@@ -1,6 +1,6 @@
-﻿namespace TestTask
+﻿namespace TestTask.ChildForms
 {
-    partial class LoginForm
+    partial class RegistrationForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,35 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tlpLogIn = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpRegistration = new System.Windows.Forms.TableLayoutPanel();
             this.tbLogIn = new MaterialSkin.Controls.MaterialTextBox();
             this.tbPassword = new MaterialSkin.Controls.MaterialTextBox();
-            this.btnSignIn = new MaterialSkin.Controls.MaterialButton();
             this.btnSignUpNow = new MaterialSkin.Controls.MaterialButton();
-            this.tlpLogIn.SuspendLayout();
+            this.tbConfirmPass = new MaterialSkin.Controls.MaterialTextBox();
+            this.tlpRegistration.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tlpLogIn
+            // tlpRegistration
             // 
-            this.tlpLogIn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tlpRegistration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpLogIn.ColumnCount = 1;
-            this.tlpLogIn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpLogIn.Controls.Add(this.tbLogIn, 0, 0);
-            this.tlpLogIn.Controls.Add(this.tbPassword, 0, 1);
-            this.tlpLogIn.Controls.Add(this.btnSignIn, 0, 2);
-            this.tlpLogIn.Controls.Add(this.btnSignUpNow, 0, 3);
-            this.tlpLogIn.Location = new System.Drawing.Point(20, 70);
-            this.tlpLogIn.MinimumSize = new System.Drawing.Size(260, 280);
-            this.tlpLogIn.Name = "tlpLogIn";
-            this.tlpLogIn.RowCount = 4;
-            this.tlpLogIn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpLogIn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpLogIn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpLogIn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpLogIn.Size = new System.Drawing.Size(260, 280);
-            this.tlpLogIn.TabIndex = 1;
+            this.tlpRegistration.ColumnCount = 1;
+            this.tlpRegistration.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpRegistration.Controls.Add(this.tbLogIn, 0, 0);
+            this.tlpRegistration.Controls.Add(this.tbPassword, 0, 1);
+            this.tlpRegistration.Controls.Add(this.btnSignUpNow, 0, 3);
+            this.tlpRegistration.Controls.Add(this.tbConfirmPass, 0, 2);
+            this.tlpRegistration.Location = new System.Drawing.Point(20, 70);
+            this.tlpRegistration.MinimumSize = new System.Drawing.Size(260, 280);
+            this.tlpRegistration.Name = "tlpRegistration";
+            this.tlpRegistration.RowCount = 4;
+            this.tlpRegistration.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpRegistration.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpRegistration.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpRegistration.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpRegistration.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpRegistration.Size = new System.Drawing.Size(260, 280);
+            this.tlpRegistration.TabIndex = 2;
             // 
             // tbLogIn
             // 
@@ -64,7 +65,7 @@
             this.tbLogIn.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbLogIn.Depth = 0;
             this.tbLogIn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbLogIn.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.tbLogIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.tbLogIn.Hint = "Username";
             this.tbLogIn.LeadingIcon = null;
             this.tbLogIn.Location = new System.Drawing.Point(20, 10);
@@ -84,7 +85,7 @@
             this.tbPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbPassword.Depth = 0;
             this.tbPassword.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbPassword.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.tbPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.tbPassword.Hint = "Password";
             this.tbPassword.LeadingIcon = null;
             this.tbPassword.Location = new System.Drawing.Point(20, 80);
@@ -97,27 +98,6 @@
             this.tbPassword.TabIndex = 1;
             this.tbPassword.Text = "";
             this.tbPassword.TrailingIcon = null;
-            // 
-            // btnSignIn
-            // 
-            this.btnSignIn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSignIn.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnSignIn.Depth = 0;
-            this.btnSignIn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSignIn.HighEmphasis = true;
-            this.btnSignIn.Icon = null;
-            this.btnSignIn.Location = new System.Drawing.Point(20, 155);
-            this.btnSignIn.Margin = new System.Windows.Forms.Padding(20, 15, 20, 15);
-            this.btnSignIn.MinimumSize = new System.Drawing.Size(220, 40);
-            this.btnSignIn.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnSignIn.Name = "btnSignIn";
-            this.btnSignIn.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnSignIn.Size = new System.Drawing.Size(220, 40);
-            this.btnSignIn.TabIndex = 2;
-            this.btnSignIn.Text = "Sign in";
-            this.btnSignIn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnSignIn.UseAccentColor = false;
-            this.btnSignIn.UseVisualStyleBackColor = true;
             // 
             // btnSignUpNow
             // 
@@ -138,30 +118,50 @@
             this.btnSignUpNow.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnSignUpNow.UseAccentColor = false;
             this.btnSignUpNow.UseVisualStyleBackColor = true;
-            this.btnSignUpNow.Click += new System.EventHandler(this.BtnSignUpNow_Click);
             // 
-            // LoginForm
+            // tbConfirmPass
+            // 
+            this.tbConfirmPass.AnimateReadOnly = false;
+            this.tbConfirmPass.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbConfirmPass.Depth = 0;
+            this.tbConfirmPass.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbConfirmPass.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.tbConfirmPass.Hint = "Confirm password";
+            this.tbConfirmPass.LeadingIcon = null;
+            this.tbConfirmPass.Location = new System.Drawing.Point(20, 150);
+            this.tbConfirmPass.Margin = new System.Windows.Forms.Padding(20, 10, 20, 5);
+            this.tbConfirmPass.MaxLength = 50;
+            this.tbConfirmPass.MouseState = MaterialSkin.MouseState.OUT;
+            this.tbConfirmPass.Multiline = false;
+            this.tbConfirmPass.Name = "tbConfirmPass";
+            this.tbConfirmPass.Size = new System.Drawing.Size(220, 50);
+            this.tbConfirmPass.TabIndex = 4;
+            this.tbConfirmPass.Text = "";
+            this.tbConfirmPass.TrailingIcon = null;
+            // 
+            // RegistrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(300, 360);
-            this.Controls.Add(this.tlpLogIn);
+            this.Controls.Add(this.tlpRegistration);
             this.MinimumSize = new System.Drawing.Size(300, 360);
-            this.Name = "LoginForm";
+            this.Name = "RegistrationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Sign In";
-            this.tlpLogIn.ResumeLayout(false);
-            this.tlpLogIn.PerformLayout();
+            this.Text = "RegistrationForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegistrationForm_FormClosing);
+            this.tlpRegistration.ResumeLayout(false);
+            this.tlpRegistration.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.TableLayoutPanel tlpLogIn;
+
+        private System.Windows.Forms.TableLayoutPanel tlpRegistration;
         private MaterialSkin.Controls.MaterialTextBox tbLogIn;
         private MaterialSkin.Controls.MaterialTextBox tbPassword;
-        private MaterialSkin.Controls.MaterialButton btnSignIn;
         private MaterialSkin.Controls.MaterialButton btnSignUpNow;
+        private MaterialSkin.Controls.MaterialTextBox tbConfirmPass;
     }
 }
-
