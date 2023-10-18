@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingItem\ModelBase.cs" />
+    <Compile Include="BindingItem\UserBinding\UserModel.cs" />
     <Compile Include="ChildForms\RegistrationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +82,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.UserModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,6 +96,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\TestTask.Core\TestTask.Core.csproj">
+      <Project>{AAD1C004-7096-4A18-9889-D8512763144F}</Project>
+      <Name>TestTask.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

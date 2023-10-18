@@ -1,4 +1,5 @@
 ﻿using MaterialSkin.Controls;
+using System.Windows.Forms;
 
 namespace TestTask.ChildForms
 {
@@ -9,7 +10,7 @@ namespace TestTask.ChildForms
             InitializeComponent();
         }
 
-        private void RegistrationForm_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
-            => DialogResult = System.Windows.Forms.DialogResult.Cancel;
+        private void RegistrationForm_FormClosing(object sender, FormClosingEventArgs e)
+            => DialogResult = DialogResult.Cancel;
     }
 }
