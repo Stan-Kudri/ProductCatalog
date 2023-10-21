@@ -4,7 +4,7 @@ namespace TestTask.Core.Extension
 {
     public static class StringUsernameExtension
     {
-        private const int MinLengthUsername = 3;
+        public const int MinLengthUsername = 3;
 
         public static bool ValidFormatUsername(this string password, out string message)
         {

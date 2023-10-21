@@ -31,9 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.tlpRegistration = new System.Windows.Forms.TableLayoutPanel();
             this.tbLogIn = new MaterialSkin.Controls.MaterialTextBox();
+            this.userModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tbPassword = new MaterialSkin.Controls.MaterialTextBox();
             this.btnSignUpNow = new MaterialSkin.Controls.MaterialButton();
-            this.userModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tlpRegistration.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userModelBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -66,7 +66,7 @@
             this.tbLogIn.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userModelBindingSource, "Username", true));
             this.tbLogIn.Depth = 0;
             this.tbLogIn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbLogIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.tbLogIn.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.tbLogIn.Hint = "Username";
             this.tbLogIn.LeadingIcon = null;
             this.tbLogIn.Location = new System.Drawing.Point(20, 10);
@@ -80,6 +80,10 @@
             this.tbLogIn.Text = "";
             this.tbLogIn.TrailingIcon = null;
             // 
+            // userModelBindingSource
+            // 
+            this.userModelBindingSource.DataSource = typeof(TestTask.BindingItem.UserModel);
+            // 
             // tbPassword
             // 
             this.tbPassword.AnimateReadOnly = false;
@@ -87,10 +91,10 @@
             this.tbPassword.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userModelBindingSource, "Password", true));
             this.tbPassword.Depth = 0;
             this.tbPassword.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.tbPassword.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.tbPassword.Hint = "Password";
             this.tbPassword.LeadingIcon = null;
-            this.tbPassword.Location = new System.Drawing.Point(20, 89);
+            this.tbPassword.Location = new System.Drawing.Point(20, 90);
             this.tbPassword.Margin = new System.Windows.Forms.Padding(20, 10, 20, 5);
             this.tbPassword.MaxLength = 50;
             this.tbPassword.MouseState = MaterialSkin.MouseState.OUT;
@@ -109,21 +113,18 @@
             this.btnSignUpNow.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSignUpNow.HighEmphasis = true;
             this.btnSignUpNow.Icon = null;
-            this.btnSignUpNow.Location = new System.Drawing.Point(20, 173);
+            this.btnSignUpNow.Location = new System.Drawing.Point(20, 175);
             this.btnSignUpNow.Margin = new System.Windows.Forms.Padding(20, 15, 20, 15);
             this.btnSignUpNow.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSignUpNow.Name = "btnSignUpNow";
             this.btnSignUpNow.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnSignUpNow.Size = new System.Drawing.Size(220, 52);
+            this.btnSignUpNow.Size = new System.Drawing.Size(220, 50);
             this.btnSignUpNow.TabIndex = 3;
             this.btnSignUpNow.Text = "Registration";
             this.btnSignUpNow.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnSignUpNow.UseAccentColor = false;
             this.btnSignUpNow.UseVisualStyleBackColor = true;
-            // 
-            // userModelBindingSource
-            // 
-            this.userModelBindingSource.DataSource = typeof(TestTask.BindingItem.UserModel);
+            this.btnSignUpNow.Click += new System.EventHandler(this.BtnSignUpNow_Click);
             // 
             // RegistrationForm
             // 

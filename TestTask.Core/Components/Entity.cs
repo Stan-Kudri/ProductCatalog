@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace TestTask.Core
+﻿namespace TestTask.Core
 {
     public class Entity
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
     }
 }

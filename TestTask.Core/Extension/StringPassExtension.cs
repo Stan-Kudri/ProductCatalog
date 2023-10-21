@@ -4,7 +4,7 @@ namespace TestTask.Core.Extension
 {
     public static class StringPassExtension
     {
-        private const int MinLengthPass = 6;
+        public const int MinLengthPass = 6;
 
         public static bool ValidFormatPassword(this string password, out string message)
         {

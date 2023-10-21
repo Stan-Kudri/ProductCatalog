@@ -31,10 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.tlpLogIn = new System.Windows.Forms.TableLayoutPanel();
             this.tbLogIn = new MaterialSkin.Controls.MaterialTextBox();
+            this.userModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tbPassword = new MaterialSkin.Controls.MaterialTextBox();
             this.btnSignIn = new MaterialSkin.Controls.MaterialButton();
             this.btnSignUpNow = new MaterialSkin.Controls.MaterialButton();
-            this.userModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tlpLogIn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userModelBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -82,6 +82,10 @@
             this.tbLogIn.Text = "";
             this.tbLogIn.TrailingIcon = null;
             // 
+            // userModelBindingSource
+            // 
+            this.userModelBindingSource.DataSource = typeof(TestTask.BindingItem.UserModel);
+            // 
             // tbPassword
             // 
             this.tbPassword.AnimateReadOnly = false;
@@ -123,6 +127,7 @@
             this.btnSignIn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnSignIn.UseAccentColor = false;
             this.btnSignIn.UseVisualStyleBackColor = true;
+            this.btnSignIn.Click += new System.EventHandler(this.BtnSignIn_Click);
             // 
             // btnSignUpNow
             // 
@@ -144,10 +149,6 @@
             this.btnSignUpNow.UseAccentColor = false;
             this.btnSignUpNow.UseVisualStyleBackColor = true;
             this.btnSignUpNow.Click += new System.EventHandler(this.BtnSignUpNow_Click);
-            // 
-            // userModelBindingSource
-            // 
-            this.userModelBindingSource.DataSource = typeof(TestTask.BindingItem.UserModel);
             // 
             // LoginForm
             // 
