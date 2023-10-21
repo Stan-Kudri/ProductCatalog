@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tlpLogIn = new System.Windows.Forms.TableLayoutPanel();
             this.tbLogIn = new MaterialSkin.Controls.MaterialTextBox();
+            this.userModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tbPassword = new MaterialSkin.Controls.MaterialTextBox();
             this.btnSignIn = new MaterialSkin.Controls.MaterialButton();
             this.btnSignUpNow = new MaterialSkin.Controls.MaterialButton();
             this.tlpLogIn.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userModelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpLogIn
@@ -62,6 +65,7 @@
             // 
             this.tbLogIn.AnimateReadOnly = false;
             this.tbLogIn.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbLogIn.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userModelBindingSource, "Username", true));
             this.tbLogIn.Depth = 0;
             this.tbLogIn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbLogIn.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -78,10 +82,15 @@
             this.tbLogIn.Text = "";
             this.tbLogIn.TrailingIcon = null;
             // 
+            // userModelBindingSource
+            // 
+            this.userModelBindingSource.DataSource = typeof(TestTask.BindingItem.UserModel);
+            // 
             // tbPassword
             // 
             this.tbPassword.AnimateReadOnly = false;
             this.tbPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbPassword.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userModelBindingSource, "Password", true));
             this.tbPassword.Depth = 0;
             this.tbPassword.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbPassword.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -118,6 +127,7 @@
             this.btnSignIn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnSignIn.UseAccentColor = false;
             this.btnSignIn.UseVisualStyleBackColor = true;
+            this.btnSignIn.Click += new System.EventHandler(this.BtnSignIn_Click);
             // 
             // btnSignUpNow
             // 
@@ -152,6 +162,7 @@
             this.Text = "Sign In";
             this.tlpLogIn.ResumeLayout(false);
             this.tlpLogIn.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userModelBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -162,6 +173,7 @@
         private MaterialSkin.Controls.MaterialTextBox tbPassword;
         private MaterialSkin.Controls.MaterialButton btnSignIn;
         private MaterialSkin.Controls.MaterialButton btnSignUpNow;
+        private System.Windows.Forms.BindingSource userModelBindingSource;
     }
 }
 
