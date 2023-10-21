@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Entity.cs" />
+    <Compile Include="Components\Mode.cs" />
     <Compile Include="Components\User.cs" />
     <Compile Include="Db\AppDbContext.cs" />
     <Compile Include="Db\DbContextFactory.cs" />
