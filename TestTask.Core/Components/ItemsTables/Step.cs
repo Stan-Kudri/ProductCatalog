@@ -36,5 +36,25 @@ namespace TestTask.Core.Components.ItemsTables
         public string Type { get; set; } = string.Empty;
 
         public int Volume { get; set; } = 0;
+
+        public override bool Equals(object obj) => Equals(obj as Step);
+
+        public bool Equals(Step other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            return other.Id == Id
+                   && other.ModeId == ModeId
+                   && other.Timer == Timer
+                   && other.Destination == Destination
+                   && other.Speed == Speed
+                   && other.Type == Type
+                   && other.Volume == Volume;
+        }
+
+        public override int GetHashCode() => Id.GetHashCode() * ModeId.GetHashCode() + Type.GetHashCode();
     }
 }

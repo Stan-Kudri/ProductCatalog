@@ -32,5 +32,22 @@ namespace TestTask.Core.Components
         public int MaxUsedTips { get; set; } = 0;
 
         public List<Step> Steps { get; set; } = null;
+
+        public override bool Equals(object obj) => Equals(obj as Mode);
+
+        public bool Equals(Mode other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            return other.Id == Id
+                   && other.Name == Name
+                   && other.MaxBottleNumber == MaxBottleNumber
+                   && other.MaxUsedTips == MaxUsedTips;
+        }
+
+        public override int GetHashCode() => Id.GetHashCode() + MaxBottleNumber.GetHashCode() + MaxUsedTips.GetHashCode();
     }
 }
