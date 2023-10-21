@@ -15,7 +15,7 @@ namespace TestTask.Core.Service
         {
             if (mode == null)
             {
-                throw new ArgumentException("The received parameters are not correct.");
+                throw new ArgumentException("The received parameters are not correct.", nameof(mode));
             }
 
             if (_dbContext.Modes.Any(e => e.Name == mode.Name))
@@ -47,6 +47,7 @@ namespace TestTask.Core.Service
         {
             var mode = _dbContext.Modes.FirstOrDefault(e => e.Id == id) ?? throw new InvalidOperationException("Interaction element not found.");
             _dbContext.Modes.Remove(mode);
+            _dbContext.SaveChanges();
         }
     }
 }

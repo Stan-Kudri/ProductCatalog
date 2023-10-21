@@ -74,6 +74,7 @@
     <Compile Include="Extension\StringUsernameExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ModeService.cs" />
+    <Compile Include="Service\StepService.cs" />
     <Compile Include="Service\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
