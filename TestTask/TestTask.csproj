@@ -70,7 +70,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindingItem\ModelBase.cs" />
+    <Compile Include="BindingItem\UserBinding\ModeModel.cs" />
     <Compile Include="BindingItem\UserBinding\UserModel.cs" />
+    <Compile Include="ChildForms\ModeForm\AddModeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildForms\ModeForm\AddModeForm.Designer.cs">
+      <DependentUpon>AddModeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChildForms\RegistrationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +98,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ChildForms\ModeForm\AddModeForm.resx">
+      <DependentUpon>AddModeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChildForms\RegistrationForm.resx">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -110,6 +120,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.ModeModel.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
