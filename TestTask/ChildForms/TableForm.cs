@@ -5,6 +5,7 @@ using TestTask.BindingItem.UserBinding.StepBinding;
 using TestTask.ChildForms.ModeForm;
 using TestTask.ChildForms.StepForm;
 using TestTask.Core.Components;
+using TestTask.Core.Components.ItemsTables;
 using TestTask.Core.Service;
 using TestTask.Core.Service.Components;
 using TestTask.Extension;
@@ -76,6 +77,7 @@ namespace TestTask.ChildForms
 
             var step = addFormStep.GetModeModel().ToStep();
             _stepService.Add(step);
+            LoadDataGridStep();
         }
 
         private void UpdateSelectMode() => _selectMode = new SelectMode(_modeService.GetAllMode());
@@ -84,6 +86,7 @@ namespace TestTask.ChildForms
         {
             UpdateSelectMode();
             LoadDataGridMode();
+            LoadDataGridStep();
         }
 
         private void LoadDataGridMode()
@@ -94,6 +97,17 @@ namespace TestTask.ChildForms
             {
                 ClearGridMode();
                 FillGridMode(item);
+            }
+        }
+
+        private void LoadDataGridStep()
+        {
+            var items = _stepService.GetAllItems();
+
+            if (items != null)
+            {
+                ClearGridStep();
+                FillGridStep(items);
             }
         }
 
@@ -112,11 +126,21 @@ namespace TestTask.ChildForms
 
         private void ClearGridMode() => dgvModes.Rows.Clear();
 
+        private void ClearGridStep() => dgvSteps.Rows.Clear();
+
         private void FillGridMode(List<Mode> items)
         {
             foreach (var item in items)
             {
                 dgvModes.Rows.Add(item.Id, item.Name, item.MaxBottleNumber, item.MaxUsedTips);
+            }
+        }
+
+        private void FillGridStep(List<Step> items)
+        {
+            foreach (var item in items)
+            {
+                dgvSteps.Rows.Add(item.Id, item.ModeId, item.Timer, item.Destination, item.Speed, item.Type, item.Volume);
             }
         }
     }
