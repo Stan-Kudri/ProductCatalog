@@ -25,7 +25,6 @@ namespace TestTask.ChildForms
         private const int IndexColumnMaxUsedTips = 3;
 
         //Index column Mode table
-        private const int IndexColumnStepModeName = 1;
         private const int IndexColumnTimer = 2;
         private const int IndexColumnDestination = 3;
         private const int IndexColumnSpeed = 4;
