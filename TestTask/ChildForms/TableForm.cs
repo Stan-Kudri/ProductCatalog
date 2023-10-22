@@ -244,7 +244,7 @@ namespace TestTask.ChildForms
             var destination = CellElement(rowItems, IndexColumnDestination);
             var speed = CellElement(rowItems, IndexColumnSpeed).ParseInt();
             var type = CellElement(rowItems, IndexColumnType) ?? throw new ArgumentException("Name cannot be null.");
-            var volume = CellElement(rowItems, IndexColumnSpeed).ParseInt();
+            var volume = CellElement(rowItems, IndexColumnVolume).ParseInt();
 
             return new Step(modeId, timer, destination, speed, type, volume, idStep);
         }
