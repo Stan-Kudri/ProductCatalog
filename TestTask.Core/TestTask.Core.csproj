@@ -73,6 +73,7 @@
     <Compile Include="Extension\StringPassExtension.cs" />
     <Compile Include="Extension\StringUsernameExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Components\IMessageBox.cs" />
     <Compile Include="Service\ModeService.cs" />
     <Compile Include="Service\StepService.cs" />
     <Compile Include="Service\UserService.cs" />

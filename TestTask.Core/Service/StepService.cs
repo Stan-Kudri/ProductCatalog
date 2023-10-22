@@ -18,7 +18,7 @@ namespace TestTask.Core.Service
                 throw new ArgumentException("The received parameters are not correct.", nameof(step));
             }
 
-            if (_dbContext.Modes.FirstOrDefault(e => e.Id == step.ModeId) != null)
+            if (_dbContext.Modes.FirstOrDefault(e => e.Id == step.ModeId) == null)
             {
                 throw new Exception("Mode ID does not exist.");
             }

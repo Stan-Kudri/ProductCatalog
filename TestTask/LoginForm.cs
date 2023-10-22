@@ -6,22 +6,29 @@ using TestTask.ChildForms;
 using TestTask.Core.Components;
 using TestTask.Core.Extension;
 using TestTask.Core.Service;
+using TestTask.Core.Service.Components;
 
 namespace TestTask
 {
     public partial class LoginForm : MaterialForm
     {
         private readonly UserService _userService;
+        private readonly ModeService _modeService;
+        private readonly StepService _stepService;
+        private readonly IMessageBox _messageBox;
 
-        public LoginForm(UserService userService)
+        public LoginForm(UserService userService, ModeService modeService, StepService stepService, IMessageBox messageBox)
         {
             InitializeComponent();
             _userService = userService;
+            _modeService = modeService;
+            _stepService = stepService;
+            _messageBox = messageBox;
         }
 
         private void BtnSignUpNow_Click(object sender, EventArgs e)
         {
-            var registrForm = new RegistrationForm(_userService);
+            var registrForm = new RegistrationForm(_userService, _messageBox);
 
             Hide();
 
@@ -35,12 +42,20 @@ namespace TestTask
         {
             if (!ValidateData(out var message, out var user))
             {
-                MessageBox.Show(message, "Information", MessageBoxButtons.OK);
+                _messageBox.ShowInfo(message);
                 return;
             }
 
             Hide();
-            DialogResult = DialogResult.OK;
+
+            var tableForm = new TableForm(_modeService, _stepService, _messageBox);
+            if (tableForm.ShowDialog() == DialogResult.Cancel)
+            {
+                _messageBox.ShowInfo("Account logout completed successfully.");
+                ClearEnteredData();
+                Show();
+                return;
+            }
 
             Close();
         }
@@ -80,5 +95,7 @@ namespace TestTask
             message = string.Empty;
             return true;
         }
+
+        private void ClearEnteredData() => tbLogIn.Text = tbPassword.Text = string.Empty;
     }
 }

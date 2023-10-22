@@ -4,17 +4,20 @@ using TestTask.BindingItem;
 using TestTask.Core.Components;
 using TestTask.Core.Extension;
 using TestTask.Core.Service;
+using TestTask.Core.Service.Components;
 
 namespace TestTask.ChildForms
 {
     public partial class RegistrationForm : MaterialForm
     {
         private readonly UserService _userService;
+        private readonly IMessageBox _messageBox;
 
-        public RegistrationForm(UserService userService)
+        public RegistrationForm(UserService userService, IMessageBox messageBox)
         {
             InitializeComponent();
             _userService = userService;
+            _messageBox = messageBox;
         }
 
         private void RegistrationForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -24,7 +27,7 @@ namespace TestTask.ChildForms
         {
             if (!ValidateData(out var message, out var user))
             {
-                MessageBox.Show(message, "Information", MessageBoxButtons.OK);
+                _messageBox.ShowInfo(message);
                 return;
             }
 

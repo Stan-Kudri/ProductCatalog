@@ -70,12 +70,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindingItem\ModelBase.cs" />
+    <Compile Include="BindingItem\UserBinding\ModeModel.cs" />
+    <Compile Include="BindingItem\UserBinding\StepBinding\SelectMode.cs" />
+    <Compile Include="BindingItem\UserBinding\StepBinding\StepModel.cs" />
     <Compile Include="BindingItem\UserBinding\UserModel.cs" />
+    <Compile Include="ChildForms\ModeForm\AddModeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildForms\ModeForm\AddModeForm.Designer.cs">
+      <DependentUpon>AddModeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChildForms\RegistrationForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ChildForms\RegistrationForm.Designer.cs">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChildForms\StepForm\AddStepForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildForms\StepForm\AddStepForm.Designer.cs">
+      <DependentUpon>AddStepForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ChildForms\TableForm.cs">
       <SubType>Form</SubType>
@@ -89,10 +104,17 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Message\MessageBoxShow.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ChildForms\ModeForm\AddModeForm.resx">
+      <DependentUpon>AddModeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChildForms\RegistrationForm.resx">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildForms\StepForm\AddStepForm.resx">
+      <DependentUpon>AddStepForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildForms\TableForm.resx">
       <DependentUpon>TableForm.cs</DependentUpon>
@@ -110,6 +132,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.ModeModel.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.StepBinding.SelectMode.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.StepMode.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -130,6 +155,7 @@
       <Name>TestTask.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
