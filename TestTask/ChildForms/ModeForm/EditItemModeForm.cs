@@ -36,7 +36,7 @@ namespace TestTask.ChildForms.ModeForm
             DialogResult = DialogResult.OK;
         }
 
-        protected override void DefoultValue()
+        protected override void DefaultValue()
         {
             tbNameMode.Text = _mode.Name;
             tbMaxUsedTips.Text = _mode.MaxUsedTips.ToString();

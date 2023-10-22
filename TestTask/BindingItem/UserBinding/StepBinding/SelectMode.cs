@@ -6,14 +6,14 @@ namespace TestTask.BindingItem.UserBinding.StepBinding
 {
     public class SelectMode : ModelBase
     {
-        private Mode _modeName = null;
+        private Mode _mode = null;
 
         public SelectMode(List<Mode> listMode)
         {
             if (listMode != null)
             {
                 Items = new ObservableCollection<Mode>(listMode);
-                _modeName = Items[0];
+                _mode = Items[0];
             }
         }
 
@@ -21,8 +21,19 @@ namespace TestTask.BindingItem.UserBinding.StepBinding
 
         public Mode Mode
         {
-            get => _modeName;
-            set => SetField(ref _modeName, value);
+            get => _mode;
+            set => SetField(ref _mode, value);
+        }
+
+        public void SetValueMode(int modeId)
+        {
+            for (var i = 0; i < Items.Count; i++)
+            {
+                if (modeId == Items[i].Id)
+                {
+                    _mode = Items[i];
+                }
+            }
         }
     }
 }

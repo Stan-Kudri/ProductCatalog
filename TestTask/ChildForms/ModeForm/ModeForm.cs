@@ -31,7 +31,7 @@ namespace TestTask.ChildForms.ModeForm
             DialogResult = DialogResult.OK;
         }
 
-        private void BtnClear_Click(object sender, EventArgs e) => DefoultValue();
+        private void BtnClear_Click(object sender, EventArgs e) => DefaultValue();
 
         private void BtnClose_Click(object sender, EventArgs e)
         {
@@ -39,9 +39,9 @@ namespace TestTask.ChildForms.ModeForm
             Close();
         }
 
-        protected virtual void AddModeForm_Load(object sender, EventArgs e) => DefoultValue();
+        protected virtual void AddModeForm_Load(object sender, EventArgs e) => DefaultValue();
 
-        protected virtual void DefoultValue()
+        protected virtual void DefaultValue()
         {
             tbNameMode.Text = string.Empty;
             tbMaxUsedTips.Text = "0";

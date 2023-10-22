@@ -71,5 +71,7 @@ namespace TestTask.BindingItem.UserBinding
             new StepModel(mode, timer, destination, speed, type, volume);
 
         public Step ToStep() => new Step(_mode.Id, _timer, _destination, _speed, _type, _volume);
+
+        public Step ToStep(int stepId) => new Step(_mode.Id, _timer, _destination, _speed, _type, _volume, stepId);
     }
 }

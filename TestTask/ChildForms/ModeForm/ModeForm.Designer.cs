@@ -227,7 +227,7 @@
             this.btnClear.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnClear.Size = new System.Drawing.Size(122, 33);
             this.btnClear.TabIndex = 1;
-            this.btnClear.Text = "Clear";
+            this.btnClear.Text = "Default Value";
             this.btnClear.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnClear.UseAccentColor = false;
             this.btnClear.UseVisualStyleBackColor = true;

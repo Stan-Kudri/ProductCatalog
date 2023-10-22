@@ -289,6 +289,7 @@
             this.btnEditStep.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnEditStep.UseAccentColor = false;
             this.btnEditStep.UseVisualStyleBackColor = true;
+            this.btnEditStep.Click += new System.EventHandler(this.BtnEditStep_Click);
             // 
             // btnDeleteStep
             // 
