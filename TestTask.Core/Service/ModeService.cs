@@ -52,5 +52,7 @@ namespace TestTask.Core.Service
         }
 
         public List<Mode> GetAllMode() => _dbContext.Modes.Count() > 0 ? _dbContext.Modes.ToList() : null;
+
+        public IQueryable<Mode> GetModes() => _dbContext.Modes;
     }
 }

@@ -35,7 +35,7 @@ namespace TestTask.Core.Service
                 throw new ArgumentNullException("The format of the transmitted data is incorrect.", nameof(step));
             }
 
-            if (_dbContext.Modes.FirstOrDefault(e => e.Id == step.ModeId) != null)
+            if (!_dbContext.Modes.Any(e => e.Id == step.ModeId))
             {
                 throw new Exception("Mode ID does not exist.");
             }

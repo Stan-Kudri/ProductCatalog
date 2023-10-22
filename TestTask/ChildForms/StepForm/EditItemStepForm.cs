@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using TestTask.BindingItem.UserBinding.StepBinding;
+using TestTask.Core.Components;
 using TestTask.Core.Components.ItemsTables;
 using TestTask.Core.Service.Components;
 
@@ -12,7 +13,7 @@ namespace TestTask.ChildForms.StepForm
 
         private Step _editStep;
 
-        public EditItemStepForm(IMessageBox messageBox, SelectMode modes, Step oldStep)
+        public EditItemStepForm(IMessageBox messageBox, List<Mode> modes, Step oldStep)
             : base(messageBox, modes)
         {
             Text = "Edit Step";

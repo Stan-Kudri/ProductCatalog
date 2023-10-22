@@ -1,11 +1,12 @@
-﻿using TestTask.BindingItem.UserBinding.StepBinding;
+﻿using System.Collections.Generic;
+using TestTask.Core.Components;
 using TestTask.Core.Service.Components;
 
 namespace TestTask.ChildForms.StepForm
 {
     public class AddItemStepForm : StepForm
     {
-        AddItemStepForm(IMessageBox messageBox, SelectMode modes)
+        public AddItemStepForm(IMessageBox messageBox, List<Mode> modes)
             : base(messageBox, modes)
         {
             Text = "Add Step";

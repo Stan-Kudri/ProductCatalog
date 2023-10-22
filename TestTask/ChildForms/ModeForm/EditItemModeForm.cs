@@ -7,15 +7,16 @@ namespace TestTask.ChildForms.ModeForm
 {
     public class EditItemModeForm : ModeForm
     {
-        private readonly Mode _mode;
+        private readonly Mode _oldMode;
 
         private Mode _editMode;
+        private bool _сhangedName = false;
 
         public EditItemModeForm(IMessageBox messageBox, Mode mode)
             : base(messageBox)
         {
             Text = "Edit Mode";
-            _mode = mode;
+            _oldMode = mode;
         }
 
         protected override void BtnSave_Click(object sender, EventArgs e)
@@ -26,23 +27,26 @@ namespace TestTask.ChildForms.ModeForm
                 return;
             }
 
-            _editMode = GetModeModel().ToMode(_mode.Id);
-            if (_mode.Equals(_editMode))
+            _editMode = GetModeModel().ToMode(_oldMode.Id);
+            if (_oldMode.Equals(_editMode))
             {
                 _messageBox.ShowInfo("The mode has not been modified.");
                 DialogResult = DialogResult.Cancel;
             }
 
+            _сhangedName = _editMode.Name != _oldMode.Name;
             DialogResult = DialogResult.OK;
         }
 
         protected override void DefaultValue()
         {
-            tbNameMode.Text = _mode.Name;
-            tbMaxUsedTips.Text = _mode.MaxUsedTips.ToString();
-            tbMaxBottle.Text = _mode.MaxBottleNumber.ToString();
+            tbNameMode.Text = _oldMode.Name;
+            tbMaxUsedTips.Text = _oldMode.MaxUsedTips.ToString();
+            tbMaxBottle.Text = _oldMode.MaxBottleNumber.ToString();
         }
 
         public Mode GetEditMode() => _editMode;
+
+        public bool ChangedModeName() => _сhangedName;
     }
 }

@@ -9,7 +9,6 @@ using TestTask.Core.Components.ItemsTables;
 using TestTask.Core.Service;
 using TestTask.Core.Service.Components;
 using TestTask.Extension;
-using SelectMode = TestTask.BindingItem.UserBinding.StepBinding.SelectMode;
 
 namespace TestTask.ChildForms
 {
@@ -26,18 +25,17 @@ namespace TestTask.ChildForms
         private const int IndexColumnMaxUsedTips = 3;
 
         //Index column Mode table
-        private const int IndexColumnModeId = 1;
+        private const int IndexColumnStepModeName = 1;
         private const int IndexColumnTimer = 2;
         private const int IndexColumnDestination = 3;
         private const int IndexColumnSpeed = 4;
         private const int IndexColumnType = 5;
         private const int IndexColumnVolume = 6;
+        private const int IndexColumnModeId = 7;
 
         private readonly ModeService _modeService;
         private readonly StepService _stepService;
         private readonly IMessageBox _messageBox;
-
-        private SelectMode _selectMode;
 
         public TableForm(ModeService modeService, StepService stepService, IMessageBox messageBox)
         {
@@ -60,19 +58,20 @@ namespace TestTask.ChildForms
                 _modeService.Add(mode);
             }
 
-            UpdateSelectMode();
             LoadDataGridMode();
         }
 
         private void BtnAddItemStep_Click(object sender, EventArgs e)
         {
-            if (_selectMode.Items == null || _selectMode.Items.Count == 0)
+            var listMode = _modeService.GetAllMode();
+
+            if (listMode == null || listMode.Count == 0)
             {
                 _messageBox.ShowWarning("Add a mode to the table to add a step.");
                 return;
             }
 
-            using (var addFormStep = new StepForm.StepForm(_messageBox, _selectMode))
+            using (var addFormStep = new AddItemStepForm(_messageBox, listMode))
             {
                 if (addFormStep.ShowDialog() != DialogResult.OK)
                 {
@@ -155,6 +154,11 @@ namespace TestTask.ChildForms
 
                     var updateItem = editModeForm.GetEditMode();
                     _modeService.Update(updateItem);
+
+                    if (editModeForm.ChangedModeName())
+                    {
+                        LoadDataGridStep();
+                    }
                 }
 
                 LoadDataGridMode();
@@ -168,13 +172,14 @@ namespace TestTask.ChildForms
 
         private void BtnEditStep_Click(object sender, EventArgs e)
         {
+            var listMode = _modeService.GetAllMode();
             var indexEditRow = GetSelectedRowIndexesGridStep();
 
             if (indexEditRow.Count == 1)
             {
                 var oldItem = GetStep(indexEditRow.First());
 
-                using (var editStepForm = new EditItemStepForm(_messageBox, _selectMode, oldItem))
+                using (var editStepForm = new EditItemStepForm(_messageBox, listMode, oldItem))
                 {
                     if (editStepForm.ShowDialog() != DialogResult.OK)
                     {
@@ -185,7 +190,7 @@ namespace TestTask.ChildForms
                     _stepService.Update(updateItem);
                 }
 
-                LoadDataGridMode();
+                LoadDataGridStep();
             }
             else
             {
@@ -195,12 +200,9 @@ namespace TestTask.ChildForms
 
         private void TableForm_Load(object sender, EventArgs e)
         {
-            UpdateSelectMode();
             LoadDataGridMode();
             LoadDataGridStep();
         }
-
-        private void UpdateSelectMode() => _selectMode = new SelectMode(_modeService.GetAllMode());
 
         private void LoadDataGridMode()
         {
@@ -239,12 +241,12 @@ namespace TestTask.ChildForms
         {
             var rowItems = dgvSteps.Rows[indexRow];
             var idStep = CellElement(rowItems, IndexId).ParseInt();
-            var modeId = CellElement(rowItems, IndexColumnModeId).ParseInt();
             var timer = CellElement(rowItems, IndexColumnTimer).ParseInt();
             var destination = CellElement(rowItems, IndexColumnDestination);
             var speed = CellElement(rowItems, IndexColumnSpeed).ParseInt();
             var type = CellElement(rowItems, IndexColumnType) ?? throw new ArgumentException("Name cannot be null.");
-            var volume = CellElement(rowItems, IndexColumnSpeed).ParseInt();
+            var volume = CellElement(rowItems, IndexColumnVolume).ParseInt();
+            var modeId = CellElement(rowItems, IndexColumnModeId).ParseInt();
 
             return new Step(modeId, timer, destination, speed, type, volume, idStep);
         }
@@ -265,9 +267,12 @@ namespace TestTask.ChildForms
 
         private void FillGridStep(List<Step> items)
         {
+            var modes = _modeService.GetModes();
+
             foreach (var item in items)
             {
-                dgvSteps.Rows.Add(item.Id, item.ModeId, item.Timer, item.Destination, item.Speed, item.Type, item.Volume);
+                var nameMode = modes.FirstOrDefault(e => e.Id == item.ModeId).Name ?? throw new ArgumentException("Name mode cannot be empty.");
+                dgvSteps.Rows.Add(item.Id, nameMode, item.Timer, item.Destination, item.Speed, item.Type, item.Volume, item.ModeId);
             }
         }
 
