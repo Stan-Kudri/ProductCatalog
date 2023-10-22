@@ -74,11 +74,17 @@
     <Compile Include="BindingItem\UserBinding\StepBinding\SelectMode.cs" />
     <Compile Include="BindingItem\UserBinding\StepBinding\StepModel.cs" />
     <Compile Include="BindingItem\UserBinding\UserModel.cs" />
-    <Compile Include="ChildForms\ModeForm\AddModeForm.cs">
+    <Compile Include="ChildForms\ModeForm\AddItemModeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildForms\ModeForm\AddModeForm.Designer.cs">
-      <DependentUpon>AddModeForm.cs</DependentUpon>
+    <Compile Include="ChildForms\ModeForm\ModeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildForms\ModeForm\ModeForm.Designer.cs">
+      <DependentUpon>ModeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChildForms\ModeForm\EditItemModeForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="ChildForms\RegistrationForm.cs">
       <SubType>Form</SubType>
@@ -109,8 +115,8 @@
     <Compile Include="Message\MessageBoxShow.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ChildForms\ModeForm\AddModeForm.resx">
-      <DependentUpon>AddModeForm.cs</DependentUpon>
+    <EmbeddedResource Include="ChildForms\ModeForm\ModeForm.resx">
+      <DependentUpon>ModeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildForms\RegistrationForm.resx">
       <DependentUpon>RegistrationForm.cs</DependentUpon>

@@ -1,11 +1,7 @@
 ﻿namespace TestTask.ChildForms.ModeForm
 {
-    partial class AddModeForm
+    partial class ModeForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -34,7 +30,7 @@
             this.tlpNameMode = new System.Windows.Forms.TableLayoutPanel();
             this.tlpMode = new System.Windows.Forms.TableLayoutPanel();
             this.tbMaxBottle = new MaterialSkin.Controls.MaterialTextBox2();
-            this.tbMaxUsedType = new MaterialSkin.Controls.MaterialTextBox2();
+            this.tbMaxUsedTips = new MaterialSkin.Controls.MaterialTextBox2();
             this.tlbButtonMode = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new MaterialSkin.Controls.MaterialButton();
             this.btnClear = new MaterialSkin.Controls.MaterialButton();
@@ -103,7 +99,7 @@
             this.tlpMode.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpMode.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpMode.Controls.Add(this.tbMaxBottle, 0, 0);
-            this.tlpMode.Controls.Add(this.tbMaxUsedType, 1, 0);
+            this.tlpMode.Controls.Add(this.tbMaxUsedTips, 1, 0);
             this.tlpMode.Location = new System.Drawing.Point(5, 61);
             this.tlpMode.MinimumSize = new System.Drawing.Size(390, 50);
             this.tlpMode.Name = "tlpMode";
@@ -145,38 +141,38 @@
             this.tbMaxBottle.UseSystemPasswordChar = false;
             this.tbMaxBottle.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbMaxBottle_KeyPress);
             // 
-            // tbMaxUsedType
+            // tbMaxUsedTips
             // 
-            this.tbMaxUsedType.AnimateReadOnly = false;
-            this.tbMaxUsedType.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.tbMaxUsedType.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.tbMaxUsedType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.modeModelBindingSource, "MaxUsedTips", true));
-            this.tbMaxUsedType.Depth = 0;
-            this.tbMaxUsedType.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbMaxUsedType.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.tbMaxUsedType.HideSelection = true;
-            this.tbMaxUsedType.Hint = "MaxUsedType";
-            this.tbMaxUsedType.LeadingIcon = null;
-            this.tbMaxUsedType.Location = new System.Drawing.Point(198, 3);
-            this.tbMaxUsedType.MaxLength = 32767;
-            this.tbMaxUsedType.MouseState = MaterialSkin.MouseState.OUT;
-            this.tbMaxUsedType.Name = "tbMaxUsedType";
-            this.tbMaxUsedType.PasswordChar = '\0';
-            this.tbMaxUsedType.PrefixSuffixText = null;
-            this.tbMaxUsedType.ReadOnly = false;
-            this.tbMaxUsedType.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbMaxUsedType.SelectedText = "";
-            this.tbMaxUsedType.SelectionLength = 0;
-            this.tbMaxUsedType.SelectionStart = 0;
-            this.tbMaxUsedType.ShortcutsEnabled = true;
-            this.tbMaxUsedType.Size = new System.Drawing.Size(189, 48);
-            this.tbMaxUsedType.TabIndex = 1;
-            this.tbMaxUsedType.TabStop = false;
-            this.tbMaxUsedType.Text = "0";
-            this.tbMaxUsedType.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.tbMaxUsedType.TrailingIcon = null;
-            this.tbMaxUsedType.UseSystemPasswordChar = false;
-            this.tbMaxUsedType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbMaxUsedType_KeyPress);
+            this.tbMaxUsedTips.AnimateReadOnly = false;
+            this.tbMaxUsedTips.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tbMaxUsedTips.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.tbMaxUsedTips.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.modeModelBindingSource, "MaxUsedTips", true));
+            this.tbMaxUsedTips.Depth = 0;
+            this.tbMaxUsedTips.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbMaxUsedTips.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.tbMaxUsedTips.HideSelection = true;
+            this.tbMaxUsedTips.Hint = "MaxUsedType";
+            this.tbMaxUsedTips.LeadingIcon = null;
+            this.tbMaxUsedTips.Location = new System.Drawing.Point(198, 3);
+            this.tbMaxUsedTips.MaxLength = 32767;
+            this.tbMaxUsedTips.MouseState = MaterialSkin.MouseState.OUT;
+            this.tbMaxUsedTips.Name = "tbMaxUsedTips";
+            this.tbMaxUsedTips.PasswordChar = '\0';
+            this.tbMaxUsedTips.PrefixSuffixText = null;
+            this.tbMaxUsedTips.ReadOnly = false;
+            this.tbMaxUsedTips.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tbMaxUsedTips.SelectedText = "";
+            this.tbMaxUsedTips.SelectionLength = 0;
+            this.tbMaxUsedTips.SelectionStart = 0;
+            this.tbMaxUsedTips.ShortcutsEnabled = true;
+            this.tbMaxUsedTips.Size = new System.Drawing.Size(189, 48);
+            this.tbMaxUsedTips.TabIndex = 1;
+            this.tbMaxUsedTips.TabStop = false;
+            this.tbMaxUsedTips.Text = "0";
+            this.tbMaxUsedTips.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.tbMaxUsedTips.TrailingIcon = null;
+            this.tbMaxUsedTips.UseSystemPasswordChar = false;
+            this.tbMaxUsedTips.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbMaxUsedType_KeyPress);
             // 
             // tlbButtonMode
             // 
@@ -258,7 +254,7 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
-            // AddModeForm
+            // ModeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -267,8 +263,9 @@
             this.Controls.Add(this.tlpMode);
             this.Controls.Add(this.tlpNameMode);
             this.MinimumSize = new System.Drawing.Size(420, 200);
-            this.Name = "AddModeForm";
-            this.Text = "AddModeForm";
+            this.Name = "ModeForm";
+            this.Text = "Mode Form";
+            this.Load += new System.EventHandler(this.AddModeForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.modeModelBindingSource)).EndInit();
             this.tlpNameMode.ResumeLayout(false);
             this.tlpMode.ResumeLayout(false);
@@ -280,15 +277,16 @@
 
         #endregion
 
-        private MaterialSkin.Controls.MaterialTextBox2 tbNameMode;
-        private System.Windows.Forms.TableLayoutPanel tlpNameMode;
-        private System.Windows.Forms.TableLayoutPanel tlpMode;
-        private MaterialSkin.Controls.MaterialTextBox2 tbMaxBottle;
-        private MaterialSkin.Controls.MaterialTextBox2 tbMaxUsedType;
-        private System.Windows.Forms.TableLayoutPanel tlbButtonMode;
-        private MaterialSkin.Controls.MaterialButton btnSave;
-        private MaterialSkin.Controls.MaterialButton btnClear;
-        private MaterialSkin.Controls.MaterialButton btnClose;
-        private System.Windows.Forms.BindingSource modeModelBindingSource;
+        protected MaterialSkin.Controls.MaterialTextBox2 tbNameMode;
+        protected System.Windows.Forms.TableLayoutPanel tlpNameMode;
+        protected System.Windows.Forms.TableLayoutPanel tlpMode;
+        protected MaterialSkin.Controls.MaterialTextBox2 tbMaxBottle;
+        protected MaterialSkin.Controls.MaterialTextBox2 tbMaxUsedTips;
+        protected System.Windows.Forms.TableLayoutPanel tlbButtonMode;
+        protected MaterialSkin.Controls.MaterialButton btnSave;
+        protected MaterialSkin.Controls.MaterialButton btnClear;
+        protected MaterialSkin.Controls.MaterialButton btnClose;
+        protected System.Windows.Forms.BindingSource modeModelBindingSource;
+        private System.ComponentModel.IContainer components;
     }
 }

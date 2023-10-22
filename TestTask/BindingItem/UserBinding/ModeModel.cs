@@ -36,5 +36,7 @@ namespace TestTask.BindingItem.UserBinding
         public static ModeModel GetModeModel(string name, int maxBottleNumber, int maxUsedTips) => new ModeModel(name, maxBottleNumber, maxUsedTips);
 
         public Mode ToMode() => new Mode(_name, _maxBottleNumber, _maxUsedTips);
+
+        public Mode ToMode(int id) => new Mode(_name, _maxBottleNumber, _maxUsedTips, id);
     }
 }

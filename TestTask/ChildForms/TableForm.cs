@@ -49,7 +49,7 @@ namespace TestTask.ChildForms
 
         private void BtnAddMode_Click(object sender, EventArgs e)
         {
-            using (var addFormMode = new AddModeForm(_messageBox))
+            using (var addFormMode = new AddItemModeForm(_messageBox))
             {
                 if (addFormMode.ShowDialog() != DialogResult.OK)
                 {
@@ -136,6 +136,31 @@ namespace TestTask.ChildForms
             }
 
             LoadDataGridStep();
+        }
+
+        private void BtnEditMode_Click(object sender, EventArgs e)
+        {
+            var indexEditRow = GetSelectedRowIndexesGridMode();
+
+            if (indexEditRow.Count == 1)
+            {
+                var oldItem = GetMode(indexEditRow.First());
+                var editModeForm = new EditItemModeForm(_messageBox, oldItem);
+
+                if (editModeForm.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                var updateItem = editModeForm.GetEditMode();
+                _modeService.Update(updateItem);
+                LoadDataGridMode();
+            }
+            else
+            {
+                _messageBox.ShowWarning("Select one item.");
+            }
+
         }
 
         private void TableForm_Load(object sender, EventArgs e)
