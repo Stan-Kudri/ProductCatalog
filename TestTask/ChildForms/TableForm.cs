@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using TestTask.BindingItem.UserBinding.StepBinding;
 using TestTask.ChildForms.ModeForm;
@@ -14,6 +15,8 @@ namespace TestTask.ChildForms
 {
     public partial class TableForm : Form
     {
+        private const string MessageNotSelectedItem = "No items selected";
+
         //Index column from all tables
         private const int IndexId = 0;
 
@@ -80,7 +83,57 @@ namespace TestTask.ChildForms
             LoadDataGridStep();
         }
 
-        private void UpdateSelectMode() => _selectMode = new SelectMode(_modeService.GetAllMode());
+        private void BtnDeliteMode_Click(object sender, EventArgs e)
+        {
+            var selectedRowIndex = GetSelectedRowIndexesGridMode()
+                .Select(i => dgvModes.Rows[i].Get<int>(IndexId))
+                .ToList();
+
+            if (selectedRowIndex.Count == 0)
+            {
+                _messageBox.ShowWarning(MessageNotSelectedItem);
+                return;
+            }
+
+            if (!_messageBox.ShowQuestion("Delete selected items?"))
+            {
+                return;
+            }
+
+            foreach (var id in selectedRowIndex)
+            {
+                RemoveItemRowGridMode(id);
+                _modeService.Remove(id);
+            }
+
+            LoadDataGridMode();
+        }
+
+        private void BtnDeliteStep_Click(object sender, EventArgs e)
+        {
+            var selectedRowIndex = GetSelectedRowIndexesGridStep()
+                .Select(i => dgvSteps.Rows[i].Get<int>(IndexId))
+                .ToList();
+
+            if (selectedRowIndex.Count == 0)
+            {
+                _messageBox.ShowWarning(MessageNotSelectedItem);
+                return;
+            }
+
+            if (!_messageBox.ShowQuestion("Delete selected items?"))
+            {
+                return;
+            }
+
+            foreach (var id in selectedRowIndex)
+            {
+                RemoveItemRowGridSteps(id);
+                _stepService.Remove(id);
+            }
+
+            LoadDataGridStep();
+        }
 
         private void TableForm_Load(object sender, EventArgs e)
         {
@@ -88,6 +141,8 @@ namespace TestTask.ChildForms
             LoadDataGridMode();
             LoadDataGridStep();
         }
+
+        private void UpdateSelectMode() => _selectMode = new SelectMode(_modeService.GetAllMode());
 
         private void LoadDataGridMode()
         {
@@ -141,6 +196,66 @@ namespace TestTask.ChildForms
             foreach (var item in items)
             {
                 dgvSteps.Rows.Add(item.Id, item.ModeId, item.Timer, item.Destination, item.Speed, item.Type, item.Volume);
+            }
+        }
+
+        private HashSet<int> GetSelectedRowIndexesGridMode()
+        {
+            var result = new HashSet<int>();
+
+            foreach (DataGridViewRow dgvModeSelectedRow in dgvModes.SelectedRows)
+            {
+                result.Add(dgvModeSelectedRow.Index);
+            }
+
+            foreach (DataGridViewCell dgvModeSelectedCell in dgvModes.SelectedCells)
+            {
+                result.Add(dgvModeSelectedCell.RowIndex);
+            }
+
+            return result;
+        }
+
+        private HashSet<int> GetSelectedRowIndexesGridStep()
+        {
+            var result = new HashSet<int>();
+
+            foreach (DataGridViewRow dgvStepSelectedRow in dgvSteps.SelectedRows)
+            {
+                result.Add(dgvStepSelectedRow.Index);
+            }
+
+            foreach (DataGridViewCell dgvStepSelectedCell in dgvSteps.SelectedCells)
+            {
+                result.Add(dgvStepSelectedCell.RowIndex);
+            }
+
+            return result;
+        }
+
+        private void RemoveItemRowGridMode(int id)
+        {
+            foreach (DataGridViewRow row in dgvModes.Rows)
+            {
+                var idItem = row.Get<int>(IndexId);
+                if (idItem != null && idItem == id)
+                {
+                    dgvModes.Rows.RemoveAt(row.Index);
+                    break;
+                }
+            }
+        }
+
+        private void RemoveItemRowGridSteps(int id)
+        {
+            foreach (DataGridViewRow row in dgvSteps.Rows)
+            {
+                var idItem = row.Get<int>(IndexId);
+                if (idItem != null && idItem == id)
+                {
+                    dgvSteps.Rows.RemoveAt(row.Index);
+                    break;
+                }
             }
         }
     }
