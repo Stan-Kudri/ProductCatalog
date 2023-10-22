@@ -7,12 +7,17 @@ using TestTask.Core.Service.Components;
 
 namespace TestTask.ChildForms.StepForm
 {
-    public partial class AddStepForm : Form
+    public partial class StepForm : Form
     {
-        private readonly IMessageBox _messageBox;
-        private readonly SelectMode _modes;
+        protected readonly IMessageBox _messageBox;
+        protected readonly SelectMode _modes;
 
-        public AddStepForm(IMessageBox messageBox, SelectMode modes)
+        private StepForm()
+        {
+            InitializeComponent();
+        }
+
+        public StepForm(IMessageBox messageBox, SelectMode modes)
         {
             InitializeComponent();
             _messageBox = messageBox;
@@ -22,7 +27,7 @@ namespace TestTask.ChildForms.StepForm
         protected Mode SelectedMode =>
             cmbModeValue.SelectedValue != null ? (Mode)cmbModeValue.SelectedValue : throw new Exception("Wrong combo box format");
 
-        private void BtnAdd_Click(object sender, EventArgs e)
+        protected virtual void BtnAdd_Click(object sender, EventArgs e)
         {
             if (!IsDataFilled(out var message))
             {
@@ -41,9 +46,10 @@ namespace TestTask.ChildForms.StepForm
             Close();
         }
 
-        private void AddStepForm_Load(object sender, EventArgs e)
+        protected virtual void AddStepForm_Load(object sender, EventArgs e)
         {
             selectModeBindingSource.DataSource = _modes.Items;
+            SetDefoultValueData();
         }
 
         private void TbTimer_KeyPress(object sender, KeyPressEventArgs e) => KeyPressDigit(e);
@@ -62,7 +68,7 @@ namespace TestTask.ChildForms.StepForm
             e.Handled = true;
         }
 
-        private void SetDefoultValueData()
+        protected virtual void SetDefoultValueData()
         {
             cmbModeValue.SelectedItem = _modes.Mode;
             tbTimer.Text = "0";
@@ -72,7 +78,7 @@ namespace TestTask.ChildForms.StepForm
             tbVolume.Text = "0";
         }
 
-        private bool IsDataFilled(out string message)
+        protected bool IsDataFilled(out string message)
         {
             if (cmbModeValue.Text.Length <= 0)
             {
@@ -90,7 +96,7 @@ namespace TestTask.ChildForms.StepForm
             return true;
         }
 
-        public StepModel GetModeModel()
+        public StepModel GetStepModel()
         {
             if (!int.TryParse(tbTimer.Text, out var timer))
             {

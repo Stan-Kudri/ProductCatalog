@@ -28,7 +28,7 @@ namespace TestTask.Core.Service
             _dbContext.SaveChanges();
         }
 
-        public void Edit(Mode mode)
+        public void Update(Mode mode)
         {
             if (mode == null)
             {

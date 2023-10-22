@@ -8,6 +8,12 @@ namespace TestTask.Core.Components.ItemsTables
         {
         }
 
+        public Step(int modeId, int timer, string destination, int speed, string type, int volume, int id)
+            : this(modeId, timer, destination, speed, type, volume)
+        {
+            Id = id > 0 ? Id = id : throw new ArgumentException("The ID must be greater than zero.", nameof(id));
+        }
+
         public Step(int modeId, int timer, string destination, int speed, string type, int volume)
         {
             ModeId = modeId > 0 ? ModeId = modeId : throw new ArgumentException("Step ID greater than zero.", nameof(modeId));

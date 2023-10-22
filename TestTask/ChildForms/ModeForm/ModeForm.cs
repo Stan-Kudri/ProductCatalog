@@ -5,28 +5,33 @@ using TestTask.Core.Service.Components;
 
 namespace TestTask.ChildForms.ModeForm
 {
-    public partial class AddModeForm : Form
+    public partial class ModeForm : Form
     {
-        private readonly IMessageBox _messageBox;
+        protected readonly IMessageBox _messageBox;
 
-        public AddModeForm(IMessageBox messageBox)
+        private ModeForm()
+        {
+            InitializeComponent();
+        }
+
+        public ModeForm(IMessageBox messageBox)
         {
             InitializeComponent();
             _messageBox = messageBox;
         }
 
-        private void BtnSave_Click(object sender, EventArgs e)
+        protected virtual void BtnSave_Click(object sender, EventArgs e)
         {
             if (tbNameMode.Text == string.Empty)
             {
-                _messageBox.ShowInfo("Fill in the field Name");
+                _messageBox.ShowWarning("Fill in the field Name");
                 return;
             }
 
             DialogResult = DialogResult.OK;
         }
 
-        private void BtnClear_Click(object sender, EventArgs e) => DefoultValue();
+        private void BtnClear_Click(object sender, EventArgs e) => DefaultValue();
 
         private void BtnClose_Click(object sender, EventArgs e)
         {
@@ -34,32 +39,18 @@ namespace TestTask.ChildForms.ModeForm
             Close();
         }
 
-        private void DefoultValue()
+        protected virtual void AddModeForm_Load(object sender, EventArgs e) => DefaultValue();
+
+        protected virtual void DefaultValue()
         {
             tbNameMode.Text = string.Empty;
-            tbMaxUsedType.Text = "0";
+            tbMaxUsedTips.Text = "0";
             tbMaxBottle.Text = "0";
         }
 
-        private void TbMaxBottle_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsDigit(e.KeyChar))
-            {
-                return;
-            }
+        private void TbMaxBottle_KeyPress(object sender, KeyPressEventArgs e) => KeyPressDigit(e);
 
-            e.Handled = true;
-        }
-
-        private void TbMaxUsedType_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsDigit(e.KeyChar))
-            {
-                return;
-            }
-
-            e.Handled = true;
-        }
+        private void TbMaxUsedType_KeyPress(object sender, KeyPressEventArgs e) => KeyPressDigit(e);
 
         public ModeModel GetModeModel()
         {
@@ -68,12 +59,22 @@ namespace TestTask.ChildForms.ModeForm
                 throw new Exception("The MaxBottleNumber field is filled in incorrectly.");
             }
 
-            if (!int.TryParse(tbMaxUsedType.Text, out var valueMaxUsedType))
+            if (!int.TryParse(tbMaxUsedTips.Text, out var valueMaxUsedType))
             {
                 throw new Exception("The MaxUsedType field is filled in incorrectly.");
             }
 
             return new ModeModel(tbNameMode.Text, valueMaxBottle, valueMaxUsedType);
+        }
+
+        private void KeyPressDigit(KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                return;
+            }
+
+            e.Handled = true;
         }
     }
 }

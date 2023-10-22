@@ -28,7 +28,7 @@ namespace TestTask.Core.Service
             _dbContext.SaveChanges();
         }
 
-        public void Edit(Step step)
+        public void Update(Step step)
         {
             if (step == null)
             {

@@ -1,11 +1,7 @@
 ﻿namespace TestTask.ChildForms.StepForm
 {
-    partial class AddStepForm
+    partial class StepForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -137,6 +133,7 @@
             this.tlpStepData.Controls.Add(this.tbType, 0, 4);
             this.tlpStepData.Controls.Add(this.tbVolume, 0, 5);
             this.tlpStepData.Location = new System.Drawing.Point(5, 5);
+            this.tlpStepData.MinimumSize = new System.Drawing.Size(300, 300);
             this.tlpStepData.Name = "tlpStepData";
             this.tlpStepData.RowCount = 6;
             this.tlpStepData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
@@ -291,7 +288,7 @@
             this.tlpAddButton.Name = "tlpAddButton";
             this.tlpAddButton.RowCount = 1;
             this.tlpAddButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpAddButton.Size = new System.Drawing.Size(300, 35);
+            this.tlpAddButton.Size = new System.Drawing.Size(300, 45);
             this.tlpAddButton.TabIndex = 3;
             // 
             // btnAdd
@@ -307,7 +304,7 @@
             this.btnAdd.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnAdd.Size = new System.Drawing.Size(91, 23);
+            this.btnAdd.Size = new System.Drawing.Size(91, 33);
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Add";
             this.btnAdd.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -328,9 +325,9 @@
             this.btnClear.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnClear.Name = "btnClear";
             this.btnClear.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClear.Size = new System.Drawing.Size(91, 23);
+            this.btnClear.Size = new System.Drawing.Size(91, 33);
             this.btnClear.TabIndex = 1;
-            this.btnClear.Text = "Clear";
+            this.btnClear.Text = "Default Value";
             this.btnClear.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnClear.UseAccentColor = false;
             this.btnClear.UseVisualStyleBackColor = true;
@@ -349,7 +346,7 @@
             this.btnClose.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnClose.Name = "btnClose";
             this.btnClose.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClose.Size = new System.Drawing.Size(94, 23);
+            this.btnClose.Size = new System.Drawing.Size(94, 33);
             this.btnClose.TabIndex = 2;
             this.btnClose.Text = "Close";
             this.btnClose.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -357,16 +354,16 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
-            // AddStepForm
+            // StepForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(309, 346);
+            this.ClientSize = new System.Drawing.Size(309, 356);
             this.Controls.Add(this.tlpAddButton);
             this.Controls.Add(this.tlpStepData);
-            this.MinimumSize = new System.Drawing.Size(325, 385);
-            this.Name = "AddStepForm";
-            this.Text = "AddStepForm";
+            this.MinimumSize = new System.Drawing.Size(325, 395);
+            this.Name = "StepForm";
+            this.Text = "Step Form";
             this.Load += new System.EventHandler(this.AddStepForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.stepModelBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).EndInit();
@@ -380,19 +377,20 @@
 
         #endregion
 
-        private MaterialSkin.Controls.MaterialTextBox2 tbTimer;
-        private MaterialSkin.Controls.MaterialComboBox cmbModeValue;
-        private System.Windows.Forms.TableLayoutPanel tlpStepData;
-        private MaterialSkin.Controls.MaterialTextBox2 tbDestination;
-        private MaterialSkin.Controls.MaterialTextBox2 tbSpeed;
-        private MaterialSkin.Controls.MaterialTextBox2 tbType;
-        private MaterialSkin.Controls.MaterialTextBox2 tbVolume;
-        private System.Windows.Forms.TableLayoutPanel tlpAddButton;
-        private MaterialSkin.Controls.MaterialButton btnAdd;
-        private MaterialSkin.Controls.MaterialButton btnClear;
-        private MaterialSkin.Controls.MaterialButton btnClose;
-        private System.Windows.Forms.BindingSource stepModelBindingSource;
-        private System.Windows.Forms.BindingSource selectModeBindingSource;
-        private System.Windows.Forms.BindingSource itemsBindingSource;
+        protected MaterialSkin.Controls.MaterialTextBox2 tbTimer;
+        protected MaterialSkin.Controls.MaterialComboBox cmbModeValue;
+        protected System.Windows.Forms.TableLayoutPanel tlpStepData;
+        protected MaterialSkin.Controls.MaterialTextBox2 tbDestination;
+        protected MaterialSkin.Controls.MaterialTextBox2 tbSpeed;
+        protected MaterialSkin.Controls.MaterialTextBox2 tbType;
+        protected MaterialSkin.Controls.MaterialTextBox2 tbVolume;
+        protected System.Windows.Forms.TableLayoutPanel tlpAddButton;
+        protected MaterialSkin.Controls.MaterialButton btnAdd;
+        protected MaterialSkin.Controls.MaterialButton btnClear;
+        protected MaterialSkin.Controls.MaterialButton btnClose;
+        protected System.Windows.Forms.BindingSource stepModelBindingSource;
+        protected System.Windows.Forms.BindingSource selectModeBindingSource;
+        protected System.Windows.Forms.BindingSource itemsBindingSource;
+        private System.ComponentModel.IContainer components;
     }
 }

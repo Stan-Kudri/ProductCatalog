@@ -49,7 +49,7 @@ namespace TestTask.ChildForms
 
         private void BtnAddMode_Click(object sender, EventArgs e)
         {
-            using (var addFormMode = new AddModeForm(_messageBox))
+            using (var addFormMode = new AddItemModeForm(_messageBox))
             {
                 if (addFormMode.ShowDialog() != DialogResult.OK)
                 {
@@ -72,14 +72,14 @@ namespace TestTask.ChildForms
                 return;
             }
 
-            using (var addFormStep = new AddStepForm(_messageBox, _selectMode))
+            using (var addFormStep = new StepForm.StepForm(_messageBox, _selectMode))
             {
                 if (addFormStep.ShowDialog() != DialogResult.OK)
                 {
                     return;
                 }
 
-                var step = addFormStep.GetModeModel().ToStep();
+                var step = addFormStep.GetStepModel().ToStep();
                 _stepService.Add(step);
             }
 
@@ -138,6 +138,61 @@ namespace TestTask.ChildForms
             LoadDataGridStep();
         }
 
+        private void BtnEditMode_Click(object sender, EventArgs e)
+        {
+            var indexEditRow = GetSelectedRowIndexesGridMode();
+
+            if (indexEditRow.Count == 1)
+            {
+                var oldItem = GetMode(indexEditRow.First());
+
+                using (var editModeForm = new EditItemModeForm(_messageBox, oldItem))
+                {
+                    if (editModeForm.ShowDialog() != DialogResult.OK)
+                    {
+                        return;
+                    }
+
+                    var updateItem = editModeForm.GetEditMode();
+                    _modeService.Update(updateItem);
+                }
+
+                LoadDataGridMode();
+            }
+            else
+            {
+                _messageBox.ShowWarning("Select one item.");
+            }
+
+        }
+
+        private void BtnEditStep_Click(object sender, EventArgs e)
+        {
+            var indexEditRow = GetSelectedRowIndexesGridStep();
+
+            if (indexEditRow.Count == 1)
+            {
+                var oldItem = GetStep(indexEditRow.First());
+
+                using (var editStepForm = new EditItemStepForm(_messageBox, _selectMode, oldItem))
+                {
+                    if (editStepForm.ShowDialog() != DialogResult.OK)
+                    {
+                        return;
+                    }
+
+                    var updateItem = editStepForm.GetEditStep();
+                    _stepService.Update(updateItem);
+                }
+
+                LoadDataGridMode();
+            }
+            else
+            {
+                _messageBox.ShowWarning("Select one item.");
+            }
+        }
+
         private void TableForm_Load(object sender, EventArgs e)
         {
             UpdateSelectMode();
@@ -178,6 +233,20 @@ namespace TestTask.ChildForms
             var maxUsedTips = CellElement(rowItems, IndexColumnMaxUsedTips).ParseInt();
 
             return new Mode(nameMode, maxBottle, maxUsedTips, idMode);
+        }
+
+        private Step GetStep(int indexRow)
+        {
+            var rowItems = dgvSteps.Rows[indexRow];
+            var idStep = CellElement(rowItems, IndexId).ParseInt();
+            var modeId = CellElement(rowItems, IndexColumnModeId).ParseInt();
+            var timer = CellElement(rowItems, IndexColumnTimer).ParseInt();
+            var destination = CellElement(rowItems, IndexColumnDestination);
+            var speed = CellElement(rowItems, IndexColumnSpeed).ParseInt();
+            var type = CellElement(rowItems, IndexColumnType) ?? throw new ArgumentException("Name cannot be null.");
+            var volume = CellElement(rowItems, IndexColumnSpeed).ParseInt();
+
+            return new Step(modeId, timer, destination, speed, type, volume, idStep);
         }
 
         private string CellElement(DataGridViewRow rowItem, int indexColumn) => rowItem.GetString(indexColumn) ?? throw new Exception("String cannot be null.");
