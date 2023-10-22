@@ -88,7 +88,7 @@
             this.tabPageModes.Location = new System.Drawing.Point(4, 22);
             this.tabPageModes.Name = "tabPageModes";
             this.tabPageModes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageModes.Size = new System.Drawing.Size(766, 376);
+            this.tabPageModes.Size = new System.Drawing.Size(766, 398);
             this.tabPageModes.TabIndex = 0;
             this.tabPageModes.Text = "Modes";
             this.tabPageModes.UseVisualStyleBackColor = true;
@@ -106,9 +106,9 @@
             this.MaxBottleNumber,
             this.MaxUsedTips});
             this.dgvModes.Location = new System.Drawing.Point(3, 3);
-            this.dgvModes.MinimumSize = new System.Drawing.Size(760, 335);
+            this.dgvModes.MinimumSize = new System.Drawing.Size(760, 355);
             this.dgvModes.Name = "dgvModes";
-            this.dgvModes.Size = new System.Drawing.Size(760, 335);
+            this.dgvModes.Size = new System.Drawing.Size(760, 355);
             this.dgvModes.TabIndex = 4;
             // 
             // IdMode
@@ -147,7 +147,7 @@
             this.tlpModesButton.Controls.Add(this.btnAddMode, 0, 0);
             this.tlpModesButton.Controls.Add(this.btnEditMode, 1, 0);
             this.tlpModesButton.Controls.Add(this.btnDeliteMode, 2, 0);
-            this.tlpModesButton.Location = new System.Drawing.Point(3, 345);
+            this.tlpModesButton.Location = new System.Drawing.Point(3, 365);
             this.tlpModesButton.MinimumSize = new System.Drawing.Size(760, 25);
             this.tlpModesButton.Name = "tlpModesButton";
             this.tlpModesButton.RowCount = 1;
