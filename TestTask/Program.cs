@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using TestTask.Core.Db;
+using TestTask.Core.ImportDB.Read.Header;
 using TestTask.Core.Service;
 using TestTask.Message;
 
@@ -18,6 +19,9 @@ namespace TestTask
         {
             new DbContextFactory().EnsureCreated(ConnectionName);
             var message = new MessageBoxShow();
+
+            new ReadMode().Reader();
+            new ReadStep().Reader();
 
             using (var appDbContext = new AppDbContext(ConnectionName))
             {
