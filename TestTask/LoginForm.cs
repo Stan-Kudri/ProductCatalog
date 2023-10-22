@@ -28,13 +28,14 @@ namespace TestTask
 
         private void BtnSignUpNow_Click(object sender, EventArgs e)
         {
-            var registrForm = new RegistrationForm(_userService, _messageBox);
-
             Hide();
 
-            if (registrForm.ShowDialog() == DialogResult.Cancel)
+            using (var registrForm = new RegistrationForm(_userService, _messageBox))
             {
-                Show();
+                if (registrForm.ShowDialog() == DialogResult.Cancel)
+                {
+                    Show();
+                }
             }
         }
 
@@ -48,13 +49,15 @@ namespace TestTask
 
             Hide();
 
-            var tableForm = new TableForm(_modeService, _stepService, _messageBox);
-            if (tableForm.ShowDialog() == DialogResult.Cancel)
+            using (var tableForm = new TableForm(_modeService, _stepService, _messageBox))
             {
-                _messageBox.ShowInfo("Account logout completed successfully.");
-                ClearEnteredData();
-                Show();
-                return;
+                if (tableForm.ShowDialog() == DialogResult.Cancel)
+                {
+                    _messageBox.ShowInfo("Account logout completed successfully.");
+                    ClearEnteredData();
+                    Show();
+                    return;
+                }
             }
 
             Close();

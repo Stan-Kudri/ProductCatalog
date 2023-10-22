@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using TestTask.BindingItem.UserBinding.StepBinding;
 using TestTask.ChildForms.ModeForm;
 using TestTask.ChildForms.StepForm;
 using TestTask.Core.Components;
@@ -10,6 +9,7 @@ using TestTask.Core.Components.ItemsTables;
 using TestTask.Core.Service;
 using TestTask.Core.Service.Components;
 using TestTask.Extension;
+using SelectMode = TestTask.BindingItem.UserBinding.StepBinding.SelectMode;
 
 namespace TestTask.ChildForms
 {
@@ -49,15 +49,16 @@ namespace TestTask.ChildForms
 
         private void BtnAddMode_Click(object sender, EventArgs e)
         {
-            var addFormMode = new AddModeForm(_messageBox);
-
-            if (addFormMode.ShowDialog() != DialogResult.OK)
+            using (var addFormMode = new AddModeForm(_messageBox))
             {
-                return;
-            }
+                if (addFormMode.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
 
-            var mode = addFormMode.GetModeModel().ToMode();
-            _modeService.Add(mode);
+                var mode = addFormMode.GetModeModel().ToMode();
+                _modeService.Add(mode);
+            }
 
             UpdateSelectMode();
             LoadDataGridMode();
@@ -71,15 +72,17 @@ namespace TestTask.ChildForms
                 return;
             }
 
-            var addFormStep = new AddStepForm(_messageBox, _selectMode);
-
-            if (addFormStep.ShowDialog() != DialogResult.OK)
+            using (var addFormStep = new AddStepForm(_messageBox, _selectMode))
             {
-                return;
+                if (addFormStep.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                var step = addFormStep.GetModeModel().ToStep();
+                _stepService.Add(step);
             }
 
-            var step = addFormStep.GetModeModel().ToStep();
-            _stepService.Add(step);
             LoadDataGridStep();
         }
 

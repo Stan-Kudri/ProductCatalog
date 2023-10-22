@@ -38,25 +38,25 @@
             this.tlpModesButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnAddMode = new MaterialSkin.Controls.MaterialButton();
             this.btnEditMode = new MaterialSkin.Controls.MaterialButton();
-            this.btnDeliteMode = new MaterialSkin.Controls.MaterialButton();
+            this.btnDeleteMode = new MaterialSkin.Controls.MaterialButton();
             this.tabPageSteps = new System.Windows.Forms.TabPage();
             this.tlpStepsButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnAddItemStep = new MaterialSkin.Controls.MaterialButton();
             this.btnEditStep = new MaterialSkin.Controls.MaterialButton();
-            this.btnDeliteStep = new MaterialSkin.Controls.MaterialButton();
+            this.btnDeleteStep = new MaterialSkin.Controls.MaterialButton();
             this.dgvSteps = new System.Windows.Forms.DataGridView();
-            this.IdStep = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ModelId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Timer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Destination = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Speed = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpButtonAllTable = new System.Windows.Forms.TableLayoutPanel();
             this.btnAddData = new MaterialSkin.Controls.MaterialButton();
             this.btnClearData = new MaterialSkin.Controls.MaterialButton();
             this.btnCloseApp = new MaterialSkin.Controls.MaterialButton();
             this.tlpTabControl = new System.Windows.Forms.TableLayoutPanel();
+            this.IdStep = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ModeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Timer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Destination = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Speed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tcData.SuspendLayout();
             this.tabPageModes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvModes)).BeginInit();
@@ -146,7 +146,7 @@
             this.tlpModesButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpModesButton.Controls.Add(this.btnAddMode, 0, 0);
             this.tlpModesButton.Controls.Add(this.btnEditMode, 1, 0);
-            this.tlpModesButton.Controls.Add(this.btnDeliteMode, 2, 0);
+            this.tlpModesButton.Controls.Add(this.btnDeleteMode, 2, 0);
             this.tlpModesButton.Location = new System.Drawing.Point(3, 370);
             this.tlpModesButton.MinimumSize = new System.Drawing.Size(760, 25);
             this.tlpModesButton.Name = "tlpModesButton";
@@ -170,7 +170,7 @@
             this.btnAddMode.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnAddMode.Size = new System.Drawing.Size(233, 19);
             this.btnAddMode.TabIndex = 0;
-            this.btnAddMode.Text = "Add Mode";
+            this.btnAddMode.Text = "Add";
             this.btnAddMode.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnAddMode.UseAccentColor = false;
             this.btnAddMode.UseVisualStyleBackColor = true;
@@ -191,31 +191,31 @@
             this.btnEditMode.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnEditMode.Size = new System.Drawing.Size(233, 19);
             this.btnEditMode.TabIndex = 1;
-            this.btnEditMode.Text = "Edit Mode";
+            this.btnEditMode.Text = "Edit";
             this.btnEditMode.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnEditMode.UseAccentColor = false;
             this.btnEditMode.UseVisualStyleBackColor = true;
             // 
-            // btnDeliteMode
+            // btnDeleteMode
             // 
-            this.btnDeliteMode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnDeliteMode.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnDeliteMode.Depth = 0;
-            this.btnDeliteMode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDeliteMode.HighEmphasis = true;
-            this.btnDeliteMode.Icon = null;
-            this.btnDeliteMode.Location = new System.Drawing.Point(516, 3);
-            this.btnDeliteMode.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.btnDeliteMode.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnDeliteMode.Name = "btnDeliteMode";
-            this.btnDeliteMode.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnDeliteMode.Size = new System.Drawing.Size(234, 19);
-            this.btnDeliteMode.TabIndex = 2;
-            this.btnDeliteMode.Text = "Delite Mode";
-            this.btnDeliteMode.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnDeliteMode.UseAccentColor = false;
-            this.btnDeliteMode.UseVisualStyleBackColor = true;
-            this.btnDeliteMode.Click += new System.EventHandler(this.BtnDeliteMode_Click);
+            this.btnDeleteMode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnDeleteMode.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnDeleteMode.Depth = 0;
+            this.btnDeleteMode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDeleteMode.HighEmphasis = true;
+            this.btnDeleteMode.Icon = null;
+            this.btnDeleteMode.Location = new System.Drawing.Point(516, 3);
+            this.btnDeleteMode.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.btnDeleteMode.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnDeleteMode.Name = "btnDeleteMode";
+            this.btnDeleteMode.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnDeleteMode.Size = new System.Drawing.Size(234, 19);
+            this.btnDeleteMode.TabIndex = 2;
+            this.btnDeleteMode.Text = "Delete";
+            this.btnDeleteMode.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnDeleteMode.UseAccentColor = false;
+            this.btnDeleteMode.UseVisualStyleBackColor = true;
+            this.btnDeleteMode.Click += new System.EventHandler(this.BtnDeliteMode_Click);
             // 
             // tabPageSteps
             // 
@@ -239,7 +239,7 @@
             this.tlpStepsButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpStepsButton.Controls.Add(this.btnAddItemStep, 0, 0);
             this.tlpStepsButton.Controls.Add(this.btnEditStep, 1, 0);
-            this.tlpStepsButton.Controls.Add(this.btnDeliteStep, 2, 0);
+            this.tlpStepsButton.Controls.Add(this.btnDeleteStep, 2, 0);
             this.tlpStepsButton.Location = new System.Drawing.Point(3, 370);
             this.tlpStepsButton.MinimumSize = new System.Drawing.Size(760, 25);
             this.tlpStepsButton.Name = "tlpStepsButton";
@@ -263,7 +263,7 @@
             this.btnAddItemStep.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnAddItemStep.Size = new System.Drawing.Size(233, 19);
             this.btnAddItemStep.TabIndex = 0;
-            this.btnAddItemStep.Text = "Add Step";
+            this.btnAddItemStep.Text = "Add";
             this.btnAddItemStep.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnAddItemStep.UseAccentColor = false;
             this.btnAddItemStep.UseVisualStyleBackColor = true;
@@ -284,31 +284,31 @@
             this.btnEditStep.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnEditStep.Size = new System.Drawing.Size(233, 19);
             this.btnEditStep.TabIndex = 1;
-            this.btnEditStep.Text = "Edit Step";
+            this.btnEditStep.Text = "Edit";
             this.btnEditStep.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnEditStep.UseAccentColor = false;
             this.btnEditStep.UseVisualStyleBackColor = true;
             // 
-            // btnDeliteStep
+            // btnDeleteStep
             // 
-            this.btnDeliteStep.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnDeliteStep.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnDeliteStep.Depth = 0;
-            this.btnDeliteStep.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDeliteStep.HighEmphasis = true;
-            this.btnDeliteStep.Icon = null;
-            this.btnDeliteStep.Location = new System.Drawing.Point(516, 3);
-            this.btnDeliteStep.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.btnDeliteStep.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnDeliteStep.Name = "btnDeliteStep";
-            this.btnDeliteStep.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnDeliteStep.Size = new System.Drawing.Size(234, 19);
-            this.btnDeliteStep.TabIndex = 2;
-            this.btnDeliteStep.Text = "Delite Step";
-            this.btnDeliteStep.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnDeliteStep.UseAccentColor = false;
-            this.btnDeliteStep.UseVisualStyleBackColor = true;
-            this.btnDeliteStep.Click += new System.EventHandler(this.BtnDeliteStep_Click);
+            this.btnDeleteStep.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnDeleteStep.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnDeleteStep.Depth = 0;
+            this.btnDeleteStep.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDeleteStep.HighEmphasis = true;
+            this.btnDeleteStep.Icon = null;
+            this.btnDeleteStep.Location = new System.Drawing.Point(516, 3);
+            this.btnDeleteStep.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.btnDeleteStep.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnDeleteStep.Name = "btnDeleteStep";
+            this.btnDeleteStep.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnDeleteStep.Size = new System.Drawing.Size(234, 19);
+            this.btnDeleteStep.TabIndex = 2;
+            this.btnDeleteStep.Text = "Delete";
+            this.btnDeleteStep.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnDeleteStep.UseAccentColor = false;
+            this.btnDeleteStep.UseVisualStyleBackColor = true;
+            this.btnDeleteStep.Click += new System.EventHandler(this.BtnDeliteStep_Click);
             // 
             // dgvSteps
             // 
@@ -319,7 +319,7 @@
             this.dgvSteps.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSteps.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdStep,
-            this.ModelId,
+            this.ModeId,
             this.Timer,
             this.Destination,
             this.Speed,
@@ -330,56 +330,6 @@
             this.dgvSteps.Name = "dgvSteps";
             this.dgvSteps.Size = new System.Drawing.Size(760, 360);
             this.dgvSteps.TabIndex = 0;
-            // 
-            // IdStep
-            // 
-            this.IdStep.FillWeight = 134.3092F;
-            this.IdStep.HeaderText = "ID";
-            this.IdStep.MinimumWidth = 50;
-            this.IdStep.Name = "IdStep";
-            this.IdStep.ReadOnly = true;
-            // 
-            // ModelId
-            // 
-            this.ModelId.FillWeight = 166.9742F;
-            this.ModelId.HeaderText = "ModelId";
-            this.ModelId.MinimumWidth = 50;
-            this.ModelId.Name = "ModelId";
-            // 
-            // Timer
-            // 
-            this.Timer.FillWeight = 9.885016F;
-            this.Timer.HeaderText = "Timer";
-            this.Timer.MinimumWidth = 90;
-            this.Timer.Name = "Timer";
-            // 
-            // Destination
-            // 
-            this.Destination.FillWeight = 244.5199F;
-            this.Destination.HeaderText = "Destination";
-            this.Destination.MinimumWidth = 140;
-            this.Destination.Name = "Destination";
-            // 
-            // Speed
-            // 
-            this.Speed.FillWeight = 9.885016F;
-            this.Speed.HeaderText = "Speed";
-            this.Speed.MinimumWidth = 80;
-            this.Speed.Name = "Speed";
-            // 
-            // Type
-            // 
-            this.Type.FillWeight = 9.885016F;
-            this.Type.HeaderText = "Type";
-            this.Type.MinimumWidth = 80;
-            this.Type.Name = "Type";
-            // 
-            // Volume
-            // 
-            this.Volume.FillWeight = 22.61278F;
-            this.Volume.HeaderText = "Volume";
-            this.Volume.MinimumWidth = 100;
-            this.Volume.Name = "Volume";
             // 
             // tlpButtonAllTable
             // 
@@ -475,6 +425,56 @@
             this.tlpTabControl.Size = new System.Drawing.Size(780, 430);
             this.tlpTabControl.TabIndex = 2;
             // 
+            // IdStep
+            // 
+            this.IdStep.FillWeight = 134.3092F;
+            this.IdStep.HeaderText = "ID";
+            this.IdStep.MinimumWidth = 50;
+            this.IdStep.Name = "IdStep";
+            this.IdStep.ReadOnly = true;
+            // 
+            // ModeId
+            // 
+            this.ModeId.FillWeight = 166.9742F;
+            this.ModeId.HeaderText = "ModeId";
+            this.ModeId.MinimumWidth = 50;
+            this.ModeId.Name = "ModeId";
+            // 
+            // Timer
+            // 
+            this.Timer.FillWeight = 9.885016F;
+            this.Timer.HeaderText = "Timer";
+            this.Timer.MinimumWidth = 90;
+            this.Timer.Name = "Timer";
+            // 
+            // Destination
+            // 
+            this.Destination.FillWeight = 244.5199F;
+            this.Destination.HeaderText = "Destination";
+            this.Destination.MinimumWidth = 140;
+            this.Destination.Name = "Destination";
+            // 
+            // Speed
+            // 
+            this.Speed.FillWeight = 9.885016F;
+            this.Speed.HeaderText = "Speed";
+            this.Speed.MinimumWidth = 80;
+            this.Speed.Name = "Speed";
+            // 
+            // Type
+            // 
+            this.Type.FillWeight = 9.885016F;
+            this.Type.HeaderText = "Type";
+            this.Type.MinimumWidth = 80;
+            this.Type.Name = "Type";
+            // 
+            // Volume
+            // 
+            this.Volume.FillWeight = 22.61278F;
+            this.Volume.HeaderText = "Volume";
+            this.Volume.MinimumWidth = 100;
+            this.Volume.Name = "Volume";
+            // 
             // TableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -513,21 +513,21 @@
         private System.Windows.Forms.TableLayoutPanel tlpTabControl;
         private MaterialSkin.Controls.MaterialButton btnAddItemStep;
         private MaterialSkin.Controls.MaterialButton btnEditStep;
-        private MaterialSkin.Controls.MaterialButton btnDeliteStep;
+        private MaterialSkin.Controls.MaterialButton btnDeleteStep;
         private MaterialSkin.Controls.MaterialButton btnAddData;
         private MaterialSkin.Controls.MaterialButton btnClearData;
         private MaterialSkin.Controls.MaterialButton btnCloseApp;
         private System.Windows.Forms.TableLayoutPanel tlpModesButton;
         private MaterialSkin.Controls.MaterialButton btnAddMode;
         private MaterialSkin.Controls.MaterialButton btnEditMode;
-        private MaterialSkin.Controls.MaterialButton btnDeliteMode;
+        private MaterialSkin.Controls.MaterialButton btnDeleteMode;
         private System.Windows.Forms.DataGridView dgvModes;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdMode;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameMode;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaxBottleNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaxUsedTips;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdStep;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ModelId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ModeId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Timer;
         private System.Windows.Forms.DataGridViewTextBoxColumn Destination;
         private System.Windows.Forms.DataGridViewTextBoxColumn Speed;
