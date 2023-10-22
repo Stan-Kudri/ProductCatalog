@@ -84,6 +84,12 @@
     <Compile Include="ChildForms\RegistrationForm.Designer.cs">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChildForms\StepForm\AddStepForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildForms\StepForm\AddStepForm.Designer.cs">
+      <DependentUpon>AddStepForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChildForms\TableForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChildForms\RegistrationForm.resx">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildForms\StepForm\AddStepForm.resx">
+      <DependentUpon>AddStepForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildForms\TableForm.resx">
       <DependentUpon>TableForm.cs</DependentUpon>

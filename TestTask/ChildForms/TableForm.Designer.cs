@@ -106,9 +106,9 @@
             this.MaxBottleNumber,
             this.MaxUsedTips});
             this.dgvModes.Location = new System.Drawing.Point(3, 3);
-            this.dgvModes.MinimumSize = new System.Drawing.Size(760, 355);
+            this.dgvModes.MinimumSize = new System.Drawing.Size(760, 360);
             this.dgvModes.Name = "dgvModes";
-            this.dgvModes.Size = new System.Drawing.Size(760, 355);
+            this.dgvModes.Size = new System.Drawing.Size(760, 360);
             this.dgvModes.TabIndex = 4;
             // 
             // IdMode
@@ -147,7 +147,7 @@
             this.tlpModesButton.Controls.Add(this.btnAddMode, 0, 0);
             this.tlpModesButton.Controls.Add(this.btnEditMode, 1, 0);
             this.tlpModesButton.Controls.Add(this.btnDeliteMode, 2, 0);
-            this.tlpModesButton.Location = new System.Drawing.Point(3, 365);
+            this.tlpModesButton.Location = new System.Drawing.Point(3, 370);
             this.tlpModesButton.MinimumSize = new System.Drawing.Size(760, 25);
             this.tlpModesButton.Name = "tlpModesButton";
             this.tlpModesButton.RowCount = 1;
@@ -239,7 +239,7 @@
             this.tlpStepsButton.Controls.Add(this.btnAddItemStep, 0, 0);
             this.tlpStepsButton.Controls.Add(this.btnEditStep, 1, 0);
             this.tlpStepsButton.Controls.Add(this.btnDeliteStep, 2, 0);
-            this.tlpStepsButton.Location = new System.Drawing.Point(3, 367);
+            this.tlpStepsButton.Location = new System.Drawing.Point(3, 370);
             this.tlpStepsButton.MinimumSize = new System.Drawing.Size(760, 25);
             this.tlpStepsButton.Name = "tlpStepsButton";
             this.tlpStepsButton.RowCount = 1;
@@ -323,9 +323,9 @@
             this.Type,
             this.Volume});
             this.dgvSteps.Location = new System.Drawing.Point(3, 3);
-            this.dgvSteps.MinimumSize = new System.Drawing.Size(760, 335);
+            this.dgvSteps.MinimumSize = new System.Drawing.Size(760, 360);
             this.dgvSteps.Name = "dgvSteps";
-            this.dgvSteps.Size = new System.Drawing.Size(760, 357);
+            this.dgvSteps.Size = new System.Drawing.Size(760, 360);
             this.dgvSteps.TabIndex = 0;
             // 
             // IdStep
