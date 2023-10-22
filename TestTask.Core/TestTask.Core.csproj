@@ -88,6 +88,7 @@
     <Compile Include="Components\User.cs" />
     <Compile Include="Db\AppDbContext.cs" />
     <Compile Include="Db\DbContextFactory.cs" />
+    <Compile Include="Extension\RowExtension.cs" />
     <Compile Include="Extension\StringPassExtension.cs" />
     <Compile Include="Extension\StringUsernameExtension.cs" />
     <Compile Include="ImportDB\Component\Result.cs" />
