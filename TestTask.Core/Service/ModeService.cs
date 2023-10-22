@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TestTask.Core.Components;
 using TestTask.Core.Db;
@@ -49,5 +50,7 @@ namespace TestTask.Core.Service
             _dbContext.Modes.Remove(mode);
             _dbContext.SaveChanges();
         }
+
+        public List<Mode> GetAllMode() => _dbContext.Modes.Count() > 0 ? _dbContext.Modes.ToList() : null;
     }
 }

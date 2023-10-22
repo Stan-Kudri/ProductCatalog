@@ -71,6 +71,8 @@
   <ItemGroup>
     <Compile Include="BindingItem\ModelBase.cs" />
     <Compile Include="BindingItem\UserBinding\ModeModel.cs" />
+    <Compile Include="BindingItem\UserBinding\StepBinding\SelectMode.cs" />
+    <Compile Include="BindingItem\UserBinding\StepBinding\StepModel.cs" />
     <Compile Include="BindingItem\UserBinding\UserModel.cs" />
     <Compile Include="ChildForms\ModeForm\AddModeForm.cs">
       <SubType>Form</SubType>
@@ -131,6 +133,8 @@
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.ModeModel.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.StepBinding.SelectMode.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.StepMode.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -151,6 +155,7 @@
       <Name>TestTask.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Windows.Forms;
 using TestTask.BindingItem.UserBinding;
+using TestTask.Core.Service.Components;
 
 namespace TestTask.ChildForms.ModeForm
 {
     public partial class AddModeForm : Form
     {
-        public AddModeForm()
+        private readonly IMessageBox _messageBox;
+
+        public AddModeForm(IMessageBox messageBox)
         {
             InitializeComponent();
+            _messageBox = messageBox;
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
             if (tbNameMode.Text == string.Empty)
             {
-                MessageBox.Show("Fill in the field Name", "Information", MessageBoxButtons.OK);
+                _messageBox.ShowInfo("Fill in the field Name");
                 return;
             }
 

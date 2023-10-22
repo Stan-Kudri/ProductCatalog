@@ -28,8 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tbTimer = new MaterialSkin.Controls.MaterialTextBox2();
+            this.stepModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cmbModeValue = new MaterialSkin.Controls.MaterialComboBox();
+            this.itemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.selectModeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tlpStepData = new System.Windows.Forms.TableLayoutPanel();
             this.tbDestination = new MaterialSkin.Controls.MaterialTextBox2();
             this.tbSpeed = new MaterialSkin.Controls.MaterialTextBox2();
@@ -39,6 +43,9 @@
             this.btnAdd = new MaterialSkin.Controls.MaterialButton();
             this.btnClear = new MaterialSkin.Controls.MaterialButton();
             this.btnClose = new MaterialSkin.Controls.MaterialButton();
+            ((System.ComponentModel.ISupportInitialize)(this.stepModelBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectModeBindingSource)).BeginInit();
             this.tlpStepData.SuspendLayout();
             this.tlpAddButton.SuspendLayout();
             this.SuspendLayout();
@@ -48,9 +55,10 @@
             this.tbTimer.AnimateReadOnly = false;
             this.tbTimer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tbTimer.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.tbTimer.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.stepModelBindingSource, "Timer", true));
             this.tbTimer.Depth = 0;
             this.tbTimer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbTimer.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.tbTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.tbTimer.HideSelection = true;
             this.tbTimer.Hint = "Timer";
             this.tbTimer.LeadingIcon = null;
@@ -74,18 +82,25 @@
             this.tbTimer.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.tbTimer.TrailingIcon = null;
             this.tbTimer.UseSystemPasswordChar = false;
+            this.tbTimer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbTimer_KeyPress);
+            // 
+            // stepModelBindingSource
+            // 
+            this.stepModelBindingSource.DataSource = typeof(TestTask.BindingItem.UserBinding.StepModel);
             // 
             // cmbModeValue
             // 
             this.cmbModeValue.AutoResize = false;
             this.cmbModeValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbModeValue.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.stepModelBindingSource, "Mode", true));
+            this.cmbModeValue.DataSource = this.itemsBindingSource;
             this.cmbModeValue.Depth = 0;
             this.cmbModeValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbModeValue.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbModeValue.DropDownHeight = 174;
             this.cmbModeValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbModeValue.DropDownWidth = 121;
-            this.cmbModeValue.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cmbModeValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.cmbModeValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.cmbModeValue.FormattingEnabled = true;
             this.cmbModeValue.IntegralHeight = false;
@@ -98,6 +113,15 @@
             this.cmbModeValue.Size = new System.Drawing.Size(294, 49);
             this.cmbModeValue.StartIndex = 0;
             this.cmbModeValue.TabIndex = 1;
+            // 
+            // itemsBindingSource
+            // 
+            this.itemsBindingSource.DataMember = "Items";
+            this.itemsBindingSource.DataSource = this.selectModeBindingSource;
+            // 
+            // selectModeBindingSource
+            // 
+            this.selectModeBindingSource.DataSource = typeof(TestTask.BindingItem.UserBinding.StepBinding.SelectMode);
             // 
             // tlpStepData
             // 
@@ -130,9 +154,10 @@
             this.tbDestination.AnimateReadOnly = false;
             this.tbDestination.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tbDestination.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.tbDestination.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.stepModelBindingSource, "Destination", true));
             this.tbDestination.Depth = 0;
             this.tbDestination.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbDestination.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.tbDestination.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.tbDestination.HideSelection = true;
             this.tbDestination.Hint = "Destination";
             this.tbDestination.LeadingIcon = null;
@@ -160,9 +185,10 @@
             this.tbSpeed.AnimateReadOnly = false;
             this.tbSpeed.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tbSpeed.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.tbSpeed.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.stepModelBindingSource, "Speed", true));
             this.tbSpeed.Depth = 0;
             this.tbSpeed.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbSpeed.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.tbSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.tbSpeed.HideSelection = true;
             this.tbSpeed.Hint = "Speed";
             this.tbSpeed.LeadingIcon = null;
@@ -185,15 +211,17 @@
             this.tbSpeed.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.tbSpeed.TrailingIcon = null;
             this.tbSpeed.UseSystemPasswordChar = false;
+            this.tbSpeed.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbSpeed_KeyPress);
             // 
             // tbType
             // 
             this.tbType.AnimateReadOnly = false;
             this.tbType.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tbType.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.tbType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.stepModelBindingSource, "Type", true));
             this.tbType.Depth = 0;
             this.tbType.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbType.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.tbType.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.tbType.HideSelection = true;
             this.tbType.Hint = "Type";
             this.tbType.LeadingIcon = null;
@@ -221,9 +249,10 @@
             this.tbVolume.AnimateReadOnly = false;
             this.tbVolume.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tbVolume.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.tbVolume.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.stepModelBindingSource, "Volume", true));
             this.tbVolume.Depth = 0;
             this.tbVolume.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbVolume.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.tbVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.tbVolume.HideSelection = true;
             this.tbVolume.Hint = "Volume";
             this.tbVolume.LeadingIcon = null;
@@ -246,6 +275,7 @@
             this.tbVolume.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.tbVolume.TrailingIcon = null;
             this.tbVolume.UseSystemPasswordChar = false;
+            this.tbVolume.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbVolume_KeyPress);
             // 
             // tlpAddButton
             // 
@@ -277,12 +307,13 @@
             this.btnAdd.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnAdd.Size = new System.Drawing.Size(92, 23);
+            this.btnAdd.Size = new System.Drawing.Size(91, 23);
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Add";
             this.btnAdd.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnAdd.UseAccentColor = false;
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // btnClear
             // 
@@ -292,17 +323,18 @@
             this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClear.HighEmphasis = true;
             this.btnClear.Icon = null;
-            this.btnClear.Location = new System.Drawing.Point(104, 6);
+            this.btnClear.Location = new System.Drawing.Point(103, 6);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnClear.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnClear.Name = "btnClear";
             this.btnClear.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClear.Size = new System.Drawing.Size(92, 23);
+            this.btnClear.Size = new System.Drawing.Size(91, 23);
             this.btnClear.TabIndex = 1;
             this.btnClear.Text = "Clear";
             this.btnClear.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnClear.UseAccentColor = false;
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
             // btnClose
             // 
@@ -312,17 +344,18 @@
             this.btnClose.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClose.HighEmphasis = true;
             this.btnClose.Icon = null;
-            this.btnClose.Location = new System.Drawing.Point(204, 6);
+            this.btnClose.Location = new System.Drawing.Point(202, 6);
             this.btnClose.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnClose.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnClose.Name = "btnClose";
             this.btnClose.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClose.Size = new System.Drawing.Size(92, 23);
+            this.btnClose.Size = new System.Drawing.Size(94, 23);
             this.btnClose.TabIndex = 2;
             this.btnClose.Text = "Close";
             this.btnClose.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnClose.UseAccentColor = false;
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
             // AddStepForm
             // 
@@ -334,6 +367,10 @@
             this.MinimumSize = new System.Drawing.Size(325, 385);
             this.Name = "AddStepForm";
             this.Text = "AddStepForm";
+            this.Load += new System.EventHandler(this.AddStepForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.stepModelBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectModeBindingSource)).EndInit();
             this.tlpStepData.ResumeLayout(false);
             this.tlpAddButton.ResumeLayout(false);
             this.tlpAddButton.PerformLayout();
@@ -354,5 +391,8 @@
         private MaterialSkin.Controls.MaterialButton btnAdd;
         private MaterialSkin.Controls.MaterialButton btnClear;
         private MaterialSkin.Controls.MaterialButton btnClose;
+        private System.Windows.Forms.BindingSource stepModelBindingSource;
+        private System.Windows.Forms.BindingSource selectModeBindingSource;
+        private System.Windows.Forms.BindingSource itemsBindingSource;
     }
 }

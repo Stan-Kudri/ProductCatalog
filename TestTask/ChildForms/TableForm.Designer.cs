@@ -266,6 +266,7 @@
             this.btnAddItemStep.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnAddItemStep.UseAccentColor = false;
             this.btnAddItemStep.UseVisualStyleBackColor = true;
+            this.btnAddItemStep.Click += new System.EventHandler(this.BtnAddItemStep_Click);
             // 
             // btnEditStep
             // 
@@ -482,6 +483,7 @@
             this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "TableForm";
             this.Text = "TableForm";
+            this.Load += new System.EventHandler(this.TableForm_Load);
             this.tcData.ResumeLayout(false);
             this.tabPageModes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvModes)).EndInit();

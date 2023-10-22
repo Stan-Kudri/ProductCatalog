@@ -49,5 +49,7 @@ namespace TestTask.Core.Components
         }
 
         public override int GetHashCode() => Id.GetHashCode() + MaxBottleNumber.GetHashCode() + MaxUsedTips.GetHashCode();
+
+        public override string ToString() => Name;
     }
 }
