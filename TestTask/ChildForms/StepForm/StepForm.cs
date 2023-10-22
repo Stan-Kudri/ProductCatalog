@@ -38,7 +38,7 @@ namespace TestTask.ChildForms.StepForm
             DialogResult = DialogResult.OK;
         }
 
-        private void BtnClear_Click(object sender, EventArgs e) => SetDefoultValueData();
+        private void BtnClear_Click(object sender, EventArgs e) => SetDefaultValueData();
 
         private void BtnClose_Click(object sender, EventArgs e)
         {
@@ -49,7 +49,7 @@ namespace TestTask.ChildForms.StepForm
         protected virtual void AddStepForm_Load(object sender, EventArgs e)
         {
             selectModeBindingSource.DataSource = _modes.Items;
-            SetDefoultValueData();
+            SetDefaultValueData();
         }
 
         private void TbTimer_KeyPress(object sender, KeyPressEventArgs e) => KeyPressDigit(e);
@@ -68,7 +68,7 @@ namespace TestTask.ChildForms.StepForm
             e.Handled = true;
         }
 
-        protected virtual void SetDefoultValueData()
+        protected virtual void SetDefaultValueData()
         {
             cmbModeValue.SelectedItem = _modes.Mode;
             tbTimer.Text = "0";

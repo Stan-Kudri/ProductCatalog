@@ -40,7 +40,7 @@ namespace TestTask.ChildForms.StepForm
         protected override void AddStepForm_Load(object sender, EventArgs e)
         {
             selectModeBindingSource.DataSource = _modes.Items;
-            _modes.SetValueMode(_oldStep.Id);
+            _modes.SetValueMode(_oldStep.ModeId);
             SetDefaultValueData();
         }
 
