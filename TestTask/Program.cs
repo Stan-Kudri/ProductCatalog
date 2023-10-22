@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using TestTask.Core.Db;
 using TestTask.Core.Service;
+using TestTask.Message;
 
 namespace TestTask
 {
@@ -16,12 +17,13 @@ namespace TestTask
         static void Main()
         {
             new DbContextFactory().EnsureCreated(ConnectionName);
+            var message = new MessageBoxShow();
 
             using (var appDbContext = new AppDbContext(ConnectionName))
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new LoginForm(new UserService(appDbContext)));
+                Application.Run(new LoginForm(new UserService(appDbContext), new ModeService(appDbContext), new StepService(appDbContext), message));
             }
         }
     }
