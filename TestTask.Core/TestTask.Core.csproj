@@ -91,12 +91,13 @@
     <Compile Include="Enum\ModeField.cs" />
     <Compile Include="Enum\StepField.cs" />
     <Compile Include="Extension\ReadExtension\ReadHeadExtension.cs" />
+    <Compile Include="Extension\ReadExtension\ReadItemExtension.cs" />
     <Compile Include="Extension\RowExtension.cs" />
     <Compile Include="Extension\StringPassExtension.cs" />
     <Compile Include="Extension\StringUsernameExtension.cs" />
     <Compile Include="ImportDB\Component\Result.cs" />
-    <Compile Include="ImportDB\Read\Header\ReadMode.cs" />
-    <Compile Include="ImportDB\Read\Header\ReadStep.cs" />
+    <Compile Include="ImportDB\Read\ReadMode.cs" />
+    <Compile Include="ImportDB\Read\ReadStep.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Components\IMessageBox.cs" />
     <Compile Include="Service\ModeService.cs" />
