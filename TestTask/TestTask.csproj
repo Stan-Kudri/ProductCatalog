@@ -98,6 +98,8 @@
     <Compile Include="ChildForms\TableForm.Designer.cs">
       <DependentUpon>TableForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Extension\GridItemExtension.cs" />
+    <Compile Include="Extension\ParseExtension.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>

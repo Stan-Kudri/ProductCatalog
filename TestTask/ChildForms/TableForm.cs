@@ -1,15 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using TestTask.BindingItem.UserBinding.StepBinding;
 using TestTask.ChildForms.ModeForm;
 using TestTask.ChildForms.StepForm;
+using TestTask.Core.Components;
 using TestTask.Core.Service;
 using TestTask.Core.Service.Components;
+using TestTask.Extension;
 
 namespace TestTask.ChildForms
 {
     public partial class TableForm : Form
     {
+        //Index column from all tables
+        private const int IndexId = 0;
+
+        //Index column Mode table
+        private const int IndexColumnModeName = 1;
+        private const int IndexColumnMaxBottle = 2;
+        private const int IndexColumnMaxUsedTips = 3;
+
+        //Index column Mode table
+        private const int IndexColumnModeId = 1;
+        private const int IndexColumnTimer = 2;
+        private const int IndexColumnDestination = 3;
+        private const int IndexColumnSpeed = 4;
+        private const int IndexColumnType = 5;
+        private const int IndexColumnVolume = 6;
+
         private readonly ModeService _modeService;
         private readonly StepService _stepService;
         private readonly IMessageBox _messageBox;
@@ -35,7 +54,9 @@ namespace TestTask.ChildForms
 
             var mode = addFormMode.GetModeModel().ToMode();
             _modeService.Add(mode);
+
             UpdateSelectMode();
+            LoadDataGridMode();
         }
 
         private void BtnAddItemStep_Click(object sender, EventArgs e)
@@ -62,6 +83,41 @@ namespace TestTask.ChildForms
         private void TableForm_Load(object sender, EventArgs e)
         {
             UpdateSelectMode();
+            LoadDataGridMode();
+        }
+
+        private void LoadDataGridMode()
+        {
+            var item = _modeService.GetAllMode();
+
+            if (item != null)
+            {
+                ClearGridMode();
+                FillGridMode(item);
+            }
+        }
+
+        private Mode GetMode(int indexRow)
+        {
+            var rowItems = dgvModes.Rows[indexRow];
+            var idMode = CellElement(rowItems, IndexId).ParseInt();
+            var nameMode = CellElement(rowItems, IndexColumnModeName) ?? throw new ArgumentException("Name cannot be null.");
+            var maxBottle = CellElement(rowItems, IndexColumnMaxBottle).ParseInt();
+            var maxUsedTips = CellElement(rowItems, IndexColumnMaxUsedTips).ParseInt();
+
+            return new Mode(nameMode, maxBottle, maxUsedTips, idMode);
+        }
+
+        private string CellElement(DataGridViewRow rowItem, int indexColumn) => rowItem.GetString(indexColumn) ?? throw new Exception("String cannot be null.");
+
+        private void ClearGridMode() => dgvModes.Rows.Clear();
+
+        private void FillGridMode(List<Mode> items)
+        {
+            foreach (var item in items)
+            {
+                dgvModes.Rows.Add(item.Id, item.Name, item.MaxBottleNumber, item.MaxUsedTips);
+            }
         }
     }
 }

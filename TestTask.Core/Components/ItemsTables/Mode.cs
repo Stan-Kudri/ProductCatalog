@@ -10,6 +10,12 @@ namespace TestTask.Core.Components
         {
         }
 
+        public Mode(string name, int maxBottleNumber, int maxUsedTips, int id)
+            : this(name, maxBottleNumber, maxUsedTips)
+        {
+            Id = id > 0 ? Id = id : throw new ArgumentException("The ID must be greater than zero.", nameof(id));
+        }
+
         public Mode(string name, int maxBottleNumber, int maxUsedTips, List<Step> steps = null)
         {
             Name = name != string.Empty && name != null ? Name = name : throw new ArgumentException("The step name cannot be empty.", nameof(name));
