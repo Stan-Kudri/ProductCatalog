@@ -31,6 +31,10 @@
             this.tcData = new System.Windows.Forms.TabControl();
             this.tabPageModes = new System.Windows.Forms.TabPage();
             this.dgvModes = new System.Windows.Forms.DataGridView();
+            this.IdMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaxBottleNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaxUsedTips = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpModesButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnAddMode = new MaterialSkin.Controls.MaterialButton();
             this.btnEditMode = new MaterialSkin.Controls.MaterialButton();
@@ -46,10 +50,6 @@
             this.btnClearData = new MaterialSkin.Controls.MaterialButton();
             this.btnCloseApp = new MaterialSkin.Controls.MaterialButton();
             this.tlpTabControl = new System.Windows.Forms.TableLayoutPanel();
-            this.IdMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaxBottleNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaxUsedTips = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdStep = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ModeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Timer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,6 +57,7 @@
             this.Speed = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ModeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tcData.SuspendLayout();
             this.tabPageModes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvModes)).BeginInit();
@@ -110,6 +111,34 @@
             this.dgvModes.Name = "dgvModes";
             this.dgvModes.Size = new System.Drawing.Size(760, 360);
             this.dgvModes.TabIndex = 4;
+            // 
+            // IdMode
+            // 
+            this.IdMode.HeaderText = "ID";
+            this.IdMode.MinimumWidth = 30;
+            this.IdMode.Name = "IdMode";
+            this.IdMode.ReadOnly = true;
+            // 
+            // NameMode
+            // 
+            this.NameMode.HeaderText = "Name";
+            this.NameMode.MinimumWidth = 280;
+            this.NameMode.Name = "NameMode";
+            this.NameMode.ReadOnly = true;
+            // 
+            // MaxBottleNumber
+            // 
+            this.MaxBottleNumber.HeaderText = "MaxBottleNumber";
+            this.MaxBottleNumber.MinimumWidth = 40;
+            this.MaxBottleNumber.Name = "MaxBottleNumber";
+            this.MaxBottleNumber.ReadOnly = true;
+            // 
+            // MaxUsedTips
+            // 
+            this.MaxUsedTips.HeaderText = "MaxUsedTips";
+            this.MaxUsedTips.MinimumWidth = 40;
+            this.MaxUsedTips.Name = "MaxUsedTips";
+            this.MaxUsedTips.ReadOnly = true;
             // 
             // tlpModesButton
             // 
@@ -301,7 +330,8 @@
             this.Destination,
             this.Speed,
             this.Type,
-            this.Volume});
+            this.Volume,
+            this.ModeId});
             this.dgvSteps.Location = new System.Drawing.Point(3, 3);
             this.dgvSteps.MinimumSize = new System.Drawing.Size(760, 360);
             this.dgvSteps.Name = "dgvSteps";
@@ -402,34 +432,6 @@
             this.tlpTabControl.Size = new System.Drawing.Size(780, 430);
             this.tlpTabControl.TabIndex = 2;
             // 
-            // IdMode
-            // 
-            this.IdMode.HeaderText = "ID";
-            this.IdMode.MinimumWidth = 30;
-            this.IdMode.Name = "IdMode";
-            this.IdMode.ReadOnly = true;
-            // 
-            // NameMode
-            // 
-            this.NameMode.HeaderText = "Name";
-            this.NameMode.MinimumWidth = 280;
-            this.NameMode.Name = "NameMode";
-            this.NameMode.ReadOnly = true;
-            // 
-            // MaxBottleNumber
-            // 
-            this.MaxBottleNumber.HeaderText = "MaxBottleNumber";
-            this.MaxBottleNumber.MinimumWidth = 40;
-            this.MaxBottleNumber.Name = "MaxBottleNumber";
-            this.MaxBottleNumber.ReadOnly = true;
-            // 
-            // MaxUsedTips
-            // 
-            this.MaxUsedTips.HeaderText = "MaxUsedTips";
-            this.MaxUsedTips.MinimumWidth = 40;
-            this.MaxUsedTips.Name = "MaxUsedTips";
-            this.MaxUsedTips.ReadOnly = true;
-            // 
             // IdStep
             // 
             this.IdStep.FillWeight = 134.3092F;
@@ -485,6 +487,13 @@
             this.Volume.MinimumWidth = 100;
             this.Volume.Name = "Volume";
             this.Volume.ReadOnly = true;
+            // 
+            // ModeId
+            // 
+            this.ModeId.HeaderText = "ModeId";
+            this.ModeId.Name = "ModeId";
+            this.ModeId.ReadOnly = true;
+            this.ModeId.Visible = false;
             // 
             // TableForm
             // 
@@ -544,5 +553,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Speed;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ModeId;
     }
 }

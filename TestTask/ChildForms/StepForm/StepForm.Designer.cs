@@ -36,7 +36,7 @@
             this.tbType = new MaterialSkin.Controls.MaterialTextBox2();
             this.tbVolume = new MaterialSkin.Controls.MaterialTextBox2();
             this.tlpAddButton = new System.Windows.Forms.TableLayoutPanel();
-            this.btnAdd = new MaterialSkin.Controls.MaterialButton();
+            this.btnSave = new MaterialSkin.Controls.MaterialButton();
             this.btnClear = new MaterialSkin.Controls.MaterialButton();
             this.btnClose = new MaterialSkin.Controls.MaterialButton();
             ((System.ComponentModel.ISupportInitialize)(this.stepModelBindingSource)).BeginInit();
@@ -281,7 +281,7 @@
             this.tlpAddButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpAddButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpAddButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpAddButton.Controls.Add(this.btnAdd, 0, 0);
+            this.tlpAddButton.Controls.Add(this.btnSave, 0, 0);
             this.tlpAddButton.Controls.Add(this.btnClear, 1, 0);
             this.tlpAddButton.Controls.Add(this.btnClose, 2, 0);
             this.tlpAddButton.Location = new System.Drawing.Point(5, 310);
@@ -291,26 +291,26 @@
             this.tlpAddButton.Size = new System.Drawing.Size(300, 45);
             this.tlpAddButton.TabIndex = 3;
             // 
-            // btnAdd
+            // btnSave
             // 
-            this.btnAdd.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnAdd.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnAdd.Depth = 0;
-            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAdd.HighEmphasis = true;
-            this.btnAdd.Icon = null;
-            this.btnAdd.Location = new System.Drawing.Point(4, 6);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnAdd.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnAdd.Size = new System.Drawing.Size(91, 33);
-            this.btnAdd.TabIndex = 0;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnAdd.UseAccentColor = false;
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
+            this.btnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSave.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnSave.Depth = 0;
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSave.HighEmphasis = true;
+            this.btnSave.Icon = null;
+            this.btnSave.Location = new System.Drawing.Point(4, 6);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnSave.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnSave.Name = "btnSave";
+            this.btnSave.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnSave.Size = new System.Drawing.Size(91, 33);
+            this.btnSave.TabIndex = 0;
+            this.btnSave.Text = "Save";
+            this.btnSave.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnSave.UseAccentColor = false;
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // btnClear
             // 
@@ -385,7 +385,7 @@
         protected MaterialSkin.Controls.MaterialTextBox2 tbType;
         protected MaterialSkin.Controls.MaterialTextBox2 tbVolume;
         protected System.Windows.Forms.TableLayoutPanel tlpAddButton;
-        protected MaterialSkin.Controls.MaterialButton btnAdd;
+        protected MaterialSkin.Controls.MaterialButton btnSave;
         protected MaterialSkin.Controls.MaterialButton btnClear;
         protected MaterialSkin.Controls.MaterialButton btnClose;
         protected System.Windows.Forms.BindingSource stepModelBindingSource;

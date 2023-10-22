@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using TestTask.BindingItem.UserBinding;
 using TestTask.BindingItem.UserBinding.StepBinding;
@@ -17,11 +18,11 @@ namespace TestTask.ChildForms.StepForm
             InitializeComponent();
         }
 
-        public StepForm(IMessageBox messageBox, SelectMode modes)
+        public StepForm(IMessageBox messageBox, List<Mode> modes)
         {
             InitializeComponent();
             _messageBox = messageBox;
-            _modes = modes;
+            _modes = new SelectMode(modes);
         }
 
         protected Mode SelectedMode =>
