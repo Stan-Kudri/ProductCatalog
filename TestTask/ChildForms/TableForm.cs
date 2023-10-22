@@ -109,6 +109,32 @@ namespace TestTask.ChildForms
             LoadDataGridMode();
         }
 
+        private void BtnDeliteStep_Click(object sender, EventArgs e)
+        {
+            var selectedRowIndex = GetSelectedRowIndexesGridStep()
+                .Select(i => dgvSteps.Rows[i].Get<int>(IndexId))
+                .ToList();
+
+            if (selectedRowIndex.Count == 0)
+            {
+                _messageBox.ShowWarning(MessageNotSelectedItem);
+                return;
+            }
+
+            if (!_messageBox.ShowQuestion("Delete selected items?"))
+            {
+                return;
+            }
+
+            foreach (var id in selectedRowIndex)
+            {
+                RemoveItemRowGridSteps(id);
+                _stepService.Remove(id);
+            }
+
+            LoadDataGridStep();
+        }
+
         private void TableForm_Load(object sender, EventArgs e)
         {
             UpdateSelectMode();
@@ -190,6 +216,23 @@ namespace TestTask.ChildForms
             return result;
         }
 
+        private HashSet<int> GetSelectedRowIndexesGridStep()
+        {
+            var result = new HashSet<int>();
+
+            foreach (DataGridViewRow dgvStepSelectedRow in dgvSteps.SelectedRows)
+            {
+                result.Add(dgvStepSelectedRow.Index);
+            }
+
+            foreach (DataGridViewCell dgvStepSelectedCell in dgvSteps.SelectedCells)
+            {
+                result.Add(dgvStepSelectedCell.RowIndex);
+            }
+
+            return result;
+        }
+
         private void RemoveItemRowGridMode(int id)
         {
             foreach (DataGridViewRow row in dgvModes.Rows)
@@ -198,6 +241,19 @@ namespace TestTask.ChildForms
                 if (idItem != null && idItem == id)
                 {
                     dgvModes.Rows.RemoveAt(row.Index);
+                    break;
+                }
+            }
+        }
+
+        private void RemoveItemRowGridSteps(int id)
+        {
+            foreach (DataGridViewRow row in dgvSteps.Rows)
+            {
+                var idItem = row.Get<int>(IndexId);
+                if (idItem != null && idItem == id)
+                {
+                    dgvSteps.Rows.RemoveAt(row.Index);
                     break;
                 }
             }

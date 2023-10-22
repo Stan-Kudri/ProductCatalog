@@ -308,6 +308,7 @@
             this.btnDeliteStep.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnDeliteStep.UseAccentColor = false;
             this.btnDeliteStep.UseVisualStyleBackColor = true;
+            this.btnDeliteStep.Click += new System.EventHandler(this.BtnDeliteStep_Click);
             // 
             // dgvSteps
             // 
