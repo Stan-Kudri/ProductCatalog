@@ -88,6 +88,8 @@
     <Compile Include="Components\User.cs" />
     <Compile Include="Db\AppDbContext.cs" />
     <Compile Include="Db\DbContextFactory.cs" />
+    <Compile Include="Enum\ModeField.cs" />
+    <Compile Include="Enum\StepField.cs" />
     <Compile Include="Extension\RowExtension.cs" />
     <Compile Include="Extension\StringPassExtension.cs" />
     <Compile Include="Extension\StringUsernameExtension.cs" />
