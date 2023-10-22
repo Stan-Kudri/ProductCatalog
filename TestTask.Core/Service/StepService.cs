@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TestTask.Core.Components.ItemsTables;
 using TestTask.Core.Db;
@@ -57,5 +58,7 @@ namespace TestTask.Core.Service
             _dbContext.Steps.Remove(step);
             _dbContext.SaveChanges();
         }
+
+        public List<Step> GetAllItems() => _dbContext.Steps.Count() > 0 ? _dbContext.Steps.ToList() : null;
     }
 }

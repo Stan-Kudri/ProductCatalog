@@ -45,6 +45,11 @@
             this.btnEditStep = new MaterialSkin.Controls.MaterialButton();
             this.btnDeliteStep = new MaterialSkin.Controls.MaterialButton();
             this.dgvSteps = new System.Windows.Forms.DataGridView();
+            this.tlpButtonAllTable = new System.Windows.Forms.TableLayoutPanel();
+            this.btnAddData = new MaterialSkin.Controls.MaterialButton();
+            this.btnClearData = new MaterialSkin.Controls.MaterialButton();
+            this.btnCloseApp = new MaterialSkin.Controls.MaterialButton();
+            this.tlpTabControl = new System.Windows.Forms.TableLayoutPanel();
             this.IdStep = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ModelId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Timer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,11 +57,6 @@
             this.Speed = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tlpButtonAllTable = new System.Windows.Forms.TableLayoutPanel();
-            this.btnAddData = new MaterialSkin.Controls.MaterialButton();
-            this.btnClearData = new MaterialSkin.Controls.MaterialButton();
-            this.btnCloseApp = new MaterialSkin.Controls.MaterialButton();
-            this.tlpTabControl = new System.Windows.Forms.TableLayoutPanel();
             this.tcData.SuspendLayout();
             this.tabPageModes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvModes)).BeginInit();
@@ -329,56 +329,6 @@
             this.dgvSteps.Size = new System.Drawing.Size(760, 360);
             this.dgvSteps.TabIndex = 0;
             // 
-            // IdStep
-            // 
-            this.IdStep.FillWeight = 134.3092F;
-            this.IdStep.HeaderText = "ID";
-            this.IdStep.MinimumWidth = 55;
-            this.IdStep.Name = "IdStep";
-            this.IdStep.ReadOnly = true;
-            // 
-            // ModelId
-            // 
-            this.ModelId.FillWeight = 166.9742F;
-            this.ModelId.HeaderText = "ModelId";
-            this.ModelId.MinimumWidth = 55;
-            this.ModelId.Name = "ModelId";
-            // 
-            // Timer
-            // 
-            this.Timer.FillWeight = 9.885016F;
-            this.Timer.HeaderText = "Timer";
-            this.Timer.MinimumWidth = 90;
-            this.Timer.Name = "Timer";
-            // 
-            // Destination
-            // 
-            this.Destination.FillWeight = 244.5199F;
-            this.Destination.HeaderText = "Destination";
-            this.Destination.MinimumWidth = 140;
-            this.Destination.Name = "Destination";
-            // 
-            // Speed
-            // 
-            this.Speed.FillWeight = 9.885016F;
-            this.Speed.HeaderText = "Speed";
-            this.Speed.MinimumWidth = 100;
-            this.Speed.Name = "Speed";
-            // 
-            // Type
-            // 
-            this.Type.FillWeight = 9.885016F;
-            this.Type.HeaderText = "Type";
-            this.Type.MinimumWidth = 120;
-            this.Type.Name = "Type";
-            // 
-            // Volume
-            // 
-            this.Volume.FillWeight = 22.61278F;
-            this.Volume.HeaderText = "Volume";
-            this.Volume.MinimumWidth = 100;
-            this.Volume.Name = "Volume";
-            // 
             // tlpButtonAllTable
             // 
             this.tlpButtonAllTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -473,6 +423,56 @@
             this.tlpTabControl.Size = new System.Drawing.Size(780, 430);
             this.tlpTabControl.TabIndex = 2;
             // 
+            // IdStep
+            // 
+            this.IdStep.FillWeight = 134.3092F;
+            this.IdStep.HeaderText = "ID";
+            this.IdStep.MinimumWidth = 50;
+            this.IdStep.Name = "IdStep";
+            this.IdStep.ReadOnly = true;
+            // 
+            // ModelId
+            // 
+            this.ModelId.FillWeight = 166.9742F;
+            this.ModelId.HeaderText = "ModelId";
+            this.ModelId.MinimumWidth = 50;
+            this.ModelId.Name = "ModelId";
+            // 
+            // Timer
+            // 
+            this.Timer.FillWeight = 9.885016F;
+            this.Timer.HeaderText = "Timer";
+            this.Timer.MinimumWidth = 90;
+            this.Timer.Name = "Timer";
+            // 
+            // Destination
+            // 
+            this.Destination.FillWeight = 244.5199F;
+            this.Destination.HeaderText = "Destination";
+            this.Destination.MinimumWidth = 140;
+            this.Destination.Name = "Destination";
+            // 
+            // Speed
+            // 
+            this.Speed.FillWeight = 9.885016F;
+            this.Speed.HeaderText = "Speed";
+            this.Speed.MinimumWidth = 80;
+            this.Speed.Name = "Speed";
+            // 
+            // Type
+            // 
+            this.Type.FillWeight = 9.885016F;
+            this.Type.HeaderText = "Type";
+            this.Type.MinimumWidth = 80;
+            this.Type.Name = "Type";
+            // 
+            // Volume
+            // 
+            this.Volume.FillWeight = 22.61278F;
+            this.Volume.HeaderText = "Volume";
+            this.Volume.MinimumWidth = 100;
+            this.Volume.Name = "Volume";
+            // 
             // TableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -519,6 +519,11 @@
         private MaterialSkin.Controls.MaterialButton btnAddMode;
         private MaterialSkin.Controls.MaterialButton btnEditMode;
         private MaterialSkin.Controls.MaterialButton btnDeliteMode;
+        private System.Windows.Forms.DataGridView dgvModes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdMode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameMode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaxBottleNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaxUsedTips;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdStep;
         private System.Windows.Forms.DataGridViewTextBoxColumn ModelId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Timer;
@@ -526,10 +531,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Speed;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
-        private System.Windows.Forms.DataGridView dgvModes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdMode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NameMode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaxBottleNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaxUsedTips;
     }
 }
