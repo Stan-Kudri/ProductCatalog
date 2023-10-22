@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tbNameMode = new MaterialSkin.Controls.MaterialTextBox2();
-            this.modeModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tlpNameMode = new System.Windows.Forms.TableLayoutPanel();
             this.tlpMode = new System.Windows.Forms.TableLayoutPanel();
             this.tbMaxBottle = new MaterialSkin.Controls.MaterialTextBox2();
@@ -39,10 +38,11 @@
             this.btnSave = new MaterialSkin.Controls.MaterialButton();
             this.btnClear = new MaterialSkin.Controls.MaterialButton();
             this.btnClose = new MaterialSkin.Controls.MaterialButton();
-            ((System.ComponentModel.ISupportInitialize)(this.modeModelBindingSource)).BeginInit();
+            this.modeModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tlpNameMode.SuspendLayout();
             this.tlpMode.SuspendLayout();
             this.tlbButtonMode.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.modeModelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tbNameMode
@@ -75,10 +75,6 @@
             this.tbNameMode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbNameMode.TrailingIcon = null;
             this.tbNameMode.UseSystemPasswordChar = false;
-            // 
-            // modeModelBindingSource
-            // 
-            this.modeModelBindingSource.DataSource = typeof(TestTask.BindingItem.UserBinding.ModeModel);
             // 
             // tlpNameMode
             // 
@@ -258,6 +254,10 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
+            // modeModelBindingSource
+            // 
+            this.modeModelBindingSource.DataSource = typeof(TestTask.BindingItem.UserBinding.ModeModel);
+            // 
             // AddModeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -269,11 +269,11 @@
             this.MinimumSize = new System.Drawing.Size(420, 200);
             this.Name = "AddModeForm";
             this.Text = "AddModeForm";
-            ((System.ComponentModel.ISupportInitialize)(this.modeModelBindingSource)).EndInit();
             this.tlpNameMode.ResumeLayout(false);
             this.tlpMode.ResumeLayout(false);
             this.tlbButtonMode.ResumeLayout(false);
             this.tlbButtonMode.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.modeModelBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

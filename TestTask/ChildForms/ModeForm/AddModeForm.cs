@@ -11,7 +11,7 @@ namespace TestTask.ChildForms.ModeForm
             InitializeComponent();
         }
 
-        private void BtnSave_Click(object sender, System.EventArgs e)
+        private void BtnSave_Click(object sender, EventArgs e)
         {
             if (tbNameMode.Text == string.Empty)
             {
@@ -22,9 +22,9 @@ namespace TestTask.ChildForms.ModeForm
             DialogResult = DialogResult.OK;
         }
 
-        private void BtnClear_Click(object sender, System.EventArgs e) => DefoultValue();
+        private void BtnClear_Click(object sender, EventArgs e) => DefoultValue();
 
-        private void BtnClose_Click(object sender, System.EventArgs e)
+        private void BtnClose_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();

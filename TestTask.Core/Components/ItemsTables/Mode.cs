@@ -19,7 +19,7 @@ namespace TestTask.Core.Components
                 throw new ArgumentException("The maximum number of bottles cannot be less than zero.", nameof(maxBottleNumber));
 
             MaxUsedTips = maxUsedTips >= 0 ?
-                MaxBottleNumber = maxUsedTips :
+                MaxUsedTips = maxUsedTips :
                 throw new ArgumentException("The maximum used of tips cannot be less than zero.", nameof(maxUsedTips));
 
             Steps = steps;
