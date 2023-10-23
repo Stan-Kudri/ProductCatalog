@@ -62,10 +62,6 @@ namespace TestTask.Core.Service
             Update(mode);
         }
 
-        public bool IsIDExists(int id) => _dbContext.Modes.FirstOrDefault(e => e.Id == id) != null;
-
         public List<Mode> GetAllMode() => _dbContext.Modes.Count() > 0 ? _dbContext.Modes.ToList() : null;
-
-        public IQueryable<Mode> GetModes() => _dbContext.Modes;
     }
 }

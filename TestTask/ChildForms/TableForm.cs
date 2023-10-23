@@ -31,12 +31,12 @@ namespace TestTask.ChildForms
         private const int IndexColumnMaxUsedTips = 3;
 
         //Index column Mode table
+        private const int IndexColumnModeId = 1;
         private const int IndexColumnTimer = 2;
         private const int IndexColumnDestination = 3;
         private const int IndexColumnSpeed = 4;
         private const int IndexColumnType = 5;
         private const int IndexColumnVolume = 6;
-        private const int IndexColumnModeId = 7;
 
         private readonly ModeService _modeService;
         private readonly StepService _stepService;
@@ -276,6 +276,8 @@ namespace TestTask.ChildForms
 
         private void TableForm_Load(object sender, EventArgs e) => UpdateAllGrids();
 
+        private void TableForm_FormClosing(object sender, FormClosingEventArgs e) => DialogResult = DialogResult.Cancel;
+
         private void LoadDataGridMode()
         {
             var item = _modeService.GetAllMode();
@@ -339,12 +341,9 @@ namespace TestTask.ChildForms
 
         private void FillGridStep(List<Step> items)
         {
-            var modes = _modeService.GetModes();
-
             foreach (var item in items)
             {
-                var nameMode = modes.FirstOrDefault(e => e.Id == item.ModeId).Name ?? throw new ArgumentException("Name mode cannot be empty.");
-                dgvSteps.Rows.Add(item.Id, nameMode, item.Timer, item.Destination, item.Speed, item.Type, item.Volume, item.ModeId);
+                dgvSteps.Rows.Add(item.Id, item.ModeId, item.Timer, item.Destination, item.Speed, item.Type, item.Volume);
             }
         }
 
