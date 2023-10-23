@@ -110,9 +110,11 @@ namespace TestTask.ChildForms
             {
                 RemoveItemRowGridMode(id);
                 _modeService.Remove(id);
+                _stepService.RemoveStepRelatedToMode(id);
             }
 
             LoadDataGridMode();
+            LoadDataGridStep();
         }
 
         private void BtnDeliteStep_Click(object sender, EventArgs e)

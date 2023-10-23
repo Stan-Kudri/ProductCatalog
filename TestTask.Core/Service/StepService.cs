@@ -59,6 +59,18 @@ namespace TestTask.Core.Service
             _dbContext.SaveChanges();
         }
 
+        public void RemoveStepRelatedToMode(int modeId)
+        {
+            var steps = _dbContext.Steps.Where(e => e.ModeId == modeId).Select(e => e);
+
+            if (steps.Count() <= 0)
+            {
+                return;
+            }
+
+            _dbContext.Steps.RemoveRange(steps.ToList());
+        }
+
         public void AddImportData(Step step)
         {
             if (_dbContext.Modes.FirstOrDefault(e => e.Id == step.ModeId) == null)
