@@ -205,6 +205,7 @@
     </Compile>
     <Compile Include="Extension\GridItemExtension.cs" />
     <Compile Include="Extension\ParseExtension.cs" />
+    <Compile Include="Extension\SelectedItemDGVExtension.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -349,39 +349,9 @@ namespace TestTask.ChildForms
             }
         }
 
-        private HashSet<int> GetSelectedRowIndexesGridMode()
-        {
-            var result = new HashSet<int>();
+        private HashSet<int> GetSelectedRowIndexesGridMode() => dgvModes.GetSelectedRowIndexesGrid();
 
-            foreach (DataGridViewRow dgvModeSelectedRow in dgvModes.SelectedRows)
-            {
-                result.Add(dgvModeSelectedRow.Index);
-            }
-
-            foreach (DataGridViewCell dgvModeSelectedCell in dgvModes.SelectedCells)
-            {
-                result.Add(dgvModeSelectedCell.RowIndex);
-            }
-
-            return result;
-        }
-
-        private HashSet<int> GetSelectedRowIndexesGridStep()
-        {
-            var result = new HashSet<int>();
-
-            foreach (DataGridViewRow dgvStepSelectedRow in dgvSteps.SelectedRows)
-            {
-                result.Add(dgvStepSelectedRow.Index);
-            }
-
-            foreach (DataGridViewCell dgvStepSelectedCell in dgvSteps.SelectedCells)
-            {
-                result.Add(dgvStepSelectedCell.RowIndex);
-            }
-
-            return result;
-        }
+        private HashSet<int> GetSelectedRowIndexesGridStep() => dgvSteps.GetSelectedRowIndexesGrid();
 
         private void RemoveItemRowGridMode(int id)
         {
