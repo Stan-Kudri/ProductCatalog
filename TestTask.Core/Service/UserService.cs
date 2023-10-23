@@ -27,9 +27,6 @@ namespace TestTask.Core.Service
             _dbContext.SaveChanges();
         }
 
-        public int GetId(User user) =>
-            _dbContext.Users.FirstOrDefault(e => e.Username == user.Username && e.PasswordHash == user.PasswordHash).Id;
-
         public bool IsFreeUsername(string username) =>
             _dbContext.Users.FirstOrDefault(e => e.Username == username) == null;
 
