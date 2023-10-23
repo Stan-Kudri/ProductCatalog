@@ -204,7 +204,7 @@ namespace TestTask.ChildForms
             }
         }
 
-        private void BtnAddData_Click(object sender, EventArgs e)
+        private void TsmItemImportFromExcel_Click(object sender, EventArgs e)
         {
             var loadTable = new Dictionary<string, bool>()
             {
@@ -273,6 +273,8 @@ namespace TestTask.ChildForms
                 }
             }
         }
+
+        private void TsmItemClose_Click(object sender, EventArgs e) => Close();
 
         private void TableForm_Load(object sender, EventArgs e) => UpdateAllGrids();
 
