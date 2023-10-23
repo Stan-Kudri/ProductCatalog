@@ -1,6 +1,6 @@
 ﻿namespace TestTask.ChildForms.StepForm
 {
-    partial class StepForm
+    partial class StepFormBase
     {
 
         /// <summary>

@@ -1,6 +1,6 @@
 ﻿namespace TestTask.ChildForms.ModeForm
 {
-    partial class ModeForm
+    partial class ModeFormBase
     {
 
         /// <summary>
@@ -254,7 +254,7 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
-            // ModeForm
+            // ModeFormBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -263,7 +263,7 @@
             this.Controls.Add(this.tlpMode);
             this.Controls.Add(this.tlpNameMode);
             this.MinimumSize = new System.Drawing.Size(420, 200);
-            this.Name = "ModeForm";
+            this.Name = "ModeFormBase";
             this.Text = "Mode Form";
             this.Load += new System.EventHandler(this.AddModeForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.modeModelBindingSource)).EndInit();

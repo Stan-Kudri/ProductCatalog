@@ -8,17 +8,17 @@ using TestTask.Core.Service.Components;
 
 namespace TestTask.ChildForms.StepForm
 {
-    public partial class StepForm : Form
+    public partial class StepFormBase : Form
     {
         protected readonly IMessageBox _messageBox;
         protected readonly SelectMode _modes;
 
-        private StepForm()
+        private StepFormBase()
         {
             InitializeComponent();
         }
 
-        public StepForm(IMessageBox messageBox, List<Mode> modes)
+        public StepFormBase(IMessageBox messageBox, List<Mode> modes)
         {
             InitializeComponent();
             _messageBox = messageBox;
@@ -61,12 +61,10 @@ namespace TestTask.ChildForms.StepForm
 
         private void KeyPressDigit(KeyPressEventArgs e)
         {
-            if (char.IsDigit(e.KeyChar))
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(8))
             {
-                return;
+                e.Handled = true;
             }
-
-            e.Handled = true;
         }
 
         protected virtual void SetDefaultValueData()
