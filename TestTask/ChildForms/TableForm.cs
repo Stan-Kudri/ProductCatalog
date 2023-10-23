@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using TestTask.ChildForms.Import;
 using TestTask.ChildForms.ModeForm;
 using TestTask.ChildForms.StepForm;
 using TestTask.Core.Components;
 using TestTask.Core.Components.ItemsTables;
+using TestTask.Core.ImportDB.Read.Header;
 using TestTask.Core.Service;
 using TestTask.Core.Service.Components;
 using TestTask.Extension;
@@ -14,6 +16,9 @@ namespace TestTask.ChildForms
 {
     public partial class TableForm : Form
     {
+        private const string Mode = "Mode";
+        private const string Step = "Step";
+
         private const string MessageNotSelectedItem = "No items selected";
 
         //Index column from all tables
@@ -194,6 +199,62 @@ namespace TestTask.ChildForms
             else
             {
                 _messageBox.ShowWarning("Select one item.");
+            }
+        }
+
+        private void BtnAddData_Click(object sender, EventArgs e)
+        {
+            var loadTable = new Dictionary<string, bool>()
+            {
+                { Mode, false },
+                { Step, false },
+            };
+
+            using (var impotDbForExcel = new ImportDatabaseForm(_messageBox))
+            {
+                if (impotDbForExcel.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                loadTable[Mode] = impotDbForExcel.IsDownloadTableMode;
+                loadTable[Step] = impotDbForExcel.IsDownloadTableStep;
+            }
+
+            using (var openReplaceDataFromFile = new OpenFileDialog { Filter = "Excel Files |*.xls;*.xlsx;*.xlsm" })
+            {
+                if (openReplaceDataFromFile.ShowDialog() == DialogResult.Cancel)
+                {
+                    return;
+                }
+
+                var path = openReplaceDataFromFile.FileName;
+
+                if (loadTable[Mode])
+                {
+                    var modeRead = new ReadMode().Reader(path);
+
+                    foreach (var item in modeRead)
+                    {
+                        if (item.Success)
+                        {
+                            _modeService.AddImportData(item.Value);
+                        }
+                    }
+                }
+
+                if (loadTable[Step])
+                {
+                    var stepRead = new ReadStep().Reader(path);
+
+                    foreach (var item in stepRead)
+                    {
+                        if (item.Success)
+                        {
+                            _stepService.AddImportData(item.Value);
+                        }
+                    }
+                }
             }
         }
 

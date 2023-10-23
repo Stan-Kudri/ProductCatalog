@@ -59,6 +59,22 @@ namespace TestTask.Core.Service
             _dbContext.SaveChanges();
         }
 
+        public void AddImportData(Step step)
+        {
+            if (_dbContext.Modes.FirstOrDefault(e => e.Id == step.ModeId) == null)
+            {
+                return;
+            }
+
+            var duplicateId = _dbContext.Modes.FirstOrDefault(e => e.Id == step.Id);
+            if (duplicateId == null)
+            {
+                Add(step);
+            }
+
+            Update(step);
+        }
+
         public List<Step> GetAllItems() => _dbContext.Steps.Count() > 0 ? _dbContext.Steps.ToList() : null;
     }
 }

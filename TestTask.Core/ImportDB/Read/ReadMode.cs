@@ -14,9 +14,14 @@ namespace TestTask.Core.ImportDB.Read.Header
     {
         private const string ModeSheetName = "Modes";
 
-        public List<Result<Mode>> Reader()
+        public List<Result<Mode>> Reader(string path)
         {
-            using (FileStream fileStream = new FileStream("DataExample.xlsx", FileMode.Open, FileAccess.Read))
+            if (!File.Exists(path))
+            {
+                throw new ArgumentException("File does not exist.");
+            }
+
+            using (FileStream fileStream = new FileStream(Path.Combine(path), FileMode.Open, FileAccess.Read))
             {
                 var workbook = new XSSFWorkbook(fileStream);
 

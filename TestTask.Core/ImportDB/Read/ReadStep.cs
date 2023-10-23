@@ -14,9 +14,14 @@ namespace TestTask.Core.ImportDB.Read.Header
     {
         private const string StepSheetName = "Steps";
 
-        public List<Result<Step>> Reader()
+        public List<Result<Step>> Reader(string path)
         {
-            using (FileStream fileStream = new FileStream("DataExample.xlsx", FileMode.Open, FileAccess.Read))
+            if (!File.Exists(path))
+            {
+                throw new ArgumentException("File does not exist.");
+            }
+
+            using (FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
                 var workbook = new XSSFWorkbook(fileStream);
 

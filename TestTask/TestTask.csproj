@@ -74,6 +74,12 @@
     <Compile Include="BindingItem\UserBinding\StepBinding\SelectMode.cs" />
     <Compile Include="BindingItem\UserBinding\StepBinding\StepModel.cs" />
     <Compile Include="BindingItem\UserBinding\UserModel.cs" />
+    <Compile Include="ChildForms\Import\ImportDatabaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildForms\Import\ImportDatabaseForm.Designer.cs">
+      <DependentUpon>ImportDatabaseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChildForms\ModeForm\AddItemModeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,9 @@
     <Compile Include="Message\MessageBoxShow.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ChildForms\Import\ImportDatabaseForm.resx">
+      <DependentUpon>ImportDatabaseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChildForms\ModeForm\ModeForm.resx">
       <DependentUpon>ModeForm.cs</DependentUpon>
     </EmbeddedResource>
