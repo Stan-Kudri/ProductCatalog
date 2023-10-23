@@ -1,11 +1,11 @@
-﻿using TestTask.Core.Service.Components;
+﻿using System;
 
 namespace TestTask.ChildForms.ModeForm
 {
     public class AddItemModeForm : ModeFormBase
     {
-        public AddItemModeForm(IMessageBox messageBox)
-            : base(messageBox)
+        public AddItemModeForm(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
             Text = "Add Mode";
         }

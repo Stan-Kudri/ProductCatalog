@@ -5,7 +5,7 @@ namespace TestTask.Core.Db
 {
     public class DbContextFactory
     {
-        public void EnsureCreated(string connectionString)
+        public AppDbContext EnsureCreated(string connectionString)
         {
             if (connectionString == null)
             {
@@ -18,6 +18,7 @@ namespace TestTask.Core.Db
             using (var db = new AppDbContext(builder.Options))
             {
                 db.Database.EnsureCreated();
+                return db;
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -38,21 +39,23 @@ namespace TestTask.ChildForms
         private const int IndexColumnType = 5;
         private const int IndexColumnVolume = 6;
 
+        private readonly IServiceProvider _serviceProvider;
         private readonly ModeService _modeService;
         private readonly StepService _stepService;
         private readonly IMessageBox _messageBox;
 
-        public TableForm(ModeService modeService, StepService stepService, IMessageBox messageBox)
+        public TableForm(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            _modeService = modeService;
-            _stepService = stepService;
-            _messageBox = messageBox;
+            _serviceProvider = serviceProvider;
+            _modeService = serviceProvider.GetRequiredService<ModeService>();
+            _stepService = serviceProvider.GetRequiredService<StepService>();
+            _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
         }
 
         private void BtnAddMode_Click(object sender, EventArgs e)
         {
-            using (var addFormMode = new AddItemModeForm(_messageBox))
+            using (var addFormMode = new AddItemModeForm(_serviceProvider))
             {
                 if (addFormMode.ShowDialog() != DialogResult.OK)
                 {
@@ -76,7 +79,7 @@ namespace TestTask.ChildForms
                 return;
             }
 
-            using (var addFormStep = new AddItemStepForm(_messageBox, listMode))
+            using (var addFormStep = new AddItemStepForm(_serviceProvider, listMode))
             {
                 if (addFormStep.ShowDialog() != DialogResult.OK)
                 {
@@ -151,7 +154,7 @@ namespace TestTask.ChildForms
             {
                 var oldItem = GetMode(indexEditRow.First());
 
-                using (var editModeForm = new EditItemModeForm(_messageBox, oldItem))
+                using (var editModeForm = new EditItemModeForm(_serviceProvider, oldItem))
                 {
                     if (editModeForm.ShowDialog() != DialogResult.OK)
                     {
@@ -185,7 +188,7 @@ namespace TestTask.ChildForms
             {
                 var oldItem = GetStep(indexEditRow.First());
 
-                using (var editStepForm = new EditItemStepForm(_messageBox, listMode, oldItem))
+                using (var editStepForm = new EditItemStepForm(_serviceProvider, listMode, oldItem))
                 {
                     if (editStepForm.ShowDialog() != DialogResult.OK)
                     {
@@ -212,7 +215,7 @@ namespace TestTask.ChildForms
                 { Step, false },
             };
 
-            using (var impotDbForExcel = new ImportDatabaseForm(_messageBox))
+            using (var impotDbForExcel = new ImportDatabaseForm(_serviceProvider))
             {
                 if (impotDbForExcel.ShowDialog() != DialogResult.OK)
                 {

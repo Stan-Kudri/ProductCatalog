@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TestTask.Core.Components;
-using TestTask.Core.Service.Components;
 
 namespace TestTask.ChildForms.StepForm
 {
     public class AddItemStepForm : StepFormBase
     {
-        public AddItemStepForm(IMessageBox messageBox, List<Mode> modes)
-            : base(messageBox, modes)
+        public AddItemStepForm(IServiceProvider serviceProvider, List<Mode> modes)
+            : base(serviceProvider, modes)
         {
             Text = "Add Step";
         }

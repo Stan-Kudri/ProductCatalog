@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using TestTask.Core.Components;
 using TestTask.Core.Components.ItemsTables;
-using TestTask.Core.Service.Components;
 
 namespace TestTask.ChildForms.StepForm
 {
@@ -13,8 +12,8 @@ namespace TestTask.ChildForms.StepForm
 
         private Step _editStep;
 
-        public EditItemStepForm(IMessageBox messageBox, List<Mode> modes, Step oldStep)
-            : base(messageBox, modes)
+        public EditItemStepForm(IServiceProvider serviceProvider, List<Mode> modes, Step oldStep)
+            : base(serviceProvider, modes)
         {
             Text = "Edit Step";
             _oldStep = oldStep;

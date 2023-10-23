@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using TestTask.Core.Components;
-using TestTask.Core.Service.Components;
 
 namespace TestTask.ChildForms.ModeForm
 {
@@ -12,8 +11,8 @@ namespace TestTask.ChildForms.ModeForm
         private Mode _editMode;
         private bool _сhangedName = false;
 
-        public EditItemModeForm(IMessageBox messageBox, Mode mode)
-            : base(messageBox)
+        public EditItemModeForm(IServiceProvider serviceProvider, Mode mode)
+            : base(serviceProvider)
         {
             Text = "Edit Mode";
             _oldMode = mode;

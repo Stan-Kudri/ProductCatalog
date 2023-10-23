@@ -1,4 +1,5 @@
 ﻿using MaterialSkin.Controls;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows.Forms;
 using TestTask.BindingItem;
@@ -12,25 +13,27 @@ namespace TestTask
 {
     public partial class LoginForm : MaterialForm
     {
+        private readonly IServiceProvider _serviceProvider;
         private readonly UserService _userService;
         private readonly ModeService _modeService;
         private readonly StepService _stepService;
         private readonly IMessageBox _messageBox;
 
-        public LoginForm(UserService userService, ModeService modeService, StepService stepService, IMessageBox messageBox)
+        public LoginForm(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            _userService = userService;
-            _modeService = modeService;
-            _stepService = stepService;
-            _messageBox = messageBox;
+            _serviceProvider = serviceProvider;
+            _userService = _serviceProvider.GetRequiredService<UserService>();
+            _modeService = _serviceProvider.GetRequiredService<ModeService>();
+            _stepService = _serviceProvider.GetRequiredService<StepService>();
+            _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
         }
 
         private void BtnSignUpNow_Click(object sender, EventArgs e)
         {
             Hide();
 
-            using (var registrForm = new RegistrationForm(_userService, _messageBox))
+            using (var registrForm = new RegistrationForm(_serviceProvider))
             {
                 if (registrForm.ShowDialog() == DialogResult.Cancel)
                 {
@@ -50,7 +53,7 @@ namespace TestTask
 
             Hide();
 
-            using (var tableForm = new TableForm(_modeService, _stepService, _messageBox))
+            using (var tableForm = new TableForm(_serviceProvider))
             {
                 if (tableForm.ShowDialog() == DialogResult.Cancel)
                 {

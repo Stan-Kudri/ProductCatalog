@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows.Forms;
 using TestTask.Core.Db;
 using TestTask.Core.Service;
+using TestTask.Core.Service.Components;
 using TestTask.Message;
 
 namespace TestTask
@@ -17,17 +19,22 @@ namespace TestTask
         [STAThread]
         static void Main()
         {
-            var builder = new DbContextOptionsBuilder<AppDbContext>().UseSqlite($"Data Source={ConnectionName}.db");
+            var serviceCollection = new ServiceCollection()
+                .AddSingleton(new DbContextOptionsBuilder<AppDbContext>().UseSqlite($"Data Source={ConnectionName}.db"))
+                .AddSingleton(e => e.GetRequiredService<DbContextOptionsBuilder<AppDbContext>>().Options)
+                .AddSingleton(e => new AppDbContext(e.GetRequiredService<DbContextOptions<AppDbContext>>()))
+                .AddSingleton(e => new UserService(e.GetRequiredService<AppDbContext>()))
+                .AddSingleton(e => new ModeService(e.GetRequiredService<AppDbContext>()))
+                .AddSingleton(e => new StepService(e.GetRequiredService<AppDbContext>()))
+                .AddScoped<IMessageBox>(e => new MessageBoxShow());
 
-            var message = new MessageBoxShow();
+            var container = serviceCollection.BuildServiceProvider();
 
-            using (var appDbContext = new AppDbContext(builder.Options))
+            using (var scope = container.CreateScope())
             {
-                appDbContext.Database.EnsureCreated();
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new LoginForm(new UserService(appDbContext), new ModeService(appDbContext), new StepService(appDbContext), message));
-
+                Application.Run(new LoginForm(scope.ServiceProvider));
             }
         }
     }

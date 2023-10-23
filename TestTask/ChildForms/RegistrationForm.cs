@@ -1,4 +1,6 @@
 ﻿using MaterialSkin.Controls;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Windows.Forms;
 using TestTask.BindingItem;
 using TestTask.Core.Components;
@@ -13,11 +15,11 @@ namespace TestTask.ChildForms
         private readonly UserService _userService;
         private readonly IMessageBox _messageBox;
 
-        public RegistrationForm(UserService userService, IMessageBox messageBox)
+        public RegistrationForm(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            _userService = userService;
-            _messageBox = messageBox;
+            _userService = serviceProvider.GetRequiredService<UserService>();
+            _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
         }
 
         private void RegistrationForm_FormClosing(object sender, FormClosingEventArgs e)
