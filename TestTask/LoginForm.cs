@@ -34,6 +34,7 @@ namespace TestTask
             {
                 if (registrForm.ShowDialog() == DialogResult.Cancel)
                 {
+                    ClearEnteredData();
                     Show();
                 }
             }
@@ -53,14 +54,9 @@ namespace TestTask
             {
                 if (tableForm.ShowDialog() == DialogResult.Cancel)
                 {
-                    _messageBox.ShowInfo("Account logout completed successfully.");
-                    ClearEnteredData();
-                    Show();
-                    return;
+                    Close();
                 }
             }
-
-            Close();
         }
 
         private bool ValidateData(out string message, out User user)
