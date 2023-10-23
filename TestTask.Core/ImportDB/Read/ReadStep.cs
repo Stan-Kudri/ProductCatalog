@@ -3,8 +3,10 @@ using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using TestTask.Core.Components.ItemsTables;
 using TestTask.Core.Enum;
 using TestTask.Core.Extension.ReadExtension;
+using TestTask.Core.ImportDB.Component;
 
 namespace TestTask.Core.ImportDB.Read.Header
 {
@@ -12,7 +14,7 @@ namespace TestTask.Core.ImportDB.Read.Header
     {
         private const string StepSheetName = "Steps";
 
-        public void Reader()
+        public List<Result<Step>> Reader()
         {
             using (FileStream fileStream = new FileStream("DataExample.xlsx", FileMode.Open, FileAccess.Read))
             {
@@ -50,8 +52,24 @@ namespace TestTask.Core.ImportDB.Read.Header
                 {
                     Console.WriteLine("Failed to load title.");
                     Console.ReadLine();
-                    return;
+                    return new List<Result<Step>>();
                 }
+
+                var addMode = new List<Result<Step>>();
+                for (var i = 1; i <= sheet.LastRowNum; i++)
+                {
+                    IRow row = sheet.GetRow(i);
+                    if (row == null)
+                    {
+                        addMode.Add(Result<Step>.CreateFail("Row should not be empty", row.RowNum));
+                        continue;
+                    }
+
+                    var modeResult = row.ReadStep(header);
+                    addMode.Add(modeResult);
+                }
+
+                return addMode;
             }
         }
     }

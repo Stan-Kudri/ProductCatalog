@@ -4,7 +4,7 @@ namespace TestTask.Core.Components.ItemsTables
 {
     public class Step : Entity
     {
-        private Step()
+        public Step()
         {
         }
 
