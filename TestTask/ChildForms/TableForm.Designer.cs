@@ -45,11 +45,6 @@
             this.btnEditStep = new MaterialSkin.Controls.MaterialButton();
             this.btnDeleteStep = new MaterialSkin.Controls.MaterialButton();
             this.dgvSteps = new System.Windows.Forms.DataGridView();
-            this.tlpButtonAllTable = new System.Windows.Forms.TableLayoutPanel();
-            this.btnAddData = new MaterialSkin.Controls.MaterialButton();
-            this.btnClearData = new MaterialSkin.Controls.MaterialButton();
-            this.btnCloseApp = new MaterialSkin.Controls.MaterialButton();
-            this.tlpTabControl = new System.Windows.Forms.TableLayoutPanel();
             this.IdStep = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ModeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Timer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,6 +52,11 @@
             this.Speed = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tlpTabControl = new System.Windows.Forms.TableLayoutPanel();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.tsmItemFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmItemImportFromExcel = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmItemClose = new System.Windows.Forms.ToolStripMenuItem();
             this.tcData.SuspendLayout();
             this.tabPageModes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvModes)).BeginInit();
@@ -64,8 +64,8 @@
             this.tabPageSteps.SuspendLayout();
             this.tlpStepsButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSteps)).BeginInit();
-            this.tlpButtonAllTable.SuspendLayout();
             this.tlpTabControl.SuspendLayout();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcData
@@ -336,101 +336,6 @@
             this.dgvSteps.Size = new System.Drawing.Size(760, 360);
             this.dgvSteps.TabIndex = 0;
             // 
-            // tlpButtonAllTable
-            // 
-            this.tlpButtonAllTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tlpButtonAllTable.ColumnCount = 3;
-            this.tlpButtonAllTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpButtonAllTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpButtonAllTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpButtonAllTable.Controls.Add(this.btnAddData, 0, 0);
-            this.tlpButtonAllTable.Controls.Add(this.btnClearData, 1, 0);
-            this.tlpButtonAllTable.Controls.Add(this.btnCloseApp, 2, 0);
-            this.tlpButtonAllTable.Location = new System.Drawing.Point(2, 430);
-            this.tlpButtonAllTable.MinimumSize = new System.Drawing.Size(780, 30);
-            this.tlpButtonAllTable.Name = "tlpButtonAllTable";
-            this.tlpButtonAllTable.RowCount = 1;
-            this.tlpButtonAllTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpButtonAllTable.Size = new System.Drawing.Size(780, 30);
-            this.tlpButtonAllTable.TabIndex = 1;
-            // 
-            // btnAddData
-            // 
-            this.btnAddData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnAddData.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnAddData.Depth = 0;
-            this.btnAddData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAddData.HighEmphasis = true;
-            this.btnAddData.Icon = null;
-            this.btnAddData.Location = new System.Drawing.Point(10, 3);
-            this.btnAddData.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.btnAddData.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnAddData.Name = "btnAddData";
-            this.btnAddData.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnAddData.Size = new System.Drawing.Size(240, 24);
-            this.btnAddData.TabIndex = 0;
-            this.btnAddData.Text = "Add Data";
-            this.btnAddData.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnAddData.UseAccentColor = false;
-            this.btnAddData.UseVisualStyleBackColor = true;
-            this.btnAddData.Click += new System.EventHandler(this.BtnAddData_Click);
-            // 
-            // btnClearData
-            // 
-            this.btnClearData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnClearData.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnClearData.Depth = 0;
-            this.btnClearData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClearData.HighEmphasis = true;
-            this.btnClearData.Icon = null;
-            this.btnClearData.Location = new System.Drawing.Point(270, 3);
-            this.btnClearData.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.btnClearData.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnClearData.Name = "btnClearData";
-            this.btnClearData.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClearData.Size = new System.Drawing.Size(240, 24);
-            this.btnClearData.TabIndex = 1;
-            this.btnClearData.Text = "Clear data";
-            this.btnClearData.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnClearData.UseAccentColor = false;
-            this.btnClearData.UseVisualStyleBackColor = true;
-            // 
-            // btnCloseApp
-            // 
-            this.btnCloseApp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCloseApp.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnCloseApp.Depth = 0;
-            this.btnCloseApp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCloseApp.HighEmphasis = true;
-            this.btnCloseApp.Icon = null;
-            this.btnCloseApp.Location = new System.Drawing.Point(530, 3);
-            this.btnCloseApp.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.btnCloseApp.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnCloseApp.Name = "btnCloseApp";
-            this.btnCloseApp.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnCloseApp.Size = new System.Drawing.Size(240, 24);
-            this.btnCloseApp.TabIndex = 2;
-            this.btnCloseApp.Text = "Close";
-            this.btnCloseApp.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnCloseApp.UseAccentColor = false;
-            this.btnCloseApp.UseVisualStyleBackColor = true;
-            // 
-            // tlpTabControl
-            // 
-            this.tlpTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpTabControl.ColumnCount = 1;
-            this.tlpTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpTabControl.Controls.Add(this.tcData, 0, 0);
-            this.tlpTabControl.Location = new System.Drawing.Point(2, 2);
-            this.tlpTabControl.MinimumSize = new System.Drawing.Size(780, 430);
-            this.tlpTabControl.Name = "tlpTabControl";
-            this.tlpTabControl.RowCount = 1;
-            this.tlpTabControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpTabControl.Size = new System.Drawing.Size(780, 430);
-            this.tlpTabControl.TabIndex = 2;
-            // 
             // IdStep
             // 
             this.IdStep.FillWeight = 134.3092F;
@@ -485,14 +390,64 @@
             this.Volume.Name = "Volume";
             this.Volume.ReadOnly = true;
             // 
+            // tlpTabControl
+            // 
+            this.tlpTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpTabControl.ColumnCount = 1;
+            this.tlpTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpTabControl.Controls.Add(this.tcData, 0, 0);
+            this.tlpTabControl.Location = new System.Drawing.Point(2, 20);
+            this.tlpTabControl.MinimumSize = new System.Drawing.Size(780, 430);
+            this.tlpTabControl.Name = "tlpTabControl";
+            this.tlpTabControl.RowCount = 1;
+            this.tlpTabControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpTabControl.Size = new System.Drawing.Size(780, 430);
+            this.tlpTabControl.TabIndex = 2;
+            // 
+            // menuStrip
+            // 
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmItemFile});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(784, 24);
+            this.menuStrip.TabIndex = 3;
+            this.menuStrip.Text = "menuStrip";
+            // 
+            // tsmItemFile
+            // 
+            this.tsmItemFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmItemImportFromExcel,
+            this.tsmItemClose});
+            this.tsmItemFile.Name = "tsmItemFile";
+            this.tsmItemFile.Size = new System.Drawing.Size(37, 20);
+            this.tsmItemFile.Text = "File";
+            // 
+            // tsmItemImportFromExcel
+            // 
+            this.tsmItemImportFromExcel.Name = "tsmItemImportFromExcel";
+            this.tsmItemImportFromExcel.Size = new System.Drawing.Size(180, 22);
+            this.tsmItemImportFromExcel.Text = "Import from Excel";
+            this.tsmItemImportFromExcel.Click += new System.EventHandler(this.TsmItemImportFromExcel_Click);
+            // 
+            // tsmItemClose
+            // 
+            this.tsmItemClose.Name = "tsmItemClose";
+            this.tsmItemClose.Size = new System.Drawing.Size(180, 22);
+            this.tsmItemClose.Text = "Close";
+            this.tsmItemClose.Click += new System.EventHandler(this.TsmItemClose_Click);
+            // 
             // TableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 461);
+            this.ClientSize = new System.Drawing.Size(784, 451);
             this.Controls.Add(this.tlpTabControl);
-            this.Controls.Add(this.tlpButtonAllTable);
-            this.MinimumSize = new System.Drawing.Size(800, 500);
+            this.Controls.Add(this.menuStrip);
+            this.MainMenuStrip = this.menuStrip;
+            this.MinimumSize = new System.Drawing.Size(800, 490);
             this.Name = "TableForm";
             this.Text = "TableForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TableForm_FormClosing);
@@ -506,10 +461,11 @@
             this.tlpStepsButton.ResumeLayout(false);
             this.tlpStepsButton.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSteps)).EndInit();
-            this.tlpButtonAllTable.ResumeLayout(false);
-            this.tlpButtonAllTable.PerformLayout();
             this.tlpTabControl.ResumeLayout(false);
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -520,14 +476,10 @@
         private System.Windows.Forms.TabPage tabPageSteps;
         private System.Windows.Forms.DataGridView dgvSteps;
         private System.Windows.Forms.TableLayoutPanel tlpStepsButton;
-        private System.Windows.Forms.TableLayoutPanel tlpButtonAllTable;
         private System.Windows.Forms.TableLayoutPanel tlpTabControl;
         private MaterialSkin.Controls.MaterialButton btnAddItemStep;
         private MaterialSkin.Controls.MaterialButton btnEditStep;
         private MaterialSkin.Controls.MaterialButton btnDeleteStep;
-        private MaterialSkin.Controls.MaterialButton btnAddData;
-        private MaterialSkin.Controls.MaterialButton btnClearData;
-        private MaterialSkin.Controls.MaterialButton btnCloseApp;
         private System.Windows.Forms.TableLayoutPanel tlpModesButton;
         private MaterialSkin.Controls.MaterialButton btnAddMode;
         private MaterialSkin.Controls.MaterialButton btnEditMode;
@@ -544,5 +496,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Speed;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
+        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.ToolStripMenuItem tsmItemFile;
+        private System.Windows.Forms.ToolStripMenuItem tsmItemImportFromExcel;
+        private System.Windows.Forms.ToolStripMenuItem tsmItemClose;
     }
 }
