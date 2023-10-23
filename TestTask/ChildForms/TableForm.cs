@@ -23,7 +23,7 @@ namespace TestTask.ChildForms
         private const string MessageNotSelectedItem = "No items selected";
 
         //Index column from all tables
-        private const int IndexId = 0;
+        public const int IndexId = 0;
 
         //Index column Mode table
         private const int IndexColumnModeName = 1;
@@ -353,31 +353,9 @@ namespace TestTask.ChildForms
 
         private HashSet<int> GetSelectedRowIndexesGridStep() => dgvSteps.GetSelectedRowIndexesGrid();
 
-        private void RemoveItemRowGridMode(int id)
-        {
-            foreach (DataGridViewRow row in dgvModes.Rows)
-            {
-                var idItem = row.Get<int>(IndexId);
-                if (idItem != null && idItem == id)
-                {
-                    dgvModes.Rows.RemoveAt(row.Index);
-                    break;
-                }
-            }
-        }
+        private void RemoveItemRowGridMode(int id) => dgvModes.RemoveItemRowGrid(id);
 
-        private void RemoveItemRowGridSteps(int id)
-        {
-            foreach (DataGridViewRow row in dgvSteps.Rows)
-            {
-                var idItem = row.Get<int>(IndexId);
-                if (idItem != null && idItem == id)
-                {
-                    dgvSteps.Rows.RemoveAt(row.Index);
-                    break;
-                }
-            }
-        }
+        private void RemoveItemRowGridSteps(int id) => dgvSteps.RemoveItemRowGrid(id);
 
         private void UpdateAllGrids()
         {
