@@ -6,7 +6,7 @@ namespace TestTask.Core.Components
 {
     public class Mode : Entity
     {
-        private Mode()
+        public Mode()
         {
         }
 

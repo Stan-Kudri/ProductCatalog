@@ -51,13 +51,12 @@
             this.btnCloseApp = new MaterialSkin.Controls.MaterialButton();
             this.tlpTabControl = new System.Windows.Forms.TableLayoutPanel();
             this.IdStep = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ModeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ModeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Timer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Destination = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Speed = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ModeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tcData.SuspendLayout();
             this.tabPageModes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvModes)).BeginInit();
@@ -325,13 +324,12 @@
             this.dgvSteps.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSteps.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdStep,
-            this.ModeName,
+            this.ModeId,
             this.Timer,
             this.Destination,
             this.Speed,
             this.Type,
-            this.Volume,
-            this.ModeId});
+            this.Volume});
             this.dgvSteps.Location = new System.Drawing.Point(3, 3);
             this.dgvSteps.MinimumSize = new System.Drawing.Size(760, 360);
             this.dgvSteps.Name = "dgvSteps";
@@ -375,6 +373,7 @@
             this.btnAddData.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnAddData.UseAccentColor = false;
             this.btnAddData.UseVisualStyleBackColor = true;
+            this.btnAddData.Click += new System.EventHandler(this.BtnAddData_Click);
             // 
             // btnClearData
             // 
@@ -440,13 +439,11 @@
             this.IdStep.Name = "IdStep";
             this.IdStep.ReadOnly = true;
             // 
-            // ModeName
+            // ModeId
             // 
-            this.ModeName.FillWeight = 166.9742F;
-            this.ModeName.HeaderText = "Mode Name";
-            this.ModeName.MinimumWidth = 90;
-            this.ModeName.Name = "ModeName";
-            this.ModeName.ReadOnly = true;
+            this.ModeId.HeaderText = "ModeId";
+            this.ModeId.Name = "ModeId";
+            this.ModeId.ReadOnly = true;
             // 
             // Timer
             // 
@@ -488,13 +485,6 @@
             this.Volume.Name = "Volume";
             this.Volume.ReadOnly = true;
             // 
-            // ModeId
-            // 
-            this.ModeId.HeaderText = "ModeId";
-            this.ModeId.Name = "ModeId";
-            this.ModeId.ReadOnly = true;
-            this.ModeId.Visible = false;
-            // 
             // TableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -505,6 +495,7 @@
             this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "TableForm";
             this.Text = "TableForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TableForm_FormClosing);
             this.Load += new System.EventHandler(this.TableForm_Load);
             this.tcData.ResumeLayout(false);
             this.tabPageModes.ResumeLayout(false);
@@ -547,12 +538,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MaxBottleNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaxUsedTips;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdStep;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ModeName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ModeId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Timer;
         private System.Windows.Forms.DataGridViewTextBoxColumn Destination;
         private System.Windows.Forms.DataGridViewTextBoxColumn Speed;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ModeId;
     }
 }

@@ -19,7 +19,7 @@ namespace TestTask.Core.Service
                 throw new ArgumentException("The received parameters are not correct.", nameof(mode));
             }
 
-            if (_dbContext.Modes.Any(e => e.Name == mode.Name))
+            if (_dbContext.Modes.Any(e => e.Id == mode.Id))
             {
                 throw new ArgumentException("This mode exists.");
             }
@@ -51,8 +51,17 @@ namespace TestTask.Core.Service
             _dbContext.SaveChanges();
         }
 
-        public List<Mode> GetAllMode() => _dbContext.Modes.Count() > 0 ? _dbContext.Modes.ToList() : null;
+        public void AddImportData(Mode mode)
+        {
+            var duplicateId = _dbContext.Modes.FirstOrDefault(e => e.Id == mode.Id);
+            if (duplicateId == null)
+            {
+                Add(mode);
+            }
 
-        public IQueryable<Mode> GetModes() => _dbContext.Modes;
+            Update(mode);
+        }
+
+        public List<Mode> GetAllMode() => _dbContext.Modes.Count() > 0 ? _dbContext.Modes.ToList() : null;
     }
 }

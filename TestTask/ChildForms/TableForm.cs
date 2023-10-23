@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using TestTask.ChildForms.Import;
 using TestTask.ChildForms.ModeForm;
 using TestTask.ChildForms.StepForm;
 using TestTask.Core.Components;
 using TestTask.Core.Components.ItemsTables;
+using TestTask.Core.Extension;
+using TestTask.Core.ImportDB.Read.Header;
 using TestTask.Core.Service;
 using TestTask.Core.Service.Components;
 using TestTask.Extension;
@@ -14,6 +17,9 @@ namespace TestTask.ChildForms
 {
     public partial class TableForm : Form
     {
+        private const string Mode = "Mode";
+        private const string Step = "Step";
+
         private const string MessageNotSelectedItem = "No items selected";
 
         //Index column from all tables
@@ -25,13 +31,12 @@ namespace TestTask.ChildForms
         private const int IndexColumnMaxUsedTips = 3;
 
         //Index column Mode table
-        private const int IndexColumnStepModeName = 1;
+        private const int IndexColumnModeId = 1;
         private const int IndexColumnTimer = 2;
         private const int IndexColumnDestination = 3;
         private const int IndexColumnSpeed = 4;
         private const int IndexColumnType = 5;
         private const int IndexColumnVolume = 6;
-        private const int IndexColumnModeId = 7;
 
         private readonly ModeService _modeService;
         private readonly StepService _stepService;
@@ -106,9 +111,10 @@ namespace TestTask.ChildForms
             {
                 RemoveItemRowGridMode(id);
                 _modeService.Remove(id);
+                _stepService.RemoveStepRelatedToMode(id);
             }
 
-            LoadDataGridMode();
+            UpdateAllGrids();
         }
 
         private void BtnDeliteStep_Click(object sender, EventArgs e)
@@ -198,11 +204,79 @@ namespace TestTask.ChildForms
             }
         }
 
-        private void TableForm_Load(object sender, EventArgs e)
+        private void BtnAddData_Click(object sender, EventArgs e)
         {
-            LoadDataGridMode();
-            LoadDataGridStep();
+            var loadTable = new Dictionary<string, bool>()
+            {
+                { Mode, false },
+                { Step, false },
+            };
+
+            using (var impotDbForExcel = new ImportDatabaseForm(_messageBox))
+            {
+                if (impotDbForExcel.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                loadTable[Mode] = impotDbForExcel.IsDownloadTableMode;
+                loadTable[Step] = impotDbForExcel.IsDownloadTableStep;
+            }
+
+            using (var openReplaceDataFromFile = new OpenFileDialog { Filter = "Excel Files |*.xls;*.xlsx;*.xlsm" })
+            {
+                if (openReplaceDataFromFile.ShowDialog() == DialogResult.Cancel)
+                {
+                    return;
+                }
+
+                var path = openReplaceDataFromFile.FileName;
+
+                if (loadTable[Mode])
+                {
+                    var modeRead = new ReadMode().Reader(path);
+
+                    foreach (var item in modeRead)
+                    {
+                        if (item.Success)
+                        {
+                            _modeService.AddImportData(item.Value);
+                        }
+                    }
+
+                    LoadDataGridMode();
+
+                    if (!modeRead.IsNoErrorLine(out var message))
+                    {
+                        _messageBox.ShowWarning(message);
+                    }
+                }
+
+                if (loadTable[Step])
+                {
+                    var stepRead = new ReadStep().Reader(path);
+
+                    foreach (var item in stepRead)
+                    {
+                        if (item.Success)
+                        {
+                            _stepService.AddImportData(item.Value);
+                        }
+                    }
+
+                    LoadDataGridStep();
+
+                    if (!stepRead.IsNoErrorLine(out var message))
+                    {
+                        _messageBox.ShowWarning(message);
+                    }
+                }
+            }
         }
+
+        private void TableForm_Load(object sender, EventArgs e) => UpdateAllGrids();
+
+        private void TableForm_FormClosing(object sender, FormClosingEventArgs e) => DialogResult = DialogResult.Cancel;
 
         private void LoadDataGridMode()
         {
@@ -267,12 +341,9 @@ namespace TestTask.ChildForms
 
         private void FillGridStep(List<Step> items)
         {
-            var modes = _modeService.GetModes();
-
             foreach (var item in items)
             {
-                var nameMode = modes.FirstOrDefault(e => e.Id == item.ModeId).Name ?? throw new ArgumentException("Name mode cannot be empty.");
-                dgvSteps.Rows.Add(item.Id, nameMode, item.Timer, item.Destination, item.Speed, item.Type, item.Volume, item.ModeId);
+                dgvSteps.Rows.Add(item.Id, item.ModeId, item.Timer, item.Destination, item.Speed, item.Type, item.Volume);
             }
         }
 
@@ -334,6 +405,12 @@ namespace TestTask.ChildForms
                     break;
                 }
             }
+        }
+
+        private void UpdateAllGrids()
+        {
+            LoadDataGridMode();
+            LoadDataGridStep();
         }
     }
 }

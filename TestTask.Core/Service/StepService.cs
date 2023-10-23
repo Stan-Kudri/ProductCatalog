@@ -59,6 +59,34 @@ namespace TestTask.Core.Service
             _dbContext.SaveChanges();
         }
 
+        public void RemoveStepRelatedToMode(int modeId)
+        {
+            var steps = _dbContext.Steps.Where(e => e.ModeId == modeId).Select(e => e);
+
+            if (steps.Count() <= 0)
+            {
+                return;
+            }
+
+            _dbContext.Steps.RemoveRange(steps.ToList());
+        }
+
+        public void AddImportData(Step step)
+        {
+            if (_dbContext.Modes.FirstOrDefault(e => e.Id == step.ModeId) == null)
+            {
+                return;
+            }
+
+            var duplicateId = _dbContext.Steps.FirstOrDefault(e => e.Id == step.Id);
+            if (duplicateId == null)
+            {
+                Add(step);
+            }
+
+            Update(step);
+        }
+
         public List<Step> GetAllItems() => _dbContext.Steps.Count() > 0 ? _dbContext.Steps.ToList() : null;
     }
 }
