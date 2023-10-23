@@ -7,6 +7,7 @@ using TestTask.ChildForms.ModeForm;
 using TestTask.ChildForms.StepForm;
 using TestTask.Core.Components;
 using TestTask.Core.Components.ItemsTables;
+using TestTask.Core.Extension;
 using TestTask.Core.ImportDB.Read.Header;
 using TestTask.Core.Service;
 using TestTask.Core.Service.Components;
@@ -113,8 +114,7 @@ namespace TestTask.ChildForms
                 _stepService.RemoveStepRelatedToMode(id);
             }
 
-            LoadDataGridMode();
-            LoadDataGridStep();
+            UpdateAllGrids();
         }
 
         private void BtnDeliteStep_Click(object sender, EventArgs e)
@@ -243,7 +243,13 @@ namespace TestTask.ChildForms
                             _modeService.AddImportData(item.Value);
                         }
                     }
+
                     LoadDataGridMode();
+
+                    if (!modeRead.IsNoErrorLine(out var message))
+                    {
+                        _messageBox.ShowWarning(message);
+                    }
                 }
 
                 if (loadTable[Step])
@@ -257,16 +263,18 @@ namespace TestTask.ChildForms
                             _stepService.AddImportData(item.Value);
                         }
                     }
+
                     LoadDataGridStep();
+
+                    if (!stepRead.IsNoErrorLine(out var message))
+                    {
+                        _messageBox.ShowWarning(message);
+                    }
                 }
             }
         }
 
-        private void TableForm_Load(object sender, EventArgs e)
-        {
-            LoadDataGridMode();
-            LoadDataGridStep();
-        }
+        private void TableForm_Load(object sender, EventArgs e) => UpdateAllGrids();
 
         private void LoadDataGridMode()
         {
@@ -398,6 +406,12 @@ namespace TestTask.ChildForms
                     break;
                 }
             }
+        }
+
+        private void UpdateAllGrids()
+        {
+            LoadDataGridMode();
+            LoadDataGridStep();
         }
     }
 }

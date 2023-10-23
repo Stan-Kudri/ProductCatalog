@@ -150,6 +150,7 @@
     <Compile Include="Enum\StepField.cs" />
     <Compile Include="Extension\ReadExtension\ReadHeadExtension.cs" />
     <Compile Include="Extension\ReadExtension\ReadItemExtension.cs" />
+    <Compile Include="Extension\ResultMessageErrorExtension.cs" />
     <Compile Include="Extension\RowExtension.cs" />
     <Compile Include="Extension\StringPassExtension.cs" />
     <Compile Include="Extension\StringUsernameExtension.cs" />
