@@ -9,7 +9,5 @@
         void ShowError(string message);
 
         bool ShowQuestion(string message);
-
-        bool ShowQuestionSaveItem(string message);
     }
 }

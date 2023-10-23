@@ -5,16 +5,16 @@ using TestTask.Core.Service.Components;
 
 namespace TestTask.ChildForms.ModeForm
 {
-    public partial class ModeForm : Form
+    public partial class ModeFormBase : Form
     {
         protected readonly IMessageBox _messageBox;
 
-        private ModeForm()
+        private ModeFormBase()
         {
             InitializeComponent();
         }
 
-        public ModeForm(IMessageBox messageBox)
+        public ModeFormBase(IMessageBox messageBox)
         {
             InitializeComponent();
             _messageBox = messageBox;
@@ -69,12 +69,10 @@ namespace TestTask.ChildForms.ModeForm
 
         private void KeyPressDigit(KeyPressEventArgs e)
         {
-            if (char.IsDigit(e.KeyChar))
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(8))
             {
-                return;
+                e.Handled = true;
             }
-
-            e.Handled = true;
         }
     }
 }

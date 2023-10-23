@@ -95,6 +95,7 @@
             // 
             // dgvModes
             // 
+            this.dgvModes.AllowUserToAddRows = false;
             this.dgvModes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -317,6 +318,7 @@
             // 
             // dgvSteps
             // 
+            this.dgvSteps.AllowUserToAddRows = false;
             this.dgvSteps.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -428,14 +430,14 @@
             // tsmItemImportFromExcel
             // 
             this.tsmItemImportFromExcel.Name = "tsmItemImportFromExcel";
-            this.tsmItemImportFromExcel.Size = new System.Drawing.Size(180, 22);
+            this.tsmItemImportFromExcel.Size = new System.Drawing.Size(169, 22);
             this.tsmItemImportFromExcel.Text = "Import from Excel";
             this.tsmItemImportFromExcel.Click += new System.EventHandler(this.TsmItemImportFromExcel_Click);
             // 
             // tsmItemClose
             // 
             this.tsmItemClose.Name = "tsmItemClose";
-            this.tsmItemClose.Size = new System.Drawing.Size(180, 22);
+            this.tsmItemClose.Size = new System.Drawing.Size(169, 22);
             this.tsmItemClose.Text = "Close";
             this.tsmItemClose.Click += new System.EventHandler(this.TsmItemClose_Click);
             // 

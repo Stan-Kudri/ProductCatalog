@@ -7,7 +7,7 @@ using TestTask.Core.Service.Components;
 
 namespace TestTask.ChildForms.StepForm
 {
-    public class EditItemStepForm : StepForm
+    public class EditItemStepForm : StepFormBase
     {
         private readonly Step _oldStep;
 

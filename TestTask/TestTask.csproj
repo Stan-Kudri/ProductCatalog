@@ -170,11 +170,11 @@
     <Compile Include="ChildForms\ModeForm\AddItemModeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildForms\ModeForm\ModeForm.cs">
+    <Compile Include="ChildForms\ModeForm\ModeFormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildForms\ModeForm\ModeForm.Designer.cs">
-      <DependentUpon>ModeForm.cs</DependentUpon>
+    <Compile Include="ChildForms\ModeForm\ModeFormBase.Designer.cs">
+      <DependentUpon>ModeFormBase.cs</DependentUpon>
     </Compile>
     <Compile Include="ChildForms\ModeForm\EditItemModeForm.cs">
       <SubType>Form</SubType>
@@ -191,11 +191,11 @@
     <Compile Include="ChildForms\StepForm\EditItemStepForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildForms\StepForm\StepForm.cs">
+    <Compile Include="ChildForms\StepForm\StepFormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildForms\StepForm\StepForm.Designer.cs">
-      <DependentUpon>StepForm.cs</DependentUpon>
+    <Compile Include="ChildForms\StepForm\StepFormBase.Designer.cs">
+      <DependentUpon>StepFormBase.cs</DependentUpon>
     </Compile>
     <Compile Include="ChildForms\TableForm.cs">
       <SubType>Form</SubType>
@@ -205,6 +205,8 @@
     </Compile>
     <Compile Include="Extension\GridItemExtension.cs" />
     <Compile Include="Extension\ParseExtension.cs" />
+    <Compile Include="Extension\RemoveItemDGVExtension.cs" />
+    <Compile Include="Extension\SelectedItemDGVExtension.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -217,14 +219,14 @@
     <EmbeddedResource Include="ChildForms\Import\ImportDatabaseForm.resx">
       <DependentUpon>ImportDatabaseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChildForms\ModeForm\ModeForm.resx">
-      <DependentUpon>ModeForm.cs</DependentUpon>
+    <EmbeddedResource Include="ChildForms\ModeForm\ModeFormBase.resx">
+      <DependentUpon>ModeFormBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildForms\RegistrationForm.resx">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChildForms\StepForm\StepForm.resx">
-      <DependentUpon>StepForm.cs</DependentUpon>
+    <EmbeddedResource Include="ChildForms\StepForm\StepFormBase.resx">
+      <DependentUpon>StepFormBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildForms\TableForm.resx">
       <DependentUpon>TableForm.cs</DependentUpon>

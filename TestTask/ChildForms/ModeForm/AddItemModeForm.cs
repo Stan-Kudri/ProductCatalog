@@ -2,7 +2,7 @@
 
 namespace TestTask.ChildForms.ModeForm
 {
-    public class AddItemModeForm : ModeForm
+    public class AddItemModeForm : ModeFormBase
     {
         public AddItemModeForm(IMessageBox messageBox)
             : base(messageBox)

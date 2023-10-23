@@ -5,7 +5,7 @@ using TestTask.Core.Service.Components;
 
 namespace TestTask.ChildForms.ModeForm
 {
-    public class EditItemModeForm : ModeForm
+    public class EditItemModeForm : ModeFormBase
     {
         private readonly Mode _oldMode;
 
