@@ -16,7 +16,7 @@ namespace TestTask.ChildForms.Import
 
         private void BtnImportData_Click(object sender, EventArgs e)
         {
-            if (cbModes.Checked == cbStep.Checked == false)
+            if (!cbModes.Checked && !cbStep.Checked)
             {
                 _messageBox.ShowWarning("The tables to load are not selected.");
                 return;

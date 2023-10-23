@@ -66,7 +66,7 @@ namespace TestTask.Core.Service
                 return;
             }
 
-            var duplicateId = _dbContext.Modes.FirstOrDefault(e => e.Id == step.Id);
+            var duplicateId = _dbContext.Steps.FirstOrDefault(e => e.Id == step.Id);
             if (duplicateId == null)
             {
                 Add(step);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Windows.Forms;
 using TestTask.Core.Db;
 using TestTask.Core.Service;
@@ -16,14 +17,17 @@ namespace TestTask
         [STAThread]
         static void Main()
         {
-            new DbContextFactory().EnsureCreated(ConnectionName);
+            var builder = new DbContextOptionsBuilder<AppDbContext>().UseSqlite($"Data Source={ConnectionName}.db");
+
             var message = new MessageBoxShow();
 
-            using (var appDbContext = new AppDbContext(ConnectionName))
+            using (var appDbContext = new AppDbContext(builder.Options))
             {
+                appDbContext.Database.EnsureCreated();
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new LoginForm(new UserService(appDbContext), new ModeService(appDbContext), new StepService(appDbContext), message));
+
             }
         }
     }

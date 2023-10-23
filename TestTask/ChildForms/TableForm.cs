@@ -241,6 +241,7 @@ namespace TestTask.ChildForms
                             _modeService.AddImportData(item.Value);
                         }
                     }
+                    LoadDataGridMode();
                 }
 
                 if (loadTable[Step])
@@ -254,6 +255,7 @@ namespace TestTask.ChildForms
                             _stepService.AddImportData(item.Value);
                         }
                     }
+                    LoadDataGridStep();
                 }
             }
         }
