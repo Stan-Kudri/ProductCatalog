@@ -43,6 +43,9 @@
             // 
             // tlpLogIn
             // 
+            this.tlpLogIn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpLogIn.ColumnCount = 1;
             this.tlpLogIn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpLogIn.Controls.Add(this.tbLogIn, 0, 0);
@@ -148,6 +151,7 @@
             // 
             // tlbButton
             // 
+            this.tlbButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tlbButton.ColumnCount = 1;
             this.tlbButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlbButton.Controls.Add(this.btnSignIn, 0, 0);
