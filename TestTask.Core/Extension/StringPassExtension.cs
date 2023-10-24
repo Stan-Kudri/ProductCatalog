@@ -13,6 +13,7 @@ namespace TestTask.Core.Extension
             if (password.Length < MinLengthPass)
             {
                 message = "Your password isn’t strong enough, try making it longer.";
+                return false;
             }
 
             if (!password.All(e => char.IsLetterOrDigit(e)))
@@ -21,9 +22,15 @@ namespace TestTask.Core.Extension
                 return false;
             }
 
-            if (!password.Any(e => char.IsDigit(e)) || !password.Any(e => char.IsLetter(e)))
+            if (!password.Any(e => char.IsDigit(e)))
             {
-                message = "Invalid string format";
+                message = string.Format("{0}\n{1}", "Invalid string format.", "The password does not contain a number.");
+                return false;
+            }
+
+            if (!password.Any(e => char.IsLetter(e)))
+            {
+                message = string.Format("{0}\n{1}", "Invalid string format.", "The password does not contain a latter.");
                 return false;
             }
 
