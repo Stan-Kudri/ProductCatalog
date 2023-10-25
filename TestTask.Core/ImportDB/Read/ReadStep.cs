@@ -14,7 +14,7 @@ namespace TestTask.Core.ImportDB.Read.Header
     {
         private const string StepSheetName = "Steps";
 
-        public List<Result<Step>> Reader(string path)
+        public List<Result<Step>> ReadExcel(string path)
         {
             if (!File.Exists(path))
             {
@@ -51,7 +51,7 @@ namespace TestTask.Core.ImportDB.Read.Header
                 Dictionary<StepField, int> header;
                 try
                 {
-                    header = sheet.ReadHeaderStep(columnMap);
+                    header = sheet.ReadHeader(columnMap);
                 }
                 catch
                 {

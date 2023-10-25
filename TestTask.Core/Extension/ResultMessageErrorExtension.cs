@@ -35,6 +35,5 @@ namespace TestTask.Core.Extension
             message = string.Format("{0}\n{1}", FirstMessage, errorLine);
             return false;
         }
-
     }
 }

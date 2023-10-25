@@ -9,6 +9,7 @@ namespace TestTask.Core.Extension
         public static Result<string> GetString(this IRow self, int cellNumber, string columnName)
         {
             var cell = self.GetCell(cellNumber);
+
             if (cell == null)
             {
                 return Result<string>.CreateSuccess(null, self.RowNum);
@@ -35,28 +36,22 @@ namespace TestTask.Core.Extension
             }
 
             string valueShouldBeNumberMessage = columnName + " should be number";
+
             if (cell.CellType == CellType.Blank)
             {
                 return Result<int>.CreateFail(valueShouldBeNumberMessage, self.RowNum);
             }
 
-            if (cell.CellType == CellType.String)
-            {
-                try
-                {
-                    var value = cell.StringCellValue;
-                    return Result<int>.CreateSuccess(Convert.ToInt32(value), self.RowNum);
-                }
-                catch
-                {
-                    return Result<int>.CreateFail(valueShouldBeNumberMessage, self.RowNum);
-                }
-            }
-
             try
             {
-                var value = cell.NumericCellValue;
-                return Result<int>.CreateSuccess(Convert.ToInt32(value), self.RowNum);
+                if (cell.CellType == CellType.String)
+                {
+                    var valueInStringCell = cell.StringCellValue;
+                    return Result<int>.CreateSuccess(Convert.ToInt32(valueInStringCell), self.RowNum);
+                }
+
+                var valueInNumericCell = cell.NumericCellValue;
+                return Result<int>.CreateSuccess(Convert.ToInt32(valueInNumericCell), self.RowNum);
             }
             catch
             {

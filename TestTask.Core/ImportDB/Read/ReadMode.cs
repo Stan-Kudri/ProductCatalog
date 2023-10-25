@@ -14,7 +14,7 @@ namespace TestTask.Core.ImportDB.Read.Header
     {
         private const string ModeSheetName = "Modes";
 
-        public List<Result<Mode>> Reader(string path)
+        public List<Result<Mode>> ReadExcel(string path)
         {
             if (!File.Exists(path))
             {
@@ -49,7 +49,7 @@ namespace TestTask.Core.ImportDB.Read.Header
                 Dictionary<ModeField, int> header;
                 try
                 {
-                    header = sheet.ReadHeaderMode(columnMap);
+                    header = sheet.ReadHeader(columnMap);
                 }
                 catch
                 {

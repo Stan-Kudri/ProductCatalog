@@ -234,7 +234,7 @@ namespace TestTask.ChildForms
 
                 if (loadTable[Mode])
                 {
-                    var modeRead = new ReadMode().Reader(path);
+                    var modeRead = new ReadMode().ReadExcel(path);
 
                     foreach (var item in modeRead)
                     {
@@ -254,7 +254,7 @@ namespace TestTask.ChildForms
 
                 if (loadTable[Step])
                 {
-                    var stepRead = new ReadStep().Reader(path);
+                    var stepRead = new ReadStep().ReadExcel(path);
 
                     foreach (var item in stepRead)
                     {
