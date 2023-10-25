@@ -149,7 +149,7 @@
             this.MinimumSize = new System.Drawing.Size(270, 240);
             this.Name = "RegistrationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "RegistrationForm";
+            this.Text = "Registration";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegistrationForm_FormClosing);
             this.tlpRegistration.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.userModelBindingSource)).EndInit();
