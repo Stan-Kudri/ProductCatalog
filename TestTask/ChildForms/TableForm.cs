@@ -284,9 +284,10 @@ namespace TestTask.ChildForms
         {
             var item = _modeService.GetAllMode();
 
+            ClearGridMode();
+
             if (item != null)
             {
-                ClearGridMode();
                 FillGridMode(item);
             }
         }
@@ -295,9 +296,10 @@ namespace TestTask.ChildForms
         {
             var items = _stepService.GetAllItems();
 
+            ClearGridStep();
+
             if (items != null)
             {
-                ClearGridStep();
                 FillGridStep(items);
             }
         }
