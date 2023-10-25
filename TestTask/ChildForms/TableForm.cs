@@ -66,7 +66,7 @@ namespace TestTask.ChildForms
             LoadDataGridMode();
         }
 
-        private void BtnAddItemStep_Click(object sender, EventArgs e)
+        private void BtnAddStep_Click(object sender, EventArgs e)
         {
             var listMode = _modeService.GetAllMode();
 
@@ -85,59 +85,6 @@ namespace TestTask.ChildForms
 
                 var step = addFormStep.GetStepModel().ToStep();
                 _stepService.Add(step);
-            }
-
-            LoadDataGridStep();
-        }
-
-        private void BtnDeliteMode_Click(object sender, EventArgs e)
-        {
-            var selectedRowIndex = GetSelectedRowIndexesGridMode()
-                .Select(i => dgvModes.Rows[i].Get<int>(IndexId))
-                .ToList();
-
-            if (selectedRowIndex.Count == 0)
-            {
-                _messageBox.ShowWarning(MessageNotSelectedItem);
-                return;
-            }
-
-            if (!_messageBox.ShowQuestion("Delete selected items?"))
-            {
-                return;
-            }
-
-            foreach (var id in selectedRowIndex)
-            {
-                RemoveItemRowGridMode(id);
-                _modeService.Remove(id);
-                _stepService.RemoveStepRelatedToMode(id);
-            }
-
-            UpdateAllGrids();
-        }
-
-        private void BtnDeliteStep_Click(object sender, EventArgs e)
-        {
-            var selectedRowIndex = GetSelectedRowIndexesGridStep()
-                .Select(i => dgvSteps.Rows[i].Get<int>(IndexId))
-                .ToList();
-
-            if (selectedRowIndex.Count == 0)
-            {
-                _messageBox.ShowWarning(MessageNotSelectedItem);
-                return;
-            }
-
-            if (!_messageBox.ShowQuestion("Delete selected items?"))
-            {
-                return;
-            }
-
-            foreach (var id in selectedRowIndex)
-            {
-                RemoveItemRowGridSteps(id);
-                _stepService.Remove(id);
             }
 
             LoadDataGridStep();
@@ -173,10 +120,62 @@ namespace TestTask.ChildForms
             {
                 _messageBox.ShowWarning("Select one item.");
             }
-
         }
 
-        private void BtnEditStep_Click(object sender, EventArgs e)
+        private void BtnDeleteStep_Click(object sender, EventArgs e)
+        {
+            var selectedRowIndex = GetSelectedRowIndexesGridStep()
+                .Select(i => dgvSteps.Rows[i].Get<int>(IndexId))
+                .ToList();
+
+            if (selectedRowIndex.Count == 0)
+            {
+                _messageBox.ShowWarning(MessageNotSelectedItem);
+                return;
+            }
+
+            if (!_messageBox.ShowQuestion("Delete selected items?"))
+            {
+                return;
+            }
+
+            foreach (var id in selectedRowIndex)
+            {
+                RemoveItemRowGridSteps(id);
+                _stepService.Remove(id);
+            }
+
+            LoadDataGridStep();
+        }
+
+        private void BtnDeleteMode_Click(object sender, EventArgs e)
+        {
+            var selectedRowIndex = GetSelectedRowIndexesGridMode()
+                .Select(i => dgvModes.Rows[i].Get<int>(IndexId))
+                .ToList();
+
+            if (selectedRowIndex.Count == 0)
+            {
+                _messageBox.ShowWarning(MessageNotSelectedItem);
+                return;
+            }
+
+            if (!_messageBox.ShowQuestion("Delete selected items?"))
+            {
+                return;
+            }
+
+            foreach (var id in selectedRowIndex)
+            {
+                RemoveItemRowGridMode(id);
+                _modeService.Remove(id);
+                _stepService.RemoveStepRelatedToMode(id);
+            }
+
+            UpdateAllGrids();
+        }
+
+        private void BtnEditStep_Click_1(object sender, EventArgs e)
         {
             var listMode = _modeService.GetAllMode();
             var indexEditRow = GetSelectedRowIndexesGridStep();
