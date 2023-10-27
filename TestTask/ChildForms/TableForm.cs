@@ -204,7 +204,7 @@ namespace TestTask.ChildForms
             LoadDataGridStep();
         }
 
-        private void TsmItemImportFromExcel_Click(object sender, EventArgs e)
+        private void TsmImportFromExcel_Click(object sender, EventArgs e)
         {
             var loadTable = new Dictionary<string, bool>()
             {
@@ -272,6 +272,11 @@ namespace TestTask.ChildForms
                     }
                 }
             }
+        }
+
+        private void TsmItemSaveExcel_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void TsmItemClose_Click(object sender, EventArgs e) => Close();
