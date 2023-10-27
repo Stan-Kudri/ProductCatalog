@@ -29,13 +29,21 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tcData = new System.Windows.Forms.TabControl();
             this.tabPageModes = new System.Windows.Forms.TabPage();
             this.dgvModes = new System.Windows.Forms.DataGridView();
-            this.IdMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaxBottleNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaxUsedTips = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpModesButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnDeleteMode = new System.Windows.Forms.Button();
             this.btnEditMode = new System.Windows.Forms.Button();
@@ -46,6 +54,16 @@
             this.btnAddStep = new System.Windows.Forms.Button();
             this.btnEditStep = new System.Windows.Forms.Button();
             this.dgvSteps = new System.Windows.Forms.DataGridView();
+            this.tlpTabControl = new System.Windows.Forms.TableLayoutPanel();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.tsmItemFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmItemImportFromExcel = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmItemClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.IdMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaxBottleNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaxUsedTips = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdStep = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ModeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Timer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,12 +71,6 @@
             this.Speed = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tlpTabControl = new System.Windows.Forms.TableLayoutPanel();
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.tsmItemFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmItemImportFromExcel = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmItemClose = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tcData.SuspendLayout();
             this.tabPageModes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvModes)).BeginInit();
@@ -78,9 +90,10 @@
             this.tcData.Controls.Add(this.tabPageModes);
             this.tcData.Controls.Add(this.tabPageSteps);
             this.tcData.Location = new System.Drawing.Point(3, 3);
+            this.tcData.MinimumSize = new System.Drawing.Size(824, 464);
             this.tcData.Name = "tcData";
             this.tcData.SelectedIndex = 0;
-            this.tcData.Size = new System.Drawing.Size(784, 464);
+            this.tcData.Size = new System.Drawing.Size(824, 464);
             this.tcData.TabIndex = 0;
             // 
             // tabPageModes
@@ -90,7 +103,7 @@
             this.tabPageModes.Location = new System.Drawing.Point(4, 22);
             this.tabPageModes.Name = "tabPageModes";
             this.tabPageModes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageModes.Size = new System.Drawing.Size(776, 438);
+            this.tabPageModes.Size = new System.Drawing.Size(816, 438);
             this.tabPageModes.TabIndex = 0;
             this.tabPageModes.Text = "Modes";
             this.tabPageModes.UseVisualStyleBackColor = true;
@@ -102,45 +115,46 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvModes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvModes.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvModes.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvModes.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvModes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Lucida Fax", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowFrame;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvModes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvModes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvModes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdMode,
             this.NameMode,
             this.MaxBottleNumber,
             this.MaxUsedTips});
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Lucida Bright", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.WindowFrame;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvModes.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvModes.GridColor = System.Drawing.Color.White;
             this.dgvModes.Location = new System.Drawing.Point(3, 3);
             this.dgvModes.MinimumSize = new System.Drawing.Size(760, 360);
             this.dgvModes.Name = "dgvModes";
-            this.dgvModes.Size = new System.Drawing.Size(770, 360);
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Lucida Fax", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.WindowFrame;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvModes.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.dgvModes.Size = new System.Drawing.Size(810, 360);
             this.dgvModes.TabIndex = 4;
-            // 
-            // IdMode
-            // 
-            this.IdMode.HeaderText = "ID";
-            this.IdMode.MinimumWidth = 30;
-            this.IdMode.Name = "IdMode";
-            this.IdMode.ReadOnly = true;
-            // 
-            // NameMode
-            // 
-            this.NameMode.HeaderText = "Name";
-            this.NameMode.MinimumWidth = 280;
-            this.NameMode.Name = "NameMode";
-            this.NameMode.ReadOnly = true;
-            // 
-            // MaxBottleNumber
-            // 
-            this.MaxBottleNumber.HeaderText = "MaxBottleNumber";
-            this.MaxBottleNumber.MinimumWidth = 40;
-            this.MaxBottleNumber.Name = "MaxBottleNumber";
-            this.MaxBottleNumber.ReadOnly = true;
-            // 
-            // MaxUsedTips
-            // 
-            this.MaxUsedTips.HeaderText = "MaxUsedTips";
-            this.MaxUsedTips.MinimumWidth = 40;
-            this.MaxUsedTips.Name = "MaxUsedTips";
-            this.MaxUsedTips.ReadOnly = true;
             // 
             // tlpModesButton
             // 
@@ -217,7 +231,7 @@
             this.tabPageSteps.Location = new System.Drawing.Point(4, 22);
             this.tabPageSteps.Name = "tabPageSteps";
             this.tabPageSteps.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSteps.Size = new System.Drawing.Size(776, 438);
+            this.tabPageSteps.Size = new System.Drawing.Size(816, 438);
             this.tabPageSteps.TabIndex = 1;
             this.tabPageSteps.Text = "Steps";
             this.tabPageSteps.UseVisualStyleBackColor = true;
@@ -291,6 +305,17 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvSteps.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvSteps.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvSteps.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvSteps.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Lucida Fax", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.WindowFrame;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSteps.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvSteps.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSteps.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdStep,
@@ -300,66 +325,30 @@
             this.Speed,
             this.Type,
             this.Volume});
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Lucida Fax", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.WindowFrame;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSteps.DefaultCellStyle = dataGridViewCellStyle10;
+            this.dgvSteps.GridColor = System.Drawing.Color.White;
             this.dgvSteps.Location = new System.Drawing.Point(3, 3);
             this.dgvSteps.MinimumSize = new System.Drawing.Size(760, 360);
             this.dgvSteps.Name = "dgvSteps";
-            this.dgvSteps.Size = new System.Drawing.Size(770, 360);
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Lucida Fax", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.WindowFrame;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSteps.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvSteps.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            this.dgvSteps.Size = new System.Drawing.Size(810, 360);
             this.dgvSteps.TabIndex = 0;
-            // 
-            // IdStep
-            // 
-            this.IdStep.FillWeight = 50F;
-            this.IdStep.HeaderText = "ID";
-            this.IdStep.MinimumWidth = 30;
-            this.IdStep.Name = "IdStep";
-            this.IdStep.ReadOnly = true;
-            // 
-            // ModeId
-            // 
-            this.ModeId.FillWeight = 40F;
-            this.ModeId.HeaderText = "ModeId";
-            this.ModeId.MinimumWidth = 30;
-            this.ModeId.Name = "ModeId";
-            this.ModeId.ReadOnly = true;
-            // 
-            // Timer
-            // 
-            this.Timer.FillWeight = 80F;
-            this.Timer.HeaderText = "Timer";
-            this.Timer.MinimumWidth = 70;
-            this.Timer.Name = "Timer";
-            this.Timer.ReadOnly = true;
-            // 
-            // Destination
-            // 
-            this.Destination.FillWeight = 200F;
-            this.Destination.HeaderText = "Destination";
-            this.Destination.MinimumWidth = 160;
-            this.Destination.Name = "Destination";
-            this.Destination.ReadOnly = true;
-            // 
-            // Speed
-            // 
-            this.Speed.FillWeight = 9.885016F;
-            this.Speed.HeaderText = "Speed";
-            this.Speed.MinimumWidth = 80;
-            this.Speed.Name = "Speed";
-            this.Speed.ReadOnly = true;
-            // 
-            // Type
-            // 
-            this.Type.HeaderText = "Type";
-            this.Type.MinimumWidth = 120;
-            this.Type.Name = "Type";
-            this.Type.ReadOnly = true;
-            // 
-            // Volume
-            // 
-            this.Volume.FillWeight = 90F;
-            this.Volume.HeaderText = "Volume";
-            this.Volume.MinimumWidth = 70;
-            this.Volume.Name = "Volume";
-            this.Volume.ReadOnly = true;
             // 
             // tlpTabControl
             // 
@@ -374,7 +363,7 @@
             this.tlpTabControl.Name = "tlpTabControl";
             this.tlpTabControl.RowCount = 1;
             this.tlpTabControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpTabControl.Size = new System.Drawing.Size(790, 470);
+            this.tlpTabControl.Size = new System.Drawing.Size(830, 470);
             this.tlpTabControl.TabIndex = 2;
             // 
             // menuStrip
@@ -383,7 +372,7 @@
             this.tsmItemFile});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(794, 24);
+            this.menuStrip.Size = new System.Drawing.Size(834, 24);
             this.menuStrip.TabIndex = 3;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -410,15 +399,110 @@
             this.tsmItemClose.Text = "Close";
             this.tsmItemClose.Click += new System.EventHandler(this.TsmItemClose_Click);
             // 
+            // IdMode
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.IdMode.DefaultCellStyle = dataGridViewCellStyle2;
+            this.IdMode.HeaderText = "    ID";
+            this.IdMode.MinimumWidth = 30;
+            this.IdMode.Name = "IdMode";
+            this.IdMode.ReadOnly = true;
+            // 
+            // NameMode
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.NameMode.DefaultCellStyle = dataGridViewCellStyle3;
+            this.NameMode.FillWeight = 120F;
+            this.NameMode.HeaderText = "    Name";
+            this.NameMode.MinimumWidth = 250;
+            this.NameMode.Name = "NameMode";
+            this.NameMode.ReadOnly = true;
+            // 
+            // MaxBottleNumber
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.MaxBottleNumber.DefaultCellStyle = dataGridViewCellStyle4;
+            this.MaxBottleNumber.FillWeight = 120F;
+            this.MaxBottleNumber.HeaderText = "    MaxBottleNumber";
+            this.MaxBottleNumber.MinimumWidth = 60;
+            this.MaxBottleNumber.Name = "MaxBottleNumber";
+            this.MaxBottleNumber.ReadOnly = true;
+            // 
+            // MaxUsedTips
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.MaxUsedTips.DefaultCellStyle = dataGridViewCellStyle5;
+            this.MaxUsedTips.HeaderText = "    MaxUsedTips";
+            this.MaxUsedTips.MinimumWidth = 40;
+            this.MaxUsedTips.Name = "MaxUsedTips";
+            this.MaxUsedTips.ReadOnly = true;
+            // 
+            // IdStep
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.IdStep.DefaultCellStyle = dataGridViewCellStyle9;
+            this.IdStep.FillWeight = 70F;
+            this.IdStep.HeaderText = "    ID";
+            this.IdStep.MinimumWidth = 50;
+            this.IdStep.Name = "IdStep";
+            this.IdStep.ReadOnly = true;
+            // 
+            // ModeId
+            // 
+            this.ModeId.FillWeight = 90F;
+            this.ModeId.HeaderText = "    ModeId";
+            this.ModeId.MinimumWidth = 60;
+            this.ModeId.Name = "ModeId";
+            this.ModeId.ReadOnly = true;
+            // 
+            // Timer
+            // 
+            this.Timer.FillWeight = 80F;
+            this.Timer.HeaderText = "    Timer";
+            this.Timer.MinimumWidth = 70;
+            this.Timer.Name = "Timer";
+            this.Timer.ReadOnly = true;
+            // 
+            // Destination
+            // 
+            this.Destination.FillWeight = 180F;
+            this.Destination.HeaderText = "    Destination";
+            this.Destination.MinimumWidth = 160;
+            this.Destination.Name = "Destination";
+            this.Destination.ReadOnly = true;
+            // 
+            // Speed
+            // 
+            this.Speed.FillWeight = 9.885016F;
+            this.Speed.HeaderText = "    Speed";
+            this.Speed.MinimumWidth = 100;
+            this.Speed.Name = "Speed";
+            this.Speed.ReadOnly = true;
+            // 
+            // Type
+            // 
+            this.Type.HeaderText = "    Type";
+            this.Type.MinimumWidth = 120;
+            this.Type.Name = "Type";
+            this.Type.ReadOnly = true;
+            // 
+            // Volume
+            // 
+            this.Volume.FillWeight = 90F;
+            this.Volume.HeaderText = "    Volume";
+            this.Volume.MinimumWidth = 70;
+            this.Volume.Name = "Volume";
+            this.Volume.ReadOnly = true;
+            // 
             // TableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(794, 491);
+            this.ClientSize = new System.Drawing.Size(834, 491);
             this.Controls.Add(this.tlpTabControl);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
-            this.MinimumSize = new System.Drawing.Size(810, 530);
+            this.MinimumSize = new System.Drawing.Size(850, 530);
             this.Name = "TableForm";
             this.Text = "Table";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TableForm_FormClosing);
@@ -448,21 +532,10 @@
         private System.Windows.Forms.TableLayoutPanel tlpTabControl;
         private System.Windows.Forms.TableLayoutPanel tlpModesButton;
         private System.Windows.Forms.DataGridView dgvModes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdMode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NameMode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaxBottleNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaxUsedTips;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem tsmItemFile;
         private System.Windows.Forms.ToolStripMenuItem tsmItemImportFromExcel;
         private System.Windows.Forms.ToolStripMenuItem tsmItemClose;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdStep;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ModeId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Timer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Destination;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Speed;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Button btnAddMode;
         private System.Windows.Forms.Button btnEditMode;
@@ -470,5 +543,16 @@
         private System.Windows.Forms.Button btnDeleteStep;
         private System.Windows.Forms.Button btnAddStep;
         private System.Windows.Forms.Button btnEditStep;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdMode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameMode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaxBottleNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaxUsedTips;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdStep;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ModeId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Timer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Destination;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Speed;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
     }
 }
