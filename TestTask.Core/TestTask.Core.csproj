@@ -154,10 +154,13 @@
     <Compile Include="Extension\RowExtension.cs" />
     <Compile Include="Extension\StringPassExtension.cs" />
     <Compile Include="Extension\StringUsernameExtension.cs" />
+    <Compile Include="Extension\WriteExtension\CreateSheetExtension.cs" />
+    <Compile Include="Extension\WriteExtension\WriteColumnNameExtension.cs" />
     <Compile Include="ImportDB\Component\Result.cs" />
     <Compile Include="ImportDB\Read\ReadMode.cs" />
     <Compile Include="ImportDB\Read\ReadStep.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SaveDB\Write\WriteExcel.cs" />
     <Compile Include="Service\Components\IMessageBox.cs" />
     <Compile Include="Service\ModeService.cs" />
     <Compile Include="Service\StepService.cs" />

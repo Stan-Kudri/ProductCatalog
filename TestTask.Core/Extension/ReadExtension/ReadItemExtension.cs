@@ -21,7 +21,7 @@ namespace TestTask.Core.Extension.ReadExtension
             {
                 switch (pair.Key)
                 {
-                    case ModeField.Id:
+                    case ModeField.ID:
 
                         var id = row.GetInt(pair.Value, "Id");
                         if (!id.Success)
@@ -83,7 +83,7 @@ namespace TestTask.Core.Extension.ReadExtension
             {
                 switch (pair.Key)
                 {
-                    case StepField.Id:
+                    case StepField.ID:
 
                         var id = row.GetInt(pair.Value, "Id");
                         if (!id.Success)

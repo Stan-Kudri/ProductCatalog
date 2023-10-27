@@ -9,6 +9,7 @@ using TestTask.Core.Components;
 using TestTask.Core.Components.ItemsTables;
 using TestTask.Core.Extension;
 using TestTask.Core.ImportDB.Read.Header;
+using TestTask.Core.SaveDB.Write;
 using TestTask.Core.Service;
 using TestTask.Core.Service.Components;
 using TestTask.Extension;
@@ -276,7 +277,8 @@ namespace TestTask.ChildForms
 
         private void TsmItemSaveExcel_Click(object sender, EventArgs e)
         {
-
+            var writeExcel = new WriteExcel(_stepService, _modeService, _messageBox);
+            writeExcel.Write();
         }
 
         private void TsmItemClose_Click(object sender, EventArgs e) => Close();

@@ -27,7 +27,7 @@ namespace TestTask.Core.ImportDB.Read.Header
 
                 var columnMap = new Dictionary<string, StepField>
                 {
-                    ["ID"] = StepField.Id,
+                    ["ID"] = StepField.ID,
                     ["ModeId"] = StepField.ModeId,
                     ["Destination"] = StepField.Destination,
                     ["Speed"] = StepField.Speed,
