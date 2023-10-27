@@ -50,6 +50,7 @@ namespace TestTask.ChildForms
             _messageBox = messageBox;
         }
 
+
         private void BtnAddMode_Click(object sender, EventArgs e)
         {
             using (var addFormMode = new AddItemModeForm(_messageBox))
@@ -64,30 +65,6 @@ namespace TestTask.ChildForms
             }
 
             LoadDataGridMode();
-        }
-
-        private void BtnAddStep_Click(object sender, EventArgs e)
-        {
-            var listMode = _modeService.GetAllMode();
-
-            if (listMode == null || listMode.Count == 0)
-            {
-                _messageBox.ShowWarning("Add a mode to the table to add a step.");
-                return;
-            }
-
-            using (var addFormStep = new AddItemStepForm(_messageBox, listMode))
-            {
-                if (addFormStep.ShowDialog() != DialogResult.OK)
-                {
-                    return;
-                }
-
-                var step = addFormStep.GetStepModel().ToStep();
-                _stepService.Add(step);
-            }
-
-            LoadDataGridStep();
         }
 
         private void BtnEditMode_Click(object sender, EventArgs e)
@@ -122,32 +99,6 @@ namespace TestTask.ChildForms
             }
         }
 
-        private void BtnDeleteStep_Click(object sender, EventArgs e)
-        {
-            var selectedRowIndex = GetSelectedRowIndexesGridStep()
-                .Select(i => dgvSteps.Rows[i].Get<int>(IndexId))
-                .ToList();
-
-            if (selectedRowIndex.Count == 0)
-            {
-                _messageBox.ShowWarning(MessageNotSelectedItem);
-                return;
-            }
-
-            if (!_messageBox.ShowQuestion("Delete selected items?"))
-            {
-                return;
-            }
-
-            foreach (var id in selectedRowIndex)
-            {
-                RemoveItemRowGridSteps(id);
-                _stepService.Remove(id);
-            }
-
-            LoadDataGridStep();
-        }
-
         private void BtnDeleteMode_Click(object sender, EventArgs e)
         {
             var selectedRowIndex = GetSelectedRowIndexesGridMode()
@@ -175,7 +126,31 @@ namespace TestTask.ChildForms
             UpdateAllGrids();
         }
 
-        private void BtnEditStep_Click_1(object sender, EventArgs e)
+        private void BtnAddStep_Click(object sender, EventArgs e)
+        {
+            var listMode = _modeService.GetAllMode();
+
+            if (listMode == null || listMode.Count == 0)
+            {
+                _messageBox.ShowWarning("Add a mode to the table to add a step.");
+                return;
+            }
+
+            using (var addFormStep = new AddItemStepForm(_messageBox, listMode))
+            {
+                if (addFormStep.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                var step = addFormStep.GetStepModel().ToStep();
+                _stepService.Add(step);
+            }
+
+            LoadDataGridStep();
+        }
+
+        private void BtnEditStep_Click(object sender, EventArgs e)
         {
             var listMode = _modeService.GetAllMode();
             var indexEditRow = GetSelectedRowIndexesGridStep();
@@ -201,6 +176,32 @@ namespace TestTask.ChildForms
             {
                 _messageBox.ShowWarning("Select one item.");
             }
+        }
+
+        private void BtnDeleteStep_Click(object sender, EventArgs e)
+        {
+            var selectedRowIndex = GetSelectedRowIndexesGridStep()
+                .Select(i => dgvSteps.Rows[i].Get<int>(IndexId))
+                .ToList();
+
+            if (selectedRowIndex.Count == 0)
+            {
+                _messageBox.ShowWarning(MessageNotSelectedItem);
+                return;
+            }
+
+            if (!_messageBox.ShowQuestion("Delete selected items?"))
+            {
+                return;
+            }
+
+            foreach (var id in selectedRowIndex)
+            {
+                RemoveItemRowGridSteps(id);
+                _stepService.Remove(id);
+            }
+
+            LoadDataGridStep();
         }
 
         private void TsmItemImportFromExcel_Click(object sender, EventArgs e)
