@@ -7,9 +7,10 @@ using TestTask.ChildForms.ModeForm;
 using TestTask.ChildForms.StepForm;
 using TestTask.Core.Components;
 using TestTask.Core.Components.ItemsTables;
+using TestTask.Core.ExportDB;
+using TestTask.Core.ExportDB.SheetFillers;
 using TestTask.Core.Extension;
 using TestTask.Core.ImportDB.Read.Header;
-using TestTask.Core.SaveDB.Write;
 using TestTask.Core.Service;
 using TestTask.Core.Service.Components;
 using TestTask.Extension;
@@ -129,7 +130,7 @@ namespace TestTask.ChildForms
 
         private void BtnAddStep_Click(object sender, EventArgs e)
         {
-            var listMode = _modeService.GetAllMode();
+            var listMode = _modeService.GetAll();
 
             if (listMode == null || listMode.Count == 0)
             {
@@ -153,7 +154,7 @@ namespace TestTask.ChildForms
 
         private void BtnEditStep_Click(object sender, EventArgs e)
         {
-            var listMode = _modeService.GetAllMode();
+            var listMode = _modeService.GetAll();
             var indexEditRow = GetSelectedRowIndexesGridStep();
 
             if (indexEditRow.Count == 1)
@@ -277,8 +278,15 @@ namespace TestTask.ChildForms
 
         private void TsmItemSaveExcel_Click(object sender, EventArgs e)
         {
-            var writeExcel = new WriteExcel(_stepService, _modeService, _messageBox);
-            writeExcel.Write();
+            ModeSheetFiller modeSheetFiller = new ModeSheetFiller(_modeService);
+
+            var fillers = new ISheetFiller[]
+            {
+                modeSheetFiller,
+            };
+
+            var writeExcel = new ExcelExporter(fillers);
+            writeExcel.ExportToFile("ExcelFile.xlsx");
         }
 
         private void TsmItemClose_Click(object sender, EventArgs e) => Close();
@@ -289,7 +297,7 @@ namespace TestTask.ChildForms
 
         private void LoadDataGridMode()
         {
-            var item = _modeService.GetAllMode();
+            var item = _modeService.GetAll();
 
             ClearGridMode();
 

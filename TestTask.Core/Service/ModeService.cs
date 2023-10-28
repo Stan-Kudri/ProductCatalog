@@ -62,6 +62,6 @@ namespace TestTask.Core.Service
             Update(mode);
         }
 
-        public List<Mode> GetAllMode() => _dbContext.Modes.Count() > 0 ? _dbContext.Modes.ToList() : null;
+        public List<Mode> GetAll() => _dbContext.Modes.Count() > 0 ? _dbContext.Modes.ToList() : null;
     }
 }
