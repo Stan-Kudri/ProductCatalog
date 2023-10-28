@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace TestTask.Core.Extension
 {
@@ -24,13 +25,13 @@ namespace TestTask.Core.Extension
 
             if (!password.Any(e => char.IsDigit(e)))
             {
-                message = string.Format("{0}\n{1}", "Invalid string format.", "The password does not contain a number.");
+                message = string.Format("{0}{1}{2}", "Invalid string format.", Environment.NewLine, "The password does not contain a number.");
                 return false;
             }
 
             if (!password.Any(e => char.IsLetter(e)))
             {
-                message = string.Format("{0}\n{1}", "Invalid string format.", "The password does not contain a latter.");
+                message = string.Format("{0}{1}{2}", "Invalid string format.", Environment.NewLine, "The password does not contain a latter.");
                 return false;
             }
 

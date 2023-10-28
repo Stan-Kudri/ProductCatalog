@@ -32,18 +32,22 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tcData = new System.Windows.Forms.TabControl();
             this.tabPageModes = new System.Windows.Forms.TabPage();
             this.dgvModes = new System.Windows.Forms.DataGridView();
+            this.IdMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaxBottleNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaxUsedTips = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpModesButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnDeleteMode = new System.Windows.Forms.Button();
             this.btnEditMode = new System.Windows.Forms.Button();
@@ -54,16 +58,6 @@
             this.btnAddStep = new System.Windows.Forms.Button();
             this.btnEditStep = new System.Windows.Forms.Button();
             this.dgvSteps = new System.Windows.Forms.DataGridView();
-            this.tlpTabControl = new System.Windows.Forms.TableLayoutPanel();
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.tsmItemFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmItemImportFromExcel = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmItemClose = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.IdMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaxBottleNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaxUsedTips = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdStep = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ModeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Timer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -71,6 +65,15 @@
             this.Speed = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tlpTabControl = new System.Windows.Forms.TableLayoutPanel();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.tsmItemFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmItemImport = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmImportFromExcel = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmItemExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmSaveToExcel = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmItemClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tcData.SuspendLayout();
             this.tabPageModes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvModes)).BeginInit();
@@ -155,6 +158,44 @@
             this.dgvModes.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvModes.Size = new System.Drawing.Size(810, 360);
             this.dgvModes.TabIndex = 4;
+            // 
+            // IdMode
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.IdMode.DefaultCellStyle = dataGridViewCellStyle2;
+            this.IdMode.HeaderText = "    ID";
+            this.IdMode.MinimumWidth = 30;
+            this.IdMode.Name = "IdMode";
+            this.IdMode.ReadOnly = true;
+            // 
+            // NameMode
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.NameMode.DefaultCellStyle = dataGridViewCellStyle3;
+            this.NameMode.FillWeight = 120F;
+            this.NameMode.HeaderText = "    Name";
+            this.NameMode.MinimumWidth = 250;
+            this.NameMode.Name = "NameMode";
+            this.NameMode.ReadOnly = true;
+            // 
+            // MaxBottleNumber
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.MaxBottleNumber.DefaultCellStyle = dataGridViewCellStyle4;
+            this.MaxBottleNumber.FillWeight = 120F;
+            this.MaxBottleNumber.HeaderText = "    MaxBottleNumber";
+            this.MaxBottleNumber.MinimumWidth = 60;
+            this.MaxBottleNumber.Name = "MaxBottleNumber";
+            this.MaxBottleNumber.ReadOnly = true;
+            // 
+            // MaxUsedTips
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.MaxUsedTips.DefaultCellStyle = dataGridViewCellStyle5;
+            this.MaxUsedTips.HeaderText = "    MaxUsedTips";
+            this.MaxUsedTips.MinimumWidth = 40;
+            this.MaxUsedTips.Name = "MaxUsedTips";
+            this.MaxUsedTips.ReadOnly = true;
             // 
             // tlpModesButton
             // 
@@ -350,93 +391,6 @@
             this.dgvSteps.Size = new System.Drawing.Size(810, 360);
             this.dgvSteps.TabIndex = 0;
             // 
-            // tlpTabControl
-            // 
-            this.tlpTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpTabControl.ColumnCount = 1;
-            this.tlpTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpTabControl.Controls.Add(this.tcData, 0, 0);
-            this.tlpTabControl.Location = new System.Drawing.Point(2, 20);
-            this.tlpTabControl.MinimumSize = new System.Drawing.Size(780, 430);
-            this.tlpTabControl.Name = "tlpTabControl";
-            this.tlpTabControl.RowCount = 1;
-            this.tlpTabControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpTabControl.Size = new System.Drawing.Size(830, 470);
-            this.tlpTabControl.TabIndex = 2;
-            // 
-            // menuStrip
-            // 
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmItemFile});
-            this.menuStrip.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(834, 24);
-            this.menuStrip.TabIndex = 3;
-            this.menuStrip.Text = "menuStrip";
-            // 
-            // tsmItemFile
-            // 
-            this.tsmItemFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmItemImportFromExcel,
-            this.tsmItemClose});
-            this.tsmItemFile.Name = "tsmItemFile";
-            this.tsmItemFile.Size = new System.Drawing.Size(37, 20);
-            this.tsmItemFile.Text = "File";
-            // 
-            // tsmItemImportFromExcel
-            // 
-            this.tsmItemImportFromExcel.Name = "tsmItemImportFromExcel";
-            this.tsmItemImportFromExcel.Size = new System.Drawing.Size(169, 22);
-            this.tsmItemImportFromExcel.Text = "Import from Excel";
-            this.tsmItemImportFromExcel.Click += new System.EventHandler(this.TsmItemImportFromExcel_Click);
-            // 
-            // tsmItemClose
-            // 
-            this.tsmItemClose.Name = "tsmItemClose";
-            this.tsmItemClose.Size = new System.Drawing.Size(169, 22);
-            this.tsmItemClose.Text = "Close";
-            this.tsmItemClose.Click += new System.EventHandler(this.TsmItemClose_Click);
-            // 
-            // IdMode
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.IdMode.DefaultCellStyle = dataGridViewCellStyle2;
-            this.IdMode.HeaderText = "    ID";
-            this.IdMode.MinimumWidth = 30;
-            this.IdMode.Name = "IdMode";
-            this.IdMode.ReadOnly = true;
-            // 
-            // NameMode
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.NameMode.DefaultCellStyle = dataGridViewCellStyle3;
-            this.NameMode.FillWeight = 120F;
-            this.NameMode.HeaderText = "    Name";
-            this.NameMode.MinimumWidth = 250;
-            this.NameMode.Name = "NameMode";
-            this.NameMode.ReadOnly = true;
-            // 
-            // MaxBottleNumber
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.MaxBottleNumber.DefaultCellStyle = dataGridViewCellStyle4;
-            this.MaxBottleNumber.FillWeight = 120F;
-            this.MaxBottleNumber.HeaderText = "    MaxBottleNumber";
-            this.MaxBottleNumber.MinimumWidth = 60;
-            this.MaxBottleNumber.Name = "MaxBottleNumber";
-            this.MaxBottleNumber.ReadOnly = true;
-            // 
-            // MaxUsedTips
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.MaxUsedTips.DefaultCellStyle = dataGridViewCellStyle5;
-            this.MaxUsedTips.HeaderText = "    MaxUsedTips";
-            this.MaxUsedTips.MinimumWidth = 40;
-            this.MaxUsedTips.Name = "MaxUsedTips";
-            this.MaxUsedTips.ReadOnly = true;
-            // 
             // IdStep
             // 
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -494,6 +448,79 @@
             this.Volume.Name = "Volume";
             this.Volume.ReadOnly = true;
             // 
+            // tlpTabControl
+            // 
+            this.tlpTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpTabControl.ColumnCount = 1;
+            this.tlpTabControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpTabControl.Controls.Add(this.tcData, 0, 0);
+            this.tlpTabControl.Location = new System.Drawing.Point(2, 20);
+            this.tlpTabControl.MinimumSize = new System.Drawing.Size(780, 430);
+            this.tlpTabControl.Name = "tlpTabControl";
+            this.tlpTabControl.RowCount = 1;
+            this.tlpTabControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpTabControl.Size = new System.Drawing.Size(830, 470);
+            this.tlpTabControl.TabIndex = 2;
+            // 
+            // menuStrip
+            // 
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmItemFile});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(834, 24);
+            this.menuStrip.TabIndex = 3;
+            this.menuStrip.Text = "menuStrip";
+            // 
+            // tsmItemFile
+            // 
+            this.tsmItemFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmItemImport,
+            this.tsmItemExport,
+            this.tsmItemClose});
+            this.tsmItemFile.Name = "tsmItemFile";
+            this.tsmItemFile.Size = new System.Drawing.Size(37, 20);
+            this.tsmItemFile.Text = "File";
+            // 
+            // tsmItemImport
+            // 
+            this.tsmItemImport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmImportFromExcel});
+            this.tsmItemImport.Name = "tsmItemImport";
+            this.tsmItemImport.Size = new System.Drawing.Size(180, 22);
+            this.tsmItemImport.Text = "Import from";
+            // 
+            // tsmImportFromExcel
+            // 
+            this.tsmImportFromExcel.Name = "tsmImportFromExcel";
+            this.tsmImportFromExcel.Size = new System.Drawing.Size(101, 22);
+            this.tsmImportFromExcel.Text = "Excel";
+            this.tsmImportFromExcel.Click += new System.EventHandler(this.TsmImportFromExcel_Click);
+            // 
+            // tsmItemExport
+            // 
+            this.tsmItemExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmSaveToExcel});
+            this.tsmItemExport.Name = "tsmItemExport";
+            this.tsmItemExport.Size = new System.Drawing.Size(180, 22);
+            this.tsmItemExport.Text = "Export to";
+            // 
+            // tsmSaveToExcel
+            // 
+            this.tsmSaveToExcel.Name = "tsmSaveToExcel";
+            this.tsmSaveToExcel.Size = new System.Drawing.Size(180, 22);
+            this.tsmSaveToExcel.Text = "Excel";
+            this.tsmSaveToExcel.Click += new System.EventHandler(this.TsmItemSaveExcel_Click);
+            // 
+            // tsmItemClose
+            // 
+            this.tsmItemClose.Name = "tsmItemClose";
+            this.tsmItemClose.Size = new System.Drawing.Size(180, 22);
+            this.tsmItemClose.Text = "Close";
+            this.tsmItemClose.Click += new System.EventHandler(this.TsmItemClose_Click);
+            // 
             // TableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -534,7 +561,7 @@
         private System.Windows.Forms.DataGridView dgvModes;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem tsmItemFile;
-        private System.Windows.Forms.ToolStripMenuItem tsmItemImportFromExcel;
+        private System.Windows.Forms.ToolStripMenuItem tsmItemImport;
         private System.Windows.Forms.ToolStripMenuItem tsmItemClose;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Button btnAddMode;
@@ -554,5 +581,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Speed;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
+        private System.Windows.Forms.ToolStripMenuItem tsmItemExport;
+        private System.Windows.Forms.ToolStripMenuItem tsmImportFromExcel;
+        private System.Windows.Forms.ToolStripMenuItem tsmSaveToExcel;
     }
 }

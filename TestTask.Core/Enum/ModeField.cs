@@ -2,7 +2,7 @@
 {
     public enum ModeField
     {
-        Id,
+        ID,
         Name,
         MaxBottleNumber,
         MaxUsedTips,

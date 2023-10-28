@@ -27,7 +27,7 @@ namespace TestTask.Core.ImportDB.Read.Header
 
                 var columnMap = new Dictionary<string, ModeField>
                 {
-                    ["ID"] = ModeField.Id,
+                    ["ID"] = ModeField.ID,
                     ["Name"] = ModeField.Name,
                     ["MaxUsedTips"] = ModeField.MaxUsedTips,
                     ["MaxBottleNumber"] = ModeField.MaxBottleNumber,
