@@ -278,17 +278,27 @@ namespace TestTask.ChildForms
 
         private void TsmItemSaveExcel_Click(object sender, EventArgs e)
         {
-            var modeSheetFiller = new ModeSheetFiller(_modeService);
-            var stepSheetFiller = new StepSheetFiller(_stepService);
-
-            var fillers = new ISheetFiller[]
+            using (var exportFileData = new SaveFileDialog() { Filter = "Excel Files |*.xls;*.xlsx;*.xlsm" })
             {
+                if (exportFileData.ShowDialog() == DialogResult.Cancel)
+                {
+                    return;
+                }
+
+                var path = exportFileData.FileName;
+
+                var modeSheetFiller = new ModeSheetFiller(_modeService);
+                var stepSheetFiller = new StepSheetFiller(_stepService);
+
+                var fillers = new ISheetFiller[]
+                {
                 modeSheetFiller,
                 stepSheetFiller,
-            };
+                };
 
-            var writeExcel = new ExcelExporter(fillers);
-            writeExcel.ExportToFile("ExcelFile.xlsx");
+                var writeExcel = new ExcelExporter(fillers);
+                writeExcel.ExportToFile(path);
+            }
         }
 
         private void TsmItemClose_Click(object sender, EventArgs e) => Close();

@@ -29,7 +29,7 @@ namespace TestTask.Core.ExportDB
 
         public void ExportToFile(string path)
         {
-            using (var fileStream = File.OpenWrite(path))
+            using (var fileStream = File.OpenWrite(Path.Combine(path)))
             {
                 Export(fileStream);
             }
