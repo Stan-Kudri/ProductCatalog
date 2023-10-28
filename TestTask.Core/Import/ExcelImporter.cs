@@ -1,6 +1,5 @@
 ﻿using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using TestTask.Core.Import.Importers;
@@ -27,17 +26,22 @@ namespace TestTask.Core.Import
         public List<Result<T>> Import(Stream stream)
         {
             var workbook = new XSSFWorkbook(stream);
-            var sheet = GetSheet(workbook);
+            var addMode = new List<Result<T>>();
+
+            if (!GetSheet(workbook, out var sheet))
+            {
+                addMode.Add(Result<T>.CreateFail("Faild to read sheet.", 0));
+                return addMode;
+            }
 
             var success = _importer.ReadHeader(sheet);
             if (!success)
             {
-                Console.WriteLine("Failed to load title.");
-                Console.ReadLine();
-                return new List<Result<T>>();
+                var result = Result<T>.CreateFail("Failed to load title.", 0);
+                addMode.Add(result);
+                return addMode;
             }
 
-            var addMode = new List<Result<T>>();
             for (var i = 1; i <= sheet.LastRowNum; i++)
             {
                 IRow row = sheet.GetRow(i);
@@ -54,20 +58,20 @@ namespace TestTask.Core.Import
             return addMode;
         }
 
-        private ISheet GetSheet(XSSFWorkbook workbook)
+        private bool GetSheet(XSSFWorkbook workbook, out ISheet sheet)
         {
-            var numberSheet = 0;
             for (var i = 0; i < workbook.NumberOfSheets; i++)
             {
                 var sheetName = workbook.GetSheetName(i);
                 if (_importer.IsModelSheet(sheetName))
                 {
-                    numberSheet = i;
-                    break;
+                    sheet = workbook.GetSheetAt(i);
+                    return true;
                 }
             }
 
-            return workbook.GetSheetAt(numberSheet);
+            sheet = null;
+            return false;
         }
     }
 }

@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TestTask.Core.Extension
 {
     public static class ResultMessageErrorExtension
     {
+        private const int NumberErrorNotRow = 0;
         private const int MaxErrorLine = 10;
         private const string FirstMessage = "Errors when importing data:";
 
@@ -16,6 +18,12 @@ namespace TestTask.Core.Extension
             {
                 if (!item.Success)
                 {
+                    if (item.Row == NumberErrorNotRow)
+                    {
+                        errorsStr.Add(item.Error);
+                        continue;
+                    }
+
                     errorsStr.Add(item.ToString());
                 }
 
@@ -30,8 +38,8 @@ namespace TestTask.Core.Extension
                 return true;
             }
 
-            var errorLine = string.Join("\n", errorsStr);
-            message = string.Format("{0}\n{1}", FirstMessage, errorLine);
+            var errorLine = string.Join(Environment.NewLine, errorsStr);
+            message = string.Format("{0}{1}{2}", FirstMessage, Environment.NewLine, errorLine);
             return false;
         }
     }

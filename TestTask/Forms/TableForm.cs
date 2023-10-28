@@ -250,7 +250,7 @@ namespace TestTask.Forms
 
                     if (!modeRead.IsNoErrorLine(out var message))
                     {
-                        _messageBox.ShowWarning(message);
+                        _messageBox.ShowWarning(message, Mode);
                     }
                 }
 
@@ -270,7 +270,7 @@ namespace TestTask.Forms
 
                     if (!stepRead.IsNoErrorLine(out var message))
                     {
-                        _messageBox.ShowWarning(message);
+                        _messageBox.ShowWarning(message, Step);
                     }
                 }
             }
