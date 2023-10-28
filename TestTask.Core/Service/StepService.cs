@@ -87,6 +87,6 @@ namespace TestTask.Core.Service
             Update(step);
         }
 
-        public List<Step> GetAllItems() => _dbContext.Steps.Count() > 0 ? _dbContext.Steps.ToList() : null;
+        public List<Step> GetAll() => _dbContext.Steps.Count() > 0 ? _dbContext.Steps.ToList() : null;
     }
 }

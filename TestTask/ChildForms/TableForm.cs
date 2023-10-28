@@ -278,11 +278,13 @@ namespace TestTask.ChildForms
 
         private void TsmItemSaveExcel_Click(object sender, EventArgs e)
         {
-            ModeSheetFiller modeSheetFiller = new ModeSheetFiller(_modeService);
+            var modeSheetFiller = new ModeSheetFiller(_modeService);
+            var stepSheetFiller = new StepSheetFiller(_stepService);
 
             var fillers = new ISheetFiller[]
             {
                 modeSheetFiller,
+                stepSheetFiller,
             };
 
             var writeExcel = new ExcelExporter(fillers);
@@ -309,7 +311,7 @@ namespace TestTask.ChildForms
 
         private void LoadDataGridStep()
         {
-            var items = _stepService.GetAllItems();
+            var items = _stepService.GetAll();
 
             ClearGridStep();
 

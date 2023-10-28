@@ -148,6 +148,7 @@
     <Compile Include="Db\DbContextFactory.cs" />
     <Compile Include="Enum\ModeField.cs" />
     <Compile Include="Enum\StepField.cs" />
+    <Compile Include="ExportDB\SheetFillers\StepSheetFiller.cs" />
     <Compile Include="Extension\ReadExtension\ReadHeadExtension.cs" />
     <Compile Include="Extension\ReadExtension\ReadItemExtension.cs" />
     <Compile Include="Extension\ResultMessageErrorExtension.cs" />
