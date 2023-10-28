@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using TestTask.Core.Service.Components;
+using TestTask.Core;
 
 namespace TestTask.Message
 {

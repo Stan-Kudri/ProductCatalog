@@ -1,8 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Windows.Forms;
-using TestTask.Core.Db;
-using TestTask.Core.Service;
+using TestTask.Core;
+using TestTask.Core.Models.Modes;
+using TestTask.Core.Models.Steeps;
+using TestTask.Core.Models.Users;
+using TestTask.Forms;
 using TestTask.Message;
 
 namespace TestTask

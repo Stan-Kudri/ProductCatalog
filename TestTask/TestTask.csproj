@@ -165,77 +165,83 @@
     <Compile Include="BindingItem\UserBinding\StepBinding\SelectMode.cs" />
     <Compile Include="BindingItem\UserBinding\StepBinding\StepModel.cs" />
     <Compile Include="BindingItem\UserBinding\UserModel.cs" />
-    <Compile Include="ChildForms\Import\ImportDatabaseForm.cs">
+    <Compile Include="Forms\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildForms\Import\ImportDatabaseForm.Designer.cs">
+    <Compile Include="Forms\BaseForm.Designer.cs">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Import\ImportDatabaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Import\ImportDatabaseForm.Designer.cs">
       <DependentUpon>ImportDatabaseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChildForms\ModeForm\AddItemModeForm.cs">
+    <Compile Include="Forms\ModeForm\AddItemModeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildForms\ModeForm\ModeFormBase.cs">
+    <Compile Include="Forms\ModeForm\ModeFormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildForms\ModeForm\ModeFormBase.Designer.cs">
+    <Compile Include="Forms\ModeForm\ModeFormBase.Designer.cs">
       <DependentUpon>ModeFormBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChildForms\ModeForm\EditItemModeForm.cs">
+    <Compile Include="Forms\ModeForm\EditItemModeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildForms\RegistrationForm.cs">
+    <Compile Include="Forms\RegistrationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildForms\RegistrationForm.Designer.cs">
+    <Compile Include="Forms\RegistrationForm.Designer.cs">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChildForms\StepForm\AddItemStepForm.cs">
+    <Compile Include="Forms\StepForm\AddItemStepForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildForms\StepForm\EditItemStepForm.cs">
+    <Compile Include="Forms\StepForm\EditItemStepForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildForms\StepForm\StepFormBase.cs">
+    <Compile Include="Forms\StepForm\StepFormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildForms\StepForm\StepFormBase.Designer.cs">
+    <Compile Include="Forms\StepForm\StepFormBase.Designer.cs">
       <DependentUpon>StepFormBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChildForms\TableForm.cs">
+    <Compile Include="Forms\TableForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildForms\TableForm.Designer.cs">
+    <Compile Include="Forms\TableForm.Designer.cs">
       <DependentUpon>TableForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Extension\GridItemExtension.cs" />
     <Compile Include="Extension\ParseExtension.cs" />
     <Compile Include="Extension\RemoveItemDGVExtension.cs" />
     <Compile Include="Extension\SelectedItemDGVExtension.cs" />
-    <Compile Include="LoginForm.cs">
+    <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
+    <Compile Include="Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Message\MessageBoxShow.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ChildForms\Import\ImportDatabaseForm.resx">
+    <EmbeddedResource Include="Forms\Import\ImportDatabaseForm.resx">
       <DependentUpon>ImportDatabaseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChildForms\ModeForm\ModeFormBase.resx">
+    <EmbeddedResource Include="Forms\ModeForm\ModeFormBase.resx">
       <DependentUpon>ModeFormBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChildForms\RegistrationForm.resx">
+    <EmbeddedResource Include="Forms\RegistrationForm.resx">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChildForms\StepForm\StepFormBase.resx">
+    <EmbeddedResource Include="Forms\StepForm\StepFormBase.resx">
       <DependentUpon>StepFormBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChildForms\TableForm.resx">
+    <EmbeddedResource Include="Forms\TableForm.resx">
       <DependentUpon>TableForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
+    <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

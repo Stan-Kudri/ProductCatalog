@@ -1,4 +1,4 @@
-﻿using TestTask.Core.Components;
+﻿using TestTask.Core.Models.Users;
 
 namespace TestTask.BindingItem
 {

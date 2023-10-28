@@ -1,6 +1,6 @@
 ﻿using System;
-using TestTask.Core.Components;
-using TestTask.Core.Components.ItemsTables;
+using TestTask.Core.Models.Modes;
+using TestTask.Core.Models.Steeps;
 
 namespace TestTask.BindingItem.UserBinding
 {
