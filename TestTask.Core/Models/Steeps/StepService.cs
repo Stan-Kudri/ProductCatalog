@@ -86,5 +86,7 @@ namespace TestTask.Core.Models.Steeps
         }
 
         public List<Step> GetAll() => _dbContext.Steps.Count() > 0 ? _dbContext.Steps.ToList() : null;
+
+        public IQueryable<Step> GetSteps() => _dbContext.Steps.Select(e => e);
     }
 }

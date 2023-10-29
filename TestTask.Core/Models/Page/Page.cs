@@ -4,6 +4,9 @@ namespace TestTask.Core.Models.Page
 {
     public class Page
     {
+        public const int StartNumberPage = 15;
+        public const int StartSizePage = 1;
+
         private int _number;
         private int _size;
 

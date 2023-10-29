@@ -144,6 +144,7 @@
     <Compile Include="Models\IService.cs" />
     <Compile Include="Models\Modes\Mode.cs" />
     <Compile Include="Models\Page\Page.cs" />
+    <Compile Include="Models\Page\PagedList.cs" />
     <Compile Include="Models\Steeps\Step.cs" />
     <Compile Include="Models\Users\User.cs" />
     <Compile Include="AppDbContext.cs" />

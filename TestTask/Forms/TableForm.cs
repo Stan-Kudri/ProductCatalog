@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using TestTask.BindingItem.UserBinding;
 using TestTask.ChildForms.Import;
 using TestTask.Core;
 using TestTask.Core.Export;
@@ -10,6 +11,7 @@ using TestTask.Core.Extension;
 using TestTask.Core.Import;
 using TestTask.Core.Import.Importers;
 using TestTask.Core.Models.Modes;
+using TestTask.Core.Models.Page;
 using TestTask.Core.Models.Steeps;
 using TestTask.Extension;
 using TestTask.Forms.ModeForm;
@@ -46,14 +48,18 @@ namespace TestTask.Forms
         private readonly StepService _stepService;
         private readonly IMessageBox _messageBox;
 
+        private PagedList<Step> _pagedListStep;
+
         public TableForm(ModeService modeService, StepService stepService, IMessageBox messageBox)
         {
             InitializeComponent();
             _modeService = modeService;
             _stepService = stepService;
             _messageBox = messageBox;
+            _pagedListStep = new PagedList<Step>(_stepService.GetSteps());
         }
 
+        public PageModel PageStep { get; set; } = new PageModel();
 
         private void BtnAddMode_Click(object sender, EventArgs e)
         {
@@ -115,6 +121,7 @@ namespace TestTask.Forms
             }
 
             RemoveItemRowListViewMode();
+            LoadDataStep();
         }
 
         private void BtnAddStep_Click(object sender, EventArgs e)
@@ -136,7 +143,7 @@ namespace TestTask.Forms
 
                 var item = addFormStep.GetStepModel().ToStep();
                 _stepService.Add(item);
-                AddStepInListView(item);
+                LoadDataStep();
             }
         }
 
@@ -185,6 +192,7 @@ namespace TestTask.Forms
             }
 
             listViewSteps.Remove(_stepService);
+            LoadDataStep();
         }
 
         private void TsmImportFromExcel_Click(object sender, EventArgs e)
@@ -247,7 +255,7 @@ namespace TestTask.Forms
                         }
                     }
 
-                    LoadListViewStep();
+                    LoadDataStep();
 
                     if (!stepRead.IsNoErrorLine(out var message))
                     {
@@ -284,14 +292,63 @@ namespace TestTask.Forms
 
         private void TsmItemClose_Click(object sender, EventArgs e) => Close();
 
-        private void TableForm_Load(object sender, EventArgs e) => UpdateAllGrids();
+        private void TableForm_Load(object sender, EventArgs e)
+        {
+            UpdateAllGrids();
+            cmbPageSizeSteps.DataSource = PageStep.Items;
+        }
 
         private void TableForm_FormClosing(object sender, FormClosingEventArgs e) => DialogResult = DialogResult.Cancel;
+
+        private void CmbPageSizeSteps_Changed(object sender, EventArgs e)
+        {
+            var pageSizeCmb = PageStep.Items[cmbPageSizeSteps.SelectedIndex];
+
+            if (PageStep.ChangedPage(pageSizeCmb))
+            {
+                PageStep.Size = pageSizeCmb;
+                PageStep.Number = 1;
+                LoadDataStep();
+            }
+        }
+
+        private void TextBoxCurrentPageStep_TextChanged(object sender, EventArgs e)
+        {
+            if (!int.TryParse(textBoxCurrentPageStep.Text, out var pageNumber)
+                || pageNumber > _pagedListStep.PageCount
+                || _pagedListStep.PageNumber != PageStep.Number)
+            {
+                textBoxCurrentPageStep.Text = _pagedListStep.PageNumber.ToString();
+                return;
+            }
+
+            PageStep.Number = pageNumber;
+            LoadDataStep();
+        }
+
+        private void LoadDataStep()
+        {
+            _pagedListStep = _stepService.GetSteps().GetPagedList(PageStep.GetPage());
+            if (IsNotFirstPageStepsEmpty())
+            {
+                PageStep.Number -= 1;
+                LoadDataStep();
+            }
+
+            var item = _pagedListStep.Items;
+
+            listViewSteps.Items.Clear();
+            FillListViewStep(item);
+            CustomUpdateFormState();
+
+            labelTotalPageStep.Text = labelTotalPageStep.Text = string.Format("/{0}", Math.Max(_pagedListStep.PageCount, 1));
+            textBoxCurrentPageStep.Text = _pagedListStep.PageNumber.ToString();
+        }
 
         private void UpdateAllGrids()
         {
             LoadListViewMode();
-            LoadListViewStep();
+            LoadDataStep();
         }
 
         private void LoadListViewMode()
@@ -305,17 +362,6 @@ namespace TestTask.Forms
                 FillListViewMode(item);
             }
 
-        }
-
-        private void LoadListViewStep()
-        {
-            var item = _stepService.GetAll();
-
-            ClearListViewStep();
-            if (item != null)
-            {
-                FillListViewStep(item);
-            }
         }
 
         private Mode GetMode(int indexRow)
@@ -419,22 +465,8 @@ namespace TestTask.Forms
                 if (item.Selected)
                 {
                     var id = CellElement(item, IndexId).ParseInt();
-                    RemoveStepRelatedToMode(id);
+                    _stepService.RemoveStepRelatedToMode(id);
                     _modeService.Remove(id);
-                    item.Remove();
-                    i--;
-                }
-            }
-        }
-
-        private void RemoveStepRelatedToMode(int idMode)
-        {
-            for (var i = 0; i < listViewSteps.Items.Count; i++)
-            {
-                var item = listViewSteps.Items[i];
-                var idModeInSteps = CellElement(item, IndexColumnModeId).ParseInt();
-                if (idModeInSteps == idMode)
-                {
                     item.Remove();
                     i--;
                 }
@@ -443,6 +475,55 @@ namespace TestTask.Forms
 
         private void ClearListViewMode() => listViewModes.Items.Clear();
 
-        private void ClearListViewStep() => listViewSteps.Items.Clear();
+        private void CustomUpdateFormState()
+        {
+            var hasPageControl = _pagedListStep.PageCount > 0 ? true : false;
+
+            btnFirstPageSteps.Enabled =
+                btnLastPageSteps.Enabled =
+                    btnNextPageSteps.Enabled =
+                        btnBackPageSteps.Enabled =
+                            labelTotalPageStep.Enabled =
+                                textBoxCurrentPageStep.Enabled =
+                                    hasPageControl;
+        }
+
+        private void BtnBackPageSteps_Click(object sender, EventArgs e)
+        {
+            if (_pagedListStep.HasPrevious)
+            {
+                PageStep.Number--;
+                LoadDataStep();
+            }
+        }
+
+        private void BtnNextPageSteps_Click(object sender, EventArgs e)
+        {
+            if (_pagedListStep.HasNext)
+            {
+                PageStep.Number++;
+                LoadDataStep();
+            }
+        }
+
+        private void BtnFirstPageSteps_Click(object sender, EventArgs e)
+        {
+            if (_pagedListStep.HasPrevious)
+            {
+                PageStep.Number = 1;
+                LoadDataStep();
+            }
+        }
+
+        private void BtnLastPageSteps_Click(object sender, EventArgs e)
+        {
+            if (_pagedListStep.HasNext)
+            {
+                PageStep.Number = _pagedListStep.PageCount;
+                LoadDataStep();
+            }
+        }
+
+        private bool IsNotFirstPageStepsEmpty() => _pagedListStep.Count == 0 && PageStep.Number != 1;
     }
 }

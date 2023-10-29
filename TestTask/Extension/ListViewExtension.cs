@@ -23,8 +23,6 @@ namespace TestTask.Extension
                 {
                     var id = GetString(rowItem, IndexId).ParseInt();
                     service.Remove(id);
-                    rowItem.Remove();
-                    i--;
                 }
             }
         }
