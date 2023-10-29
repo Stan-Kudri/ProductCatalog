@@ -162,10 +162,12 @@
   <ItemGroup>
     <Compile Include="BindingItem\ModelBase.cs" />
     <Compile Include="BindingItem\UserBinding\ModeModel.cs" />
+    <Compile Include="BindingItem\UserBinding\PageModel.cs" />
     <Compile Include="BindingItem\UserBinding\StepBinding\SelectMode.cs" />
     <Compile Include="BindingItem\UserBinding\StepBinding\StepModel.cs" />
     <Compile Include="BindingItem\UserBinding\UserModel.cs" />
     <Compile Include="Extension\ListViewExtension.cs" />
+    <Compile Include="Extension\PageExtension.cs" />
     <Compile Include="Forms\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -254,6 +256,7 @@
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.ModeModel.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.PageModel.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.StepBinding.SelectMode.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.StepMode.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserModel.datasource" />
