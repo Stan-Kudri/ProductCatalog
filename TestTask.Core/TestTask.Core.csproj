@@ -141,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Entity.cs" />
+    <Compile Include="Models\IService.cs" />
     <Compile Include="Models\Modes\Mode.cs" />
     <Compile Include="Models\Steeps\Step.cs" />
     <Compile Include="Models\Users\User.cs" />

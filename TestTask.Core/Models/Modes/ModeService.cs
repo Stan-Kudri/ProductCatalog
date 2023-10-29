@@ -4,40 +4,40 @@ using System.Linq;
 
 namespace TestTask.Core.Models.Modes
 {
-    public class ModeService
+    public class ModeService : IService<Mode>
     {
         private readonly AppDbContext _dbContext;
 
         public ModeService(AppDbContext appDbContext) => _dbContext = appDbContext;
 
-        public void Add(Mode mode)
+        public void Add(Mode item)
         {
-            if (mode == null)
+            if (item == null)
             {
-                throw new ArgumentException("The received parameters are not correct.", nameof(mode));
+                throw new ArgumentException("The received parameters are not correct.", nameof(item));
             }
 
-            if (_dbContext.Modes.Any(e => e.Id == mode.Id))
+            if (_dbContext.Modes.Any(e => e.Id == item.Id))
             {
                 throw new ArgumentException("This mode exists.");
             }
 
-            _dbContext.Modes.Add(mode);
+            _dbContext.Modes.Add(item);
             _dbContext.SaveChanges();
         }
 
-        public void Update(Mode mode)
+        public void Update(Mode item)
         {
-            if (mode == null)
+            if (item == null)
             {
-                throw new ArgumentNullException("The format of the transmitted data is incorrect.", nameof(mode));
+                throw new ArgumentNullException("The format of the transmitted data is incorrect.", nameof(item));
             }
 
-            var item = _dbContext.Modes.FirstOrDefault(e => e.Id == mode.Id) ?? throw new InvalidOperationException("Interaction element not found.");
+            var oldItem = _dbContext.Modes.FirstOrDefault(e => e.Id == item.Id) ?? throw new InvalidOperationException("Interaction element not found.");
 
-            item.Name = mode.Name;
-            item.MaxBottleNumber = mode.MaxBottleNumber;
-            item.MaxUsedTips = mode.MaxUsedTips;
+            oldItem.Name = item.Name;
+            oldItem.MaxBottleNumber = item.MaxBottleNumber;
+            oldItem.MaxUsedTips = item.MaxUsedTips;
 
             _dbContext.SaveChanges();
         }
@@ -61,5 +61,7 @@ namespace TestTask.Core.Models.Modes
         }
 
         public List<Mode> GetAll() => _dbContext.Modes.Count() > 0 ? _dbContext.Modes.ToList() : null;
+
+        public IQueryable<Mode> GetModes() => _dbContext.Modes.Select(e => e);
     }
 }

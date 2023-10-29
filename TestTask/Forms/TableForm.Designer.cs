@@ -31,39 +31,23 @@ namespace TestTask.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle89 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle90 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle91 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle92 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TableForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.tcData = new System.Windows.Forms.TabControl();
-            this.tabPageModes = new System.Windows.Forms.TabPage();
-            this.dgvModes = new System.Windows.Forms.DataGridView();
+            this.IdMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaxBottleNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaxUsedTips = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpModesButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnDeleteMode = new System.Windows.Forms.Button();
             this.btnEditMode = new System.Windows.Forms.Button();
             this.btnAddMode = new System.Windows.Forms.Button();
-            this.tabPageSteps = new System.Windows.Forms.TabPage();
             this.tlpStepsButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnDeleteStep = new System.Windows.Forms.Button();
             this.btnAddStep = new System.Windows.Forms.Button();
             this.btnEditStep = new System.Windows.Forms.Button();
-            this.dgvSteps = new System.Windows.Forms.DataGridView();
-            this.IdStep = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ModeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Timer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Destination = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Speed = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.tsmItemFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmItemImport = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,90 +56,76 @@ namespace TestTask.Forms
             this.tsmSaveToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmItemClose = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.IdMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaxBottleNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaxUsedTips = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tcData.SuspendLayout();
-            this.tabPageModes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvModes)).BeginInit();
+            this.materialTabSelector = new MaterialSkin.Controls.MaterialTabSelector();
+            this.materialTabControl = new MaterialSkin.Controls.MaterialTabControl();
+            this.tabPageModes = new System.Windows.Forms.TabPage();
+            this.tlpModesList = new System.Windows.Forms.TableLayoutPanel();
+            this.listViewModes = new MaterialSkin.Controls.MaterialListView();
+            this.columnIDModes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnNameModes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnMaxBottleNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnMaxUsedTips = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabPageStep = new System.Windows.Forms.TabPage();
+            this.tlpListStep = new System.Windows.Forms.TableLayoutPanel();
+            this.listViewSteps = new MaterialSkin.Controls.MaterialListView();
+            this.columnIDStep = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnModeId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnTimer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnDestination = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnSpeed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnVolume = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tlpModesButton.SuspendLayout();
-            this.tabPageSteps.SuspendLayout();
             this.tlpStepsButton.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSteps)).BeginInit();
             this.menuStrip.SuspendLayout();
+            this.materialTabControl.SuspendLayout();
+            this.tabPageModes.SuspendLayout();
+            this.tlpModesList.SuspendLayout();
+            this.tabPageStep.SuspendLayout();
+            this.tlpListStep.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tcData
+            // IdMode
             // 
-            this.tcData.Controls.Add(this.tabPageModes);
-            this.tcData.Controls.Add(this.tabPageSteps);
-            this.tcData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tcData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tcData.Location = new System.Drawing.Point(3, 88);
-            this.tcData.Name = "tcData";
-            this.tcData.SelectedIndex = 0;
-            this.tcData.Size = new System.Drawing.Size(846, 512);
-            this.tcData.TabIndex = 0;
+            dataGridViewCellStyle89.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.IdMode.DefaultCellStyle = dataGridViewCellStyle89;
+            this.IdMode.HeaderText = "    ID";
+            this.IdMode.MinimumWidth = 30;
+            this.IdMode.Name = "IdMode";
+            this.IdMode.ReadOnly = true;
+            this.IdMode.Width = 169;
             // 
-            // tabPageModes
+            // NameMode
             // 
-            this.tabPageModes.Controls.Add(this.dgvModes);
-            this.tabPageModes.Controls.Add(this.tlpModesButton);
-            this.tabPageModes.Location = new System.Drawing.Point(4, 25);
-            this.tabPageModes.Name = "tabPageModes";
-            this.tabPageModes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageModes.Size = new System.Drawing.Size(838, 483);
-            this.tabPageModes.TabIndex = 0;
-            this.tabPageModes.Text = "Modes";
-            this.tabPageModes.UseVisualStyleBackColor = true;
+            dataGridViewCellStyle90.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.NameMode.DefaultCellStyle = dataGridViewCellStyle90;
+            this.NameMode.FillWeight = 120F;
+            this.NameMode.HeaderText = "    Name";
+            this.NameMode.MinimumWidth = 250;
+            this.NameMode.Name = "NameMode";
+            this.NameMode.ReadOnly = true;
+            this.NameMode.Width = 250;
             // 
-            // dgvModes
+            // MaxBottleNumber
             // 
-            this.dgvModes.AllowUserToAddRows = false;
-            this.dgvModes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvModes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvModes.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvModes.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvModes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvModes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.WindowFrame;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvModes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
-            this.dgvModes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvModes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IdMode,
-            this.NameMode,
-            this.MaxBottleNumber,
-            this.MaxUsedTips});
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.WindowFrame;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvModes.DefaultCellStyle = dataGridViewCellStyle18;
-            this.dgvModes.GridColor = System.Drawing.Color.White;
-            this.dgvModes.Location = new System.Drawing.Point(3, 3);
-            this.dgvModes.Name = "dgvModes";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvModes.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
-            this.dgvModes.Size = new System.Drawing.Size(832, 444);
-            this.dgvModes.TabIndex = 4;
+            dataGridViewCellStyle91.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.MaxBottleNumber.DefaultCellStyle = dataGridViewCellStyle91;
+            this.MaxBottleNumber.FillWeight = 120F;
+            this.MaxBottleNumber.HeaderText = "    MaxBottleNumber";
+            this.MaxBottleNumber.MinimumWidth = 60;
+            this.MaxBottleNumber.Name = "MaxBottleNumber";
+            this.MaxBottleNumber.ReadOnly = true;
+            this.MaxBottleNumber.Width = 203;
+            // 
+            // MaxUsedTips
+            // 
+            dataGridViewCellStyle92.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.MaxUsedTips.DefaultCellStyle = dataGridViewCellStyle92;
+            this.MaxUsedTips.HeaderText = "    MaxUsedTips";
+            this.MaxUsedTips.MinimumWidth = 40;
+            this.MaxUsedTips.Name = "MaxUsedTips";
+            this.MaxUsedTips.ReadOnly = true;
+            this.MaxUsedTips.Width = 169;
             // 
             // tlpModesButton
             // 
@@ -169,7 +139,7 @@ namespace TestTask.Forms
             this.tlpModesButton.Controls.Add(this.btnEditMode, 1, 0);
             this.tlpModesButton.Controls.Add(this.btnAddMode, 0, 0);
             this.tlpModesButton.ForeColor = System.Drawing.Color.Transparent;
-            this.tlpModesButton.Location = new System.Drawing.Point(740, 451);
+            this.tlpModesButton.Location = new System.Drawing.Point(648, 309);
             this.tlpModesButton.Margin = new System.Windows.Forms.Padding(1);
             this.tlpModesButton.MinimumSize = new System.Drawing.Size(95, 29);
             this.tlpModesButton.Name = "tlpModesButton";
@@ -235,18 +205,6 @@ namespace TestTask.Forms
             this.btnAddMode.UseVisualStyleBackColor = false;
             this.btnAddMode.Click += new System.EventHandler(this.BtnAddMode_Click);
             // 
-            // tabPageSteps
-            // 
-            this.tabPageSteps.Controls.Add(this.tlpStepsButton);
-            this.tabPageSteps.Controls.Add(this.dgvSteps);
-            this.tabPageSteps.Location = new System.Drawing.Point(4, 25);
-            this.tabPageSteps.Name = "tabPageSteps";
-            this.tabPageSteps.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSteps.Size = new System.Drawing.Size(838, 483);
-            this.tabPageSteps.TabIndex = 1;
-            this.tabPageSteps.Text = "Steps";
-            this.tabPageSteps.UseVisualStyleBackColor = true;
-            // 
             // tlpStepsButton
             // 
             this.tlpStepsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -259,7 +217,7 @@ namespace TestTask.Forms
             this.tlpStepsButton.Controls.Add(this.btnAddStep, 0, 0);
             this.tlpStepsButton.Controls.Add(this.btnEditStep, 1, 0);
             this.tlpStepsButton.ForeColor = System.Drawing.Color.Transparent;
-            this.tlpStepsButton.Location = new System.Drawing.Point(740, 453);
+            this.tlpStepsButton.Location = new System.Drawing.Point(648, 309);
             this.tlpStepsButton.Margin = new System.Windows.Forms.Padding(1);
             this.tlpStepsButton.MinimumSize = new System.Drawing.Size(95, 29);
             this.tlpStepsButton.Name = "tlpStepsButton";
@@ -319,120 +277,13 @@ namespace TestTask.Forms
             this.btnEditStep.UseVisualStyleBackColor = true;
             this.btnEditStep.Click += new System.EventHandler(this.BtnEditStep_Click);
             // 
-            // dgvSteps
-            // 
-            this.dgvSteps.AllowUserToAddRows = false;
-            this.dgvSteps.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvSteps.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvSteps.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvSteps.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.WindowFrame;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvSteps.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle20;
-            this.dgvSteps.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSteps.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IdStep,
-            this.ModeId,
-            this.Timer,
-            this.Destination,
-            this.Speed,
-            this.Type,
-            this.Volume});
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvSteps.DefaultCellStyle = dataGridViewCellStyle22;
-            this.dgvSteps.GridColor = System.Drawing.Color.White;
-            this.dgvSteps.Location = new System.Drawing.Point(3, 3);
-            this.dgvSteps.Name = "dgvSteps";
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvSteps.RowHeadersDefaultCellStyle = dataGridViewCellStyle23;
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgvSteps.RowsDefaultCellStyle = dataGridViewCellStyle24;
-            this.dgvSteps.Size = new System.Drawing.Size(832, 446);
-            this.dgvSteps.TabIndex = 0;
-            // 
-            // IdStep
-            // 
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.IdStep.DefaultCellStyle = dataGridViewCellStyle21;
-            this.IdStep.FillWeight = 70F;
-            this.IdStep.HeaderText = "    ID";
-            this.IdStep.MinimumWidth = 50;
-            this.IdStep.Name = "IdStep";
-            this.IdStep.ReadOnly = true;
-            // 
-            // ModeId
-            // 
-            this.ModeId.FillWeight = 90F;
-            this.ModeId.HeaderText = "    ModeId";
-            this.ModeId.MinimumWidth = 60;
-            this.ModeId.Name = "ModeId";
-            this.ModeId.ReadOnly = true;
-            // 
-            // Timer
-            // 
-            this.Timer.FillWeight = 80F;
-            this.Timer.HeaderText = "    Timer";
-            this.Timer.MinimumWidth = 70;
-            this.Timer.Name = "Timer";
-            this.Timer.ReadOnly = true;
-            // 
-            // Destination
-            // 
-            this.Destination.FillWeight = 180F;
-            this.Destination.HeaderText = "    Destination";
-            this.Destination.MinimumWidth = 160;
-            this.Destination.Name = "Destination";
-            this.Destination.ReadOnly = true;
-            // 
-            // Speed
-            // 
-            this.Speed.FillWeight = 9.885016F;
-            this.Speed.HeaderText = "    Speed";
-            this.Speed.MinimumWidth = 100;
-            this.Speed.Name = "Speed";
-            this.Speed.ReadOnly = true;
-            // 
-            // Type
-            // 
-            this.Type.HeaderText = "    Type";
-            this.Type.MinimumWidth = 120;
-            this.Type.Name = "Type";
-            this.Type.ReadOnly = true;
-            // 
-            // Volume
-            // 
-            this.Volume.FillWeight = 90F;
-            this.Volume.HeaderText = "    Volume";
-            this.Volume.MinimumWidth = 70;
-            this.Volume.Name = "Volume";
-            this.Volume.ReadOnly = true;
-            // 
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmItemFile});
             this.menuStrip.Location = new System.Drawing.Point(3, 64);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(846, 24);
+            this.menuStrip.Size = new System.Drawing.Size(774, 24);
             this.menuStrip.TabIndex = 3;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -483,81 +334,238 @@ namespace TestTask.Forms
             this.tsmItemClose.Text = "Close";
             this.tsmItemClose.Click += new System.EventHandler(this.TsmItemClose_Click);
             // 
-            // IdMode
+            // materialTabSelector
             // 
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.IdMode.DefaultCellStyle = dataGridViewCellStyle14;
-            this.IdMode.HeaderText = "    ID";
-            this.IdMode.MinimumWidth = 30;
-            this.IdMode.Name = "IdMode";
-            this.IdMode.ReadOnly = true;
+            this.materialTabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.materialTabSelector.BaseTabControl = this.materialTabControl;
+            this.materialTabSelector.CharacterCasing = MaterialSkin.Controls.MaterialTabSelector.CustomCharacterCasing.Normal;
+            this.materialTabSelector.Depth = 0;
+            this.materialTabSelector.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialTabSelector.Location = new System.Drawing.Point(5, 90);
+            this.materialTabSelector.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialTabSelector.Name = "materialTabSelector";
+            this.materialTabSelector.Size = new System.Drawing.Size(770, 48);
+            this.materialTabSelector.TabIndex = 6;
+            this.materialTabSelector.Text = "TabSelector";
             // 
-            // NameMode
+            // materialTabControl
             // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.NameMode.DefaultCellStyle = dataGridViewCellStyle15;
-            this.NameMode.FillWeight = 120F;
-            this.NameMode.HeaderText = "    Name";
-            this.NameMode.MinimumWidth = 250;
-            this.NameMode.Name = "NameMode";
-            this.NameMode.ReadOnly = true;
+            this.materialTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.materialTabControl.Controls.Add(this.tabPageModes);
+            this.materialTabControl.Controls.Add(this.tabPageStep);
+            this.materialTabControl.Depth = 0;
+            this.materialTabControl.Location = new System.Drawing.Point(8, 144);
+            this.materialTabControl.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialTabControl.Multiline = true;
+            this.materialTabControl.Name = "materialTabControl";
+            this.materialTabControl.SelectedIndex = 0;
+            this.materialTabControl.Size = new System.Drawing.Size(766, 370);
+            this.materialTabControl.TabIndex = 5;
             // 
-            // MaxBottleNumber
+            // tabPageModes
             // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.MaxBottleNumber.DefaultCellStyle = dataGridViewCellStyle16;
-            this.MaxBottleNumber.FillWeight = 120F;
-            this.MaxBottleNumber.HeaderText = "    MaxBottleNumber";
-            this.MaxBottleNumber.MinimumWidth = 60;
-            this.MaxBottleNumber.Name = "MaxBottleNumber";
-            this.MaxBottleNumber.ReadOnly = true;
+            this.tabPageModes.Controls.Add(this.tlpModesList);
+            this.tabPageModes.Controls.Add(this.tlpModesButton);
+            this.tabPageModes.Location = new System.Drawing.Point(4, 22);
+            this.tabPageModes.Name = "tabPageModes";
+            this.tabPageModes.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageModes.Size = new System.Drawing.Size(758, 344);
+            this.tabPageModes.TabIndex = 0;
+            this.tabPageModes.Text = "Modes";
+            this.tabPageModes.UseVisualStyleBackColor = true;
             // 
-            // MaxUsedTips
+            // tlpModesList
             // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.MaxUsedTips.DefaultCellStyle = dataGridViewCellStyle17;
-            this.MaxUsedTips.HeaderText = "    MaxUsedTips";
-            this.MaxUsedTips.MinimumWidth = 40;
-            this.MaxUsedTips.Name = "MaxUsedTips";
-            this.MaxUsedTips.ReadOnly = true;
+            this.tlpModesList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpModesList.ColumnCount = 1;
+            this.tlpModesList.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpModesList.Controls.Add(this.listViewModes, 0, 0);
+            this.tlpModesList.Location = new System.Drawing.Point(0, 0);
+            this.tlpModesList.Name = "tlpModesList";
+            this.tlpModesList.RowCount = 1;
+            this.tlpModesList.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpModesList.Size = new System.Drawing.Size(755, 305);
+            this.tlpModesList.TabIndex = 6;
+            // 
+            // listViewModes
+            // 
+            this.listViewModes.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
+            this.listViewModes.AutoSizeTable = false;
+            this.listViewModes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.listViewModes.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listViewModes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnIDModes,
+            this.columnNameModes,
+            this.columnMaxBottleNumber,
+            this.columnMaxUsedTips});
+            this.listViewModes.Depth = 0;
+            this.listViewModes.FullRowSelect = true;
+            this.listViewModes.HideSelection = false;
+            this.listViewModes.Location = new System.Drawing.Point(3, 3);
+            this.listViewModes.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.listViewModes.MouseState = MaterialSkin.MouseState.OUT;
+            this.listViewModes.Name = "listViewModes";
+            this.listViewModes.OwnerDraw = true;
+            this.listViewModes.Size = new System.Drawing.Size(740, 299);
+            this.listViewModes.TabIndex = 5;
+            this.listViewModes.UseCompatibleStateImageBehavior = false;
+            this.listViewModes.View = System.Windows.Forms.View.Details;
+            // 
+            // columnIDModes
+            // 
+            this.columnIDModes.Text = "ID";
+            this.columnIDModes.Width = 80;
+            // 
+            // columnNameModes
+            // 
+            this.columnNameModes.Text = "Name";
+            this.columnNameModes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnNameModes.Width = 300;
+            // 
+            // columnMaxBottleNumber
+            // 
+            this.columnMaxBottleNumber.Text = "MaxBottleNumber";
+            this.columnMaxBottleNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnMaxBottleNumber.Width = 180;
+            // 
+            // columnMaxUsedTips
+            // 
+            this.columnMaxUsedTips.Text = "MaxUsedTips";
+            this.columnMaxUsedTips.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnMaxUsedTips.Width = 180;
+            // 
+            // tabPageStep
+            // 
+            this.tabPageStep.Controls.Add(this.tlpListStep);
+            this.tabPageStep.Controls.Add(this.tlpStepsButton);
+            this.tabPageStep.Location = new System.Drawing.Point(4, 22);
+            this.tabPageStep.Name = "tabPageStep";
+            this.tabPageStep.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageStep.Size = new System.Drawing.Size(758, 344);
+            this.tabPageStep.TabIndex = 1;
+            this.tabPageStep.Text = "Steps";
+            this.tabPageStep.UseVisualStyleBackColor = true;
+            // 
+            // tlpListStep
+            // 
+            this.tlpListStep.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpListStep.ColumnCount = 1;
+            this.tlpListStep.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpListStep.Controls.Add(this.listViewSteps, 0, 0);
+            this.tlpListStep.Location = new System.Drawing.Point(0, 0);
+            this.tlpListStep.Name = "tlpListStep";
+            this.tlpListStep.RowCount = 1;
+            this.tlpListStep.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpListStep.Size = new System.Drawing.Size(755, 305);
+            this.tlpListStep.TabIndex = 7;
+            // 
+            // listViewSteps
+            // 
+            this.listViewSteps.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
+            this.listViewSteps.AutoSizeTable = false;
+            this.listViewSteps.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.listViewSteps.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listViewSteps.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnIDStep,
+            this.columnModeId,
+            this.columnTimer,
+            this.columnDestination,
+            this.columnSpeed,
+            this.columnType,
+            this.columnVolume});
+            this.listViewSteps.Depth = 0;
+            this.listViewSteps.FullRowSelect = true;
+            this.listViewSteps.HideSelection = false;
+            this.listViewSteps.Location = new System.Drawing.Point(3, 3);
+            this.listViewSteps.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.listViewSteps.MouseState = MaterialSkin.MouseState.OUT;
+            this.listViewSteps.Name = "listViewSteps";
+            this.listViewSteps.OwnerDraw = true;
+            this.listViewSteps.Size = new System.Drawing.Size(740, 295);
+            this.listViewSteps.TabIndex = 5;
+            this.listViewSteps.UseCompatibleStateImageBehavior = false;
+            this.listViewSteps.View = System.Windows.Forms.View.Details;
+            // 
+            // columnIDStep
+            // 
+            this.columnIDStep.Text = "ID";
+            this.columnIDStep.Width = 50;
+            // 
+            // columnModeId
+            // 
+            this.columnModeId.Text = "ModeId";
+            this.columnModeId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnModeId.Width = 100;
+            // 
+            // columnTimer
+            // 
+            this.columnTimer.Text = "Timer";
+            this.columnTimer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnTimer.Width = 90;
+            // 
+            // columnDestination
+            // 
+            this.columnDestination.Text = "Destination";
+            this.columnDestination.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnDestination.Width = 150;
+            // 
+            // columnSpeed
+            // 
+            this.columnSpeed.Text = "Speed";
+            this.columnSpeed.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnSpeed.Width = 90;
+            // 
+            // columnType
+            // 
+            this.columnType.Text = "Type";
+            this.columnType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnType.Width = 150;
+            // 
+            // columnVolume
+            // 
+            this.columnVolume.Text = "Volume";
+            this.columnVolume.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnVolume.Width = 90;
             // 
             // TableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(852, 603);
-            this.Controls.Add(this.tcData);
+            this.ClientSize = new System.Drawing.Size(780, 520);
+            this.Controls.Add(this.materialTabSelector);
+            this.Controls.Add(this.materialTabControl);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
             this.Name = "TableForm";
             this.Text = "Table";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TableForm_FormClosing);
             this.Load += new System.EventHandler(this.TableForm_Load);
-            this.tcData.ResumeLayout(false);
-            this.tabPageModes.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvModes)).EndInit();
             this.tlpModesButton.ResumeLayout(false);
             this.tlpModesButton.PerformLayout();
-            this.tabPageSteps.ResumeLayout(false);
             this.tlpStepsButton.ResumeLayout(false);
             this.tlpStepsButton.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSteps)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            this.materialTabControl.ResumeLayout(false);
+            this.tabPageModes.ResumeLayout(false);
+            this.tlpModesList.ResumeLayout(false);
+            this.tabPageStep.ResumeLayout(false);
+            this.tlpListStep.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TabControl tcData;
-        private System.Windows.Forms.TabPage tabPageModes;
-        private System.Windows.Forms.TabPage tabPageSteps;
-        private System.Windows.Forms.DataGridView dgvSteps;
         private System.Windows.Forms.TableLayoutPanel tlpStepsButton;
         private System.Windows.Forms.TableLayoutPanel tlpModesButton;
-        private System.Windows.Forms.DataGridView dgvModes;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem tsmItemFile;
         private System.Windows.Forms.ToolStripMenuItem tsmItemImport;
@@ -569,13 +577,6 @@ namespace TestTask.Forms
         private System.Windows.Forms.Button btnDeleteStep;
         private System.Windows.Forms.Button btnAddStep;
         private System.Windows.Forms.Button btnEditStep;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdStep;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ModeId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Timer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Destination;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Speed;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
         private System.Windows.Forms.ToolStripMenuItem tsmItemExport;
         private System.Windows.Forms.ToolStripMenuItem tsmImportFromExcel;
         private System.Windows.Forms.ToolStripMenuItem tsmSaveToExcel;
@@ -583,5 +584,24 @@ namespace TestTask.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn NameMode;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaxBottleNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaxUsedTips;
+        private MaterialSkin.Controls.MaterialTabSelector materialTabSelector;
+        private MaterialSkin.Controls.MaterialTabControl materialTabControl;
+        private System.Windows.Forms.TabPage tabPageModes;
+        private System.Windows.Forms.TabPage tabPageStep;
+        private MaterialSkin.Controls.MaterialListView listViewModes;
+        private System.Windows.Forms.ColumnHeader columnIDModes;
+        private System.Windows.Forms.ColumnHeader columnNameModes;
+        private System.Windows.Forms.ColumnHeader columnMaxBottleNumber;
+        private System.Windows.Forms.ColumnHeader columnMaxUsedTips;
+        private System.Windows.Forms.TableLayoutPanel tlpModesList;
+        private System.Windows.Forms.TableLayoutPanel tlpListStep;
+        private MaterialSkin.Controls.MaterialListView listViewSteps;
+        private System.Windows.Forms.ColumnHeader columnIDStep;
+        private System.Windows.Forms.ColumnHeader columnModeId;
+        private System.Windows.Forms.ColumnHeader columnTimer;
+        private System.Windows.Forms.ColumnHeader columnDestination;
+        private System.Windows.Forms.ColumnHeader columnSpeed;
+        private System.Windows.Forms.ColumnHeader columnType;
+        private System.Windows.Forms.ColumnHeader columnVolume;
     }
 }

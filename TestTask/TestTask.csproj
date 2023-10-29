@@ -165,6 +165,7 @@
     <Compile Include="BindingItem\UserBinding\StepBinding\SelectMode.cs" />
     <Compile Include="BindingItem\UserBinding\StepBinding\StepModel.cs" />
     <Compile Include="BindingItem\UserBinding\UserModel.cs" />
+    <Compile Include="Extension\ListViewExtension.cs" />
     <Compile Include="Forms\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,10 +214,7 @@
     <Compile Include="Forms\TableForm.Designer.cs">
       <DependentUpon>TableForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Extension\GridItemExtension.cs" />
     <Compile Include="Extension\ParseExtension.cs" />
-    <Compile Include="Extension\RemoveItemDGVExtension.cs" />
-    <Compile Include="Extension\SelectedItemDGVExtension.cs" />
     <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -24,6 +24,8 @@ namespace TestTask.Forms
 
         private const string MessageNotSelectedItem = "No items selected";
 
+        private const int NoItemsSelected = 0;
+
         //Index column from all tables
         public const int IndexId = 0;
 
@@ -62,52 +64,42 @@ namespace TestTask.Forms
                     return;
                 }
 
-                var mode = addFormMode.GetModeModel().ToMode();
-                _modeService.Add(mode);
+                var item = addFormMode.GetModeModel().ToMode();
+                _modeService.Add(item);
+                AddModeInListView(item);
             }
-
-            LoadDataGridMode();
         }
 
         private void BtnEditMode_Click(object sender, EventArgs e)
         {
-            var indexEditRow = GetSelectedRowIndexesGridMode();
+            var indexEditItem = listViewSteps.SelectedIndices.Cast<int>();
 
-            if (indexEditRow.Count == 1)
-            {
-                var oldItem = GetMode(indexEditRow.First());
-
-                using (var editModeForm = new EditItemModeForm(_messageBox, oldItem))
-                {
-                    if (editModeForm.ShowDialog() != DialogResult.OK)
-                    {
-                        return;
-                    }
-
-                    var updateItem = editModeForm.GetEditMode();
-                    _modeService.Update(updateItem);
-
-                    if (editModeForm.ChangedModeName())
-                    {
-                        LoadDataGridStep();
-                    }
-                }
-
-                LoadDataGridMode();
-            }
-            else
+            if (indexEditItem.Count() != 1)
             {
                 _messageBox.ShowWarning("Select one item.");
+            }
+
+            var row = indexEditItem.First();
+            var oldItem = GetMode(row);
+
+            using (var editModeForm = new EditItemModeForm(_messageBox, oldItem))
+            {
+                if (editModeForm.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                var updateItem = editModeForm.GetEditMode();
+                _modeService.Update(updateItem);
+                UpdateMode(updateItem, row);
             }
         }
 
         private void BtnDeleteMode_Click(object sender, EventArgs e)
         {
-            var selectedRowIndex = GetSelectedRowIndexesGridMode()
-                .Select(i => dgvModes.Rows[i].Get<int>(IndexId))
-                .ToList();
+            var selectedRowIndex = listViewModes.SelectedIndices;
 
-            if (selectedRowIndex.Count == 0)
+            if (selectedRowIndex.Count == NoItemsSelected)
             {
                 _messageBox.ShowWarning(MessageNotSelectedItem);
                 return;
@@ -115,78 +107,69 @@ namespace TestTask.Forms
 
             if (!_messageBox.ShowQuestion("Delete selected items?"))
             {
+                foreach (ListViewItem item in listViewModes.Items)
+                {
+                    item.Selected = false;
+                }
                 return;
             }
 
-            foreach (var id in selectedRowIndex)
-            {
-                RemoveItemRowGridMode(id);
-                _modeService.Remove(id);
-                _stepService.RemoveStepRelatedToMode(id);
-            }
-
-            UpdateAllGrids();
+            RemoveItemRowListViewMode();
         }
 
         private void BtnAddStep_Click(object sender, EventArgs e)
         {
-            var listMode = _modeService.GetAll();
+            var listMode = _modeService.GetModes();
 
-            if (listMode == null || listMode.Count == 0)
+            if (listMode.Count() == 0)
             {
                 _messageBox.ShowWarning("Add a mode to the table to add a step.");
                 return;
             }
 
-            using (var addFormStep = new AddItemStepForm(_messageBox, listMode))
+            using (var addFormStep = new AddItemStepForm(_messageBox, listMode.ToList()))
             {
                 if (addFormStep.ShowDialog() != DialogResult.OK)
                 {
                     return;
                 }
 
-                var step = addFormStep.GetStepModel().ToStep();
-                _stepService.Add(step);
+                var item = addFormStep.GetStepModel().ToStep();
+                _stepService.Add(item);
+                AddStepInListView(item);
             }
-
-            LoadDataGridStep();
         }
 
         private void BtnEditStep_Click(object sender, EventArgs e)
         {
-            var listMode = _modeService.GetAll();
-            var indexEditRow = GetSelectedRowIndexesGridStep();
+            var indexEditRow = listViewSteps.SelectedIndices.Cast<int>();
 
-            if (indexEditRow.Count == 1)
-            {
-                var oldItem = GetStep(indexEditRow.First());
-
-                using (var editStepForm = new EditItemStepForm(_messageBox, listMode, oldItem))
-                {
-                    if (editStepForm.ShowDialog() != DialogResult.OK)
-                    {
-                        return;
-                    }
-
-                    var updateItem = editStepForm.GetEditStep();
-                    _stepService.Update(updateItem);
-                }
-
-                LoadDataGridStep();
-            }
-            else
+            if (indexEditRow.Count() != 1)
             {
                 _messageBox.ShowWarning("Select one item.");
+            }
+
+            var listMode = _modeService.GetAll();
+            var indexRow = indexEditRow.First();
+            var oldItem = GetStep(indexRow);
+
+            using (var editStepForm = new EditItemStepForm(_messageBox, listMode, oldItem))
+            {
+                if (editStepForm.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                var updateItem = editStepForm.GetEditStep();
+                _stepService.Update(updateItem);
+                UpdateStep(updateItem, indexRow);
             }
         }
 
         private void BtnDeleteStep_Click(object sender, EventArgs e)
         {
-            var selectedRowIndex = GetSelectedRowIndexesGridStep()
-                .Select(i => dgvSteps.Rows[i].Get<int>(IndexId))
-                .ToList();
-
-            if (selectedRowIndex.Count == 0)
+            var selectedRow = listViewSteps.SelectedIndices.Count;
+            if (selectedRow == NoItemsSelected)
             {
                 _messageBox.ShowWarning(MessageNotSelectedItem);
                 return;
@@ -194,16 +177,14 @@ namespace TestTask.Forms
 
             if (!_messageBox.ShowQuestion("Delete selected items?"))
             {
+                foreach (ListViewItem item in listViewSteps.Items)
+                {
+                    item.Selected = false;
+                }
                 return;
             }
 
-            foreach (var id in selectedRowIndex)
-            {
-                RemoveItemRowGridSteps(id);
-                _stepService.Remove(id);
-            }
-
-            LoadDataGridStep();
+            listViewSteps.Remove(_stepService);
         }
 
         private void TsmImportFromExcel_Click(object sender, EventArgs e)
@@ -246,7 +227,7 @@ namespace TestTask.Forms
                         }
                     }
 
-                    LoadDataGridMode();
+                    LoadListViewMode();
 
                     if (!modeRead.IsNoErrorLine(out var message))
                     {
@@ -266,7 +247,7 @@ namespace TestTask.Forms
                         }
                     }
 
-                    LoadDataGridStep();
+                    LoadListViewStep();
 
                     if (!stepRead.IsNoErrorLine(out var message))
                     {
@@ -307,89 +288,161 @@ namespace TestTask.Forms
 
         private void TableForm_FormClosing(object sender, FormClosingEventArgs e) => DialogResult = DialogResult.Cancel;
 
-        private void LoadDataGridMode()
+        private void UpdateAllGrids()
+        {
+            LoadListViewMode();
+            LoadListViewStep();
+        }
+
+        private void LoadListViewMode()
         {
             var item = _modeService.GetAll();
 
-            ClearGridMode();
+            ClearListViewMode();
 
             if (item != null)
             {
-                FillGridMode(item);
+                FillListViewMode(item);
             }
+
         }
 
-        private void LoadDataGridStep()
+        private void LoadListViewStep()
         {
-            var items = _stepService.GetAll();
+            var item = _stepService.GetAll();
 
-            ClearGridStep();
-
-            if (items != null)
+            ClearListViewStep();
+            if (item != null)
             {
-                FillGridStep(items);
+                FillListViewStep(item);
             }
         }
 
         private Mode GetMode(int indexRow)
         {
-            var rowItems = dgvModes.Rows[indexRow];
-            var idMode = CellElement(rowItems, IndexId).ParseInt();
-            var nameMode = CellElement(rowItems, IndexColumnModeName) ?? throw new ArgumentException("Name cannot be null.");
-            var maxBottle = CellElement(rowItems, IndexColumnMaxBottle).ParseInt();
-            var maxUsedTips = CellElement(rowItems, IndexColumnMaxUsedTips).ParseInt();
+            var rowItem = listViewModes.Items[indexRow];
+
+            var idMode = CellElement(rowItem, IndexId).ParseInt();
+            var nameMode = CellElement(rowItem, IndexColumnModeName) ?? throw new ArgumentException("Name cannot be null.");
+            var maxBottle = CellElement(rowItem, IndexColumnMaxBottle).ParseInt();
+            var maxUsedTips = CellElement(rowItem, IndexColumnMaxUsedTips).ParseInt();
 
             return new Mode(nameMode, maxBottle, maxUsedTips, idMode);
         }
 
         private Step GetStep(int indexRow)
         {
-            var rowItems = dgvSteps.Rows[indexRow];
-            var idStep = CellElement(rowItems, IndexId).ParseInt();
-            var timer = CellElement(rowItems, IndexColumnTimer).ParseInt();
-            var destination = CellElement(rowItems, IndexColumnDestination);
-            var speed = CellElement(rowItems, IndexColumnSpeed).ParseInt();
-            var type = CellElement(rowItems, IndexColumnType) ?? throw new ArgumentException("Name cannot be null.");
-            var volume = CellElement(rowItems, IndexColumnVolume).ParseInt();
-            var modeId = CellElement(rowItems, IndexColumnModeId).ParseInt();
+            var rowItem = listViewSteps.Items[indexRow];
+
+            var idStep = CellElement(rowItem, IndexId).ParseInt();
+            var timer = CellElement(rowItem, IndexColumnTimer).ParseInt();
+            var destination = CellElement(rowItem, IndexColumnDestination);
+            var speed = CellElement(rowItem, IndexColumnSpeed).ParseInt();
+            var type = CellElement(rowItem, IndexColumnType) ?? throw new ArgumentException("Name cannot be null.");
+            var volume = CellElement(rowItem, IndexColumnVolume).ParseInt();
+            var modeId = CellElement(rowItem, IndexColumnModeId).ParseInt();
 
             return new Step(modeId, timer, destination, speed, type, volume, idStep);
         }
 
-        private string CellElement(DataGridViewRow rowItem, int indexColumn) => rowItem.GetString(indexColumn) ?? throw new Exception("String cannot be null.");
+        private string CellElement(ListViewItem rowItem, int indexColumn) => rowItem.GetString(indexColumn) ?? throw new Exception("String cannot be null.");
 
-        private void ClearGridMode() => dgvModes.Rows.Clear();
-
-        private void ClearGridStep() => dgvSteps.Rows.Clear();
-
-        private void FillGridMode(List<Mode> items)
+        private void FillListViewMode(List<Mode> items)
         {
             foreach (var item in items)
             {
-                dgvModes.Rows.Add(item.Id, item.Name, item.MaxBottleNumber, item.MaxUsedTips);
+                AddModeInListView(item);
             }
         }
 
-        private void FillGridStep(List<Step> items)
+        private void FillListViewStep(List<Step> items)
         {
             foreach (var item in items)
             {
-                dgvSteps.Rows.Add(item.Id, item.ModeId, item.Timer, item.Destination, item.Speed, item.Type, item.Volume);
+                AddStepInListView(item);
             }
         }
 
-        private HashSet<int> GetSelectedRowIndexesGridMode() => dgvModes.GetSelectedRowIndexesGrid();
-
-        private HashSet<int> GetSelectedRowIndexesGridStep() => dgvSteps.GetSelectedRowIndexesGrid();
-
-        private void RemoveItemRowGridMode(int id) => dgvModes.RemoveItemRowGrid(id);
-
-        private void RemoveItemRowGridSteps(int id) => dgvSteps.RemoveItemRowGrid(id);
-
-        private void UpdateAllGrids()
+        private void AddModeInListView(Mode item)
         {
-            LoadDataGridMode();
-            LoadDataGridStep();
+            var itemsRow = new string[]
+            {
+                item.Id.ToString(),
+                item.Name,
+                item.MaxBottleNumber.ToString(),
+                item.MaxBottleNumber.ToString()
+            };
+            var listItem = new ListViewItem(itemsRow);
+            listViewModes.Items.Add(listItem);
         }
+
+        private void AddStepInListView(Step item)
+        {
+            var itemsRow = new string[]
+            {
+                item.Id.ToString(),
+                item.ModeId.ToString(),
+                item.Timer.ToString(),
+                item.Destination != null ? item.Destination.ToString() : string.Empty,
+                item.Speed.ToString(),
+                item.Type,
+                item.Volume.ToString()
+            };
+
+            var listItem = new ListViewItem(itemsRow);
+            listViewSteps.Items.Add(listItem);
+        }
+
+        public void UpdateMode(Mode editItem, int row)
+        {
+            listViewModes.Items[row].SubItems[IndexId].Text = editItem.Id.ToString();
+            listViewModes.Items[row].SubItems[IndexColumnModeName].Text = editItem.Name.ToString();
+            listViewModes.Items[row].SubItems[IndexColumnMaxBottle].Text = editItem.MaxBottleNumber.ToString();
+            listViewModes.Items[row].SubItems[IndexColumnMaxUsedTips].Text = editItem.MaxUsedTips.ToString();
+        }
+
+        public void UpdateStep(Step editItem, int row)
+        {
+            listViewSteps.Items[row].SubItems[IndexId].Text = editItem.Id.ToString();
+            listViewSteps.Items[row].SubItems[IndexColumnModeId].Text = editItem.ModeId.ToString();
+            listViewSteps.Items[row].SubItems[IndexColumnTimer].Text = editItem.Timer.ToString();
+            listViewSteps.Items[row].SubItems[IndexColumnDestination].Text = editItem.Destination == null ? string.Empty : editItem.Destination.ToString();
+            listViewSteps.Items[row].SubItems[IndexColumnType].Text = editItem.Type.ToString();
+            listViewSteps.Items[row].SubItems[IndexColumnVolume].Text = editItem.Volume.ToString();
+        }
+
+        private void RemoveItemRowListViewMode()
+        {
+            for (var i = 0; i < listViewModes.Items.Count; i++)
+            {
+                var item = listViewModes.Items[i];
+                if (item.Selected)
+                {
+                    var id = CellElement(item, IndexId).ParseInt();
+                    RemoveStepRelatedToMode(id);
+                    _modeService.Remove(id);
+                    item.Remove();
+                    i--;
+                }
+            }
+        }
+
+        private void RemoveStepRelatedToMode(int idMode)
+        {
+            for (var i = 0; i < listViewSteps.Items.Count; i++)
+            {
+                var item = listViewSteps.Items[i];
+                var idModeInSteps = CellElement(item, IndexColumnModeId).ParseInt();
+                if (idModeInSteps == idMode)
+                {
+                    item.Remove();
+                    i--;
+                }
+            }
+        }
+
+        private void ClearListViewMode() => listViewModes.Items.Clear();
+
+        private void ClearListViewStep() => listViewSteps.Items.Clear();
     }
 }

@@ -4,48 +4,48 @@ using System.Linq;
 
 namespace TestTask.Core.Models.Steeps
 {
-    public class StepService
+    public class StepService : IService<Step>
     {
         private readonly AppDbContext _dbContext;
 
         public StepService(AppDbContext appDbContext) => _dbContext = appDbContext;
 
-        public void Add(Step step)
+        public void Add(Step item)
         {
-            if (step == null)
+            if (item == null)
             {
-                throw new ArgumentException("The received parameters are not correct.", nameof(step));
+                throw new ArgumentException("The received parameters are not correct.", nameof(item));
             }
 
-            if (_dbContext.Modes.FirstOrDefault(e => e.Id == step.ModeId) == null)
+            if (_dbContext.Modes.FirstOrDefault(e => e.Id == item.ModeId) == null)
             {
                 throw new Exception("Mode ID does not exist.");
             }
 
-            _dbContext.Steps.Add(step);
+            _dbContext.Steps.Add(item);
             _dbContext.SaveChanges();
         }
 
-        public void Update(Step step)
+        public void Update(Step item)
         {
-            if (step == null)
+            if (item == null)
             {
-                throw new ArgumentNullException("The format of the transmitted data is incorrect.", nameof(step));
+                throw new ArgumentNullException("The format of the transmitted data is incorrect.", nameof(item));
             }
 
-            if (!_dbContext.Modes.Any(e => e.Id == step.ModeId))
+            if (!_dbContext.Modes.Any(e => e.Id == item.ModeId))
             {
                 throw new Exception("Mode ID does not exist.");
             }
 
-            var item = _dbContext.Steps.FirstOrDefault(e => e.Id == step.Id) ?? throw new InvalidOperationException("Interaction element not found.");
+            var oldItem = _dbContext.Steps.FirstOrDefault(e => e.Id == item.Id) ?? throw new InvalidOperationException("Interaction element not found.");
 
-            item.ModeId = step.ModeId;
-            item.Timer = step.Timer;
-            item.Destination = step.Destination;
-            item.Speed = step.Speed;
-            item.Type = step.Type;
-            item.Volume = step.Volume;
+            oldItem.ModeId = item.ModeId;
+            oldItem.Timer = item.Timer;
+            oldItem.Destination = item.Destination;
+            oldItem.Speed = item.Speed;
+            oldItem.Type = item.Type;
+            oldItem.Volume = item.Volume;
 
             _dbContext.SaveChanges();
         }
