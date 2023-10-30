@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Windows.Forms;
-using TestTask.Core;
 using TestTask.Core.Models.Modes;
 
 namespace TestTask.Forms.ModeForm
 {
     public class EditItemModeForm : ModeFormBase
     {
-        private readonly Mode _oldMode;
-
+        private Mode _oldMode;
         private Mode _editMode;
         private bool _сhangedName = false;
 
-        public EditItemModeForm(IMessageBox messageBox, Mode mode)
-            : base(messageBox)
+        public EditItemModeForm(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
             Text = "Edit Mode";
-            _oldMode = mode;
         }
+
+        public void Initialize(Mode mode) => _oldMode = mode;
 
         protected override void BtnSave_Click(object sender, EventArgs e)
         {

@@ -27,7 +27,7 @@ namespace TestTask.Forms
         {
             Hide();
 
-            using (var registrForm = new RegistrationForm(_serviceProvider))
+            using (var registrForm = _serviceProvider.GetRequiredService<RegistrationForm>())
             {
                 if (registrForm.ShowDialog() == DialogResult.Cancel)
                 {
@@ -47,7 +47,7 @@ namespace TestTask.Forms
 
             Hide();
 
-            using (var tableForm = new TableForm(_serviceProvider))
+            using (var tableForm = _serviceProvider.GetRequiredService<TableForm>())
             {
                 if (tableForm.ShowDialog() == DialogResult.Cancel)
                 {

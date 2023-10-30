@@ -4,6 +4,8 @@ using System;
 using System.Windows.Forms;
 using TestTask.ChildForms.Import;
 using TestTask.Core;
+using TestTask.Core.Import;
+using TestTask.Core.Import.Importers;
 using TestTask.Core.Models.Modes;
 using TestTask.Core.Models.Steeps;
 using TestTask.Core.Models.Users;
@@ -38,7 +40,13 @@ namespace TestTask
                 .AddTransient<TableForm>()
                 .AddTransient<AddItemModeForm>()
                 .AddTransient<EditItemModeForm>()
-                .AddTransient<AddItemStepForm>();
+                .AddTransient<AddItemStepForm>()
+                .AddTransient(e => new OpenFileDialog { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
+                .AddTransient(e => new SaveFileDialog() { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
+                .AddSingleton(e => new ModeImporter())
+                .AddSingleton(e => new StepImporter())
+                .AddTransient(e => new ExcelImporter<Mode>(e.GetRequiredService<ModeImporter>()))
+                .AddTransient(e => new ExcelImporter<Step>(e.GetRequiredService<StepImporter>()));
 
             var container = collection.BuildServiceProvider();
 

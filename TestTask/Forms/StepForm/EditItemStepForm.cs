@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using TestTask.Core;
+using TestTask.BindingItem.UserBinding.StepBinding;
 using TestTask.Core.Models.Modes;
 using TestTask.Core.Models.Steeps;
 
@@ -9,15 +9,19 @@ namespace TestTask.Forms.StepForm
 {
     public class EditItemStepForm : StepFormBase
     {
-        private readonly Step _oldStep;
-
+        private Step _oldStep;
         private Step _editStep;
 
-        public EditItemStepForm(IMessageBox messageBox, List<Mode> modes, Step oldStep)
-            : base(messageBox, modes)
+        public EditItemStepForm(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
             Text = "Edit Step";
-            _oldStep = oldStep;
+        }
+
+        public void Initialize(List<Mode> modes, Step oldItem)
+        {
+            _modes = new SelectMode(modes);
+            _oldStep = oldItem;
         }
 
         protected override void BtnAdd_Click(object sender, EventArgs e)

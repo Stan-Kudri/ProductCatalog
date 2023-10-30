@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Windows.Forms;
 using TestTask.BindingItem.UserBinding;
 using TestTask.Core;
@@ -14,10 +15,10 @@ namespace TestTask.Forms.ModeForm
             InitializeComponent();
         }
 
-        public ModeFormBase(IMessageBox messageBox)
+        public ModeFormBase(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            _messageBox = messageBox;
+            _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
         }
 
         protected virtual void BtnSave_Click(object sender, EventArgs e)
