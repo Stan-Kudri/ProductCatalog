@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -44,6 +45,7 @@ namespace TestTask.Forms
         private const int IndexColumnVolume = 6;
         private const int IndexColumnModeId = 7;
 
+        private readonly IServiceProvider _serviceProvider;
         private readonly ModeService _modeService;
         private readonly StepService _stepService;
         private readonly IMessageBox _messageBox;
@@ -51,14 +53,13 @@ namespace TestTask.Forms
         private PagedList<Mode> _pagedListMode;
         private PagedList<Step> _pagedListStep;
 
-        public TableForm(ModeService modeService, StepService stepService, IMessageBox messageBox)
+        public TableForm(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            _modeService = modeService;
-            _stepService = stepService;
-            _messageBox = messageBox;
-            _pagedListMode = new PagedList<Mode>(_modeService.GetModes());
-            _pagedListStep = new PagedList<Step>(_stepService.GetSteps());
+            _serviceProvider = serviceProvider;
+            _modeService = _serviceProvider.GetRequiredService<ModeService>();
+            _stepService = _serviceProvider.GetRequiredService<StepService>();
+            _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
         }
 
         public PageModel PageMode { get; set; } = new PageModel();
@@ -301,6 +302,8 @@ namespace TestTask.Forms
 
         private void TableForm_Load(object sender, EventArgs e)
         {
+            _pagedListMode = new PagedList<Mode>(_modeService.GetModes());
+            _pagedListStep = new PagedList<Step>(_stepService.GetSteps());
             UpdateAllGrids();
             cmbPageSizeModes.DataSource = PageMode.Items;
             cmbPageSizeSteps.DataSource = PageStep.Items;

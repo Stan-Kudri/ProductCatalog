@@ -1,11 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MaterialSkin;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows.Forms;
+using TestTask.ChildForms.Import;
 using TestTask.Core;
 using TestTask.Core.Models.Modes;
 using TestTask.Core.Models.Steeps;
 using TestTask.Core.Models.Users;
 using TestTask.Forms;
+using TestTask.Forms.ModeForm;
+using TestTask.Forms.StepForm;
 
 namespace TestTask
 {
@@ -19,17 +23,33 @@ namespace TestTask
         [STAThread]
         static void Main()
         {
-            var builder = new DbContextOptionsBuilder<AppDbContext>().UseSqlite($"Data Source={ConnectionName}.db");
+            var collection = new ServiceCollection()
+                .AddScoped(e => new DbContextFactory(ConnectionName))
+                .AddScoped(e => e.GetRequiredService<DbContextFactory>().Create())
+                .AddScoped<IMessageBox>(e => new MessageBoxShow())
+                .AddScoped<UserService>()
+                .AddScoped<ModeService>()
+                .AddScoped<StepService>()
+                .AddScoped<UserValidator>()
+                .AddSingleton<BaseForm>()
+                .AddTransient<LoginForm>()
+                .AddTransient<RegistrationForm>()
+                .AddTransient<ImportDatabaseForm>()
+                .AddTransient<TableForm>()
+                .AddTransient<AddItemModeForm>()
+                .AddTransient<EditItemModeForm>()
+                .AddTransient<AddItemStepForm>();
 
-            var message = new MessageBoxShow();
+            var container = collection.BuildServiceProvider();
 
-            using (var appDbContext = new AppDbContext(builder.Options))
+            using (var scope = container.CreateScope())
             {
-                appDbContext.Database.EnsureCreated();
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new LoginForm(new UserService(appDbContext), new ModeService(appDbContext), new StepService(appDbContext), message));
-
+                var loginForm = scope.ServiceProvider.GetRequiredService<LoginForm>();
+                var materialSkinManager = MaterialSkinManager.Instance;
+                materialSkinManager.AddFormToManage(loginForm);
+                materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+                materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue800, Primary.BlueGrey800, Primary.Blue500, Accent.Indigo700, TextShade.WHITE);
+                Application.Run(loginForm);
             }
         }
     }

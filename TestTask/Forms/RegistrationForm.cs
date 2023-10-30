@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Windows.Forms;
 using TestTask.BindingItem;
 using TestTask.Core;
 using TestTask.Core.Models.Users;
@@ -7,14 +9,16 @@ namespace TestTask.Forms
 {
     public partial class RegistrationForm : BaseForm
     {
+        private readonly IServiceProvider _serviceProvider;
         private readonly UserService _userService;
         private readonly IMessageBox _messageBox;
 
-        public RegistrationForm(UserService userService, IMessageBox messageBox)
+        public RegistrationForm(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            _userService = userService;
-            _messageBox = messageBox;
+            _serviceProvider = serviceProvider;
+            _userService = _serviceProvider.GetRequiredService<UserService>();
+            _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
         }
 
         private void RegistrationForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -41,7 +45,7 @@ namespace TestTask.Forms
             user = null;
             var username = tbLogIn.Text;
             var password = tbPassword.Text;
-            var userValidator = new UserValidator();
+            var userValidator = _serviceProvider.GetRequiredService<UserValidator>();
             if (!userValidator.ValidFormatUsername(username, out string messageValidUsername))
             {
                 message = messageValidUsername;
