@@ -28,7 +28,7 @@ namespace TestTask.Core.Import
             var workbook = new XSSFWorkbook(stream);
             var addMode = new List<Result<T>>();
 
-            if (!GetSheet(workbook, out var sheet))
+            if (!TryGetSheet(workbook, out var sheet))
             {
                 addMode.Add(Result<T>.CreateFail("Faild to read sheet.", 0));
                 return addMode;
@@ -58,7 +58,7 @@ namespace TestTask.Core.Import
             return addMode;
         }
 
-        private bool GetSheet(XSSFWorkbook workbook, out ISheet sheet)
+        private bool TryGetSheet(XSSFWorkbook workbook, out ISheet sheet)
         {
             for (var i = 0; i < workbook.NumberOfSheets; i++)
             {

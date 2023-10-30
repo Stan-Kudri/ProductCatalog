@@ -129,13 +129,12 @@ namespace TestTask.Forms
             }
 
             RemoveItemRowListViewMode();
-            LoadDataMode();
-            LoadDataStep();
+            UpdateAllGrids();
         }
 
         private void BtnAddStep_Click(object sender, EventArgs e)
         {
-            var listMode = _modeService.GetModes();
+            var listMode = _modeService.GetQueryableAll();
 
             if (listMode.Count() == 0)
             {
@@ -308,8 +307,8 @@ namespace TestTask.Forms
 
         private void TableForm_Load(object sender, EventArgs e)
         {
-            _pagedListMode = new PagedList<Mode>(_modeService.GetModes());
-            _pagedListStep = new PagedList<Step>(_stepService.GetSteps());
+            _pagedListMode = new PagedList<Mode>(_modeService.GetQueryableAll());
+            _pagedListStep = new PagedList<Step>(_stepService.GetQueryableAll());
             UpdateAllGrids();
             cmbPageSizeModes.DataSource = PageMode.Items;
             cmbPageSizeSteps.DataSource = PageStep.Items;
@@ -369,7 +368,7 @@ namespace TestTask.Forms
 
         private void LoadDataMode()
         {
-            _pagedListMode = _modeService.GetModes().GetPagedList(PageMode.GetPage());
+            _pagedListMode = _modeService.GetQueryableAll().GetPagedList(PageMode.GetPage());
             if (IsNotFirstPageModesEmpty())
             {
                 PageMode.Number -= 1;
@@ -387,7 +386,7 @@ namespace TestTask.Forms
 
         private void LoadDataStep()
         {
-            _pagedListStep = _stepService.GetSteps().GetPagedList(PageStep.GetPage());
+            _pagedListStep = _stepService.GetQueryableAll().GetPagedList(PageStep.GetPage());
             if (IsNotFirstPageStepsEmpty())
             {
                 PageStep.Number -= 1;

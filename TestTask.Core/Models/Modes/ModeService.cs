@@ -60,11 +60,11 @@ namespace TestTask.Core.Models.Modes
             Update(mode);
         }
 
-        public List<Mode> GetAll() => _dbContext.Modes.Count() > 0 ? _dbContext.Modes.ToList() : null;
-
         public string NameMode(int id)
             => _dbContext.Modes.FirstOrDefault(e => e.Id == id).Name ?? throw new ArgumentException("Interaction element not found.");
 
-        public IQueryable<Mode> GetModes() => _dbContext.Modes.Select(e => e);
+        public List<Mode> GetAll() => _dbContext.Modes.Count() > 0 ? _dbContext.Modes.ToList() : null;
+
+        public IQueryable<Mode> GetQueryableAll() => _dbContext.Modes.Select(e => e);
     }
 }
