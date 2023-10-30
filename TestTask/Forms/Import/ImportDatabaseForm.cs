@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Windows.Forms;
 using TestTask.Core;
 using TestTask.Forms;
@@ -9,10 +10,10 @@ namespace TestTask.ChildForms.Import
     {
         IMessageBox _messageBox;
 
-        public ImportDatabaseForm(IMessageBox messageBox)
+        public ImportDatabaseForm(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            _messageBox = messageBox;
+            _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
         }
 
         private void BtnImportData_Click(object sender, EventArgs e)

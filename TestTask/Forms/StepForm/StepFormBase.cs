@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Windows.Forms;
 using TestTask.BindingItem.UserBinding;
 using TestTask.BindingItem.UserBinding.StepBinding;
@@ -11,18 +11,18 @@ namespace TestTask.Forms.StepForm
     public partial class StepFormBase : BaseForm
     {
         protected readonly IMessageBox _messageBox;
-        protected readonly SelectMode _modes;
+
+        protected SelectMode _modes;
 
         private StepFormBase()
         {
             InitializeComponent();
         }
 
-        public StepFormBase(IMessageBox messageBox, List<Mode> modes)
+        public StepFormBase(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            _messageBox = messageBox;
-            _modes = new SelectMode(modes);
+            _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
         }
 
         protected Mode SelectedMode =>

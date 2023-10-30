@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -9,7 +10,6 @@ using TestTask.Core.Export;
 using TestTask.Core.Export.SheetFillers;
 using TestTask.Core.Extension;
 using TestTask.Core.Import;
-using TestTask.Core.Import.Importers;
 using TestTask.Core.Models.Modes;
 using TestTask.Core.Models.Page;
 using TestTask.Core.Models.Steeps;
@@ -44,6 +44,7 @@ namespace TestTask.Forms
         private const int IndexColumnVolume = 6;
         private const int IndexColumnModeId = 7;
 
+        private readonly IServiceProvider _serviceProvider;
         private readonly ModeService _modeService;
         private readonly StepService _stepService;
         private readonly IMessageBox _messageBox;
@@ -51,14 +52,14 @@ namespace TestTask.Forms
         private PagedList<Mode> _pagedListMode;
         private PagedList<Step> _pagedListStep;
 
-        public TableForm(ModeService modeService, StepService stepService, IMessageBox messageBox)
+        public TableForm(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            _modeService = modeService;
-            _stepService = stepService;
-            _messageBox = messageBox;
-            _pagedListMode = new PagedList<Mode>(_modeService.GetModes());
-            _pagedListStep = new PagedList<Step>(_stepService.GetSteps());
+            _serviceProvider = serviceProvider;
+            _modeService = _serviceProvider.GetRequiredService<ModeService>();
+            _stepService = _serviceProvider.GetRequiredService<StepService>();
+            _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
+            DoubleBuffered = true;
         }
 
         public PageModel PageMode { get; set; } = new PageModel();
@@ -67,7 +68,7 @@ namespace TestTask.Forms
 
         private void BtnAddMode_Click(object sender, EventArgs e)
         {
-            using (var addFormMode = new AddItemModeForm(_messageBox))
+            using (var addFormMode = _serviceProvider.GetRequiredService<AddItemModeForm>())
             {
                 if (addFormMode.ShowDialog() != DialogResult.OK)
                 {
@@ -93,8 +94,10 @@ namespace TestTask.Forms
             var row = indexEditItem.First();
             var oldItem = GetMode(row);
 
-            using (var editModeForm = new EditItemModeForm(_messageBox, oldItem))
+            using (var editModeForm = _serviceProvider.GetRequiredService<EditItemModeForm>())
             {
+                editModeForm.Initialize(oldItem);
+
                 if (editModeForm.ShowDialog() != DialogResult.OK)
                 {
                     return;
@@ -140,8 +143,10 @@ namespace TestTask.Forms
                 return;
             }
 
-            using (var addFormStep = new AddItemStepForm(_messageBox, listMode.ToList()))
+            using (var addFormStep = _serviceProvider.GetRequiredService<AddItemStepForm>())
             {
+                addFormStep.Initialize(listMode.ToList());
+
                 if (addFormStep.ShowDialog() != DialogResult.OK)
                 {
                     return;
@@ -167,8 +172,10 @@ namespace TestTask.Forms
             var indexRow = indexEditRow.First();
             var oldItem = GetStep(indexRow);
 
-            using (var editStepForm = new EditItemStepForm(_messageBox, listMode, oldItem))
+            using (var editStepForm = _serviceProvider.GetRequiredService<EditItemStepForm>())
             {
+                editStepForm.Initialize(listMode, oldItem);
+
                 if (editStepForm.ShowDialog() != DialogResult.OK)
                 {
                     return;
@@ -210,7 +217,7 @@ namespace TestTask.Forms
                 { Step, false },
             };
 
-            using (var impotDbForExcel = new ImportDatabaseForm(_messageBox))
+            using (var impotDbForExcel = _serviceProvider.GetRequiredService<ImportDatabaseForm>())
             {
                 if (impotDbForExcel.ShowDialog() != DialogResult.OK)
                 {
@@ -221,7 +228,7 @@ namespace TestTask.Forms
                 loadTable[Step] = impotDbForExcel.IsDownloadTableStep;
             }
 
-            using (var openReplaceDataFromFile = new OpenFileDialog { Filter = "Excel Files |*.xls;*.xlsx;*.xlsm" })
+            using (var openReplaceDataFromFile = _serviceProvider.GetRequiredService<OpenFileDialog>())
             {
                 if (openReplaceDataFromFile.ShowDialog() == DialogResult.Cancel)
                 {
@@ -232,7 +239,7 @@ namespace TestTask.Forms
 
                 if (loadTable[Mode])
                 {
-                    var modeRead = new ExcelImporter<Mode>(new ModeImporter()).ImportFromFile(path);
+                    var modeRead = _serviceProvider.GetRequiredService<ExcelImporter<Mode>>().ImportFromFile(path);
 
                     foreach (var item in modeRead)
                     {
@@ -252,7 +259,7 @@ namespace TestTask.Forms
 
                 if (loadTable[Step])
                 {
-                    var stepRead = new ExcelImporter<Step>(new StepImporter()).ImportFromFile(path);
+                    var stepRead = _serviceProvider.GetRequiredService<ExcelImporter<Step>>().ImportFromFile(path);
 
                     foreach (var item in stepRead)
                     {
@@ -274,7 +281,7 @@ namespace TestTask.Forms
 
         private void TsmItemSaveExcel_Click(object sender, EventArgs e)
         {
-            using (var exportFileData = new SaveFileDialog() { Filter = "Excel Files |*.xls;*.xlsx;*.xlsm" })
+            using (var exportFileData = _serviceProvider.GetRequiredService<SaveFileDialog>())
             {
                 if (exportFileData.ShowDialog() == DialogResult.Cancel)
                 {
@@ -301,6 +308,8 @@ namespace TestTask.Forms
 
         private void TableForm_Load(object sender, EventArgs e)
         {
+            _pagedListMode = new PagedList<Mode>(_modeService.GetModes());
+            _pagedListStep = new PagedList<Step>(_stepService.GetSteps());
             UpdateAllGrids();
             cmbPageSizeModes.DataSource = PageMode.Items;
             cmbPageSizeSteps.DataSource = PageStep.Items;

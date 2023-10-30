@@ -140,6 +140,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbContextFactory.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\IService.cs" />
     <Compile Include="Models\Modes\Mode.cs" />

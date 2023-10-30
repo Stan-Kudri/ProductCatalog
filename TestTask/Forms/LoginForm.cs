@@ -1,27 +1,24 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Windows.Forms;
 using TestTask.BindingItem;
 using TestTask.Core;
-using TestTask.Core.Models.Modes;
-using TestTask.Core.Models.Steeps;
 using TestTask.Core.Models.Users;
 
 namespace TestTask.Forms
 {
     public partial class LoginForm : BaseForm
     {
+        private readonly IServiceProvider _serviceProvider;
         private readonly UserService _userService;
-        private readonly ModeService _modeService;
-        private readonly StepService _stepService;
         private readonly IMessageBox _messageBox;
 
-        public LoginForm(UserService userService, ModeService modeService, StepService stepService, IMessageBox messageBox)
+        public LoginForm(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            _userService = userService;
-            _modeService = modeService;
-            _stepService = stepService;
-            _messageBox = messageBox;
+            _serviceProvider = serviceProvider;
+            _userService = serviceProvider.GetRequiredService<UserService>();
+            _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
             tbLogIn.Text = "Sergey";
             tbPassword.Text = "qwe123";
         }
@@ -30,7 +27,7 @@ namespace TestTask.Forms
         {
             Hide();
 
-            using (var registrForm = new RegistrationForm(_userService, _messageBox))
+            using (var registrForm = _serviceProvider.GetRequiredService<RegistrationForm>())
             {
                 if (registrForm.ShowDialog() == DialogResult.Cancel)
                 {
@@ -50,7 +47,7 @@ namespace TestTask.Forms
 
             Hide();
 
-            using (var tableForm = new TableForm(_modeService, _stepService, _messageBox))
+            using (var tableForm = _serviceProvider.GetRequiredService<TableForm>())
             {
                 if (tableForm.ShowDialog() == DialogResult.Cancel)
                 {
@@ -65,7 +62,7 @@ namespace TestTask.Forms
             var username = tbLogIn.Text;
             var password = tbPassword.Text;
 
-            var userValidator = new UserValidator();
+            var userValidator = _serviceProvider.GetRequiredService<UserValidator>();
             if (!userValidator.ValidFormatUsername(username, out string messageValidUsername))
             {
                 message = messageValidUsername;
