@@ -30,19 +30,19 @@ namespace TestTask.Forms
 
         //Index column from all tables
         public const int IndexId = 0;
+        private const int IndexColumnModeName = 1;
 
         //Index column Mode table
-        private const int IndexColumnModeName = 1;
         private const int IndexColumnMaxBottle = 2;
         private const int IndexColumnMaxUsedTips = 3;
 
         //Index column Mode table
-        private const int IndexColumnModeId = 1;
         private const int IndexColumnTimer = 2;
         private const int IndexColumnDestination = 3;
         private const int IndexColumnSpeed = 4;
         private const int IndexColumnType = 5;
         private const int IndexColumnVolume = 6;
+        private const int IndexColumnModeId = 7;
 
         private readonly ModeService _modeService;
         private readonly StepService _stepService;
@@ -87,6 +87,7 @@ namespace TestTask.Forms
             if (indexEditItem.Count() != 1)
             {
                 _messageBox.ShowWarning("Select one item.");
+                return;
             }
 
             var row = indexEditItem.First();
@@ -159,6 +160,7 @@ namespace TestTask.Forms
             if (indexEditRow.Count() != 1)
             {
                 _messageBox.ShowWarning("Select one item.");
+                return;
             }
 
             var listMode = _modeService.GetAll();
@@ -332,30 +334,28 @@ namespace TestTask.Forms
 
         private void TextBoxCurrentPageMode_TextChanged(object sender, EventArgs e)
         {
-            if (!int.TryParse(textBoxCurrentPageMode.Text, out var pageNumber)
-                || pageNumber > _pagedListMode.PageCount
-                || _pagedListMode.PageNumber != PageMode.Number)
+            if (int.TryParse(textBoxCurrentPageMode.Text, out var pageNumber)
+                && pageNumber <= _pagedListMode.PageCount
+                && _pagedListMode.PageNumber == PageMode.Number)
             {
-                textBoxCurrentPageMode.Text = _pagedListMode.PageNumber.ToString();
-                return;
+                PageMode.Number = pageNumber;
+                LoadDataMode();
             }
 
-            PageMode.Number = pageNumber;
-            LoadDataStep();
+            textBoxCurrentPageMode.Text = string.Format("{0}/{1}", PageMode.Number, _pagedListMode.PageCount);
         }
 
         private void TextBoxCurrentPageStep_TextChanged(object sender, EventArgs e)
         {
-            if (!int.TryParse(textBoxCurrentPageStep.Text, out var pageNumber)
-                || pageNumber > _pagedListStep.PageCount
-                || _pagedListStep.PageNumber != PageStep.Number)
+            if (int.TryParse(textBoxCurrentPageStep.Text, out var pageNumber)
+                && pageNumber <= _pagedListStep.PageCount
+                && _pagedListStep.PageNumber == PageStep.Number)
             {
-                textBoxCurrentPageStep.Text = _pagedListStep.PageNumber.ToString();
-                return;
+                PageStep.Number = pageNumber;
+                LoadDataStep();
             }
 
-            PageStep.Number = pageNumber;
-            LoadDataStep();
+            textBoxCurrentPageStep.Text = string.Format("{0}/{1}", PageStep.Number, _pagedListStep.PageCount);
         }
 
         private void LoadDataMode()
@@ -373,7 +373,6 @@ namespace TestTask.Forms
             FillListViewMode(item);
             CustomUpdateFormStateModesPagination();
 
-            labelTotalPageMode.Text = labelTotalPageMode.Text = string.Format("/{0}", Math.Max(_pagedListMode.PageCount, 1));
             textBoxCurrentPageMode.Text = _pagedListMode.PageNumber.ToString();
         }
 
@@ -392,7 +391,6 @@ namespace TestTask.Forms
             FillListViewStep(item);
             CustomUpdateFormStateStepsPagination();
 
-            labelTotalPageStep.Text = labelTotalPageStep.Text = string.Format("/{0}", Math.Max(_pagedListStep.PageCount, 1));
             textBoxCurrentPageStep.Text = _pagedListStep.PageNumber.ToString();
         }
 
@@ -422,7 +420,7 @@ namespace TestTask.Forms
             var timer = CellElement(rowItem, IndexColumnTimer).ParseInt();
             var destination = CellElement(rowItem, IndexColumnDestination);
             var speed = CellElement(rowItem, IndexColumnSpeed).ParseInt();
-            var type = CellElement(rowItem, IndexColumnType) ?? throw new ArgumentException("Name cannot be null.");
+            var type = CellElement(rowItem, IndexColumnType) ?? throw new Exception("Type cannot be null.");
             var volume = CellElement(rowItem, IndexColumnVolume).ParseInt();
             var modeId = CellElement(rowItem, IndexColumnModeId).ParseInt();
 
@@ -465,12 +463,13 @@ namespace TestTask.Forms
             var itemsRow = new string[]
             {
                 item.Id.ToString(),
-                item.ModeId.ToString(),
+                _modeService.NameMode(item.ModeId),
                 item.Timer.ToString(),
                 item.Destination != null ? item.Destination.ToString() : string.Empty,
                 item.Speed.ToString(),
                 item.Type,
-                item.Volume.ToString()
+                item.Volume.ToString(),
+                item.ModeId.ToString(),
             };
 
             var listItem = new ListViewItem(itemsRow);
@@ -488,11 +487,13 @@ namespace TestTask.Forms
         public void UpdateStep(Step editItem, int row)
         {
             listViewSteps.Items[row].SubItems[IndexId].Text = editItem.Id.ToString();
-            listViewSteps.Items[row].SubItems[IndexColumnModeId].Text = editItem.ModeId.ToString();
+            listViewSteps.Items[row].SubItems[IndexColumnModeName].Text = _modeService.NameMode(editItem.ModeId);
             listViewSteps.Items[row].SubItems[IndexColumnTimer].Text = editItem.Timer.ToString();
             listViewSteps.Items[row].SubItems[IndexColumnDestination].Text = editItem.Destination == null ? string.Empty : editItem.Destination.ToString();
+            listViewSteps.Items[row].SubItems[IndexColumnSpeed].Text = editItem.Speed.ToString();
             listViewSteps.Items[row].SubItems[IndexColumnType].Text = editItem.Type.ToString();
             listViewSteps.Items[row].SubItems[IndexColumnVolume].Text = editItem.Volume.ToString();
+            listViewSteps.Items[row].SubItems[IndexColumnModeId].Text = editItem.ModeId.ToString();
         }
 
         private void RemoveItemRowListViewMode()
@@ -511,13 +512,12 @@ namespace TestTask.Forms
 
         private void CustomUpdateFormStateModesPagination()
         {
-            var hasPageControl = _pagedListStep.PageCount > 0 ? true : false;
+            var hasPageControl = _pagedListMode.PageCount > 0 ? true : false;
 
             btnFirstPageModes.Enabled =
                 btnLastPageModes.Enabled =
                     btnNextPageModes.Enabled =
                         btnBackPageModes.Enabled =
-                            labelTotalPageMode.Enabled =
                                 textBoxCurrentPageMode.Enabled =
                                     hasPageControl;
         }
@@ -530,8 +530,7 @@ namespace TestTask.Forms
                 btnLastPageSteps.Enabled =
                     btnNextPageSteps.Enabled =
                         btnBackPageSteps.Enabled =
-                            labelTotalPageStep.Enabled =
-                                textBoxCurrentPageStep.Enabled =
+                            textBoxCurrentPageStep.Enabled =
                                     hasPageControl;
         }
 
