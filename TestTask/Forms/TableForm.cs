@@ -76,6 +76,13 @@ namespace TestTask.Forms
             PageStep.ChangeCurrentPage += LoadDataStep;
         }
 
+        private void TableForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            PageMode.ChangeCurrentPage -= LoadDataMode;
+            PageStep.ChangeCurrentPage -= LoadDataStep;
+        }
+
         private void BtnAddMode_Click(object sender, EventArgs e)
         {
             using (var addFormMode = _serviceProvider.GetRequiredService<AddItemModeForm>())
@@ -314,8 +321,6 @@ namespace TestTask.Forms
         }
 
         private void TsmItemClose_Click(object sender, EventArgs e) => Close();
-
-        private void TableForm_FormClosing(object sender, FormClosingEventArgs e) => DialogResult = DialogResult.Cancel;
 
         private void CmbPageSizeModes_Changed(object sender, EventArgs e)
         {
