@@ -26,38 +26,39 @@ namespace TestTask
         static void Main()
         {
             var collection = new ServiceCollection()
-                .AddScoped(e => new DbContextFactory(ConnectionName))
+                .AddSingleton(e => new DbContextFactory(ConnectionName))
                 .AddScoped(e => e.GetRequiredService<DbContextFactory>().Create())
                 .AddScoped<IMessageBox>(e => new MessageBoxShow())
                 .AddScoped<UserService>()
                 .AddScoped<ModeService>()
                 .AddScoped<StepService>()
                 .AddScoped<UserValidator>()
-                .AddSingleton<BaseForm>()
+                .AddSingleton(e => new BaseForm())
                 .AddTransient<LoginForm>()
                 .AddTransient<RegistrationForm>()
                 .AddTransient<ImportDatabaseForm>()
-                .AddTransient<TableForm>()
+                .AddSingleton<TableForm>()
                 .AddTransient<AddItemModeForm>()
                 .AddTransient<EditItemModeForm>()
                 .AddTransient<AddItemStepForm>()
-                .AddTransient(e => new OpenFileDialog { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
-                .AddTransient(e => new SaveFileDialog() { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
+                .AddSingleton(e => new OpenFileDialog { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
+                .AddSingleton(e => new SaveFileDialog() { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
                 .AddSingleton(e => new ModeImporter())
                 .AddSingleton(e => new StepImporter())
-                .AddTransient(e => new ExcelImporter<Mode>(e.GetRequiredService<ModeImporter>()))
-                .AddTransient(e => new ExcelImporter<Step>(e.GetRequiredService<StepImporter>()));
+                .AddSingleton(e => new ExcelImporter<Mode>(e.GetRequiredService<ModeImporter>()))
+                .AddSingleton(e => new ExcelImporter<Step>(e.GetRequiredService<StepImporter>()));
 
             var container = collection.BuildServiceProvider();
 
             using (var scope = container.CreateScope())
             {
-                var loginForm = scope.ServiceProvider.GetRequiredService<LoginForm>();
-                var materialSkinManager = MaterialSkinManager.Instance;
-                materialSkinManager.AddFormToManage(loginForm);
-                materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-                materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue800, Primary.BlueGrey800, Primary.Blue500, Accent.Indigo700, TextShade.WHITE);
-                Application.Run(loginForm);
+                using (var loginForm = scope.ServiceProvider.GetRequiredService<LoginForm>())
+                {
+                    var materialSkinManager = MaterialSkinManager.Instance;
+                    materialSkinManager.AddFormToManage(loginForm);
+                    materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+                    Application.Run(loginForm);
+                }
             }
         }
     }

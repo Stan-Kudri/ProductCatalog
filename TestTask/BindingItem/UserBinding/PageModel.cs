@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using TestTask.Core.Models.Page;
 
 namespace TestTask.BindingItem.UserBinding
@@ -15,12 +16,18 @@ namespace TestTask.BindingItem.UserBinding
             Size = pageSize;
         }
 
+        public event Action ChangeCurrentPage;
+
         public ObservableCollection<int> Items { get; set; } = new ObservableCollection<int> { 15, 30, 60 };
 
         public int Number
         {
             get => _number;
-            set => SetField(ref _number, value);
+            set
+            {
+                SetField(ref _number, value);
+                ChangeCurrentPage?.Invoke();
+            }
         }
 
         public int Size

@@ -59,12 +59,22 @@ namespace TestTask.Forms
             _modeService = _serviceProvider.GetRequiredService<ModeService>();
             _stepService = _serviceProvider.GetRequiredService<StepService>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
-            DoubleBuffered = true;
         }
 
         public PageModel PageMode { get; set; } = new PageModel();
 
         public PageModel PageStep { get; set; } = new PageModel();
+
+        private void TableForm_Load(object sender, EventArgs e)
+        {
+            _pagedListMode = new PagedList<Mode>(_modeService.GetQueryableAll());
+            _pagedListStep = new PagedList<Step>(_stepService.GetQueryableAll());
+            cmbPageSizeModes.DataSource = PageMode.Items;
+            cmbPageSizeSteps.DataSource = PageStep.Items;
+            UpdateAllGrids();
+            PageMode.ChangeCurrentPage += LoadDataMode;
+            PageStep.ChangeCurrentPage += LoadDataStep;
+        }
 
         private void BtnAddMode_Click(object sender, EventArgs e)
         {
@@ -305,15 +315,6 @@ namespace TestTask.Forms
 
         private void TsmItemClose_Click(object sender, EventArgs e) => Close();
 
-        private void TableForm_Load(object sender, EventArgs e)
-        {
-            _pagedListMode = new PagedList<Mode>(_modeService.GetQueryableAll());
-            _pagedListStep = new PagedList<Step>(_stepService.GetQueryableAll());
-            UpdateAllGrids();
-            cmbPageSizeModes.DataSource = PageMode.Items;
-            cmbPageSizeSteps.DataSource = PageStep.Items;
-        }
-
         private void TableForm_FormClosing(object sender, FormClosingEventArgs e) => DialogResult = DialogResult.Cancel;
 
         private void CmbPageSizeModes_Changed(object sender, EventArgs e)
@@ -324,7 +325,6 @@ namespace TestTask.Forms
             {
                 PageMode.Size = pageSizeCmb;
                 PageMode.Number = 1;
-                LoadDataMode();
             }
         }
 
@@ -336,7 +336,6 @@ namespace TestTask.Forms
             {
                 PageStep.Size = pageSizeCmb;
                 PageStep.Number = 1;
-                LoadDataStep();
             }
         }
 
@@ -347,7 +346,6 @@ namespace TestTask.Forms
                 && _pagedListMode.PageNumber == PageMode.Number)
             {
                 PageMode.Number = pageNumber;
-                LoadDataMode();
             }
 
             textBoxCurrentPageMode.Text = string.Format("{0}/{1}", PageMode.Number, _pagedListMode.PageCount);
@@ -360,7 +358,6 @@ namespace TestTask.Forms
                 && _pagedListStep.PageNumber == PageStep.Number)
             {
                 PageStep.Number = pageNumber;
-                LoadDataStep();
             }
 
             textBoxCurrentPageStep.Text = string.Format("{0}/{1}", PageStep.Number, _pagedListStep.PageCount);
@@ -372,7 +369,6 @@ namespace TestTask.Forms
             if (IsNotFirstPageModesEmpty())
             {
                 PageMode.Number -= 1;
-                LoadDataMode();
             }
 
             var item = _pagedListMode.Items;
@@ -390,7 +386,6 @@ namespace TestTask.Forms
             if (IsNotFirstPageStepsEmpty())
             {
                 PageStep.Number -= 1;
-                LoadDataStep();
             }
 
             var item = _pagedListStep.Items;
@@ -528,6 +523,13 @@ namespace TestTask.Forms
                         btnBackPageModes.Enabled =
                                 textBoxCurrentPageMode.Enabled =
                                     hasPageControl;
+
+            btnFirstPageModes.Visible =
+                btnLastPageModes.Visible =
+                    btnNextPageModes.Visible =
+                        btnBackPageModes.Visible =
+                                textBoxCurrentPageMode.Visible =
+                                    hasPageControl;
         }
 
         private void CustomUpdateFormStateStepsPagination()
@@ -540,6 +542,13 @@ namespace TestTask.Forms
                         btnBackPageSteps.Enabled =
                             textBoxCurrentPageStep.Enabled =
                                     hasPageControl;
+
+            btnFirstPageSteps.Visible =
+                btnLastPageSteps.Visible =
+                    btnNextPageSteps.Visible =
+                        btnBackPageSteps.Visible =
+                            textBoxCurrentPageStep.Visible =
+                                    hasPageControl;
         }
 
         private void BtnFirstPageModes_Click(object sender, EventArgs e)
@@ -547,7 +556,6 @@ namespace TestTask.Forms
             if (_pagedListMode.HasPrevious)
             {
                 PageMode.Number = 1;
-                LoadDataMode();
             }
         }
 
@@ -556,7 +564,6 @@ namespace TestTask.Forms
             if (_pagedListMode.HasPrevious)
             {
                 PageMode.Number--;
-                LoadDataMode();
             }
         }
 
@@ -565,7 +572,6 @@ namespace TestTask.Forms
             if (_pagedListMode.HasNext)
             {
                 PageMode.Number++;
-                LoadDataMode();
             }
         }
 
@@ -573,8 +579,7 @@ namespace TestTask.Forms
         {
             if (_pagedListMode.HasNext)
             {
-                PageStep.Number = _pagedListMode.PageCount;
-                LoadDataMode();
+                PageMode.Number = _pagedListMode.PageCount;
             }
         }
 
@@ -583,7 +588,6 @@ namespace TestTask.Forms
             if (_pagedListStep.HasPrevious)
             {
                 PageStep.Number = 1;
-                LoadDataStep();
             }
         }
 
@@ -592,7 +596,6 @@ namespace TestTask.Forms
             if (_pagedListStep.HasPrevious)
             {
                 PageStep.Number--;
-                LoadDataStep();
             }
         }
 
@@ -601,7 +604,6 @@ namespace TestTask.Forms
             if (_pagedListStep.HasNext)
             {
                 PageStep.Number++;
-                LoadDataStep();
             }
         }
 
@@ -610,7 +612,6 @@ namespace TestTask.Forms
             if (_pagedListStep.HasNext)
             {
                 PageStep.Number = _pagedListStep.PageCount;
-                LoadDataStep();
             }
         }
 
