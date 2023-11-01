@@ -33,11 +33,11 @@ namespace TestTask
                 .AddScoped<ModeService>()
                 .AddScoped<StepService>()
                 .AddScoped<UserValidator>()
-                .AddSingleton(e => new BaseForm())
+                .AddSingleton<BaseForm>()
                 .AddTransient<LoginForm>()
                 .AddTransient<RegistrationForm>()
                 .AddTransient<ImportDatabaseForm>()
-                .AddSingleton<TableForm>()
+                .AddTransient<TableForm>()
                 .AddTransient<AddItemModeForm>()
                 .AddTransient<EditItemModeForm>()
                 .AddTransient<AddItemStepForm>()
@@ -57,6 +57,8 @@ namespace TestTask
                     var materialSkinManager = MaterialSkinManager.Instance;
                     materialSkinManager.AddFormToManage(loginForm);
                     materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+                    materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey600, Primary.BlueGrey400, Primary.Grey800, Accent.Yellow700, TextShade.WHITE);
+                    Application.EnableVisualStyles();
                     Application.Run(loginForm);
                 }
             }

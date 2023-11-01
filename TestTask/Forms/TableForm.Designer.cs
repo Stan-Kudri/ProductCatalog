@@ -31,10 +31,10 @@ namespace TestTask.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle73 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle74 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle75 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle76 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TableForm));
             this.IdMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NameMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -112,8 +112,8 @@ namespace TestTask.Forms
             // 
             // IdMode
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.IdMode.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.IdMode.DefaultCellStyle = dataGridViewCellStyle73;
             this.IdMode.HeaderText = "    ID";
             this.IdMode.MinimumWidth = 30;
             this.IdMode.Name = "IdMode";
@@ -122,8 +122,8 @@ namespace TestTask.Forms
             // 
             // NameMode
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.NameMode.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.NameMode.DefaultCellStyle = dataGridViewCellStyle74;
             this.NameMode.FillWeight = 120F;
             this.NameMode.HeaderText = "    Name";
             this.NameMode.MinimumWidth = 250;
@@ -133,8 +133,8 @@ namespace TestTask.Forms
             // 
             // MaxBottleNumber
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.MaxBottleNumber.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle75.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.MaxBottleNumber.DefaultCellStyle = dataGridViewCellStyle75;
             this.MaxBottleNumber.FillWeight = 120F;
             this.MaxBottleNumber.HeaderText = "    MaxBottleNumber";
             this.MaxBottleNumber.MinimumWidth = 60;
@@ -144,8 +144,8 @@ namespace TestTask.Forms
             // 
             // MaxUsedTips
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.MaxUsedTips.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle76.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.MaxUsedTips.DefaultCellStyle = dataGridViewCellStyle76;
             this.MaxUsedTips.HeaderText = "    MaxUsedTips";
             this.MaxUsedTips.MinimumWidth = 40;
             this.MaxUsedTips.Name = "MaxUsedTips";
@@ -318,9 +318,10 @@ namespace TestTask.Forms
             // 
             // menuStrip
             // 
+            this.menuStrip.BackColor = System.Drawing.Color.Azure;
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmItemFile});
-            this.menuStrip.Location = new System.Drawing.Point(3, 64);
+            this.menuStrip.Location = new System.Drawing.Point(3, 24);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(774, 24);
             this.menuStrip.TabIndex = 3;
@@ -328,6 +329,7 @@ namespace TestTask.Forms
             // 
             // tsmItemFile
             // 
+            this.tsmItemFile.BackColor = System.Drawing.Color.Transparent;
             this.tsmItemFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmItemImport,
             this.tsmItemExport,
@@ -377,14 +379,15 @@ namespace TestTask.Forms
             // 
             this.materialTabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.materialTabSelector.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.materialTabSelector.BaseTabControl = this.materialTabControl;
             this.materialTabSelector.CharacterCasing = MaterialSkin.Controls.MaterialTabSelector.CustomCharacterCasing.Normal;
             this.materialTabSelector.Depth = 0;
             this.materialTabSelector.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialTabSelector.Location = new System.Drawing.Point(5, 90);
+            this.materialTabSelector.Location = new System.Drawing.Point(8, 51);
             this.materialTabSelector.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialTabSelector.Name = "materialTabSelector";
-            this.materialTabSelector.Size = new System.Drawing.Size(770, 48);
+            this.materialTabSelector.Size = new System.Drawing.Size(762, 21);
             this.materialTabSelector.TabIndex = 6;
             this.materialTabSelector.Text = "TabSelector";
             // 
@@ -396,12 +399,12 @@ namespace TestTask.Forms
             this.materialTabControl.Controls.Add(this.tabPageModes);
             this.materialTabControl.Controls.Add(this.tabPageStep);
             this.materialTabControl.Depth = 0;
-            this.materialTabControl.Location = new System.Drawing.Point(8, 144);
+            this.materialTabControl.Location = new System.Drawing.Point(8, 75);
             this.materialTabControl.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialTabControl.Multiline = true;
             this.materialTabControl.Name = "materialTabControl";
             this.materialTabControl.SelectedIndex = 0;
-            this.materialTabControl.Size = new System.Drawing.Size(766, 370);
+            this.materialTabControl.Size = new System.Drawing.Size(766, 357);
             this.materialTabControl.TabIndex = 5;
             // 
             // tabPageModes
@@ -411,7 +414,7 @@ namespace TestTask.Forms
             this.tabPageModes.Location = new System.Drawing.Point(4, 22);
             this.tabPageModes.Name = "tabPageModes";
             this.tabPageModes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageModes.Size = new System.Drawing.Size(758, 344);
+            this.tabPageModes.Size = new System.Drawing.Size(758, 331);
             this.tabPageModes.TabIndex = 0;
             this.tabPageModes.Text = "Modes";
             this.tabPageModes.UseVisualStyleBackColor = true;
@@ -428,7 +431,7 @@ namespace TestTask.Forms
             this.tlpMode.Controls.Add(this.tlpPagedMode, 1, 0);
             this.tlpMode.Controls.Add(this.tlpModesButton, 2, 0);
             this.tlpMode.Controls.Add(this.cmbPageSizeModes, 0, 0);
-            this.tlpMode.Location = new System.Drawing.Point(3, 307);
+            this.tlpMode.Location = new System.Drawing.Point(3, 290);
             this.tlpMode.Name = "tlpMode";
             this.tlpMode.RowCount = 1;
             this.tlpMode.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -583,7 +586,7 @@ namespace TestTask.Forms
             this.tlpModesList.Name = "tlpModesList";
             this.tlpModesList.RowCount = 1;
             this.tlpModesList.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpModesList.Size = new System.Drawing.Size(755, 305);
+            this.tlpModesList.Size = new System.Drawing.Size(755, 290);
             this.tlpModesList.TabIndex = 6;
             // 
             // listViewModes
@@ -598,6 +601,7 @@ namespace TestTask.Forms
             this.columnMaxBottleNumber,
             this.columnMaxUsedTips});
             this.listViewModes.Depth = 0;
+            this.listViewModes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewModes.FullRowSelect = true;
             this.listViewModes.HideSelection = false;
             this.listViewModes.Location = new System.Drawing.Point(3, 3);
@@ -606,7 +610,7 @@ namespace TestTask.Forms
             this.listViewModes.MouseState = MaterialSkin.MouseState.OUT;
             this.listViewModes.Name = "listViewModes";
             this.listViewModes.OwnerDraw = true;
-            this.listViewModes.Size = new System.Drawing.Size(740, 299);
+            this.listViewModes.Size = new System.Drawing.Size(749, 284);
             this.listViewModes.TabIndex = 5;
             this.listViewModes.UseCompatibleStateImageBehavior = false;
             this.listViewModes.View = System.Windows.Forms.View.Details;
@@ -641,7 +645,7 @@ namespace TestTask.Forms
             this.tabPageStep.Location = new System.Drawing.Point(4, 22);
             this.tabPageStep.Name = "tabPageStep";
             this.tabPageStep.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageStep.Size = new System.Drawing.Size(758, 344);
+            this.tabPageStep.Size = new System.Drawing.Size(758, 331);
             this.tabPageStep.TabIndex = 1;
             this.tabPageStep.Text = "Steps";
             this.tabPageStep.UseVisualStyleBackColor = true;
@@ -658,7 +662,7 @@ namespace TestTask.Forms
             this.tlpSteps.Controls.Add(this.tlpPagedStep, 1, 0);
             this.tlpSteps.Controls.Add(this.tlpStepsButton, 2, 0);
             this.tlpSteps.Controls.Add(this.cmbPageSizeSteps, 0, 0);
-            this.tlpSteps.Location = new System.Drawing.Point(3, 307);
+            this.tlpSteps.Location = new System.Drawing.Point(3, 290);
             this.tlpSteps.Name = "tlpSteps";
             this.tlpSteps.RowCount = 1;
             this.tlpSteps.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -804,7 +808,7 @@ namespace TestTask.Forms
             this.tlpListStep.Name = "tlpListStep";
             this.tlpListStep.RowCount = 1;
             this.tlpListStep.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpListStep.Size = new System.Drawing.Size(755, 305);
+            this.tlpListStep.Size = new System.Drawing.Size(755, 290);
             this.tlpListStep.TabIndex = 7;
             // 
             // listViewSteps
@@ -823,6 +827,7 @@ namespace TestTask.Forms
             this.columnVolume,
             this.columnModeId});
             this.listViewSteps.Depth = 0;
+            this.listViewSteps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewSteps.FullRowSelect = true;
             this.listViewSteps.HideSelection = false;
             this.listViewSteps.Location = new System.Drawing.Point(3, 3);
@@ -831,7 +836,7 @@ namespace TestTask.Forms
             this.listViewSteps.MouseState = MaterialSkin.MouseState.OUT;
             this.listViewSteps.Name = "listViewSteps";
             this.listViewSteps.OwnerDraw = true;
-            this.listViewSteps.Size = new System.Drawing.Size(740, 295);
+            this.listViewSteps.Size = new System.Drawing.Size(749, 284);
             this.listViewSteps.TabIndex = 5;
             this.listViewSteps.UseCompatibleStateImageBehavior = false;
             this.listViewSteps.View = System.Windows.Forms.View.Details;
@@ -887,12 +892,15 @@ namespace TestTask.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(780, 520);
+            this.ClientSize = new System.Drawing.Size(780, 435);
             this.Controls.Add(this.materialTabSelector);
             this.Controls.Add(this.materialTabControl);
             this.Controls.Add(this.menuStrip);
+            this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.MainMenuStrip = this.menuStrip;
             this.Name = "TableForm";
+            this.Padding = new System.Windows.Forms.Padding(3, 24, 3, 3);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Table";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TableForm_FormClosing);
             this.Load += new System.EventHandler(this.TableForm_Load);
