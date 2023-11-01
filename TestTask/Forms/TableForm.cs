@@ -52,6 +52,8 @@ namespace TestTask.Forms
         private PagedList<Mode> _pagedListMode;
         private PagedList<Step> _pagedListStep;
 
+        private bool Resizing = false;
+
         public TableForm(IServiceProvider serviceProvider)
         {
             InitializeComponent();
@@ -318,6 +320,26 @@ namespace TestTask.Forms
                 var writeExcel = new ExcelExporter(fillers);
                 writeExcel.ExportToFile(path);
             }
+        }
+
+        private void TlpListStep_SizeChanged(object sender, EventArgs e)
+        {
+            if (!Resizing)
+            {
+                Resizing = true;
+                SizeChangedListView(listViewSteps);
+            }
+            Resizing = false;
+        }
+
+        private void TlpModesList_SizeChanged(object sender, EventArgs e)
+        {
+            if (!Resizing)
+            {
+                Resizing = true;
+                SizeChangedListView(listViewModes);
+            }
+            Resizing = false;
         }
 
         private void TsmItemClose_Click(object sender, EventArgs e) => Close();
@@ -623,5 +645,23 @@ namespace TestTask.Forms
         private bool IsNotFirstPageModesEmpty() => _pagedListMode.Count == 0 && PageMode.Number != 1;
 
         private bool IsNotFirstPageStepsEmpty() => _pagedListStep.Count == 0 && PageStep.Number != 1;
+
+        private void SizeChangedListView(ListView listView)
+        {
+            if (listView != null)
+            {
+                float totalColumnWidth = 0;
+
+                for (int i = 0; i < listView.Columns.Count; i++)
+                    totalColumnWidth += Convert.ToInt32(listView.Columns[i].Tag);
+
+                for (int i = 0; i < listView.Columns.Count; i++)
+                {
+                    float colPercentage = (Convert.ToInt32(listView.Columns[i].Tag) / totalColumnWidth);
+                    listView.Columns[i].Width = (int)(colPercentage * listView.ClientRectangle.Width);
+                }
+                Console.WriteLine();
+            }
+        }
     }
 }
