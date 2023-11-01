@@ -655,12 +655,12 @@ namespace TestTask.Forms
                 for (int i = 0; i < listView.Columns.Count; i++)
                     totalColumnWidth += Convert.ToInt32(listView.Columns[i].Tag);
 
+                //Column Tage = Width custom size
                 for (int i = 0; i < listView.Columns.Count; i++)
                 {
-                    float colPercentage = (Convert.ToInt32(listView.Columns[i].Tag) / totalColumnWidth);
-                    listView.Columns[i].Width = (int)(colPercentage * listView.ClientRectangle.Width);
+                    float colPercenTage = (Convert.ToInt32(listView.Columns[i].Tag) / totalColumnWidth);
+                    listView.Columns[i].Width = (int)(colPercenTage * listView.ClientRectangle.Width);
                 }
-                Console.WriteLine();
             }
         }
     }
