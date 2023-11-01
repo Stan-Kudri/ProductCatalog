@@ -31,10 +31,10 @@ namespace TestTask.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle73 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle74 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle75 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle76 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TableForm));
             this.IdMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NameMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -112,8 +112,8 @@ namespace TestTask.Forms
             // 
             // IdMode
             // 
-            dataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.IdMode.DefaultCellStyle = dataGridViewCellStyle73;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.IdMode.DefaultCellStyle = dataGridViewCellStyle9;
             this.IdMode.HeaderText = "    ID";
             this.IdMode.MinimumWidth = 30;
             this.IdMode.Name = "IdMode";
@@ -122,8 +122,8 @@ namespace TestTask.Forms
             // 
             // NameMode
             // 
-            dataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.NameMode.DefaultCellStyle = dataGridViewCellStyle74;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.NameMode.DefaultCellStyle = dataGridViewCellStyle10;
             this.NameMode.FillWeight = 120F;
             this.NameMode.HeaderText = "    Name";
             this.NameMode.MinimumWidth = 250;
@@ -133,8 +133,8 @@ namespace TestTask.Forms
             // 
             // MaxBottleNumber
             // 
-            dataGridViewCellStyle75.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.MaxBottleNumber.DefaultCellStyle = dataGridViewCellStyle75;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.MaxBottleNumber.DefaultCellStyle = dataGridViewCellStyle11;
             this.MaxBottleNumber.FillWeight = 120F;
             this.MaxBottleNumber.HeaderText = "    MaxBottleNumber";
             this.MaxBottleNumber.MinimumWidth = 60;
@@ -144,8 +144,8 @@ namespace TestTask.Forms
             // 
             // MaxUsedTips
             // 
-            dataGridViewCellStyle76.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.MaxUsedTips.DefaultCellStyle = dataGridViewCellStyle76;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.MaxUsedTips.DefaultCellStyle = dataGridViewCellStyle12;
             this.MaxUsedTips.HeaderText = "    MaxUsedTips";
             this.MaxUsedTips.MinimumWidth = 40;
             this.MaxUsedTips.Name = "MaxUsedTips";
@@ -588,6 +588,7 @@ namespace TestTask.Forms
             this.tlpModesList.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpModesList.Size = new System.Drawing.Size(755, 290);
             this.tlpModesList.TabIndex = 6;
+            this.tlpModesList.SizeChanged += new System.EventHandler(this.TlpModesList_SizeChanged);
             // 
             // listViewModes
             // 
@@ -617,23 +618,27 @@ namespace TestTask.Forms
             // 
             // columnIDModes
             // 
+            this.columnIDModes.Tag = "80";
             this.columnIDModes.Text = "ID";
             this.columnIDModes.Width = 80;
             // 
             // columnNameModes
             // 
+            this.columnNameModes.Tag = "300";
             this.columnNameModes.Text = "Name";
             this.columnNameModes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnNameModes.Width = 300;
             // 
             // columnMaxBottleNumber
             // 
+            this.columnMaxBottleNumber.Tag = "180";
             this.columnMaxBottleNumber.Text = "MaxBottleNumber";
             this.columnMaxBottleNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnMaxBottleNumber.Width = 180;
             // 
             // columnMaxUsedTips
             // 
+            this.columnMaxUsedTips.Tag = "180";
             this.columnMaxUsedTips.Text = "MaxUsedTips";
             this.columnMaxUsedTips.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnMaxUsedTips.Width = 180;
@@ -810,6 +815,7 @@ namespace TestTask.Forms
             this.tlpListStep.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpListStep.Size = new System.Drawing.Size(755, 290);
             this.tlpListStep.TabIndex = 7;
+            this.tlpListStep.SizeChanged += new System.EventHandler(this.TlpListStep_SizeChanged);
             // 
             // listViewSteps
             // 
@@ -843,47 +849,55 @@ namespace TestTask.Forms
             // 
             // columnIDStep
             // 
+            this.columnIDStep.Tag = "50";
             this.columnIDStep.Text = "ID";
             this.columnIDStep.Width = 50;
             // 
             // columnModeName
             // 
+            this.columnModeName.Tag = "110";
             this.columnModeName.Text = "ModeName";
             this.columnModeName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnModeName.Width = 110;
             // 
             // columnTimer
             // 
+            this.columnTimer.Tag = "90";
             this.columnTimer.Text = "Timer";
             this.columnTimer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnTimer.Width = 90;
             // 
             // columnDestination
             // 
+            this.columnDestination.Tag = "150";
             this.columnDestination.Text = "Destination";
             this.columnDestination.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnDestination.Width = 150;
             // 
             // columnSpeed
             // 
+            this.columnSpeed.Tag = "90";
             this.columnSpeed.Text = "Speed";
             this.columnSpeed.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnSpeed.Width = 90;
             // 
             // columnType
             // 
+            this.columnType.Tag = "140";
             this.columnType.Text = "Type";
             this.columnType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnType.Width = 140;
             // 
             // columnVolume
             // 
+            this.columnVolume.Tag = "90";
             this.columnVolume.Text = "Volume";
             this.columnVolume.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnVolume.Width = 90;
             // 
             // columnModeId
             // 
+            this.columnModeId.Tag = "0";
             this.columnModeId.Text = "ModeId";
             this.columnModeId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnModeId.Width = 0;
