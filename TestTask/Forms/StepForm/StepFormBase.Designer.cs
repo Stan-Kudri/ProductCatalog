@@ -24,12 +24,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.tbTimer = new MaterialSkin.Controls.MaterialTextBox2();
-            this.stepModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.cmbModeValue = new MaterialSkin.Controls.MaterialComboBox();
-            this.itemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.selectModeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cmbCompanyValue = new MaterialSkin.Controls.MaterialComboBox();
             this.tlpStepData = new System.Windows.Forms.TableLayoutPanel();
             this.tbDestination = new MaterialSkin.Controls.MaterialTextBox2();
             this.tbSpeed = new MaterialSkin.Controls.MaterialTextBox2();
@@ -39,9 +35,6 @@
             this.btnSave = new MaterialSkin.Controls.MaterialButton();
             this.btnClear = new MaterialSkin.Controls.MaterialButton();
             this.btnClose = new MaterialSkin.Controls.MaterialButton();
-            ((System.ComponentModel.ISupportInitialize)(this.stepModelBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.selectModeBindingSource)).BeginInit();
             this.tlpStepData.SuspendLayout();
             this.tlpAddButton.SuspendLayout();
             this.SuspendLayout();
@@ -51,7 +44,6 @@
             this.tbTimer.AnimateReadOnly = false;
             this.tbTimer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tbTimer.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.tbTimer.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.stepModelBindingSource, "Timer", true));
             this.tbTimer.Depth = 0;
             this.tbTimer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -80,44 +72,29 @@
             this.tbTimer.UseSystemPasswordChar = false;
             this.tbTimer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbTimer_KeyPress);
             // 
-            // stepModelBindingSource
+            // cmbCompanyValue
             // 
-            this.stepModelBindingSource.DataSource = typeof(TestTask.BindingItem.UserBinding.StepModel);
-            // 
-            // cmbModeValue
-            // 
-            this.cmbModeValue.AutoResize = false;
-            this.cmbModeValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cmbModeValue.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.stepModelBindingSource, "Mode", true));
-            this.cmbModeValue.DataSource = this.itemsBindingSource;
-            this.cmbModeValue.Depth = 0;
-            this.cmbModeValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbModeValue.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cmbModeValue.DropDownHeight = 174;
-            this.cmbModeValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbModeValue.DropDownWidth = 121;
-            this.cmbModeValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.cmbModeValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cmbModeValue.FormattingEnabled = true;
-            this.cmbModeValue.IntegralHeight = false;
-            this.cmbModeValue.ItemHeight = 43;
-            this.cmbModeValue.Location = new System.Drawing.Point(3, 0);
-            this.cmbModeValue.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.cmbModeValue.MaxDropDownItems = 4;
-            this.cmbModeValue.MouseState = MaterialSkin.MouseState.OUT;
-            this.cmbModeValue.Name = "cmbModeValue";
-            this.cmbModeValue.Size = new System.Drawing.Size(294, 49);
-            this.cmbModeValue.StartIndex = 0;
-            this.cmbModeValue.TabIndex = 1;
-            // 
-            // itemsBindingSource
-            // 
-            this.itemsBindingSource.DataMember = "Items";
-            this.itemsBindingSource.DataSource = this.selectModeBindingSource;
-            // 
-            // selectModeBindingSource
-            // 
-            this.selectModeBindingSource.DataSource = typeof(TestTask.BindingItem.UserBinding.StepBinding.SelectMode);
+            this.cmbCompanyValue.AutoResize = false;
+            this.cmbCompanyValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbCompanyValue.Depth = 0;
+            this.cmbCompanyValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbCompanyValue.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbCompanyValue.DropDownHeight = 174;
+            this.cmbCompanyValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCompanyValue.DropDownWidth = 121;
+            this.cmbCompanyValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cmbCompanyValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cmbCompanyValue.FormattingEnabled = true;
+            this.cmbCompanyValue.IntegralHeight = false;
+            this.cmbCompanyValue.ItemHeight = 43;
+            this.cmbCompanyValue.Location = new System.Drawing.Point(3, 0);
+            this.cmbCompanyValue.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.cmbCompanyValue.MaxDropDownItems = 4;
+            this.cmbCompanyValue.MouseState = MaterialSkin.MouseState.OUT;
+            this.cmbCompanyValue.Name = "cmbCompanyValue";
+            this.cmbCompanyValue.Size = new System.Drawing.Size(294, 49);
+            this.cmbCompanyValue.StartIndex = 0;
+            this.cmbCompanyValue.TabIndex = 1;
             // 
             // tlpStepData
             // 
@@ -126,7 +103,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpStepData.ColumnCount = 1;
             this.tlpStepData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpStepData.Controls.Add(this.cmbModeValue, 0, 0);
+            this.tlpStepData.Controls.Add(this.cmbCompanyValue, 0, 0);
             this.tlpStepData.Controls.Add(this.tbTimer, 0, 1);
             this.tlpStepData.Controls.Add(this.tbDestination, 0, 2);
             this.tlpStepData.Controls.Add(this.tbSpeed, 0, 3);
@@ -151,7 +128,6 @@
             this.tbDestination.AnimateReadOnly = false;
             this.tbDestination.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tbDestination.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.tbDestination.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.stepModelBindingSource, "Destination", true));
             this.tbDestination.Depth = 0;
             this.tbDestination.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbDestination.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -182,7 +158,6 @@
             this.tbSpeed.AnimateReadOnly = false;
             this.tbSpeed.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tbSpeed.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.tbSpeed.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.stepModelBindingSource, "Speed", true));
             this.tbSpeed.Depth = 0;
             this.tbSpeed.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -215,7 +190,6 @@
             this.tbType.AnimateReadOnly = false;
             this.tbType.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tbType.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.tbType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.stepModelBindingSource, "Type", true));
             this.tbType.Depth = 0;
             this.tbType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbType.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -246,7 +220,6 @@
             this.tbVolume.AnimateReadOnly = false;
             this.tbVolume.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tbVolume.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.tbVolume.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.stepModelBindingSource, "Volume", true));
             this.tbVolume.Depth = 0;
             this.tbVolume.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -366,9 +339,6 @@
             this.Name = "StepFormBase";
             this.Text = "Step Form";
             this.Load += new System.EventHandler(this.AddStepForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.stepModelBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.selectModeBindingSource)).EndInit();
             this.tlpStepData.ResumeLayout(false);
             this.tlpAddButton.ResumeLayout(false);
             this.tlpAddButton.PerformLayout();
@@ -379,7 +349,7 @@
         #endregion
 
         protected MaterialSkin.Controls.MaterialTextBox2 tbTimer;
-        protected MaterialSkin.Controls.MaterialComboBox cmbModeValue;
+        protected MaterialSkin.Controls.MaterialComboBox cmbCompanyValue;
         protected System.Windows.Forms.TableLayoutPanel tlpStepData;
         protected MaterialSkin.Controls.MaterialTextBox2 tbDestination;
         protected MaterialSkin.Controls.MaterialTextBox2 tbSpeed;
@@ -389,9 +359,6 @@
         protected MaterialSkin.Controls.MaterialButton btnSave;
         protected MaterialSkin.Controls.MaterialButton btnClear;
         protected MaterialSkin.Controls.MaterialButton btnClose;
-        protected System.Windows.Forms.BindingSource stepModelBindingSource;
-        protected System.Windows.Forms.BindingSource selectModeBindingSource;
-        protected System.Windows.Forms.BindingSource itemsBindingSource;
-        private System.ComponentModel.IContainer components;
+        protected System.ComponentModel.IContainer components;
     }
 }

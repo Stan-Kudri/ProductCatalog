@@ -16,7 +16,7 @@ namespace TestTask.Core.Models.Steeps
 
         public Step(int modeId, int timer, string destination, int speed, string type, int volume)
         {
-            ModeId = modeId > 0 ? ModeId = modeId : throw new ArgumentException("Step ID greater than zero.", nameof(modeId));
+            CompanyId = modeId > 0 ? CompanyId = modeId : throw new ArgumentException("Step ID greater than zero.", nameof(modeId));
 
             Timer = timer >= 0 ? Timer = timer : throw new ArgumentException("The timer value is greater than zero.", nameof(timer));
 
@@ -31,7 +31,7 @@ namespace TestTask.Core.Models.Steeps
             Volume = volume >= 0 ? Volume = volume : throw new ArgumentException("The volume cannot be less than zero.", nameof(volume));
         }
 
-        public int ModeId { get; set; } = 0;
+        public int CompanyId { get; set; } = 0;
 
         public int Timer { get; set; } = 0;
 
@@ -53,7 +53,7 @@ namespace TestTask.Core.Models.Steeps
             }
 
             return other.Id == Id
-                   && other.ModeId == ModeId
+                   && other.CompanyId == CompanyId
                    && other.Timer == Timer
                    && other.Destination == Destination
                    && other.Speed == Speed
@@ -61,6 +61,6 @@ namespace TestTask.Core.Models.Steeps
                    && other.Volume == Volume;
         }
 
-        public override int GetHashCode() => Id.GetHashCode() * ModeId.GetHashCode() + Type.GetHashCode();
+        public override int GetHashCode() => Id.GetHashCode() * CompanyId.GetHashCode() + Type.GetHashCode();
     }
 }

@@ -57,5 +57,38 @@ namespace TestTask.Core.Extension
                 return Result<int>.CreateFail(valueShouldBeNumberMessage, self.RowNum);
             }
         }
+
+        public static Result<DateTime> GetDate(this IRow self, int cellNumber, string columnName)
+        {
+            var cell = self.GetCell(cellNumber);
+
+            if (cell == null)
+            {
+                return Result<DateTime>.CreateFail(columnName + " cell is empty", self.RowNum);
+            }
+
+            string valueShouldBeNumberMessage = columnName + " should be number";
+
+            if (cell.CellType == CellType.Blank)
+            {
+                return Result<DateTime>.CreateFail(valueShouldBeNumberMessage, self.RowNum);
+            }
+
+            try
+            {
+                if (cell.CellType == CellType.String)
+                {
+                    var valueInStringCell = cell.StringCellValue;
+                    return Result<DateTime>.CreateSuccess(Convert.ToDateTime(valueInStringCell), self.RowNum);
+                }
+
+                var valueInDateTimeCell = cell.DateCellValue;
+                return Result<DateTime>.CreateSuccess(valueInDateTimeCell, self.RowNum);
+            }
+            catch
+            {
+                return Result<DateTime>.CreateFail(valueShouldBeNumberMessage, self.RowNum);
+            }
+        }
     }
 }

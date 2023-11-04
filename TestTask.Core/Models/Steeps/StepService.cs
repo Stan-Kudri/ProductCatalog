@@ -17,9 +17,9 @@ namespace TestTask.Core.Models.Steeps
                 throw new ArgumentException("The received parameters are not correct.", nameof(item));
             }
 
-            if (_dbContext.Modes.FirstOrDefault(e => e.Id == item.ModeId) == null)
+            if (_dbContext.Company.FirstOrDefault(e => e.Id == item.CompanyId) == null)
             {
-                throw new Exception("Mode ID does not exist.");
+                throw new Exception("Company ID does not exist.");
             }
 
             _dbContext.Steps.Add(item);
@@ -33,14 +33,14 @@ namespace TestTask.Core.Models.Steeps
                 throw new ArgumentNullException("The format of the transmitted data is incorrect.", nameof(item));
             }
 
-            if (!_dbContext.Modes.Any(e => e.Id == item.ModeId))
+            if (!_dbContext.Company.Any(e => e.Id == item.CompanyId))
             {
-                throw new Exception("Mode ID does not exist.");
+                throw new Exception("Company ID does not exist.");
             }
 
             var oldItem = _dbContext.Steps.FirstOrDefault(e => e.Id == item.Id) ?? throw new InvalidOperationException("Interaction element not found.");
 
-            oldItem.ModeId = item.ModeId;
+            oldItem.CompanyId = item.CompanyId;
             oldItem.Timer = item.Timer;
             oldItem.Destination = item.Destination;
             oldItem.Speed = item.Speed;
@@ -59,7 +59,7 @@ namespace TestTask.Core.Models.Steeps
 
         public void RemoveStepRelatedToMode(int modeId)
         {
-            var steps = _dbContext.Steps.Where(e => e.ModeId == modeId).Select(e => e);
+            var steps = _dbContext.Steps.Where(e => e.CompanyId == modeId).Select(e => e);
 
             if (steps.Count() <= 0)
             {
@@ -71,7 +71,7 @@ namespace TestTask.Core.Models.Steeps
 
         public void AddImportData(Step step)
         {
-            if (_dbContext.Modes.FirstOrDefault(e => e.Id == step.ModeId) == null)
+            if (_dbContext.Company.FirstOrDefault(e => e.Id == step.CompanyId) == null)
             {
                 return;
             }

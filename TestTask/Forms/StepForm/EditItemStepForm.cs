@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using TestTask.BindingItem.UserBinding.StepBinding;
-using TestTask.Core.Models.Modes;
+using TestTask.Core.Models.Company;
 using TestTask.Core.Models.Steeps;
 
 namespace TestTask.Forms.StepForm
@@ -18,9 +18,9 @@ namespace TestTask.Forms.StepForm
             Text = "Edit Step";
         }
 
-        public void Initialize(List<Mode> modes, Step oldItem)
+        public void Initialize(List<Company> company, Step oldItem)
         {
-            _modes = new SelectMode(modes);
+            _companies = new SelectCompany(company);
             _oldStep = oldItem;
         }
 
@@ -44,14 +44,14 @@ namespace TestTask.Forms.StepForm
 
         protected override void AddStepForm_Load(object sender, EventArgs e)
         {
-            selectModeBindingSource.DataSource = _modes.Items;
-            _modes.SetValueMode(_oldStep.ModeId);
+            //selectModeBindingSource.DataSource = _companies.Items;
+            _companies.SetValueMode(_oldStep.CompanyId);
             SetDefaultValueData();
         }
 
         protected override void SetDefaultValueData()
         {
-            cmbModeValue.SelectedItem = _modes.Mode;
+            cmbCompanyValue.SelectedItem = _companies.Company;
             tbTimer.Text = _oldStep.Timer.ToString();
             tbDestination.Text = _oldStep.Destination.ToString();
             tbSpeed.Text = _oldStep.Speed.ToString();

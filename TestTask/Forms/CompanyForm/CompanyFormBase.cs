@@ -4,29 +4,35 @@ using System.Windows.Forms;
 using TestTask.BindingItem.UserBinding;
 using TestTask.Core;
 
-namespace TestTask.Forms.ModeForm
+namespace TestTask.Forms.CompanyForm
 {
-    public partial class ModeFormBase : BaseForm
+    public partial class CompanyFormBase : BaseForm
     {
         protected readonly IMessageBox _messageBox;
 
-        private ModeFormBase()
+        private CompanyFormBase()
         {
             InitializeComponent();
         }
 
-        public ModeFormBase(IServiceProvider serviceProvider)
+        public CompanyFormBase(IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            DefaultValue();
             _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
         }
 
         protected virtual void BtnSave_Click(object sender, EventArgs e)
         {
-            if (tbNameMode.Text == string.Empty)
+            if (tbNameCompany.Text == string.Empty)
             {
                 _messageBox.ShowWarning("Fill in the field Name");
                 return;
+            }
+
+            if (tbContry.Text == string.Empty)
+            {
+                _messageBox.ShowWarning("Enter the company's country.");
             }
 
             DialogResult = DialogResult.OK;
@@ -44,28 +50,35 @@ namespace TestTask.Forms.ModeForm
 
         protected virtual void DefaultValue()
         {
-            tbNameMode.Text = string.Empty;
-            tbMaxUsedTips.Text = "0";
-            tbMaxBottle.Text = "0";
+            tbNameCompany.Text = string.Empty;
+            tbContry.Text = "Belarus";
+            var dateNow = DateTime.Now;
+            dtpCreateCompany.MaxDate = dateNow;
+            dtpCreateCompany.Value = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day);
         }
 
         private void TbMaxBottle_KeyPress(object sender, KeyPressEventArgs e) => KeyPressDigit(e);
 
         private void TbMaxUsedType_KeyPress(object sender, KeyPressEventArgs e) => KeyPressDigit(e);
 
-        public ModeModel GetModeModel()
+        public CompanyModel GetCompanyModel()
         {
-            if (!int.TryParse(tbMaxBottle.Text, out var valueMaxBottle))
+            if (tbNameCompany.Text == string.Empty)
             {
-                throw new Exception("The MaxBottleNumber field is filled in incorrectly.");
+                throw new Exception("The name company field is empty.");
             }
 
-            if (!int.TryParse(tbMaxUsedTips.Text, out var valueMaxUsedType))
+            if (tbContry.Text == string.Empty)
             {
-                throw new Exception("The MaxUsedType field is filled in incorrectly.");
+                throw new Exception("The country field is empty.");
             }
 
-            return new ModeModel(tbNameMode.Text, valueMaxBottle, valueMaxUsedType);
+            if (dtpCreateCompany.Value == null)
+            {
+                throw new Exception("Error in date selection.");
+            }
+
+            return new CompanyModel(tbNameCompany.Text, dtpCreateCompany.Value, tbContry.Text);
         }
 
         private void KeyPressDigit(KeyPressEventArgs e)

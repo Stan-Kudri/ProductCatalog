@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using TestTask.BindingItem.UserBinding;
 using TestTask.BindingItem.UserBinding.StepBinding;
 using TestTask.Core;
-using TestTask.Core.Models.Modes;
+using TestTask.Core.Models.Company;
 
 namespace TestTask.Forms.StepForm
 {
@@ -12,7 +12,7 @@ namespace TestTask.Forms.StepForm
     {
         protected readonly IMessageBox _messageBox;
 
-        protected SelectMode _modes;
+        protected SelectCompany _companies;
 
         private StepFormBase()
         {
@@ -25,8 +25,8 @@ namespace TestTask.Forms.StepForm
             _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
         }
 
-        protected Mode SelectedMode =>
-            cmbModeValue.SelectedValue != null ? (Mode)cmbModeValue.SelectedValue : throw new Exception("Wrong combo box format");
+        protected Company SelectedCompany =>
+            cmbCompanyValue.SelectedValue != null ? (Company)cmbCompanyValue.SelectedValue : throw new Exception("Wrong combo box format");
 
         protected virtual void BtnAdd_Click(object sender, EventArgs e)
         {
@@ -49,7 +49,7 @@ namespace TestTask.Forms.StepForm
 
         protected virtual void AddStepForm_Load(object sender, EventArgs e)
         {
-            selectModeBindingSource.DataSource = _modes.Items;
+            //selectModeBindingSource.DataSource = _companies.Items;
             SetDefaultValueData();
         }
 
@@ -69,7 +69,7 @@ namespace TestTask.Forms.StepForm
 
         protected virtual void SetDefaultValueData()
         {
-            cmbModeValue.SelectedItem = _modes.Mode;
+            cmbCompanyValue.SelectedItem = _companies.Company;
             tbTimer.Text = "0";
             tbDestination.Text = string.Empty;
             tbSpeed.Text = "0";
@@ -79,9 +79,9 @@ namespace TestTask.Forms.StepForm
 
         protected bool IsDataFilled(out string message)
         {
-            if (cmbModeValue.Text.Length <= 0)
+            if (cmbCompanyValue.Text.Length <= 0)
             {
-                message = "Select your mode.";
+                message = "Select your company.";
                 return false;
             }
 
@@ -117,7 +117,7 @@ namespace TestTask.Forms.StepForm
                 throw new Exception("The Volume field is filled in incorrectly.");
             }
 
-            return new StepModel(SelectedMode, timer, tbDestination.Text, speed, tbType.Text, volume);
+            return new StepModel(SelectedCompany, timer, tbDestination.Text, speed, tbType.Text, volume);
         }
     }
 }

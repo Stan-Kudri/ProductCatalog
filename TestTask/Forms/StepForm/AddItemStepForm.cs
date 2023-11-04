@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TestTask.BindingItem.UserBinding.StepBinding;
-using TestTask.Core.Models.Modes;
+using TestTask.Core.Models.Company;
 
 namespace TestTask.Forms.StepForm
 {
@@ -13,6 +13,6 @@ namespace TestTask.Forms.StepForm
             Text = "Add Step";
         }
 
-        public void Initialize(List<Mode> modes) => _modes = new SelectMode(modes);
+        public void Initialize(List<Company> company) => _companies = new SelectCompany(company);
     }
 }

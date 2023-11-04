@@ -42,7 +42,7 @@ namespace TestTask.Core.Export.SheetFillers
                             cell.SetCellValue(item.Id);
                             break;
                         case StepField.ModeId:
-                            cell.SetCellValue(item.ModeId);
+                            cell.SetCellValue(item.CompanyId);
                             break;
                         case StepField.Timer:
                             cell.SetCellValue(item.Timer);

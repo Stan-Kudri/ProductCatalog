@@ -70,7 +70,7 @@ namespace TestTask.Core.Import.Importers
                         {
                             return modeId.ToError<Step>();
                         }
-                        res.ModeId = modeId.Value;
+                        res.CompanyId = modeId.Value;
                         break;
 
                     case StepField.Timer:

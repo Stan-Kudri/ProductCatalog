@@ -1,27 +1,27 @@
 ﻿using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
-using TestTask.Core.Models.Modes;
+using TestTask.Core.Models.Company;
 
 namespace TestTask.Core.Export.SheetFillers
 {
-    public class ModeSheetFiller : ISheetFiller
+    public class CompanySheetFiller : ISheetFiller
     {
-        private readonly ModeService _modeService;
-        private readonly List<ModeField> _columnMap = CreateColumnMap();
+        private readonly CompanyService _modeService;
+        private readonly List<CompanyField> _columnMap = CreateColumnMap();
 
-        public ModeSheetFiller(ModeService modeService) => _modeService = modeService;
+        public CompanySheetFiller(CompanyService companyService) => _modeService = companyService;
 
-        public string Name => "Modes";
+        public string Name => "Company";
 
-        public List<ModeField> ColumnMap => _columnMap;
+        public List<CompanyField> ColumnMap => _columnMap;
 
         public void Fill(ISheet sheet)
         {
             IRow row = sheet.CreateRow(0);
             for (int i = 0; i < _columnMap.Count; i++)
             {
-                ModeField column = _columnMap[i];
+                CompanyField column = _columnMap[i];
                 row.CreateCell(i).SetCellValue(column.ToString());
             }
 
@@ -34,21 +34,21 @@ namespace TestTask.Core.Export.SheetFillers
 
                 for (int i = 0; i < _columnMap.Count; i++)
                 {
-                    ModeField column = _columnMap[i];
+                    CompanyField column = _columnMap[i];
                     ICell cell = row.CreateCell(i);
                     switch (column)
                     {
-                        case ModeField.ID:
+                        case CompanyField.ID:
                             cell.SetCellValue(item.Id);
                             break;
-                        case ModeField.Name:
+                        case CompanyField.Name:
                             cell.SetCellValue(item.Name);
                             break;
-                        case ModeField.MaxBottleNumber:
-                            cell.SetCellValue(item.MaxBottleNumber);
+                        case CompanyField.DateCreation:
+                            cell.SetCellValue(item.DateCreation);
                             break;
-                        case ModeField.MaxUsedTips:
-                            cell.SetCellValue(item.MaxUsedTips);
+                        case CompanyField.Country:
+                            cell.SetCellValue(item.Country);
                             break;
                         default:
                             throw new Exception("Unknown field.");
@@ -57,10 +57,10 @@ namespace TestTask.Core.Export.SheetFillers
             }
         }
 
-        private static List<ModeField> CreateColumnMap()
+        private static List<CompanyField> CreateColumnMap()
         {
-            var columnMap = new List<ModeField>();
-            foreach (ModeField suit in (ModeField[])Enum.GetValues(typeof(ModeField)))
+            var columnMap = new List<CompanyField>();
+            foreach (CompanyField suit in (CompanyField[])Enum.GetValues(typeof(CompanyField)))
             {
                 columnMap.Add(suit);
             }

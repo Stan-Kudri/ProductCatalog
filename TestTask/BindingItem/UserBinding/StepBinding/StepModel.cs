@@ -1,21 +1,21 @@
 ﻿using System;
-using TestTask.Core.Models.Modes;
+using TestTask.Core.Models.Company;
 using TestTask.Core.Models.Steeps;
 
 namespace TestTask.BindingItem.UserBinding
 {
     public class StepModel : ModelBase
     {
-        private Mode _mode = null;
+        private Company _company = null;
         private int _timer = 0;
         private string _destination = null;
         private int _speed = 0;
         private string _type = string.Empty;
         private int _volume = 0;
 
-        public StepModel(Mode mode, int timer, string destination, int speed, string type, int volume)
+        public StepModel(Company company, int timer, string destination, int speed, string type, int volume)
         {
-            Mode = mode ?? throw new ArgumentException("The mode cannot be null.", nameof(mode));
+            Company = company ?? throw new ArgumentException("The company cannot be null.", nameof(company));
 
             Timer = timer >= 0 ? Timer = timer : throw new ArgumentException("The timer value is greater than zero.", nameof(timer));
 
@@ -31,10 +31,10 @@ namespace TestTask.BindingItem.UserBinding
         }
 
 
-        public Mode Mode
+        public Company Company
         {
-            get => _mode;
-            set => SetField(ref _mode, value);
+            get => _company;
+            set => SetField(ref _company, value);
         }
 
         public int Timer
@@ -67,8 +67,8 @@ namespace TestTask.BindingItem.UserBinding
             set => SetField(ref _volume, value);
         }
 
-        public Step ToStep() => new Step(_mode.Id, _timer, _destination, _speed, _type, _volume);
+        public Step ToStep() => new Step(_company.Id, _timer, _destination, _speed, _type, _volume);
 
-        public Step ToStep(int stepId) => new Step(_mode.Id, _timer, _destination, _speed, _type, _volume, stepId);
+        public Step ToStep(int stepId) => new Step(_company.Id, _timer, _destination, _speed, _type, _volume, stepId);
     }
 }
