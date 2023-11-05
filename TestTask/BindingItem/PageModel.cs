@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using TestTask.Core.Models.Page;
 
-namespace TestTask.BindingItem.UserBinding
+namespace TestTask.BindingItem
 {
     public class PageModel : ModelBase
     {

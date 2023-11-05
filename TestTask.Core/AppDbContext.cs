@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
 using TestTask.Core.Models.Users;
@@ -17,6 +18,8 @@ namespace TestTask.Core
         public DbSet<Company> Company { get; set; }
 
         public DbSet<Product> Product { get; set; }
+
+        public DbSet<Category> Category { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,10 +46,18 @@ namespace TestTask.Core
             configurationProduct.HasKey(e => e.Id);
             configurationProduct.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
             configurationProduct.Property(e => e.CompanyId).IsRequired().HasColumnName("companyId");
-            configurationProduct.Property(e => e.Category).IsRequired().HasColumnName("category").HasMaxLength(128);
+            configurationProduct.Property(e => e.CategoryId).IsRequired().HasColumnName("categoryId");
             configurationProduct.Property(e => e.Type).IsRequired().HasColumnName("type").HasMaxLength(128);
             configurationProduct.Property(e => e.Price).IsRequired().HasColumnType("NUMERIC").HasColumnName("price");
             configurationProduct.Property(e => e.Destination).HasColumnName("destination");
+
+            var configurationCategory = modelBuilder.Entity<Category>();
+            configurationCategory.ToTable("category");
+            configurationCategory.HasKey(e => e.Id);
+            configurationCategory.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
+            configurationCategory.HasIndex(e => e.Name).IsUnique();
+            configurationCategory.Property(e => e.Name).IsRequired().HasMaxLength(128).HasColumnName("name").HasMaxLength(128);
+            configurationCategory.HasMany(e => e.Product).WithOne().HasForeignKey(e => e.CategoryId);
         }
     }
 }

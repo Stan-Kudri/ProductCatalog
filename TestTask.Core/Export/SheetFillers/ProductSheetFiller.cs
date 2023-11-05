@@ -1,16 +1,17 @@
 ﻿using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TestTask.Core.Models.Products;
 
 namespace TestTask.Core.Export.SheetFillers
 {
     public class ProductSheetFiller : ISheetFiller
     {
-        private readonly ProductService _stepService;
+        private readonly ProductService _productService;
         private readonly List<ProductField> _columnMap = CreateColumnMap();
 
-        public ProductSheetFiller(ProductService stepService) => _stepService = stepService;
+        public ProductSheetFiller(ProductService stepService) => _productService = stepService;
 
         public string Name => "Product";
 
@@ -27,7 +28,7 @@ namespace TestTask.Core.Export.SheetFillers
 
             var numberRow = 0;
 
-            foreach (var item in _stepService.GetAll())
+            foreach (var item in _productService.GetAll())
             {
                 numberRow++;
                 row = sheet.CreateRow(numberRow);
@@ -44,8 +45,8 @@ namespace TestTask.Core.Export.SheetFillers
                         case ProductField.CompanyId:
                             cell.SetCellValue(item.CompanyId);
                             break;
-                        case ProductField.Category:
-                            cell.SetCellValue(item.Category);
+                        case ProductField.CategoryId:
+                            cell.SetCellValue(item.CategoryId);
                             break;
                         case ProductField.Type:
                             cell.SetCellValue(item.Type);
@@ -53,7 +54,6 @@ namespace TestTask.Core.Export.SheetFillers
                         case ProductField.Price:
                             var price = Convert.ToDouble(item.Price);
                             cell.SetCellValue(price);
-                            //cell.SetCellValue(string.Format("{0:C2}", item.Price));
                             break;
                         case ProductField.Destination:
                             cell.SetCellValue(item.Destination);
@@ -66,14 +66,6 @@ namespace TestTask.Core.Export.SheetFillers
         }
 
         private static List<ProductField> CreateColumnMap()
-        {
-            var columnMap = new List<ProductField>();
-            foreach (ProductField suit in (ProductField[])Enum.GetValues(typeof(ProductField)))
-            {
-                columnMap.Add(suit);
-            }
-
-            return columnMap;
-        }
+            => ((ProductField[])Enum.GetValues(typeof(ProductField))).ToList();
     }
 }

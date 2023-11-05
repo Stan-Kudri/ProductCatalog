@@ -1,4 +1,6 @@
-﻿namespace TestTask.Forms.CompanyForm
+﻿using TestTask.BindingItem;
+
+namespace TestTask.Forms.CompanyForm
 {
     partial class CompanyFormBase
     {
@@ -68,13 +70,13 @@
             this.tbNameCompany.Size = new System.Drawing.Size(244, 48);
             this.tbNameCompany.TabIndex = 1;
             this.tbNameCompany.TabStop = false;
-            this.tbNameCompany.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbNameCompany.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.tbNameCompany.TrailingIcon = null;
             this.tbNameCompany.UseSystemPasswordChar = false;
             // 
             // companyModelBindingSource
             // 
-            this.companyModelBindingSource.DataSource = typeof(TestTask.BindingItem.UserBinding.CompanyModel);
+            this.companyModelBindingSource.DataSource = typeof(TestTask.BindingItem.CompanyModel);
             // 
             // tlpNameCompany
             // 

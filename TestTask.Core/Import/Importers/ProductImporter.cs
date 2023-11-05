@@ -12,7 +12,7 @@ namespace TestTask.Core.Import.Importers
         {
             ["ID"] = ProductField.ID,
             ["CompanyId"] = ProductField.CompanyId,
-            ["Category"] = ProductField.Category,
+            ["CategoryId"] = ProductField.CategoryId,
             ["Type"] = ProductField.Type,
             ["Price"] = ProductField.Price,
             ["Destination"] = ProductField.Destination,
@@ -24,7 +24,6 @@ namespace TestTask.Core.Import.Importers
 
         public bool ReadHeader(ISheet sheet)
         {
-            _header = null;
             try
             {
                 _header = sheet.ReadHeader(_columnMap);
@@ -32,6 +31,7 @@ namespace TestTask.Core.Import.Importers
             }
             catch
             {
+                _header = null;
                 return false;
             }
         }
@@ -73,18 +73,14 @@ namespace TestTask.Core.Import.Importers
                         res.CompanyId = companyId.Value;
                         break;
 
-                    case ProductField.Category:
+                    case ProductField.CategoryId:
 
-                        var category = row.GetString(pair.Value, "Category");
-                        if (!category.Success)
+                        var categoryId = row.GetInt(pair.Value, "CategoryId");
+                        if (!categoryId.Success)
                         {
-                            return category.ToError<Product>();
+                            return categoryId.ToError<Product>();
                         }
-                        if (string.IsNullOrEmpty(category.Value))
-                        {
-                            return Result<Product>.CreateFail("Category should not be empty", row.RowNum);
-                        }
-                        res.Category = category.Value;
+                        res.CategoryId = categoryId.Value;
                         break;
 
                     case ProductField.Type:

@@ -33,6 +33,7 @@
             this.tlbComboBox = new System.Windows.Forms.TableLayoutPanel();
             this.btnImportData = new MaterialSkin.Controls.MaterialButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.cbCategory = new MaterialSkin.Controls.MaterialCheckbox();
             this.tlbComboBox.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -51,9 +52,10 @@
             this.cbCompany.Name = "cbCompany";
             this.cbCompany.ReadOnly = false;
             this.cbCompany.Ripple = true;
-            this.cbCompany.Size = new System.Drawing.Size(123, 40);
+            this.cbCompany.Size = new System.Drawing.Size(123, 55);
             this.cbCompany.TabIndex = 0;
             this.cbCompany.Text = "Company";
+            this.cbCompany.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cbCompany.UseVisualStyleBackColor = true;
             // 
             // cbProduct
@@ -70,9 +72,10 @@
             this.cbProduct.Name = "cbProduct";
             this.cbProduct.ReadOnly = false;
             this.cbProduct.Ripple = true;
-            this.cbProduct.Size = new System.Drawing.Size(123, 40);
+            this.cbProduct.Size = new System.Drawing.Size(123, 55);
             this.cbProduct.TabIndex = 1;
             this.cbProduct.Text = "Product";
+            this.cbProduct.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cbProduct.UseVisualStyleBackColor = true;
             // 
             // tlbComboBox
@@ -80,14 +83,16 @@
             this.tlbComboBox.ColumnCount = 2;
             this.tlbComboBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlbComboBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlbComboBox.Controls.Add(this.cbCategory, 0, 1);
             this.tlbComboBox.Controls.Add(this.cbCompany, 0, 0);
             this.tlbComboBox.Controls.Add(this.cbProduct, 1, 0);
             this.tlbComboBox.Location = new System.Drawing.Point(8, 72);
             this.tlbComboBox.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.tlbComboBox.Name = "tlbComboBox";
-            this.tlbComboBox.RowCount = 1;
-            this.tlbComboBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlbComboBox.Size = new System.Drawing.Size(246, 40);
+            this.tlbComboBox.RowCount = 2;
+            this.tlbComboBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlbComboBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlbComboBox.Size = new System.Drawing.Size(246, 110);
             this.tlbComboBox.TabIndex = 2;
             // 
             // btnImportData
@@ -116,7 +121,7 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.btnImportData, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 114);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 185);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(5, 10, 5, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -125,14 +130,34 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(246, 50);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
+            // cbCategory
+            // 
+            this.cbCategory.AutoSize = true;
+            this.cbCategory.Checked = true;
+            this.cbCategory.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbCategory.Depth = 0;
+            this.cbCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbCategory.Location = new System.Drawing.Point(0, 55);
+            this.cbCategory.Margin = new System.Windows.Forms.Padding(0);
+            this.cbCategory.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.cbCategory.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cbCategory.Name = "cbCategory";
+            this.cbCategory.ReadOnly = false;
+            this.cbCategory.Ripple = true;
+            this.cbCategory.Size = new System.Drawing.Size(123, 55);
+            this.cbCategory.TabIndex = 2;
+            this.cbCategory.Text = "Category";
+            this.cbCategory.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cbCategory.UseVisualStyleBackColor = true;
+            // 
             // ImportDatabaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(260, 170);
+            this.ClientSize = new System.Drawing.Size(260, 240);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tlbComboBox);
-            this.MinimumSize = new System.Drawing.Size(260, 170);
+            this.MinimumSize = new System.Drawing.Size(260, 240);
             this.Name = "ImportDatabaseForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Import from Excel";
@@ -151,5 +176,6 @@
         private System.Windows.Forms.TableLayoutPanel tlbComboBox;
         private MaterialSkin.Controls.MaterialButton btnImportData;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private MaterialSkin.Controls.MaterialCheckbox cbCategory;
     }
 }

@@ -1,16 +1,17 @@
 ﻿using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TestTask.Core.Models.Companies;
 
 namespace TestTask.Core.Export.SheetFillers
 {
     public class CompanySheetFiller : ISheetFiller
     {
-        private readonly CompanyService _modeService;
+        private readonly CompanyService _companyService;
         private readonly List<CompanyField> _columnMap = CreateColumnMap();
 
-        public CompanySheetFiller(CompanyService companyService) => _modeService = companyService;
+        public CompanySheetFiller(CompanyService companyService) => _companyService = companyService;
 
         public string Name => "Company";
 
@@ -27,7 +28,7 @@ namespace TestTask.Core.Export.SheetFillers
 
             var numberRow = 0;
 
-            foreach (var item in _modeService.GetAll())
+            foreach (var item in _companyService.GetAll())
             {
                 numberRow++;
                 row = sheet.CreateRow(numberRow);
@@ -58,14 +59,6 @@ namespace TestTask.Core.Export.SheetFillers
         }
 
         private static List<CompanyField> CreateColumnMap()
-        {
-            var columnMap = new List<CompanyField>();
-            foreach (CompanyField suit in (CompanyField[])Enum.GetValues(typeof(CompanyField)))
-            {
-                columnMap.Add(suit);
-            }
-
-            return columnMap;
-        }
+            => ((CompanyField[])Enum.GetValues(typeof(CompanyField))).ToList();
     }
 }

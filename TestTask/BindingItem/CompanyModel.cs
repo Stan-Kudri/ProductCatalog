@@ -1,7 +1,7 @@
 ﻿using System;
 using TestTask.Core.Models.Companies;
 
-namespace TestTask.BindingItem.UserBinding
+namespace TestTask.BindingItem
 {
     public class CompanyModel : ModelBase
     {
@@ -36,7 +36,7 @@ namespace TestTask.BindingItem.UserBinding
 
         public static CompanyModel GetModeModel(string name, DateTime dateCreation, string country) => new CompanyModel(name, dateCreation, country);
 
-        public Company ToMode() => new Company(_name, _dateCreation, _country);
+        public Company ToCompany() => new Company(_name, _dateCreation, _country);
 
         public Company ToCompany(int id) => new Company(_name, _dateCreation, _country, id);
     }

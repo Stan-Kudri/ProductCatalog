@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using TestTask.Core.Models.Companies;
 
-namespace TestTask.BindingItem.UserBinding.ProductBinding
+namespace TestTask.BindingItem.ProductBinding
 {
     public class SelectCompany : ModelBase
     {
