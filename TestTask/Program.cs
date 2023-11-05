@@ -6,11 +6,11 @@ using TestTask.ChildForms.Import;
 using TestTask.Core;
 using TestTask.Core.Import;
 using TestTask.Core.Import.Importers;
-using TestTask.Core.Models.Modes;
-using TestTask.Core.Models.Steeps;
+using TestTask.Core.Models.Companies;
+using TestTask.Core.Models.Products;
 using TestTask.Core.Models.Users;
 using TestTask.Forms;
-using TestTask.Forms.ModeForm;
+using TestTask.Forms.CompanyForm;
 using TestTask.Forms.StepForm;
 
 namespace TestTask
@@ -30,23 +30,24 @@ namespace TestTask
                 .AddScoped(e => e.GetRequiredService<DbContextFactory>().Create())
                 .AddScoped<IMessageBox>(e => new MessageBoxShow())
                 .AddScoped<UserService>()
-                .AddScoped<ModeService>()
-                .AddScoped<StepService>()
+                .AddScoped<CompanyService>()
+                .AddScoped<ProductService>()
                 .AddScoped<UserValidator>()
                 .AddSingleton<BaseForm>()
                 .AddTransient<LoginForm>()
                 .AddTransient<RegistrationForm>()
                 .AddTransient<ImportDatabaseForm>()
                 .AddTransient<TableForm>()
-                .AddTransient<AddItemModeForm>()
-                .AddTransient<EditItemModeForm>()
-                .AddTransient<AddItemStepForm>()
+                .AddTransient<AddItemCompanyForm>()
+                .AddTransient<EditItemCompanyForm>()
+                .AddTransient<AddItemProductForm>()
+                .AddTransient<EditItemProductForm>()
                 .AddSingleton(e => new OpenFileDialog { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
                 .AddSingleton(e => new SaveFileDialog() { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
-                .AddSingleton(e => new ModeImporter())
-                .AddSingleton(e => new StepImporter())
-                .AddSingleton(e => new ExcelImporter<Mode>(e.GetRequiredService<ModeImporter>()))
-                .AddSingleton(e => new ExcelImporter<Step>(e.GetRequiredService<StepImporter>()));
+                .AddSingleton(e => new CompanyImporter())
+                .AddSingleton(e => new ProductImporter())
+                .AddSingleton(e => new ExcelImporter<Company>(e.GetRequiredService<CompanyImporter>()))
+                .AddSingleton(e => new ExcelImporter<Product>(e.GetRequiredService<ProductImporter>()));
 
             var container = collection.BuildServiceProvider();
 
@@ -57,7 +58,7 @@ namespace TestTask
                     var materialSkinManager = MaterialSkinManager.Instance;
                     materialSkinManager.AddFormToManage(loginForm);
                     materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-                    materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey600, Primary.BlueGrey400, Primary.Grey800, Accent.Yellow700, TextShade.WHITE);
+                    materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey600, Primary.BlueGrey400, Primary.Grey800, Accent.Pink100, TextShade.WHITE);
                     Application.EnableVisualStyles();
                     Application.Run(loginForm);
                 }

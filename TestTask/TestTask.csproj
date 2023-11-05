@@ -161,10 +161,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindingItem\ModelBase.cs" />
-    <Compile Include="BindingItem\UserBinding\ModeModel.cs" />
+    <Compile Include="BindingItem\UserBinding\CompanyModel.cs" />
     <Compile Include="BindingItem\UserBinding\PageModel.cs" />
-    <Compile Include="BindingItem\UserBinding\StepBinding\SelectMode.cs" />
-    <Compile Include="BindingItem\UserBinding\StepBinding\StepModel.cs" />
+    <Compile Include="BindingItem\UserBinding\ProductBinding\SelectCompany.cs" />
+    <Compile Include="BindingItem\UserBinding\ProductBinding\ProductModel.cs" />
     <Compile Include="BindingItem\UserBinding\UserModel.cs" />
     <Compile Include="Extension\ListViewExtension.cs" />
     <Compile Include="Extension\PageExtension.cs" />
@@ -180,16 +180,16 @@
     <Compile Include="Forms\Import\ImportDatabaseForm.Designer.cs">
       <DependentUpon>ImportDatabaseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ModeForm\AddItemModeForm.cs">
+    <Compile Include="Forms\CompanyForm\AddItemCompanyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ModeForm\ModeFormBase.cs">
+    <Compile Include="Forms\CompanyForm\CompanyFormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ModeForm\ModeFormBase.Designer.cs">
-      <DependentUpon>ModeFormBase.cs</DependentUpon>
+    <Compile Include="Forms\CompanyForm\CompanyFormBase.Designer.cs">
+      <DependentUpon>CompanyFormBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ModeForm\EditItemModeForm.cs">
+    <Compile Include="Forms\CompanyForm\EditItemCompanyForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\RegistrationForm.cs">
@@ -198,17 +198,17 @@
     <Compile Include="Forms\RegistrationForm.Designer.cs">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\StepForm\AddItemStepForm.cs">
+    <Compile Include="Forms\StepForm\AddItemProductForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\StepForm\EditItemStepForm.cs">
+    <Compile Include="Forms\StepForm\EditItemProductForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\StepForm\StepFormBase.cs">
+    <Compile Include="Forms\StepForm\ProductFormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\StepForm\StepFormBase.Designer.cs">
-      <DependentUpon>StepFormBase.cs</DependentUpon>
+    <Compile Include="Forms\StepForm\ProductFormBase.Designer.cs">
+      <DependentUpon>ProductFormBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\TableForm.cs">
       <SubType>Form</SubType>
@@ -226,23 +226,30 @@
     <Compile Include="MessageBoxShow.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Import\ImportDatabaseForm.resx">
       <DependentUpon>ImportDatabaseForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ModeForm\ModeFormBase.resx">
-      <DependentUpon>ModeFormBase.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\CompanyForm\CompanyFormBase.resx">
+      <DependentUpon>CompanyFormBase.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RegistrationForm.resx">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\StepForm\StepFormBase.resx">
-      <DependentUpon>StepFormBase.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\StepForm\ProductFormBase.resx">
+      <DependentUpon>ProductFormBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TableForm.resx">
       <DependentUpon>TableForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -255,10 +262,10 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.ModeModel.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.CompanyModel.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.PageModel.datasource" />
-    <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.StepBinding.SelectMode.datasource" />
-    <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.StepMode.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.ProductBinding.ProductModel.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.ProductBinding.SelectCompany.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
