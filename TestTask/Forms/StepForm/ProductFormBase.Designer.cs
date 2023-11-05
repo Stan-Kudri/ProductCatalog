@@ -1,4 +1,6 @@
-﻿namespace TestTask.Forms.StepForm
+﻿using TestTask.BindingItem.ProductBinding;
+
+namespace TestTask.Forms.StepForm
 {
     partial class ProductFormBase
     {
@@ -25,57 +27,29 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tbCategory = new MaterialSkin.Controls.MaterialTextBox2();
             this.productModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cmbCompanyValue = new MaterialSkin.Controls.MaterialComboBox();
-            this.itemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.itemsBindingSourceCompany = new System.Windows.Forms.BindingSource(this.components);
             this.selectCompanyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tlpProductData = new System.Windows.Forms.TableLayoutPanel();
             this.tbType = new MaterialSkin.Controls.MaterialTextBox2();
             this.tbPrice = new MaterialSkin.Controls.MaterialTextBox2();
             this.tbDestination = new MaterialSkin.Controls.MaterialTextBox2();
+            this.cmbCategoryValue = new MaterialSkin.Controls.MaterialComboBox();
             this.tlpProductButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new MaterialSkin.Controls.MaterialButton();
             this.btnClear = new MaterialSkin.Controls.MaterialButton();
             this.btnClose = new MaterialSkin.Controls.MaterialButton();
+            this.selectCategoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.itemsBindingSourceCategory = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.productModelBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCompany)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectCompanyBindingSource)).BeginInit();
             this.tlpProductData.SuspendLayout();
             this.tlpProductButton.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.selectCategoryBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCategory)).BeginInit();
             this.SuspendLayout();
-            // 
-            // tbCategory
-            // 
-            this.tbCategory.AnimateReadOnly = false;
-            this.tbCategory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.tbCategory.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.tbCategory.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productModelBindingSource, "Category", true));
-            this.tbCategory.Depth = 0;
-            this.tbCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.tbCategory.HideSelection = true;
-            this.tbCategory.Hint = "Category";
-            this.tbCategory.LeadingIcon = null;
-            this.tbCategory.Location = new System.Drawing.Point(3, 51);
-            this.tbCategory.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.tbCategory.MaxLength = 32767;
-            this.tbCategory.MouseState = MaterialSkin.MouseState.OUT;
-            this.tbCategory.Name = "tbCategory";
-            this.tbCategory.PasswordChar = '\0';
-            this.tbCategory.PrefixSuffixText = null;
-            this.tbCategory.ReadOnly = false;
-            this.tbCategory.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbCategory.SelectedText = "";
-            this.tbCategory.SelectionLength = 0;
-            this.tbCategory.SelectionStart = 0;
-            this.tbCategory.ShortcutsEnabled = true;
-            this.tbCategory.Size = new System.Drawing.Size(294, 48);
-            this.tbCategory.TabIndex = 0;
-            this.tbCategory.TabStop = false;
-            this.tbCategory.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.tbCategory.TrailingIcon = null;
-            this.tbCategory.UseSystemPasswordChar = false;
             // 
             // productModelBindingSource
             // 
@@ -85,7 +59,7 @@
             // 
             this.cmbCompanyValue.AutoResize = false;
             this.cmbCompanyValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cmbCompanyValue.DataSource = this.itemsBindingSource;
+            this.cmbCompanyValue.DataSource = this.itemsBindingSourceCompany;
             this.cmbCompanyValue.Depth = 0;
             this.cmbCompanyValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbCompanyValue.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
@@ -106,14 +80,14 @@
             this.cmbCompanyValue.StartIndex = 0;
             this.cmbCompanyValue.TabIndex = 1;
             // 
-            // itemsBindingSource
+            // itemsBindingSourceCompany
             // 
-            this.itemsBindingSource.DataMember = "Items";
-            this.itemsBindingSource.DataSource = this.selectCompanyBindingSource;
+            this.itemsBindingSourceCompany.DataMember = "Items";
+            this.itemsBindingSourceCompany.DataSource = this.selectCompanyBindingSource;
             // 
             // selectCompanyBindingSource
             // 
-            this.selectCompanyBindingSource.DataSource = typeof(TestTask.BindingItem.UserBinding.ProductBinding.SelectCompany);
+            this.selectCompanyBindingSource.DataSource = typeof(SelectCompany);
             // 
             // tlpProductData
             // 
@@ -123,10 +97,10 @@
             this.tlpProductData.ColumnCount = 1;
             this.tlpProductData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpProductData.Controls.Add(this.cmbCompanyValue, 0, 0);
-            this.tlpProductData.Controls.Add(this.tbCategory, 0, 1);
             this.tlpProductData.Controls.Add(this.tbType, 0, 2);
             this.tlpProductData.Controls.Add(this.tbPrice, 0, 3);
             this.tlpProductData.Controls.Add(this.tbDestination, 0, 4);
+            this.tlpProductData.Controls.Add(this.cmbCategoryValue, 0, 1);
             this.tlpProductData.Location = new System.Drawing.Point(4, 69);
             this.tlpProductData.MinimumSize = new System.Drawing.Size(300, 250);
             this.tlpProductData.Name = "tlpProductData";
@@ -235,6 +209,30 @@
             this.tbDestination.TrailingIcon = null;
             this.tbDestination.UseSystemPasswordChar = false;
             // 
+            // cmbCategory
+            // 
+            this.cmbCategoryValue.AutoResize = false;
+            this.cmbCategoryValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbCategoryValue.DataSource = this.itemsBindingSourceCategory;
+            this.cmbCategoryValue.Depth = 0;
+            this.cmbCategoryValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbCategoryValue.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbCategoryValue.DropDownHeight = 174;
+            this.cmbCategoryValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCategoryValue.DropDownWidth = 121;
+            this.cmbCategoryValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cmbCategoryValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cmbCategoryValue.FormattingEnabled = true;
+            this.cmbCategoryValue.IntegralHeight = false;
+            this.cmbCategoryValue.ItemHeight = 43;
+            this.cmbCategoryValue.Location = new System.Drawing.Point(3, 53);
+            this.cmbCategoryValue.MaxDropDownItems = 4;
+            this.cmbCategoryValue.MouseState = MaterialSkin.MouseState.OUT;
+            this.cmbCategoryValue.Name = "cmbCategory";
+            this.cmbCategoryValue.Size = new System.Drawing.Size(294, 49);
+            this.cmbCategoryValue.StartIndex = 0;
+            this.cmbCategoryValue.TabIndex = 5;
+            // 
             // tlpProductButton
             // 
             this.tlpProductButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -316,6 +314,15 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
+            // selectCategoryBindingSource
+            // 
+            this.selectCategoryBindingSource.DataSource = typeof(TestTask.BindingItem.ProductBinding.SelectCategory);
+            // 
+            // itemsBindingSourceCategory
+            // 
+            this.itemsBindingSourceCategory.DataMember = "Items";
+            this.itemsBindingSourceCategory.DataSource = this.selectCategoryBindingSource;
+            // 
             // ProductFormBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -328,18 +335,18 @@
             this.Text = "Product";
             this.Load += new System.EventHandler(this.AddStepForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.productModelBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCompany)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectCompanyBindingSource)).EndInit();
             this.tlpProductData.ResumeLayout(false);
             this.tlpProductButton.ResumeLayout(false);
             this.tlpProductButton.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.selectCategoryBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCategory)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        protected MaterialSkin.Controls.MaterialTextBox2 tbCategory;
         protected MaterialSkin.Controls.MaterialComboBox cmbCompanyValue;
         protected System.Windows.Forms.TableLayoutPanel tlpProductData;
         protected MaterialSkin.Controls.MaterialTextBox2 tbType;
@@ -350,8 +357,11 @@
         protected MaterialSkin.Controls.MaterialButton btnClear;
         protected MaterialSkin.Controls.MaterialButton btnClose;
         protected System.Windows.Forms.BindingSource productModelBindingSource;
-        protected System.Windows.Forms.BindingSource itemsBindingSource;
+        protected System.Windows.Forms.BindingSource itemsBindingSourceCompany;
         protected System.Windows.Forms.BindingSource selectCompanyBindingSource;
-        private System.ComponentModel.IContainer components;
+        protected MaterialSkin.Controls.MaterialComboBox cmbCategoryValue;
+        protected System.ComponentModel.IContainer components;
+        protected System.Windows.Forms.BindingSource itemsBindingSourceCategory;
+        protected System.Windows.Forms.BindingSource selectCategoryBindingSource;
     }
 }

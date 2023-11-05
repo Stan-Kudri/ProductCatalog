@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using TestTask.BindingItem.UserBinding.ProductBinding;
+using TestTask.BindingItem.ProductBinding;
+using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
 
@@ -18,9 +19,10 @@ namespace TestTask.Forms.StepForm
             Text = "Edit Product";
         }
 
-        public void Initialize(List<Company> company, Product oldItem)
+        public void Initialize(List<Company> company, List<Category> categories, Product oldItem)
         {
             _companies = new SelectCompany(company);
+            _categories = new SelectCategory(categories);
             _oldItem = oldItem;
         }
 
@@ -32,7 +34,7 @@ namespace TestTask.Forms.StepForm
                 return;
             }
 
-            _editItem = GetStepModel().ToStep(_oldItem.Id);
+            _editItem = GetProductModel().ToStep(_oldItem.Id);
             if (_oldItem.Equals(_editItem))
             {
                 _messageBox.ShowInfo("The product has not been modified.");
@@ -52,7 +54,7 @@ namespace TestTask.Forms.StepForm
         protected override void SetDefaultValueData()
         {
             cmbCompanyValue.SelectedItem = _companies.Company;
-            tbCategory.Text = _oldItem.Category;
+            cmbCategoryValue.SelectedItem = _categories.Category;
             tbType.Text = _oldItem.Type;
             tbPrice.Text = _oldItem.Price.ToString();
             tbDestination.Text = _oldItem.Destination;

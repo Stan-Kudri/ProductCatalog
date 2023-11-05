@@ -41,7 +41,7 @@ namespace TestTask.Core.Models.Products
             var oldItem = _dbContext.Product.FirstOrDefault(e => e.Id == item.Id) ?? throw new InvalidOperationException("Interaction element not found.");
 
             oldItem.CompanyId = item.CompanyId;
-            oldItem.Category = item.Category;
+            oldItem.CategoryId = item.CategoryId;
             oldItem.Type = item.Type;
             oldItem.Price = item.Price;
             oldItem.Destination = item.Destination;
@@ -56,16 +56,28 @@ namespace TestTask.Core.Models.Products
             _dbContext.SaveChanges();
         }
 
-        public void RemoveStepRelatedToMode(int companyId)
+        public void RemoveProductRelatedToCompany(int companyId)
         {
-            var steps = _dbContext.Product.Where(e => e.CompanyId == companyId).Select(e => e);
+            var product = _dbContext.Product.Where(e => e.CompanyId == companyId).Select(e => e);
 
-            if (steps.Count() <= 0)
+            if (product.Count() <= 0)
             {
                 return;
             }
 
-            _dbContext.Product.RemoveRange(steps.ToList());
+            _dbContext.Product.RemoveRange(product.ToList());
+        }
+
+        public void RemoveProductRelatedToCategory(int categoryId)
+        {
+            var product = _dbContext.Product.Where(e => e.CategoryId == categoryId).Select(e => e);
+
+            if (product.Count() <= 0)
+            {
+                return;
+            }
+
+            _dbContext.Product.RemoveRange(product.ToList());
         }
 
         public void AddImportData(Product item)

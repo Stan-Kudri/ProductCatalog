@@ -4,7 +4,7 @@
     {
         ID,
         CompanyId,
-        Category,
+        CategoryId,
         Type,
         Price,
         Destination,

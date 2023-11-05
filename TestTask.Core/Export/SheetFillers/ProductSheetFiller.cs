@@ -1,6 +1,7 @@
 ﻿using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TestTask.Core.Models.Products;
 
 namespace TestTask.Core.Export.SheetFillers
@@ -44,8 +45,8 @@ namespace TestTask.Core.Export.SheetFillers
                         case ProductField.CompanyId:
                             cell.SetCellValue(item.CompanyId);
                             break;
-                        case ProductField.Category:
-                            cell.SetCellValue(item.Category);
+                        case ProductField.CategoryId:
+                            cell.SetCellValue(item.CategoryId);
                             break;
                         case ProductField.Type:
                             cell.SetCellValue(item.Type);
@@ -65,14 +66,6 @@ namespace TestTask.Core.Export.SheetFillers
         }
 
         private static List<ProductField> CreateColumnMap()
-        {
-            var columnMap = new List<ProductField>();
-            foreach (ProductField suit in (ProductField[])Enum.GetValues(typeof(ProductField)))
-            {
-                columnMap.Add(suit);
-            }
-
-            return columnMap;
-        }
+            => ((ProductField[])Enum.GetValues(typeof(ProductField))).ToList();
     }
 }

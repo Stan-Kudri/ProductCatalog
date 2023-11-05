@@ -8,19 +8,17 @@ namespace TestTask.Core.Models.Products
         {
         }
 
-        public Product(int modeId, string category, string type, string destination, decimal price, int id)
-            : this(modeId, category, type, destination, price)
+        public Product(int companyId, int categoryId, string type, string destination, decimal price, int id)
+            : this(companyId, categoryId, type, destination, price)
         {
             Id = id > 0 ? Id = id : throw new ArgumentException("The ID must be greater than zero.", nameof(id));
         }
 
-        public Product(int modeId, string category, string type, string destination, decimal price)
+        public Product(int companyId, int categoryId, string type, string destination, decimal price)
         {
-            CompanyId = modeId > 0 ? CompanyId = modeId : throw new ArgumentException("Company ID greater than zero.", nameof(modeId));
+            CompanyId = companyId > 0 ? CompanyId = companyId : throw new ArgumentException("Company ID greater than zero.", nameof(companyId));
 
-            Category = category != string.Empty && category != null ?
-                Category = category :
-                throw new ArgumentException("The category name cannot be empty.", nameof(category));
+            CategoryId = categoryId > 0 ? CategoryId = categoryId : throw new ArgumentException("Category ID greater than zero.", nameof(categoryId));
 
             Type = type != string.Empty && type != null ?
                 Type = type :
@@ -33,7 +31,7 @@ namespace TestTask.Core.Models.Products
 
         public int CompanyId { get; set; } = 0;
 
-        public string Category { get; set; } = string.Empty;
+        public int CategoryId { get; set; } = 0;
 
         public string Type { get; set; } = string.Empty;
 
@@ -52,7 +50,7 @@ namespace TestTask.Core.Models.Products
 
             return other.Id == Id
                    && other.CompanyId == CompanyId
-                   && other.Category == Category
+                   && other.CategoryId == CategoryId
                    && other.Type == Type
                    && other.Price == Price
                    && other.Destination == Destination;

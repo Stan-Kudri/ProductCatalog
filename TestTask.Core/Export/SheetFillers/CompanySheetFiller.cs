@@ -1,6 +1,7 @@
 ﻿using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TestTask.Core.Models.Companies;
 
 namespace TestTask.Core.Export.SheetFillers
@@ -58,14 +59,6 @@ namespace TestTask.Core.Export.SheetFillers
         }
 
         private static List<CompanyField> CreateColumnMap()
-        {
-            var columnMap = new List<CompanyField>();
-            foreach (CompanyField suit in (CompanyField[])Enum.GetValues(typeof(CompanyField)))
-            {
-                columnMap.Add(suit);
-            }
-
-            return columnMap;
-        }
+            => ((CompanyField[])Enum.GetValues(typeof(CompanyField))).ToList();
     }
 }

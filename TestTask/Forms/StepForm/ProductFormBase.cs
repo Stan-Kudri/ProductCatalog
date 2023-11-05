@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows.Forms;
+using TestTask.BindingItem.ProductBinding;
 using TestTask.BindingItem.UserBinding.ProductBinding;
 using TestTask.Core;
+using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 
 namespace TestTask.Forms.StepForm
@@ -12,6 +14,7 @@ namespace TestTask.Forms.StepForm
         protected readonly IMessageBox _messageBox;
 
         protected SelectCompany _companies;
+        protected SelectCategory _categories;
 
         private ProductFormBase()
         {
@@ -26,6 +29,9 @@ namespace TestTask.Forms.StepForm
 
         protected Company SelectedCompany =>
             cmbCompanyValue.SelectedValue != null ? (Company)cmbCompanyValue.SelectedValue : throw new Exception("Wrong combo box format");
+
+        protected Category SelectedCategory =>
+            cmbCategoryValue.SelectedValue != null ? (Category)cmbCategoryValue.SelectedValue : throw new Exception("Wrong combo box format");
 
         protected virtual void BtnAdd_Click(object sender, EventArgs e)
         {
@@ -49,6 +55,7 @@ namespace TestTask.Forms.StepForm
         protected virtual void AddStepForm_Load(object sender, EventArgs e)
         {
             selectCompanyBindingSource.DataSource = _companies.Items;
+            selectCategoryBindingSource.DataSource = _categories.Items;
             SetDefaultValueData();
         }
 
@@ -68,7 +75,7 @@ namespace TestTask.Forms.StepForm
         protected virtual void SetDefaultValueData()
         {
             cmbCompanyValue.SelectedItem = _companies.Company;
-            tbCategory.Text = string.Empty;
+            cmbCategoryValue.SelectedItem = _categories.Category;
             tbType.Text = string.Empty;
             tbPrice.Text = "0";
             tbDestination.Text = string.Empty;
@@ -82,9 +89,9 @@ namespace TestTask.Forms.StepForm
                 return false;
             }
 
-            if (tbCategory.Text.Length == decimal.Zero)
+            if (cmbCategoryValue.Text.Length <= 0)
             {
-                message = "Please enter a Category.";
+                message = "Select your category.";
                 return false;
             }
 
@@ -104,13 +111,8 @@ namespace TestTask.Forms.StepForm
             return true;
         }
 
-        public ProductModel GetStepModel()
+        public ProductModel GetProductModel()
         {
-            if (tbCategory.Text == string.Empty)
-            {
-                throw new Exception("The Category field is filled in incorrectly.");
-            }
-
             if (tbType.Text == string.Empty)
             {
                 throw new Exception("The Type field is filled in incorrectly.");
@@ -121,7 +123,7 @@ namespace TestTask.Forms.StepForm
                 throw new Exception("The Price field is filled in incorrectly.");
             }
 
-            return new ProductModel(SelectedCompany, tbCategory.Text, tbType.Text, price, tbDestination.Text);
+            return new ProductModel(SelectedCompany, SelectedCategory, tbType.Text, price, tbDestination.Text);
         }
     }
 }

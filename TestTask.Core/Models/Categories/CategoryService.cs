@@ -18,7 +18,7 @@ namespace TestTask.Core.Models.Companies
                 throw new ArgumentException("The received parameters are not correct.", nameof(item));
             }
 
-            if (_dbContext.Company.Any(e => e.Id == item.Id))
+            if (_dbContext.Category.Any(e => e.Id == item.Id))
             {
                 throw new ArgumentException("This company exists.");
             }
@@ -34,15 +34,15 @@ namespace TestTask.Core.Models.Companies
                 throw new ArgumentNullException("The format of the transmitted data is incorrect.", nameof(item));
             }
 
-            var oldItem = _dbContext.Company.FirstOrDefault(e => e.Id == item.Id) ?? throw new InvalidOperationException("Interaction element not found.");
+            var oldItem = _dbContext.Category.FirstOrDefault(e => e.Id == item.Id) ?? throw new InvalidOperationException("Interaction element not found.");
             oldItem.Name = item.Name;
             _dbContext.SaveChanges();
         }
 
         public void Remove(int id)
         {
-            var company = _dbContext.Company.FirstOrDefault(e => e.Id == id) ?? throw new InvalidOperationException("Interaction element not found.");
-            _dbContext.Company.Remove(company);
+            var category = _dbContext.Category.FirstOrDefault(e => e.Id == id) ?? throw new InvalidOperationException("Interaction element not found.");
+            _dbContext.Category.Remove(category);
             _dbContext.SaveChanges();
         }
 
@@ -58,7 +58,7 @@ namespace TestTask.Core.Models.Companies
         }
 
         public string GetName(int id)
-            => _dbContext.Company.FirstOrDefault(e => e.Id == id).Name ?? throw new ArgumentException("Interaction element not found.");
+            => _dbContext.Category.FirstOrDefault(e => e.Id == id).Name ?? throw new ArgumentException("Interaction element not found.");
 
         public List<Category> GetAll() => _dbContext.Category.Count() > 0 ? _dbContext.Category.ToList() : null;
 

@@ -18,7 +18,7 @@ namespace TestTask.ChildForms.Import
 
         private void BtnImportData_Click(object sender, EventArgs e)
         {
-            if (!cbCompany.Checked && !cbProduct.Checked)
+            if (!cbCompany.Checked && !cbProduct.Checked && !cbCategory.Checked)
             {
                 _messageBox.ShowWarning("The tables to load are not selected.");
                 return;
@@ -28,8 +28,10 @@ namespace TestTask.ChildForms.Import
             Close();
         }
 
-        public bool IsDownloadTableMode => cbCompany.Checked;
+        public bool IsDownloadTableCompany => cbCompany.Checked;
 
-        public bool IsDownloadTableStep => cbProduct.Checked;
+        public bool IsDownloadTableProduct => cbProduct.Checked;
+
+        public bool IsDownloadTableCategory => cbCategory.Checked;
     }
 }

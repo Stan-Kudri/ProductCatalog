@@ -14,7 +14,7 @@ namespace TestTask.Core.Export.SheetFillers
 
         public CategorySheetFiller(CategoryService categoryService) => _categoryService = categoryService;
 
-        public string Name => "Company";
+        public string Name => "Category";
 
         public List<CategoryField> ColumnMap => _columnMap;
 

@@ -151,8 +151,6 @@
     <Compile Include="Models\Companies\Company.cs" />
     <Compile Include="Models\Page\Page.cs" />
     <Compile Include="Models\Page\PagedList.cs" />
-    <Compile Include="Models\Products\Category\Foodstuffs.cs" />
-    <Compile Include="Models\Products\Category\NonFoodProducts.cs" />
     <Compile Include="Models\Products\Product.cs" />
     <Compile Include="Models\Users\User.cs" />
     <Compile Include="AppDbContext.cs" />

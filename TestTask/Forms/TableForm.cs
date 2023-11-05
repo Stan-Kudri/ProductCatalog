@@ -10,10 +10,12 @@ using TestTask.Core.Export;
 using TestTask.Core.Export.SheetFillers;
 using TestTask.Core.Extension;
 using TestTask.Core.Import;
+using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Page;
 using TestTask.Core.Models.Products;
 using TestTask.Extension;
+using TestTask.Forms.CategoryForm;
 using TestTask.Forms.CompanyForm;
 using TestTask.Forms.StepForm;
 
@@ -23,6 +25,7 @@ namespace TestTask.Forms
     {
         private const string Company = "Company";
         private const string Product = "Product";
+        private const string Category = "Category";
 
         private const string MessageNotSelectedItem = "No items selected";
 
@@ -42,14 +45,17 @@ namespace TestTask.Forms
         private const int IndexColumnPrice = 4;
         private const int IndexColumnDestination = 5;
         private const int IndexColumnIdCompany = 6;
+        private const int IndexColumnIdCategory = 7;
 
         private readonly IServiceProvider _serviceProvider;
         private readonly CompanyService _companyService;
         private readonly ProductService _productService;
+        private readonly CategoryService _categoryService;
         private readonly IMessageBox _messageBox;
 
         private PagedList<Company> _pagedListCompany;
         private PagedList<Product> _pagedListProduct;
+        private PagedList<Category> _pagedListCategory;
 
         private bool Resizing = false;
 
@@ -59,6 +65,7 @@ namespace TestTask.Forms
             _serviceProvider = serviceProvider;
             _companyService = _serviceProvider.GetRequiredService<CompanyService>();
             _productService = _serviceProvider.GetRequiredService<ProductService>();
+            _categoryService = _serviceProvider.GetRequiredService<CategoryService>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
         }
 
@@ -66,15 +73,19 @@ namespace TestTask.Forms
 
         public PageModel PageProduct { get; set; } = new PageModel();
 
+        public PageModel PageCategory { get; set; } = new PageModel();
+
         private void TableForm_Load(object sender, EventArgs e)
         {
             _pagedListCompany = new PagedList<Company>(_companyService.GetQueryableAll());
             _pagedListProduct = new PagedList<Product>(_productService.GetQueryableAll());
             cmbPageSizeCompanies.DataSource = PageCompany.Items;
             cmbPageSizeProduct.DataSource = PageProduct.Items;
+            cmbCategoryPageSize.DataSource = PageCategory.Items;
             UpdateAllGrids();
             PageCompany.ChangeCurrentPage += LoadDataCompany;
             PageProduct.ChangeCurrentPage += LoadDataProduct;
+            PageCategory.ChangeCurrentPage += LoadDataCategory;
         }
 
         private void TableForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -82,6 +93,7 @@ namespace TestTask.Forms
             DialogResult = DialogResult.Cancel;
             PageCompany.ChangeCurrentPage -= LoadDataCompany;
             PageProduct.ChangeCurrentPage -= LoadDataProduct;
+            PageCategory.ChangeCurrentPage -= LoadDataCategory;
         }
 
         private void BtnAddCompany_Click(object sender, EventArgs e)
@@ -123,7 +135,7 @@ namespace TestTask.Forms
 
                 var updateItem = editCompanyForm.GetEditCompany();
                 _companyService.Update(updateItem);
-                UpdateMode(updateItem, row);
+                UpdateCompany(updateItem, row);
             }
         }
 
@@ -153,6 +165,7 @@ namespace TestTask.Forms
         private void BtnAddProduct_Click(object sender, EventArgs e)
         {
             var listCompany = _companyService.GetQueryableAll();
+            var listCategory = _categoryService.GetQueryableAll();
 
             if (listCompany.Count() == 0)
             {
@@ -160,16 +173,22 @@ namespace TestTask.Forms
                 return;
             }
 
+            if (listCategory.Count() == 0)
+            {
+                _messageBox.ShowWarning("Add a category to the table to add a product.");
+                return;
+            }
+
             using (var addFormProduct = _serviceProvider.GetRequiredService<AddItemProductForm>())
             {
-                addFormProduct.Initialize(listCompany.ToList());
+                addFormProduct.Initialize(listCompany.ToList(), listCategory.ToList());
 
                 if (addFormProduct.ShowDialog() != DialogResult.OK)
                 {
                     return;
                 }
 
-                var item = addFormProduct.GetStepModel().ToStep();
+                var item = addFormProduct.GetProductModel().ToStep();
                 _productService.Add(item);
                 LoadDataProduct();
             }
@@ -186,12 +205,13 @@ namespace TestTask.Forms
             }
 
             var listCompany = _companyService.GetAll();
+            var listCategory = _categoryService.GetAll();
             var indexRow = indexEditRow.First();
             var oldItem = GetProduct(indexRow);
 
             using (var editProductForm = _serviceProvider.GetRequiredService<EditItemProductForm>())
             {
-                editProductForm.Initialize(listCompany, oldItem);
+                editProductForm.Initialize(listCompany, listCategory, oldItem);
 
                 if (editProductForm.ShowDialog() != DialogResult.OK)
                 {
@@ -226,12 +246,79 @@ namespace TestTask.Forms
             LoadDataProduct();
         }
 
+        private void BtnAddCategory_Click(object sender, EventArgs e)
+        {
+            using (var addFormMode = _serviceProvider.GetRequiredService<AddCategoryForm>())
+            {
+                if (addFormMode.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                var item = addFormMode.GetCategoryModel().ToCategory();
+                _categoryService.Add(item);
+                LoadDataCategory();
+            }
+        }
+
+        private void BtnEditCategory_Click(object sender, EventArgs e)
+        {
+            var indexEditItem = listViewCategories.SelectedIndices.Cast<int>();
+
+            if (indexEditItem.Count() != 1)
+            {
+                _messageBox.ShowWarning("Select one item.");
+                return;
+            }
+
+            var row = indexEditItem.First();
+            var oldItem = GetCategory(row);
+
+            using (var editCompanyForm = _serviceProvider.GetRequiredService<EditCategoryForm>())
+            {
+                editCompanyForm.Initialize(oldItem);
+
+                if (editCompanyForm.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                var updateItem = editCompanyForm.EditItem();
+                _categoryService.Update(updateItem);
+                UpdateCategory(updateItem, row);
+            }
+        }
+
+        private void BtnDeleteCategory_Click(object sender, EventArgs e)
+        {
+            var selectedRowIndex = listViewCategories.SelectedIndices;
+
+            if (selectedRowIndex.Count == NoItemsSelected)
+            {
+                _messageBox.ShowWarning(MessageNotSelectedItem);
+                return;
+            }
+
+            if (!_messageBox.ShowQuestion("Delete selected items?"))
+            {
+                foreach (ListViewItem item in listViewCategories.Items)
+                {
+                    item.Selected = false;
+                }
+                return;
+            }
+
+            RemoveItemRowListViewCategory();
+            UpdateAllGrids();
+        }
+
         private void TsmImportFromExcel_Click(object sender, EventArgs e)
         {
             var loadTable = new Dictionary<string, bool>()
             {
                 { Company, false },
                 { Product, false },
+                { Category, false },
             };
 
             using (var impotDbForExcel = _serviceProvider.GetRequiredService<ImportDatabaseForm>())
@@ -241,8 +328,9 @@ namespace TestTask.Forms
                     return;
                 }
 
-                loadTable[Company] = impotDbForExcel.IsDownloadTableMode;
-                loadTable[Product] = impotDbForExcel.IsDownloadTableStep;
+                loadTable[Company] = impotDbForExcel.IsDownloadTableCompany;
+                loadTable[Product] = impotDbForExcel.IsDownloadTableProduct;
+                loadTable[Category] = impotDbForExcel.IsDownloadTableCategory;
             }
 
             using (var openReplaceDataFromFile = _serviceProvider.GetRequiredService<OpenFileDialog>())
@@ -293,6 +381,26 @@ namespace TestTask.Forms
                         _messageBox.ShowWarning(message, Product);
                     }
                 }
+
+                if (loadTable[Category])
+                {
+                    var categoryRead = _serviceProvider.GetRequiredService<ExcelImporter<Category>>().ImportFromFile(path);
+
+                    foreach (var item in categoryRead)
+                    {
+                        if (item.Success)
+                        {
+                            _categoryService.AddImportData(item.Value);
+                        }
+                    }
+
+                    LoadDataCategory();
+
+                    if (!categoryRead.IsNoErrorLine(out var message))
+                    {
+                        _messageBox.ShowWarning(message, Category);
+                    }
+                }
             }
         }
 
@@ -308,12 +416,14 @@ namespace TestTask.Forms
                 var path = exportFileData.FileName;
 
                 var companySheetFiller = new CompanySheetFiller(_companyService);
-                var stepSheetFiller = new ProductSheetFiller(_productService);
+                var productSheetFiller = new ProductSheetFiller(_productService);
+                var categorySheetFiller = new CategorySheetFiller(_categoryService);
 
                 var fillers = new ISheetFiller[]
                 {
-                companySheetFiller,
-                stepSheetFiller,
+                    companySheetFiller,
+                    productSheetFiller,
+                    categorySheetFiller,
                 };
 
                 var writeExcel = new ExcelExporter(fillers);
@@ -337,6 +447,16 @@ namespace TestTask.Forms
             {
                 Resizing = true;
                 SizeChangedListView(listViewProduct);
+            }
+            Resizing = false;
+        }
+
+        private void TlpListCategory_SizeChanged(object sender, EventArgs e)
+        {
+            if (!Resizing)
+            {
+                Resizing = true;
+                SizeChangedListView(listViewCategories);
             }
             Resizing = false;
         }
@@ -365,28 +485,51 @@ namespace TestTask.Forms
             }
         }
 
+        private void CmbPageSizeCategory_Changed(object sender, EventArgs e)
+        {
+            var pageSizeCmb = PageCategory.Items[cmbCategoryPageSize.SelectedIndex];
+
+            if (PageCategory.ChangedPage(pageSizeCmb))
+            {
+                PageCategory.Size = pageSizeCmb;
+                PageCategory.Number = 1;
+            }
+        }
+
         private void TextBoxCurrentPageMode_TextChanged(object sender, EventArgs e)
         {
-            if (int.TryParse(textBoxCurrentPageCompanies.Text, out var pageNumber)
+            if (int.TryParse(tbCurrentPageCompanies.Text, out var pageNumber)
                 && pageNumber <= _pagedListCompany.PageCount
                 && _pagedListCompany.PageNumber == PageCompany.Number)
             {
                 PageCompany.Number = pageNumber;
             }
 
-            textBoxCurrentPageCompanies.Text = string.Format("{0}/{1}", PageCompany.Number, _pagedListCompany.PageCount);
+            tbCurrentPageCompanies.Text = string.Format("{0}/{1}", PageCompany.Number, _pagedListCompany.PageCount);
         }
 
         private void TextBoxCurrentPageProduct_TextChanged(object sender, EventArgs e)
         {
-            if (int.TryParse(textBoxCurrentPageProduct.Text, out var pageNumber)
+            if (int.TryParse(tbCurrentPageProduct.Text, out var pageNumber)
                 && pageNumber <= _pagedListProduct.PageCount
                 && _pagedListProduct.PageNumber == PageProduct.Number)
             {
                 PageProduct.Number = pageNumber;
             }
 
-            textBoxCurrentPageProduct.Text = string.Format("{0}/{1}", PageProduct.Number, _pagedListProduct.PageCount);
+            tbCurrentPageProduct.Text = string.Format("{0}/{1}", PageProduct.Number, _pagedListProduct.PageCount);
+        }
+
+        private void TextBoxCurrentPageCategories_TextChanged(object sender, EventArgs e)
+        {
+            if (int.TryParse(tbCurrentPageCategories.Text, out var pageNumber)
+                && pageNumber <= _pagedListCategory.PageCount
+                && _pagedListCategory.PageNumber == PageCategory.Number)
+            {
+                PageCategory.Number = pageNumber;
+            }
+
+            tbCurrentPageCategories.Text = string.Format("{0}/{1}", PageCategory.Number, _pagedListCategory.PageCount);
         }
 
         private void LoadDataCompany()
@@ -400,10 +543,10 @@ namespace TestTask.Forms
             var item = _pagedListCompany.Items;
 
             listViewCompanies.Items.Clear();
-            FillListViewMode(item);
+            FillListViewCompany(item);
             CustomUpdateFormStateCompanyPagination();
 
-            textBoxCurrentPageCompanies.Text = _pagedListCompany.PageNumber.ToString();
+            tbCurrentPageCompanies.Text = _pagedListCompany.PageNumber.ToString();
         }
 
         private void LoadDataProduct()
@@ -420,13 +563,31 @@ namespace TestTask.Forms
             FillListViewProduct(item);
             CustomUpdateFormStateProductPagination();
 
-            textBoxCurrentPageProduct.Text = _pagedListProduct.PageNumber.ToString();
+            tbCurrentPageProduct.Text = _pagedListProduct.PageNumber.ToString();
+        }
+
+        private void LoadDataCategory()
+        {
+            _pagedListCategory = _categoryService.GetQueryableAll().GetPagedList(PageCategory.GetPage());
+            if (IsNotFirstPageCategoryEmpty())
+            {
+                PageCategory.Number -= 1;
+            }
+
+            var item = _pagedListCategory.Items;
+
+            listViewCategories.Items.Clear();
+            FillListViewCategory(item);
+            CustomUpdateFormStateCategoryPagination();
+
+            tbCurrentPageCategories.Text = _pagedListCategory.PageNumber.ToString();
         }
 
         private void UpdateAllGrids()
         {
             LoadDataCompany();
             LoadDataProduct();
+            LoadDataCategory();
         }
 
         private Company GetCompany(int indexRow)
@@ -446,19 +607,29 @@ namespace TestTask.Forms
         {
             var rowItem = listViewProduct.Items[indexRow];
 
-            var idStep = CellElement(rowItem, IndexId).ParseInt();
-            var category = CellElement(rowItem, IndexColumnCategory) ?? throw new Exception("Type cannot be null.");
+            var idProduct = CellElement(rowItem, IndexId).ParseInt();
             var type = CellElement(rowItem, IndexColumnType) ?? throw new Exception("Type cannot be null.");
             var price = CellElement(rowItem, IndexColumnPrice).ParseDecimal();
             var destination = CellElement(rowItem, IndexColumnDestination);
             var companyId = CellElement(rowItem, IndexColumnIdCompany).ParseInt();
+            var categoryId = CellElement(rowItem, IndexColumnIdCategory).ParseInt();
 
-            return new Product(companyId, category, type, destination, price, idStep);
+            return new Product(companyId, categoryId, type, destination, price, idProduct);
+        }
+
+        private Category GetCategory(int indexRow)
+        {
+            var rowItem = listViewCompanies.Items[indexRow];
+
+            var id = CellElement(rowItem, IndexId).ParseInt();
+            var name = CellElement(rowItem, IndexColumnCompanyName) ?? throw new ArgumentException("Name cannot be null.");
+
+            return new Category(name, id);
         }
 
         private string CellElement(ListViewItem rowItem, int indexColumn) => rowItem.GetString(indexColumn) ?? throw new Exception("String cannot be null.");
 
-        private void FillListViewMode(List<Company> items)
+        private void FillListViewCompany(List<Company> items)
         {
             foreach (var item in items)
             {
@@ -471,6 +642,14 @@ namespace TestTask.Forms
             foreach (var item in items)
             {
                 AddProductInListView(item);
+            }
+        }
+
+        private void FillListViewCategory(List<Category> items)
+        {
+            foreach (var item in items)
+            {
+                AddCategoryInListView(item);
             }
         }
 
@@ -493,18 +672,26 @@ namespace TestTask.Forms
             {
                 item.Id.ToString(),
                 _companyService.CompanyName(item.CompanyId),
-                item.Category,
+                _categoryService.GetName(item.CategoryId),
                 item.Type,
                 item.Price.ToString(),
                 item.Destination != null ? item.Destination.ToString() : string.Empty,
                 item.CompanyId.ToString(),
+                item.CategoryId.ToString(),
             };
 
             var listItem = new ListViewItem(itemsRow);
             listViewProduct.Items.Add(listItem);
         }
 
-        public void UpdateMode(Company editItem, int row)
+        private void AddCategoryInListView(Category item)
+        {
+            var itemsRow = new string[] { item.Id.ToString(), item.Name };
+
+            listViewCategories.Items.Add(new ListViewItem(itemsRow));
+        }
+
+        public void UpdateCompany(Company editItem, int row)
         {
             listViewCompanies.Items[row].SubItems[IndexId].Text = editItem.Id.ToString();
             listViewCompanies.Items[row].SubItems[IndexColumnCompanyName].Text = editItem.Name.ToString();
@@ -516,11 +703,18 @@ namespace TestTask.Forms
         {
             listViewProduct.Items[row].SubItems[IndexId].Text = editItem.Id.ToString();
             listViewProduct.Items[row].SubItems[IndexColumnCompanyName].Text = _companyService.CompanyName(editItem.CompanyId);
-            listViewProduct.Items[row].SubItems[IndexColumnCategory].Text = editItem.Category == null ? string.Empty : editItem.Category.ToString();
+            listViewProduct.Items[row].SubItems[IndexColumnCategory].Text = _categoryService.GetName(editItem.CategoryId);
             listViewProduct.Items[row].SubItems[IndexColumnType].Text = editItem.Type == null ? string.Empty : editItem.Type.ToString();
             listViewProduct.Items[row].SubItems[IndexColumnPrice].Text = editItem.Price.ToString();
             listViewProduct.Items[row].SubItems[IndexColumnDestination].Text = editItem.Destination.ToString();
             listViewProduct.Items[row].SubItems[IndexColumnIdCompany].Text = editItem.CompanyId.ToString();
+            listViewProduct.Items[row].SubItems[IndexColumnIdCategory].Text = editItem.CategoryId.ToString();
+        }
+
+        public void UpdateCategory(Category editItem, int row)
+        {
+            listViewCategories.Items[row].SubItems[IndexId].Text = editItem.Id.ToString();
+            listViewCategories.Items[row].SubItems[IndexColumnCompanyName].Text = editItem.Name.ToString();
         }
 
         private void RemoveItemRowListViewCompany()
@@ -531,50 +725,57 @@ namespace TestTask.Forms
                 if (item.Selected)
                 {
                     var id = CellElement(item, IndexId).ParseInt();
-                    _productService.RemoveStepRelatedToMode(id);
+                    _productService.RemoveProductRelatedToCompany(id);
                     _companyService.Remove(id);
+                }
+            }
+        }
+
+        private void RemoveItemRowListViewCategory()
+        {
+            for (var i = 0; i < listViewCategories.Items.Count; i++)
+            {
+                var item = listViewCategories.Items[i];
+                if (item.Selected)
+                {
+                    var id = CellElement(item, IndexId).ParseInt();
+                    _productService.RemoveProductRelatedToCategory(id);
+                    _categoryService.Remove(id);
                 }
             }
         }
 
         private void CustomUpdateFormStateCompanyPagination()
         {
-            var hasPageControl = _pagedListCompany.PageCount > 0 ? true : false;
-
-            btnFirstPageCompanies.Enabled =
-                btnLastPageCompanies.Enabled =
-                    btnNextPageCompanies.Enabled =
-                        btnBackPageCompanies.Enabled =
-                                textBoxCurrentPageCompanies.Enabled =
-                                    hasPageControl;
-
-            btnFirstPageCompanies.Visible =
-                btnLastPageCompanies.Visible =
-                    btnNextPageCompanies.Visible =
-                        btnBackPageCompanies.Visible =
-                                textBoxCurrentPageCompanies.Visible =
-                                    hasPageControl;
+            btnFirstPageCompanies.Enabled = btnFirstPageCompanies.Visible =
+                btnLastPageCompanies.Enabled = btnLastPageCompanies.Visible =
+                    btnNextPageCompanies.Enabled = btnNextPageCompanies.Visible =
+                        btnBackPageCompanies.Enabled = btnBackPageCompanies.Visible =
+                                tbCurrentPageCompanies.Enabled = tbCurrentPageCompanies.Visible =
+                                    _pagedListCompany.PageCount > 0 ? true : false;
         }
 
         private void CustomUpdateFormStateProductPagination()
         {
-            var hasPageControl = _pagedListProduct.PageCount > 0 ? true : false;
-
-            btnFirstPageProducts.Enabled =
-                btnLastPageProduct.Enabled =
-                    btnNextPageProduct.Enabled =
-                        btnBackPageProducts.Enabled =
-                            textBoxCurrentPageProduct.Enabled =
-                                    hasPageControl;
-
-            btnFirstPageProducts.Visible =
-                btnLastPageProduct.Visible =
-                    btnNextPageProduct.Visible =
-                        btnBackPageProducts.Visible =
-                            textBoxCurrentPageProduct.Visible =
-                                    hasPageControl;
+            btnFirstPageProducts.Enabled = btnFirstPageProducts.Visible =
+                btnLastPageProduct.Enabled = btnLastPageProduct.Visible =
+                    btnNextPageProduct.Enabled = btnNextPageProduct.Visible =
+                        btnBackPageProducts.Enabled = btnBackPageProducts.Visible =
+                            tbCurrentPageProduct.Enabled = tbCurrentPageProduct.Visible =
+                                    _pagedListProduct.PageCount > 0 ? true : false;
         }
 
+        private void CustomUpdateFormStateCategoryPagination()
+        {
+            btnFirstPageCategories.Enabled = btnFirstPageCategories.Visible =
+                btnLastPageCategories.Enabled = btnLastPageCategories.Visible =
+                    btnNextPageCategories.Enabled = btnNextPageCategories.Visible =
+                        btnBackPageCategories.Enabled = btnBackPageCategories.Visible =
+                            tbCurrentPageCategories.Enabled = tbCurrentPageCategories.Visible =
+                                    _pagedListCategory.PageCount > 0 ? true : false;
+        }
+
+        //Button Company page click
         private void BtnFirstPageCompany_Click(object sender, EventArgs e)
         {
             if (_pagedListCompany.HasPrevious)
@@ -607,6 +808,7 @@ namespace TestTask.Forms
             }
         }
 
+        //Button Product page click
         private void BtnFirstPageProduct_Click(object sender, EventArgs e)
         {
             if (_pagedListProduct.HasPrevious)
@@ -639,9 +841,44 @@ namespace TestTask.Forms
             }
         }
 
+        //Button Category page click
+        private void BtnFirstPageCategories_Click(object sender, EventArgs e)
+        {
+            if (_pagedListCategory.HasPrevious)
+            {
+                PageCategory.Number = 1;
+            }
+        }
+
+        private void BtnBackPageCategories_Click(object sender, EventArgs e)
+        {
+            if (_pagedListCategory.HasPrevious)
+            {
+                PageCategory.Number--;
+            }
+        }
+
+        private void BtnNextPageCategories_Click(object sender, EventArgs e)
+        {
+            if (_pagedListCategory.HasNext)
+            {
+                PageCategory.Number++;
+            }
+        }
+
+        private void BtnLastPageCategories_Click(object sender, EventArgs e)
+        {
+            if (_pagedListCategory.HasNext)
+            {
+                PageCategory.Number = _pagedListCategory.PageCount;
+            }
+        }
+
         private bool IsNotFirstPageCompanyEmpty() => _pagedListCompany.Count == 0 && PageCompany.Number != 1;
 
         private bool IsNotFirstPageProductEmpty() => _pagedListProduct.Count == 0 && PageProduct.Number != 1;
+
+        private bool IsNotFirstPageCategoryEmpty() => _pagedListCategory.Count == 0 && PageCategory.Number != 1;
 
         private void SizeChangedListView(ListView listView)
         {

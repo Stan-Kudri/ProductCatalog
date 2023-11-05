@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using TestTask.BindingItem.UserBinding.ProductBinding;
+using TestTask.BindingItem.ProductBinding;
+using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 
 namespace TestTask.Forms.StepForm
@@ -13,6 +14,10 @@ namespace TestTask.Forms.StepForm
             Text = "Add Product";
         }
 
-        public void Initialize(List<Company> company) => _companies = new SelectCompany(company);
+        public void Initialize(List<Company> company, List<Category> category)
+        {
+            _companies = new SelectCompany(company);
+            _categories = new SelectCategory(category);
+        }
     }
 }
