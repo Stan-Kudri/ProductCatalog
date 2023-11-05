@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using TestTask.BindingItem.UserBinding.StepBinding;
-using TestTask.Core.Models.Company;
+using TestTask.BindingItem.UserBinding.ProductBinding;
+using TestTask.Core.Models.Companies;
 
 namespace TestTask.Forms.StepForm
 {
-    public class AddItemStepForm : StepFormBase
+    public class AddItemProductForm : ProductFormBase
     {
-        public AddItemStepForm(IServiceProvider serviceProvider)
+        public AddItemProductForm(IServiceProvider serviceProvider)
             : base(serviceProvider)
         {
-            Text = "Add Step";
+            Text = "Add Product";
         }
 
         public void Initialize(List<Company> company) => _companies = new SelectCompany(company);

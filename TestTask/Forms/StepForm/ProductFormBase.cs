@@ -1,25 +1,24 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows.Forms;
-using TestTask.BindingItem.UserBinding;
-using TestTask.BindingItem.UserBinding.StepBinding;
+using TestTask.BindingItem.UserBinding.ProductBinding;
 using TestTask.Core;
-using TestTask.Core.Models.Company;
+using TestTask.Core.Models.Companies;
 
 namespace TestTask.Forms.StepForm
 {
-    public partial class StepFormBase : BaseForm
+    public partial class ProductFormBase : BaseForm
     {
         protected readonly IMessageBox _messageBox;
 
         protected SelectCompany _companies;
 
-        private StepFormBase()
+        private ProductFormBase()
         {
             InitializeComponent();
         }
 
-        public StepFormBase(IServiceProvider serviceProvider)
+        public ProductFormBase(IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
@@ -49,19 +48,18 @@ namespace TestTask.Forms.StepForm
 
         protected virtual void AddStepForm_Load(object sender, EventArgs e)
         {
-            //selectModeBindingSource.DataSource = _companies.Items;
+            selectCompanyBindingSource.DataSource = _companies.Items;
             SetDefaultValueData();
         }
 
-        private void TbTimer_KeyPress(object sender, KeyPressEventArgs e) => KeyPressDigit(e);
-
-        private void TbSpeed_KeyPress(object sender, KeyPressEventArgs e) => KeyPressDigit(e);
-
-        private void TbVolume_KeyPress(object sender, KeyPressEventArgs e) => KeyPressDigit(e);
-
-        private void KeyPressDigit(KeyPressEventArgs e)
+        private void TbPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(8))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
+            {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
             {
                 e.Handled = true;
             }
@@ -70,11 +68,10 @@ namespace TestTask.Forms.StepForm
         protected virtual void SetDefaultValueData()
         {
             cmbCompanyValue.SelectedItem = _companies.Company;
-            tbTimer.Text = "0";
-            tbDestination.Text = string.Empty;
-            tbSpeed.Text = "0";
+            tbCategory.Text = string.Empty;
             tbType.Text = string.Empty;
-            tbVolume.Text = "0";
+            tbPrice.Text = "0";
+            tbDestination.Text = string.Empty;
         }
 
         protected bool IsDataFilled(out string message)
@@ -85,9 +82,21 @@ namespace TestTask.Forms.StepForm
                 return false;
             }
 
+            if (tbCategory.Text.Length == decimal.Zero)
+            {
+                message = "Please enter a Category.";
+                return false;
+            }
+
             if (tbType.Text.Length == decimal.Zero)
             {
                 message = "Please enter a Type.";
+                return false;
+            }
+
+            if (tbPrice.Text.Length == decimal.Zero)
+            {
+                message = "Please enter a Price.";
                 return false;
             }
 
@@ -95,16 +104,11 @@ namespace TestTask.Forms.StepForm
             return true;
         }
 
-        public StepModel GetStepModel()
+        public ProductModel GetStepModel()
         {
-            if (!int.TryParse(tbTimer.Text, out var timer))
+            if (tbCategory.Text == string.Empty)
             {
-                throw new Exception("The Timer field is filled in incorrectly.");
-            }
-
-            if (!int.TryParse(tbSpeed.Text, out var speed))
-            {
-                throw new Exception("The Speed field is filled in incorrectly.");
+                throw new Exception("The Category field is filled in incorrectly.");
             }
 
             if (tbType.Text == string.Empty)
@@ -112,12 +116,12 @@ namespace TestTask.Forms.StepForm
                 throw new Exception("The Type field is filled in incorrectly.");
             }
 
-            if (!int.TryParse(tbVolume.Text, out var volume))
+            if (!decimal.TryParse(tbPrice.Text, out var price))
             {
-                throw new Exception("The Volume field is filled in incorrectly.");
+                throw new Exception("The Price field is filled in incorrectly.");
             }
 
-            return new StepModel(SelectedCompany, timer, tbDestination.Text, speed, tbType.Text, volume);
+            return new ProductModel(SelectedCompany, tbCategory.Text, tbType.Text, price, tbDestination.Text);
         }
     }
 }

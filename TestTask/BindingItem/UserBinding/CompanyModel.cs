@@ -1,5 +1,5 @@
 ﻿using System;
-using TestTask.Core.Models.Company;
+using TestTask.Core.Models.Companies;
 
 namespace TestTask.BindingItem.UserBinding
 {

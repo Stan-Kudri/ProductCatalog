@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using TestTask.Core.Models.Steeps;
+using TestTask.Core.Models.Products;
 
-namespace TestTask.Core.Models.Company
+namespace TestTask.Core.Models.Companies
 {
     public class Company : Entity
     {
@@ -16,17 +16,17 @@ namespace TestTask.Core.Models.Company
             Id = id > 0 ? Id = id : throw new ArgumentException("The ID must be greater than zero.", nameof(id));
         }
 
-        public Company(string name, DateTime dateCreation, string country, List<Step> steps = null)
+        public Company(string name, DateTime dateCreation, string country, List<Product> products = null)
         {
-            Name = name != string.Empty && name != null ? Name = name : throw new ArgumentException("The step name cannot be empty.", nameof(name));
+            Name = name != string.Empty && name != null ? Name = name : throw new ArgumentException("The product name cannot be empty.", nameof(name));
 
             DateCreation = dateCreation <= DateTime.Now ?
                 DateCreation = dateCreation :
                 throw new ArgumentException("The creation date is currently impossible.", nameof(dateCreation));
 
-            Country = country != string.Empty && country != null ? Country = country : throw new ArgumentException("The country cannot be empty.", nameof(name));
+            Country = country != string.Empty && country != null ? Country = country : throw new ArgumentException("The country cannot be empty.", nameof(country));
 
-            Product = steps;
+            Product = products;
         }
 
         public string Name { get; set; } = string.Empty;
@@ -35,7 +35,7 @@ namespace TestTask.Core.Models.Company
 
         public string Country { get; set; } = string.Empty;
 
-        public List<Step> Product { get; set; } = null;
+        public List<Product> Product { get; set; } = null;
 
         public override bool Equals(object obj) => Equals(obj as Company);
 

@@ -143,15 +143,17 @@
     <Compile Include="DbContextFactory.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\IService.cs" />
-    <Compile Include="Models\Company\Company.cs" />
+    <Compile Include="Models\Companies\Company.cs" />
     <Compile Include="Models\Page\Page.cs" />
     <Compile Include="Models\Page\PagedList.cs" />
-    <Compile Include="Models\Steeps\Step.cs" />
+    <Compile Include="Models\Products\Category\Foodstuffs.cs" />
+    <Compile Include="Models\Products\Category\NonFoodProducts.cs" />
+    <Compile Include="Models\Products\Product.cs" />
     <Compile Include="Models\Users\User.cs" />
     <Compile Include="AppDbContext.cs" />
-    <Compile Include="Models\Company\CompanyField.cs" />
-    <Compile Include="Models\Steeps\StepField.cs" />
-    <Compile Include="Export\SheetFillers\StepSheetFiller.cs" />
+    <Compile Include="Models\Companies\CompanyField.cs" />
+    <Compile Include="Models\Products\ProductField.cs" />
+    <Compile Include="Export\SheetFillers\ProductSheetFiller.cs" />
     <Compile Include="Extension\SheetExtension.cs" />
     <Compile Include="Extension\ResultMessageErrorExtension.cs" />
     <Compile Include="Extension\RowExtension.cs" />
@@ -161,13 +163,13 @@
     <Compile Include="Import\Importers\IImporter.cs" />
     <Compile Include="Import\ExcelImporter.cs" />
     <Compile Include="Import\Importers\CompanyImporter.cs" />
-    <Compile Include="Import\Importers\StepImporter.cs" />
+    <Compile Include="Import\Importers\ProductImporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Export\SheetFillers\CompanySheetFiller.cs" />
     <Compile Include="Export\ExcelExporter.cs" />
     <Compile Include="IMessageBox.cs" />
-    <Compile Include="Models\Company\CompanyService.cs" />
-    <Compile Include="Models\Steeps\StepService.cs" />
+    <Compile Include="Models\Companies\CompanyService.cs" />
+    <Compile Include="Models\Products\ProductService.cs" />
     <Compile Include="Models\Users\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

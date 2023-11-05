@@ -134,7 +134,6 @@
             this.tbContry.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.tbContry.TrailingIcon = null;
             this.tbContry.UseSystemPasswordChar = false;
-            this.tbContry.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbMaxBottle_KeyPress);
             // 
             // dtpCreateCompany
             // 

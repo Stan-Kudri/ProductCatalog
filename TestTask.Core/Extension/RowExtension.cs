@@ -90,5 +90,38 @@ namespace TestTask.Core.Extension
                 return Result<DateTime>.CreateFail(valueShouldBeNumberMessage, self.RowNum);
             }
         }
+
+        public static Result<decimal> GetDecimal(this IRow self, int cellNumber, string columnName)
+        {
+            var cell = self.GetCell(cellNumber);
+
+            if (cell == null)
+            {
+                return Result<decimal>.CreateFail(columnName + " cell is empty", self.RowNum);
+            }
+
+            string valueShouldBeNumberMessage = columnName + " should be number";
+
+            if (cell.CellType == CellType.Blank)
+            {
+                return Result<decimal>.CreateFail(valueShouldBeNumberMessage, self.RowNum);
+            }
+
+            try
+            {
+                if (cell.CellType == CellType.String)
+                {
+                    var valueInStringCell = cell.StringCellValue;
+                    return Result<decimal>.CreateSuccess(Convert.ToDecimal(valueInStringCell), self.RowNum);
+                }
+
+                var valueInNumericCell = cell.NumericCellValue;
+                return Result<decimal>.CreateSuccess(Convert.ToDecimal(valueInNumericCell), self.RowNum);
+            }
+            catch
+            {
+                return Result<decimal>.CreateFail(valueShouldBeNumberMessage, self.RowNum);
+            }
+        }
     }
 }

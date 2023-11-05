@@ -10,9 +10,9 @@ using TestTask.Core.Export;
 using TestTask.Core.Export.SheetFillers;
 using TestTask.Core.Extension;
 using TestTask.Core.Import;
-using TestTask.Core.Models.Company;
+using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Page;
-using TestTask.Core.Models.Steeps;
+using TestTask.Core.Models.Products;
 using TestTask.Extension;
 using TestTask.Forms.CompanyForm;
 using TestTask.Forms.StepForm;
@@ -22,7 +22,7 @@ namespace TestTask.Forms
     public partial class TableForm : BaseForm
     {
         private const string Company = "Company";
-        private const string Step = "Step";
+        private const string Product = "Product";
 
         private const string MessageNotSelectedItem = "No items selected";
 
@@ -36,21 +36,20 @@ namespace TestTask.Forms
         private const int IndexColumnDataCreate = 2;
         private const int IndexColumnCountry = 3;
 
-        //Index column Step table
-        private const int IndexColumnTimer = 2;
-        private const int IndexColumnDestination = 3;
-        private const int IndexColumnSpeed = 4;
-        private const int IndexColumnType = 5;
-        private const int IndexColumnVolume = 6;
-        private const int IndexColumnModeId = 7;
+        //Index column Product table
+        private const int IndexColumnCategory = 2;
+        private const int IndexColumnType = 3;
+        private const int IndexColumnPrice = 4;
+        private const int IndexColumnDestination = 5;
+        private const int IndexColumnIdCompany = 6;
 
         private readonly IServiceProvider _serviceProvider;
         private readonly CompanyService _companyService;
-        private readonly StepService _stepService;
+        private readonly ProductService _productService;
         private readonly IMessageBox _messageBox;
 
         private PagedList<Company> _pagedListCompany;
-        private PagedList<Step> _pagedListStep;
+        private PagedList<Product> _pagedListProduct;
 
         private bool Resizing = false;
 
@@ -59,30 +58,30 @@ namespace TestTask.Forms
             InitializeComponent();
             _serviceProvider = serviceProvider;
             _companyService = _serviceProvider.GetRequiredService<CompanyService>();
-            _stepService = _serviceProvider.GetRequiredService<StepService>();
+            _productService = _serviceProvider.GetRequiredService<ProductService>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
         }
 
         public PageModel PageCompany { get; set; } = new PageModel();
 
-        public PageModel PageStep { get; set; } = new PageModel();
+        public PageModel PageProduct { get; set; } = new PageModel();
 
         private void TableForm_Load(object sender, EventArgs e)
         {
             _pagedListCompany = new PagedList<Company>(_companyService.GetQueryableAll());
-            _pagedListStep = new PagedList<Step>(_stepService.GetQueryableAll());
+            _pagedListProduct = new PagedList<Product>(_productService.GetQueryableAll());
             cmbPageSizeCompanies.DataSource = PageCompany.Items;
-            cmbPageSizeSteps.DataSource = PageStep.Items;
+            cmbPageSizeProduct.DataSource = PageProduct.Items;
             UpdateAllGrids();
-            PageCompany.ChangeCurrentPage += LoadDataMode;
-            PageStep.ChangeCurrentPage += LoadDataStep;
+            PageCompany.ChangeCurrentPage += LoadDataCompany;
+            PageProduct.ChangeCurrentPage += LoadDataProduct;
         }
 
         private void TableForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult = DialogResult.Cancel;
-            PageCompany.ChangeCurrentPage -= LoadDataMode;
-            PageStep.ChangeCurrentPage -= LoadDataStep;
+            PageCompany.ChangeCurrentPage -= LoadDataCompany;
+            PageProduct.ChangeCurrentPage -= LoadDataProduct;
         }
 
         private void BtnAddCompany_Click(object sender, EventArgs e)
@@ -96,7 +95,7 @@ namespace TestTask.Forms
 
                 var item = addFormMode.GetCompanyModel().ToMode();
                 _companyService.Add(item);
-                LoadDataMode();
+                LoadDataCompany();
             }
         }
 
@@ -151,34 +150,34 @@ namespace TestTask.Forms
             UpdateAllGrids();
         }
 
-        private void BtnAddStep_Click(object sender, EventArgs e)
+        private void BtnAddProduct_Click(object sender, EventArgs e)
         {
             var listCompany = _companyService.GetQueryableAll();
 
             if (listCompany.Count() == 0)
             {
-                _messageBox.ShowWarning("Add a company to the table to add a step.");
+                _messageBox.ShowWarning("Add a company to the table to add a product.");
                 return;
             }
 
-            using (var addFormStep = _serviceProvider.GetRequiredService<AddItemStepForm>())
+            using (var addFormProduct = _serviceProvider.GetRequiredService<AddItemProductForm>())
             {
-                addFormStep.Initialize(listCompany.ToList());
+                addFormProduct.Initialize(listCompany.ToList());
 
-                if (addFormStep.ShowDialog() != DialogResult.OK)
+                if (addFormProduct.ShowDialog() != DialogResult.OK)
                 {
                     return;
                 }
 
-                var item = addFormStep.GetStepModel().ToStep();
-                _stepService.Add(item);
-                LoadDataStep();
+                var item = addFormProduct.GetStepModel().ToStep();
+                _productService.Add(item);
+                LoadDataProduct();
             }
         }
 
-        private void BtnEditStep_Click(object sender, EventArgs e)
+        private void BtnEditProduct_Click(object sender, EventArgs e)
         {
-            var indexEditRow = listViewSteps.SelectedIndices.Cast<int>();
+            var indexEditRow = listViewProduct.SelectedIndices.Cast<int>();
 
             if (indexEditRow.Count() != 1)
             {
@@ -186,28 +185,28 @@ namespace TestTask.Forms
                 return;
             }
 
-            var listMode = _companyService.GetAll();
+            var listCompany = _companyService.GetAll();
             var indexRow = indexEditRow.First();
-            var oldItem = GetStep(indexRow);
+            var oldItem = GetProduct(indexRow);
 
-            using (var editStepForm = _serviceProvider.GetRequiredService<EditItemStepForm>())
+            using (var editProductForm = _serviceProvider.GetRequiredService<EditItemProductForm>())
             {
-                editStepForm.Initialize(listMode, oldItem);
+                editProductForm.Initialize(listCompany, oldItem);
 
-                if (editStepForm.ShowDialog() != DialogResult.OK)
+                if (editProductForm.ShowDialog() != DialogResult.OK)
                 {
                     return;
                 }
 
-                var updateItem = editStepForm.GetEditStep();
-                _stepService.Update(updateItem);
-                UpdateStep(updateItem, indexRow);
+                var updateItem = editProductForm.GetEditProduct();
+                _productService.Update(updateItem);
+                UpdateProduct(updateItem, indexRow);
             }
         }
 
-        private void BtnDeleteStep_Click(object sender, EventArgs e)
+        private void BtnDeleteProduct_Click(object sender, EventArgs e)
         {
-            var selectedRow = listViewSteps.SelectedIndices.Count;
+            var selectedRow = listViewProduct.SelectedIndices.Count;
             if (selectedRow == NoItemsSelected)
             {
                 _messageBox.ShowWarning(MessageNotSelectedItem);
@@ -216,15 +215,15 @@ namespace TestTask.Forms
 
             if (!_messageBox.ShowQuestion("Delete selected items?"))
             {
-                foreach (ListViewItem item in listViewSteps.Items)
+                foreach (ListViewItem item in listViewProduct.Items)
                 {
                     item.Selected = false;
                 }
                 return;
             }
 
-            listViewSteps.Remove(_stepService);
-            LoadDataStep();
+            listViewProduct.Remove(_productService);
+            LoadDataProduct();
         }
 
         private void TsmImportFromExcel_Click(object sender, EventArgs e)
@@ -232,7 +231,7 @@ namespace TestTask.Forms
             var loadTable = new Dictionary<string, bool>()
             {
                 { Company, false },
-                { Step, false },
+                { Product, false },
             };
 
             using (var impotDbForExcel = _serviceProvider.GetRequiredService<ImportDatabaseForm>())
@@ -243,7 +242,7 @@ namespace TestTask.Forms
                 }
 
                 loadTable[Company] = impotDbForExcel.IsDownloadTableMode;
-                loadTable[Step] = impotDbForExcel.IsDownloadTableStep;
+                loadTable[Product] = impotDbForExcel.IsDownloadTableStep;
             }
 
             using (var openReplaceDataFromFile = _serviceProvider.GetRequiredService<OpenFileDialog>())
@@ -257,9 +256,9 @@ namespace TestTask.Forms
 
                 if (loadTable[Company])
                 {
-                    var modeRead = _serviceProvider.GetRequiredService<ExcelImporter<Company>>().ImportFromFile(path);
+                    var companyRead = _serviceProvider.GetRequiredService<ExcelImporter<Company>>().ImportFromFile(path);
 
-                    foreach (var item in modeRead)
+                    foreach (var item in companyRead)
                     {
                         if (item.Success)
                         {
@@ -267,31 +266,31 @@ namespace TestTask.Forms
                         }
                     }
 
-                    LoadDataMode();
+                    LoadDataCompany();
 
-                    if (!modeRead.IsNoErrorLine(out var message))
+                    if (!companyRead.IsNoErrorLine(out var message))
                     {
                         _messageBox.ShowWarning(message, Company);
                     }
                 }
 
-                if (loadTable[Step])
+                if (loadTable[Product])
                 {
-                    var stepRead = _serviceProvider.GetRequiredService<ExcelImporter<Step>>().ImportFromFile(path);
+                    var productRead = _serviceProvider.GetRequiredService<ExcelImporter<Product>>().ImportFromFile(path);
 
-                    foreach (var item in stepRead)
+                    foreach (var item in productRead)
                     {
                         if (item.Success)
                         {
-                            _stepService.AddImportData(item.Value);
+                            _productService.AddImportData(item.Value);
                         }
                     }
 
-                    LoadDataStep();
+                    LoadDataProduct();
 
-                    if (!stepRead.IsNoErrorLine(out var message))
+                    if (!productRead.IsNoErrorLine(out var message))
                     {
-                        _messageBox.ShowWarning(message, Step);
+                        _messageBox.ShowWarning(message, Product);
                     }
                 }
             }
@@ -309,7 +308,7 @@ namespace TestTask.Forms
                 var path = exportFileData.FileName;
 
                 var companySheetFiller = new CompanySheetFiller(_companyService);
-                var stepSheetFiller = new StepSheetFiller(_stepService);
+                var stepSheetFiller = new ProductSheetFiller(_productService);
 
                 var fillers = new ISheetFiller[]
                 {
@@ -322,17 +321,7 @@ namespace TestTask.Forms
             }
         }
 
-        private void TlpListStep_SizeChanged(object sender, EventArgs e)
-        {
-            if (!Resizing)
-            {
-                Resizing = true;
-                SizeChangedListView(listViewSteps);
-            }
-            Resizing = false;
-        }
-
-        private void TlpModesList_SizeChanged(object sender, EventArgs e)
+        private void TlpCompanyList_SizeChanged(object sender, EventArgs e)
         {
             if (!Resizing)
             {
@@ -342,9 +331,19 @@ namespace TestTask.Forms
             Resizing = false;
         }
 
+        private void TlpProductList_SizeChanged(object sender, EventArgs e)
+        {
+            if (!Resizing)
+            {
+                Resizing = true;
+                SizeChangedListView(listViewProduct);
+            }
+            Resizing = false;
+        }
+
         private void TsmItemClose_Click(object sender, EventArgs e) => Close();
 
-        private void CmbPageSizeModes_Changed(object sender, EventArgs e)
+        private void CmbPageSizeCompany_Changed(object sender, EventArgs e)
         {
             var pageSizeCmb = PageCompany.Items[cmbPageSizeCompanies.SelectedIndex];
 
@@ -355,14 +354,14 @@ namespace TestTask.Forms
             }
         }
 
-        private void CmbPageSizeSteps_Changed(object sender, EventArgs e)
+        private void CmbPageSizeProduct_Changed(object sender, EventArgs e)
         {
-            var pageSizeCmb = PageStep.Items[cmbPageSizeSteps.SelectedIndex];
+            var pageSizeCmb = PageProduct.Items[cmbPageSizeProduct.SelectedIndex];
 
-            if (PageStep.ChangedPage(pageSizeCmb))
+            if (PageProduct.ChangedPage(pageSizeCmb))
             {
-                PageStep.Size = pageSizeCmb;
-                PageStep.Number = 1;
+                PageProduct.Size = pageSizeCmb;
+                PageProduct.Number = 1;
             }
         }
 
@@ -378,22 +377,22 @@ namespace TestTask.Forms
             textBoxCurrentPageCompanies.Text = string.Format("{0}/{1}", PageCompany.Number, _pagedListCompany.PageCount);
         }
 
-        private void TextBoxCurrentPageStep_TextChanged(object sender, EventArgs e)
+        private void TextBoxCurrentPageProduct_TextChanged(object sender, EventArgs e)
         {
-            if (int.TryParse(textBoxCurrentPageStep.Text, out var pageNumber)
-                && pageNumber <= _pagedListStep.PageCount
-                && _pagedListStep.PageNumber == PageStep.Number)
+            if (int.TryParse(textBoxCurrentPageProduct.Text, out var pageNumber)
+                && pageNumber <= _pagedListProduct.PageCount
+                && _pagedListProduct.PageNumber == PageProduct.Number)
             {
-                PageStep.Number = pageNumber;
+                PageProduct.Number = pageNumber;
             }
 
-            textBoxCurrentPageStep.Text = string.Format("{0}/{1}", PageStep.Number, _pagedListStep.PageCount);
+            textBoxCurrentPageProduct.Text = string.Format("{0}/{1}", PageProduct.Number, _pagedListProduct.PageCount);
         }
 
-        private void LoadDataMode()
+        private void LoadDataCompany()
         {
             _pagedListCompany = _companyService.GetQueryableAll().GetPagedList(PageCompany.GetPage());
-            if (IsNotFirstPageModesEmpty())
+            if (IsNotFirstPageCompanyEmpty())
             {
                 PageCompany.Number -= 1;
             }
@@ -402,32 +401,32 @@ namespace TestTask.Forms
 
             listViewCompanies.Items.Clear();
             FillListViewMode(item);
-            CustomUpdateFormStateModesPagination();
+            CustomUpdateFormStateCompanyPagination();
 
             textBoxCurrentPageCompanies.Text = _pagedListCompany.PageNumber.ToString();
         }
 
-        private void LoadDataStep()
+        private void LoadDataProduct()
         {
-            _pagedListStep = _stepService.GetQueryableAll().GetPagedList(PageStep.GetPage());
-            if (IsNotFirstPageStepsEmpty())
+            _pagedListProduct = _productService.GetQueryableAll().GetPagedList(PageProduct.GetPage());
+            if (IsNotFirstPageProductEmpty())
             {
-                PageStep.Number -= 1;
+                PageProduct.Number -= 1;
             }
 
-            var item = _pagedListStep.Items;
+            var item = _pagedListProduct.Items;
 
-            listViewSteps.Items.Clear();
-            FillListViewStep(item);
-            CustomUpdateFormStateStepsPagination();
+            listViewProduct.Items.Clear();
+            FillListViewProduct(item);
+            CustomUpdateFormStateProductPagination();
 
-            textBoxCurrentPageStep.Text = _pagedListStep.PageNumber.ToString();
+            textBoxCurrentPageProduct.Text = _pagedListProduct.PageNumber.ToString();
         }
 
         private void UpdateAllGrids()
         {
-            LoadDataMode();
-            LoadDataStep();
+            LoadDataCompany();
+            LoadDataProduct();
         }
 
         private Company GetCompany(int indexRow)
@@ -443,19 +442,18 @@ namespace TestTask.Forms
             return new Company(name, dateCreation, country, id);
         }
 
-        private Step GetStep(int indexRow)
+        private Product GetProduct(int indexRow)
         {
-            var rowItem = listViewSteps.Items[indexRow];
+            var rowItem = listViewProduct.Items[indexRow];
 
             var idStep = CellElement(rowItem, IndexId).ParseInt();
-            var timer = CellElement(rowItem, IndexColumnTimer).ParseInt();
-            var destination = CellElement(rowItem, IndexColumnDestination);
-            var speed = CellElement(rowItem, IndexColumnSpeed).ParseInt();
+            var category = CellElement(rowItem, IndexColumnCategory) ?? throw new Exception("Type cannot be null.");
             var type = CellElement(rowItem, IndexColumnType) ?? throw new Exception("Type cannot be null.");
-            var volume = CellElement(rowItem, IndexColumnVolume).ParseInt();
-            var modeId = CellElement(rowItem, IndexColumnModeId).ParseInt();
+            var price = CellElement(rowItem, IndexColumnPrice).ParseDecimal();
+            var destination = CellElement(rowItem, IndexColumnDestination);
+            var companyId = CellElement(rowItem, IndexColumnIdCompany).ParseInt();
 
-            return new Step(modeId, timer, destination, speed, type, volume, idStep);
+            return new Product(companyId, category, type, destination, price, idStep);
         }
 
         private string CellElement(ListViewItem rowItem, int indexColumn) => rowItem.GetString(indexColumn) ?? throw new Exception("String cannot be null.");
@@ -464,19 +462,19 @@ namespace TestTask.Forms
         {
             foreach (var item in items)
             {
-                AddModeInListView(item);
+                AddCompanyInListView(item);
             }
         }
 
-        private void FillListViewStep(List<Step> items)
+        private void FillListViewProduct(List<Product> items)
         {
             foreach (var item in items)
             {
-                AddStepInListView(item);
+                AddProductInListView(item);
             }
         }
 
-        private void AddModeInListView(Company item)
+        private void AddCompanyInListView(Company item)
         {
             var itemsRow = new string[]
             {
@@ -489,42 +487,40 @@ namespace TestTask.Forms
             listViewCompanies.Items.Add(listItem);
         }
 
-        private void AddStepInListView(Step item)
+        private void AddProductInListView(Product item)
         {
             var itemsRow = new string[]
             {
                 item.Id.ToString(),
-                _companyService.NameMode(item.CompanyId),
-                item.Timer.ToString(),
-                item.Destination != null ? item.Destination.ToString() : string.Empty,
-                item.Speed.ToString(),
+                _companyService.CompanyName(item.CompanyId),
+                item.Category,
                 item.Type,
-                item.Volume.ToString(),
+                item.Price.ToString(),
+                item.Destination != null ? item.Destination.ToString() : string.Empty,
                 item.CompanyId.ToString(),
             };
 
             var listItem = new ListViewItem(itemsRow);
-            listViewSteps.Items.Add(listItem);
+            listViewProduct.Items.Add(listItem);
         }
 
         public void UpdateMode(Company editItem, int row)
         {
             listViewCompanies.Items[row].SubItems[IndexId].Text = editItem.Id.ToString();
             listViewCompanies.Items[row].SubItems[IndexColumnCompanyName].Text = editItem.Name.ToString();
-            listViewCompanies.Items[row].SubItems[IndexColumnDataCreate].Text = editItem.DateCreation.ToString();
+            listViewCompanies.Items[row].SubItems[IndexColumnDataCreate].Text = editItem.DateCreation.ToString("d");
             listViewCompanies.Items[row].SubItems[IndexColumnCountry].Text = editItem.Country.ToString();
         }
 
-        public void UpdateStep(Step editItem, int row)
+        public void UpdateProduct(Product editItem, int row)
         {
-            listViewSteps.Items[row].SubItems[IndexId].Text = editItem.Id.ToString();
-            listViewSteps.Items[row].SubItems[IndexColumnCompanyName].Text = _companyService.NameMode(editItem.CompanyId);
-            listViewSteps.Items[row].SubItems[IndexColumnTimer].Text = editItem.Timer.ToString();
-            listViewSteps.Items[row].SubItems[IndexColumnDestination].Text = editItem.Destination == null ? string.Empty : editItem.Destination.ToString();
-            listViewSteps.Items[row].SubItems[IndexColumnSpeed].Text = editItem.Speed.ToString();
-            listViewSteps.Items[row].SubItems[IndexColumnType].Text = editItem.Type.ToString();
-            listViewSteps.Items[row].SubItems[IndexColumnVolume].Text = editItem.Volume.ToString();
-            listViewSteps.Items[row].SubItems[IndexColumnModeId].Text = editItem.CompanyId.ToString();
+            listViewProduct.Items[row].SubItems[IndexId].Text = editItem.Id.ToString();
+            listViewProduct.Items[row].SubItems[IndexColumnCompanyName].Text = _companyService.CompanyName(editItem.CompanyId);
+            listViewProduct.Items[row].SubItems[IndexColumnCategory].Text = editItem.Category == null ? string.Empty : editItem.Category.ToString();
+            listViewProduct.Items[row].SubItems[IndexColumnType].Text = editItem.Type == null ? string.Empty : editItem.Type.ToString();
+            listViewProduct.Items[row].SubItems[IndexColumnPrice].Text = editItem.Price.ToString();
+            listViewProduct.Items[row].SubItems[IndexColumnDestination].Text = editItem.Destination.ToString();
+            listViewProduct.Items[row].SubItems[IndexColumnIdCompany].Text = editItem.CompanyId.ToString();
         }
 
         private void RemoveItemRowListViewCompany()
@@ -535,13 +531,13 @@ namespace TestTask.Forms
                 if (item.Selected)
                 {
                     var id = CellElement(item, IndexId).ParseInt();
-                    _stepService.RemoveStepRelatedToMode(id);
+                    _productService.RemoveStepRelatedToMode(id);
                     _companyService.Remove(id);
                 }
             }
         }
 
-        private void CustomUpdateFormStateModesPagination()
+        private void CustomUpdateFormStateCompanyPagination()
         {
             var hasPageControl = _pagedListCompany.PageCount > 0 ? true : false;
 
@@ -560,26 +556,26 @@ namespace TestTask.Forms
                                     hasPageControl;
         }
 
-        private void CustomUpdateFormStateStepsPagination()
+        private void CustomUpdateFormStateProductPagination()
         {
-            var hasPageControl = _pagedListStep.PageCount > 0 ? true : false;
+            var hasPageControl = _pagedListProduct.PageCount > 0 ? true : false;
 
-            btnFirstPageSteps.Enabled =
-                btnLastPageSteps.Enabled =
-                    btnNextPageSteps.Enabled =
-                        btnBackPageSteps.Enabled =
-                            textBoxCurrentPageStep.Enabled =
+            btnFirstPageProducts.Enabled =
+                btnLastPageProduct.Enabled =
+                    btnNextPageProduct.Enabled =
+                        btnBackPageProducts.Enabled =
+                            textBoxCurrentPageProduct.Enabled =
                                     hasPageControl;
 
-            btnFirstPageSteps.Visible =
-                btnLastPageSteps.Visible =
-                    btnNextPageSteps.Visible =
-                        btnBackPageSteps.Visible =
-                            textBoxCurrentPageStep.Visible =
+            btnFirstPageProducts.Visible =
+                btnLastPageProduct.Visible =
+                    btnNextPageProduct.Visible =
+                        btnBackPageProducts.Visible =
+                            textBoxCurrentPageProduct.Visible =
                                     hasPageControl;
         }
 
-        private void BtnFirstPageModes_Click(object sender, EventArgs e)
+        private void BtnFirstPageCompany_Click(object sender, EventArgs e)
         {
             if (_pagedListCompany.HasPrevious)
             {
@@ -587,7 +583,7 @@ namespace TestTask.Forms
             }
         }
 
-        private void BtnBackPageModes_Click(object sender, EventArgs e)
+        private void BtnBackPageCompany_Click(object sender, EventArgs e)
         {
             if (_pagedListCompany.HasPrevious)
             {
@@ -595,7 +591,7 @@ namespace TestTask.Forms
             }
         }
 
-        private void BtnNextPageModes_Click(object sender, EventArgs e)
+        private void BtnNextPageCompany_Click(object sender, EventArgs e)
         {
             if (_pagedListCompany.HasNext)
             {
@@ -603,7 +599,7 @@ namespace TestTask.Forms
             }
         }
 
-        private void BtnLastPageModes_Click(object sender, EventArgs e)
+        private void BtnLastPageCompany_Click(object sender, EventArgs e)
         {
             if (_pagedListCompany.HasNext)
             {
@@ -611,43 +607,43 @@ namespace TestTask.Forms
             }
         }
 
-        private void BtnFirstPageSteps_Click(object sender, EventArgs e)
+        private void BtnFirstPageProduct_Click(object sender, EventArgs e)
         {
-            if (_pagedListStep.HasPrevious)
+            if (_pagedListProduct.HasPrevious)
             {
-                PageStep.Number = 1;
+                PageProduct.Number = 1;
             }
         }
 
-        private void BtnBackPageSteps_Click(object sender, EventArgs e)
+        private void BtnBackPageProduct_Click(object sender, EventArgs e)
         {
-            if (_pagedListStep.HasPrevious)
+            if (_pagedListProduct.HasPrevious)
             {
-                PageStep.Number--;
+                PageProduct.Number--;
             }
         }
 
-        private void BtnNextPageSteps_Click(object sender, EventArgs e)
+        private void BtnNextPageProduct_Click(object sender, EventArgs e)
         {
-            if (_pagedListStep.HasNext)
+            if (_pagedListProduct.HasNext)
             {
-                PageStep.Number++;
+                PageProduct.Number++;
             }
         }
 
-        private void BtnLastPageSteps_Click(object sender, EventArgs e)
+        private void BtnLastPageProduct_Click(object sender, EventArgs e)
         {
-            if (_pagedListStep.HasNext)
+            if (_pagedListProduct.HasNext)
             {
-                PageStep.Number = _pagedListStep.PageCount;
+                PageProduct.Number = _pagedListProduct.PageCount;
             }
         }
 
-        private bool IsNotFirstPageModesEmpty() => _pagedListCompany.Count == 0 && PageCompany.Number != 1;
+        private bool IsNotFirstPageCompanyEmpty() => _pagedListCompany.Count == 0 && PageCompany.Number != 1;
 
-        private bool IsNotFirstPageStepsEmpty() => _pagedListStep.Count == 0 && PageStep.Number != 1;
+        private bool IsNotFirstPageProductEmpty() => _pagedListProduct.Count == 0 && PageProduct.Number != 1;
 
-        private void SizeChangedListView(System.Windows.Forms.ListView listView)
+        private void SizeChangedListView(ListView listView)
         {
             if (listView != null)
             {

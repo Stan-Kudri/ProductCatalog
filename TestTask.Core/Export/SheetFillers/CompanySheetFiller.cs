@@ -1,7 +1,7 @@
 ﻿using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
-using TestTask.Core.Models.Company;
+using TestTask.Core.Models.Companies;
 
 namespace TestTask.Core.Export.SheetFillers
 {
@@ -45,7 +45,7 @@ namespace TestTask.Core.Export.SheetFillers
                             cell.SetCellValue(item.Name);
                             break;
                         case CompanyField.DateCreation:
-                            cell.SetCellValue(item.DateCreation);
+                            cell.SetCellValue(item.DateCreation.ToString("d"));
                             break;
                         case CompanyField.Country:
                             cell.SetCellValue(item.Country);

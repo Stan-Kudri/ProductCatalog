@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using TestTask.Core.Models.Company;
+using TestTask.Core.Models.Companies;
 
-namespace TestTask.BindingItem.UserBinding.StepBinding
+namespace TestTask.BindingItem.UserBinding.ProductBinding
 {
     public class SelectCompany : ModelBase
     {

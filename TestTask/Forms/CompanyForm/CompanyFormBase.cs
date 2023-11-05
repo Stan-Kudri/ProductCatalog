@@ -3,12 +3,14 @@ using System;
 using System.Windows.Forms;
 using TestTask.BindingItem.UserBinding;
 using TestTask.Core;
+using TestTask.Core.Models.Companies;
 
 namespace TestTask.Forms.CompanyForm
 {
     public partial class CompanyFormBase : BaseForm
     {
         protected readonly IMessageBox _messageBox;
+        protected readonly CompanyService _companyService;
 
         private CompanyFormBase()
         {
@@ -18,15 +20,23 @@ namespace TestTask.Forms.CompanyForm
         public CompanyFormBase(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            DefaultValue();
             _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
+            _companyService = serviceProvider.GetRequiredService<CompanyService>();
         }
 
         protected virtual void BtnSave_Click(object sender, EventArgs e)
         {
-            if (tbNameCompany.Text == string.Empty)
+            var nameCompany = tbNameCompany.Text;
+
+            if (nameCompany == string.Empty)
             {
                 _messageBox.ShowWarning("Fill in the field Name");
+                return;
+            }
+
+            if (!_companyService.IsFreeName(nameCompany))
+            {
+                _messageBox.ShowWarning("Name company is not free.");
                 return;
             }
 
@@ -57,10 +67,6 @@ namespace TestTask.Forms.CompanyForm
             dtpCreateCompany.Value = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day);
         }
 
-        private void TbMaxBottle_KeyPress(object sender, KeyPressEventArgs e) => KeyPressDigit(e);
-
-        private void TbMaxUsedType_KeyPress(object sender, KeyPressEventArgs e) => KeyPressDigit(e);
-
         public CompanyModel GetCompanyModel()
         {
             if (tbNameCompany.Text == string.Empty)
@@ -79,14 +85,6 @@ namespace TestTask.Forms.CompanyForm
             }
 
             return new CompanyModel(tbNameCompany.Text, dtpCreateCompany.Value, tbContry.Text);
-        }
-
-        private void KeyPressDigit(KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(8))
-            {
-                e.Handled = true;
-            }
         }
     }
 }

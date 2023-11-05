@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using TestTask.Core.Extension;
-using TestTask.Core.Models.Company;
+using TestTask.Core.Models.Companies;
 
 namespace TestTask.Core.Import.Importers
 {
@@ -96,7 +96,7 @@ namespace TestTask.Core.Import.Importers
                         {
                             return Result<Company>.CreateFail("Country should not be empty", row.RowNum);
                         }
-                        res.Name = country.Value;
+                        res.Country = country.Value;
                         break;
                 }
 

@@ -6,8 +6,8 @@ using TestTask.ChildForms.Import;
 using TestTask.Core;
 using TestTask.Core.Import;
 using TestTask.Core.Import.Importers;
-using TestTask.Core.Models.Company;
-using TestTask.Core.Models.Steeps;
+using TestTask.Core.Models.Companies;
+using TestTask.Core.Models.Products;
 using TestTask.Core.Models.Users;
 using TestTask.Forms;
 using TestTask.Forms.CompanyForm;
@@ -31,7 +31,7 @@ namespace TestTask
                 .AddScoped<IMessageBox>(e => new MessageBoxShow())
                 .AddScoped<UserService>()
                 .AddScoped<CompanyService>()
-                .AddScoped<StepService>()
+                .AddScoped<ProductService>()
                 .AddScoped<UserValidator>()
                 .AddSingleton<BaseForm>()
                 .AddTransient<LoginForm>()
@@ -40,13 +40,14 @@ namespace TestTask
                 .AddTransient<TableForm>()
                 .AddTransient<AddItemCompanyForm>()
                 .AddTransient<EditItemCompanyForm>()
-                .AddTransient<AddItemStepForm>()
+                .AddTransient<AddItemProductForm>()
+                .AddTransient<EditItemProductForm>()
                 .AddSingleton(e => new OpenFileDialog { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
                 .AddSingleton(e => new SaveFileDialog() { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
                 .AddSingleton(e => new CompanyImporter())
-                .AddSingleton(e => new StepImporter())
+                .AddSingleton(e => new ProductImporter())
                 .AddSingleton(e => new ExcelImporter<Company>(e.GetRequiredService<CompanyImporter>()))
-                .AddSingleton(e => new ExcelImporter<Step>(e.GetRequiredService<StepImporter>()));
+                .AddSingleton(e => new ExcelImporter<Product>(e.GetRequiredService<ProductImporter>()));
 
             var container = collection.BuildServiceProvider();
 

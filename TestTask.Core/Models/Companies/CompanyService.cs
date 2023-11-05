@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TestTask.Core.Models.Company
+namespace TestTask.Core.Models.Companies
 {
     public class CompanyService : IService<Company>
     {
@@ -60,11 +60,13 @@ namespace TestTask.Core.Models.Company
             Update(company);
         }
 
-        public string NameMode(int id)
+        public string CompanyName(int id)
             => _dbContext.Company.FirstOrDefault(e => e.Id == id).Name ?? throw new ArgumentException("Interaction element not found.");
 
         public List<Company> GetAll() => _dbContext.Company.Count() > 0 ? _dbContext.Company.ToList() : null;
 
         public IQueryable<Company> GetQueryableAll() => _dbContext.Company.Select(e => e);
+
+        public bool IsFreeName(string name) => _dbContext.Company.FirstOrDefault(e => e.Name == name) == null;
     }
 }

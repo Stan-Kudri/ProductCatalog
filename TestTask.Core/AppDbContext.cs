@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TestTask.Core.Models.Company;
-using TestTask.Core.Models.Steeps;
+using TestTask.Core.Models.Companies;
+using TestTask.Core.Models.Products;
 using TestTask.Core.Models.Users;
 
 namespace TestTask.Core
@@ -16,7 +16,7 @@ namespace TestTask.Core
 
         public DbSet<Company> Company { get; set; }
 
-        public DbSet<Step> Steps { get; set; }
+        public DbSet<Product> Product { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,21 +32,21 @@ namespace TestTask.Core
             configurationCompany.ToTable("company");
             configurationCompany.HasKey(e => e.Id);
             configurationCompany.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
+            configurationCompany.HasIndex(e => e.Name).IsUnique();
             configurationCompany.Property(e => e.Name).IsRequired().HasMaxLength(128).HasColumnName("name").HasMaxLength(128);
             configurationCompany.Property(e => e.DateCreation).IsRequired().HasColumnType("DATETIME").HasColumnName("dateCreation");
             configurationCompany.Property(e => e.Country).IsRequired().HasMaxLength(64).HasColumnName("country");
             configurationCompany.HasMany(e => e.Product).WithOne().HasForeignKey(e => e.CompanyId);
 
-            var configurationStep = modelBuilder.Entity<Step>();
-            configurationStep.ToTable("step");
-            configurationStep.HasKey(e => e.Id);
-            configurationStep.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
-            configurationStep.Property(e => e.CompanyId).IsRequired().HasColumnName("modeId");
-            configurationStep.Property(e => e.Timer).IsRequired().HasColumnName("timer");
-            configurationStep.Property(e => e.Destination).HasColumnName("destination");
-            configurationStep.Property(e => e.Speed).IsRequired().HasColumnName("speed");
-            configurationStep.Property(e => e.Type).IsRequired().HasColumnName("type").HasMaxLength(128);
-            configurationStep.Property(e => e.Volume).IsRequired().HasColumnName("volume");
+            var configurationProduct = modelBuilder.Entity<Product>();
+            configurationProduct.ToTable("product");
+            configurationProduct.HasKey(e => e.Id);
+            configurationProduct.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
+            configurationProduct.Property(e => e.CompanyId).IsRequired().HasColumnName("companyId");
+            configurationProduct.Property(e => e.Category).IsRequired().HasColumnName("category").HasMaxLength(128);
+            configurationProduct.Property(e => e.Type).IsRequired().HasColumnName("type").HasMaxLength(128);
+            configurationProduct.Property(e => e.Price).IsRequired().HasColumnType("NUMERIC").HasColumnName("price");
+            configurationProduct.Property(e => e.Destination).HasColumnName("destination");
         }
     }
 }

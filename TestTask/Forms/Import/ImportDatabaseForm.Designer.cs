@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cbModes = new MaterialSkin.Controls.MaterialCheckbox();
-            this.cbStep = new MaterialSkin.Controls.MaterialCheckbox();
+            this.cbCompany = new MaterialSkin.Controls.MaterialCheckbox();
+            this.cbProduct = new MaterialSkin.Controls.MaterialCheckbox();
             this.tlbComboBox = new System.Windows.Forms.TableLayoutPanel();
             this.btnImportData = new MaterialSkin.Controls.MaterialButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -37,51 +37,51 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // cbModes
+            // cbCompany
             // 
-            this.cbModes.AutoSize = true;
-            this.cbModes.Checked = true;
-            this.cbModes.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbModes.Depth = 0;
-            this.cbModes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbModes.Location = new System.Drawing.Point(0, 0);
-            this.cbModes.Margin = new System.Windows.Forms.Padding(0);
-            this.cbModes.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.cbModes.MouseState = MaterialSkin.MouseState.HOVER;
-            this.cbModes.Name = "cbModes";
-            this.cbModes.ReadOnly = false;
-            this.cbModes.Ripple = true;
-            this.cbModes.Size = new System.Drawing.Size(123, 40);
-            this.cbModes.TabIndex = 0;
-            this.cbModes.Text = "Modes";
-            this.cbModes.UseVisualStyleBackColor = true;
+            this.cbCompany.AutoSize = true;
+            this.cbCompany.Checked = true;
+            this.cbCompany.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbCompany.Depth = 0;
+            this.cbCompany.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbCompany.Location = new System.Drawing.Point(0, 0);
+            this.cbCompany.Margin = new System.Windows.Forms.Padding(0);
+            this.cbCompany.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.cbCompany.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cbCompany.Name = "cbCompany";
+            this.cbCompany.ReadOnly = false;
+            this.cbCompany.Ripple = true;
+            this.cbCompany.Size = new System.Drawing.Size(123, 40);
+            this.cbCompany.TabIndex = 0;
+            this.cbCompany.Text = "Company";
+            this.cbCompany.UseVisualStyleBackColor = true;
             // 
-            // cbStep
+            // cbProduct
             // 
-            this.cbStep.AutoSize = true;
-            this.cbStep.Checked = true;
-            this.cbStep.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbStep.Depth = 0;
-            this.cbStep.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbStep.Location = new System.Drawing.Point(123, 0);
-            this.cbStep.Margin = new System.Windows.Forms.Padding(0);
-            this.cbStep.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.cbStep.MouseState = MaterialSkin.MouseState.HOVER;
-            this.cbStep.Name = "cbStep";
-            this.cbStep.ReadOnly = false;
-            this.cbStep.Ripple = true;
-            this.cbStep.Size = new System.Drawing.Size(123, 40);
-            this.cbStep.TabIndex = 1;
-            this.cbStep.Text = "Step";
-            this.cbStep.UseVisualStyleBackColor = true;
+            this.cbProduct.AutoSize = true;
+            this.cbProduct.Checked = true;
+            this.cbProduct.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbProduct.Depth = 0;
+            this.cbProduct.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbProduct.Location = new System.Drawing.Point(123, 0);
+            this.cbProduct.Margin = new System.Windows.Forms.Padding(0);
+            this.cbProduct.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.cbProduct.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cbProduct.Name = "cbProduct";
+            this.cbProduct.ReadOnly = false;
+            this.cbProduct.Ripple = true;
+            this.cbProduct.Size = new System.Drawing.Size(123, 40);
+            this.cbProduct.TabIndex = 1;
+            this.cbProduct.Text = "Product";
+            this.cbProduct.UseVisualStyleBackColor = true;
             // 
             // tlbComboBox
             // 
             this.tlbComboBox.ColumnCount = 2;
             this.tlbComboBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlbComboBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlbComboBox.Controls.Add(this.cbModes, 0, 0);
-            this.tlbComboBox.Controls.Add(this.cbStep, 1, 0);
+            this.tlbComboBox.Controls.Add(this.cbCompany, 0, 0);
+            this.tlbComboBox.Controls.Add(this.cbProduct, 1, 0);
             this.tlbComboBox.Location = new System.Drawing.Point(8, 72);
             this.tlbComboBox.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.tlbComboBox.Name = "tlbComboBox";
@@ -146,8 +146,8 @@
 
         #endregion
 
-        private MaterialSkin.Controls.MaterialCheckbox cbModes;
-        private MaterialSkin.Controls.MaterialCheckbox cbStep;
+        private MaterialSkin.Controls.MaterialCheckbox cbCompany;
+        private MaterialSkin.Controls.MaterialCheckbox cbProduct;
         private System.Windows.Forms.TableLayoutPanel tlbComboBox;
         private MaterialSkin.Controls.MaterialButton btnImportData;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using TestTask.Core.Models.Company;
+using TestTask.Core.Models.Companies;
 
 namespace TestTask.Forms.CompanyForm
 {
@@ -45,9 +45,9 @@ namespace TestTask.Forms.CompanyForm
         protected override void DefaultValue()
         {
             tbNameCompany.Text = _oldCompany.Name;
+            tbContry.Text = _oldCompany.Country;
             dtpCreateCompany.MaxDate = DateTime.Now;
             dtpCreateCompany.Value = _oldCompany.DateCreation;
-            tbContry.Text = _oldCompany.DateCreation.ToString();
         }
 
         public Company GetEditCompany() => _editCompany;
