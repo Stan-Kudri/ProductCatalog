@@ -58,7 +58,9 @@ namespace TestTask.Forms
             this.btnBackPageCompanies = new MaterialSkin.Controls.MaterialButton();
             this.btnNextPageCompanies = new MaterialSkin.Controls.MaterialButton();
             this.textBoxCurrentPageCompanies = new System.Windows.Forms.TextBox();
+            this.bindingSourcePage = new System.Windows.Forms.BindingSource(this.components);
             this.cmbPageSizeCompanies = new System.Windows.Forms.ComboBox();
+            this.bindingSourcePageCompanies = new System.Windows.Forms.BindingSource(this.components);
             this.tlpCompanyList = new System.Windows.Forms.TableLayoutPanel();
             this.listViewCompanies = new MaterialSkin.Controls.MaterialListView();
             this.columnIDCompany = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -74,6 +76,7 @@ namespace TestTask.Forms
             this.btnNextPageProduct = new MaterialSkin.Controls.MaterialButton();
             this.textBoxCurrentPageProduct = new System.Windows.Forms.TextBox();
             this.cmbPageSizeProduct = new System.Windows.Forms.ComboBox();
+            this.bindingSourcePageProducts = new System.Windows.Forms.BindingSource(this.components);
             this.tlpListProduct = new System.Windows.Forms.TableLayoutPanel();
             this.listViewProduct = new MaterialSkin.Controls.MaterialListView();
             this.columnIDStep = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -83,9 +86,6 @@ namespace TestTask.Forms
             this.columnPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnDestination = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnCompanyId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.bindingSourcePage = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSourcePageProducts = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSourcePageCompanies = new System.Windows.Forms.BindingSource(this.components);
             this.tlpCompaniesButton.SuspendLayout();
             this.tlpProductsButton.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -93,14 +93,14 @@ namespace TestTask.Forms
             this.tabPageCompanies.SuspendLayout();
             this.tlpCompany.SuspendLayout();
             this.tlpPagedCompanies.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageCompanies)).BeginInit();
             this.tlpCompanyList.SuspendLayout();
             this.tabPageProduct.SuspendLayout();
             this.tlpProduct.SuspendLayout();
             this.tlpPagedProduct.SuspendLayout();
-            this.tlpListProduct.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageProducts)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageCompanies)).BeginInit();
+            this.tlpListProduct.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpCompaniesButton
@@ -505,6 +505,10 @@ namespace TestTask.Forms
             this.textBoxCurrentPageCompanies.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxCurrentPageCompanies.TextChanged += new System.EventHandler(this.TextBoxCurrentPageMode_TextChanged);
             // 
+            // bindingSourcePage
+            // 
+            this.bindingSourcePage.DataSource = typeof(TestTask.BindingItem.UserBinding.PageModel);
+            // 
             // cmbPageSizeCompanies
             // 
             this.cmbPageSizeCompanies.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -515,6 +519,11 @@ namespace TestTask.Forms
             this.cmbPageSizeCompanies.Size = new System.Drawing.Size(121, 21);
             this.cmbPageSizeCompanies.TabIndex = 10;
             this.cmbPageSizeCompanies.SelectedIndexChanged += new System.EventHandler(this.CmbPageSizeCompany_Changed);
+            // 
+            // bindingSourcePageCompanies
+            // 
+            this.bindingSourcePageCompanies.DataMember = "Items";
+            this.bindingSourcePageCompanies.DataSource = this.bindingSourcePage;
             // 
             // tlpCompanyList
             // 
@@ -743,6 +752,11 @@ namespace TestTask.Forms
             this.cmbPageSizeProduct.TabIndex = 10;
             this.cmbPageSizeProduct.SelectedIndexChanged += new System.EventHandler(this.CmbPageSizeProduct_Changed);
             // 
+            // bindingSourcePageProducts
+            // 
+            this.bindingSourcePageProducts.DataMember = "Items";
+            this.bindingSourcePageProducts.DataSource = this.bindingSourcePage;
+            // 
             // tlpListProduct
             // 
             this.tlpListProduct.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -796,14 +810,14 @@ namespace TestTask.Forms
             // 
             // columnCompanyName
             // 
-            this.columnCompanyName.Tag = "110";
+            this.columnCompanyName.Tag = "140";
             this.columnCompanyName.Text = "Company";
             this.columnCompanyName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnCompanyName.Width = 140;
             // 
             // columnCategory
             // 
-            this.columnCategory.Tag = "90";
+            this.columnCategory.Tag = "110";
             this.columnCategory.Text = "Category";
             this.columnCategory.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnCategory.Width = 110;
@@ -824,7 +838,7 @@ namespace TestTask.Forms
             // 
             // columnDestination
             // 
-            this.columnDestination.Tag = "140";
+            this.columnDestination.Tag = "160";
             this.columnDestination.Text = "Destination";
             this.columnDestination.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnDestination.Width = 160;
@@ -835,20 +849,6 @@ namespace TestTask.Forms
             this.columnCompanyId.Text = "CompanyId";
             this.columnCompanyId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnCompanyId.Width = 0;
-            // 
-            // bindingSourcePage
-            // 
-            this.bindingSourcePage.DataSource = typeof(TestTask.BindingItem.UserBinding.PageModel);
-            // 
-            // bindingSourcePageProducts
-            // 
-            this.bindingSourcePageProducts.DataMember = "Items";
-            this.bindingSourcePageProducts.DataSource = this.bindingSourcePage;
-            // 
-            // bindingSourcePageCompanies
-            // 
-            this.bindingSourcePageCompanies.DataMember = "Items";
-            this.bindingSourcePageCompanies.DataSource = this.bindingSourcePage;
             // 
             // TableForm
             // 
@@ -877,15 +877,15 @@ namespace TestTask.Forms
             this.tlpCompany.ResumeLayout(false);
             this.tlpPagedCompanies.ResumeLayout(false);
             this.tlpPagedCompanies.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageCompanies)).EndInit();
             this.tlpCompanyList.ResumeLayout(false);
             this.tabPageProduct.ResumeLayout(false);
             this.tlpProduct.ResumeLayout(false);
             this.tlpPagedProduct.ResumeLayout(false);
             this.tlpPagedProduct.PerformLayout();
-            this.tlpListProduct.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageProducts)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageCompanies)).EndInit();
+            this.tlpListProduct.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
