@@ -24,7 +24,6 @@ namespace TestTask.Core.Import.Importers
 
         public bool ReadHeader(ISheet sheet)
         {
-            _header = null;
             try
             {
                 _header = sheet.ReadHeader(_columnMap);
@@ -32,6 +31,7 @@ namespace TestTask.Core.Import.Importers
             }
             catch
             {
+                _header = null;
                 return false;
             }
         }

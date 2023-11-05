@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using TestTask.BindingItem;
 
 namespace TestTask.Forms
 {
@@ -507,7 +508,7 @@ namespace TestTask.Forms
             // 
             // bindingSourcePage
             // 
-            this.bindingSourcePage.DataSource = typeof(TestTask.BindingItem.UserBinding.PageModel);
+            this.bindingSourcePage.DataSource = typeof(PageModel);
             // 
             // cmbPageSizeCompanies
             // 

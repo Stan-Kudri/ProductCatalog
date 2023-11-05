@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using TestTask.BindingItem.UserBinding;
+using TestTask.BindingItem;
 using TestTask.ChildForms.Import;
 using TestTask.Core;
 using TestTask.Core.Export;
@@ -93,7 +93,7 @@ namespace TestTask.Forms
                     return;
                 }
 
-                var item = addFormMode.GetCompanyModel().ToMode();
+                var item = addFormMode.GetCompanyModel().ToCompany();
                 _companyService.Add(item);
                 LoadDataCompany();
             }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows.Forms;
-using TestTask.BindingItem.UserBinding;
+using TestTask.BindingItem;
 using TestTask.Core;
 using TestTask.Core.Models.Companies;
 

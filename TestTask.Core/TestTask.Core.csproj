@@ -141,6 +141,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbContextFactory.cs" />
+    <Compile Include="Export\SheetFillers\CategorySheetFiller.cs" />
+    <Compile Include="Import\Importers\CategoryImporter.cs" />
     <Compile Include="Models\Categories\Category.cs" />
     <Compile Include="Models\Categories\CategoryField.cs" />
     <Compile Include="Models\Categories\CategoryService.cs" />

@@ -7,10 +7,10 @@ namespace TestTask.Core.Export.SheetFillers
 {
     public class CompanySheetFiller : ISheetFiller
     {
-        private readonly CompanyService _modeService;
+        private readonly CompanyService _companyService;
         private readonly List<CompanyField> _columnMap = CreateColumnMap();
 
-        public CompanySheetFiller(CompanyService companyService) => _modeService = companyService;
+        public CompanySheetFiller(CompanyService companyService) => _companyService = companyService;
 
         public string Name => "Company";
 
@@ -27,7 +27,7 @@ namespace TestTask.Core.Export.SheetFillers
 
             var numberRow = 0;
 
-            foreach (var item in _modeService.GetAll())
+            foreach (var item in _companyService.GetAll())
             {
                 numberRow++;
                 row = sheet.CreateRow(numberRow);

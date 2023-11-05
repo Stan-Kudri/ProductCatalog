@@ -160,12 +160,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingItem\CategoryModel.cs" />
     <Compile Include="BindingItem\ModelBase.cs" />
-    <Compile Include="BindingItem\UserBinding\CompanyModel.cs" />
-    <Compile Include="BindingItem\UserBinding\PageModel.cs" />
-    <Compile Include="BindingItem\UserBinding\ProductBinding\SelectCompany.cs" />
-    <Compile Include="BindingItem\UserBinding\ProductBinding\ProductModel.cs" />
-    <Compile Include="BindingItem\UserBinding\UserModel.cs" />
+    <Compile Include="BindingItem\CompanyModel.cs" />
+    <Compile Include="BindingItem\PageModel.cs" />
+    <Compile Include="BindingItem\ProductBinding\SelectCompany.cs" />
+    <Compile Include="BindingItem\ProductBinding\ProductModel.cs" />
+    <Compile Include="BindingItem\UserModel.cs" />
     <Compile Include="Extension\ListViewExtension.cs" />
     <Compile Include="Extension\PageExtension.cs" />
     <Compile Include="Forms\BaseForm.cs">

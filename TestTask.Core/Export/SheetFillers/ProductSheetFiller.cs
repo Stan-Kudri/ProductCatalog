@@ -7,10 +7,10 @@ namespace TestTask.Core.Export.SheetFillers
 {
     public class ProductSheetFiller : ISheetFiller
     {
-        private readonly ProductService _stepService;
+        private readonly ProductService _productService;
         private readonly List<ProductField> _columnMap = CreateColumnMap();
 
-        public ProductSheetFiller(ProductService stepService) => _stepService = stepService;
+        public ProductSheetFiller(ProductService stepService) => _productService = stepService;
 
         public string Name => "Product";
 
@@ -27,7 +27,7 @@ namespace TestTask.Core.Export.SheetFillers
 
             var numberRow = 0;
 
-            foreach (var item in _stepService.GetAll())
+            foreach (var item in _productService.GetAll())
             {
                 numberRow++;
                 row = sheet.CreateRow(numberRow);
@@ -53,7 +53,6 @@ namespace TestTask.Core.Export.SheetFillers
                         case ProductField.Price:
                             var price = Convert.ToDouble(item.Price);
                             cell.SetCellValue(price);
-                            //cell.SetCellValue(string.Format("{0:C2}", item.Price));
                             break;
                         case ProductField.Destination:
                             cell.SetCellValue(item.Destination);
