@@ -64,12 +64,12 @@
             this.listView.FullRowSelect = true;
             this.listView.HideSelection = false;
             this.listView.Location = new System.Drawing.Point(0, 0);
-            this.listView.MinimumSize = new System.Drawing.Size(755, 290);
+            this.listView.MinimumSize = new System.Drawing.Size(200, 100);
             this.listView.MouseLocation = new System.Drawing.Point(-1, -1);
             this.listView.MouseState = MaterialSkin.MouseState.OUT;
             this.listView.Name = "listView";
             this.listView.OwnerDraw = true;
-            this.listView.Size = new System.Drawing.Size(755, 300);
+            this.listView.Size = new System.Drawing.Size(755, 270);
             this.listView.TabIndex = 6;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
@@ -102,7 +102,7 @@
             this.tlpPageButton.Controls.Add(this.btnBackPage, 1, 0);
             this.tlpPageButton.Controls.Add(this.tbCurrentPage, 2, 0);
             this.tlpPageButton.Controls.Add(this.btnNextPage, 3, 0);
-            this.tlpPageButton.Location = new System.Drawing.Point(250, 300);
+            this.tlpPageButton.Location = new System.Drawing.Point(250, 270);
             this.tlpPageButton.Name = "tlpPageButton";
             this.tlpPageButton.RowCount = 1;
             this.tlpPageButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -208,7 +208,7 @@
             this.cmbPageSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cmbPageSize.DataSource = this.itemsBindingSourcePageCategory;
             this.cmbPageSize.FormattingEnabled = true;
-            this.cmbPageSize.Location = new System.Drawing.Point(0, 310);
+            this.cmbPageSize.Location = new System.Drawing.Point(0, 280);
             this.cmbPageSize.Name = "cmbPageSize";
             this.cmbPageSize.Size = new System.Drawing.Size(121, 21);
             this.cmbPageSize.TabIndex = 11;
@@ -235,9 +235,8 @@
             this.tlpCompaniesButton.Controls.Add(this.btnEditItem, 1, 0);
             this.tlpCompaniesButton.Controls.Add(this.btnAddItem, 0, 0);
             this.tlpCompaniesButton.ForeColor = System.Drawing.Color.Transparent;
-            this.tlpCompaniesButton.Location = new System.Drawing.Point(645, 302);
+            this.tlpCompaniesButton.Location = new System.Drawing.Point(645, 272);
             this.tlpCompaniesButton.Margin = new System.Windows.Forms.Padding(1);
-            this.tlpCompaniesButton.MinimumSize = new System.Drawing.Size(110, 29);
             this.tlpCompaniesButton.Name = "tlpCompaniesButton";
             this.tlpCompaniesButton.RowCount = 1;
             this.tlpCompaniesButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -312,7 +311,7 @@
             this.Controls.Add(this.tlpPageButton);
             this.Controls.Add(this.listView);
             this.Name = "ListViewCategoryControl";
-            this.Size = new System.Drawing.Size(755, 331);
+            this.Size = new System.Drawing.Size(755, 301);
             this.tlpPageButton.ResumeLayout(false);
             this.tlpPageButton.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourcePageCategory)).EndInit();
@@ -337,10 +336,10 @@
         protected MaterialSkin.Controls.MaterialButton btnBackPage;
         protected System.Windows.Forms.TextBox tbCurrentPage;
         protected MaterialSkin.Controls.MaterialButton btnNextPage;
-        private System.Windows.Forms.BindingSource itemsBindingSourcePageCategory;
-        private System.Windows.Forms.BindingSource pageModelBindingSource;
-        private System.ComponentModel.IContainer components;
-        private System.Windows.Forms.ColumnHeader columnIDCategory;
-        private System.Windows.Forms.ColumnHeader columnCategoryName;
+        protected System.Windows.Forms.BindingSource itemsBindingSourcePageCategory;
+        protected System.Windows.Forms.BindingSource pageModelBindingSource;
+        protected System.ComponentModel.IContainer components;
+        protected System.Windows.Forms.ColumnHeader columnIDCategory;
+        protected System.Windows.Forms.ColumnHeader columnCategoryName;
     }
 }

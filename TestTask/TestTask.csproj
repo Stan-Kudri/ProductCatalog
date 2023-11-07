@@ -164,6 +164,7 @@
     <Compile Include="BindingItem\ModelBase.cs" />
     <Compile Include="BindingItem\CompanyModel.cs" />
     <Compile Include="BindingItem\PageModel.cs" />
+    <Compile Include="BindingItem\Pages\SortPageCategory.cs" />
     <Compile Include="BindingItem\ProductBinding\SelectCategory.cs" />
     <Compile Include="BindingItem\ProductBinding\SelectCompany.cs" />
     <Compile Include="BindingItem\ProductBinding\ProductModel.cs" />
@@ -179,6 +180,12 @@
     </Compile>
     <Compile Include="Control\CategoryCantrol\ListViewCategoryControl.Designer.cs">
       <DependentUpon>ListViewCategoryControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CategoryCantrol\TabPageCategoryUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\CategoryCantrol\TabPageCategoryUserControl.Designer.cs">
+      <DependentUpon>TabPageCategoryUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Extension\ListViewExtension.cs" />
     <Compile Include="Extension\PageExtension.cs" />
@@ -254,6 +261,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Control\CategoryCantrol\ListViewCategoryControl.resx">
       <DependentUpon>ListViewCategoryControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\CategoryCantrol\TabPageCategoryUserControl.resx">
+      <DependentUpon>TabPageCategoryUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>

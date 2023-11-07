@@ -24,7 +24,6 @@ namespace TestTask.Control.CategoryCantrol
         private const int IndexColumnCompanyName = 1;
 
         protected IServiceProvider _serviceProvider;
-        protected CategoryService _categoryService;
         protected ProductService _productService;
         protected IMessageBox _messageBox;
 
@@ -37,6 +36,8 @@ namespace TestTask.Control.CategoryCantrol
         {
             InitializeComponent();
         }
+
+        public CategoryService _categoryService;
 
         public PageModel Page { get; set; } = new PageModel();
 

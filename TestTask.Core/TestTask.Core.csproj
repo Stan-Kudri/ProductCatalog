@@ -149,6 +149,7 @@
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\IService.cs" />
     <Compile Include="Models\Companies\Company.cs" />
+    <Compile Include="Models\Page\Category\SortCategory.cs" />
     <Compile Include="Models\Page\Page.cs" />
     <Compile Include="Models\Page\PagedList.cs" />
     <Compile Include="Models\Products\Product.cs" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TestTask.Control.CategoryCantrol;
 using TestTask.Core.Models.Categories;
 
 namespace TestTask.Core.Models.Companies
@@ -10,6 +11,8 @@ namespace TestTask.Core.Models.Companies
         private readonly AppDbContext _dbContext;
 
         public CategoryService(AppDbContext appDbContext) => _dbContext = appDbContext;
+
+        public SortCategory SortCategory { get; set; } = new SortCategory();
 
         public void Add(Category item)
         {
@@ -60,9 +63,9 @@ namespace TestTask.Core.Models.Companies
         public string GetName(int id)
             => _dbContext.Category.FirstOrDefault(e => e.Id == id).Name ?? throw new ArgumentException("Interaction element not found.");
 
-        public List<Category> GetAll() => _dbContext.Category.Count() > 0 ? _dbContext.Category.ToList() : null;
+        public List<Category> GetAll() => _dbContext.Category.Count() > 0 ? SortCategory.Apply(_dbContext.Category).ToList() : null;
 
-        public IQueryable<Category> GetQueryableAll() => _dbContext.Category.Select(e => e);
+        public IQueryable<Category> GetQueryableAll() => SortCategory.Apply(_dbContext.Category);
 
         public bool IsFreeName(string name) => _dbContext.Category.FirstOrDefault(e => e.Name == name) == null;
     }
