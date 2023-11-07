@@ -106,6 +106,8 @@ namespace TestTask.Forms
             this.listViewCategories = new MaterialSkin.Controls.MaterialListView();
             this.columnIDCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnCategoryName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabPageCATEGORIES = new System.Windows.Forms.TabPage();
+            this.listViewCategoryCATEGORIES = new TestTask.Control.CategoryCantrol.ListViewCategoryControl();
             this.tlpCompaniesButton.SuspendLayout();
             this.tlpProductsButton.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -127,6 +129,7 @@ namespace TestTask.Forms
             this.tlpCategoriesPageControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageCategories)).BeginInit();
             this.tlpListCategory.SuspendLayout();
+            this.tabPageCATEGORIES.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpCompaniesButton
@@ -460,6 +463,7 @@ namespace TestTask.Forms
             this.materialTabControl.Controls.Add(this.tabPageCompanies);
             this.materialTabControl.Controls.Add(this.tabPageProduct);
             this.materialTabControl.Controls.Add(this.tabPageCategory);
+            this.materialTabControl.Controls.Add(this.tabPageCATEGORIES);
             this.materialTabControl.Depth = 0;
             this.materialTabControl.Location = new System.Drawing.Point(8, 75);
             this.materialTabControl.MouseState = MaterialSkin.MouseState.HOVER;
@@ -1183,7 +1187,28 @@ namespace TestTask.Forms
             this.columnCategoryName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnCategoryName.Width = 540;
             // 
-            // TableForm
+            // tabPageCATEGORIES
+            // 
+            this.tabPageCATEGORIES.Controls.Add(this.listViewCategoryCATEGORIES);
+            this.tabPageCATEGORIES.Location = new System.Drawing.Point(4, 22);
+            this.tabPageCATEGORIES.Name = "tabPageCATEGORIES";
+            this.tabPageCATEGORIES.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageCATEGORIES.Size = new System.Drawing.Size(758, 331);
+            this.tabPageCATEGORIES.TabIndex = 3;
+            this.tabPageCATEGORIES.Text = "CATEGORIES";
+            this.tabPageCATEGORIES.UseVisualStyleBackColor = true;
+            // 
+            // listViewCategoryCATEGORIES
+            // 
+            this.listViewCategoryCATEGORIES.Depth = 0;
+            this.listViewCategoryCATEGORIES.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewCategoryCATEGORIES.Location = new System.Drawing.Point(3, 3);
+            this.listViewCategoryCATEGORIES.MouseState = MaterialSkin.MouseState.HOVER;
+            this.listViewCategoryCATEGORIES.Name = "listViewCategoryCATEGORIES";
+            this.listViewCategoryCATEGORIES.Size = new System.Drawing.Size(752, 325);
+            this.listViewCategoryCATEGORIES.TabIndex = 0;
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1193,7 +1218,7 @@ namespace TestTask.Forms
             this.Controls.Add(this.menuStrip);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.MainMenuStrip = this.menuStrip;
-            this.Name = "TableForm";
+            this.Name = "MainForm";
             this.Padding = new System.Windows.Forms.Padding(3, 24, 3, 3);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Table";
@@ -1227,6 +1252,7 @@ namespace TestTask.Forms
             this.tlpCategoriesPageControl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageCategories)).EndInit();
             this.tlpListCategory.ResumeLayout(false);
+            this.tabPageCATEGORIES.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1308,5 +1334,7 @@ namespace TestTask.Forms
         private System.Windows.Forms.ColumnHeader columnCategoryName;
         private System.Windows.Forms.BindingSource bindingSourcePageCategories;
         private System.Windows.Forms.ColumnHeader columnCategoryId;
+        private System.Windows.Forms.TabPage tabPageCATEGORIES;
+        private Control.CategoryCantrol.ListViewCategoryControl listViewCategoryCATEGORIES;
     }
 }

@@ -67,6 +67,7 @@ namespace TestTask.Forms
             _productService = _serviceProvider.GetRequiredService<ProductService>();
             _categoryService = _serviceProvider.GetRequiredService<CategoryService>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
+            listViewCategoryCATEGORIES.Initialize(_serviceProvider);
         }
 
         public PageModel PageCompany { get; set; } = new PageModel();
@@ -94,6 +95,7 @@ namespace TestTask.Forms
             PageCompany.ChangeCurrentPage -= LoadDataCompany;
             PageProduct.ChangeCurrentPage -= LoadDataProduct;
             PageCategory.ChangeCurrentPage -= LoadDataCategory;
+            listViewCategoryCATEGORIES.Closing();
         }
 
         private void BtnAddCompany_Click(object sender, EventArgs e)
@@ -258,6 +260,7 @@ namespace TestTask.Forms
                 var item = addFormMode.GetCategoryModel().ToCategory();
                 _categoryService.Add(item);
                 LoadDataCategory();
+                listViewCategoryCATEGORIES.LoadData();
             }
         }
 
@@ -394,6 +397,7 @@ namespace TestTask.Forms
                         }
                     }
 
+                    listViewCategoryCATEGORIES.LoadData();
                     LoadDataCategory();
 
                     if (!categoryRead.IsNoErrorLine(out var message))
@@ -588,6 +592,7 @@ namespace TestTask.Forms
             LoadDataCompany();
             LoadDataProduct();
             LoadDataCategory();
+            listViewCategoryCATEGORIES.LoadData();
         }
 
         private Company GetCompany(int indexRow)
