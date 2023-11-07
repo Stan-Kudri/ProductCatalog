@@ -224,11 +224,11 @@
     <Compile Include="Forms\Products\ProductFormBase.Designer.cs">
       <DependentUpon>ProductFormBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TableForm.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\TableForm.Designer.cs">
-      <DependentUpon>TableForm.cs</DependentUpon>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Extension\ParseExtension.cs" />
     <Compile Include="Forms\LoginForm.cs">
@@ -261,8 +261,8 @@
     <EmbeddedResource Include="Forms\Products\ProductFormBase.resx">
       <DependentUpon>ProductFormBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TableForm.resx">
-      <DependentUpon>TableForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

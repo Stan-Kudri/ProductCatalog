@@ -15,13 +15,13 @@ using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Page;
 using TestTask.Core.Models.Products;
 using TestTask.Extension;
-using TestTask.Forms.CategoryForm;
-using TestTask.Forms.CompanyForm;
+using TestTask.Forms.Categories;
+using TestTask.Forms.Companies;
 using TestTask.Forms.Products;
 
 namespace TestTask.Forms
 {
-    public partial class TableForm : BaseForm
+    public partial class MainForm : BaseForm
     {
         private const string Company = "Company";
         private const string Product = "Product";
@@ -59,7 +59,7 @@ namespace TestTask.Forms
 
         private bool Resizing = false;
 
-        public TableForm(IServiceProvider serviceProvider)
+        public MainForm(IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;

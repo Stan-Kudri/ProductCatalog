@@ -3,7 +3,7 @@ using TestTask.BindingItem;
 
 namespace TestTask.Forms
 {
-    partial class TableForm
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@ namespace TestTask.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TableForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tlpCompaniesButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnDeleteCompany = new System.Windows.Forms.Button();
             this.btnEditCompany = new System.Windows.Forms.Button();

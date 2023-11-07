@@ -47,7 +47,7 @@ namespace TestTask.Forms
 
             Hide();
 
-            using (var tableForm = _serviceProvider.GetRequiredService<TableForm>())
+            using (var tableForm = _serviceProvider.GetRequiredService<MainForm>())
             {
                 if (tableForm.ShowDialog() == DialogResult.Cancel)
                 {
