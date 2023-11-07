@@ -27,6 +27,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListViewCategoryControl));
             this.listView = new MaterialSkin.Controls.MaterialListView();
+            this.columnIDCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnCategoryName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tlpPageButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnFirstPage = new MaterialSkin.Controls.MaterialButton();
             this.btnLastPage = new MaterialSkin.Controls.MaterialButton();
@@ -34,18 +36,16 @@
             this.tbCurrentPage = new System.Windows.Forms.TextBox();
             this.btnNextPage = new MaterialSkin.Controls.MaterialButton();
             this.cmbPageSize = new System.Windows.Forms.ComboBox();
+            this.itemsBindingSourcePageCategory = new System.Windows.Forms.BindingSource(this.components);
+            this.pageModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tlpCompaniesButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnDeleteItems = new System.Windows.Forms.Button();
             this.btnEditItem = new System.Windows.Forms.Button();
             this.btnAddItem = new System.Windows.Forms.Button();
-            this.pageModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.itemsBindingSourcePageCategory = new System.Windows.Forms.BindingSource(this.components);
-            this.columnIDCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnCategoryName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tlpPageButton.SuspendLayout();
-            this.tlpCompaniesButton.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pageModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourcePageCategory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pageModelBindingSource)).BeginInit();
+            this.tlpCompaniesButton.SuspendLayout();
             this.SuspendLayout();
             // 
             // listView
@@ -64,43 +64,54 @@
             this.listView.FullRowSelect = true;
             this.listView.HideSelection = false;
             this.listView.Location = new System.Drawing.Point(0, 0);
-            this.listView.MaximumSize = new System.Drawing.Size(755, 290);
-            this.listView.MinimumSize = new System.Drawing.Size(755, 285);
+            this.listView.MinimumSize = new System.Drawing.Size(755, 290);
             this.listView.MouseLocation = new System.Drawing.Point(-1, -1);
             this.listView.MouseState = MaterialSkin.MouseState.OUT;
             this.listView.Name = "listView";
             this.listView.OwnerDraw = true;
-            this.listView.Size = new System.Drawing.Size(755, 290);
+            this.listView.Size = new System.Drawing.Size(755, 300);
             this.listView.TabIndex = 6;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
             this.listView.SizeChanged += new System.EventHandler(this.ListView_SizeChanged);
+            // 
+            // columnIDCategory
+            // 
+            this.columnIDCategory.Tag = "200";
+            this.columnIDCategory.Text = "ID";
+            this.columnIDCategory.Width = 200;
+            // 
+            // columnCategoryName
+            // 
+            this.columnCategoryName.Tag = "555";
+            this.columnCategoryName.Text = "Name";
+            this.columnCategoryName.Width = 555;
             // 
             // tlpPageButton
             // 
             this.tlpPageButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpPageButton.ColumnCount = 5;
-            this.tlpPageButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.56863F));
-            this.tlpPageButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.56863F));
-            this.tlpPageButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.72549F));
-            this.tlpPageButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.56863F));
-            this.tlpPageButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.56863F));
+            this.tlpPageButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpPageButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpPageButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpPageButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpPageButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpPageButton.Controls.Add(this.btnFirstPage, 0, 0);
             this.tlpPageButton.Controls.Add(this.btnLastPage, 4, 0);
             this.tlpPageButton.Controls.Add(this.btnBackPage, 1, 0);
             this.tlpPageButton.Controls.Add(this.tbCurrentPage, 2, 0);
             this.tlpPageButton.Controls.Add(this.btnNextPage, 3, 0);
-            this.tlpPageButton.Location = new System.Drawing.Point(250, 295);
+            this.tlpPageButton.Location = new System.Drawing.Point(250, 300);
             this.tlpPageButton.Name = "tlpPageButton";
             this.tlpPageButton.RowCount = 1;
             this.tlpPageButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpPageButton.Size = new System.Drawing.Size(255, 32);
+            this.tlpPageButton.Size = new System.Drawing.Size(255, 30);
             this.tlpPageButton.TabIndex = 7;
             // 
             // btnFirstPage
             // 
-            this.btnFirstPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnFirstPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFirstPage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnFirstPage.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnFirstPage.Depth = 0;
@@ -111,7 +122,7 @@
             this.btnFirstPage.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnFirstPage.Name = "btnFirstPage";
             this.btnFirstPage.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnFirstPage.Size = new System.Drawing.Size(46, 20);
+            this.btnFirstPage.Size = new System.Drawing.Size(45, 18);
             this.btnFirstPage.TabIndex = 5;
             this.btnFirstPage.Text = "<<";
             this.btnFirstPage.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -121,18 +132,18 @@
             // 
             // btnLastPage
             // 
-            this.btnLastPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLastPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLastPage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnLastPage.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnLastPage.Depth = 0;
             this.btnLastPage.HighEmphasis = true;
             this.btnLastPage.Icon = null;
-            this.btnLastPage.Location = new System.Drawing.Point(200, 6);
+            this.btnLastPage.Location = new System.Drawing.Point(203, 6);
             this.btnLastPage.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnLastPage.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnLastPage.Name = "btnLastPage";
             this.btnLastPage.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnLastPage.Size = new System.Drawing.Size(51, 20);
+            this.btnLastPage.Size = new System.Drawing.Size(48, 18);
             this.btnLastPage.TabIndex = 6;
             this.btnLastPage.Text = ">>";
             this.btnLastPage.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -142,18 +153,18 @@
             // 
             // btnBackPage
             // 
-            this.btnBackPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnBackPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBackPage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnBackPage.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnBackPage.Depth = 0;
             this.btnBackPage.HighEmphasis = true;
             this.btnBackPage.Icon = null;
-            this.btnBackPage.Location = new System.Drawing.Point(58, 6);
+            this.btnBackPage.Location = new System.Drawing.Point(57, 6);
             this.btnBackPage.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnBackPage.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnBackPage.Name = "btnBackPage";
             this.btnBackPage.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnBackPage.Size = new System.Drawing.Size(46, 20);
+            this.btnBackPage.Size = new System.Drawing.Size(45, 18);
             this.btnBackPage.TabIndex = 7;
             this.btnBackPage.Text = "<";
             this.btnBackPage.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -164,27 +175,27 @@
             // tbCurrentPage
             // 
             this.tbCurrentPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbCurrentPage.Location = new System.Drawing.Point(111, 6);
+            this.tbCurrentPage.Location = new System.Drawing.Point(109, 5);
             this.tbCurrentPage.Name = "tbCurrentPage";
-            this.tbCurrentPage.Size = new System.Drawing.Size(28, 20);
+            this.tbCurrentPage.Size = new System.Drawing.Size(34, 20);
             this.tbCurrentPage.TabIndex = 9;
             this.tbCurrentPage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbCurrentPage.TextChanged += new System.EventHandler(this.TbCurrentPage_TextChanged);
             // 
             // btnNextPage
             // 
-            this.btnNextPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNextPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnNextPage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnNextPage.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnNextPage.Depth = 0;
             this.btnNextPage.HighEmphasis = true;
             this.btnNextPage.Icon = null;
-            this.btnNextPage.Location = new System.Drawing.Point(146, 6);
+            this.btnNextPage.Location = new System.Drawing.Point(150, 6);
             this.btnNextPage.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnNextPage.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnNextPage.Name = "btnNextPage";
             this.btnNextPage.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnNextPage.Size = new System.Drawing.Size(46, 20);
+            this.btnNextPage.Size = new System.Drawing.Size(45, 18);
             this.btnNextPage.TabIndex = 8;
             this.btnNextPage.Text = ">";
             this.btnNextPage.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -202,6 +213,15 @@
             this.cmbPageSize.Size = new System.Drawing.Size(121, 21);
             this.cmbPageSize.TabIndex = 11;
             this.cmbPageSize.SelectedIndexChanged += new System.EventHandler(this.CmbPageSize_Changed);
+            // 
+            // itemsBindingSourcePageCategory
+            // 
+            this.itemsBindingSourcePageCategory.DataMember = "Items";
+            this.itemsBindingSourcePageCategory.DataSource = this.pageModelBindingSource;
+            // 
+            // pageModelBindingSource
+            // 
+            this.pageModelBindingSource.DataSource = typeof(TestTask.BindingItem.PageModel);
             // 
             // tlpCompaniesButton
             // 
@@ -283,27 +303,6 @@
             this.btnAddItem.UseVisualStyleBackColor = false;
             this.btnAddItem.Click += new System.EventHandler(this.BtnAddItem_Click);
             // 
-            // pageModelBindingSource
-            // 
-            this.pageModelBindingSource.DataSource = typeof(TestTask.BindingItem.PageModel);
-            // 
-            // itemsBindingSourcePageCategory
-            // 
-            this.itemsBindingSourcePageCategory.DataMember = "Items";
-            this.itemsBindingSourcePageCategory.DataSource = this.pageModelBindingSource;
-            // 
-            // columnIDCategory
-            // 
-            this.columnIDCategory.Tag = "200";
-            this.columnIDCategory.Text = "ID";
-            this.columnIDCategory.Width = 200;
-            // 
-            // columnCategoryName
-            // 
-            this.columnCategoryName.Tag = "555";
-            this.columnCategoryName.Text = "Name";
-            this.columnCategoryName.Width = 555;
-            // 
             // ListViewCategoryControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -316,10 +315,10 @@
             this.Size = new System.Drawing.Size(755, 331);
             this.tlpPageButton.ResumeLayout(false);
             this.tlpPageButton.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourcePageCategory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pageModelBindingSource)).EndInit();
             this.tlpCompaniesButton.ResumeLayout(false);
             this.tlpCompaniesButton.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pageModelBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourcePageCategory)).EndInit();
             this.ResumeLayout(false);
 
         }
