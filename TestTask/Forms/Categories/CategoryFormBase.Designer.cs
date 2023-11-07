@@ -1,4 +1,4 @@
-﻿namespace TestTask.Forms.CategoryForm
+﻿namespace TestTask.Forms.Categories
 {
     partial class CategoryFormBase
     {

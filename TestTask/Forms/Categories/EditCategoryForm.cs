@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using TestTask.Core.Models.Categories;
 
-namespace TestTask.Forms.CategoryForm
+namespace TestTask.Forms.Categories
 {
     public class EditCategoryForm : CategoryFormBase
     {

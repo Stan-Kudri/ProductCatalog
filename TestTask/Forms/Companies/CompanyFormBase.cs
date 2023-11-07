@@ -5,7 +5,7 @@ using TestTask.BindingItem;
 using TestTask.Core;
 using TestTask.Core.Models.Companies;
 
-namespace TestTask.Forms.CompanyForm
+namespace TestTask.Forms.Companies
 {
     public partial class CompanyFormBase : BaseForm
     {
