@@ -39,6 +39,8 @@ namespace TestTask.Control.CategoryCantrol
             InitializeComponent();
         }
 
+        public event Action ChangeCategories;
+
         public SearchRequestCategory SearchRequest = new SearchRequestCategory();
 
         public PageModel Page { get; set; } = new PageModel();
@@ -67,6 +69,7 @@ namespace TestTask.Control.CategoryCantrol
 
                 var item = addFormMode.GetCategoryModel().ToCategory();
                 _categoryService.Add(item);
+                ChangeCategories?.Invoke();
                 LoadData();
             }
         }
@@ -96,6 +99,7 @@ namespace TestTask.Control.CategoryCantrol
                 var updateItem = editCompanyForm.EditItem();
                 _categoryService.Update(updateItem);
                 Update(updateItem, row);
+                ChangeCategories?.Invoke();
             }
         }
 
@@ -119,6 +123,7 @@ namespace TestTask.Control.CategoryCantrol
             }
 
             RemoveItemRowListViewCategory();
+            ChangeCategories?.Invoke();
             LoadData();
         }
 

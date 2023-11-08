@@ -13,15 +13,13 @@ namespace TestTask.Control.CategoryCantrol
         private FilterModelCategories _filterName;
 
         public TabPageCategoryUserControl()
-            : base()
-        {
-            InitializeComponent();
-        }
+            : base() => InitializeComponent();
 
         public void Initialize(IServiceProvider serviceProvider)
         {
             listViewCategoryControl.Initialize(serviceProvider);
             _categoryService = serviceProvider.GetRequiredService<CategoryService>();
+
             _filterName = new FilterModelCategories(_categoryService.GetAll());
             _sortPage = new SortPageCategories();
 
@@ -31,6 +29,7 @@ namespace TestTask.Control.CategoryCantrol
             cmbSortName.SelectedItem = _sortPage.SortType;
 
             listViewCategoryControl.SearchRequest = new SearchRequestCategory(_filterName.GetFilterCategoryName(), _sortPage.ToSortCategory(), listViewCategoryControl.Page.GetPage());
+            listViewCategoryControl.ChangeCategories += Update;
         }
 
         private void CmbSortName_Changed(object sender, EventArgs e)
@@ -50,5 +49,13 @@ namespace TestTask.Control.CategoryCantrol
         public void LoadData() => listViewCategoryControl.LoadData();
 
         public void Closing() => listViewCategoryControl.Closing();
+
+        public void Update()
+        {
+            _filterName = new FilterModelCategories(_categoryService.GetAll());
+            cmbFilterCategory.DataSource = _filterName.Items;
+            cmbFilterCategory.SelectedItem = _filterName.Category;
+            listViewCategoryControl.SearchRequest = new SearchRequestCategory(_filterName.GetFilterCategoryName(), _sortPage.ToSortCategory(), listViewCategoryControl.Page.GetPage());
+        }
     }
 }
