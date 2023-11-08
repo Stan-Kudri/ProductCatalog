@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using TestTask.Core.Models.Categories;
 
-namespace TestTask.Control.CategoryCantrol
+namespace TestTask.Core.Models.Page.Categories
 {
     public class SortCategory
     {
@@ -10,13 +10,8 @@ namespace TestTask.Control.CategoryCantrol
         public SortCategory(bool isAscending = true) => IsAscending = isAscending;
 
         public IQueryable<Category> Apply(IQueryable<Category> items)
-        {
-            if (IsAscending)
-            {
-                return items.OrderBy(e => e.Name).Select(e => e);
-            }
-
-            return items.OrderByDescending(e => e.Name).Select(e => e);
-        }
+            => IsAscending ?
+            items.OrderBy(e => e.Name).Select(e => e) :
+            items.OrderByDescending(e => e.Name).Select(e => e);
     }
 }

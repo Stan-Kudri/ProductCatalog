@@ -164,7 +164,8 @@
     <Compile Include="BindingItem\ModelBase.cs" />
     <Compile Include="BindingItem\CompanyModel.cs" />
     <Compile Include="BindingItem\PageModel.cs" />
-    <Compile Include="BindingItem\Pages\SortPageCategory.cs" />
+    <Compile Include="BindingItem\Pages\Categories\FilterModelCategories.cs" />
+    <Compile Include="BindingItem\Pages\Categories\SortPageCategories.cs" />
     <Compile Include="BindingItem\ProductBinding\SelectCategory.cs" />
     <Compile Include="BindingItem\ProductBinding\SelectCompany.cs" />
     <Compile Include="BindingItem\ProductBinding\ProductModel.cs" />
@@ -306,6 +307,8 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\TestTask.BindingItem.CategoryModel.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.PageModel.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Categories.FilterModelCategories.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Categories.SortPageCategories.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.ProductBinding.SelectCategory.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.CompanyModel.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.PageModel.datasource" />

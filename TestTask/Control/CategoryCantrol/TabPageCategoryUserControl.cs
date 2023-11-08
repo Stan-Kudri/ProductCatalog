@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using TestTask.BindingItem.Pages;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
+using TestTask.BindingItem.Pages.Categories;
+using TestTask.Core.Models.Companies;
+using TestTask.Core.Models.Page.Categories;
 
 namespace TestTask.Control.CategoryCantrol
 {
     public partial class TabPageCategoryUserControl : BaseUserControl
     {
-        private Dictionary<int, string> mapSortCategory = new Dictionary<int, string>() { { 0, "Ascending" }, { 1, "Descending" }, };
+        private CategoryService _categoryService;
+        private SortPageCategories _sortPage;
+        private FilterModelCategories _filterName;
 
         public TabPageCategoryUserControl()
             : base()
@@ -14,36 +18,37 @@ namespace TestTask.Control.CategoryCantrol
             InitializeComponent();
         }
 
-        public SortPageCategory SortPage = new SortPageCategory();
-
         public void Initialize(IServiceProvider serviceProvider)
         {
             listViewCategoryControl.Initialize(serviceProvider);
-            cmbSortName.DataSource = SortPage.Items;
+            _categoryService = serviceProvider.GetRequiredService<CategoryService>();
+            _filterName = new FilterModelCategories(_categoryService.GetAll());
+            _sortPage = new SortPageCategories();
+
+            cmbFilterCategory.DataSource = _filterName.Items;
+            cmbSortName.DataSource = _sortPage.Items;
+            cmbFilterCategory.SelectedItem = _filterName.Category;
+            cmbSortName.SelectedItem = _sortPage.SortType;
+
+            listViewCategoryControl.SearchRequest = new SearchRequestCategory(_filterName.GetFilterCategoryName(), _sortPage.ToSortCategory(), listViewCategoryControl.Page.GetPage());
         }
 
         private void CmbSortName_Changed(object sender, EventArgs e)
         {
-            listViewCategoryControl._categoryService.SortCategory = SortPage.ToSortCategory(SortCMBCategory());
+            _sortPage.SetSort(cmbSortName.SelectedItem.ToString());
+            listViewCategoryControl.SearchRequest.Sort = _sortPage.ToSortCategory();
+            LoadData();
+        }
+
+        private void CmbFilterCategory_Changed(object sender, EventArgs e)
+        {
+            _filterName.Category = cmbFilterCategory.SelectedItem.ToString();
+            listViewCategoryControl.SearchRequest.Filter = _filterName.GetFilterCategoryName();
             LoadData();
         }
 
         public void LoadData() => listViewCategoryControl.LoadData();
 
         public void Closing() => listViewCategoryControl.Closing();
-
-        private bool SortCMBCategory()
-        {
-            if (cmbSortName.SelectedItem.ToString() == mapSortCategory[0])
-            {
-                return true;
-            }
-            else if (cmbSortName.SelectedItem.ToString() == mapSortCategory[1])
-            {
-                return false;
-            }
-
-            throw new ArgumentException("Uncnown sort category.");
-        }
     }
 }

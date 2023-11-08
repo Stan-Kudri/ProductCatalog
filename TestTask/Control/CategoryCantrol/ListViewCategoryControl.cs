@@ -8,6 +8,7 @@ using TestTask.Core;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Page;
+using TestTask.Core.Models.Page.Categories;
 using TestTask.Core.Models.Products;
 using TestTask.Extension;
 using TestTask.Forms.Categories;
@@ -23,11 +24,12 @@ namespace TestTask.Control.CategoryCantrol
         private const int IndexId = 0;
         private const int IndexColumnCompanyName = 1;
 
-        protected IServiceProvider _serviceProvider;
-        protected ProductService _productService;
-        protected IMessageBox _messageBox;
+        private IServiceProvider _serviceProvider;
+        private CategoryService _categoryService;
+        private ProductService _productService;
+        private IMessageBox _messageBox;
 
-        protected PagedList<Category> _pagedList;
+        private PagedList<Category> _pagedList;
 
         private bool Resizing = false;
 
@@ -37,7 +39,7 @@ namespace TestTask.Control.CategoryCantrol
             InitializeComponent();
         }
 
-        public CategoryService _categoryService;
+        public SearchRequestCategory SearchRequest = new SearchRequestCategory();
 
         public PageModel Page { get; set; } = new PageModel();
 
@@ -198,7 +200,10 @@ namespace TestTask.Control.CategoryCantrol
 
         public void LoadData()
         {
-            _pagedList = _categoryService.GetQueryableAll().GetPagedList(Page.GetPage());
+            var query = SearchRequest.ApplyFilter(_categoryService.GetQueryableAll());
+            query = SearchRequest.ApplyOrderBy(query);
+            _pagedList = query.GetPagedList(Page.GetPage());
+
             if (IsNotFirstPageCategoryEmpty())
             {
                 Page.Number -= 1;

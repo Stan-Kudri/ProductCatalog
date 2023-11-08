@@ -6,7 +6,7 @@ namespace TestTask.BindingItem.ProductBinding
 {
     public class SelectCategory : ModelBase
     {
-        private Category _category = null;
+        protected Category _category = null;
 
         public SelectCategory(List<Category> listMode)
         {
