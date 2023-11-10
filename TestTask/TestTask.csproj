@@ -164,10 +164,31 @@
     <Compile Include="BindingItem\ModelBase.cs" />
     <Compile Include="BindingItem\CompanyModel.cs" />
     <Compile Include="BindingItem\PageModel.cs" />
+    <Compile Include="BindingItem\Pages\Categories\FilterModelCategories.cs" />
+    <Compile Include="BindingItem\Pages\Categories\SortPageCategories.cs" />
+    <Compile Include="BindingItem\Pages\ISearchRequest.cs" />
     <Compile Include="BindingItem\ProductBinding\SelectCategory.cs" />
     <Compile Include="BindingItem\ProductBinding\SelectCompany.cs" />
     <Compile Include="BindingItem\ProductBinding\ProductModel.cs" />
     <Compile Include="BindingItem\UserModel.cs" />
+    <Compile Include="Control\BaseUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\BaseUserControl.Designer.cs">
+      <DependentUpon>BaseUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CategoryCantrol\ListViewCategoryControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\CategoryCantrol\ListViewCategoryControl.Designer.cs">
+      <DependentUpon>ListViewCategoryControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CategoryCantrol\TabPageCategoryUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\CategoryCantrol\TabPageCategoryUserControl.Designer.cs">
+      <DependentUpon>TabPageCategoryUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extension\ListViewExtension.cs" />
     <Compile Include="Extension\PageExtension.cs" />
     <Compile Include="Forms\BaseForm.cs">
@@ -176,16 +197,16 @@
     <Compile Include="Forms\BaseForm.Designer.cs">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CategoryForm\AddCategoryForm.cs">
+    <Compile Include="Forms\Categories\AddCategoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CategoryForm\CategoryFormBase.cs">
+    <Compile Include="Forms\Categories\CategoryFormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CategoryForm\CategoryFormBase.Designer.cs">
+    <Compile Include="Forms\Categories\CategoryFormBase.Designer.cs">
       <DependentUpon>CategoryFormBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CategoryForm\EditCategoryForm.cs">
+    <Compile Include="Forms\Categories\EditCategoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Import\ImportDatabaseForm.cs">
@@ -194,16 +215,16 @@
     <Compile Include="Forms\Import\ImportDatabaseForm.Designer.cs">
       <DependentUpon>ImportDatabaseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CompanyForm\AddItemCompanyForm.cs">
+    <Compile Include="Forms\Companies\AddItemCompanyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CompanyForm\CompanyFormBase.cs">
+    <Compile Include="Forms\Companies\CompanyFormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CompanyForm\CompanyFormBase.Designer.cs">
+    <Compile Include="Forms\Companies\CompanyFormBase.Designer.cs">
       <DependentUpon>CompanyFormBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CompanyForm\EditItemCompanyForm.cs">
+    <Compile Include="Forms\Companies\EditItemCompanyForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\RegistrationForm.cs">
@@ -212,23 +233,23 @@
     <Compile Include="Forms\RegistrationForm.Designer.cs">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\StepForm\AddItemProductForm.cs">
+    <Compile Include="Forms\Products\AddItemProductForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\StepForm\EditItemProductForm.cs">
+    <Compile Include="Forms\Products\EditItemProductForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\StepForm\ProductFormBase.cs">
+    <Compile Include="Forms\Products\ProductFormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\StepForm\ProductFormBase.Designer.cs">
+    <Compile Include="Forms\Products\ProductFormBase.Designer.cs">
       <DependentUpon>ProductFormBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TableForm.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\TableForm.Designer.cs">
-      <DependentUpon>TableForm.cs</DependentUpon>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Extension\ParseExtension.cs" />
     <Compile Include="Forms\LoginForm.cs">
@@ -240,29 +261,35 @@
     <Compile Include="MessageBoxShow.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Control\CategoryCantrol\ListViewCategoryControl.resx">
+      <DependentUpon>ListViewCategoryControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\CategoryCantrol\TabPageCategoryUserControl.resx">
+      <DependentUpon>TabPageCategoryUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CategoryForm\CategoryFormBase.resx">
+    <EmbeddedResource Include="Forms\Categories\CategoryFormBase.resx">
       <DependentUpon>CategoryFormBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Import\ImportDatabaseForm.resx">
       <DependentUpon>ImportDatabaseForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CompanyForm\CompanyFormBase.resx">
+    <EmbeddedResource Include="Forms\Companies\CompanyFormBase.resx">
       <DependentUpon>CompanyFormBase.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RegistrationForm.resx">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\StepForm\ProductFormBase.resx">
+    <EmbeddedResource Include="Forms\Products\ProductFormBase.resx">
       <DependentUpon>ProductFormBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TableForm.resx">
-      <DependentUpon>TableForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -280,6 +307,9 @@
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\TestTask.BindingItem.CategoryModel.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.PageModel.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Categories.FilterModelCategories.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Categories.SortPageCategories.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.ProductBinding.SelectCategory.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.CompanyModel.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.PageModel.datasource" />
@@ -327,6 +357,7 @@
   <ItemGroup>
     <None Include="Resources\RemoveButton.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

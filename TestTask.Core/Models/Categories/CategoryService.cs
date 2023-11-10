@@ -62,7 +62,7 @@ namespace TestTask.Core.Models.Companies
 
         public List<Category> GetAll() => _dbContext.Category.Count() > 0 ? _dbContext.Category.ToList() : null;
 
-        public IQueryable<Category> GetQueryableAll() => _dbContext.Category.Select(e => e);
+        public IQueryable<Category> GetQueryableAll() => _dbContext.Category;
 
         public bool IsFreeName(string name) => _dbContext.Category.FirstOrDefault(e => e.Name == name) == null;
     }

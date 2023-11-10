@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TestTask.Forms.CompanyForm
+namespace TestTask.Forms.Companies
 {
     public class AddItemCompanyForm : CompanyFormBase
     {

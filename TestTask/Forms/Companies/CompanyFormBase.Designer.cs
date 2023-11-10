@@ -1,6 +1,6 @@
 ﻿using TestTask.BindingItem;
 
-namespace TestTask.Forms.CompanyForm
+namespace TestTask.Forms.Companies
 {
     partial class CompanyFormBase
     {

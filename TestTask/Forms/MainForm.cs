@@ -15,13 +15,13 @@ using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Page;
 using TestTask.Core.Models.Products;
 using TestTask.Extension;
-using TestTask.Forms.CategoryForm;
-using TestTask.Forms.CompanyForm;
-using TestTask.Forms.StepForm;
+using TestTask.Forms.Categories;
+using TestTask.Forms.Companies;
+using TestTask.Forms.Products;
 
 namespace TestTask.Forms
 {
-    public partial class TableForm : BaseForm
+    public partial class MainForm : BaseForm
     {
         private const string Company = "Company";
         private const string Product = "Product";
@@ -59,7 +59,7 @@ namespace TestTask.Forms
 
         private bool Resizing = false;
 
-        public TableForm(IServiceProvider serviceProvider)
+        public MainForm(IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;
@@ -67,6 +67,8 @@ namespace TestTask.Forms
             _productService = _serviceProvider.GetRequiredService<ProductService>();
             _categoryService = _serviceProvider.GetRequiredService<CategoryService>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
+            listViewCategoryCATEGORIES.Initialize(_serviceProvider);
+            tabPageCategoryUserControl.Initialize(_serviceProvider);
         }
 
         public PageModel PageCompany { get; set; } = new PageModel();
@@ -94,6 +96,8 @@ namespace TestTask.Forms
             PageCompany.ChangeCurrentPage -= LoadDataCompany;
             PageProduct.ChangeCurrentPage -= LoadDataProduct;
             PageCategory.ChangeCurrentPage -= LoadDataCategory;
+            listViewCategoryCATEGORIES.Closing();
+            tabPageCategoryUserControl.Closing();
         }
 
         private void BtnAddCompany_Click(object sender, EventArgs e)
@@ -258,6 +262,8 @@ namespace TestTask.Forms
                 var item = addFormMode.GetCategoryModel().ToCategory();
                 _categoryService.Add(item);
                 LoadDataCategory();
+                listViewCategoryCATEGORIES.LoadDate();
+                tabPageCategoryUserControl.LoadData();
             }
         }
 
@@ -394,6 +400,8 @@ namespace TestTask.Forms
                         }
                     }
 
+                    listViewCategoryCATEGORIES.LoadDate();
+                    tabPageCategoryUserControl.LoadData();
                     LoadDataCategory();
 
                     if (!categoryRead.IsNoErrorLine(out var message))
@@ -588,6 +596,8 @@ namespace TestTask.Forms
             LoadDataCompany();
             LoadDataProduct();
             LoadDataCategory();
+            listViewCategoryCATEGORIES.LoadDate();
+            tabPageCategoryUserControl.LoadData();
         }
 
         private Company GetCompany(int indexRow)

@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using TestTask.Core.Models.Companies;
 
-namespace TestTask.Forms.CompanyForm
+namespace TestTask.Forms.Companies
 {
     public class EditItemCompanyForm : CompanyFormBase
     {

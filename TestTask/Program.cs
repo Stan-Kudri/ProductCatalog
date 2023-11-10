@@ -11,9 +11,9 @@ using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
 using TestTask.Core.Models.Users;
 using TestTask.Forms;
-using TestTask.Forms.CategoryForm;
-using TestTask.Forms.CompanyForm;
-using TestTask.Forms.StepForm;
+using TestTask.Forms.Categories;
+using TestTask.Forms.Companies;
+using TestTask.Forms.Products;
 
 namespace TestTask
 {
@@ -40,7 +40,7 @@ namespace TestTask
                 .AddTransient<LoginForm>()
                 .AddTransient<RegistrationForm>()
                 .AddTransient<ImportDatabaseForm>()
-                .AddTransient<TableForm>()
+                .AddTransient<MainForm>()
                 .AddTransient<AddItemCompanyForm>()
                 .AddTransient<EditItemCompanyForm>()
                 .AddTransient<AddItemProductForm>()

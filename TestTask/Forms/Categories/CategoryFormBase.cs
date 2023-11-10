@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using TestTask.BindingItem;
 using TestTask.Core;
 
-namespace TestTask.Forms.CategoryForm
+namespace TestTask.Forms.Categories
 {
     public partial class CategoryFormBase : BaseForm
     {
