@@ -24,6 +24,8 @@ namespace TestTask.Core.Models.Categories
 
         public List<Product> Product { get; set; } = null;
 
+        public string[] GetItemListView() => new string[] { Id.ToString(), Name };
+
         public override bool Equals(object obj) => Equals(obj as Category);
 
         public bool Equals(Category other)

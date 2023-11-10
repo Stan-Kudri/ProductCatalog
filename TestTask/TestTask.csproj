@@ -177,11 +177,17 @@
     <Compile Include="Control\BaseUserControl.Designer.cs">
       <DependentUpon>BaseUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Control\CategoryCantrol\ListViewCategoryControl.cs">
+    <Compile Include="Control\CategoryCantrol\CategoryListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Control\CategoryCantrol\ListViewCategoryControl.Designer.cs">
-      <DependentUpon>ListViewCategoryControl.cs</DependentUpon>
+    <Compile Include="Control\CategoryCantrol\CategoryListView.Designer.cs">
+      <DependentUpon>CategoryListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CategoryCantrol\ListViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\CategoryCantrol\ListViewControl.Designer.cs">
+      <DependentUpon>ListViewControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Control\CategoryCantrol\TabPageCategoryUserControl.cs">
       <SubType>UserControl</SubType>
@@ -261,8 +267,11 @@
     <Compile Include="MessageBoxShow.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Control\CategoryCantrol\ListViewCategoryControl.resx">
-      <DependentUpon>ListViewCategoryControl.cs</DependentUpon>
+    <EmbeddedResource Include="Control\CategoryCantrol\CategoryListView.resx">
+      <DependentUpon>CategoryListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\CategoryCantrol\ListViewControl.resx">
+      <DependentUpon>ListViewControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Control\CategoryCantrol\TabPageCategoryUserControl.resx">
       <DependentUpon>TabPageCategoryUserControl.cs</DependentUpon>

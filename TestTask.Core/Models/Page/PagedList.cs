@@ -12,7 +12,7 @@ namespace TestTask.Core.Models.Page
         {
         }
 
-        public PagedList(List<T> items, int pageNumber, int pageSize, int totalItems)
+        public PagedList(IEnumerable<T> items, int pageNumber, int pageSize, int totalItems)
         {
             if (items == null)
             {

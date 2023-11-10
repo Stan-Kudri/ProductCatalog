@@ -1,6 +1,6 @@
 ﻿namespace TestTask.Control.CategoryCantrol
 {
-    partial class ListViewCategoryControl
+    partial class ListViewControl
     {
 
         /// <summary> 
@@ -25,10 +25,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListViewCategoryControl));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListViewControl));
             this.listView = new MaterialSkin.Controls.MaterialListView();
-            this.columnIDCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnCategoryName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tlpPageButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnFirstPage = new MaterialSkin.Controls.MaterialButton();
             this.btnLastPage = new MaterialSkin.Controls.MaterialButton();
@@ -57,9 +55,6 @@
             this.listView.AutoSizeTable = false;
             this.listView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.listView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnIDCategory,
-            this.columnCategoryName});
             this.listView.Depth = 0;
             this.listView.FullRowSelect = true;
             this.listView.HideSelection = false;
@@ -74,18 +69,6 @@
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
             this.listView.SizeChanged += new System.EventHandler(this.ListView_SizeChanged);
-            // 
-            // columnIDCategory
-            // 
-            this.columnIDCategory.Tag = "200";
-            this.columnIDCategory.Text = "ID";
-            this.columnIDCategory.Width = 200;
-            // 
-            // columnCategoryName
-            // 
-            this.columnCategoryName.Tag = "555";
-            this.columnCategoryName.Text = "Name";
-            this.columnCategoryName.Width = 555;
             // 
             // tlpPageButton
             // 
@@ -339,8 +322,6 @@
         protected MaterialSkin.Controls.MaterialButton btnNextPage;
         protected System.Windows.Forms.BindingSource itemsBindingSourcePageCategory;
         protected System.Windows.Forms.BindingSource pageModelBindingSource;
-        protected System.Windows.Forms.ColumnHeader columnIDCategory;
-        protected System.Windows.Forms.ColumnHeader columnCategoryName;
         private System.ComponentModel.IContainer components;
     }
 }

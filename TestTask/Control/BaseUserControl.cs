@@ -5,6 +5,7 @@ namespace TestTask.Control
 {
     public partial class BaseUserControl : UserControl, IMaterialControl
     {
+
         public BaseUserControl() => InitializeComponent();
 
         //IMaterialControl item

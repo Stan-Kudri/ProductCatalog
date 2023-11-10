@@ -39,6 +39,18 @@ namespace TestTask.Core.Models.Products
 
         public decimal Price { get; set; } = decimal.Zero;
 
+        public string[] GetItemListView() => new string[]
+        {
+            Id.ToString(),
+            CompanyId.ToString(),
+            CategoryId.ToString(),
+            Type,
+            Price.ToString(),
+            Destination,
+            CompanyId.ToString(),
+            CategoryId.ToString(),
+        };
+
         public override bool Equals(object obj) => Equals(obj as Product);
 
         public bool Equals(Product other)

@@ -67,8 +67,6 @@ namespace TestTask.Forms
             _productService = _serviceProvider.GetRequiredService<ProductService>();
             _categoryService = _serviceProvider.GetRequiredService<CategoryService>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
-            listViewCategoryCATEGORIES.Initialize(_serviceProvider);
-            tabPageCategoryUserControl.Initialize(_serviceProvider);
         }
 
         public PageModel PageCompany { get; set; } = new PageModel();
@@ -81,23 +79,22 @@ namespace TestTask.Forms
         {
             _pagedListCompany = new PagedList<Company>(_companyService.GetQueryableAll());
             _pagedListProduct = new PagedList<Product>(_productService.GetQueryableAll());
+            lstViewCategory.Initialize(_serviceProvider);
             cmbPageSizeCompanies.DataSource = PageCompany.Items;
             cmbPageSizeProduct.DataSource = PageProduct.Items;
             cmbCategoryPageSize.DataSource = PageCategory.Items;
             UpdateAllGrids();
-            PageCompany.ChangeCurrentPage += LoadDataCompany;
-            PageProduct.ChangeCurrentPage += LoadDataProduct;
-            PageCategory.ChangeCurrentPage += LoadDataCategory;
+            PageCompany.ChangeCurrentPage += LoadDateCompany;
+            PageProduct.ChangeCurrentPage += LoadDateProduct;
+            PageCategory.ChangeCurrentPage += LoadDateCategory;
         }
 
         private void TableForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult = DialogResult.Cancel;
-            PageCompany.ChangeCurrentPage -= LoadDataCompany;
-            PageProduct.ChangeCurrentPage -= LoadDataProduct;
-            PageCategory.ChangeCurrentPage -= LoadDataCategory;
-            listViewCategoryCATEGORIES.Closing();
-            tabPageCategoryUserControl.Closing();
+            PageCompany.ChangeCurrentPage -= LoadDateCompany;
+            PageProduct.ChangeCurrentPage -= LoadDateProduct;
+            PageCategory.ChangeCurrentPage -= LoadDateCategory;
         }
 
         private void BtnAddCompany_Click(object sender, EventArgs e)
@@ -111,7 +108,7 @@ namespace TestTask.Forms
 
                 var item = addFormMode.GetCompanyModel().ToCompany();
                 _companyService.Add(item);
-                LoadDataCompany();
+                LoadDateCompany();
             }
         }
 
@@ -194,7 +191,7 @@ namespace TestTask.Forms
 
                 var item = addFormProduct.GetProductModel().ToStep();
                 _productService.Add(item);
-                LoadDataProduct();
+                LoadDateProduct();
             }
         }
 
@@ -247,7 +244,7 @@ namespace TestTask.Forms
             }
 
             listViewProduct.Remove(_productService);
-            LoadDataProduct();
+            LoadDateProduct();
         }
 
         private void BtnAddCategory_Click(object sender, EventArgs e)
@@ -261,9 +258,7 @@ namespace TestTask.Forms
 
                 var item = addFormMode.GetCategoryModel().ToCategory();
                 _categoryService.Add(item);
-                LoadDataCategory();
-                listViewCategoryCATEGORIES.LoadDate();
-                tabPageCategoryUserControl.LoadData();
+                LoadDateCategory();
             }
         }
 
@@ -360,7 +355,7 @@ namespace TestTask.Forms
                         }
                     }
 
-                    LoadDataCompany();
+                    LoadDateCompany();
 
                     if (!companyRead.IsNoErrorLine(out var message))
                     {
@@ -380,7 +375,7 @@ namespace TestTask.Forms
                         }
                     }
 
-                    LoadDataProduct();
+                    LoadDateProduct();
 
                     if (!productRead.IsNoErrorLine(out var message))
                     {
@@ -400,9 +395,7 @@ namespace TestTask.Forms
                         }
                     }
 
-                    listViewCategoryCATEGORIES.LoadDate();
-                    tabPageCategoryUserControl.LoadData();
-                    LoadDataCategory();
+                    LoadDateCategory();
 
                     if (!categoryRead.IsNoErrorLine(out var message))
                     {
@@ -540,7 +533,7 @@ namespace TestTask.Forms
             tbCurrentPageCategories.Text = string.Format("{0}/{1}", PageCategory.Number, _pagedListCategory.PageCount);
         }
 
-        private void LoadDataCompany()
+        private void LoadDateCompany()
         {
             _pagedListCompany = _companyService.GetQueryableAll().GetPagedList(PageCompany.GetPage());
             if (IsNotFirstPageCompanyEmpty())
@@ -557,7 +550,7 @@ namespace TestTask.Forms
             tbCurrentPageCompanies.Text = _pagedListCompany.PageNumber.ToString();
         }
 
-        private void LoadDataProduct()
+        private void LoadDateProduct()
         {
             _pagedListProduct = _productService.GetQueryableAll().GetPagedList(PageProduct.GetPage());
             if (IsNotFirstPageProductEmpty())
@@ -574,7 +567,7 @@ namespace TestTask.Forms
             tbCurrentPageProduct.Text = _pagedListProduct.PageNumber.ToString();
         }
 
-        private void LoadDataCategory()
+        private void LoadDateCategory()
         {
             _pagedListCategory = _categoryService.GetQueryableAll().GetPagedList(PageCategory.GetPage());
             if (IsNotFirstPageCategoryEmpty())
@@ -593,11 +586,10 @@ namespace TestTask.Forms
 
         private void UpdateAllGrids()
         {
-            LoadDataCompany();
-            LoadDataProduct();
-            LoadDataCategory();
-            listViewCategoryCATEGORIES.LoadDate();
-            tabPageCategoryUserControl.LoadData();
+            LoadDateCompany();
+            LoadDateProduct();
+            LoadDateCategory();
+            lstViewCategory.LoadData();
         }
 
         private Company GetCompany(int indexRow)
