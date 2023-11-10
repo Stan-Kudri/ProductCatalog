@@ -262,7 +262,7 @@ namespace TestTask.Forms
                 var item = addFormMode.GetCategoryModel().ToCategory();
                 _categoryService.Add(item);
                 LoadDataCategory();
-                listViewCategoryCATEGORIES.LoadData();
+                listViewCategoryCATEGORIES.LoadDate();
                 tabPageCategoryUserControl.LoadData();
             }
         }
@@ -400,7 +400,7 @@ namespace TestTask.Forms
                         }
                     }
 
-                    listViewCategoryCATEGORIES.LoadData();
+                    listViewCategoryCATEGORIES.LoadDate();
                     tabPageCategoryUserControl.LoadData();
                     LoadDataCategory();
 
@@ -596,7 +596,7 @@ namespace TestTask.Forms
             LoadDataCompany();
             LoadDataProduct();
             LoadDataCategory();
-            listViewCategoryCATEGORIES.LoadData();
+            listViewCategoryCATEGORIES.LoadDate();
             tabPageCategoryUserControl.LoadData();
         }
 

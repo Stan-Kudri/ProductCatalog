@@ -1225,8 +1225,10 @@ namespace TestTask.Forms
             // 
             // tabPageCategoryUserControl
             // 
+            this.tabPageCategoryUserControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabPageCategoryUserControl.Depth = 0;
-            this.tabPageCategoryUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPageCategoryUserControl.Location = new System.Drawing.Point(3, 3);
             this.tabPageCategoryUserControl.MouseState = MaterialSkin.MouseState.HOVER;
             this.tabPageCategoryUserControl.Name = "tabPageCategoryUserControl";

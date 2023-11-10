@@ -8,7 +8,6 @@ using TestTask.Core;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Page;
-using TestTask.Core.Models.Page.Categories;
 using TestTask.Core.Models.Products;
 using TestTask.Extension;
 using TestTask.Forms.Categories;
@@ -34,14 +33,10 @@ namespace TestTask.Control.CategoryCantrol
         private bool Resizing = false;
 
         public ListViewCategoryControl()
-            : base()
-        {
-            InitializeComponent();
-        }
+            : base() => InitializeComponent();
 
         public event Action ChangeCategories;
-
-        public SearchRequestCategory SearchRequest = new SearchRequestCategory();
+        public event Action ChangePageCurrent;
 
         public PageModel Page { get; set; } = new PageModel();
 
@@ -52,11 +47,10 @@ namespace TestTask.Control.CategoryCantrol
             _productService = _serviceProvider.GetRequiredService<ProductService>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
             cmbPageSize.DataSource = Page.Items;
-            LoadData();
-            Page.ChangeCurrentPage += LoadData;
+            Page.ChangeCurrentPage += ChangePage;
         }
 
-        public void Closing() => Page.ChangeCurrentPage -= LoadData;
+        public void Closing() => Page.ChangeCurrentPage -= ChangePage;
 
         protected void BtnAddItem_Click(object sender, EventArgs e)
         {
@@ -70,7 +64,6 @@ namespace TestTask.Control.CategoryCantrol
                 var item = addFormMode.GetCategoryModel().ToCategory();
                 _categoryService.Add(item);
                 ChangeCategories?.Invoke();
-                LoadData();
             }
         }
 
@@ -124,7 +117,6 @@ namespace TestTask.Control.CategoryCantrol
 
             RemoveItemRowListViewCategory();
             ChangeCategories?.Invoke();
-            LoadData();
         }
 
         protected void BtnFirstPage_Click(object sender, EventArgs e)
@@ -203,12 +195,13 @@ namespace TestTask.Control.CategoryCantrol
             Resizing = false;
         }
 
-        public void LoadData()
-        {
-            var query = SearchRequest.ApplyFilter(_categoryService.GetQueryableAll());
-            query = SearchRequest.ApplyOrderBy(query);
-            _pagedList = query.GetPagedList(Page.GetPage());
+        public void LoadDate() => LoadDataPage(_categoryService.GetQueryableAll());
 
+        public void ChangePage() => ChangePageCurrent?.Invoke();
+
+        public void LoadDataPage(IQueryable<Category> items)
+        {
+            _pagedList = items.GetPagedList(Page.GetPage());
             if (IsNotFirstPageCategoryEmpty())
             {
                 Page.Number -= 1;

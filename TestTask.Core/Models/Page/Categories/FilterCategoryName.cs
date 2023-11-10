@@ -15,6 +15,8 @@ namespace TestTask.Core.Models.Page.Categories
         {
         }
 
+        public string Name => _name;
+
         public FilterCategoryName(string name) => _name = name != null ? _name = name : throw new ArgumentException("Unknown category name.");
 
         public IQueryable<Category> Apply(IQueryable<Category> item) => _name == AllCategory ? item.Select(e => e) : item.Where(e => e.Name == _name);
