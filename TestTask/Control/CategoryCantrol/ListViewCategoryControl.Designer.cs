@@ -306,6 +306,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.Controls.Add(this.tlpCompaniesButton);
             this.Controls.Add(this.cmbPageSize);
             this.Controls.Add(this.tlpPageButton);
@@ -338,8 +339,8 @@
         protected MaterialSkin.Controls.MaterialButton btnNextPage;
         protected System.Windows.Forms.BindingSource itemsBindingSourcePageCategory;
         protected System.Windows.Forms.BindingSource pageModelBindingSource;
-        protected System.ComponentModel.IContainer components;
         protected System.Windows.Forms.ColumnHeader columnIDCategory;
         protected System.Windows.Forms.ColumnHeader columnCategoryName;
+        private System.ComponentModel.IContainer components;
     }
 }
