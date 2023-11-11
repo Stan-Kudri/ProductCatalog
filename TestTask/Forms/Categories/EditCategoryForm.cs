@@ -14,7 +14,7 @@ namespace TestTask.Forms.Categories
 
         public void Initialize(Category oldItem) => _oldItem = oldItem;
 
-        protected virtual void BtnSave_Click(object sender, EventArgs e)
+        protected override void BtnSave_Click(object sender, EventArgs e)
         {
             if (!IsDataFilled(out var message))
             {

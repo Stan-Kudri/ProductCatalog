@@ -20,6 +20,7 @@ namespace TestTask.Control.CategoryCantrol
         private PagedList<Entity> _pagedList;
 
         private bool Resizing = false;
+        private float[] _percentages;
 
         public ListViewControl()
             : base()
@@ -33,10 +34,14 @@ namespace TestTask.Control.CategoryCantrol
         {
             _provider = provider;
             _messageBox = messageBox;
+            float initialTotalColumnWidth = 0;
             foreach (var column in provider.Columns)
             {
-                listView.Columns.Add(new ColumnHeader { Tag = column.Width.ToString(), Text = column.Name, Width = column.Width });
+                listView.Columns.Add(new ColumnHeader { Text = column.Name, Width = column.Width });
+                initialTotalColumnWidth += column.Width;
             }
+
+            _percentages = provider.Columns.Select(c => c.Width / initialTotalColumnWidth).ToArray();
 
             cmbPageSize.DataSource = Page.Items;
             Page.ChangeCurrentPage += LoadData;
@@ -44,7 +49,8 @@ namespace TestTask.Control.CategoryCantrol
 
         public void Closing() => Page.ChangeCurrentPage -= LoadData;
 
-        protected void BtnAddItem_Click(object sender, EventArgs e)
+
+        private void BtnAddItem_Click(object sender, EventArgs e)
         {
             if (_provider.Add())
             {
@@ -52,7 +58,7 @@ namespace TestTask.Control.CategoryCantrol
             }
         }
 
-        protected void BtnEditItem_Click(object sender, EventArgs e)
+        private void BtnEditItem_Click(object sender, EventArgs e)
         {
             var indexEditItem = listView.SelectedIndices.Cast<int>();
 
@@ -71,7 +77,7 @@ namespace TestTask.Control.CategoryCantrol
             }
         }
 
-        protected void BtnDeleteItems_Click(object sender, EventArgs e)
+        private void BtnDeleteItems_Click(object sender, EventArgs e)
         {
             var selectedRowIndex = listView.SelectedIndices;
 
@@ -160,23 +166,21 @@ namespace TestTask.Control.CategoryCantrol
             }
         }
 
-        private void ListView_SizeChanged(object sender, EventArgs e)
+        private void ListView_SizeChanged(object sender, EventArgs e) => ChangeSizeColumnListView();
+
+        public void ChangeSizeColumnListView()
         {
-            if (!Resizing)
+            if (Resizing)
             {
-                Resizing = true;
+                return;
+            }
 
-                float totalColumnWidth = 0;
+            Resizing = true;
 
-                for (int i = 0; i < listView.Columns.Count; i++)
-                    totalColumnWidth += Convert.ToInt32(listView.Columns[i].Tag);
-
-                //Column Tage = Width custom size
-                for (int i = 0; i < listView.Columns.Count; i++)
-                {
-                    float percenTage = (Convert.ToInt32(listView.Columns[i].Tag) / totalColumnWidth);
-                    listView.Columns[i].Width = (int)(percenTage * listView.ClientRectangle.Width);
-                }
+            //Column Tage = Width custom size
+            for (int i = 0; i < listView.Columns.Count; i++)
+            {
+                listView.Columns[i].Width = (int)(_percentages[i] * listView.ClientRectangle.Width);
             }
 
             Resizing = false;
@@ -198,12 +202,12 @@ namespace TestTask.Control.CategoryCantrol
                     .ToArray();
                 listView.Items.Add(new ListViewItem(values));
             }
-            CustomUpdateFormStatePagination();
+            UpdateButtons();
 
             tbCurrentPage.Text = _pagedList.PageNumber.ToString();
         }
 
-        private void CustomUpdateFormStatePagination()
+        private void UpdateButtons()
         {
             btnFirstPage.Enabled = btnFirstPage.Visible =
                 btnLastPage.Enabled = btnLastPage.Visible =
@@ -217,7 +221,7 @@ namespace TestTask.Control.CategoryCantrol
 
         public interface IListViewDataProvider
         {
-            IReadOnlyCollection<ListViewColumn> Columns { get; }
+            IReadOnlyList<ListViewColumn> Columns { get; }
 
             PagedList<Entity> GetPage(Page page);
 

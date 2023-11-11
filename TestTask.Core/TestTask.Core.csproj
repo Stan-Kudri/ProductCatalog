@@ -145,12 +145,8 @@
     <Compile Include="Import\Importers\CategoryImporter.cs" />
     <Compile Include="Models\Categories\Category.cs" />
     <Compile Include="Models\Categories\CategoryField.cs" />
-    <Compile Include="Models\Categories\ListViewCategoryColumn.cs" />
     <Compile Include="Models\Categories\CategoryService.cs" />
-    <Compile Include="Models\ColumnListView.cs" />
-    <Compile Include="Models\Companies\ListViewCompanyColumn.cs" />
     <Compile Include="Models\Entity.cs" />
-    <Compile Include="Models\IListViewTableColumn.cs" />
     <Compile Include="Models\IService.cs" />
     <Compile Include="Models\Companies\Company.cs" />
     <Compile Include="Models\Page\Categories\FilterCategoryName.cs" />
@@ -158,7 +154,6 @@
     <Compile Include="Models\Page\Page.cs" />
     <Compile Include="Models\Page\PagedList.cs" />
     <Compile Include="Models\Page\Categories\SearchRequestCategory.cs" />
-    <Compile Include="Models\Products\ListViewProductsColumn.cs" />
     <Compile Include="Models\Products\Product.cs" />
     <Compile Include="Models\Users\User.cs" />
     <Compile Include="AppDbContext.cs" />

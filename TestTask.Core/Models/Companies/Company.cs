@@ -37,8 +37,6 @@ namespace TestTask.Core.Models.Companies
 
         public List<Product> Product { get; set; } = null;
 
-        public string[] GetItemListView() => new string[] { Id.ToString(), Name, DateCreation.ToString("d"), Country };
-
         public override bool Equals(object obj) => Equals(obj as Company);
 
         public bool Equals(Company other)

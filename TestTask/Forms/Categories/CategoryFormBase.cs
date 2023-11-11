@@ -21,6 +21,8 @@ namespace TestTask.Forms.Categories
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
         }
 
+        private void CategoryFormBase_Load(object sender, EventArgs e) => SetDefaultValueData();
+
         private void BtnClose_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;

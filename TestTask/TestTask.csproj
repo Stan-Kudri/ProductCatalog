@@ -189,12 +189,6 @@
     <Compile Include="Control\CategoryCantrol\ListViewControl.Designer.cs">
       <DependentUpon>ListViewControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Control\CategoryCantrol\TabPageCategoryUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Control\CategoryCantrol\TabPageCategoryUserControl.Designer.cs">
-      <DependentUpon>TabPageCategoryUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Extension\ListViewExtension.cs" />
     <Compile Include="Extension\PageExtension.cs" />
     <Compile Include="Forms\BaseForm.cs">
@@ -272,9 +266,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Control\CategoryCantrol\ListViewControl.resx">
       <DependentUpon>ListViewControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Control\CategoryCantrol\TabPageCategoryUserControl.resx">
-      <DependentUpon>TabPageCategoryUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>

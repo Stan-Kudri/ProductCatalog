@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using TestTask.BindingItem.Pages.Categories;
 using TestTask.Core;
 using TestTask.Core.Models;
 using TestTask.Core.Models.Categories;
@@ -22,13 +23,11 @@ namespace TestTask.Control.CategoryCantrol
         private IServiceProvider _serviceProvider;
         private CategoryService _categoryService;
         private ProductService _productService;
+        private SortPageCategories _sortCategory = new SortPageCategories();
 
-        public CategoryListView()
-        {
-            InitializeComponent();
-        }
+        public CategoryListView() => InitializeComponent();
 
-        public IReadOnlyCollection<ListViewControl.ListViewColumn> Columns { get; } = new List<ListViewControl.ListViewColumn>
+        public IReadOnlyList<ListViewControl.ListViewColumn> Columns { get; } = new List<ListViewControl.ListViewColumn>
         {
             new ListViewControl.ListViewColumn("ID", 200, e => ((Category)e).Id),
             new ListViewControl.ListViewColumn("Name", 555, e => ((Category)e).Name),
@@ -39,10 +38,12 @@ namespace TestTask.Control.CategoryCantrol
             _serviceProvider = serviceProvider;
             _categoryService = _serviceProvider.GetRequiredService<CategoryService>();
             _productService = _serviceProvider.GetRequiredService<ProductService>();
-            lstView.Initialize(this, serviceProvider.GetRequiredService<IMessageBox>());
+            listView.Initialize(this, serviceProvider.GetRequiredService<IMessageBox>());
+            cmbSortName.DataSource = _sortCategory.Items;
+            cmbSortName.SelectedItem = _sortCategory.SortType;
         }
 
-        public void LoadData() => lstView.LoadData();
+        public void LoadData() => listView.LoadData();
 
         public bool Add()
         {
@@ -90,10 +91,8 @@ namespace TestTask.Control.CategoryCantrol
         public PagedList<Entity> GetPage(Page page)
         {
             var queriable = _categoryService.GetQueryableAll();
-            if (!string.IsNullOrEmpty(textBox1.Text))
-            {
-                queriable = queriable.Where(e => e.Name.Contains(textBox1.Text));
-            }
+            queriable = GetSearchName(queriable);
+            queriable = GetSortName(queriable);
             var result = queriable.GetPagedList(page);
             return new PagedList<Entity>(result, result.PageNumber, result.PageSize, result.TotalItems);
         }
@@ -104,9 +103,51 @@ namespace TestTask.Control.CategoryCantrol
             _categoryService.Remove(entity.Id);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ButtonUseFilter_Click(object sender, EventArgs e)
         {
             LoadData();
+        }
+
+        private void ButtonClearFilter_Click(object sender, EventArgs e)
+        {
+            cmbSortName.SelectedItem = SortPageCategories.NoSorting;
+            _sortCategory.SetSort(cmbSortName.SelectedItem.ToString());
+            tbSearchStrName.Text = string.Empty;
+            LoadData();
+        }
+
+        private void CmbSortName_Changed(object sender, EventArgs e)
+        {
+            _sortCategory.SetSort(cmbSortName.SelectedItem.ToString());
+            LoadData();
+        }
+
+        private void CategoryListView_Load(object sender, EventArgs e)
+        {
+            /*
+            cmbSortName.DataSource = _sortCategory.Items;
+            cmbSortName.SelectedItem = _sortCategory.SortType;
+            */
+        }
+
+        private IQueryable<Category> GetSearchName(IQueryable<Category> items)
+            => string.IsNullOrEmpty(tbSearchStrName.Text)
+            ? items
+            : items.Where(e => e.Name.Contains(tbSearchStrName.Text));
+
+        private IQueryable<Category> GetSortName(IQueryable<Category> items)
+        {
+            if (_sortCategory.IsAscending == null)
+            {
+                return items;
+            }
+
+            return (bool)_sortCategory.IsAscending ? items.OrderBy(e => e.Name).Select(e => e) : items.OrderByDescending(e => e.Name).Select(e => e);
+        }
+
+        private void listView_SizeChanged(object sender, EventArgs e)
+        {
+            listView.ChangeSizeColumnListView();
         }
     }
 }

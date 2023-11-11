@@ -19,6 +19,6 @@ namespace TestTask.BindingItem
 
         public Category ToCategory() => new Category(_name);
 
-        public Category ToCategory(int id) => new Category(_name);
+        public Category ToCategory(int id) => new Category(_name, id);
     }
 }

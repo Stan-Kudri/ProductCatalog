@@ -30,8 +30,8 @@
             this.categoryModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tlpButtonCategory = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new MaterialSkin.Controls.MaterialButton();
-            this.btnClear = new MaterialSkin.Controls.MaterialButton();
             this.btnClose = new MaterialSkin.Controls.MaterialButton();
+            this.btnClear = new MaterialSkin.Controls.MaterialButton();
             this.tlpText.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.categoryModelBindingSource)).BeginInit();
             this.tlpButtonCategory.SuspendLayout();
@@ -122,27 +122,6 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
-            // btnClear
-            // 
-            this.btnClear.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnClear.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnClear.Depth = 0;
-            this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClear.HighEmphasis = true;
-            this.btnClear.Icon = null;
-            this.btnClear.Location = new System.Drawing.Point(84, 6);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnClear.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnClear.Name = "btnClear";
-            this.btnClear.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClear.Size = new System.Drawing.Size(72, 33);
-            this.btnClear.TabIndex = 4;
-            this.btnClear.Text = "Default Value";
-            this.btnClear.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnClear.UseAccentColor = false;
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
-            // 
             // btnClose
             // 
             this.btnClose.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -164,6 +143,27 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
+            // btnClear
+            // 
+            this.btnClear.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnClear.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnClear.Depth = 0;
+            this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnClear.HighEmphasis = true;
+            this.btnClear.Icon = null;
+            this.btnClear.Location = new System.Drawing.Point(84, 6);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnClear.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnClear.Name = "btnClear";
+            this.btnClear.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnClear.Size = new System.Drawing.Size(72, 33);
+            this.btnClear.TabIndex = 4;
+            this.btnClear.Text = "Default Value";
+            this.btnClear.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnClear.UseAccentColor = false;
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
+            // 
             // CategoryFormBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -174,6 +174,7 @@
             this.MinimumSize = new System.Drawing.Size(250, 175);
             this.Name = "CategoryFormBase";
             this.Text = "CategoryForm";
+            this.Load += new System.EventHandler(this.CategoryFormBase_Load);
             this.tlpText.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.categoryModelBindingSource)).EndInit();
             this.tlpButtonCategory.ResumeLayout(false);
