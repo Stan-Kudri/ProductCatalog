@@ -192,7 +192,6 @@
             this.Controls.Add(this.tlpFilter);
             this.Name = "CategoryListView";
             this.Size = new System.Drawing.Size(750, 330);
-            this.Load += new System.EventHandler(this.CategoryListView_Load);
             this.tlpFilter.ResumeLayout(false);
             this.tlpFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceSortName)).EndInit();

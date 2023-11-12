@@ -122,14 +122,6 @@ namespace TestTask.Control.CategoryCantrol
             LoadData();
         }
 
-        private void CategoryListView_Load(object sender, EventArgs e)
-        {
-            /*
-            cmbSortName.DataSource = _sortCategory.Items;
-            cmbSortName.SelectedItem = _sortCategory.SortType;
-            */
-        }
-
         private IQueryable<Category> GetSearchName(IQueryable<Category> items)
             => string.IsNullOrEmpty(tbSearchStrName.Text)
             ? items

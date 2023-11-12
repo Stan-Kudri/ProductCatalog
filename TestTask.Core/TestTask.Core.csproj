@@ -153,7 +153,6 @@
     <Compile Include="Models\Page\Categories\SortCategory.cs" />
     <Compile Include="Models\Page\Page.cs" />
     <Compile Include="Models\Page\PagedList.cs" />
-    <Compile Include="Models\Page\Categories\SearchRequestCategory.cs" />
     <Compile Include="Models\Products\Product.cs" />
     <Compile Include="Models\Users\User.cs" />
     <Compile Include="AppDbContext.cs" />
