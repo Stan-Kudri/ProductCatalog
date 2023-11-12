@@ -258,6 +258,8 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MessageBoxShow.cs" />
+    <Compile Include="Model\IListViewDataProvider.cs" />
+    <Compile Include="Model\ListViewColumn.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Control\CategoryCantrol\CategoryListView.resx">

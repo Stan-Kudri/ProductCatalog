@@ -12,10 +12,11 @@ using TestTask.Core.Models.Page;
 using TestTask.Core.Models.Products;
 using TestTask.Extension;
 using TestTask.Forms.Categories;
+using TestTask.Model;
 
 namespace TestTask.Control.CategoryCantrol
 {
-    public partial class CategoryListView : UserControl, ListViewControl.IListViewDataProvider
+    public partial class CategoryListView : UserControl, IListViewDataProvider
     {
         private const int IndexId = 0;
         private const int IndexColumnCompanyName = 1;
@@ -27,10 +28,10 @@ namespace TestTask.Control.CategoryCantrol
 
         public CategoryListView() => InitializeComponent();
 
-        public IReadOnlyList<ListViewControl.ListViewColumn> Columns { get; } = new List<ListViewControl.ListViewColumn>
+        public IReadOnlyList<ListViewColumn> Columns { get; } = new List<ListViewColumn>
         {
-            new ListViewControl.ListViewColumn("ID", 200, e => ((Category)e).Id),
-            new ListViewControl.ListViewColumn("Name", 555, e => ((Category)e).Name),
+            new ListViewColumn("ID", 200, e => ((Category)e).Id),
+            new ListViewColumn("Name", 555, e => ((Category)e).Name),
         };
 
         public void Initialize(IServiceProvider serviceProvider)
