@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using TestTask.BindingItem.Pages.Categories;
+using TestTask.Control.PageTabControls.Model;
 using TestTask.Core;
 using TestTask.Core.Models;
 using TestTask.Core.Models.Categories;
@@ -13,12 +14,12 @@ using TestTask.Core.Models.Products;
 using TestTask.Extension;
 using TestTask.Forms.Categories;
 
-namespace TestTask.Control.CategoryCantrol
+namespace TestTask.Control.PageTabControls
 {
-    public partial class CategoryListView : UserControl, ListViewControl.IListViewDataProvider
+    public partial class CategoryListView : UserControl, IListViewDataProvider
     {
         private const int IndexId = 0;
-        private const int IndexColumnCompanyName = 1;
+        private const int IndexColumnName = 1;
 
         private IServiceProvider _serviceProvider;
         private CategoryService _categoryService;
@@ -27,10 +28,10 @@ namespace TestTask.Control.CategoryCantrol
 
         public CategoryListView() => InitializeComponent();
 
-        public IReadOnlyList<ListViewControl.ListViewColumn> Columns { get; } = new List<ListViewControl.ListViewColumn>
+        public IReadOnlyList<ListViewColumn> Columns { get; } = new List<ListViewColumn>
         {
-            new ListViewControl.ListViewColumn("ID", 200, e => ((Category)e).Id),
-            new ListViewControl.ListViewColumn("Name", 555, e => ((Category)e).Name),
+            new ListViewColumn("ID", 200, e => ((Category)e).Id),
+            new ListViewColumn("Name", 555, e => ((Category)e).Name),
         };
 
         public void Initialize(IServiceProvider serviceProvider)
@@ -47,14 +48,14 @@ namespace TestTask.Control.CategoryCantrol
 
         public bool Add()
         {
-            using (var addFormMode = _serviceProvider.GetRequiredService<AddCategoryForm>())
+            using (var addForm = _serviceProvider.GetRequiredService<AddCategoryForm>())
             {
-                if (addFormMode.ShowDialog() != DialogResult.OK)
+                if (addForm.ShowDialog() != DialogResult.OK)
                 {
                     return false;
                 }
 
-                var item = addFormMode.GetCategoryModel().ToCategory();
+                var item = addForm.GetCategoryModel().ToCategory();
                 _categoryService.Add(item);
             }
 
@@ -64,16 +65,16 @@ namespace TestTask.Control.CategoryCantrol
         public bool Edit(Entity entity)
         {
             var oldItem = (Category)entity;
-            using (var editCompanyForm = _serviceProvider.GetRequiredService<EditCategoryForm>())
+            using (var editForm = _serviceProvider.GetRequiredService<EditCategoryForm>())
             {
-                editCompanyForm.Initialize(oldItem);
+                editForm.Initialize(oldItem);
 
-                if (editCompanyForm.ShowDialog() != DialogResult.OK)
+                if (editForm.ShowDialog() != DialogResult.OK)
                 {
                     return false;
                 }
 
-                var updateItem = editCompanyForm.EditItem();
+                var updateItem = editForm.EditItem();
                 _categoryService.Update(updateItem);
             }
 
@@ -83,7 +84,7 @@ namespace TestTask.Control.CategoryCantrol
         public Entity GetEntity(ListViewItem item)
         {
             var id = item.GetNonNullableString(IndexId).ParseInt();
-            var name = item.GetNonNullableString(IndexColumnCompanyName) ?? throw new ArgumentException("Name cannot be null.");
+            var name = item.GetNonNullableString(IndexColumnName) ?? throw new ArgumentException("Name cannot be null.");
 
             return new Category(name, id);
         }
@@ -116,6 +117,11 @@ namespace TestTask.Control.CategoryCantrol
             LoadData();
         }
 
+        private void ListView_SizeChanged(object sender, EventArgs e)
+        {
+            listView.ChangeSizeColumnListView();
+        }
+
         private void CmbSortName_Changed(object sender, EventArgs e)
         {
             _sortCategory.SetSort(cmbSortName.SelectedItem.ToString());
@@ -135,11 +141,6 @@ namespace TestTask.Control.CategoryCantrol
             }
 
             return (bool)_sortCategory.IsAscending ? items.OrderBy(e => e.Name).Select(e => e) : items.OrderByDescending(e => e.Name).Select(e => e);
-        }
-
-        private void listView_SizeChanged(object sender, EventArgs e)
-        {
-            listView.ChangeSizeColumnListView();
         }
     }
 }

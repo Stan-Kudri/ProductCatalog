@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using TestTask.BindingItem;
+using TestTask.Control.PageTabControls.Model;
 using TestTask.Core;
 using TestTask.Core.Models;
 using TestTask.Core.Models.Page;
 
-namespace TestTask.Control.CategoryCantrol
+namespace TestTask.Control
 {
     public partial class ListViewControl : BaseUserControl
     {
@@ -218,51 +218,5 @@ namespace TestTask.Control.CategoryCantrol
         }
 
         private bool IsNotFirstPageEmpty() => _pagedList.Count == 0 && Page.Number != 1;
-
-        public interface IListViewDataProvider
-        {
-            IReadOnlyList<ListViewColumn> Columns { get; }
-
-            PagedList<Entity> GetPage(Page page);
-
-            void Remove(Entity entity);
-
-            Entity GetEntity(ListViewItem item);
-
-            bool Edit(Entity entity);
-
-            bool Add();
-        }
-
-        public class ListViewColumn
-        {
-            public ListViewColumn(string name, int width, Func<Entity, object> valueSelector)
-            {
-                if (string.IsNullOrWhiteSpace(name))
-                {
-                    throw new ArgumentException("The column name cannot be empty.", nameof(name));
-                }
-
-                if (width <= 0)
-                {
-                    throw new ArgumentException("The width is greater than zero.", nameof(width));
-                }
-
-                if (valueSelector == null)
-                {
-                    throw new ArgumentNullException("ValueSelector should not be null");
-                }
-
-                Name = name;
-                Width = width;
-                ValueSelector = valueSelector;
-            }
-
-            public string Name { get; }
-
-            public int Width { get; }
-
-            public Func<Entity, object> ValueSelector { get; }
-        }
     }
 }

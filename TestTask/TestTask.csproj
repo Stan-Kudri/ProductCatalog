@@ -166,6 +166,7 @@
     <Compile Include="BindingItem\PageModel.cs" />
     <Compile Include="BindingItem\Pages\Categories\FilterModelCategories.cs" />
     <Compile Include="BindingItem\Pages\Categories\SortPageCategories.cs" />
+    <Compile Include="BindingItem\Pages\Companies\SortCompanies.cs" />
     <Compile Include="BindingItem\ProductBinding\SelectCategory.cs" />
     <Compile Include="BindingItem\ProductBinding\SelectCompany.cs" />
     <Compile Include="BindingItem\ProductBinding\ProductModel.cs" />
@@ -176,17 +177,23 @@
     <Compile Include="Control\BaseUserControl.Designer.cs">
       <DependentUpon>BaseUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Control\CategoryCantrol\CategoryListView.cs">
+    <Compile Include="Control\PageTabControls\CategoryListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Control\CategoryCantrol\CategoryListView.Designer.cs">
+    <Compile Include="Control\PageTabControls\CategoryListView.Designer.cs">
       <DependentUpon>CategoryListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Control\CategoryCantrol\ListViewControl.cs">
+    <Compile Include="Control\ListViewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Control\CategoryCantrol\ListViewControl.Designer.cs">
+    <Compile Include="Control\ListViewControl.Designer.cs">
       <DependentUpon>ListViewControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\PageTabControls\CompanyListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\PageTabControls\CompanyListView.Designer.cs">
+      <DependentUpon>CompanyListView.cs</DependentUpon>
     </Compile>
     <Compile Include="Extension\ListViewExtension.cs" />
     <Compile Include="Extension\PageExtension.cs" />
@@ -258,13 +265,18 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MessageBoxShow.cs" />
+    <Compile Include="Control\PageTabControls\Model\IListViewDataProvider.cs" />
+    <Compile Include="Control\PageTabControls\Model\ListViewColumn.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Control\CategoryCantrol\CategoryListView.resx">
+    <EmbeddedResource Include="Control\PageTabControls\CategoryListView.resx">
       <DependentUpon>CategoryListView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Control\CategoryCantrol\ListViewControl.resx">
+    <EmbeddedResource Include="Control\ListViewControl.resx">
       <DependentUpon>ListViewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\PageTabControls\CompanyListView.resx">
+      <DependentUpon>CompanyListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
@@ -309,6 +321,7 @@
     <None Include="Properties\DataSources\TestTask.BindingItem.PageModel.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Categories.FilterModelCategories.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Categories.SortPageCategories.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Companies.SortCompanies.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.ProductBinding.SelectCategory.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.CompanyModel.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.PageModel.datasource" />
