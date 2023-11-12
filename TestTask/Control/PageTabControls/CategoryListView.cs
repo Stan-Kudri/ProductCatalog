@@ -104,10 +104,7 @@ namespace TestTask.Control.PageTabControls
             _categoryService.Remove(entity.Id);
         }
 
-        private void ButtonUseFilter_Click(object sender, EventArgs e)
-        {
-            LoadData();
-        }
+        private void ButtonUseFilter_Click(object sender, EventArgs e) => LoadData();
 
         private void ButtonClearFilter_Click(object sender, EventArgs e)
         {
@@ -118,9 +115,7 @@ namespace TestTask.Control.PageTabControls
         }
 
         private void ListView_SizeChanged(object sender, EventArgs e)
-        {
-            listView.ChangeSizeColumnListView();
-        }
+            => listView.ChangeSizeColumnListView();
 
         private void CmbSortName_Changed(object sender, EventArgs e)
         {
@@ -140,7 +135,9 @@ namespace TestTask.Control.PageTabControls
                 return items;
             }
 
-            return (bool)_sortCategory.IsAscending ? items.OrderBy(e => e.Name).Select(e => e) : items.OrderByDescending(e => e.Name).Select(e => e);
+            return (bool)_sortCategory.IsAscending
+                    ? items.OrderBy(e => e.Name).Select(e => e)
+                    : items.OrderByDescending(e => e.Name).Select(e => e);
         }
     }
 }

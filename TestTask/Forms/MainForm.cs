@@ -79,6 +79,26 @@ namespace TestTask.Forms
             PageProduct.ChangeCurrentPage += LoadDataProduct;
         }
 
+        private void TabControl_Changed(object sender, EventArgs e)
+        {
+            var selectTab = tabControl.SelectedTab;
+
+            if (selectTab == tabPageCompanies)
+            {
+                listViewCompany.LoadData();
+            }
+            else if (selectTab == tabPageProduct)
+            {
+                LoadDataProduct();
+            }
+            else if (selectTab == tabPageCategory)
+            {
+                listViewCategory.LoadData();
+            }
+
+            return;
+        }
+
         private void TableForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult = DialogResult.Cancel;
@@ -342,9 +362,10 @@ namespace TestTask.Forms
 
         private void UpdataAllGrids()
         {
+            /*
             LoadDataProduct();
             listViewCategory.LoadData();
-            listViewCompany.LoadData();
+            listViewCompany.LoadData();*/
         }
 
 
