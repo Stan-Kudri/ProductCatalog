@@ -54,7 +54,6 @@ namespace TestTask.Forms
 
         private PagedList<Company> _pagedListCompany;
         private PagedList<Product> _pagedListProduct;
-        private PagedList<Category> _pagedListCategory;
 
         private bool Resizing = false;
 
@@ -76,7 +75,8 @@ namespace TestTask.Forms
         {
             _pagedListCompany = new PagedList<Company>(_companyService.GetQueryableAll());
             _pagedListProduct = new PagedList<Product>(_productService.GetQueryableAll());
-            lstViewCategory.Initialize(_serviceProvider);
+            listViewCategory.Initialize(_serviceProvider);
+            listViewCompany.Initialize(_serviceProvider);
             cmbPageSizeCompanies.DataSource = PageCompany.Items;
             cmbPageSizeProduct.DataSource = PageProduct.Items;
             UpdataAllGrids();
@@ -284,6 +284,7 @@ namespace TestTask.Forms
                     }
 
                     LoadDataCompany();
+                    listViewCompany.LoadData();
 
                     if (!companyRead.IsNoErrorLine(out var message))
                     {
@@ -323,7 +324,7 @@ namespace TestTask.Forms
                         }
                     }
 
-                    lstViewCategory.LoadData();
+                    listViewCategory.LoadData();
 
                     if (!categoryRead.IsNoErrorLine(out var message))
                     {
@@ -466,7 +467,8 @@ namespace TestTask.Forms
         {
             LoadDataCompany();
             LoadDataProduct();
-            lstViewCategory.LoadData();
+            listViewCategory.LoadData();
+            listViewCompany.LoadData();
         }
 
         private Company GetCompany(int indexRow)

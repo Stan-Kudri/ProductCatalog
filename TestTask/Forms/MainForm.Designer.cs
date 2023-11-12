@@ -89,9 +89,11 @@ namespace TestTask.Forms
             this.columnDestination = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnCompanyId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnCategoryId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabPageCategory = new System.Windows.Forms.TabPage();
+            this.listViewCategory = new TestTask.Control.PageTabControls.CategoryListView();
             this.bindingSourcePageCategories = new System.Windows.Forms.BindingSource(this.components);
-            this.tabPageCategorySecond = new System.Windows.Forms.TabPage();
-            this.lstViewCategory = new TestTask.Control.CategoryCantrol.CategoryListView();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.listViewCompany = new TestTask.Control.PageTabControls.CompanyListView();
             this.menuStrip.SuspendLayout();
             this.tlpCompaniesButton.SuspendLayout();
             this.materialTabControl.SuspendLayout();
@@ -107,8 +109,9 @@ namespace TestTask.Forms
             this.tlpProductsButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageProducts)).BeginInit();
             this.tlpListProduct.SuspendLayout();
+            this.tabPageCategory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageCategories)).BeginInit();
-            this.tabPageCategorySecond.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -336,7 +339,8 @@ namespace TestTask.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.materialTabControl.Controls.Add(this.tabPageCompanies);
             this.materialTabControl.Controls.Add(this.tabPageProduct);
-            this.materialTabControl.Controls.Add(this.tabPageCategorySecond);
+            this.materialTabControl.Controls.Add(this.tabPageCategory);
+            this.materialTabControl.Controls.Add(this.tabPage1);
             this.materialTabControl.Depth = 0;
             this.materialTabControl.Location = new System.Drawing.Point(8, 75);
             this.materialTabControl.MouseState = MaterialSkin.MouseState.HOVER;
@@ -865,29 +869,48 @@ namespace TestTask.Forms
             this.columnCategoryId.Text = "CategoryId";
             this.columnCategoryId.Width = 0;
             // 
+            // tabPageCategory
+            // 
+            this.tabPageCategory.Controls.Add(this.listViewCategory);
+            this.tabPageCategory.Location = new System.Drawing.Point(4, 22);
+            this.tabPageCategory.Name = "tabPageCategory";
+            this.tabPageCategory.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageCategory.Size = new System.Drawing.Size(758, 331);
+            this.tabPageCategory.TabIndex = 3;
+            this.tabPageCategory.Text = "Categories";
+            this.tabPageCategory.UseVisualStyleBackColor = true;
+            // 
+            // listViewCategory
+            // 
+            this.listViewCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewCategory.Location = new System.Drawing.Point(3, 3);
+            this.listViewCategory.Name = "listViewCategory";
+            this.listViewCategory.Size = new System.Drawing.Size(752, 325);
+            this.listViewCategory.TabIndex = 0;
+            // 
             // bindingSourcePageCategories
             // 
             this.bindingSourcePageCategories.DataMember = "Items";
             this.bindingSourcePageCategories.DataSource = this.bindingSourcePage;
             // 
-            // tabPageCategorySecond
+            // tabPage1
             // 
-            this.tabPageCategorySecond.Controls.Add(this.lstViewCategory);
-            this.tabPageCategorySecond.Location = new System.Drawing.Point(4, 22);
-            this.tabPageCategorySecond.Name = "tabPageCategorySecond";
-            this.tabPageCategorySecond.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCategorySecond.Size = new System.Drawing.Size(758, 331);
-            this.tabPageCategorySecond.TabIndex = 3;
-            this.tabPageCategorySecond.Text = "Category";
-            this.tabPageCategorySecond.UseVisualStyleBackColor = true;
+            this.tabPage1.Controls.Add(this.listViewCompany);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(758, 331);
+            this.tabPage1.TabIndex = 4;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // lstViewCategory
+            // listViewCompany
             // 
-            this.lstViewCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstViewCategory.Location = new System.Drawing.Point(3, 3);
-            this.lstViewCategory.Name = "lstViewCategory";
-            this.lstViewCategory.Size = new System.Drawing.Size(752, 325);
-            this.lstViewCategory.TabIndex = 0;
+            this.listViewCompany.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewCompany.Location = new System.Drawing.Point(3, 3);
+            this.listViewCompany.Name = "listViewCompany";
+            this.listViewCompany.Size = new System.Drawing.Size(752, 325);
+            this.listViewCompany.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -925,8 +948,9 @@ namespace TestTask.Forms
             this.tlpProductsButton.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageProducts)).EndInit();
             this.tlpListProduct.ResumeLayout(false);
+            this.tabPageCategory.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageCategories)).EndInit();
-            this.tabPageCategorySecond.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -991,7 +1015,9 @@ namespace TestTask.Forms
         private System.Windows.Forms.ColumnHeader columnDestination;
         private System.Windows.Forms.ColumnHeader columnCompanyId;
         private System.Windows.Forms.ColumnHeader columnCategoryId;
-        private System.Windows.Forms.TabPage tabPageCategorySecond;
-        private Control.CategoryCantrol.CategoryListView lstViewCategory;
+        private System.Windows.Forms.TabPage tabPageCategory;
+        private Control.PageTabControls.CategoryListView listViewCategory;
+        private System.Windows.Forms.TabPage tabPage1;
+        private Control.PageTabControls.CompanyListView listViewCompany;
     }
 }

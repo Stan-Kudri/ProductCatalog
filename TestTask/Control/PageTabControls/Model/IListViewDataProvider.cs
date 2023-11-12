@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using TestTask.Core.Models;
 using TestTask.Core.Models.Page;
 
-namespace TestTask.Model
+namespace TestTask.Control.PageTabControls.Model
 {
     public interface IListViewDataProvider
     {

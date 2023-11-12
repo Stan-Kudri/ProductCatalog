@@ -1,7 +1,7 @@
 ﻿using System;
 using TestTask.Core.Models;
 
-namespace TestTask.Model
+namespace TestTask.Control.PageTabControls.Model
 {
     public class ListViewColumn
     {
