@@ -88,7 +88,6 @@
             this.listView.FullRowSelect = true;
             this.listView.HideSelection = false;
             this.listView.Location = new System.Drawing.Point(3, 3);
-            this.listView.MinimumSize = new System.Drawing.Size(200, 100);
             this.listView.MouseLocation = new System.Drawing.Point(-1, -1);
             this.listView.MouseState = MaterialSkin.MouseState.OUT;
             this.listView.Name = "listView";
@@ -141,7 +140,6 @@
             // 
             this.tlpButtonEditItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpButtonEditItem.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tlpButtonEditItem.ColumnCount = 3;
             this.tlpButtonEditItem.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpButtonEditItem.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -164,14 +162,15 @@
             this.btnAddItem.AutoSize = true;
             this.btnAddItem.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnAddItem.BackColor = System.Drawing.Color.Transparent;
+            this.btnAddItem.FlatAppearance.BorderSize = 0;
             this.btnAddItem.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnAddItem.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnAddItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItem.Image")));
-            this.btnAddItem.Location = new System.Drawing.Point(2, 2);
+            this.btnAddItem.Location = new System.Drawing.Point(1, 1);
             this.btnAddItem.Margin = new System.Windows.Forms.Padding(1);
             this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(40, 28);
+            this.btnAddItem.Size = new System.Drawing.Size(41, 30);
             this.btnAddItem.TabIndex = 5;
             this.btnAddItem.UseVisualStyleBackColor = false;
             this.btnAddItem.Click += new System.EventHandler(this.BtnAddItem_Click);
@@ -183,14 +182,15 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEditItem.AutoSize = true;
             this.btnEditItem.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnEditItem.FlatAppearance.BorderSize = 0;
             this.btnEditItem.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnEditItem.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnEditItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditItem.Image = ((System.Drawing.Image)(resources.GetObject("btnEditItem.Image")));
-            this.btnEditItem.Location = new System.Drawing.Point(45, 2);
+            this.btnEditItem.Location = new System.Drawing.Point(44, 1);
             this.btnEditItem.Margin = new System.Windows.Forms.Padding(1);
             this.btnEditItem.Name = "btnEditItem";
-            this.btnEditItem.Size = new System.Drawing.Size(40, 28);
+            this.btnEditItem.Size = new System.Drawing.Size(41, 30);
             this.btnEditItem.TabIndex = 5;
             this.btnEditItem.UseVisualStyleBackColor = true;
             this.btnEditItem.Click += new System.EventHandler(this.BtnEditItem_Click);
@@ -203,14 +203,15 @@
             this.btnDeleteItems.AutoSize = true;
             this.btnDeleteItems.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnDeleteItems.BackColor = System.Drawing.Color.Transparent;
+            this.btnDeleteItems.FlatAppearance.BorderSize = 0;
             this.btnDeleteItems.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.btnDeleteItems.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnDeleteItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteItems.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteItems.Image")));
-            this.btnDeleteItems.Location = new System.Drawing.Point(88, 2);
+            this.btnDeleteItems.Location = new System.Drawing.Point(87, 1);
             this.btnDeleteItems.Margin = new System.Windows.Forms.Padding(1);
             this.btnDeleteItems.Name = "btnDeleteItems";
-            this.btnDeleteItems.Size = new System.Drawing.Size(40, 28);
+            this.btnDeleteItems.Size = new System.Drawing.Size(42, 30);
             this.btnDeleteItems.TabIndex = 7;
             this.btnDeleteItems.UseVisualStyleBackColor = false;
             this.btnDeleteItems.Click += new System.EventHandler(this.BtnDeleteItems_Click);
@@ -330,7 +331,7 @@
             // 
             this.cmbPageSize.DataSource = this.itemsBindingSourcePageCategory;
             this.cmbPageSize.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.cmbPageSize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbPageSize.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmbPageSize.FormattingEnabled = true;
             this.cmbPageSize.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cmbPageSize.Location = new System.Drawing.Point(3, 11);
