@@ -15,7 +15,6 @@ using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Page;
 using TestTask.Core.Models.Products;
 using TestTask.Extension;
-using TestTask.Forms.Companies;
 using TestTask.Forms.Products;
 
 namespace TestTask.Forms
@@ -67,8 +66,6 @@ namespace TestTask.Forms
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
         }
 
-        public PageModel PageCompany { get; set; } = new PageModel();
-
         public PageModel PageProduct { get; set; } = new PageModel();
 
         private void TableForm_Load(object sender, EventArgs e)
@@ -77,84 +74,15 @@ namespace TestTask.Forms
             _pagedListProduct = new PagedList<Product>(_productService.GetQueryableAll());
             listViewCategory.Initialize(_serviceProvider);
             listViewCompany.Initialize(_serviceProvider);
-            cmbPageSizeCompanies.DataSource = PageCompany.Items;
             cmbPageSizeProduct.DataSource = PageProduct.Items;
             UpdataAllGrids();
-            PageCompany.ChangeCurrentPage += LoadDataCompany;
             PageProduct.ChangeCurrentPage += LoadDataProduct;
         }
 
         private void TableForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult = DialogResult.Cancel;
-            PageCompany.ChangeCurrentPage -= LoadDataCompany;
             PageProduct.ChangeCurrentPage -= LoadDataProduct;
-        }
-
-        private void BtnAddCompany_Click(object sender, EventArgs e)
-        {
-            using (var addFormMode = _serviceProvider.GetRequiredService<AddItemCompanyForm>())
-            {
-                if (addFormMode.ShowDialog() != DialogResult.OK)
-                {
-                    return;
-                }
-
-                var item = addFormMode.GetCompanyModel().ToCompany();
-                _companyService.Add(item);
-                LoadDataCompany();
-            }
-        }
-
-        private void BtnEditCompany_Click(object sender, EventArgs e)
-        {
-            var indexEditItem = listViewCompanies.SelectedIndices.Cast<int>();
-
-            if (indexEditItem.Count() != 1)
-            {
-                _messageBox.ShowWarning("Select one item.");
-                return;
-            }
-
-            var row = indexEditItem.First();
-            var oldItem = GetCompany(row);
-
-            using (var editCompanyForm = _serviceProvider.GetRequiredService<EditItemCompanyForm>())
-            {
-                editCompanyForm.Initialize(oldItem);
-
-                if (editCompanyForm.ShowDialog() != DialogResult.OK)
-                {
-                    return;
-                }
-
-                var updateItem = editCompanyForm.GetEditCompany();
-                _companyService.Update(updateItem);
-                UpdateCompany(updateItem, row);
-            }
-        }
-
-        private void BtnDeleteCompany_Click(object sender, EventArgs e)
-        {
-            var selectedRowIndex = listViewCompanies.SelectedIndices;
-
-            if (selectedRowIndex.Count == NoItemsSelected)
-            {
-                _messageBox.ShowWarning(MessageNotSelectedItem);
-                return;
-            }
-
-            if (!_messageBox.ShowQuestion("Delete selected items?"))
-            {
-                foreach (ListViewItem item in listViewCompanies.Items)
-                {
-                    item.Selected = false;
-                }
-                return;
-            }
-
-            RemoveItemRowListViewCompany();
-            UpdataAllGrids();
         }
 
         private void BtnAddProduct_Click(object sender, EventArgs e)
@@ -283,7 +211,6 @@ namespace TestTask.Forms
                         }
                     }
 
-                    LoadDataCompany();
                     listViewCompany.LoadData();
 
                     if (!companyRead.IsNoErrorLine(out var message))
@@ -361,16 +288,6 @@ namespace TestTask.Forms
             }
         }
 
-        private void TlpCompanyList_SizeChanged(object sender, EventArgs e)
-        {
-            if (!Resizing)
-            {
-                Resizing = true;
-                SizeChangedListView(listViewCompanies);
-            }
-            Resizing = false;
-        }
-
         private void TlpProductList_SizeChanged(object sender, EventArgs e)
         {
             if (!Resizing)
@@ -383,17 +300,6 @@ namespace TestTask.Forms
 
         private void TsmItemClose_Click(object sender, EventArgs e) => Close();
 
-        private void CmbPageSizeCompany_Changed(object sender, EventArgs e)
-        {
-            var pageSizeCmb = PageCompany.Items[cmbPageSizeCompanies.SelectedIndex];
-
-            if (PageCompany.ChangedPage(pageSizeCmb))
-            {
-                PageCompany.Size = pageSizeCmb;
-                PageCompany.Number = 1;
-            }
-        }
-
         private void CmbPageSizeProduct_Changed(object sender, EventArgs e)
         {
             var pageSizeCmb = PageProduct.Items[cmbPageSizeProduct.SelectedIndex];
@@ -403,18 +309,6 @@ namespace TestTask.Forms
                 PageProduct.Size = pageSizeCmb;
                 PageProduct.Number = 1;
             }
-        }
-
-        private void TextBoxCurrentPageMode_TextChanged(object sender, EventArgs e)
-        {
-            if (int.TryParse(tbCurrentPageCompanies.Text, out var pageNumber)
-                && pageNumber <= _pagedListCompany.PageCount
-                && _pagedListCompany.PageNumber == PageCompany.Number)
-            {
-                PageCompany.Number = pageNumber;
-            }
-
-            tbCurrentPageCompanies.Text = string.Format("{0}/{1}", PageCompany.Number, _pagedListCompany.PageCount);
         }
 
         private void TextBoxCurrentPageProduct_TextChanged(object sender, EventArgs e)
@@ -427,23 +321,6 @@ namespace TestTask.Forms
             }
 
             tbCurrentPageProduct.Text = string.Format("{0}/{1}", PageProduct.Number, _pagedListProduct.PageCount);
-        }
-
-        private void LoadDataCompany()
-        {
-            _pagedListCompany = _companyService.GetQueryableAll().GetPagedList(PageCompany.GetPage());
-            if (IsNotFirstPageCompanyEmpty())
-            {
-                PageCompany.Number -= 1;
-            }
-
-            var item = _pagedListCompany.Items;
-
-            listViewCompanies.Items.Clear();
-            FillListViewCompany(item);
-            CustomUpdateFormStateCompanyPagination();
-
-            tbCurrentPageCompanies.Text = _pagedListCompany.PageNumber.ToString();
         }
 
         private void LoadDataProduct()
@@ -465,24 +342,11 @@ namespace TestTask.Forms
 
         private void UpdataAllGrids()
         {
-            LoadDataCompany();
             LoadDataProduct();
             listViewCategory.LoadData();
             listViewCompany.LoadData();
         }
 
-        private Company GetCompany(int indexRow)
-        {
-            var rowItem = listViewCompanies.Items[indexRow];
-
-            var id = CellElement(rowItem, IndexId).ParseInt();
-            var name = CellElement(rowItem, IndexColumnCompanyName) ?? throw new ArgumentException("Name cannot be null.");
-            var strDateCreation = CellElement(rowItem, IndexColumnDataCreate);
-            DateTime dateCreation = strDateCreation != null ? DateTime.Parse(strDateCreation) : throw new ArgumentException("Data create cannot be null.");
-            var country = CellElement(rowItem, IndexColumnCountry) ?? throw new ArgumentException("Country cannot be null.");
-
-            return new Company(name, dateCreation, country, id);
-        }
 
         private Product GetProduct(int indexRow)
         {
@@ -500,33 +364,12 @@ namespace TestTask.Forms
 
         private string CellElement(ListViewItem rowItem, int indexColumn) => rowItem.GetString(indexColumn) ?? throw new Exception("String cannot be null.");
 
-        private void FillListViewCompany(List<Company> items)
-        {
-            foreach (var item in items)
-            {
-                AddCompanyInListView(item);
-            }
-        }
-
         private void FillListViewProduct(List<Product> items)
         {
             foreach (var item in items)
             {
                 AddProductInListView(item);
             }
-        }
-
-        private void AddCompanyInListView(Company item)
-        {
-            var itemsRow = new string[]
-            {
-                item.Id.ToString(),
-                item.Name,
-                item.DateCreation.ToString("d"),
-                item.Country
-            };
-            var listItem = new ListViewItem(itemsRow);
-            listViewCompanies.Items.Add(listItem);
         }
 
         private void AddProductInListView(Product item)
@@ -547,14 +390,6 @@ namespace TestTask.Forms
             listViewProduct.Items.Add(listItem);
         }
 
-        public void UpdateCompany(Company editItem, int row)
-        {
-            listViewCompanies.Items[row].SubItems[IndexId].Text = editItem.Id.ToString();
-            listViewCompanies.Items[row].SubItems[IndexColumnCompanyName].Text = editItem.Name.ToString();
-            listViewCompanies.Items[row].SubItems[IndexColumnDataCreate].Text = editItem.DateCreation.ToString("d");
-            listViewCompanies.Items[row].SubItems[IndexColumnCountry].Text = editItem.Country.ToString();
-        }
-
         public void UpdateProduct(Product editItem, int row)
         {
             listViewProduct.Items[row].SubItems[IndexId].Text = editItem.Id.ToString();
@@ -567,30 +402,6 @@ namespace TestTask.Forms
             listViewProduct.Items[row].SubItems[IndexColumnIdCategory].Text = editItem.CategoryId.ToString();
         }
 
-        private void RemoveItemRowListViewCompany()
-        {
-            for (var i = 0; i < listViewCompanies.Items.Count; i++)
-            {
-                var item = listViewCompanies.Items[i];
-                if (item.Selected)
-                {
-                    var id = CellElement(item, IndexId).ParseInt();
-                    _productService.RemoveProductRelatedToCompany(id);
-                    _companyService.Remove(id);
-                }
-            }
-        }
-
-        private void CustomUpdateFormStateCompanyPagination()
-        {
-            btnFirstPageCompanies.Enabled = btnFirstPageCompanies.Visible =
-                btnLastPageCompanies.Enabled = btnLastPageCompanies.Visible =
-                    btnNextPageCompanies.Enabled = btnNextPageCompanies.Visible =
-                        btnBackPageCompanies.Enabled = btnBackPageCompanies.Visible =
-                                tbCurrentPageCompanies.Enabled = tbCurrentPageCompanies.Visible =
-                                    _pagedListCompany.PageCount > 0 ? true : false;
-        }
-
         private void CustomUpdateFormStateProductPagination()
         {
             btnFirstPageProducts.Enabled = btnFirstPageProducts.Visible =
@@ -599,39 +410,6 @@ namespace TestTask.Forms
                         btnBackPageProducts.Enabled = btnBackPageProducts.Visible =
                             tbCurrentPageProduct.Enabled = tbCurrentPageProduct.Visible =
                                     _pagedListProduct.PageCount > 0 ? true : false;
-        }
-
-        //Button Company page click
-        private void BtnFirstPageCompany_Click(object sender, EventArgs e)
-        {
-            if (_pagedListCompany.HasPrevious)
-            {
-                PageCompany.Number = 1;
-            }
-        }
-
-        private void BtnBackPageCompany_Click(object sender, EventArgs e)
-        {
-            if (_pagedListCompany.HasPrevious)
-            {
-                PageCompany.Number--;
-            }
-        }
-
-        private void BtnNextPageCompany_Click(object sender, EventArgs e)
-        {
-            if (_pagedListCompany.HasNext)
-            {
-                PageCompany.Number++;
-            }
-        }
-
-        private void BtnLastPageCompany_Click(object sender, EventArgs e)
-        {
-            if (_pagedListCompany.HasNext)
-            {
-                PageCompany.Number = _pagedListCompany.PageCount;
-            }
         }
 
         //Button Product page click
@@ -666,8 +444,6 @@ namespace TestTask.Forms
                 PageProduct.Number = _pagedListProduct.PageCount;
             }
         }
-
-        private bool IsNotFirstPageCompanyEmpty() => _pagedListCompany.Count == 0 && PageCompany.Number != 1;
 
         private bool IsNotFirstPageProductEmpty() => _pagedListProduct.Count == 0 && PageProduct.Number != 1;
 
