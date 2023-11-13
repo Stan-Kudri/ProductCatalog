@@ -1,4 +1,6 @@
 ﻿using System;
+using TestTask.Core.Models.Categories;
+using TestTask.Core.Models.Companies;
 
 namespace TestTask.Core.Models.Products
 {
@@ -29,15 +31,19 @@ namespace TestTask.Core.Models.Products
             Price = price > 0 ? Price = price : throw new ArgumentException("The price is greater than zero.", nameof(price));
         }
 
-        public int CompanyId { get; set; } = 0;
-
-        public int CategoryId { get; set; } = 0;
-
         public string Type { get; set; } = string.Empty;
+
+        public decimal Price { get; set; } = decimal.Zero;
 
         public string Destination { get; set; } = null;
 
-        public decimal Price { get; set; } = decimal.Zero;
+        public int CompanyId { get; set; } = 0;
+
+        public Company Company { get; set; }
+
+        public int CategoryId { get; set; } = 0;
+
+        public Category Category { get; set; }
 
         public override bool Equals(object obj) => Equals(obj as Product);
 

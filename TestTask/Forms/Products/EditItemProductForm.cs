@@ -34,7 +34,7 @@ namespace TestTask.Forms.Products
                 return;
             }
 
-            _editItem = GetProductModel().ToStep(_oldItem.Id);
+            _editItem = GetProductModel().ToProduct(_oldItem.Id);
             if (_oldItem.Equals(_editItem))
             {
                 _messageBox.ShowInfo("The product has not been modified.");
@@ -46,7 +46,8 @@ namespace TestTask.Forms.Products
 
         protected override void AddStepForm_Load(object sender, EventArgs e)
         {
-            selectCompanyBindingSource.DataSource = _companies.Items;
+            companyBindingSource.DataSource = _companies.Items;
+            categoryBindingSource.DataSource = _categories.Items;
             _companies.SetValueMode(_oldItem.CompanyId);
             SetDefaultValueData();
         }

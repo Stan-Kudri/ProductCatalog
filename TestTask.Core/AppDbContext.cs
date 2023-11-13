@@ -39,7 +39,6 @@ namespace TestTask.Core
             configurationCompany.Property(e => e.Name).IsRequired().HasMaxLength(128).HasColumnName("name").HasMaxLength(128);
             configurationCompany.Property(e => e.DateCreation).IsRequired().HasColumnType("DATETIME").HasColumnName("dateCreation");
             configurationCompany.Property(e => e.Country).IsRequired().HasMaxLength(64).HasColumnName("country");
-            configurationCompany.HasMany(e => e.Product).WithOne().HasForeignKey(e => e.CompanyId);
 
             var configurationProduct = modelBuilder.Entity<Product>();
             configurationProduct.ToTable("product");
@@ -50,6 +49,8 @@ namespace TestTask.Core
             configurationProduct.Property(e => e.Type).IsRequired().HasColumnName("type").HasMaxLength(128);
             configurationProduct.Property(e => e.Price).IsRequired().HasColumnType("NUMERIC").HasColumnName("price");
             configurationProduct.Property(e => e.Destination).HasColumnName("destination");
+            configurationProduct.HasOne(e => e.Company).WithMany(e => e.Product).HasForeignKey(e => e.CompanyId);
+            configurationProduct.HasOne(e => e.Category).WithMany(e => e.Product).HasForeignKey(e => e.CategoryId);
 
             var configurationCategory = modelBuilder.Entity<Category>();
             configurationCategory.ToTable("category");
@@ -57,7 +58,6 @@ namespace TestTask.Core
             configurationCategory.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
             configurationCategory.HasIndex(e => e.Name).IsUnique();
             configurationCategory.Property(e => e.Name).IsRequired().HasMaxLength(128).HasColumnName("name").HasMaxLength(128);
-            configurationCategory.HasMany(e => e.Product).WithOne().HasForeignKey(e => e.CategoryId);
         }
     }
 }

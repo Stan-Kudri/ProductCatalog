@@ -195,6 +195,12 @@
     <Compile Include="Control\PageTabControls\CompanyListView.Designer.cs">
       <DependentUpon>CompanyListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Control\PageTabControls\ProductListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\PageTabControls\ProductListView.Designer.cs">
+      <DependentUpon>ProductListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extension\ListViewExtension.cs" />
     <Compile Include="Extension\PageExtension.cs" />
     <Compile Include="Forms\BaseForm.cs">
@@ -277,6 +283,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Control\PageTabControls\CompanyListView.resx">
       <DependentUpon>CompanyListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\PageTabControls\ProductListView.resx">
+      <DependentUpon>ProductListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>

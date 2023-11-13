@@ -43,6 +43,7 @@
             this.btnNextPage = new MaterialSkin.Controls.MaterialButton();
             this.tbCurrentPage = new System.Windows.Forms.TextBox();
             this.cmbPageSize = new System.Windows.Forms.ComboBox();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourcePageCategory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pageModelBindingSource)).BeginInit();
             this.tlpListViewControl.SuspendLayout();
@@ -88,6 +89,7 @@
             this.listView.FullRowSelect = true;
             this.listView.HideSelection = false;
             this.listView.Location = new System.Drawing.Point(3, 3);
+            this.listView.MinimumSize = new System.Drawing.Size(200, 100);
             this.listView.MouseLocation = new System.Drawing.Point(-1, -1);
             this.listView.MouseState = MaterialSkin.MouseState.OUT;
             this.listView.Name = "listView";
@@ -172,6 +174,7 @@
             this.btnAddItem.Name = "btnAddItem";
             this.btnAddItem.Size = new System.Drawing.Size(41, 30);
             this.btnAddItem.TabIndex = 5;
+            this.toolTip.SetToolTip(this.btnAddItem, "Add item");
             this.btnAddItem.UseVisualStyleBackColor = false;
             this.btnAddItem.Click += new System.EventHandler(this.BtnAddItem_Click);
             // 
@@ -192,6 +195,7 @@
             this.btnEditItem.Name = "btnEditItem";
             this.btnEditItem.Size = new System.Drawing.Size(41, 30);
             this.btnEditItem.TabIndex = 5;
+            this.toolTip.SetToolTip(this.btnEditItem, "Edit item");
             this.btnEditItem.UseVisualStyleBackColor = true;
             this.btnEditItem.Click += new System.EventHandler(this.BtnEditItem_Click);
             // 
@@ -213,6 +217,7 @@
             this.btnDeleteItems.Name = "btnDeleteItems";
             this.btnDeleteItems.Size = new System.Drawing.Size(42, 30);
             this.btnDeleteItems.TabIndex = 7;
+            this.toolTip.SetToolTip(this.btnDeleteItems, "Remove item(s)");
             this.btnDeleteItems.UseVisualStyleBackColor = false;
             this.btnDeleteItems.Click += new System.EventHandler(this.BtnDeleteItems_Click);
             // 
@@ -381,5 +386,6 @@
         protected MaterialSkin.Controls.MaterialButton btnFirstPage;
         protected MaterialSkin.Controls.MaterialButton btnNextPage;
         protected System.Windows.Forms.TextBox tbCurrentPage;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

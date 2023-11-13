@@ -30,24 +30,24 @@ namespace TestTask.Forms.Products
             this.productModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cmbCompanyValue = new MaterialSkin.Controls.MaterialComboBox();
             this.itemsBindingSourceCompany = new System.Windows.Forms.BindingSource(this.components);
-            this.selectCompanyBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.companyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tlpProductData = new System.Windows.Forms.TableLayoutPanel();
             this.tbType = new MaterialSkin.Controls.MaterialTextBox2();
             this.tbPrice = new MaterialSkin.Controls.MaterialTextBox2();
             this.tbDestination = new MaterialSkin.Controls.MaterialTextBox2();
             this.cmbCategoryValue = new MaterialSkin.Controls.MaterialComboBox();
             this.itemsBindingSourceCategory = new System.Windows.Forms.BindingSource(this.components);
-            this.selectCategoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.categoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tlpProductButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new MaterialSkin.Controls.MaterialButton();
             this.btnClear = new MaterialSkin.Controls.MaterialButton();
             this.btnClose = new MaterialSkin.Controls.MaterialButton();
             ((System.ComponentModel.ISupportInitialize)(this.productModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCompany)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.selectCompanyBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).BeginInit();
             this.tlpProductData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCategory)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.selectCategoryBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
             this.tlpProductButton.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,11 +83,11 @@ namespace TestTask.Forms.Products
             // itemsBindingSourceCompany
             // 
             this.itemsBindingSourceCompany.DataMember = "Items";
-            this.itemsBindingSourceCompany.DataSource = this.selectCompanyBindingSource;
+            this.itemsBindingSourceCompany.DataSource = this.companyBindingSource;
             // 
             // selectCompanyBindingSource
             // 
-            this.selectCompanyBindingSource.DataSource = typeof(TestTask.BindingItem.ProductBinding.SelectCompany);
+            this.companyBindingSource.DataSource = typeof(TestTask.BindingItem.ProductBinding.SelectCompany);
             // 
             // tlpProductData
             // 
@@ -236,11 +236,11 @@ namespace TestTask.Forms.Products
             // itemsBindingSourceCategory
             // 
             this.itemsBindingSourceCategory.DataMember = "Items";
-            this.itemsBindingSourceCategory.DataSource = this.selectCategoryBindingSource;
+            this.itemsBindingSourceCategory.DataSource = this.categoryBindingSource;
             // 
             // selectCategoryBindingSource
             // 
-            this.selectCategoryBindingSource.DataSource = typeof(TestTask.BindingItem.ProductBinding.SelectCategory);
+            this.categoryBindingSource.DataSource = typeof(TestTask.BindingItem.ProductBinding.SelectCategory);
             // 
             // tlpProductButton
             // 
@@ -336,10 +336,10 @@ namespace TestTask.Forms.Products
             this.Load += new System.EventHandler(this.AddStepForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.productModelBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCompany)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.selectCompanyBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).EndInit();
             this.tlpProductData.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCategory)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.selectCategoryBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).EndInit();
             this.tlpProductButton.ResumeLayout(false);
             this.tlpProductButton.PerformLayout();
             this.ResumeLayout(false);
@@ -358,10 +358,10 @@ namespace TestTask.Forms.Products
         protected MaterialSkin.Controls.MaterialButton btnClose;
         protected System.Windows.Forms.BindingSource productModelBindingSource;
         protected System.Windows.Forms.BindingSource itemsBindingSourceCompany;
-        protected System.Windows.Forms.BindingSource selectCompanyBindingSource;
+        protected System.Windows.Forms.BindingSource companyBindingSource;
         protected MaterialSkin.Controls.MaterialComboBox cmbCategoryValue;
         protected System.Windows.Forms.BindingSource itemsBindingSourceCategory;
-        protected System.Windows.Forms.BindingSource selectCategoryBindingSource;
+        protected System.Windows.Forms.BindingSource categoryBindingSource;
         private System.ComponentModel.IContainer components;
     }
 }
