@@ -115,6 +115,7 @@ namespace TestTask.Control.PageTabControls
         private void ButtonClearFilter_Click(object sender, EventArgs e)
         {
             cmbSortField.SelectedItem = SortCompanies.NoSorting;
+            _sortCompany.SortField = cmbSortField.SelectedItem.ToString();
             tbSearchStrName.Text = string.Empty;
             LoadData();
         }

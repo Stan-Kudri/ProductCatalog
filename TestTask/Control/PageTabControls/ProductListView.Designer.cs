@@ -28,15 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.listView = new TestTask.Control.ListViewControl();
             this.tlpFilter = new System.Windows.Forms.TableLayoutPanel();
             this.labelSortField = new MaterialSkin.Controls.MaterialLabel();
             this.buttonClearFilter = new MaterialSkin.Controls.MaterialButton();
-            this.labelSearchName = new MaterialSkin.Controls.MaterialLabel();
-            this.tbSearchStrName = new System.Windows.Forms.TextBox();
+            this.labelSearchType = new MaterialSkin.Controls.MaterialLabel();
+            this.tbSearchStrType = new System.Windows.Forms.TextBox();
             this.buttonUseFilter = new MaterialSkin.Controls.MaterialButton();
             this.cmbSortField = new System.Windows.Forms.ComboBox();
+            this.sortProductsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tlpFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sortProductsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // listView
@@ -63,8 +66,8 @@
             this.tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tlpFilter.Controls.Add(this.labelSortField, 2, 0);
             this.tlpFilter.Controls.Add(this.buttonClearFilter, 5, 0);
-            this.tlpFilter.Controls.Add(this.labelSearchName, 0, 0);
-            this.tlpFilter.Controls.Add(this.tbSearchStrName, 1, 0);
+            this.tlpFilter.Controls.Add(this.labelSearchType, 0, 0);
+            this.tlpFilter.Controls.Add(this.tbSearchStrType, 1, 0);
             this.tlpFilter.Controls.Add(this.buttonUseFilter, 4, 0);
             this.tlpFilter.Controls.Add(this.cmbSortField, 3, 0);
             this.tlpFilter.Location = new System.Drawing.Point(1, -1);
@@ -110,30 +113,31 @@
             this.buttonClearFilter.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.buttonClearFilter.UseAccentColor = false;
             this.buttonClearFilter.UseVisualStyleBackColor = true;
+            this.buttonClearFilter.Click += new System.EventHandler(this.ButtonClearFilter_Click);
             // 
-            // labelSearchName
+            // labelSearchType
             // 
-            this.labelSearchName.AutoSize = true;
-            this.labelSearchName.Depth = 0;
-            this.labelSearchName.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.labelSearchName.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelSearchName.FontType = MaterialSkin.MaterialSkinManager.fontType.Body2;
-            this.labelSearchName.Location = new System.Drawing.Point(3, 12);
-            this.labelSearchName.Margin = new System.Windows.Forms.Padding(3);
-            this.labelSearchName.MouseState = MaterialSkin.MouseState.HOVER;
-            this.labelSearchName.Name = "labelSearchName";
-            this.labelSearchName.Size = new System.Drawing.Size(106, 17);
-            this.labelSearchName.TabIndex = 2;
-            this.labelSearchName.Text = "Search name";
-            this.labelSearchName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelSearchType.AutoSize = true;
+            this.labelSearchType.Depth = 0;
+            this.labelSearchType.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.labelSearchType.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelSearchType.FontType = MaterialSkin.MaterialSkinManager.fontType.Body2;
+            this.labelSearchType.Location = new System.Drawing.Point(3, 12);
+            this.labelSearchType.Margin = new System.Windows.Forms.Padding(3);
+            this.labelSearchType.MouseState = MaterialSkin.MouseState.HOVER;
+            this.labelSearchType.Name = "labelSearchType";
+            this.labelSearchType.Size = new System.Drawing.Size(106, 17);
+            this.labelSearchType.TabIndex = 2;
+            this.labelSearchType.Text = "Search type";
+            this.labelSearchType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tbSearchStrName
+            // tbSearchStrType
             // 
-            this.tbSearchStrName.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tbSearchStrName.Location = new System.Drawing.Point(115, 9);
-            this.tbSearchStrName.Name = "tbSearchStrName";
-            this.tbSearchStrName.Size = new System.Drawing.Size(143, 20);
-            this.tbSearchStrName.TabIndex = 3;
+            this.tbSearchStrType.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tbSearchStrType.Location = new System.Drawing.Point(115, 9);
+            this.tbSearchStrType.Name = "tbSearchStrType";
+            this.tbSearchStrType.Size = new System.Drawing.Size(143, 20);
+            this.tbSearchStrType.TabIndex = 3;
             // 
             // buttonUseFilter
             // 
@@ -154,9 +158,11 @@
             this.buttonUseFilter.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.buttonUseFilter.UseAccentColor = false;
             this.buttonUseFilter.UseVisualStyleBackColor = true;
+            this.buttonUseFilter.Click += new System.EventHandler(this.ButtonUseFilter_Click);
             // 
             // cmbSortField
             // 
+            this.cmbSortField.DataSource = this.sortProductsBindingSource;
             this.cmbSortField.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.cmbSortField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSortField.FormattingEnabled = true;
@@ -164,6 +170,11 @@
             this.cmbSortField.Name = "cmbSortField";
             this.cmbSortField.Size = new System.Drawing.Size(143, 21);
             this.cmbSortField.TabIndex = 5;
+            this.cmbSortField.SelectedIndexChanged += new System.EventHandler(this.CmbSortField_Changed);
+            // 
+            // sortProductsBindingSource
+            // 
+            this.sortProductsBindingSource.DataSource = typeof(TestTask.BindingItem.Pages.Products.SortProducts);
             // 
             // ProductListView
             // 
@@ -176,6 +187,7 @@
             this.SizeChanged += new System.EventHandler(this.ListView_SizeChanged);
             this.tlpFilter.ResumeLayout(false);
             this.tlpFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sortProductsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -187,9 +199,10 @@
         private System.Windows.Forms.TableLayoutPanel tlpFilter;
         private MaterialSkin.Controls.MaterialLabel labelSortField;
         private MaterialSkin.Controls.MaterialButton buttonClearFilter;
-        private MaterialSkin.Controls.MaterialLabel labelSearchName;
-        private System.Windows.Forms.TextBox tbSearchStrName;
+        private MaterialSkin.Controls.MaterialLabel labelSearchType;
+        private System.Windows.Forms.TextBox tbSearchStrType;
         private MaterialSkin.Controls.MaterialButton buttonUseFilter;
         private System.Windows.Forms.ComboBox cmbSortField;
+        private System.Windows.Forms.BindingSource sortProductsBindingSource;
     }
 }

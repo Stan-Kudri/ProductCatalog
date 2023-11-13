@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using TestTask.BindingItem.Pages.Products;
 using TestTask.Control.PageTabControls.Model;
 using TestTask.Core;
 using TestTask.Core.Models;
@@ -31,6 +32,7 @@ namespace TestTask.Control.PageTabControls
         private CategoryService _categoryService;
         private ProductService _productService;
         private IMessageBox _messageBox;
+        private SortProducts _sortProduct = new SortProducts();
 
         public ProductListView() => InitializeComponent();
 
@@ -49,11 +51,14 @@ namespace TestTask.Control.PageTabControls
         public void Initialize(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            _productService = _serviceProvider.GetRequiredService<ProductService>();
             _companyService = _serviceProvider.GetRequiredService<CompanyService>();
             _categoryService = _serviceProvider.GetRequiredService<CategoryService>();
-            _productService = _serviceProvider.GetRequiredService<ProductService>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
             listView.Initialize(this, serviceProvider.GetRequiredService<IMessageBox>());
+            cmbSortField.DataSource = _sortProduct.Items;
+            cmbSortField.SelectedItem = _sortProduct.SortField;
+
         }
 
         public void LoadData() => listView.LoadData();
@@ -128,22 +133,37 @@ namespace TestTask.Control.PageTabControls
         public PagedList<Entity> GetPage(Page page)
         {
             var queriable = _productService.GetQueryableAll();
-            queriable = GetSearchName(queriable);
+            queriable = GetSearchType(queriable);
+            queriable = _sortProduct.Apply(queriable);
             var result = queriable.GetPagedList(page);
             return new PagedList<Entity>(result, result.PageNumber, result.PageSize, result.TotalItems);
         }
 
         public void Remove(Entity entity)
+            => _productService.Remove(entity.Id);
+
+        private void ButtonUseFilter_Click(object sender, EventArgs e) => LoadData();
+
+        private void ButtonClearFilter_Click(object sender, EventArgs e)
         {
-            _productService.Remove(entity.Id);
+            cmbSortField.SelectedItem = SortProducts.NoSorting;
+            _sortProduct.SortField = cmbSortField.SelectedItem.ToString();
+            tbSearchStrType.Text = string.Empty;
+            LoadData();
+        }
+
+        private void CmbSortField_Changed(object sender, EventArgs e)
+        {
+            _sortProduct.SortField = cmbSortField.SelectedItem.ToString();
+            LoadData();
         }
 
         private void ListView_SizeChanged(object sender, EventArgs e)
             => listView.ChangeSizeColumnListView();
 
-        private IQueryable<Product> GetSearchName(IQueryable<Product> items)
-            => string.IsNullOrEmpty(tbSearchStrName.Text)
+        private IQueryable<Product> GetSearchType(IQueryable<Product> items)
+            => string.IsNullOrEmpty(tbSearchStrType.Text)
             ? items
-            : items.Where(e => e.Type.Contains(tbSearchStrName.Text));
+            : items.Where(e => e.Type.Contains(tbSearchStrType.Text));
     }
 }

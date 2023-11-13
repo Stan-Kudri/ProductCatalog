@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
-using TestTask.BindingItem;
 using TestTask.ChildForms.Import;
 using TestTask.Core;
 using TestTask.Core.Export;
@@ -12,7 +10,6 @@ using TestTask.Core.Extension;
 using TestTask.Core.Import;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
-using TestTask.Core.Models.Page;
 using TestTask.Core.Models.Products;
 
 namespace TestTask.Forms
@@ -34,18 +31,16 @@ namespace TestTask.Forms
             InitializeComponent();
             _serviceProvider = serviceProvider;
             _companyService = _serviceProvider.GetRequiredService<CompanyService>();
-            _productService = _serviceProvider.GetRequiredService<ProductService>();
             _categoryService = _serviceProvider.GetRequiredService<CategoryService>();
+            _productService = _serviceProvider.GetRequiredService<ProductService>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
         }
 
-        public PageModel PageProduct { get; set; } = new PageModel();
-
         private void TableForm_Load(object sender, EventArgs e)
         {
-            listViewProduct.Initialize(_serviceProvider);
-            listViewCategory.Initialize(_serviceProvider);
             listViewCompany.Initialize(_serviceProvider);
+            listViewCategory.Initialize(_serviceProvider);
+            listViewProduct.Initialize(_serviceProvider);
         }
 
         private void TabControl_Changed(object sender, EventArgs e)

@@ -85,7 +85,7 @@ namespace TestTask.Forms.Products
             this.itemsBindingSourceCompany.DataMember = "Items";
             this.itemsBindingSourceCompany.DataSource = this.companyBindingSource;
             // 
-            // selectCompanyBindingSource
+            // companyBindingSource
             // 
             this.companyBindingSource.DataSource = typeof(TestTask.BindingItem.ProductBinding.SelectCompany);
             // 
@@ -238,7 +238,7 @@ namespace TestTask.Forms.Products
             this.itemsBindingSourceCategory.DataMember = "Items";
             this.itemsBindingSourceCategory.DataSource = this.categoryBindingSource;
             // 
-            // selectCategoryBindingSource
+            // categoryBindingSource
             // 
             this.categoryBindingSource.DataSource = typeof(TestTask.BindingItem.ProductBinding.SelectCategory);
             // 
