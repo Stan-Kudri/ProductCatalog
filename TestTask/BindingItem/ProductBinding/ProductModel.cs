@@ -58,8 +58,8 @@ namespace TestTask.BindingItem.UserBinding.ProductBinding
             set => SetField(ref _price, value);
         }
 
-        public Product ToStep() => new Product(_company.Id, _category.Id, _type, _destination, _price);
+        public Product ToProduct() => new Product(_company.Id, _category.Id, _type, _destination, _price);
 
-        public Product ToStep(int companyId) => new Product(_company.Id, _category.Id, _type, _destination, _price, companyId);
+        public Product ToProduct(int productId) => new Product(_company.Id, _category.Id, _type, _destination, _price, productId);
     }
 }

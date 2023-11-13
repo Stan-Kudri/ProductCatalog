@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace TestTask.Core.Models.Products
@@ -98,6 +99,6 @@ namespace TestTask.Core.Models.Products
 
         public List<Product> GetAll() => _dbContext.Product.Count() > 0 ? _dbContext.Product.ToList() : null;
 
-        public IQueryable<Product> GetQueryableAll() => _dbContext.Product.Select(e => e);
+        public IQueryable<Product> GetQueryableAll() => _dbContext.Product.Include(e => e.Company).Include(e => e.Category).Select(e => e);
     }
 }

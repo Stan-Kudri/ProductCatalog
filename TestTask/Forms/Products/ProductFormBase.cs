@@ -54,8 +54,8 @@ namespace TestTask.Forms.Products
 
         protected virtual void AddStepForm_Load(object sender, EventArgs e)
         {
-            selectCompanyBindingSource.DataSource = _companies.Items;
-            selectCategoryBindingSource.DataSource = _categories.Items;
+            companyBindingSource.DataSource = _companies.Items;
+            categoryBindingSource.DataSource = _categories.Items;
             SetDefaultValueData();
         }
 

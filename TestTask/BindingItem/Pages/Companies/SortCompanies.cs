@@ -26,13 +26,6 @@ namespace TestTask.BindingItem.Pages.Companies
             {
                 Items.Add(item);
             }
-            /*
-            var field = Enum.GetValues(typeof(CompanyField)).Cast<CompanyField>();
-            foreach (var item in field)
-            {
-                Items.Add(item.ToString());
-            }
-            */
         }
 
         public string SortField

@@ -167,6 +167,8 @@
     <Compile Include="BindingItem\Pages\Categories\FilterModelCategories.cs" />
     <Compile Include="BindingItem\Pages\Categories\SortPageCategories.cs" />
     <Compile Include="BindingItem\Pages\Companies\SortCompanies.cs" />
+    <Compile Include="BindingItem\Pages\Products\ProductListViewField.cs" />
+    <Compile Include="BindingItem\Pages\Products\SortProducts.cs" />
     <Compile Include="BindingItem\ProductBinding\SelectCategory.cs" />
     <Compile Include="BindingItem\ProductBinding\SelectCompany.cs" />
     <Compile Include="BindingItem\ProductBinding\ProductModel.cs" />
@@ -194,6 +196,12 @@
     </Compile>
     <Compile Include="Control\PageTabControls\CompanyListView.Designer.cs">
       <DependentUpon>CompanyListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\PageTabControls\ProductListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\PageTabControls\ProductListView.Designer.cs">
+      <DependentUpon>ProductListView.cs</DependentUpon>
     </Compile>
     <Compile Include="Extension\ListViewExtension.cs" />
     <Compile Include="Extension\PageExtension.cs" />
@@ -278,6 +286,9 @@
     <EmbeddedResource Include="Control\PageTabControls\CompanyListView.resx">
       <DependentUpon>CompanyListView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Control\PageTabControls\ProductListView.resx">
+      <DependentUpon>ProductListView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -322,6 +333,7 @@
     <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Categories.FilterModelCategories.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Categories.SortPageCategories.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Companies.SortCompanies.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Products.SortProducts.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.ProductBinding.SelectCategory.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.CompanyModel.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.PageModel.datasource" />
