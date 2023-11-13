@@ -16,7 +16,7 @@ using TestTask.Forms.Products;
 
 namespace TestTask.Control.PageTabControls
 {
-    public partial class ProductListView : UserControl, IListViewDataProvider
+    public partial class ProductListView : UserControl, IListViewDataProvider, IInitialize, ILoad
     {
         private const int IndexId = 0;
         private const int IndexColumnCompanyName = 1;
@@ -43,7 +43,7 @@ namespace TestTask.Control.PageTabControls
             new ListViewColumn("Category", 130, e => ((Product)e).Category),
             new ListViewColumn("Type", 150, e => ((Product)e).Type),
             new ListViewColumn("Price", 100, e => ((Product)e).Price),
-            new ListViewColumn("Destination", 175, e => ((Product)e).Destination),
+            new ListViewColumn("Destination", 172, e => ((Product)e).Destination),
             new ListViewColumn("CompanyId", 1, e => ((Product)e).CompanyId),
             new ListViewColumn("CategoryId", 1, e => ((Product)e).CategoryId),
         };

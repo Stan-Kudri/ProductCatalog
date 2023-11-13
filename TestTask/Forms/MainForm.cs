@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using TestTask.ChildForms.Import;
+using TestTask.Control.PageTabControls.Model;
 using TestTask.Core;
 using TestTask.Core.Export;
 using TestTask.Core.Export.SheetFillers;
@@ -26,6 +27,8 @@ namespace TestTask.Forms
         private readonly CategoryService _categoryService;
         private readonly IMessageBox _messageBox;
 
+        private IInitialize[] _initializeProvider;
+
         public MainForm(IServiceProvider serviceProvider)
         {
             InitializeComponent();
@@ -34,13 +37,15 @@ namespace TestTask.Forms
             _categoryService = _serviceProvider.GetRequiredService<CategoryService>();
             _productService = _serviceProvider.GetRequiredService<ProductService>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
+            _initializeProvider = new IInitialize[] { listViewCompany, listViewCategory, listViewProduct };
         }
 
         private void TableForm_Load(object sender, EventArgs e)
         {
-            listViewCompany.Initialize(_serviceProvider);
-            listViewCategory.Initialize(_serviceProvider);
-            listViewProduct.Initialize(_serviceProvider);
+            foreach (var item in _initializeProvider)
+            {
+                item.Initialize(_serviceProvider);
+            }
         }
 
         private void TabControl_Changed(object sender, EventArgs e)
