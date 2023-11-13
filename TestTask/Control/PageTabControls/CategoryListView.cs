@@ -16,7 +16,7 @@ using TestTask.Forms.Categories;
 
 namespace TestTask.Control.PageTabControls
 {
-    public partial class CategoryListView : UserControl, IListViewDataProvider
+    public partial class CategoryListView : UserControl, IListViewDataProvider, IInitialize, ILoad
     {
         private const int IndexId = 0;
         private const int IndexColumnName = 1;

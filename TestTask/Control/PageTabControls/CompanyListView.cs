@@ -15,7 +15,7 @@ using TestTask.Forms.Companies;
 
 namespace TestTask.Control.PageTabControls
 {
-    public partial class CompanyListView : UserControl, IListViewDataProvider
+    public partial class CompanyListView : UserControl, IListViewDataProvider, IInitialize, ILoad
     {
         private const int IndexId = 0;
         private const int IndexColumnName = 1;

@@ -197,6 +197,8 @@
     <Compile Include="Control\PageTabControls\CompanyListView.Designer.cs">
       <DependentUpon>CompanyListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Control\PageTabControls\Model\IInitialize.cs" />
+    <Compile Include="Control\PageTabControls\Model\ILoad.cs" />
     <Compile Include="Control\PageTabControls\ProductListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
