@@ -37,17 +37,21 @@ namespace TestTask.Forms.Products
             this.cmbCategoryValue = new MaterialSkin.Controls.MaterialComboBox();
             this.itemsBindingSourceCategory = new System.Windows.Forms.BindingSource(this.components);
             this.categoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cmbTypeValue = new MaterialSkin.Controls.MaterialComboBox();
+            this.itemsBindingSourceType = new System.Windows.Forms.BindingSource(this.components);
+            this.typeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tlpProductButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new MaterialSkin.Controls.MaterialButton();
             this.btnClear = new MaterialSkin.Controls.MaterialButton();
             this.btnClose = new MaterialSkin.Controls.MaterialButton();
-            this.cmbTypeValue = new MaterialSkin.Controls.MaterialComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.productModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCompany)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).BeginInit();
             this.tlpProductData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCategory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.typeBindingSource)).BeginInit();
             this.tlpProductButton.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -207,6 +211,39 @@ namespace TestTask.Forms.Products
             // 
             this.categoryBindingSource.DataSource = typeof(TestTask.BindingItem.ObservableCollection.SelectCategory);
             // 
+            // cmbTypeValue
+            // 
+            this.cmbTypeValue.AutoResize = false;
+            this.cmbTypeValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbTypeValue.DataSource = this.itemsBindingSourceType;
+            this.cmbTypeValue.Depth = 0;
+            this.cmbTypeValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbTypeValue.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbTypeValue.DropDownHeight = 174;
+            this.cmbTypeValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTypeValue.DropDownWidth = 121;
+            this.cmbTypeValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cmbTypeValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cmbTypeValue.FormattingEnabled = true;
+            this.cmbTypeValue.IntegralHeight = false;
+            this.cmbTypeValue.ItemHeight = 43;
+            this.cmbTypeValue.Location = new System.Drawing.Point(3, 103);
+            this.cmbTypeValue.MaxDropDownItems = 4;
+            this.cmbTypeValue.MouseState = MaterialSkin.MouseState.OUT;
+            this.cmbTypeValue.Name = "cmbTypeValue";
+            this.cmbTypeValue.Size = new System.Drawing.Size(294, 49);
+            this.cmbTypeValue.StartIndex = 0;
+            this.cmbTypeValue.TabIndex = 6;
+            // 
+            // itemsBindingSourceType
+            // 
+            this.itemsBindingSourceType.DataMember = "Items";
+            this.itemsBindingSourceType.DataSource = this.typeBindingSource;
+            // 
+            // typeBindingSource
+            // 
+            this.typeBindingSource.DataSource = typeof(TestTask.BindingItem.ObservableCollection.SelectType);
+            // 
             // tlpProductButton
             // 
             this.tlpProductButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -288,29 +325,6 @@ namespace TestTask.Forms.Products
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
-            // cmbTypeValue
-            // 
-            this.cmbTypeValue.AutoResize = false;
-            this.cmbTypeValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cmbTypeValue.Depth = 0;
-            this.cmbTypeValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbTypeValue.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cmbTypeValue.DropDownHeight = 174;
-            this.cmbTypeValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTypeValue.DropDownWidth = 121;
-            this.cmbTypeValue.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.cmbTypeValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cmbTypeValue.FormattingEnabled = true;
-            this.cmbTypeValue.IntegralHeight = false;
-            this.cmbTypeValue.ItemHeight = 43;
-            this.cmbTypeValue.Location = new System.Drawing.Point(3, 103);
-            this.cmbTypeValue.MaxDropDownItems = 4;
-            this.cmbTypeValue.MouseState = MaterialSkin.MouseState.OUT;
-            this.cmbTypeValue.Name = "cmbTypeValue";
-            this.cmbTypeValue.Size = new System.Drawing.Size(294, 49);
-            this.cmbTypeValue.StartIndex = 0;
-            this.cmbTypeValue.TabIndex = 6;
-            // 
             // ProductFormBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -321,13 +335,15 @@ namespace TestTask.Forms.Products
             this.MinimumSize = new System.Drawing.Size(310, 365);
             this.Name = "ProductFormBase";
             this.Text = "Product";
-            this.Load += new System.EventHandler(this.AddStepForm_Load);
+            this.Load += new System.EventHandler(this.AddForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.productModelBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCompany)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).EndInit();
             this.tlpProductData.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCategory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.typeBindingSource)).EndInit();
             this.tlpProductButton.ResumeLayout(false);
             this.tlpProductButton.PerformLayout();
             this.ResumeLayout(false);
@@ -349,7 +365,9 @@ namespace TestTask.Forms.Products
         protected MaterialSkin.Controls.MaterialComboBox cmbCategoryValue;
         protected System.Windows.Forms.BindingSource itemsBindingSourceCategory;
         protected System.Windows.Forms.BindingSource categoryBindingSource;
+        protected MaterialSkin.Controls.MaterialComboBox cmbTypeValue;
+        protected System.Windows.Forms.BindingSource itemsBindingSourceType;
+        protected System.Windows.Forms.BindingSource typeBindingSource;
         private System.ComponentModel.IContainer components;
-        private MaterialSkin.Controls.MaterialComboBox cmbTypeValue;
     }
 }

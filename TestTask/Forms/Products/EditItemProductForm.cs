@@ -44,11 +44,14 @@ namespace TestTask.Forms.Products
             DialogResult = DialogResult.OK;
         }
 
-        protected override void AddStepForm_Load(object sender, EventArgs e)
+        protected override void AddForm_Load(object sender, EventArgs e)
         {
             companyBindingSource.DataSource = _companies.Items;
             categoryBindingSource.DataSource = _categories.Items;
+            typeBindingSource.DataSource = _types.Items;
             _companies.SetValueCompany(_oldItem.CompanyId);
+            _categories.SetValueCategory(_oldItem.CategoryId);
+            _types.SetValueType(_oldItem.TypeId);
             SetDefaultValueData();
         }
 
@@ -56,7 +59,7 @@ namespace TestTask.Forms.Products
         {
             cmbCompanyValue.SelectedItem = _companies.Company;
             cmbCategoryValue.SelectedItem = _categories.Category;
-            //tbType.Text = _oldItem.Type;
+            cmbTypeValue.SelectedItem = _types.Type;
             tbPrice.Text = _oldItem.Price.ToString();
             tbDestination.Text = _oldItem.Destination;
         }

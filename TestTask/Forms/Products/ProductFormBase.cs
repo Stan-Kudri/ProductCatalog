@@ -55,10 +55,11 @@ namespace TestTask.Forms.Products
             Close();
         }
 
-        protected virtual void AddStepForm_Load(object sender, EventArgs e)
+        protected virtual void AddForm_Load(object sender, EventArgs e)
         {
             companyBindingSource.DataSource = _companies.Items;
             categoryBindingSource.DataSource = _categories.Items;
+            typeBindingSource.DataSource = _types.Items;
             SetDefaultValueData();
         }
 

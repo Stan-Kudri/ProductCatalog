@@ -24,7 +24,7 @@ namespace TestTask.Forms.Type
         protected Category SelectedCategory =>
             cmbListCategory.SelectedValue != null ? (Category)cmbListCategory.SelectedValue : throw new Exception("Wrong combo box format");
 
-        private void BtnSave_Click(object sender, EventArgs e)
+        protected virtual void BtnSave_Click(object sender, EventArgs e)
         {
             if (!IsDataFilled(out var message))
             {
@@ -35,12 +35,18 @@ namespace TestTask.Forms.Type
             DialogResult = DialogResult.OK;
         }
 
-        private void BtnClear_Click(object sender, EventArgs e) => SetDefaultValueData();
+        protected virtual void BtnClear_Click(object sender, EventArgs e) => SetDefaultValueData();
 
-        private void BtnClose_Click(object sender, EventArgs e)
+        protected virtual void BtnClose_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        protected virtual void ProductTypeBaseForm_Load(object sender, EventArgs e)
+        {
+            itemsBindingSource.DataSource = _categories.Items;
+            SetDefaultValueData();
         }
 
         protected virtual void SetDefaultValueData()
@@ -67,7 +73,7 @@ namespace TestTask.Forms.Type
             return true;
         }
 
-        public ProductTypeModel GetProductModel()
+        public ProductTypeModel GetTypeProductModel()
         {
             var name = tbName.Text;
 

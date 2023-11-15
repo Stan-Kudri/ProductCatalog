@@ -2,10 +2,6 @@
 {
     partial class ProductTypeBaseForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -28,14 +24,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tlpField = new System.Windows.Forms.TableLayoutPanel();
             this.cmbListCategory = new MaterialSkin.Controls.MaterialComboBox();
+            this.itemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.selectCategoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tbName = new MaterialSkin.Controls.MaterialTextBox2();
             this.tlpButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new MaterialSkin.Controls.MaterialButton();
             this.btnClose = new MaterialSkin.Controls.MaterialButton();
             this.btnClear = new MaterialSkin.Controls.MaterialButton();
             this.tlpField.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectCategoryBindingSource)).BeginInit();
             this.tlpButton.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,6 +58,7 @@
             // 
             this.cmbListCategory.AutoResize = false;
             this.cmbListCategory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbListCategory.DataSource = this.itemsBindingSource;
             this.cmbListCategory.Depth = 0;
             this.cmbListCategory.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbListCategory.DropDownHeight = 174;
@@ -75,11 +77,21 @@
             this.cmbListCategory.StartIndex = 0;
             this.cmbListCategory.TabIndex = 0;
             // 
+            // itemsBindingSource
+            // 
+            this.itemsBindingSource.DataMember = "Items";
+            this.itemsBindingSource.DataSource = this.selectCategoryBindingSource;
+            // 
+            // selectCategoryBindingSource
+            // 
+            this.selectCategoryBindingSource.DataSource = typeof(TestTask.BindingItem.ObservableCollection.SelectCategory);
+            // 
             // tbName
             // 
             this.tbName.AnimateReadOnly = false;
             this.tbName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tbName.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.tbName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.itemsBindingSource, "Name", true));
             this.tbName.Depth = 0;
             this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.tbName.HideSelection = true;
@@ -193,7 +205,10 @@
             this.Controls.Add(this.tlpField);
             this.Name = "ProductTypeBaseForm";
             this.Text = "Product Type";
+            this.Load += new System.EventHandler(this.ProductTypeBaseForm_Load);
             this.tlpField.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectCategoryBindingSource)).EndInit();
             this.tlpButton.ResumeLayout(false);
             this.tlpButton.PerformLayout();
             this.ResumeLayout(false);
@@ -202,12 +217,15 @@
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel tlpField;
+        protected System.Windows.Forms.TableLayoutPanel tlpField;
         protected System.Windows.Forms.TableLayoutPanel tlpButton;
         protected MaterialSkin.Controls.MaterialButton btnSave;
         protected MaterialSkin.Controls.MaterialButton btnClose;
         protected MaterialSkin.Controls.MaterialButton btnClear;
-        private MaterialSkin.Controls.MaterialComboBox cmbListCategory;
-        private MaterialSkin.Controls.MaterialTextBox2 tbName;
+        protected MaterialSkin.Controls.MaterialComboBox cmbListCategory;
+        protected MaterialSkin.Controls.MaterialTextBox2 tbName;
+        protected System.Windows.Forms.BindingSource itemsBindingSource;
+        protected System.Windows.Forms.BindingSource selectCategoryBindingSource;
+        protected System.ComponentModel.IContainer components;
     }
 }
