@@ -15,6 +15,7 @@ using TestTask.Forms;
 using TestTask.Forms.Categories;
 using TestTask.Forms.Companies;
 using TestTask.Forms.Products;
+using TestTask.Forms.Type;
 
 namespace TestTask
 {
@@ -49,14 +50,18 @@ namespace TestTask
                 .AddTransient<EditItemProductForm>()
                 .AddTransient<AddCategoryForm>()
                 .AddTransient<EditCategoryForm>()
+                .AddTransient<AddProductTypeForm>()
+                .AddTransient<EditProductTypeForm>()
                 .AddSingleton(e => new OpenFileDialog { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
                 .AddSingleton(e => new SaveFileDialog() { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
                 .AddSingleton(e => new CompanyImporter())
                 .AddSingleton(e => new ProductImporter())
                 .AddSingleton(e => new CategoryImporter())
+                .AddSingleton(e => new TypeProductImporter())
                 .AddSingleton(e => new ExcelImporter<Company>(e.GetRequiredService<CompanyImporter>()))
                 .AddSingleton(e => new ExcelImporter<Product>(e.GetRequiredService<ProductImporter>()))
-                .AddSingleton(e => new ExcelImporter<Category>(e.GetRequiredService<CategoryImporter>()));
+                .AddSingleton(e => new ExcelImporter<Category>(e.GetRequiredService<CategoryImporter>()))
+                .AddSingleton(e => new ExcelImporter<ProductType>(e.GetRequiredService<TypeProductImporter>()));
 
             var container = collection.BuildServiceProvider();
 

@@ -200,6 +200,12 @@
     </Compile>
     <Compile Include="Control\PageTabControls\Model\IInitialize.cs" />
     <Compile Include="Control\PageTabControls\Model\ILoad.cs" />
+    <Compile Include="Control\PageTabControls\TypeProductListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\PageTabControls\TypeProductListView.Designer.cs">
+      <DependentUpon>TypeProductListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Control\PageTabControls\ProductListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -309,6 +315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Control\PageTabControls\ProductListView.resx">
       <DependentUpon>ProductListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\PageTabControls\TypeProductListView.resx">
+      <DependentUpon>TypeProductListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>

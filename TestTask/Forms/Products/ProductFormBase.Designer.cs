@@ -38,8 +38,9 @@ namespace TestTask.Forms.Products
             this.itemsBindingSourceCategory = new System.Windows.Forms.BindingSource(this.components);
             this.categoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cmbTypeValue = new MaterialSkin.Controls.MaterialComboBox();
-            this.itemsBindingSourceType = new System.Windows.Forms.BindingSource(this.components);
+            this.itemsBindingSourceTypes = new System.Windows.Forms.BindingSource(this.components);
             this.typeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.itemsBindingSourceType = new System.Windows.Forms.BindingSource(this.components);
             this.tlpProductButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new MaterialSkin.Controls.MaterialButton();
             this.btnClear = new MaterialSkin.Controls.MaterialButton();
@@ -50,8 +51,9 @@ namespace TestTask.Forms.Products
             ((System.ComponentModel.ISupportInitialize)(this.productModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCategory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceTypes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.typeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceType)).BeginInit();
             this.tlpProductButton.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -219,7 +221,7 @@ namespace TestTask.Forms.Products
             // 
             this.cmbTypeValue.AutoResize = false;
             this.cmbTypeValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cmbTypeValue.DataSource = this.itemsBindingSourceType;
+            this.cmbTypeValue.DataSource = this.itemsBindingSourceTypes;
             this.cmbTypeValue.Depth = 0;
             this.cmbTypeValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbTypeValue.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
@@ -239,14 +241,19 @@ namespace TestTask.Forms.Products
             this.cmbTypeValue.StartIndex = 0;
             this.cmbTypeValue.TabIndex = 6;
             // 
-            // itemsBindingSourceType
+            // itemsBindingSourceTypes
             // 
-            this.itemsBindingSourceType.DataMember = "Items";
-            this.itemsBindingSourceType.DataSource = this.typeBindingSource;
+            this.itemsBindingSourceTypes.DataMember = "Items";
+            this.itemsBindingSourceTypes.DataSource = this.typeBindingSource;
             // 
             // typeBindingSource
             // 
             this.typeBindingSource.DataSource = typeof(TestTask.BindingItem.ObservableCollection.SelectType);
+            // 
+            // itemsBindingSourceType
+            // 
+            this.itemsBindingSourceType.DataMember = "Items";
+            this.itemsBindingSourceType.DataSource = this.typeBindingSource;
             // 
             // tlpProductButton
             // 
@@ -346,8 +353,9 @@ namespace TestTask.Forms.Products
             ((System.ComponentModel.ISupportInitialize)(this.productModelBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCategory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceTypes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.typeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceType)).EndInit();
             this.tlpProductButton.ResumeLayout(false);
             this.tlpProductButton.PerformLayout();
             this.ResumeLayout(false);
@@ -371,7 +379,8 @@ namespace TestTask.Forms.Products
         protected MaterialSkin.Controls.MaterialComboBox cmbTypeValue;
         protected System.Windows.Forms.BindingSource itemsBindingSourceType;
         protected System.Windows.Forms.BindingSource typeBindingSource;
+        protected System.Windows.Forms.BindingSource productModelBindingSource;
+        protected System.Windows.Forms.BindingSource itemsBindingSourceTypes;
         private System.ComponentModel.IContainer components;
-        private System.Windows.Forms.BindingSource productModelBindingSource;
     }
 }

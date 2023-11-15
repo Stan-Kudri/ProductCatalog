@@ -33,7 +33,7 @@ namespace TestTask.Forms.Type
                 return;
             }
 
-            _editItem = GetTypeProductModel().ToProduct(_oldItem.Id);
+            _editItem = GetTypeProductModel().ToProductType(_oldItem.Id);
             if (_oldItem.Equals(_editItem))
             {
                 _messageBox.ShowInfo("The product has not been modified.");
@@ -51,7 +51,7 @@ namespace TestTask.Forms.Type
 
         protected virtual void ProductTypeBaseForm_Load(object sender, EventArgs e)
         {
-            itemsBindingSource.DataSource = _categories.Items;
+            categoryBindingSource.DataSource = _categories.Items;
             _categories.SetValueCategory(_oldItem.CategoryId);
             SetDefaultValueData();
         }
@@ -63,6 +63,6 @@ namespace TestTask.Forms.Type
             tbName.Text = _oldItem.Name;
         }
 
-        public ProductType GetEditProduct() => _editItem;
+        public ProductType GetEditTypeProduct() => _editItem;
     }
 }

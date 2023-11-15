@@ -30,8 +30,8 @@ namespace TestTask.BindingItem
             set => SetField(ref _category, value);
         }
 
-        public ProductType ToProduct() => new ProductType(_name, _category.Id);
+        public ProductType ToProductType() => new ProductType(_name, _category.Id);
 
-        public ProductType ToProduct(int typeId) => new ProductType(_name, _category.Id, typeId);
+        public ProductType ToProductType(int typeId) => new ProductType(_name, _category.Id, typeId);
     }
 }

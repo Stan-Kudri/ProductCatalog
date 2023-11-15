@@ -34,10 +34,12 @@
             this.btnSave = new MaterialSkin.Controls.MaterialButton();
             this.btnClose = new MaterialSkin.Controls.MaterialButton();
             this.btnClear = new MaterialSkin.Controls.MaterialButton();
+            this.categoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tlpField.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectCategoryBindingSource)).BeginInit();
             this.tlpButton.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpField
@@ -58,7 +60,7 @@
             // 
             this.cmbListCategory.AutoResize = false;
             this.cmbListCategory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cmbListCategory.DataSource = this.itemsBindingSource;
+            this.cmbListCategory.DataSource = this.categoryBindingSource;
             this.cmbListCategory.Depth = 0;
             this.cmbListCategory.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbListCategory.DropDownHeight = 174;
@@ -196,6 +198,11 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
+            // categoryBindingSource
+            // 
+            this.categoryBindingSource.DataMember = "Items";
+            this.categoryBindingSource.DataSource = this.selectCategoryBindingSource;
+            // 
             // ProductTypeBaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -211,6 +218,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.selectCategoryBindingSource)).EndInit();
             this.tlpButton.ResumeLayout(false);
             this.tlpButton.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -226,6 +234,7 @@
         protected MaterialSkin.Controls.MaterialTextBox2 tbName;
         protected System.Windows.Forms.BindingSource itemsBindingSource;
         protected System.Windows.Forms.BindingSource selectCategoryBindingSource;
+        protected System.Windows.Forms.BindingSource categoryBindingSource;
         protected System.ComponentModel.IContainer components;
     }
 }

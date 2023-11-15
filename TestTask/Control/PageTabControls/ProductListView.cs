@@ -58,6 +58,7 @@ namespace TestTask.Control.PageTabControls
             _productService = _serviceProvider.GetRequiredService<ProductService>();
             _companyService = _serviceProvider.GetRequiredService<CompanyService>();
             _categoryService = _serviceProvider.GetRequiredService<CategoryService>();
+            _typeService = _serviceProvider.GetRequiredService<ProductTypeService>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
             listView.Initialize(this, serviceProvider.GetRequiredService<IMessageBox>());
             cmbSortField.DataSource = _sortProduct.Items;
@@ -71,7 +72,7 @@ namespace TestTask.Control.PageTabControls
         {
             var listCompany = _companyService.GetQueryableAll();
             var listCategory = _categoryService.GetQueryableAll();
-            var listTypeProduct = _productService.GetQueryableAll();
+            var listTypeProduct = _typeService.GetQueryableAll();
 
             if (listCompany.Count() == 0)
             {
@@ -93,7 +94,7 @@ namespace TestTask.Control.PageTabControls
 
             using (var addForm = _serviceProvider.GetRequiredService<AddItemProductForm>())
             {
-                addForm.Initialize(listCompany.ToList(), listCategory.ToList());
+                addForm.Initialize(listCompany.ToList(), listCategory.ToList(), listTypeProduct.ToList());
 
                 if (addForm.ShowDialog() != DialogResult.OK)
                 {

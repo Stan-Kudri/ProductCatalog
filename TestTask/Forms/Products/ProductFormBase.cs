@@ -59,7 +59,7 @@ namespace TestTask.Forms.Products
         {
             companyBindingSource.DataSource = _companies.Items;
             categoryBindingSource.DataSource = _categories.Items;
-            typeBindingSource.DataSource = _types.Items;
+            itemsBindingSourceTypes.DataSource = _types.Items;
             SetDefaultValueData();
         }
 
