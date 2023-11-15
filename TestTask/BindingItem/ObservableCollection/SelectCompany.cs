@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using TestTask.Core.Models.Companies;
 
-namespace TestTask.BindingItem.ProductBinding
+namespace TestTask.BindingItem.ObservableCollection
 {
     public class SelectCompany : ModelBase
     {
@@ -25,7 +25,7 @@ namespace TestTask.BindingItem.ProductBinding
             set => SetField(ref _company, value);
         }
 
-        public void SetValueMode(int companyId)
+        public void SetValueCompany(int companyId)
         {
             for (var i = 0; i < Items.Count; i++)
             {

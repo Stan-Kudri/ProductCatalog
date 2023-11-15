@@ -11,6 +11,7 @@ using TestTask.Core.Models;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Page;
 using TestTask.Core.Models.Products;
+using TestTask.Core.Models.Types;
 using TestTask.Extension;
 using TestTask.Forms.Products;
 
@@ -26,10 +27,12 @@ namespace TestTask.Control.PageTabControls
         private const int IndexColumnDestination = 5;
         private const int IndexColumnIdCompany = 6;
         private const int IndexColumnIdCategory = 7;
+        private const int IndexColumnIdType = 8;
 
         private IServiceProvider _serviceProvider;
         private CompanyService _companyService;
         private CategoryService _categoryService;
+        private ProductTypeService _typeService;
         private ProductService _productService;
         private IMessageBox _messageBox;
         private SortProducts _sortProduct = new SortProducts();
@@ -46,6 +49,7 @@ namespace TestTask.Control.PageTabControls
             new ListViewColumn("Destination", 172, e => ((Product)e).Destination),
             new ListViewColumn("CompanyId", 1, e => ((Product)e).CompanyId),
             new ListViewColumn("CategoryId", 1, e => ((Product)e).CategoryId),
+            new ListViewColumn("TypeId", 1, e => ((Product)e).TypeId),
         };
 
         public void Initialize(IServiceProvider serviceProvider)
@@ -121,13 +125,13 @@ namespace TestTask.Control.PageTabControls
         public Entity GetEntity(ListViewItem item)
         {
             var idProduct = item.GetNonNullableString(IndexId).ParseInt();
-            var type = item.GetNonNullableString(IndexColumnType) ?? throw new Exception("Type cannot be null.");
             var price = item.GetNonNullableString(IndexColumnPrice).ParseDecimal();
             var destination = item.GetNonNullableString(IndexColumnDestination);
             var companyId = item.GetNonNullableString(IndexColumnIdCompany).ParseInt();
             var categoryId = item.GetNonNullableString(IndexColumnIdCategory).ParseInt();
+            var typeId = item.GetNonNullableString(IndexColumnIdType).ParseInt();
 
-            return new Product(companyId, categoryId, type, destination, price, idProduct);
+            return new Product(companyId, categoryId, typeId, destination, price, idProduct);
         }
 
         public PagedList<Entity> GetPage(Page page)
@@ -164,6 +168,6 @@ namespace TestTask.Control.PageTabControls
         private IQueryable<Product> GetSearchType(IQueryable<Product> items)
             => string.IsNullOrEmpty(tbSearchStrType.Text)
             ? items
-            : items.Where(e => e.Type.Contains(tbSearchStrType.Text));
+            : items.Where(e => e.Destination.Contains(tbSearchStrType.Text));
     }
 }

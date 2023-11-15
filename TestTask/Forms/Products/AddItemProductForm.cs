@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using TestTask.BindingItem.ProductBinding;
+using TestTask.BindingItem.ObservableCollection;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 

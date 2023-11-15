@@ -9,6 +9,7 @@ using TestTask.Core.Import.Importers;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
+using TestTask.Core.Models.Types;
 using TestTask.Core.Models.Users;
 using TestTask.Forms;
 using TestTask.Forms.Categories;
@@ -35,6 +36,7 @@ namespace TestTask
                 .AddScoped<CompanyService>()
                 .AddScoped<ProductService>()
                 .AddScoped<CategoryService>()
+                .AddScoped<ProductTypeService>()
                 .AddScoped<UserValidator>()
                 .AddSingleton<BaseForm>()
                 .AddTransient<LoginForm>()

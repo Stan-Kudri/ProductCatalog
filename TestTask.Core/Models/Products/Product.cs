@@ -1,6 +1,7 @@
 ﻿using System;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
+using TestTask.Core.Models.Types;
 
 namespace TestTask.Core.Models.Products
 {
@@ -10,28 +11,28 @@ namespace TestTask.Core.Models.Products
         {
         }
 
-        public Product(int companyId, int categoryId, string type, string destination, decimal price, int id)
-            : this(companyId, categoryId, type, destination, price)
+        public Product(int companyId, int categoryId, int typeId, string destination, decimal price, int id)
+            : this(companyId, categoryId, typeId, destination, price)
         {
             Id = id > 0 ? Id = id : throw new ArgumentException("The ID must be greater than zero.", nameof(id));
         }
 
-        public Product(int companyId, int categoryId, string type, string destination, decimal price)
+        public Product(int companyId, int categoryId, int typeId, string destination, decimal price)
         {
             CompanyId = companyId > 0 ? CompanyId = companyId : throw new ArgumentException("Company ID greater than zero.", nameof(companyId));
 
             CategoryId = categoryId > 0 ? CategoryId = categoryId : throw new ArgumentException("Category ID greater than zero.", nameof(categoryId));
 
-            Type = type != string.Empty && type != null ?
-                Type = type :
-                throw new ArgumentException("The type name cannot be empty.", nameof(type));
+            TypeId = typeId > 0 ? TypeId = typeId : throw new ArgumentException("Type ID greater than zero.", nameof(typeId));
 
             Destination = destination;
 
             Price = price > 0 ? Price = price : throw new ArgumentException("The price is greater than zero.", nameof(price));
         }
 
-        public string Type { get; set; } = string.Empty;
+        public ProductType Type { get; set; }
+
+        public int TypeId { get; set; } = 0;
 
         public decimal Price { get; set; } = decimal.Zero;
 
@@ -57,7 +58,7 @@ namespace TestTask.Core.Models.Products
             return other.Id == Id
                    && other.CompanyId == CompanyId
                    && other.CategoryId == CategoryId
-                   && other.Type == Type
+                   && other.TypeId == TypeId
                    && other.Price == Price
                    && other.Destination == Destination;
         }

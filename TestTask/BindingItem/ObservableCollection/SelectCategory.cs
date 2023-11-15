@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using TestTask.Core.Models.Categories;
 
-namespace TestTask.BindingItem.ProductBinding
+namespace TestTask.BindingItem.ObservableCollection
 {
     public class SelectCategory : ModelBase
     {
@@ -25,7 +25,7 @@ namespace TestTask.BindingItem.ProductBinding
             set => SetField(ref _category, value);
         }
 
-        public void SetValueMode(int categoryId)
+        public void SetValueCategory(int categoryId)
         {
             for (var i = 0; i < Items.Count; i++)
             {

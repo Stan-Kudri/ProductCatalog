@@ -13,7 +13,7 @@ namespace TestTask.Core.Import.Importers
             ["ID"] = ProductField.ID,
             ["CompanyId"] = ProductField.CompanyId,
             ["CategoryId"] = ProductField.CategoryId,
-            ["Type"] = ProductField.Type,
+            ["TypeId"] = ProductField.TypeId,
             ["Price"] = ProductField.Price,
             ["Destination"] = ProductField.Destination,
         };
@@ -83,18 +83,14 @@ namespace TestTask.Core.Import.Importers
                         res.CategoryId = categoryId.Value;
                         break;
 
-                    case ProductField.Type:
+                    case ProductField.TypeId:
 
-                        var type = row.GetString(pair.Value, "Type");
-                        if (!type.Success)
+                        var typeId = row.GetInt(pair.Value, "TypeId");
+                        if (!typeId.Success)
                         {
-                            return type.ToError<Product>();
+                            return typeId.ToError<Product>();
                         }
-                        if (string.IsNullOrEmpty(type.Value))
-                        {
-                            return Result<Product>.CreateFail("Type should not be empty", row.RowNum);
-                        }
-                        res.Type = type.Value;
+                        res.TypeId = typeId.Value;
                         break;
 
                     case ProductField.Price:

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using TestTask.BindingItem.ProductBinding;
+using TestTask.BindingItem.ObservableCollection;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
@@ -48,7 +48,7 @@ namespace TestTask.Forms.Products
         {
             companyBindingSource.DataSource = _companies.Items;
             categoryBindingSource.DataSource = _categories.Items;
-            _companies.SetValueMode(_oldItem.CompanyId);
+            _companies.SetValueCompany(_oldItem.CompanyId);
             SetDefaultValueData();
         }
 
@@ -56,7 +56,7 @@ namespace TestTask.Forms.Products
         {
             cmbCompanyValue.SelectedItem = _companies.Company;
             cmbCategoryValue.SelectedItem = _categories.Category;
-            tbType.Text = _oldItem.Type;
+            //tbType.Text = _oldItem.Type;
             tbPrice.Text = _oldItem.Price.ToString();
             tbDestination.Text = _oldItem.Destination;
         }

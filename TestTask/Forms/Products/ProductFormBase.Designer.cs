@@ -1,4 +1,4 @@
-﻿using TestTask.BindingItem.ProductBinding;
+﻿using TestTask.BindingItem.ObservableCollection;
 
 namespace TestTask.Forms.Products
 {
@@ -32,7 +32,6 @@ namespace TestTask.Forms.Products
             this.itemsBindingSourceCompany = new System.Windows.Forms.BindingSource(this.components);
             this.companyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tlpProductData = new System.Windows.Forms.TableLayoutPanel();
-            this.tbType = new MaterialSkin.Controls.MaterialTextBox2();
             this.tbPrice = new MaterialSkin.Controls.MaterialTextBox2();
             this.tbDestination = new MaterialSkin.Controls.MaterialTextBox2();
             this.cmbCategoryValue = new MaterialSkin.Controls.MaterialComboBox();
@@ -42,6 +41,7 @@ namespace TestTask.Forms.Products
             this.btnSave = new MaterialSkin.Controls.MaterialButton();
             this.btnClear = new MaterialSkin.Controls.MaterialButton();
             this.btnClose = new MaterialSkin.Controls.MaterialButton();
+            this.cmbTypeValue = new MaterialSkin.Controls.MaterialComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.productModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCompany)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).BeginInit();
@@ -50,10 +50,6 @@ namespace TestTask.Forms.Products
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
             this.tlpProductButton.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // productModelBindingSource
-            // 
-            this.productModelBindingSource.DataSource = typeof(TestTask.BindingItem.UserBinding.ProductBinding.ProductModel);
             // 
             // cmbCompanyValue
             // 
@@ -87,7 +83,7 @@ namespace TestTask.Forms.Products
             // 
             // companyBindingSource
             // 
-            this.companyBindingSource.DataSource = typeof(TestTask.BindingItem.ProductBinding.SelectCompany);
+            this.companyBindingSource.DataSource = typeof(TestTask.BindingItem.ObservableCollection.SelectCompany);
             // 
             // tlpProductData
             // 
@@ -97,10 +93,10 @@ namespace TestTask.Forms.Products
             this.tlpProductData.ColumnCount = 1;
             this.tlpProductData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpProductData.Controls.Add(this.cmbCompanyValue, 0, 0);
-            this.tlpProductData.Controls.Add(this.tbType, 0, 2);
             this.tlpProductData.Controls.Add(this.tbPrice, 0, 3);
             this.tlpProductData.Controls.Add(this.tbDestination, 0, 4);
             this.tlpProductData.Controls.Add(this.cmbCategoryValue, 0, 1);
+            this.tlpProductData.Controls.Add(this.cmbTypeValue, 0, 2);
             this.tlpProductData.Location = new System.Drawing.Point(4, 69);
             this.tlpProductData.MinimumSize = new System.Drawing.Size(300, 250);
             this.tlpProductData.Name = "tlpProductData";
@@ -113,37 +109,6 @@ namespace TestTask.Forms.Products
             this.tlpProductData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpProductData.Size = new System.Drawing.Size(300, 250);
             this.tlpProductData.TabIndex = 2;
-            // 
-            // tbType
-            // 
-            this.tbType.AnimateReadOnly = false;
-            this.tbType.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.tbType.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.tbType.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productModelBindingSource, "Type", true));
-            this.tbType.Depth = 0;
-            this.tbType.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbType.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.tbType.HideSelection = true;
-            this.tbType.Hint = "Type";
-            this.tbType.LeadingIcon = null;
-            this.tbType.Location = new System.Drawing.Point(3, 103);
-            this.tbType.MaxLength = 32767;
-            this.tbType.MouseState = MaterialSkin.MouseState.OUT;
-            this.tbType.Name = "tbType";
-            this.tbType.PasswordChar = '\0';
-            this.tbType.PrefixSuffixText = null;
-            this.tbType.ReadOnly = false;
-            this.tbType.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbType.SelectedText = "";
-            this.tbType.SelectionLength = 0;
-            this.tbType.SelectionStart = 0;
-            this.tbType.ShortcutsEnabled = true;
-            this.tbType.Size = new System.Drawing.Size(294, 48);
-            this.tbType.TabIndex = 2;
-            this.tbType.TabStop = false;
-            this.tbType.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.tbType.TrailingIcon = null;
-            this.tbType.UseSystemPasswordChar = false;
             // 
             // tbPrice
             // 
@@ -240,7 +205,7 @@ namespace TestTask.Forms.Products
             // 
             // categoryBindingSource
             // 
-            this.categoryBindingSource.DataSource = typeof(TestTask.BindingItem.ProductBinding.SelectCategory);
+            this.categoryBindingSource.DataSource = typeof(TestTask.BindingItem.ObservableCollection.SelectCategory);
             // 
             // tlpProductButton
             // 
@@ -323,6 +288,29 @@ namespace TestTask.Forms.Products
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
+            // cmbTypeValue
+            // 
+            this.cmbTypeValue.AutoResize = false;
+            this.cmbTypeValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbTypeValue.Depth = 0;
+            this.cmbTypeValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbTypeValue.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbTypeValue.DropDownHeight = 174;
+            this.cmbTypeValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTypeValue.DropDownWidth = 121;
+            this.cmbTypeValue.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cmbTypeValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cmbTypeValue.FormattingEnabled = true;
+            this.cmbTypeValue.IntegralHeight = false;
+            this.cmbTypeValue.ItemHeight = 43;
+            this.cmbTypeValue.Location = new System.Drawing.Point(3, 103);
+            this.cmbTypeValue.MaxDropDownItems = 4;
+            this.cmbTypeValue.MouseState = MaterialSkin.MouseState.OUT;
+            this.cmbTypeValue.Name = "cmbTypeValue";
+            this.cmbTypeValue.Size = new System.Drawing.Size(294, 49);
+            this.cmbTypeValue.StartIndex = 0;
+            this.cmbTypeValue.TabIndex = 6;
+            // 
             // ProductFormBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -349,7 +337,6 @@ namespace TestTask.Forms.Products
         #endregion
         protected MaterialSkin.Controls.MaterialComboBox cmbCompanyValue;
         protected System.Windows.Forms.TableLayoutPanel tlpProductData;
-        protected MaterialSkin.Controls.MaterialTextBox2 tbType;
         protected MaterialSkin.Controls.MaterialTextBox2 tbPrice;
         protected MaterialSkin.Controls.MaterialTextBox2 tbDestination;
         protected System.Windows.Forms.TableLayoutPanel tlpProductButton;
@@ -363,5 +350,6 @@ namespace TestTask.Forms.Products
         protected System.Windows.Forms.BindingSource itemsBindingSourceCategory;
         protected System.Windows.Forms.BindingSource categoryBindingSource;
         private System.ComponentModel.IContainer components;
+        private MaterialSkin.Controls.MaterialComboBox cmbTypeValue;
     }
 }

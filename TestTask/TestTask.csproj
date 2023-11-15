@@ -163,15 +163,16 @@
     <Compile Include="BindingItem\CategoryModel.cs" />
     <Compile Include="BindingItem\ModelBase.cs" />
     <Compile Include="BindingItem\CompanyModel.cs" />
+    <Compile Include="BindingItem\ObservableCollection\SelectType.cs" />
     <Compile Include="BindingItem\PageModel.cs" />
-    <Compile Include="BindingItem\Pages\Categories\FilterModelCategories.cs" />
     <Compile Include="BindingItem\Pages\Categories\SortPageCategories.cs" />
     <Compile Include="BindingItem\Pages\Companies\SortCompanies.cs" />
     <Compile Include="BindingItem\Pages\Products\ProductListViewField.cs" />
     <Compile Include="BindingItem\Pages\Products\SortProducts.cs" />
-    <Compile Include="BindingItem\ProductBinding\SelectCategory.cs" />
-    <Compile Include="BindingItem\ProductBinding\SelectCompany.cs" />
-    <Compile Include="BindingItem\ProductBinding\ProductModel.cs" />
+    <Compile Include="BindingItem\ObservableCollection\SelectCategory.cs" />
+    <Compile Include="BindingItem\ObservableCollection\SelectCompany.cs" />
+    <Compile Include="BindingItem\ProductModel.cs" />
+    <Compile Include="BindingItem\ProductTypeModel.cs" />
     <Compile Include="BindingItem\UserModel.cs" />
     <Compile Include="Control\BaseUserControl.cs">
       <SubType>UserControl</SubType>
@@ -274,6 +275,12 @@
     <Compile Include="Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Type\ProductTypeBaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Type\ProductTypeBaseForm.Designer.cs">
+      <DependentUpon>ProductTypeBaseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MessageBoxShow.cs" />
     <Compile Include="Control\PageTabControls\Model\IListViewDataProvider.cs" />
     <Compile Include="Control\PageTabControls\Model\ListViewColumn.cs" />
@@ -318,6 +325,9 @@
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Type\ProductTypeBaseForm.resx">
+      <DependentUpon>ProductTypeBaseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

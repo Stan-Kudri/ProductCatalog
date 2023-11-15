@@ -23,6 +23,11 @@ namespace TestTask.Core.Models.Products
                 throw new Exception("Company ID does not exist.");
             }
 
+            if (_dbContext.Category.FirstOrDefault(e => e.Id == item.CategoryId) == null)
+            {
+                throw new Exception("Category ID does not exist.");
+            }
+
             _dbContext.Product.Add(item);
             _dbContext.SaveChanges();
         }
@@ -37,6 +42,11 @@ namespace TestTask.Core.Models.Products
             if (!_dbContext.Company.Any(e => e.Id == item.CompanyId))
             {
                 throw new Exception("Company ID does not exist.");
+            }
+
+            if (!_dbContext.Category.Any(e => e.Id == item.CategoryId))
+            {
+                throw new Exception("Category ID does not exist.");
             }
 
             var oldItem = _dbContext.Product.FirstOrDefault(e => e.Id == item.Id) ?? throw new InvalidOperationException("Interaction element not found.");
@@ -83,7 +93,8 @@ namespace TestTask.Core.Models.Products
 
         public void AddImportData(Product item)
         {
-            if (_dbContext.Company.FirstOrDefault(e => e.Id == item.CompanyId) == null)
+            if (_dbContext.Company.FirstOrDefault(e => e.Id == item.CompanyId) == null ||
+                _dbContext.Category.FirstOrDefault(e => e.Id == item.CategoryId) == null)
             {
                 return;
             }
@@ -99,6 +110,7 @@ namespace TestTask.Core.Models.Products
 
         public List<Product> GetAll() => _dbContext.Product.Count() > 0 ? _dbContext.Product.ToList() : null;
 
-        public IQueryable<Product> GetQueryableAll() => _dbContext.Product.Include(e => e.Company).Include(e => e.Category).Select(e => e);
+        public IQueryable<Product> GetQueryableAll()
+            => _dbContext.Product.Include(e => e.Company).Include(e => e.Category).Include(e => e.Category.Types).Select(e => e);
     }
 }

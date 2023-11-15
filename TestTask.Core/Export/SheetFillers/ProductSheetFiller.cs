@@ -48,8 +48,8 @@ namespace TestTask.Core.Export.SheetFillers
                         case ProductField.CategoryId:
                             cell.SetCellValue(item.CategoryId);
                             break;
-                        case ProductField.Type:
-                            cell.SetCellValue(item.Type);
+                        case ProductField.TypeId:
+                            cell.SetCellValue(item.TypeId);
                             break;
                         case ProductField.Price:
                             var price = Convert.ToDouble(item.Price);
