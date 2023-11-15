@@ -207,6 +207,7 @@ namespace TestTask.Forms.Products
             this.cmbCategoryValue.Size = new System.Drawing.Size(294, 49);
             this.cmbCategoryValue.StartIndex = 0;
             this.cmbCategoryValue.TabIndex = 5;
+            this.cmbCategoryValue.SelectedIndexChanged += new System.EventHandler(this.CmbCategoryValue_Changed);
             // 
             // itemsBindingSourceCategory
             // 

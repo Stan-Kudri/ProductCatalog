@@ -55,6 +55,14 @@ namespace TestTask.Forms.Products
             Close();
         }
 
+        private void CmbCategoryValue_Changed(object sender, EventArgs e)
+        {
+            _categories.Category = (Category)cmbCategoryValue.SelectedItem;
+            var listType = _categories.Category.Types;
+            _types = new SelectType(listType);
+            itemsBindingSourceTypes.DataSource = _types.Items;
+        }
+
         protected virtual void AddForm_Load(object sender, EventArgs e)
         {
             companyBindingSource.DataSource = _companies.Items;
@@ -80,6 +88,8 @@ namespace TestTask.Forms.Products
         {
             cmbCompanyValue.SelectedItem = _companies.Company;
             cmbCategoryValue.SelectedItem = _categories.Category;
+            var listType = _categories.Category.Types;
+            _types = new SelectType(listType);
             cmbTypeValue.SelectedItem = _types.Type;
             tbPrice.Text = "0";
             tbDestination.Text = string.Empty;
