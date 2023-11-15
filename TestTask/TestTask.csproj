@@ -361,6 +361,7 @@
     <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Companies.SortCompanies.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Products.SortProducts.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.ProductBinding.SelectCategory.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.ProductModel.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.ProductTypeModel.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.CompanyModel.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.PageModel.datasource" />

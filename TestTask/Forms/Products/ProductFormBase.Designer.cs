@@ -27,12 +27,12 @@ namespace TestTask.Forms.Products
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.productModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cmbCompanyValue = new MaterialSkin.Controls.MaterialComboBox();
             this.itemsBindingSourceCompany = new System.Windows.Forms.BindingSource(this.components);
             this.companyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tlpProductData = new System.Windows.Forms.TableLayoutPanel();
             this.tbPrice = new MaterialSkin.Controls.MaterialTextBox2();
+            this.productModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tbDestination = new MaterialSkin.Controls.MaterialTextBox2();
             this.cmbCategoryValue = new MaterialSkin.Controls.MaterialComboBox();
             this.itemsBindingSourceCategory = new System.Windows.Forms.BindingSource(this.components);
@@ -44,10 +44,10 @@ namespace TestTask.Forms.Products
             this.btnSave = new MaterialSkin.Controls.MaterialButton();
             this.btnClear = new MaterialSkin.Controls.MaterialButton();
             this.btnClose = new MaterialSkin.Controls.MaterialButton();
-            ((System.ComponentModel.ISupportInitialize)(this.productModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCompany)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).BeginInit();
             this.tlpProductData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCategory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceType)).BeginInit();
@@ -146,6 +146,10 @@ namespace TestTask.Forms.Products
             this.tbPrice.TrailingIcon = null;
             this.tbPrice.UseSystemPasswordChar = false;
             this.tbPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbPrice_KeyPress);
+            // 
+            // productModelBindingSource
+            // 
+            this.productModelBindingSource.DataSource = typeof(TestTask.BindingItem.ProductModel);
             // 
             // tbDestination
             // 
@@ -336,10 +340,10 @@ namespace TestTask.Forms.Products
             this.Name = "ProductFormBase";
             this.Text = "Product";
             this.Load += new System.EventHandler(this.AddForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.productModelBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCompany)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).EndInit();
             this.tlpProductData.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.productModelBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceCategory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceType)).EndInit();
@@ -359,7 +363,6 @@ namespace TestTask.Forms.Products
         protected MaterialSkin.Controls.MaterialButton btnSave;
         protected MaterialSkin.Controls.MaterialButton btnClear;
         protected MaterialSkin.Controls.MaterialButton btnClose;
-        protected System.Windows.Forms.BindingSource productModelBindingSource;
         protected System.Windows.Forms.BindingSource itemsBindingSourceCompany;
         protected System.Windows.Forms.BindingSource companyBindingSource;
         protected MaterialSkin.Controls.MaterialComboBox cmbCategoryValue;
@@ -369,5 +372,6 @@ namespace TestTask.Forms.Products
         protected System.Windows.Forms.BindingSource itemsBindingSourceType;
         protected System.Windows.Forms.BindingSource typeBindingSource;
         private System.ComponentModel.IContainer components;
+        private System.Windows.Forms.BindingSource productModelBindingSource;
     }
 }

@@ -71,6 +71,7 @@ namespace TestTask.Control.PageTabControls
         {
             var listCompany = _companyService.GetQueryableAll();
             var listCategory = _categoryService.GetQueryableAll();
+            var listTypeProduct = _productService.GetQueryableAll();
 
             if (listCompany.Count() == 0)
             {
@@ -81,6 +82,12 @@ namespace TestTask.Control.PageTabControls
             if (listCategory.Count() == 0)
             {
                 _messageBox.ShowWarning("Add a category to the table to add a product.");
+                return false;
+            }
+
+            if (listTypeProduct.Count() == 0)
+            {
+                _messageBox.ShowWarning("Add a type to the table to add a product.");
                 return false;
             }
 
@@ -104,11 +111,12 @@ namespace TestTask.Control.PageTabControls
         {
             var listCompany = _companyService.GetAll();
             var listCategory = _categoryService.GetAll();
+            var listTypeProduct = _typeService.GetAll();
             var oldItem = (Product)entity;
 
             using (var editForm = _serviceProvider.GetRequiredService<EditItemProductForm>())
             {
-                editForm.Initialize(listCompany, listCategory, oldItem);
+                editForm.Initialize(listCompany, listCategory, listTypeProduct, oldItem);
 
                 if (editForm.ShowDialog() != DialogResult.OK)
                 {

@@ -28,6 +28,11 @@ namespace TestTask.Core.Models.Products
                 throw new Exception("Category ID does not exist.");
             }
 
+            if (_dbContext.Type.FirstOrDefault(e => e.Id == item.TypeId) == null)
+            {
+                throw new Exception("Category ID does not exist.");
+            }
+
             _dbContext.Product.Add(item);
             _dbContext.SaveChanges();
         }
@@ -49,11 +54,16 @@ namespace TestTask.Core.Models.Products
                 throw new Exception("Category ID does not exist.");
             }
 
+            if (!_dbContext.Type.Any(e => e.Id == item.TypeId))
+            {
+                throw new Exception("Category ID does not exist.");
+            }
+
             var oldItem = _dbContext.Product.FirstOrDefault(e => e.Id == item.Id) ?? throw new InvalidOperationException("Interaction element not found.");
 
             oldItem.CompanyId = item.CompanyId;
             oldItem.CategoryId = item.CategoryId;
-            oldItem.Type = item.Type;
+            oldItem.TypeId = item.TypeId;
             oldItem.Price = item.Price;
             oldItem.Destination = item.Destination;
 
@@ -94,7 +104,8 @@ namespace TestTask.Core.Models.Products
         public void AddImportData(Product item)
         {
             if (_dbContext.Company.FirstOrDefault(e => e.Id == item.CompanyId) == null ||
-                _dbContext.Category.FirstOrDefault(e => e.Id == item.CategoryId) == null)
+                _dbContext.Category.FirstOrDefault(e => e.Id == item.CategoryId) == null ||
+                _dbContext.Type.FirstOrDefault(e => e.Id == item.TypeId) == null)
             {
                 return;
             }

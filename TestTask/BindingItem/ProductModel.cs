@@ -4,7 +4,7 @@ using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
 using ProductType = TestTask.Core.Models.Types.ProductType;
 
-namespace TestTask.BindingItem.UserBinding
+namespace TestTask.BindingItem
 {
     public class ProductModel : ModelBase
     {

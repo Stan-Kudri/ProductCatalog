@@ -24,8 +24,6 @@ namespace TestTask.Core.Models.Categories
 
         public string Name { get; set; }
 
-        public ProductType Type { get; set; }
-
         public List<Product> Products { get; set; } = null;
 
         public List<ProductType> Types { get; set; } = null;

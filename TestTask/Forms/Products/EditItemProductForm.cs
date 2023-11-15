@@ -5,6 +5,7 @@ using TestTask.BindingItem.ObservableCollection;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
+using TestTask.Core.Models.Types;
 
 namespace TestTask.Forms.Products
 {
@@ -19,10 +20,11 @@ namespace TestTask.Forms.Products
             Text = "Edit Product";
         }
 
-        public void Initialize(List<Company> company, List<Category> categories, Product oldItem)
+        public void Initialize(List<Company> company, List<Category> categories, List<ProductType> types, Product oldItem)
         {
             _companies = new SelectCompany(company);
             _categories = new SelectCategory(categories);
+            _types = new SelectType(types);
             _oldItem = oldItem;
         }
 

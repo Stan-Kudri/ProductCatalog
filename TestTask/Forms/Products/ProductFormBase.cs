@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows.Forms;
+using TestTask.BindingItem;
 using TestTask.BindingItem.ObservableCollection;
-using TestTask.BindingItem.UserBinding;
 using TestTask.Core;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
-using ProductType = TestTask.Core.Models.Types.ProductType;
+using TestTask.Core.Models.Types;
 
 namespace TestTask.Forms.Products
 {
