@@ -59,30 +59,17 @@ namespace TestTask.Forms
         {
             var selectTab = tabControl.SelectedTab;
 
-            if (selectTab == tabPageCompanies)
+            foreach (var control in selectTab.Controls)
             {
-                listViewCompany.LoadData();
+                if (control is ILoad loadListView)
+                {
+                    loadListView.LoadData();
+                }
             }
-            else if (selectTab == tabPageCategory)
-            {
-                listViewCategory.LoadData();
-            }
-            else if (selectTab == tabPageProduct)
-            {
-                listViewProduct.LoadData();
-            }
-            else if (selectTab == tabPageTypeProduct)
-            {
-                listViewTypeProduct.LoadData();
-            }
-
-            return;
         }
 
         private void TableForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-        }
+            => DialogResult = DialogResult.Cancel;
 
         private void TsmImportFromExcel_Click(object sender, EventArgs e)
         {
