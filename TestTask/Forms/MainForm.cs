@@ -38,10 +38,10 @@ namespace TestTask.Forms
             _serviceProvider = serviceProvider;
             _companyService = _serviceProvider.GetRequiredService<CompanyService>();
             _categoryService = _serviceProvider.GetRequiredService<CategoryService>();
-            _productService = _serviceProvider.GetRequiredService<ProductService>();
             _typeService = _serviceProvider.GetRequiredService<ProductTypeService>();
+            _productService = _serviceProvider.GetRequiredService<ProductService>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
-            _initializeProvider = new IInitialize[] { listViewCompany, listViewCategory, listViewProduct, listViewTypeProduct };
+            _initializeProvider = new IInitialize[] { listViewCompany, listViewCategory, listViewTypeProduct, listViewProduct };
         }
 
         private void TableForm_Load(object sender, EventArgs e)

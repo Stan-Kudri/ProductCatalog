@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 
 namespace TestTask.Core.Models.Products
@@ -122,6 +122,6 @@ namespace TestTask.Core.Models.Products
         public List<Product> GetAll() => _dbContext.Product.Count() > 0 ? _dbContext.Product.ToList() : null;
 
         public IQueryable<Product> GetQueryableAll()
-            => _dbContext.Product.Include(e => e.Company).Include(e => e.Category).Include(e => e.Category.Types).Select(e => e);
+            => _dbContext.Product.Include(e => e.Company).Include(e => e.Category).ThenInclude(e => e.Types).Select(e => e);
     }
 }
