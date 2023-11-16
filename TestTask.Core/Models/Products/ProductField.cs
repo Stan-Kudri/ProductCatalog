@@ -5,7 +5,7 @@
         ID,
         CompanyId,
         CategoryId,
-        Type,
+        TypeId,
         Price,
         Destination,
     }

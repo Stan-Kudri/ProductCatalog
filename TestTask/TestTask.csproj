@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\SQLite.3.13.0\build\net45\SQLite.props" Condition="Exists('..\packages\SQLite.3.13.0\build\net45\SQLite.props')" />
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="..\packages\SQLite.3.13.0\build\net45\SQLite.props" Condition="Exists('..\packages\SQLite.3.13.0\build\net45\SQLite.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -74,8 +74,8 @@
     <Reference Include="MaterialSkin, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.2.2.3.1\lib\net45\MaterialSkin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Data.Sqlite, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Data.Sqlite.1.1.0\lib\net451\Microsoft.Data.Sqlite.dll</HintPath>
+    <Reference Include="Microsoft.Data.Sqlite, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Sqlite.1.1.1\lib\net451\Microsoft.Data.Sqlite.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.EntityFrameworkCore, Version=1.1.6.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.EntityFrameworkCore.1.1.6\lib\net451\Microsoft.EntityFrameworkCore.dll</HintPath>
@@ -122,15 +122,6 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SQLite, Version=1.0.118.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\lib\net451\System.Data.SQLite.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite.EF6, Version=1.0.118.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.118.0\lib\net451\System.Data.SQLite.EF6.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite.Linq, Version=1.0.118.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.118.0\lib\net451\System.Data.SQLite.Linq.dll</HintPath>
-    </Reference>
     <Reference Include="System.Design" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.3.1\lib\portable-net45+win8+wpa81\System.Diagnostics.DiagnosticSource.dll</HintPath>
@@ -163,15 +154,18 @@
     <Compile Include="BindingItem\CategoryModel.cs" />
     <Compile Include="BindingItem\ModelBase.cs" />
     <Compile Include="BindingItem\CompanyModel.cs" />
+    <Compile Include="BindingItem\ObservableCollection\SelectType.cs" />
     <Compile Include="BindingItem\PageModel.cs" />
-    <Compile Include="BindingItem\Pages\Categories\FilterModelCategories.cs" />
     <Compile Include="BindingItem\Pages\Categories\SortPageCategories.cs" />
     <Compile Include="BindingItem\Pages\Companies\SortCompanies.cs" />
     <Compile Include="BindingItem\Pages\Products\ProductListViewField.cs" />
     <Compile Include="BindingItem\Pages\Products\SortProducts.cs" />
-    <Compile Include="BindingItem\ProductBinding\SelectCategory.cs" />
-    <Compile Include="BindingItem\ProductBinding\SelectCompany.cs" />
-    <Compile Include="BindingItem\ProductBinding\ProductModel.cs" />
+    <Compile Include="BindingItem\ObservableCollection\SelectCategory.cs" />
+    <Compile Include="BindingItem\ObservableCollection\SelectCompany.cs" />
+    <Compile Include="BindingItem\Pages\TypeProduct\SortTypeProduct.cs" />
+    <Compile Include="BindingItem\Pages\TypeProduct\TypeListViewField.cs" />
+    <Compile Include="BindingItem\ProductModel.cs" />
+    <Compile Include="BindingItem\ProductTypeModel.cs" />
     <Compile Include="BindingItem\UserModel.cs" />
     <Compile Include="Control\BaseUserControl.cs">
       <SubType>UserControl</SubType>
@@ -199,6 +193,12 @@
     </Compile>
     <Compile Include="Control\PageTabControls\Model\IInitialize.cs" />
     <Compile Include="Control\PageTabControls\Model\ILoad.cs" />
+    <Compile Include="Control\PageTabControls\TypeProductListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\PageTabControls\TypeProductListView.Designer.cs">
+      <DependentUpon>TypeProductListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Control\PageTabControls\ProductListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -274,6 +274,24 @@
     <Compile Include="Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Type\AddProductTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Type\AddProductTypeForm.Designer.cs">
+      <DependentUpon>AddProductTypeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Type\EditProductTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Type\EditProductTypeForm.Designer.cs">
+      <DependentUpon>EditProductTypeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Type\ProductTypeBaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Type\ProductTypeBaseForm.Designer.cs">
+      <DependentUpon>ProductTypeBaseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MessageBoxShow.cs" />
     <Compile Include="Control\PageTabControls\Model\IListViewDataProvider.cs" />
     <Compile Include="Control\PageTabControls\Model\ListViewColumn.cs" />
@@ -290,6 +308,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Control\PageTabControls\ProductListView.resx">
       <DependentUpon>ProductListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\PageTabControls\TypeProductListView.resx">
+      <DependentUpon>TypeProductListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
@@ -319,6 +340,9 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Type\ProductTypeBaseForm.resx">
+      <DependentUpon>ProductTypeBaseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -331,12 +355,17 @@
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\TestTask.BindingItem.CategoryModel.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.ObservableCollection.SelectCategory.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.ObservableCollection.SelectType.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.PageModel.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Categories.FilterModelCategories.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Categories.SortPageCategories.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Companies.SortCompanies.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Products.SortProducts.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.Pages.TypeProduct.SortTypeProduct.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.ProductBinding.SelectCategory.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.ProductModel.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.ProductTypeModel.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.CompanyModel.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.PageModel.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.UserBinding.ProductBinding.ProductModel.datasource" />
@@ -389,11 +418,9 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
+    <Error Condition="!Exists('..\packages\SQLite.3.13.0\build\net45\SQLite.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLite.3.13.0\build\net45\SQLite.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
-    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net451\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net451\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
-    <Error Condition="!Exists('..\packages\SQLite.3.13.0\build\net45\SQLite.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLite.3.13.0\build\net45\SQLite.props'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
-  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net451\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net451\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
 </Project>

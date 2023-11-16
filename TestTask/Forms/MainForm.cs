@@ -12,6 +12,7 @@ using TestTask.Core.Import;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
+using TestTask.Core.Models.Types;
 
 namespace TestTask.Forms
 {
@@ -20,11 +21,13 @@ namespace TestTask.Forms
         private const string Company = "Company";
         private const string Product = "Product";
         private const string Category = "Category";
+        private const string Type = "Type";
 
         private readonly IServiceProvider _serviceProvider;
         private readonly CompanyService _companyService;
         private readonly ProductService _productService;
         private readonly CategoryService _categoryService;
+        private readonly ProductTypeService _typeService;
         private readonly IMessageBox _messageBox;
 
         private IInitialize[] _initializeProvider;
@@ -35,9 +38,10 @@ namespace TestTask.Forms
             _serviceProvider = serviceProvider;
             _companyService = _serviceProvider.GetRequiredService<CompanyService>();
             _categoryService = _serviceProvider.GetRequiredService<CategoryService>();
+            _typeService = _serviceProvider.GetRequiredService<ProductTypeService>();
             _productService = _serviceProvider.GetRequiredService<ProductService>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
-            _initializeProvider = new IInitialize[] { listViewCompany, listViewCategory, listViewProduct };
+            _initializeProvider = new IInitialize[] { listViewCompany, listViewCategory, listViewTypeProduct, listViewProduct };
         }
 
         private void TableForm_Load(object sender, EventArgs e)
@@ -64,6 +68,10 @@ namespace TestTask.Forms
             {
                 listViewProduct.LoadData();
             }
+            else if (selectTab == tabPageTypeProduct)
+            {
+                listViewTypeProduct.LoadData();
+            }
 
             return;
         }
@@ -80,6 +88,7 @@ namespace TestTask.Forms
                 { Company, false },
                 { Product, false },
                 { Category, false },
+                { Type, false },
             };
 
             using (var impotDbForExcel = _serviceProvider.GetRequiredService<ImportDatabaseForm>())
@@ -92,6 +101,7 @@ namespace TestTask.Forms
                 loadTable[Company] = impotDbForExcel.IsDownloadTableCompany;
                 loadTable[Product] = impotDbForExcel.IsDownloadTableProduct;
                 loadTable[Category] = impotDbForExcel.IsDownloadTableCategory;
+                loadTable[Type] = impotDbForExcel.IsDownloadTableType;
             }
 
             using (var openReplaceDataFromFile = _serviceProvider.GetRequiredService<OpenFileDialog>())
@@ -162,6 +172,26 @@ namespace TestTask.Forms
                         _messageBox.ShowWarning(message, Category);
                     }
                 }
+
+                if (loadTable[Type])
+                {
+                    var typeRead = _serviceProvider.GetRequiredService<ExcelImporter<ProductType>>().ImportFromFile(path);
+
+                    foreach (var item in typeRead)
+                    {
+                        if (item.Success)
+                        {
+                            _typeService.AddImportData(item.Value);
+                        }
+                    }
+
+                    listViewTypeProduct.LoadData();
+
+                    if (!typeRead.IsNoErrorLine(out var message))
+                    {
+                        _messageBox.ShowWarning(message, Category);
+                    }
+                }
             }
         }
 
@@ -179,12 +209,14 @@ namespace TestTask.Forms
                 var companySheetFiller = new CompanySheetFiller(_companyService);
                 var productSheetFiller = new ProductSheetFiller(_productService);
                 var categorySheetFiller = new CategorySheetFiller(_categoryService);
+                var typeSheetFiller = new TypeSheetFiller(_typeService);
 
                 var fillers = new ISheetFiller[]
                 {
                     companySheetFiller,
                     productSheetFiller,
                     categorySheetFiller,
+                    typeSheetFiller,
                 };
 
                 var writeExcel = new ExcelExporter(fillers);

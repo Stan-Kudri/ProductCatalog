@@ -2,6 +2,7 @@
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
+using TestTask.Core.Models.Types;
 using TestTask.Core.Models.Users;
 
 namespace TestTask.Core
@@ -20,6 +21,8 @@ namespace TestTask.Core
         public DbSet<Product> Product { get; set; }
 
         public DbSet<Category> Category { get; set; }
+
+        public DbSet<ProductType> Type { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -46,11 +49,12 @@ namespace TestTask.Core
             configurationProduct.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
             configurationProduct.Property(e => e.CompanyId).IsRequired().HasColumnName("companyId");
             configurationProduct.Property(e => e.CategoryId).IsRequired().HasColumnName("categoryId");
-            configurationProduct.Property(e => e.Type).IsRequired().HasColumnName("type").HasMaxLength(128);
+            configurationProduct.Property(e => e.TypeId).IsRequired().HasColumnName("typeId");
             configurationProduct.Property(e => e.Price).IsRequired().HasColumnType("NUMERIC").HasColumnName("price");
             configurationProduct.Property(e => e.Destination).HasColumnName("destination");
             configurationProduct.HasOne(e => e.Company).WithMany(e => e.Product).HasForeignKey(e => e.CompanyId);
-            configurationProduct.HasOne(e => e.Category).WithMany(e => e.Product).HasForeignKey(e => e.CategoryId);
+            configurationProduct.HasOne(e => e.Category).WithMany(e => e.Products).HasForeignKey(e => e.CategoryId);
+            configurationProduct.HasOne(e => e.Type).WithMany(e => e.Products).HasForeignKey(e => e.TypeId);
 
             var configurationCategory = modelBuilder.Entity<Category>();
             configurationCategory.ToTable("category");
@@ -58,6 +62,14 @@ namespace TestTask.Core
             configurationCategory.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
             configurationCategory.HasIndex(e => e.Name).IsUnique();
             configurationCategory.Property(e => e.Name).IsRequired().HasMaxLength(128).HasColumnName("name").HasMaxLength(128);
+
+            var configurationType = modelBuilder.Entity<ProductType>();
+            configurationType.ToTable("type");
+            configurationType.HasKey(e => e.Id);
+            configurationType.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
+            configurationType.HasIndex(e => e.Name).IsUnique();
+            configurationType.Property(e => e.Name).IsRequired().HasMaxLength(128).HasColumnName("name").HasMaxLength(128);
+            configurationType.HasOne(e => e.Category).WithMany(e => e.Types).HasForeignKey(e => e.CategoryId);
         }
     }
 }

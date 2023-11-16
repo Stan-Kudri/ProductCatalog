@@ -1,11 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using TestTask.BindingItem.ProductBinding;
-using TestTask.BindingItem.UserBinding.ProductBinding;
+using TestTask.BindingItem;
+using TestTask.BindingItem.ObservableCollection;
 using TestTask.Core;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
+using TestTask.Core.Models.Types;
 
 namespace TestTask.Forms.Products
 {
@@ -15,11 +17,10 @@ namespace TestTask.Forms.Products
 
         protected SelectCompany _companies;
         protected SelectCategory _categories;
+        protected SelectType _types;
 
         private ProductFormBase()
-        {
-            InitializeComponent();
-        }
+            => InitializeComponent();
 
         public ProductFormBase(IServiceProvider serviceProvider)
         {
@@ -32,6 +33,9 @@ namespace TestTask.Forms.Products
 
         protected Category SelectedCategory =>
             cmbCategoryValue.SelectedValue != null ? (Category)cmbCategoryValue.SelectedValue : throw new Exception("Wrong combo box format");
+
+        protected ProductType SelectedType =>
+            cmbTypeValue.SelectedValue != null ? (ProductType)cmbTypeValue.SelectedValue : throw new Exception("Wrong combo box format");
 
         protected virtual void BtnAdd_Click(object sender, EventArgs e)
         {
@@ -49,13 +53,27 @@ namespace TestTask.Forms.Products
         private void BtnClose_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+            _categories.ChangedCategory -= ReplaceTypeProduct;
             Close();
         }
 
-        protected virtual void AddStepForm_Load(object sender, EventArgs e)
+        private void CmbCategoryValue_Changed(object sender, EventArgs e)
+        {
+            var category = (Category)cmbCategoryValue.SelectedItem;
+
+            if (category != null)
+            {
+                _categories.Category = category;
+                itemsBindingSourceTypes.DataSource = _types.Items;
+            }
+        }
+
+        protected virtual void AddForm_Load(object sender, EventArgs e)
         {
             companyBindingSource.DataSource = _companies.Items;
             categoryBindingSource.DataSource = _categories.Items;
+            _types.ReplaceCollection(_categories.Category.Types);
+            itemsBindingSourceTypes.DataSource = _types.Items;
             SetDefaultValueData();
         }
 
@@ -76,7 +94,8 @@ namespace TestTask.Forms.Products
         {
             cmbCompanyValue.SelectedItem = _companies.Company;
             cmbCategoryValue.SelectedItem = _categories.Category;
-            tbType.Text = string.Empty;
+            _types = new SelectType(_categories.Category.Types);
+            cmbTypeValue.SelectedItem = _types.Type;
             tbPrice.Text = "0";
             tbDestination.Text = string.Empty;
         }
@@ -95,9 +114,9 @@ namespace TestTask.Forms.Products
                 return false;
             }
 
-            if (tbType.Text.Length == decimal.Zero)
+            if (cmbTypeValue.Text.Length <= 0)
             {
-                message = "Please enter a Type.";
+                message = "Select your type.";
                 return false;
             }
 
@@ -113,17 +132,15 @@ namespace TestTask.Forms.Products
 
         public ProductModel GetProductModel()
         {
-            if (tbType.Text == string.Empty)
-            {
-                throw new Exception("The Type field is filled in incorrectly.");
-            }
-
             if (!decimal.TryParse(tbPrice.Text, out var price))
             {
                 throw new Exception("The Price field is filled in incorrectly.");
             }
 
-            return new ProductModel(SelectedCompany, SelectedCategory, tbType.Text, price, tbDestination.Text);
+            return new ProductModel(SelectedCompany, SelectedCategory, SelectedType, price, tbDestination.Text);
         }
+
+        protected void ReplaceTypeProduct(List<ProductType> itmes)
+            => _types.ReplaceCollection(itmes);
     }
 }

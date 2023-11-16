@@ -45,21 +45,24 @@ namespace TestTask.Forms
             this.tabControl = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPageCompanies = new System.Windows.Forms.TabPage();
             this.listViewCompany = new TestTask.Control.PageTabControls.CompanyListView();
-            this.bindingSourcePage = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSourcePageProducts = new System.Windows.Forms.BindingSource(this.components);
             this.tabPageCategory = new System.Windows.Forms.TabPage();
             this.listViewCategory = new TestTask.Control.PageTabControls.CategoryListView();
             this.tabPageProduct = new System.Windows.Forms.TabPage();
             this.listViewProduct = new TestTask.Control.PageTabControls.ProductListView();
+            this.tabPageTypeProduct = new System.Windows.Forms.TabPage();
+            this.bindingSourcePage = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSourcePageProducts = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSourcePageCompanies = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSourcePageCategories = new System.Windows.Forms.BindingSource(this.components);
+            this.listViewTypeProduct = new TestTask.Control.PageTabControls.TypeProductListView();
             this.menuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPageCompanies.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageProducts)).BeginInit();
             this.tabPageCategory.SuspendLayout();
             this.tabPageProduct.SuspendLayout();
+            this.tabPageTypeProduct.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageCompanies)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageCategories)).BeginInit();
             this.SuspendLayout();
@@ -147,6 +150,7 @@ namespace TestTask.Forms
             this.tabControl.Controls.Add(this.tabPageCompanies);
             this.tabControl.Controls.Add(this.tabPageCategory);
             this.tabControl.Controls.Add(this.tabPageProduct);
+            this.tabControl.Controls.Add(this.tabPageTypeProduct);
             this.tabControl.Depth = 0;
             this.tabControl.Location = new System.Drawing.Point(8, 75);
             this.tabControl.MouseState = MaterialSkin.MouseState.HOVER;
@@ -175,15 +179,6 @@ namespace TestTask.Forms
             this.listViewCompany.Name = "listViewCompany";
             this.listViewCompany.Size = new System.Drawing.Size(752, 325);
             this.listViewCompany.TabIndex = 1;
-            // 
-            // bindingSourcePage
-            // 
-            this.bindingSourcePage.DataSource = typeof(TestTask.BindingItem.PageModel);
-            // 
-            // bindingSourcePageProducts
-            // 
-            this.bindingSourcePageProducts.DataMember = "Items";
-            this.bindingSourcePageProducts.DataSource = this.bindingSourcePage;
             // 
             // tabPageCategory
             // 
@@ -223,6 +218,26 @@ namespace TestTask.Forms
             this.listViewProduct.Size = new System.Drawing.Size(752, 325);
             this.listViewProduct.TabIndex = 0;
             // 
+            // tabPageTypeProduct
+            // 
+            this.tabPageTypeProduct.Controls.Add(this.listViewTypeProduct);
+            this.tabPageTypeProduct.Location = new System.Drawing.Point(4, 22);
+            this.tabPageTypeProduct.Name = "tabPageTypeProduct";
+            this.tabPageTypeProduct.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageTypeProduct.Size = new System.Drawing.Size(758, 331);
+            this.tabPageTypeProduct.TabIndex = 5;
+            this.tabPageTypeProduct.Text = "Types";
+            this.tabPageTypeProduct.UseVisualStyleBackColor = true;
+            // 
+            // bindingSourcePage
+            // 
+            this.bindingSourcePage.DataSource = typeof(TestTask.BindingItem.PageModel);
+            // 
+            // bindingSourcePageProducts
+            // 
+            this.bindingSourcePageProducts.DataMember = "Items";
+            this.bindingSourcePageProducts.DataSource = this.bindingSourcePage;
+            // 
             // bindingSourcePageCompanies
             // 
             this.bindingSourcePageCompanies.DataMember = "Items";
@@ -232,6 +247,14 @@ namespace TestTask.Forms
             // 
             this.bindingSourcePageCategories.DataMember = "Items";
             this.bindingSourcePageCategories.DataSource = this.bindingSourcePage;
+            // 
+            // listViewTypeProduct
+            // 
+            this.listViewTypeProduct.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewTypeProduct.Location = new System.Drawing.Point(3, 3);
+            this.listViewTypeProduct.Name = "listViewTypeProduct";
+            this.listViewTypeProduct.Size = new System.Drawing.Size(752, 325);
+            this.listViewTypeProduct.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -253,10 +276,11 @@ namespace TestTask.Forms
             this.menuStrip.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.tabPageCompanies.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageProducts)).EndInit();
             this.tabPageCategory.ResumeLayout(false);
             this.tabPageProduct.ResumeLayout(false);
+            this.tabPageTypeProduct.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageProducts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageCompanies)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageCategories)).EndInit();
             this.ResumeLayout(false);
@@ -287,5 +311,7 @@ namespace TestTask.Forms
         private Control.PageTabControls.CategoryListView listViewCategory;
         private System.Windows.Forms.TabPage tabPageProduct;
         private Control.PageTabControls.ProductListView listViewProduct;
+        private System.Windows.Forms.TabPage tabPageTypeProduct;
+        private Control.PageTabControls.TypeProductListView listViewTypeProduct;
     }
 }

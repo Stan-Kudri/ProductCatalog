@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using TestTask.BindingItem.ProductBinding;
+using TestTask.BindingItem.ObservableCollection;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
+using TestTask.Core.Models.Types;
 
 namespace TestTask.Forms.Products
 {
@@ -19,11 +20,13 @@ namespace TestTask.Forms.Products
             Text = "Edit Product";
         }
 
-        public void Initialize(List<Company> company, List<Category> categories, Product oldItem)
+        public void Initialize(List<Company> company, List<Category> categories, List<ProductType> types, Product oldItem)
         {
             _companies = new SelectCompany(company);
             _categories = new SelectCategory(categories);
+            _types = new SelectType(types);
             _oldItem = oldItem;
+            _categories.ChangedCategory += ReplaceTypeProduct;
         }
 
         protected override void BtnAdd_Click(object sender, EventArgs e)
@@ -44,11 +47,14 @@ namespace TestTask.Forms.Products
             DialogResult = DialogResult.OK;
         }
 
-        protected override void AddStepForm_Load(object sender, EventArgs e)
+        protected override void AddForm_Load(object sender, EventArgs e)
         {
             companyBindingSource.DataSource = _companies.Items;
             categoryBindingSource.DataSource = _categories.Items;
-            _companies.SetValueMode(_oldItem.CompanyId);
+            itemsBindingSourceTypes.DataSource = _types.Items;
+            _companies.SetValueCompany(_oldItem.CompanyId);
+            _categories.SetValueCategory(_oldItem.CategoryId);
+            _types.SetValueType(_oldItem.TypeId);
             SetDefaultValueData();
         }
 
@@ -56,7 +62,7 @@ namespace TestTask.Forms.Products
         {
             cmbCompanyValue.SelectedItem = _companies.Company;
             cmbCategoryValue.SelectedItem = _categories.Category;
-            tbType.Text = _oldItem.Type;
+            cmbTypeValue.SelectedItem = _types.Type;
             tbPrice.Text = _oldItem.Price.ToString();
             tbDestination.Text = _oldItem.Destination;
         }

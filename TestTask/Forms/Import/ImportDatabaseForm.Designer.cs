@@ -31,9 +31,10 @@
             this.cbCompany = new MaterialSkin.Controls.MaterialCheckbox();
             this.cbProduct = new MaterialSkin.Controls.MaterialCheckbox();
             this.tlbComboBox = new System.Windows.Forms.TableLayoutPanel();
+            this.cbCategory = new MaterialSkin.Controls.MaterialCheckbox();
             this.btnImportData = new MaterialSkin.Controls.MaterialButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cbCategory = new MaterialSkin.Controls.MaterialCheckbox();
+            this.cbType = new MaterialSkin.Controls.MaterialCheckbox();
             this.tlbComboBox.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -83,6 +84,7 @@
             this.tlbComboBox.ColumnCount = 2;
             this.tlbComboBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlbComboBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlbComboBox.Controls.Add(this.cbType, 0, 1);
             this.tlbComboBox.Controls.Add(this.cbCategory, 0, 1);
             this.tlbComboBox.Controls.Add(this.cbCompany, 0, 0);
             this.tlbComboBox.Controls.Add(this.cbProduct, 1, 0);
@@ -94,6 +96,26 @@
             this.tlbComboBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlbComboBox.Size = new System.Drawing.Size(246, 110);
             this.tlbComboBox.TabIndex = 2;
+            // 
+            // cbCategory
+            // 
+            this.cbCategory.AutoSize = true;
+            this.cbCategory.Checked = true;
+            this.cbCategory.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbCategory.Depth = 0;
+            this.cbCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbCategory.Location = new System.Drawing.Point(123, 55);
+            this.cbCategory.Margin = new System.Windows.Forms.Padding(0);
+            this.cbCategory.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.cbCategory.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cbCategory.Name = "cbCategory";
+            this.cbCategory.ReadOnly = false;
+            this.cbCategory.Ripple = true;
+            this.cbCategory.Size = new System.Drawing.Size(123, 55);
+            this.cbCategory.TabIndex = 2;
+            this.cbCategory.Text = "Category";
+            this.cbCategory.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cbCategory.UseVisualStyleBackColor = true;
             // 
             // btnImportData
             // 
@@ -130,25 +152,25 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(246, 50);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
-            // cbCategory
+            // cbType
             // 
-            this.cbCategory.AutoSize = true;
-            this.cbCategory.Checked = true;
-            this.cbCategory.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbCategory.Depth = 0;
-            this.cbCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbCategory.Location = new System.Drawing.Point(0, 55);
-            this.cbCategory.Margin = new System.Windows.Forms.Padding(0);
-            this.cbCategory.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.cbCategory.MouseState = MaterialSkin.MouseState.HOVER;
-            this.cbCategory.Name = "cbCategory";
-            this.cbCategory.ReadOnly = false;
-            this.cbCategory.Ripple = true;
-            this.cbCategory.Size = new System.Drawing.Size(123, 55);
-            this.cbCategory.TabIndex = 2;
-            this.cbCategory.Text = "Category";
-            this.cbCategory.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cbCategory.UseVisualStyleBackColor = true;
+            this.cbType.AutoSize = true;
+            this.cbType.Checked = true;
+            this.cbType.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbType.Depth = 0;
+            this.cbType.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbType.Location = new System.Drawing.Point(0, 55);
+            this.cbType.Margin = new System.Windows.Forms.Padding(0);
+            this.cbType.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.cbType.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cbType.Name = "cbType";
+            this.cbType.ReadOnly = false;
+            this.cbType.Ripple = true;
+            this.cbType.Size = new System.Drawing.Size(123, 55);
+            this.cbType.TabIndex = 3;
+            this.cbType.Text = "Type";
+            this.cbType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cbType.UseVisualStyleBackColor = true;
             // 
             // ImportDatabaseForm
             // 
@@ -177,5 +199,6 @@
         private MaterialSkin.Controls.MaterialButton btnImportData;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private MaterialSkin.Controls.MaterialCheckbox cbCategory;
+        private MaterialSkin.Controls.MaterialCheckbox cbType;
     }
 }
