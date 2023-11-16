@@ -30,8 +30,6 @@ namespace TestTask.Forms
         private readonly ProductTypeService _typeService;
         private readonly IMessageBox _messageBox;
 
-        private IInitialize[] _initializeProvider;
-
         public MainForm(IServiceProvider serviceProvider)
         {
             InitializeComponent();
@@ -41,14 +39,19 @@ namespace TestTask.Forms
             _typeService = _serviceProvider.GetRequiredService<ProductTypeService>();
             _productService = _serviceProvider.GetRequiredService<ProductService>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
-            _initializeProvider = new IInitialize[] { listViewCompany, listViewCategory, listViewTypeProduct, listViewProduct };
         }
 
         private void TableForm_Load(object sender, EventArgs e)
         {
-            foreach (var item in _initializeProvider)
+            foreach (TabPage tab in tabControl.Controls)
             {
-                item.Initialize(_serviceProvider);
+                foreach (var control in tab.Controls)
+                {
+                    if (control is IInitialize controlInitialize)
+                    {
+                        controlInitialize.Initialize(_serviceProvider);
+                    }
+                }
             }
         }
 
