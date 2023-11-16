@@ -162,6 +162,8 @@
     <Compile Include="BindingItem\Pages\Products\SortProducts.cs" />
     <Compile Include="BindingItem\ObservableCollection\SelectCategory.cs" />
     <Compile Include="BindingItem\ObservableCollection\SelectCompany.cs" />
+    <Compile Include="BindingItem\Pages\TypeProduct\SortTypeProduct.cs" />
+    <Compile Include="BindingItem\Pages\TypeProduct\TypeListViewField.cs" />
     <Compile Include="BindingItem\ProductModel.cs" />
     <Compile Include="BindingItem\ProductTypeModel.cs" />
     <Compile Include="BindingItem\UserModel.cs" />
@@ -360,6 +362,7 @@
     <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Categories.SortPageCategories.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Companies.SortCompanies.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.Pages.Products.SortProducts.datasource" />
+    <None Include="Properties\DataSources\TestTask.BindingItem.Pages.TypeProduct.SortTypeProduct.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.ProductBinding.SelectCategory.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.ProductModel.datasource" />
     <None Include="Properties\DataSources\TestTask.BindingItem.ProductTypeModel.datasource" />

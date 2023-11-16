@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView = new TestTask.Control.ListViewControl();
+            this.components = new System.ComponentModel.Container();
             this.tlpFilter = new System.Windows.Forms.TableLayoutPanel();
             this.labelSortField = new MaterialSkin.Controls.MaterialLabel();
             this.buttonClearFilter = new MaterialSkin.Controls.MaterialButton();
@@ -36,21 +36,11 @@
             this.tbSearchStrName = new System.Windows.Forms.TextBox();
             this.buttonUseFilter = new MaterialSkin.Controls.MaterialButton();
             this.cmbSortField = new System.Windows.Forms.ComboBox();
+            this.listView = new TestTask.Control.ListViewControl();
+            this.sortTypeProductBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tlpFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sortTypeProductBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // listView
-            // 
-            this.listView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView.AutoSize = true;
-            this.listView.Depth = 0;
-            this.listView.Location = new System.Drawing.Point(0, 34);
-            this.listView.MouseState = MaterialSkin.MouseState.HOVER;
-            this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(751, 297);
-            this.listView.TabIndex = 14;
             // 
             // tlpFilter
             // 
@@ -159,6 +149,7 @@
             // 
             // cmbSortField
             // 
+            this.cmbSortField.DataSource = this.sortTypeProductBindingSource;
             this.cmbSortField.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.cmbSortField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSortField.FormattingEnabled = true;
@@ -167,6 +158,23 @@
             this.cmbSortField.Size = new System.Drawing.Size(143, 21);
             this.cmbSortField.TabIndex = 5;
             this.cmbSortField.SelectedIndexChanged += new System.EventHandler(this.CmbSortField_Changed);
+            // 
+            // listView
+            // 
+            this.listView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listView.AutoSize = true;
+            this.listView.Depth = 0;
+            this.listView.Location = new System.Drawing.Point(0, 34);
+            this.listView.MouseState = MaterialSkin.MouseState.HOVER;
+            this.listView.Name = "listView";
+            this.listView.Size = new System.Drawing.Size(751, 297);
+            this.listView.TabIndex = 14;
+            // 
+            // sortTypeProductBindingSource
+            // 
+            this.sortTypeProductBindingSource.DataSource = typeof(TestTask.BindingItem.Pages.TypeProduct.SortTypeProduct);
             // 
             // TypeProductListView
             // 
@@ -179,6 +187,7 @@
             this.SizeChanged += new System.EventHandler(this.ListView_SizeChanged);
             this.tlpFilter.ResumeLayout(false);
             this.tlpFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sortTypeProductBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -194,5 +203,6 @@
         private System.Windows.Forms.TextBox tbSearchStrName;
         private MaterialSkin.Controls.MaterialButton buttonUseFilter;
         private System.Windows.Forms.ComboBox cmbSortField;
+        private System.Windows.Forms.BindingSource sortTypeProductBindingSource;
     }
 }

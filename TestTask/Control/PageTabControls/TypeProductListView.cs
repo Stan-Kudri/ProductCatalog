@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using TestTask.BindingItem.Pages.Products;
+using TestTask.BindingItem.Pages.TypeProduct;
 using TestTask.Control.PageTabControls.Model;
 using TestTask.Core;
 using TestTask.Core.Models;
@@ -24,6 +26,7 @@ namespace TestTask.Control.PageTabControls
         private CategoryService _categoryService;
         private ProductTypeService _typeService;
         private IMessageBox _messageBox;
+        private SortTypeProduct _sortType = new SortTypeProduct();
 
         public TypeProductListView() => InitializeComponent();
 
@@ -41,6 +44,8 @@ namespace TestTask.Control.PageTabControls
             _typeService = _serviceProvider.GetRequiredService<ProductTypeService>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
             listView.Initialize(this, serviceProvider.GetRequiredService<IMessageBox>());
+            cmbSortField.DataSource = _sortType.Items;
+            cmbSortField.SelectedItem = _sortType.SortField;
         }
 
         public void LoadData() => listView.LoadData();
@@ -105,6 +110,7 @@ namespace TestTask.Control.PageTabControls
         {
             var queriable = _typeService.GetQueryableAll();
             queriable = GetSearchType(queriable);
+            queriable = _sortType.Apply(queriable);
             var result = queriable.GetPagedList(page);
             return new PagedList<Entity>(result, result.PageNumber, result.PageSize, result.TotalItems);
         }
@@ -117,11 +123,15 @@ namespace TestTask.Control.PageTabControls
 
         private void ButtonClearFilter_Click(object sender, EventArgs e)
         {
+            cmbSortField.SelectedItem = SortProducts.NoSorting;
+            _sortType.SortField = cmbSortField.SelectedItem.ToString();
+            tbSearchStrName.Text = string.Empty;
             LoadData();
         }
 
         private void CmbSortField_Changed(object sender, EventArgs e)
         {
+            _sortType.SortField = cmbSortField.SelectedItem.ToString();
             LoadData();
         }
 
