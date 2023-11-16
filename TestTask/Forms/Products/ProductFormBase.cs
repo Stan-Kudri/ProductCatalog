@@ -28,13 +28,13 @@ namespace TestTask.Forms.Products
             _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
         }
 
-        protected Company SelectedCompany =>
+        private Company SelectedCompany =>
             cmbCompanyValue.SelectedValue != null ? (Company)cmbCompanyValue.SelectedValue : throw new Exception("Wrong combo box format");
 
-        protected Category SelectedCategory =>
+        private Category SelectedCategory =>
             cmbCategoryValue.SelectedValue != null ? (Category)cmbCategoryValue.SelectedValue : throw new Exception("Wrong combo box format");
 
-        protected ProductType SelectedType =>
+        private ProductType SelectedType =>
             cmbTypeValue.SelectedValue != null ? (ProductType)cmbTypeValue.SelectedValue : throw new Exception("Wrong combo box format");
 
         protected virtual void BtnAdd_Click(object sender, EventArgs e)
@@ -130,6 +130,9 @@ namespace TestTask.Forms.Products
             return true;
         }
 
+        protected void ReplaceTypeProduct(List<ProductType> itmes)
+            => _types.ReplaceCollection(itmes);
+
         public ProductModel GetProductModel()
         {
             if (!decimal.TryParse(tbPrice.Text, out var price))
@@ -139,8 +142,5 @@ namespace TestTask.Forms.Products
 
             return new ProductModel(SelectedCompany, SelectedCategory, SelectedType, price, tbDestination.Text);
         }
-
-        protected void ReplaceTypeProduct(List<ProductType> itmes)
-            => _types.ReplaceCollection(itmes);
     }
 }

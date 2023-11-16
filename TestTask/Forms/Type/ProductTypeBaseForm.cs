@@ -21,7 +21,8 @@ namespace TestTask.Forms.Type
             InitializeComponent();
             _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
         }
-        protected Category SelectedCategory =>
+
+        private Category SelectedCategory =>
             cmbListCategory.SelectedValue != null ? (Category)cmbListCategory.SelectedValue : throw new Exception("Wrong combo box format");
 
         protected virtual void BtnSave_Click(object sender, EventArgs e)
