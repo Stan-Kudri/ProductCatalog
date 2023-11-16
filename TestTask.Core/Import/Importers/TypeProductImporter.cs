@@ -17,7 +17,7 @@ namespace TestTask.Core.Import.Importers
 
         private Dictionary<ProductTypeField, int> _header;
 
-        public bool IsModelSheet(string sheetName) => sheetName == "Product";
+        public bool IsModelSheet(string sheetName) => sheetName == "Type";
 
         public bool ReadHeader(ISheet sheet)
         {

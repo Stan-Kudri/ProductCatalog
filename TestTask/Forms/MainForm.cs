@@ -56,17 +56,7 @@ namespace TestTask.Forms
         }
 
         private void TabControl_Changed(object sender, EventArgs e)
-        {
-            var selectTab = tabControl.SelectedTab;
-
-            foreach (var control in selectTab.Controls)
-            {
-                if (control is ILoad loadListView)
-                {
-                    loadListView.LoadData();
-                }
-            }
-        }
+            => LoadDataSelectTabPage();
 
         private void TableForm_FormClosing(object sender, FormClosingEventArgs e)
             => DialogResult = DialogResult.Cancel;
@@ -115,31 +105,9 @@ namespace TestTask.Forms
                         }
                     }
 
-                    listViewCompany.LoadData();
-
                     if (!companyRead.IsNoErrorLine(out var message))
                     {
                         _messageBox.ShowWarning(message, Company);
-                    }
-                }
-
-                if (loadTable[Product])
-                {
-                    var productRead = _serviceProvider.GetRequiredService<ExcelImporter<Product>>().ImportFromFile(path);
-
-                    foreach (var item in productRead)
-                    {
-                        if (item.Success)
-                        {
-                            _productService.AddImportData(item.Value);
-                        }
-                    }
-
-                    listViewProduct.LoadData();
-
-                    if (!productRead.IsNoErrorLine(out var message))
-                    {
-                        _messageBox.ShowWarning(message, Product);
                     }
                 }
 
@@ -154,8 +122,6 @@ namespace TestTask.Forms
                             _categoryService.AddImportData(item.Value);
                         }
                     }
-
-                    listViewCategory.LoadData();
 
                     if (!categoryRead.IsNoErrorLine(out var message))
                     {
@@ -175,14 +141,32 @@ namespace TestTask.Forms
                         }
                     }
 
-                    listViewTypeProduct.LoadData();
-
                     if (!typeRead.IsNoErrorLine(out var message))
                     {
                         _messageBox.ShowWarning(message, Category);
                     }
                 }
+
+                if (loadTable[Product])
+                {
+                    var productRead = _serviceProvider.GetRequiredService<ExcelImporter<Product>>().ImportFromFile(path);
+
+                    foreach (var item in productRead)
+                    {
+                        if (item.Success)
+                        {
+                            _productService.AddImportData(item.Value);
+                        }
+                    }
+
+                    if (!productRead.IsNoErrorLine(out var message))
+                    {
+                        _messageBox.ShowWarning(message, Product);
+                    }
+                }
             }
+
+            LoadDataSelectTabPage();
         }
 
         private void TsmItemSaveExcel_Click(object sender, EventArgs e)
@@ -215,5 +199,18 @@ namespace TestTask.Forms
         }
 
         private void TsmItemClose_Click(object sender, EventArgs e) => Close();
+
+        private void LoadDataSelectTabPage()
+        {
+            var selectTab = tabControl.SelectedTab;
+
+            foreach (var control in selectTab.Controls)
+            {
+                if (control is ILoad loadListView)
+                {
+                    loadListView.LoadData();
+                }
+            }
+        }
     }
 }
