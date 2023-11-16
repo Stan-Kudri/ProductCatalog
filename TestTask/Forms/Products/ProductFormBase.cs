@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using TestTask.BindingItem;
 using TestTask.BindingItem.ObservableCollection;
@@ -52,21 +53,26 @@ namespace TestTask.Forms.Products
         private void BtnClose_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+            _categories.ChangedCategory -= ReplaceTypeProduct;
             Close();
         }
 
         private void CmbCategoryValue_Changed(object sender, EventArgs e)
         {
-            _categories.Category = (Category)cmbCategoryValue.SelectedItem;
-            var listType = _categories.Category.Types;
-            _types = new SelectType(listType);
-            itemsBindingSourceTypes.DataSource = _types.Items;
+            var category = (Category)cmbCategoryValue.SelectedItem;
+
+            if (category != null)
+            {
+                _categories.Category = category;
+                itemsBindingSourceTypes.DataSource = _types.Items;
+            }
         }
 
         protected virtual void AddForm_Load(object sender, EventArgs e)
         {
             companyBindingSource.DataSource = _companies.Items;
             categoryBindingSource.DataSource = _categories.Items;
+            _types.ReplaceCollection(_categories.Category.Types);
             itemsBindingSourceTypes.DataSource = _types.Items;
             SetDefaultValueData();
         }
@@ -88,8 +94,7 @@ namespace TestTask.Forms.Products
         {
             cmbCompanyValue.SelectedItem = _companies.Company;
             cmbCategoryValue.SelectedItem = _categories.Category;
-            var listType = _categories.Category.Types;
-            _types = new SelectType(listType);
+            _types = new SelectType(_categories.Category.Types);
             cmbTypeValue.SelectedItem = _types.Type;
             tbPrice.Text = "0";
             tbDestination.Text = string.Empty;
@@ -134,5 +139,8 @@ namespace TestTask.Forms.Products
 
             return new ProductModel(SelectedCompany, SelectedCategory, SelectedType, price, tbDestination.Text);
         }
+
+        protected void ReplaceTypeProduct(List<ProductType> itmes)
+            => _types.ReplaceCollection(itmes);
     }
 }

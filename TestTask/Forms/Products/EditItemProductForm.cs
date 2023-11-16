@@ -26,6 +26,7 @@ namespace TestTask.Forms.Products
             _categories = new SelectCategory(categories);
             _types = new SelectType(types);
             _oldItem = oldItem;
+            _categories.ChangedCategory += ReplaceTypeProduct;
         }
 
         protected override void BtnAdd_Click(object sender, EventArgs e)

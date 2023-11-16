@@ -20,6 +20,7 @@ namespace TestTask.Forms.Products
             _companies = new SelectCompany(company);
             _categories = new SelectCategory(category);
             _types = new SelectType(types);
+            _categories.ChangedCategory += ReplaceTypeProduct;
         }
     }
 }

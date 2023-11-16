@@ -8,11 +8,11 @@ namespace TestTask.BindingItem.ObservableCollection
     {
         private Company _company = null;
 
-        public SelectCompany(List<Company> listMode)
+        public SelectCompany(List<Company> listCompany)
         {
-            if (listMode != null)
+            if (listCompany != null)
             {
-                Items = new ObservableCollection<Company>(listMode);
+                Items = new ObservableCollection<Company>(listCompany);
                 _company = Items[0];
             }
         }

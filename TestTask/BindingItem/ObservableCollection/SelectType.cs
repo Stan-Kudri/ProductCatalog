@@ -8,14 +8,8 @@ namespace TestTask.BindingItem.ObservableCollection
     {
         protected ProductType _type = null;
 
-        public SelectType(List<ProductType> listMode)
-        {
-            if (listMode != null)
-            {
-                Items = new ObservableCollection<ProductType>(listMode);
-                _type = Items[0];
-            }
-        }
+        public SelectType(List<ProductType> listType)
+            => ReplaceCollection(listType);
 
         public ObservableCollection<ProductType> Items { get; set; }
 
@@ -33,6 +27,15 @@ namespace TestTask.BindingItem.ObservableCollection
                 {
                     _type = Items[i];
                 }
+            }
+        }
+
+        public void ReplaceCollection(List<ProductType> list)
+        {
+            if (list != null)
+            {
+                Items = new ObservableCollection<ProductType>(list);
+                _type = Items[0];
             }
         }
     }
