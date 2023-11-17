@@ -92,6 +92,7 @@ namespace TestTask.Forms.Products
 
         protected virtual void SetDefaultValueData()
         {
+            tbName.Text = string.Empty;
             cmbCompanyValue.SelectedItem = _companies.Company;
             cmbCategoryValue.SelectedItem = _categories.Category;
             _types = new SelectType(_categories.Category.Types);
@@ -102,6 +103,12 @@ namespace TestTask.Forms.Products
 
         protected bool IsDataFilled(out string message)
         {
+            if (tbName.Text == string.Empty || tbName.Text == null)
+            {
+                message = "Please entr name product.";
+                return false;
+            }
+
             if (cmbCompanyValue.Text.Length <= 0)
             {
                 message = "Select your company.";
@@ -140,7 +147,7 @@ namespace TestTask.Forms.Products
                 throw new Exception("The Price field is filled in incorrectly.");
             }
 
-            return new ProductModel(SelectedCompany, SelectedCategory, SelectedType, price, tbDestination.Text);
+            return new ProductModel(tbName.Text, SelectedCompany, SelectedCategory, SelectedType, price, tbDestination.Text);
         }
     }
 }

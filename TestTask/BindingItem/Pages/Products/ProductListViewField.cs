@@ -3,6 +3,7 @@
     public enum ProductSortListViewField
     {
         ID,
+        Name,
         Company,
         Category,
         Type,

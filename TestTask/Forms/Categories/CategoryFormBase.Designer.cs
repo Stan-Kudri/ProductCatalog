@@ -173,6 +173,7 @@
             this.Controls.Add(this.tlpText);
             this.MinimumSize = new System.Drawing.Size(250, 175);
             this.Name = "CategoryFormBase";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CategoryForm";
             this.Load += new System.EventHandler(this.CategoryFormBase_Load);
             this.tlpText.ResumeLayout(false);

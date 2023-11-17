@@ -38,7 +38,7 @@ namespace TestTask.Forms.Products
             }
 
             _editItem = GetProductModel().ToProduct(_oldItem.Id);
-            if (_oldItem.Equals(_editItem))
+            if (!_oldItem.Equals(_editItem))
             {
                 _messageBox.ShowInfo("The product has not been modified.");
                 DialogResult = DialogResult.Cancel;
@@ -49,6 +49,7 @@ namespace TestTask.Forms.Products
 
         protected override void AddForm_Load(object sender, EventArgs e)
         {
+            tbName.Text = _oldItem.Name;
             companyBindingSource.DataSource = _companies.Items;
             categoryBindingSource.DataSource = _categories.Items;
             itemsBindingSourceTypes.DataSource = _types.Items;
@@ -60,6 +61,7 @@ namespace TestTask.Forms.Products
 
         protected override void SetDefaultValueData()
         {
+            tbName.Text = _oldItem.Name;
             cmbCompanyValue.SelectedItem = _companies.Company;
             cmbCategoryValue.SelectedItem = _categories.Category;
             cmbTypeValue.SelectedItem = _types.Type;

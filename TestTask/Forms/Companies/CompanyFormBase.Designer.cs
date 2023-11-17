@@ -242,6 +242,7 @@ namespace TestTask.Forms.Companies
             this.Controls.Add(this.tlpNameCompany);
             this.MinimumSize = new System.Drawing.Size(260, 280);
             this.Name = "CompanyFormBase";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Company";
             this.Load += new System.EventHandler(this.AddModeForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.companyModelBindingSource)).EndInit();

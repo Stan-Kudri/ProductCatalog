@@ -11,14 +11,18 @@ namespace TestTask.Core.Models.Products
         {
         }
 
-        public Product(int companyId, int categoryId, int typeId, string destination, decimal price, int id)
-            : this(companyId, categoryId, typeId, destination, price)
+        public Product(string name, int companyId, int categoryId, int typeId, string destination, decimal price, int id)
+            : this(name, companyId, categoryId, typeId, destination, price)
         {
             Id = id > 0 ? Id = id : throw new ArgumentException("The ID must be greater than zero.", nameof(id));
         }
 
-        public Product(int companyId, int categoryId, int typeId, string destination, decimal price)
+        public Product(string name, int companyId, int categoryId, int typeId, string destination, decimal price)
         {
+            Name = name != null && name != string.Empty
+                ? Name = name
+                : throw new ArgumentException("The name product cannot be empty.", name);
+
             CompanyId = companyId > 0 ? CompanyId = companyId : throw new ArgumentException("Company ID greater than zero.", nameof(companyId));
 
             CategoryId = categoryId > 0 ? CategoryId = categoryId : throw new ArgumentException("Category ID greater than zero.", nameof(categoryId));
@@ -29,6 +33,8 @@ namespace TestTask.Core.Models.Products
 
             Price = price > 0 ? Price = price : throw new ArgumentException("The price is greater than zero.", nameof(price));
         }
+
+        public string Name { get; set; }
 
         public ProductType Type { get; set; }
 
@@ -55,7 +61,8 @@ namespace TestTask.Core.Models.Products
                 return false;
             }
 
-            return other.Id == Id
+            return other.Name == Name
+                   && other.Id == Id
                    && other.CompanyId == CompanyId
                    && other.CategoryId == CategoryId
                    && other.TypeId == TypeId

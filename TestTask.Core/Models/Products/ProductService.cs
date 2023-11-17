@@ -61,6 +61,7 @@ namespace TestTask.Core.Models.Products
 
             var oldItem = _dbContext.Product.FirstOrDefault(e => e.Id == item.Id) ?? throw new InvalidOperationException("Interaction element not found.");
 
+            oldItem.Name = item.Name;
             oldItem.CompanyId = item.CompanyId;
             oldItem.CategoryId = item.CategoryId;
             oldItem.TypeId = item.TypeId;

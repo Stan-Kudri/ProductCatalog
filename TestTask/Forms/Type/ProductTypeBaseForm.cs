@@ -44,7 +44,7 @@ namespace TestTask.Forms.Type
             Close();
         }
 
-        protected virtual void ProductTypeBaseForm_Load(object sender, EventArgs e)
+        protected virtual void TypeBaseForm_Load(object sender, EventArgs e)
         {
             categoryBindingSource.DataSource = _categories.Items;
             SetDefaultValueData();

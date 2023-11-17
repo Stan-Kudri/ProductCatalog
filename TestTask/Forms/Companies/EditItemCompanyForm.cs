@@ -32,7 +32,7 @@ namespace TestTask.Forms.Companies
             }
 
             _editCompany = GetCompanyModel().ToCompany(_oldCompany.Id);
-            if (_oldCompany.Equals(_editCompany))
+            if (!_oldCompany.Equals(_editCompany))
             {
                 _messageBox.ShowInfo("The company has not been modified.");
                 DialogResult = DialogResult.Cancel;

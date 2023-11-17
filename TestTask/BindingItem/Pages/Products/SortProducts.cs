@@ -15,6 +15,7 @@ namespace TestTask.BindingItem.Pages.Products
         private static Dictionary<string, ProductSortListViewField> _sortMapField = new Dictionary<string, ProductSortListViewField>()
         {
             { "Id", ProductSortListViewField.ID },
+            { "Name", ProductSortListViewField.Name },
             { "Company", ProductSortListViewField.Company },
             { "Category", ProductSortListViewField.Category },
             { "Type", ProductSortListViewField.Type },
@@ -56,6 +57,8 @@ namespace TestTask.BindingItem.Pages.Products
                 {
                     case ProductSortListViewField.ID:
                         return items.OrderBy(e => e.Id);
+                    case ProductSortListViewField.Name:
+                        return items.OrderBy(e => e.Name);
                     case ProductSortListViewField.Company:
                         return items.OrderBy(e => e.Company.Name);
                     case ProductSortListViewField.Category:

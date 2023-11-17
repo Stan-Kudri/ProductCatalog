@@ -34,7 +34,7 @@
             this.labelSortField = new MaterialSkin.Controls.MaterialLabel();
             this.buttonClearFilter = new MaterialSkin.Controls.MaterialButton();
             this.labelSearchType = new MaterialSkin.Controls.MaterialLabel();
-            this.tbSearchStrType = new System.Windows.Forms.TextBox();
+            this.tbSearchStrName = new System.Windows.Forms.TextBox();
             this.buttonUseFilter = new MaterialSkin.Controls.MaterialButton();
             this.cmbSortField = new System.Windows.Forms.ComboBox();
             this.sortProductsBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -67,7 +67,7 @@
             this.tlpFilter.Controls.Add(this.labelSortField, 2, 0);
             this.tlpFilter.Controls.Add(this.buttonClearFilter, 5, 0);
             this.tlpFilter.Controls.Add(this.labelSearchType, 0, 0);
-            this.tlpFilter.Controls.Add(this.tbSearchStrType, 1, 0);
+            this.tlpFilter.Controls.Add(this.tbSearchStrName, 1, 0);
             this.tlpFilter.Controls.Add(this.buttonUseFilter, 4, 0);
             this.tlpFilter.Controls.Add(this.cmbSortField, 3, 0);
             this.tlpFilter.Location = new System.Drawing.Point(1, -1);
@@ -128,16 +128,16 @@
             this.labelSearchType.Name = "labelSearchType";
             this.labelSearchType.Size = new System.Drawing.Size(106, 17);
             this.labelSearchType.TabIndex = 2;
-            this.labelSearchType.Text = "Search type";
+            this.labelSearchType.Text = "Search name";
             this.labelSearchType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tbSearchStrType
+            // tbSearchStrName
             // 
-            this.tbSearchStrType.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tbSearchStrType.Location = new System.Drawing.Point(115, 9);
-            this.tbSearchStrType.Name = "tbSearchStrType";
-            this.tbSearchStrType.Size = new System.Drawing.Size(143, 20);
-            this.tbSearchStrType.TabIndex = 3;
+            this.tbSearchStrName.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tbSearchStrName.Location = new System.Drawing.Point(115, 9);
+            this.tbSearchStrName.Name = "tbSearchStrName";
+            this.tbSearchStrName.Size = new System.Drawing.Size(143, 20);
+            this.tbSearchStrName.TabIndex = 3;
             // 
             // buttonUseFilter
             // 
@@ -200,7 +200,7 @@
         private MaterialSkin.Controls.MaterialLabel labelSortField;
         private MaterialSkin.Controls.MaterialButton buttonClearFilter;
         private MaterialSkin.Controls.MaterialLabel labelSearchType;
-        private System.Windows.Forms.TextBox tbSearchStrType;
+        private System.Windows.Forms.TextBox tbSearchStrName;
         private MaterialSkin.Controls.MaterialButton buttonUseFilter;
         private System.Windows.Forms.ComboBox cmbSortField;
         private System.Windows.Forms.BindingSource sortProductsBindingSource;

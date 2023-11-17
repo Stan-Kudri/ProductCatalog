@@ -34,7 +34,7 @@ namespace TestTask.Forms.Type
             }
 
             _editItem = GetTypeProductModel().ToProductType(_oldItem.Id);
-            if (_oldItem.Equals(_editItem))
+            if (!_oldItem.Equals(_editItem))
             {
                 _messageBox.ShowInfo("The product has not been modified.");
                 DialogResult = DialogResult.Cancel;
@@ -49,16 +49,15 @@ namespace TestTask.Forms.Type
             Close();
         }
 
-        protected virtual void ProductTypeBaseForm_Load(object sender, EventArgs e)
+        protected override void TypeBaseForm_Load(object sender, EventArgs e)
         {
             categoryBindingSource.DataSource = _categories.Items;
-            _categories.SetValueCategory(_oldItem.CategoryId);
             SetDefaultValueData();
         }
 
         protected override void SetDefaultValueData()
         {
-            _categories.Category = _oldItem.Category;
+            _categories.SetValueCategory(_oldItem.CategoryId);
             cmbListCategory.SelectedItem = _categories.Category;
             tbName.Text = _oldItem.Name;
         }

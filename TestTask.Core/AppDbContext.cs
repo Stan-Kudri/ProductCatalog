@@ -47,6 +47,8 @@ namespace TestTask.Core
             configurationProduct.ToTable("product");
             configurationProduct.HasKey(e => e.Id);
             configurationProduct.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
+            configurationProduct.HasIndex(e => e.Name).IsUnique();
+            configurationProduct.Property(e => e.Name).IsRequired().HasMaxLength(128).HasColumnName("name").HasMaxLength(128);
             configurationProduct.Property(e => e.CompanyId).IsRequired().HasColumnName("companyId");
             configurationProduct.Property(e => e.CategoryId).IsRequired().HasColumnName("categoryId");
             configurationProduct.Property(e => e.TypeId).IsRequired().HasColumnName("typeId");

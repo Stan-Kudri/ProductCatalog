@@ -23,7 +23,7 @@ namespace TestTask.Forms.Categories
             }
 
             _editItem = GetCategoryModel().ToCategory(_oldItem.Id);
-            if (_oldItem.Equals(_editItem))
+            if (!_oldItem.Equals(_editItem))
             {
                 _messageBox.ShowInfo("The category has not been modified.");
                 DialogResult = DialogResult.Cancel;

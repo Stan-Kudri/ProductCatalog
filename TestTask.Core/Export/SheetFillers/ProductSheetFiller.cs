@@ -42,6 +42,9 @@ namespace TestTask.Core.Export.SheetFillers
                         case ProductField.ID:
                             cell.SetCellValue(item.Id);
                             break;
+                        case ProductField.Name:
+                            cell.SetCellValue(item.Name);
+                            break;
                         case ProductField.CompanyId:
                             cell.SetCellValue(item.CompanyId);
                             break;
