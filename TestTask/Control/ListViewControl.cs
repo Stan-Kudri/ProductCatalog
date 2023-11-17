@@ -70,6 +70,7 @@ namespace TestTask.Control
             var row = indexEditItem.First();
             var rowItem = listView.Items[row];
             var entity = _provider.GetEntity(rowItem);
+
             if (_provider.Edit(entity))
             {
                 LoadData();

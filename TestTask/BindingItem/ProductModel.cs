@@ -8,14 +8,19 @@ namespace TestTask.BindingItem
 {
     public class ProductModel : ModelBase
     {
+        private string _name = string.Empty;
         private Company _company = null;
         private Category _category = null;
         private ProductType _type = null;
         private decimal _price = 0;
         private string _destination = null;
 
-        public ProductModel(Company company, Category category, ProductType type, decimal price, string destination)
+        public ProductModel(string name, Company company, Category category, ProductType type, decimal price, string destination)
         {
+            Name = name != null && name != string.Empty
+                ? Name = name
+                : throw new ArgumentException("The name product cannot be empty.", name);
+
             Company = company ?? throw new ArgumentException("The company cannot be null.", nameof(company));
 
             Category = category ?? throw new ArgumentException("The category cannot be null.", nameof(category));
@@ -25,6 +30,12 @@ namespace TestTask.BindingItem
             Destination = destination;
 
             Price = price > 0 ? Price = price : throw new ArgumentException("The price is greater than zero.", nameof(price));
+        }
+
+        public string Name
+        {
+            get => _name;
+            set => SetField(ref _name, value);
         }
 
         public Company Company
@@ -57,8 +68,8 @@ namespace TestTask.BindingItem
             set => SetField(ref _price, value);
         }
 
-        public Product ToProduct() => new Product(_company.Id, _category.Id, _type.Id, _destination, _price);
+        public Product ToProduct() => new Product(_name, _company.Id, _category.Id, _type.Id, _destination, _price);
 
-        public Product ToProduct(int productId) => new Product(_company.Id, _category.Id, _type.Id, _destination, _price, productId);
+        public Product ToProduct(int productId) => new Product(_name, _company.Id, _category.Id, _type.Id, _destination, _price, productId);
     }
 }

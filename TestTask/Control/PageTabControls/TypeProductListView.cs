@@ -20,7 +20,8 @@ namespace TestTask.Control.PageTabControls
     {
         private const int IndexId = 0;
         private const int IndexColumnTypeName = 1;
-        private const int IndexColumnIdCategory = 2;
+        private const int IndexColumnNameCategory = 2;
+        private const int IndexColumnIdCategory = 3;
 
         private IServiceProvider _serviceProvider;
         private CategoryService _categoryService;
@@ -35,6 +36,7 @@ namespace TestTask.Control.PageTabControls
             new ListViewColumn("ID", 100, e => ((ProductType)e).Id),
             new ListViewColumn("Name", 355, e => ((ProductType)e).Name),
             new ListViewColumn("Category", 300, e => ((ProductType)e).Category),
+            new ListViewColumn("Category", 1, e => ((ProductType)e).CategoryId),
         };
 
         public void Initialize(IServiceProvider serviceProvider)

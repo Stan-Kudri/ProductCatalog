@@ -3,6 +3,7 @@
     public enum ProductField
     {
         ID,
+        Name,
         CompanyId,
         CategoryId,
         TypeId,

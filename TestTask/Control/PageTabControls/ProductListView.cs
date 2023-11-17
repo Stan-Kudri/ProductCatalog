@@ -19,14 +19,15 @@ namespace TestTask.Control.PageTabControls
     public partial class ProductListView : UserControl, IListViewDataProvider, IInitialize, ILoad
     {
         private const int IndexId = 0;
-        private const int IndexColumnCompanyName = 1;
-        private const int IndexColumnCategoryName = 2;
-        private const int IndexColumnType = 3;
-        private const int IndexColumnPrice = 4;
-        private const int IndexColumnDestination = 5;
-        private const int IndexColumnIdCompany = 6;
-        private const int IndexColumnIdCategory = 7;
-        private const int IndexColumnIdType = 8;
+        private const int IndexColumnName = 1;
+        private const int IndexColumnCompanyName = 2;
+        private const int IndexColumnCategoryName = 3;
+        private const int IndexColumnType = 4;
+        private const int IndexColumnPrice = 5;
+        private const int IndexColumnDestination = 6;
+        private const int IndexColumnIdCompany = 7;
+        private const int IndexColumnIdCategory = 8;
+        private const int IndexColumnIdType = 9;
 
         private IServiceProvider _serviceProvider;
         private CompanyService _companyService;
@@ -41,11 +42,12 @@ namespace TestTask.Control.PageTabControls
         public IReadOnlyList<ListViewColumn> Columns { get; } = new List<ListViewColumn>
         {
             new ListViewColumn("ID", 60, e => ((Product)e).Id),
-            new ListViewColumn("Company", 140, e => ((Product)e).Company),
+            new ListViewColumn("Name", 80, e => ((Product)e).Name),
+            new ListViewColumn("Company", 120, e => ((Product)e).Company),
             new ListViewColumn("Category", 130, e => ((Product)e).Category),
-            new ListViewColumn("Type", 150, e => ((Product)e).Type),
+            new ListViewColumn("Type", 120, e => ((Product)e).Type),
             new ListViewColumn("Price", 100, e => ((Product)e).Price),
-            new ListViewColumn("Destination", 172, e => ((Product)e).Destination),
+            new ListViewColumn("Destination", 142, e => ((Product)e).Destination),
             new ListViewColumn("CompanyId", 1, e => ((Product)e).CompanyId),
             new ListViewColumn("CategoryId", 1, e => ((Product)e).CategoryId),
             new ListViewColumn("TypeId", 1, e => ((Product)e).TypeId),
@@ -133,13 +135,14 @@ namespace TestTask.Control.PageTabControls
         public Entity GetEntity(ListViewItem item)
         {
             var idProduct = item.GetNonNullableString(IndexId).ParseInt();
+            var name = item.GetNonNullableString(IndexColumnName);
             var price = item.GetNonNullableString(IndexColumnPrice).ParseDecimal();
             var destination = item.GetNonNullableString(IndexColumnDestination);
             var companyId = item.GetNonNullableString(IndexColumnIdCompany).ParseInt();
             var categoryId = item.GetNonNullableString(IndexColumnIdCategory).ParseInt();
             var typeId = item.GetNonNullableString(IndexColumnIdType).ParseInt();
 
-            return new Product(companyId, categoryId, typeId, destination, price, idProduct);
+            return new Product(name, companyId, categoryId, typeId, destination, price, idProduct);
         }
 
         public PagedList<Entity> GetPage(Page page)
@@ -160,7 +163,7 @@ namespace TestTask.Control.PageTabControls
         {
             cmbSortField.SelectedItem = SortProducts.NoSorting;
             _sortProduct.SortField = cmbSortField.SelectedItem.ToString();
-            tbSearchStrType.Text = string.Empty;
+            tbSearchStrName.Text = string.Empty;
             LoadData();
         }
 
@@ -174,8 +177,8 @@ namespace TestTask.Control.PageTabControls
             => listView.ChangeSizeColumnListView();
 
         private IQueryable<Product> GetSearchType(IQueryable<Product> items)
-            => string.IsNullOrEmpty(tbSearchStrType.Text)
+            => string.IsNullOrEmpty(tbSearchStrName.Text)
             ? items
-            : items.Where(e => e.Destination.Contains(tbSearchStrType.Text));
+            : items.Where(e => e.Name.Contains(tbSearchStrName.Text));
     }
 }

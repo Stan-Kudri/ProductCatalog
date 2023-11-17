@@ -27,19 +27,19 @@
             this.components = new System.ComponentModel.Container();
             this.tlpField = new System.Windows.Forms.TableLayoutPanel();
             this.cmbListCategory = new MaterialSkin.Controls.MaterialComboBox();
-            this.itemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.categoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.selectCategoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tbName = new MaterialSkin.Controls.MaterialTextBox2();
+            this.itemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tlpButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new MaterialSkin.Controls.MaterialButton();
             this.btnClose = new MaterialSkin.Controls.MaterialButton();
             this.btnClear = new MaterialSkin.Controls.MaterialButton();
-            this.categoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tlpField.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.selectCategoryBindingSource)).BeginInit();
-            this.tlpButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectCategoryBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).BeginInit();
+            this.tlpButton.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpField
@@ -79,10 +79,10 @@
             this.cmbListCategory.StartIndex = 0;
             this.cmbListCategory.TabIndex = 0;
             // 
-            // itemsBindingSource
+            // categoryBindingSource
             // 
-            this.itemsBindingSource.DataMember = "Items";
-            this.itemsBindingSource.DataSource = this.selectCategoryBindingSource;
+            this.categoryBindingSource.DataMember = "Items";
+            this.categoryBindingSource.DataSource = this.selectCategoryBindingSource;
             // 
             // selectCategoryBindingSource
             // 
@@ -97,6 +97,7 @@
             this.tbName.Depth = 0;
             this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.tbName.HideSelection = true;
+            this.tbName.Hint = "Name";
             this.tbName.LeadingIcon = null;
             this.tbName.Location = new System.Drawing.Point(3, 53);
             this.tbName.MaxLength = 32767;
@@ -116,6 +117,11 @@
             this.tbName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.tbName.TrailingIcon = null;
             this.tbName.UseSystemPasswordChar = false;
+            // 
+            // itemsBindingSource
+            // 
+            this.itemsBindingSource.DataMember = "Items";
+            this.itemsBindingSource.DataSource = this.selectCategoryBindingSource;
             // 
             // tlpButton
             // 
@@ -198,11 +204,6 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
-            // categoryBindingSource
-            // 
-            this.categoryBindingSource.DataMember = "Items";
-            this.categoryBindingSource.DataSource = this.selectCategoryBindingSource;
-            // 
             // ProductTypeBaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -211,14 +212,15 @@
             this.Controls.Add(this.tlpButton);
             this.Controls.Add(this.tlpField);
             this.Name = "ProductTypeBaseForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Product Type";
-            this.Load += new System.EventHandler(this.ProductTypeBaseForm_Load);
+            this.Load += new System.EventHandler(this.TypeBaseForm_Load);
             this.tlpField.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectCategoryBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).EndInit();
             this.tlpButton.ResumeLayout(false);
             this.tlpButton.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -235,6 +237,6 @@
         protected System.Windows.Forms.BindingSource itemsBindingSource;
         protected System.Windows.Forms.BindingSource selectCategoryBindingSource;
         protected System.Windows.Forms.BindingSource categoryBindingSource;
-        protected System.ComponentModel.IContainer components;
+        private System.ComponentModel.IContainer components;
     }
 }

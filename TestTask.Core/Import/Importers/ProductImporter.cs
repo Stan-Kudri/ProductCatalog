@@ -11,6 +11,7 @@ namespace TestTask.Core.Import.Importers
         private readonly Dictionary<string, ProductField> _columnMap = new Dictionary<string, ProductField>
         {
             ["ID"] = ProductField.ID,
+            ["Name"] = ProductField.Name,
             ["CompanyId"] = ProductField.CompanyId,
             ["CategoryId"] = ProductField.CategoryId,
             ["TypeId"] = ProductField.TypeId,
@@ -61,6 +62,16 @@ namespace TestTask.Core.Import.Importers
                             return id.ToError<Product>();
                         }
                         res.Id = id.Value;
+                        break;
+
+                    case ProductField.Name:
+
+                        var name = row.GetString(pair.Value, "Name");
+                        if (!name.Success)
+                        {
+                            return name.ToError<Product>();
+                        }
+                        res.Name = name.Value;
                         break;
 
                     case ProductField.CompanyId:
