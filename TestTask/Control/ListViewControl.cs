@@ -34,13 +34,14 @@ namespace TestTask.Control
         {
             _provider = provider;
             _messageBox = messageBox;
+
+            //Initialize AutoSize ListView
             float initialTotalColumnWidth = 0;
             foreach (var column in provider.Columns)
             {
                 listView.Columns.Add(new ColumnHeader { Text = column.Name, Width = column.Width });
                 initialTotalColumnWidth += column.Width;
             }
-
             _percentages = provider.Columns.Select(c => c.Width / initialTotalColumnWidth).ToArray();
 
             cmbPageSize.DataSource = Page.Items;

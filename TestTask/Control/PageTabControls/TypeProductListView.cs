@@ -34,7 +34,7 @@ namespace TestTask.Control.PageTabControls
         public IReadOnlyList<ListViewColumn> Columns { get; } = new List<ListViewColumn>
         {
             new ListViewColumn("ID", 100, e => ((ProductType)e).Id),
-            new ListViewColumn("Name", 355, e => ((ProductType)e).Name),
+            new ListViewColumn("Name", 350, e => ((ProductType)e).Name),
             new ListViewColumn("Category", 300, e => ((ProductType)e).Category),
             new ListViewColumn("Category", 1, e => ((ProductType)e).CategoryId),
         };
