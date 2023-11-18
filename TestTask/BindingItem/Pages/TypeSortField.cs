@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace TestTask.BindingItem.Pages.Categories
+namespace TestTask.BindingItem.Pages
 {
-    public class SortPageCategories : ModelBase
+    public class TypeSortField : ModelBase
     {
         public const string NoSorting = "No Sorting";
 
@@ -14,12 +14,12 @@ namespace TestTask.BindingItem.Pages.Categories
 
         private static Dictionary<string, bool?> _sortMap = new Dictionary<string, bool?>() { { NoSorting, null }, { Ascending, true }, { Descending, false } };
 
-        public SortPageCategories()
+        public TypeSortField()
             : this(null)
         {
         }
 
-        public SortPageCategories(bool? isAscending) => _isAscending = isAscending;
+        public TypeSortField(bool? isAscending) => _isAscending = isAscending;
 
         public string SortType
         {

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using TestTask.BindingItem.Pages;
 using TestTask.BindingItem.Pages.Companies;
 using TestTask.Control.PageTabControls.Model;
 using TestTask.Core;
@@ -25,7 +26,8 @@ namespace TestTask.Control.PageTabControls
         private IServiceProvider _serviceProvider;
         private CompanyService _companyService;
         private ProductService _productService;
-        private SortCompanies _sortCompany = new SortCompanies();
+        private SortCompanies _sortField = new SortCompanies();
+        private TypeSortField _typeSort = new TypeSortField();
 
         public CompanyListView() => InitializeComponent();
 
@@ -43,8 +45,11 @@ namespace TestTask.Control.PageTabControls
             _companyService = _serviceProvider.GetRequiredService<CompanyService>();
             _productService = _serviceProvider.GetRequiredService<ProductService>();
             listView.Initialize(this, serviceProvider.GetRequiredService<IMessageBox>());
-            cmbSortField.DataSource = _sortCompany.Items;
-            cmbSortField.SelectedItem = _sortCompany.SortField;
+
+            cmbSortField.DataSource = _sortField.Items;
+            cmbSortField.SelectedItem = _sortField.SortField;
+            cmbTypeSort.DataSource = _typeSort.Items;
+            cmbTypeSort.SelectedItem = _sortField.SortField;
         }
 
         public void LoadData() => listView.LoadData();
@@ -99,7 +104,7 @@ namespace TestTask.Control.PageTabControls
         {
             var queriable = _companyService.GetQueryableAll();
             queriable = GetSearchName(queriable);
-            queriable = _sortCompany.Apply(queriable);
+            queriable = _sortField.Apply(queriable, _typeSort.IsAscending);
             var result = queriable.GetPagedList(page);
             return new PagedList<Entity>(result, result.PageNumber, result.PageSize, result.TotalItems);
         }
@@ -114,16 +119,35 @@ namespace TestTask.Control.PageTabControls
 
         private void ButtonClearFilter_Click(object sender, EventArgs e)
         {
-            cmbSortField.SelectedItem = SortCompanies.NoSorting;
-            _sortCompany.SortField = cmbSortField.SelectedItem.ToString();
+            cmbSortField.SelectedItem = SortCompanies.IdSort;
+            _sortField.SortField = cmbSortField.SelectedItem.ToString();
+            cmbTypeSort.SelectedItem = TypeSortField.NoSorting;
+            _typeSort.SetSort(cmbTypeSort.SelectedItem.ToString());
             tbSearchStrName.Text = string.Empty;
             LoadData();
         }
 
         private void CmbSortField_Changed(object sender, EventArgs e)
         {
-            _sortCompany.SortField = cmbSortField.SelectedItem.ToString();
+            _sortField.SortField = cmbSortField.SelectedItem.ToString();
             LoadData();
+        }
+
+        private void CmbTypeSort_Changed(object sender, EventArgs e)
+        {
+            _typeSort.SetSort(cmbTypeSort.SelectedItem.ToString());
+            if (_typeSort.IsAscending == null)
+            {
+                cmbSortField.Enabled = cmbSortField.Visible
+                    = labelSortField.Enabled = labelSortField.Visible = false;
+
+                LoadData();
+
+                return;
+            }
+
+            cmbSortField.Enabled = cmbSortField.Visible
+                    = labelSortField.Enabled = labelSortField.Visible = true;
         }
 
         private void ListView_SizeChanged(object sender, EventArgs e)
