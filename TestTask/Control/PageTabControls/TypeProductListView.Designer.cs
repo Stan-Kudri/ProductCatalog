@@ -88,7 +88,7 @@
             this.labelSortField.Name = "labelSortField";
             this.labelSortField.Size = new System.Drawing.Size(68, 17);
             this.labelSortField.TabIndex = 6;
-            this.labelSortField.Text = "Field:";
+            this.labelSortField.Text = "Column:";
             this.labelSortField.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // buttonClearFilter

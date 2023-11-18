@@ -61,7 +61,7 @@ namespace TestTask.Control.PageTabControls
             this.tlpFilter.Controls.Add(this.tbSearchStrName, 1, 0);
             this.tlpFilter.Controls.Add(this.buttonUseFilter, 4, 0);
             this.tlpFilter.Controls.Add(this.cmbSortName, 3, 0);
-            this.tlpFilter.Location = new System.Drawing.Point(1, 1);
+            this.tlpFilter.Location = new System.Drawing.Point(1, -1);
             this.tlpFilter.Margin = new System.Windows.Forms.Padding(1);
             this.tlpFilter.Name = "tlpFilter";
             this.tlpFilter.RowCount = 1;
@@ -170,7 +170,7 @@ namespace TestTask.Control.PageTabControls
             // 
             // sortPageCategoriesBindingSource
             // 
-            this.sortPageCategoriesBindingSource.DataSource = typeof(TypeSortField);
+            this.sortPageCategoriesBindingSource.DataSource = typeof(TestTask.BindingItem.Pages.TypeSortField);
             // 
             // listView
             // 
@@ -179,7 +179,7 @@ namespace TestTask.Control.PageTabControls
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listView.AutoSize = true;
             this.listView.Depth = 0;
-            this.listView.Location = new System.Drawing.Point(0, 36);
+            this.listView.Location = new System.Drawing.Point(0, 34);
             this.listView.MouseState = MaterialSkin.MouseState.HOVER;
             this.listView.Name = "listView";
             this.listView.Size = new System.Drawing.Size(751, 297);
