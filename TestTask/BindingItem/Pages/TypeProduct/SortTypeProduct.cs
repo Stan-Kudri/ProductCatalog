@@ -8,7 +8,8 @@ namespace TestTask.BindingItem.Pages.TypeProduct
 {
     public class SortTypeProduct : ModelBase
     {
-        public const string NoSorting = "No Sorting";
+        public const string IdSort = "Id";
+        private const bool IsSortAscending = true;
 
         private string _sortField;
 
@@ -21,13 +22,12 @@ namespace TestTask.BindingItem.Pages.TypeProduct
 
         public SortTypeProduct()
         {
-            Items.Add(NoSorting);
             foreach (var item in _sortMapField.Keys)
             {
                 Items.Add(item);
             }
 
-            _sortField = NoSorting;
+            _sortField = Items[0];
         }
 
         public string SortField
@@ -46,20 +46,29 @@ namespace TestTask.BindingItem.Pages.TypeProduct
 
         public ObservableCollection<string> Items = new ObservableCollection<string>();
 
-        public IQueryable<ProductType> Apply(IQueryable<ProductType> items)
+        public IQueryable<ProductType> Apply(IQueryable<ProductType> items, bool? isSortAscending = true)
         {
+            if (isSortAscending == null)
+            {
+                return items;
+            }
+
             if (_sortMapField.TryGetValue(_sortField, out var field))
             {
                 switch (field)
                 {
                     case TypeListViewField.ID:
-                        return items.OrderBy(e => e.Id);
+                        return isSortAscending == IsSortAscending
+                            ? items.OrderBy(e => e.Id)
+                            : items.OrderByDescending(e => e.Id);
                     case TypeListViewField.Name:
-                        return items.OrderBy(e => e.Name);
+                        return isSortAscending == IsSortAscending
+                            ? items.OrderBy(e => e.Name)
+                            : items.OrderByDescending(e => e.Name);
                     case TypeListViewField.Category:
-                        return items.OrderBy(e => e.Category.Name);
-                    default:
-                        return items;
+                        return isSortAscending == IsSortAscending
+                            ? items.OrderBy(e => e.Category.Name)
+                            : items.OrderByDescending(e => e.Category.Name);
                 }
             }
 

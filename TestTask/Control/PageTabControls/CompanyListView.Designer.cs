@@ -38,14 +38,14 @@
             this.labelSortField = new MaterialSkin.Controls.MaterialLabel();
             this.labelTypeSort = new MaterialSkin.Controls.MaterialLabel();
             this.cmbTypeSort = new System.Windows.Forms.ComboBox();
+            this.itemsBindingSourceTypeField = new System.Windows.Forms.BindingSource(this.components);
+            this.typeSortFieldBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tbSearchStrName = new System.Windows.Forms.TextBox();
             this.listView = new TestTask.Control.ListViewControl();
-            this.typeSortFieldBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.itemsBindingSourceTypeField = new System.Windows.Forms.BindingSource(this.components);
             this.tlpFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sortCompaniesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.typeSortFieldBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceTypeField)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.typeSortFieldBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpFilter
@@ -193,6 +193,15 @@
             this.cmbTypeSort.TabIndex = 8;
             this.cmbTypeSort.SelectedIndexChanged += new System.EventHandler(this.CmbTypeSort_Changed);
             // 
+            // itemsBindingSourceTypeField
+            // 
+            this.itemsBindingSourceTypeField.DataMember = "Items";
+            this.itemsBindingSourceTypeField.DataSource = this.typeSortFieldBindingSource;
+            // 
+            // typeSortFieldBindingSource
+            // 
+            this.typeSortFieldBindingSource.DataSource = typeof(TestTask.BindingItem.Pages.TypeSortField);
+            // 
             // tbSearchStrName
             // 
             this.tbSearchStrName.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -215,15 +224,6 @@
             this.listView.TabIndex = 10;
             this.listView.SizeChanged += new System.EventHandler(this.ListView_SizeChanged);
             // 
-            // typeSortFieldBindingSource
-            // 
-            this.typeSortFieldBindingSource.DataSource = typeof(TestTask.BindingItem.Pages.TypeSortField);
-            // 
-            // itemsBindingSourceTypeField
-            // 
-            this.itemsBindingSourceTypeField.DataMember = "Items";
-            this.itemsBindingSourceTypeField.DataSource = this.typeSortFieldBindingSource;
-            // 
             // CompanyListView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -235,8 +235,8 @@
             this.tlpFilter.ResumeLayout(false);
             this.tlpFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sortCompaniesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.typeSortFieldBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSourceTypeField)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.typeSortFieldBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

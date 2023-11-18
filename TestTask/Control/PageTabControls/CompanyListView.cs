@@ -49,7 +49,7 @@ namespace TestTask.Control.PageTabControls
             cmbSortField.DataSource = _sortField.Items;
             cmbSortField.SelectedItem = _sortField.SortField;
             cmbTypeSort.DataSource = _typeSort.Items;
-            cmbTypeSort.SelectedItem = _sortField.SortField;
+            cmbTypeSort.SelectedItem = _typeSort.SortType;
         }
 
         public void LoadData() => listView.LoadData();
@@ -120,8 +120,8 @@ namespace TestTask.Control.PageTabControls
         private void ButtonClearFilter_Click(object sender, EventArgs e)
         {
             cmbSortField.SelectedItem = SortCompanies.IdSort;
-            _sortField.SortField = cmbSortField.SelectedItem.ToString();
             cmbTypeSort.SelectedItem = TypeSortField.NoSorting;
+            _sortField.SortField = cmbSortField.SelectedItem.ToString();
             _typeSort.SetSort(cmbTypeSort.SelectedItem.ToString());
             tbSearchStrName.Text = string.Empty;
             LoadData();
@@ -136,18 +136,19 @@ namespace TestTask.Control.PageTabControls
         private void CmbTypeSort_Changed(object sender, EventArgs e)
         {
             _typeSort.SetSort(cmbTypeSort.SelectedItem.ToString());
+
             if (_typeSort.IsAscending == null)
             {
                 cmbSortField.Enabled = cmbSortField.Visible
                     = labelSortField.Enabled = labelSortField.Visible = false;
-
-                LoadData();
-
-                return;
+            }
+            else
+            {
+                cmbSortField.Enabled = cmbSortField.Visible
+                        = labelSortField.Enabled = labelSortField.Visible = true;
             }
 
-            cmbSortField.Enabled = cmbSortField.Visible
-                    = labelSortField.Enabled = labelSortField.Visible = true;
+            LoadData();
         }
 
         private void ListView_SizeChanged(object sender, EventArgs e)

@@ -26,6 +26,8 @@ namespace TestTask.BindingItem.Pages.Companies
             {
                 Items.Add(item);
             }
+
+            _sortField = Items[0];
         }
 
         public string SortField
