@@ -3,7 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using TestTask.BindingItem.Pages.Products;
+using TestTask.BindingItem.Pages;
+using TestTask.BindingItem.Pages.Companies;
 using TestTask.BindingItem.Pages.TypeProduct;
 using TestTask.Control.PageTabControls.Model;
 using TestTask.Core;
@@ -27,7 +28,8 @@ namespace TestTask.Control.PageTabControls
         private CategoryService _categoryService;
         private ProductTypeService _typeService;
         private IMessageBox _messageBox;
-        private SortTypeProduct _sortType = new SortTypeProduct();
+        private SortTypeProduct _sortField = new SortTypeProduct();
+        private TypeSortField _typeSort = new TypeSortField();
 
         public TypeProductListView() => InitializeComponent();
 
@@ -36,7 +38,7 @@ namespace TestTask.Control.PageTabControls
             new ListViewColumn("ID", 100, e => ((ProductType)e).Id),
             new ListViewColumn("Name", 350, e => ((ProductType)e).Name),
             new ListViewColumn("Category", 300, e => ((ProductType)e).Category),
-            new ListViewColumn("Category", 1, e => ((ProductType)e).CategoryId),
+            new ListViewColumn("CategoryId", 1, e => ((ProductType)e).CategoryId),
         };
 
         public void Initialize(IServiceProvider serviceProvider)
@@ -46,8 +48,11 @@ namespace TestTask.Control.PageTabControls
             _typeService = _serviceProvider.GetRequiredService<ProductTypeService>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
             listView.Initialize(this, serviceProvider.GetRequiredService<IMessageBox>());
-            cmbSortField.DataSource = _sortType.Items;
-            cmbSortField.SelectedItem = _sortType.SortField;
+
+            cmbSortField.DataSource = _sortField.Items;
+            cmbSortField.SelectedItem = _sortField.SortField;
+            cmbTypeSort.DataSource = _typeSort.Items;
+            cmbTypeSort.SelectedItem = _typeSort.SortType;
         }
 
         public void LoadData() => listView.LoadData();
@@ -112,7 +117,7 @@ namespace TestTask.Control.PageTabControls
         {
             var queriable = _typeService.GetQueryableAll();
             queriable = GetSearchType(queriable);
-            queriable = _sortType.Apply(queriable);
+            queriable = _sortField.Apply(queriable, _typeSort.IsAscending);
             var result = queriable.GetPagedList(page);
             return new PagedList<Entity>(result, result.PageNumber, result.PageSize, result.TotalItems);
         }
@@ -125,15 +130,35 @@ namespace TestTask.Control.PageTabControls
 
         private void ButtonClearFilter_Click(object sender, EventArgs e)
         {
-            cmbSortField.SelectedItem = SortProducts.NoSorting;
-            _sortType.SortField = cmbSortField.SelectedItem.ToString();
+            cmbSortField.SelectedItem = SortCompanies.IdSort;
+            cmbTypeSort.SelectedItem = TypeSortField.NoSorting;
+            _sortField.SortField = cmbSortField.SelectedItem.ToString();
+            _typeSort.SetSort(cmbTypeSort.SelectedItem.ToString());
             tbSearchStrName.Text = string.Empty;
             LoadData();
         }
 
         private void CmbSortField_Changed(object sender, EventArgs e)
         {
-            _sortType.SortField = cmbSortField.SelectedItem.ToString();
+            _sortField.SortField = cmbSortField.SelectedItem.ToString();
+            LoadData();
+        }
+
+        private void CmbTypeSort_Changed(object sender, EventArgs e)
+        {
+            _typeSort.SetSort(cmbTypeSort.SelectedItem.ToString());
+
+            if (_typeSort.IsAscending == null)
+            {
+                cmbSortField.Enabled = cmbSortField.Visible
+                    = labelSortField.Enabled = labelSortField.Visible = false;
+            }
+            else
+            {
+                cmbSortField.Enabled = cmbSortField.Visible
+                        = labelSortField.Enabled = labelSortField.Visible = true;
+            }
+
             LoadData();
         }
 

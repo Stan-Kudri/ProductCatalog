@@ -1,4 +1,6 @@
-﻿namespace TestTask.Control.PageTabControls
+﻿using TestTask.BindingItem.Pages;
+
+namespace TestTask.Control.PageTabControls
 {
     partial class CategoryListView
     {
@@ -168,7 +170,7 @@
             // 
             // sortPageCategoriesBindingSource
             // 
-            this.sortPageCategoriesBindingSource.DataSource = typeof(TestTask.BindingItem.Pages.Categories.SortPageCategories);
+            this.sortPageCategoriesBindingSource.DataSource = typeof(TypeSortField);
             // 
             // listView
             // 

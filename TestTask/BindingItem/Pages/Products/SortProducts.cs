@@ -8,7 +8,8 @@ namespace TestTask.BindingItem.Pages.Products
 {
     public class SortProducts : ModelBase
     {
-        public const string NoSorting = "No Sorting";
+        public const string IdSort = "Id";
+        private const bool IsSortAscending = true;
 
         private string _sortField;
 
@@ -24,13 +25,12 @@ namespace TestTask.BindingItem.Pages.Products
 
         public SortProducts()
         {
-            Items.Add(NoSorting);
             foreach (var item in _sortMapField.Keys)
             {
                 Items.Add(item);
             }
 
-            _sortField = NoSorting;
+            _sortField = Items[0];
         }
 
         public string SortField
@@ -49,26 +49,41 @@ namespace TestTask.BindingItem.Pages.Products
 
         public ObservableCollection<string> Items = new ObservableCollection<string>();
 
-        public IQueryable<Product> Apply(IQueryable<Product> items)
+        public IQueryable<Product> Apply(IQueryable<Product> items, bool? isSortAscending = true)
         {
+            if (isSortAscending == null)
+            {
+                return items;
+            }
+
             if (_sortMapField.TryGetValue(_sortField, out var field))
             {
                 switch (field)
                 {
                     case ProductSortListViewField.ID:
-                        return items.OrderBy(e => e.Id);
+                        return isSortAscending == IsSortAscending
+                            ? items.OrderBy(e => e.Id)
+                            : items.OrderByDescending(e => e.Id);
                     case ProductSortListViewField.Name:
-                        return items.OrderBy(e => e.Name);
+                        return isSortAscending == IsSortAscending
+                            ? items.OrderBy(e => e.Name)
+                            : items.OrderByDescending(e => e.Name);
                     case ProductSortListViewField.Company:
-                        return items.OrderBy(e => e.Company.Name);
+                        return isSortAscending == IsSortAscending
+                            ? items.OrderBy(e => e.Company.Name)
+                            : items.OrderByDescending(e => e.Company.Name);
                     case ProductSortListViewField.Category:
-                        return items.OrderBy(e => e.Category.Name);
+                        return isSortAscending == IsSortAscending
+                            ? items.OrderBy(e => e.Category.Name)
+                            : items.OrderByDescending(e => e.Category.Name);
                     case ProductSortListViewField.Type:
-                        return items.OrderBy(e => e.Type);
+                        return isSortAscending == IsSortAscending
+                            ? items.OrderBy(e => e.Type)
+                            : items.OrderByDescending(e => e.Type);
                     case ProductSortListViewField.Price:
-                        return items.OrderBy(e => e.Price);
-                    default:
-                        return items;
+                        return isSortAscending == IsSortAscending
+                            ? items.OrderBy(e => e.Price)
+                            : items.OrderByDescending(e => e.Price);
                 }
             }
 

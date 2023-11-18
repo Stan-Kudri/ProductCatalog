@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using TestTask.BindingItem.Pages.Categories;
+using TestTask.BindingItem.Pages;
 using TestTask.Control.PageTabControls.Model;
 using TestTask.Core;
 using TestTask.Core.Models;
@@ -24,7 +24,7 @@ namespace TestTask.Control.PageTabControls
         private IServiceProvider _serviceProvider;
         private CategoryService _categoryService;
         private ProductService _productService;
-        private SortPageCategories _sortCategory = new SortPageCategories();
+        private TypeSortField _typeSort = new TypeSortField();
 
         public CategoryListView() => InitializeComponent();
 
@@ -40,8 +40,8 @@ namespace TestTask.Control.PageTabControls
             _categoryService = _serviceProvider.GetRequiredService<CategoryService>();
             _productService = _serviceProvider.GetRequiredService<ProductService>();
             listView.Initialize(this, serviceProvider.GetRequiredService<IMessageBox>());
-            cmbSortName.DataSource = _sortCategory.Items;
-            cmbSortName.SelectedItem = _sortCategory.SortType;
+            cmbSortName.DataSource = _typeSort.Items;
+            cmbSortName.SelectedItem = _typeSort.SortType;
         }
 
         public void LoadData() => listView.LoadData();
@@ -108,8 +108,8 @@ namespace TestTask.Control.PageTabControls
 
         private void ButtonClearFilter_Click(object sender, EventArgs e)
         {
-            cmbSortName.SelectedItem = SortPageCategories.NoSorting;
-            _sortCategory.SetSort(cmbSortName.SelectedItem.ToString());
+            cmbSortName.SelectedItem = TypeSortField.NoSorting;
+            _typeSort.SetSort(cmbSortName.SelectedItem.ToString());
             tbSearchStrName.Text = string.Empty;
             LoadData();
         }
@@ -119,7 +119,7 @@ namespace TestTask.Control.PageTabControls
 
         private void CmbSortName_Changed(object sender, EventArgs e)
         {
-            _sortCategory.SetSort(cmbSortName.SelectedItem.ToString());
+            _typeSort.SetSort(cmbSortName.SelectedItem.ToString());
             LoadData();
         }
 
@@ -130,12 +130,12 @@ namespace TestTask.Control.PageTabControls
 
         private IQueryable<Category> GetSortName(IQueryable<Category> items)
         {
-            if (_sortCategory.IsAscending == null)
+            if (_typeSort.IsAscending == null)
             {
                 return items;
             }
 
-            return (bool)_sortCategory.IsAscending
+            return (bool)_typeSort.IsAscending
                     ? items.OrderBy(e => e.Name).Select(e => e)
                     : items.OrderByDescending(e => e.Name).Select(e => e);
         }

@@ -8,7 +8,8 @@ namespace TestTask.BindingItem.Pages.Companies
 {
     public class SortCompanies : ModelBase
     {
-        public const string NoSorting = "No Sorting";
+        public const string IdSort = "Id";
+        private const bool IsSortAscending = true;
 
         private string _sortField;
         private static Dictionary<string, CompanyField> _sortMapField = new Dictionary<string, CompanyField>()
@@ -21,11 +22,12 @@ namespace TestTask.BindingItem.Pages.Companies
 
         public SortCompanies()
         {
-            Items.Add(NoSorting);
             foreach (var item in _sortMapField.Keys)
             {
                 Items.Add(item);
             }
+
+            _sortField = Items[0];
         }
 
         public string SortField
@@ -44,20 +46,33 @@ namespace TestTask.BindingItem.Pages.Companies
 
         public ObservableCollection<string> Items = new ObservableCollection<string>();
 
-        public IQueryable<Company> Apply(IQueryable<Company> items)
+        public IQueryable<Company> Apply(IQueryable<Company> items, bool? isSortAscending = true)
         {
+            if (isSortAscending == null)
+            {
+                return items;
+            }
+
             if (_sortMapField.TryGetValue(_sortField, out var field))
             {
                 switch (field)
                 {
                     case CompanyField.ID:
-                        return items.OrderBy(e => e.Id);
+                        return isSortAscending == IsSortAscending
+                            ? items.OrderBy(e => e.Id)
+                            : items.OrderByDescending(e => e.Id);
                     case CompanyField.Name:
-                        return items.OrderBy(e => e.Name);
+                        return isSortAscending == IsSortAscending
+                            ? items.OrderBy(e => e.Name)
+                            : items.OrderByDescending(e => e.Name);
                     case CompanyField.DateCreation:
-                        return items.OrderBy(e => e.DateCreation);
+                        return isSortAscending == IsSortAscending
+                            ? items.OrderBy(e => e.DateCreation)
+                            : items.OrderByDescending(e => e.DateCreation);
                     case CompanyField.Country:
-                        return items.OrderBy(e => e.Country);
+                        return isSortAscending == IsSortAscending
+                            ? items.OrderBy(e => e.Country)
+                            : items.OrderByDescending(e => e.Country);
                 }
             }
 
