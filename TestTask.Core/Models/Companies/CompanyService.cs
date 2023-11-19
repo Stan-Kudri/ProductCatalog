@@ -49,6 +49,14 @@ namespace TestTask.Core.Models.Companies
             _dbContext.SaveChanges();
         }
 
+        public void AddRange(List<Company> companies)
+        {
+            foreach (var item in companies)
+            {
+                Add(item);
+            }
+        }
+
         public void AddImportData(Company company)
         {
             var duplicateId = _dbContext.Company.FirstOrDefault(e => e.Id == company.Id);
