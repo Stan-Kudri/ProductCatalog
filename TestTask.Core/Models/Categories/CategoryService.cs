@@ -57,6 +57,22 @@ namespace TestTask.Core.Models.Companies
             Update(item);
         }
 
+        public void AddRange(List<Category> categories)
+        {
+            foreach (var item in categories)
+            {
+                Add(item);
+            }
+        }
+
+        public void RemoveRange(List<int> listId)
+        {
+            foreach (var id in listId)
+            {
+                Remove(id);
+            }
+        }
+
         public string GetName(int id)
             => _dbContext.Category.FirstOrDefault(e => e.Id == id).Name ?? throw new ArgumentException("Interaction element not found.");
 

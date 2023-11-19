@@ -18,7 +18,12 @@ namespace TestTask.Core.Models.Types
                 throw new ArgumentException("The received parameters are not correct.", nameof(item));
             }
 
-            if (_dbContext.Company.FirstOrDefault(e => e.Id == item.CategoryId) == null)
+            if (_dbContext.Type.Any(e => e.Id == item.Id))
+            {
+                throw new ArgumentException("This type exists.");
+            }
+
+            if (_dbContext.Category.FirstOrDefault(e => e.Id == item.CategoryId) == null)
             {
                 throw new Exception("Category ID does not exist.");
             }
@@ -34,7 +39,7 @@ namespace TestTask.Core.Models.Types
                 throw new ArgumentNullException("The format of the transmitted data is incorrect.", nameof(item));
             }
 
-            if (!_dbContext.Type.Any(e => e.Id == item.CategoryId))
+            if (!_dbContext.Category.Any(e => e.Id == item.CategoryId))
             {
                 throw new Exception("Category ID does not exist.");
             }
@@ -52,6 +57,22 @@ namespace TestTask.Core.Models.Types
             var item = _dbContext.Type.FirstOrDefault(e => e.Id == id) ?? throw new InvalidOperationException("Interaction element not found.");
             _dbContext.Type.Remove(item);
             _dbContext.SaveChanges();
+        }
+
+        public void AddRange(List<ProductType> types)
+        {
+            foreach (var item in types)
+            {
+                Add(item);
+            }
+        }
+
+        public void RemoveRange(List<int> listId)
+        {
+            foreach (var id in listId)
+            {
+                Remove(id);
+            }
         }
 
         public void RemoveProductRelatedToCategory(int categoryId)
