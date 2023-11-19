@@ -18,6 +18,11 @@ namespace TestTask.Core.Models.Products
                 throw new ArgumentException("The received parameters are not correct.", nameof(item));
             }
 
+            if (_dbContext.Product.Any(e => e.Id == item.Id))
+            {
+                throw new ArgumentException("This product exists.");
+            }
+
             if (_dbContext.Company.FirstOrDefault(e => e.Id == item.CompanyId) == null)
             {
                 throw new Exception("Company ID does not exist.");
@@ -30,7 +35,7 @@ namespace TestTask.Core.Models.Products
 
             if (_dbContext.Type.FirstOrDefault(e => e.Id == item.TypeId) == null)
             {
-                throw new Exception("Category ID does not exist.");
+                throw new Exception("Type ID does not exist.");
             }
 
             _dbContext.Product.Add(item);
@@ -56,7 +61,7 @@ namespace TestTask.Core.Models.Products
 
             if (!_dbContext.Type.Any(e => e.Id == item.TypeId))
             {
-                throw new Exception("Category ID does not exist.");
+                throw new Exception("Type ID does not exist.");
             }
 
             var oldItem = _dbContext.Product.FirstOrDefault(e => e.Id == item.Id) ?? throw new InvalidOperationException("Interaction element not found.");
