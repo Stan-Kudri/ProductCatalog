@@ -23,20 +23,8 @@ namespace TestTask.Core.Models.Products
                 throw new ArgumentException("This product exists.");
             }
 
-            if (_dbContext.Company.FirstOrDefault(e => e.Id == item.CompanyId) == null)
-            {
-                throw new Exception("Company ID does not exist.");
-            }
 
-            if (_dbContext.Category.FirstOrDefault(e => e.Id == item.CategoryId) == null)
-            {
-                throw new Exception("Category ID does not exist.");
-            }
-
-            if (_dbContext.Type.FirstOrDefault(e => e.Id == item.TypeId) == null)
-            {
-                throw new Exception("Type ID does not exist.");
-            }
+            InvalidDBForItemProduct(item);
 
             _dbContext.Product.Add(item);
             _dbContext.SaveChanges();
@@ -49,20 +37,7 @@ namespace TestTask.Core.Models.Products
                 throw new ArgumentNullException("The format of the transmitted data is incorrect.", nameof(item));
             }
 
-            if (!_dbContext.Company.Any(e => e.Id == item.CompanyId))
-            {
-                throw new Exception("Company ID does not exist.");
-            }
-
-            if (!_dbContext.Category.Any(e => e.Id == item.CategoryId))
-            {
-                throw new Exception("Category ID does not exist.");
-            }
-
-            if (!_dbContext.Type.Any(e => e.Id == item.TypeId))
-            {
-                throw new Exception("Type ID does not exist.");
-            }
+            InvalidDBForItemProduct(item);
 
             var oldItem = _dbContext.Product.FirstOrDefault(e => e.Id == item.Id) ?? throw new InvalidOperationException("Interaction element not found.");
 
@@ -81,6 +56,22 @@ namespace TestTask.Core.Models.Products
             var item = _dbContext.Product.FirstOrDefault(e => e.Id == id) ?? throw new InvalidOperationException("Interaction element not found.");
             _dbContext.Product.Remove(item);
             _dbContext.SaveChanges();
+        }
+
+        public void AddRange(List<Product> products)
+        {
+            foreach (var item in products)
+            {
+                Add(item);
+            }
+        }
+
+        public void RemoveRange(List<int> listId)
+        {
+            foreach (var id in listId)
+            {
+                Remove(id);
+            }
         }
 
         public void RemoveProductRelatedToCompany(int companyId)
@@ -129,5 +120,23 @@ namespace TestTask.Core.Models.Products
 
         public IQueryable<Product> GetQueryableAll()
             => _dbContext.Product.Include(e => e.Company).Include(e => e.Category).ThenInclude(e => e.Types).Select(e => e);
+
+        private void InvalidDBForItemProduct(Product item)
+        {
+            if (!_dbContext.Company.Any(e => e.Id == item.CompanyId))
+            {
+                throw new Exception("Company ID does not exist.");
+            }
+
+            if (!_dbContext.Category.Any(e => e.Id == item.CategoryId))
+            {
+                throw new Exception("Category ID does not exist.");
+            }
+
+            if (!_dbContext.Type.Any(e => e.Id == item.TypeId))
+            {
+                throw new Exception("Type ID does not exist.");
+            }
+        }
     }
 }
