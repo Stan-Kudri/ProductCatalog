@@ -91,7 +91,7 @@
     <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Remotion.Linq" Version="2.1.1" />
+    <PackageReference Include="Remotion.Linq" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Forms\Step\AddItemProductForm.cs" />
