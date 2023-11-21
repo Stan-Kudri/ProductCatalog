@@ -32,260 +32,262 @@ namespace TestTask.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.tsmItemFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmItemImport = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmImportFromExcel = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmItemExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmSaveToExcel = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmItemClose = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.materialTabSelector = new MaterialSkin.Controls.MaterialTabSelector();
-            this.bindingSourcePage = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSourcePageProducts = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSourcePageCompanies = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSourcePageCategories = new System.Windows.Forms.BindingSource(this.components);
-            this.tabPageProducts = new System.Windows.Forms.TabPage();
-            this.listViewProduct = new TestTask.Control.PageTabControls.ProductListView();
-            this.tabPageTypeProduct = new System.Windows.Forms.TabPage();
-            this.listViewTypeProduct = new TestTask.Control.PageTabControls.TypeProductListView();
-            this.tabPageCategory = new System.Windows.Forms.TabPage();
-            this.listViewCategory = new TestTask.Control.PageTabControls.CategoryListView();
-            this.tabPageCompanies = new System.Windows.Forms.TabPage();
-            this.listViewCompany = new TestTask.Control.PageTabControls.CompanyListView();
-            this.tabControl = new MaterialSkin.Controls.MaterialTabControl();
-            this.menuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageProducts)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageCompanies)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageCategories)).BeginInit();
-            this.tabPageProducts.SuspendLayout();
-            this.tabPageTypeProduct.SuspendLayout();
-            this.tabPageCategory.SuspendLayout();
-            this.tabPageCompanies.SuspendLayout();
-            this.tabControl.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            menuStrip = new System.Windows.Forms.MenuStrip();
+            tsmItemFile = new System.Windows.Forms.ToolStripMenuItem();
+            tsmItemImport = new System.Windows.Forms.ToolStripMenuItem();
+            tsmImportFromExcel = new System.Windows.Forms.ToolStripMenuItem();
+            tsmItemExport = new System.Windows.Forms.ToolStripMenuItem();
+            tsmSaveToExcel = new System.Windows.Forms.ToolStripMenuItem();
+            tsmItemClose = new System.Windows.Forms.ToolStripMenuItem();
+            toolTip = new System.Windows.Forms.ToolTip(components);
+            materialTabSelector = new MaterialSkin.Controls.MaterialTabSelector();
+            tabControl = new MaterialSkin.Controls.MaterialTabControl();
+            tabPageCompanies = new System.Windows.Forms.TabPage();
+            tabPageCategory = new System.Windows.Forms.TabPage();
+            listViewCategory = new Control.PageTabControls.CategoryListView();
+            tabPageTypeProduct = new System.Windows.Forms.TabPage();
+            listViewTypeProduct = new Control.PageTabControls.TypeProductListView();
+            tabPageProducts = new System.Windows.Forms.TabPage();
+            listViewProduct = new Control.PageTabControls.ProductListView();
+            bindingSourcePage = new System.Windows.Forms.BindingSource(components);
+            bindingSourcePageProducts = new System.Windows.Forms.BindingSource(components);
+            bindingSourcePageCompanies = new System.Windows.Forms.BindingSource(components);
+            bindingSourcePageCategories = new System.Windows.Forms.BindingSource(components);
+            listViewCompany = new Control.PageTabControls.CompanyListView();
+            menuStrip.SuspendLayout();
+            tabControl.SuspendLayout();
+            tabPageCompanies.SuspendLayout();
+            tabPageCategory.SuspendLayout();
+            tabPageTypeProduct.SuspendLayout();
+            tabPageProducts.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)bindingSourcePage).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourcePageProducts).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourcePageCompanies).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourcePageCategories).BeginInit();
+            SuspendLayout();
             // 
             // menuStrip
             // 
-            this.menuStrip.BackColor = System.Drawing.Color.Azure;
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmItemFile});
-            this.menuStrip.Location = new System.Drawing.Point(3, 24);
-            this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(774, 24);
-            this.menuStrip.TabIndex = 3;
-            this.menuStrip.Text = "menuStrip";
+            menuStrip.BackColor = Color.Azure;
+            menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmItemFile });
+            menuStrip.Location = new Point(4, 28);
+            menuStrip.Name = "menuStrip";
+            menuStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            menuStrip.Size = new Size(902, 24);
+            menuStrip.TabIndex = 3;
+            menuStrip.Text = "menuStrip";
             // 
             // tsmItemFile
             // 
-            this.tsmItemFile.BackColor = System.Drawing.Color.Transparent;
-            this.tsmItemFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmItemImport,
-            this.tsmItemExport,
-            this.tsmItemClose});
-            this.tsmItemFile.Name = "tsmItemFile";
-            this.tsmItemFile.Size = new System.Drawing.Size(37, 20);
-            this.tsmItemFile.Text = "File";
+            tsmItemFile.BackColor = Color.Transparent;
+            tsmItemFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmItemImport, tsmItemExport, tsmItemClose });
+            tsmItemFile.Name = "tsmItemFile";
+            tsmItemFile.Size = new Size(37, 20);
+            tsmItemFile.Text = "File";
             // 
             // tsmItemImport
             // 
-            this.tsmItemImport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmImportFromExcel});
-            this.tsmItemImport.Name = "tsmItemImport";
-            this.tsmItemImport.Size = new System.Drawing.Size(139, 22);
-            this.tsmItemImport.Text = "Import from";
+            tsmItemImport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmImportFromExcel });
+            tsmItemImport.Name = "tsmItemImport";
+            tsmItemImport.Size = new Size(139, 22);
+            tsmItemImport.Text = "Import from";
             // 
             // tsmImportFromExcel
             // 
-            this.tsmImportFromExcel.Name = "tsmImportFromExcel";
-            this.tsmImportFromExcel.Size = new System.Drawing.Size(101, 22);
-            this.tsmImportFromExcel.Text = "Excel";
-            this.tsmImportFromExcel.Click += new System.EventHandler(this.TsmImportFromExcel_Click);
+            tsmImportFromExcel.Name = "tsmImportFromExcel";
+            tsmImportFromExcel.Size = new Size(101, 22);
+            tsmImportFromExcel.Text = "Excel";
+            tsmImportFromExcel.Click += TsmImportFromExcel_Click;
             // 
             // tsmItemExport
             // 
-            this.tsmItemExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmSaveToExcel});
-            this.tsmItemExport.Name = "tsmItemExport";
-            this.tsmItemExport.Size = new System.Drawing.Size(139, 22);
-            this.tsmItemExport.Text = "Export to";
+            tsmItemExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmSaveToExcel });
+            tsmItemExport.Name = "tsmItemExport";
+            tsmItemExport.Size = new Size(139, 22);
+            tsmItemExport.Text = "Export to";
             // 
             // tsmSaveToExcel
             // 
-            this.tsmSaveToExcel.Name = "tsmSaveToExcel";
-            this.tsmSaveToExcel.Size = new System.Drawing.Size(101, 22);
-            this.tsmSaveToExcel.Text = "Excel";
-            this.tsmSaveToExcel.Click += new System.EventHandler(this.TsmItemSaveExcel_Click);
+            tsmSaveToExcel.Name = "tsmSaveToExcel";
+            tsmSaveToExcel.Size = new Size(101, 22);
+            tsmSaveToExcel.Text = "Excel";
+            tsmSaveToExcel.Click += TsmItemSaveExcel_Click;
             // 
             // tsmItemClose
             // 
-            this.tsmItemClose.Name = "tsmItemClose";
-            this.tsmItemClose.Size = new System.Drawing.Size(139, 22);
-            this.tsmItemClose.Text = "Close";
-            this.tsmItemClose.Click += new System.EventHandler(this.TsmItemClose_Click);
+            tsmItemClose.Name = "tsmItemClose";
+            tsmItemClose.Size = new Size(139, 22);
+            tsmItemClose.Text = "Close";
+            tsmItemClose.Click += TsmItemClose_Click;
             // 
             // materialTabSelector
             // 
-            this.materialTabSelector.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.materialTabSelector.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.materialTabSelector.BaseTabControl = this.tabControl;
-            this.materialTabSelector.CharacterCasing = MaterialSkin.Controls.MaterialTabSelector.CustomCharacterCasing.Normal;
-            this.materialTabSelector.Depth = 0;
-            this.materialTabSelector.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialTabSelector.Location = new System.Drawing.Point(8, 51);
-            this.materialTabSelector.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialTabSelector.Name = "materialTabSelector";
-            this.materialTabSelector.Size = new System.Drawing.Size(762, 21);
-            this.materialTabSelector.TabIndex = 6;
-            this.materialTabSelector.Text = "TabSelector";
-            // 
-            // bindingSourcePage
-            // 
-            this.bindingSourcePage.DataSource = typeof(TestTask.BindingItem.PageModel);
-            // 
-            // bindingSourcePageProducts
-            // 
-            this.bindingSourcePageProducts.DataMember = "Items";
-            this.bindingSourcePageProducts.DataSource = this.bindingSourcePage;
-            // 
-            // bindingSourcePageCompanies
-            // 
-            this.bindingSourcePageCompanies.DataMember = "Items";
-            this.bindingSourcePageCompanies.DataSource = this.bindingSourcePage;
-            // 
-            // bindingSourcePageCategories
-            // 
-            this.bindingSourcePageCategories.DataMember = "Items";
-            this.bindingSourcePageCategories.DataSource = this.bindingSourcePage;
-            // 
-            // tabPageProducts
-            // 
-            this.tabPageProducts.Controls.Add(this.listViewProduct);
-            this.tabPageProducts.Location = new System.Drawing.Point(4, 22);
-            this.tabPageProducts.Name = "tabPageProducts";
-            this.tabPageProducts.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProducts.Size = new System.Drawing.Size(758, 331);
-            this.tabPageProducts.TabIndex = 6;
-            this.tabPageProducts.Text = "Products";
-            this.tabPageProducts.UseVisualStyleBackColor = true;
-            // 
-            // listViewProduct
-            // 
-            this.listViewProduct.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewProduct.Location = new System.Drawing.Point(3, 3);
-            this.listViewProduct.Name = "listViewProduct";
-            this.listViewProduct.Size = new System.Drawing.Size(752, 325);
-            this.listViewProduct.TabIndex = 1;
-            // 
-            // tabPageTypeProduct
-            // 
-            this.tabPageTypeProduct.Controls.Add(this.listViewTypeProduct);
-            this.tabPageTypeProduct.Location = new System.Drawing.Point(4, 22);
-            this.tabPageTypeProduct.Name = "tabPageTypeProduct";
-            this.tabPageTypeProduct.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTypeProduct.Size = new System.Drawing.Size(758, 331);
-            this.tabPageTypeProduct.TabIndex = 5;
-            this.tabPageTypeProduct.Text = "Types";
-            this.tabPageTypeProduct.UseVisualStyleBackColor = true;
-            // 
-            // listViewTypeProduct
-            // 
-            this.listViewTypeProduct.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewTypeProduct.Location = new System.Drawing.Point(3, 3);
-            this.listViewTypeProduct.Name = "listViewTypeProduct";
-            this.listViewTypeProduct.Size = new System.Drawing.Size(752, 325);
-            this.listViewTypeProduct.TabIndex = 1;
-            // 
-            // tabPageCategory
-            // 
-            this.tabPageCategory.Controls.Add(this.listViewCategory);
-            this.tabPageCategory.Location = new System.Drawing.Point(4, 22);
-            this.tabPageCategory.Name = "tabPageCategory";
-            this.tabPageCategory.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCategory.Size = new System.Drawing.Size(758, 331);
-            this.tabPageCategory.TabIndex = 3;
-            this.tabPageCategory.Text = "Categories";
-            this.tabPageCategory.UseVisualStyleBackColor = true;
-            // 
-            // listViewCategory
-            // 
-            this.listViewCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewCategory.Location = new System.Drawing.Point(3, 3);
-            this.listViewCategory.Name = "listViewCategory";
-            this.listViewCategory.Size = new System.Drawing.Size(752, 325);
-            this.listViewCategory.TabIndex = 0;
-            // 
-            // tabPageCompanies
-            // 
-            this.tabPageCompanies.Controls.Add(this.listViewCompany);
-            this.tabPageCompanies.Location = new System.Drawing.Point(4, 22);
-            this.tabPageCompanies.Name = "tabPageCompanies";
-            this.tabPageCompanies.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCompanies.Size = new System.Drawing.Size(758, 331);
-            this.tabPageCompanies.TabIndex = 0;
-            this.tabPageCompanies.Text = "Companies";
-            this.tabPageCompanies.UseVisualStyleBackColor = true;
-            // 
-            // listViewCompany
-            // 
-            this.listViewCompany.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewCompany.Location = new System.Drawing.Point(3, 3);
-            this.listViewCompany.Name = "listViewCompany";
-            this.listViewCompany.Size = new System.Drawing.Size(752, 325);
-            this.listViewCompany.TabIndex = 1;
+            materialTabSelector.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            materialTabSelector.BackColor = SystemColors.ActiveCaption;
+            materialTabSelector.BaseTabControl = tabControl;
+            materialTabSelector.CharacterCasing = MaterialSkin.Controls.MaterialTabSelector.CustomCharacterCasing.Normal;
+            materialTabSelector.Depth = 0;
+            materialTabSelector.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialTabSelector.Location = new Point(9, 59);
+            materialTabSelector.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            materialTabSelector.MouseState = MaterialSkin.MouseState.HOVER;
+            materialTabSelector.Name = "materialTabSelector";
+            materialTabSelector.Size = new Size(889, 24);
+            materialTabSelector.TabIndex = 6;
+            materialTabSelector.Text = "TabSelector";
             // 
             // tabControl
             // 
-            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl.Controls.Add(this.tabPageCompanies);
-            this.tabControl.Controls.Add(this.tabPageCategory);
-            this.tabControl.Controls.Add(this.tabPageTypeProduct);
-            this.tabControl.Controls.Add(this.tabPageProducts);
-            this.tabControl.Depth = 0;
-            this.tabControl.Location = new System.Drawing.Point(8, 75);
-            this.tabControl.MouseState = MaterialSkin.MouseState.HOVER;
-            this.tabControl.Multiline = true;
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(766, 357);
-            this.tabControl.TabIndex = 5;
-            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_Changed);
+            tabControl.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tabControl.Controls.Add(tabPageCompanies);
+            tabControl.Controls.Add(tabPageCategory);
+            tabControl.Controls.Add(tabPageTypeProduct);
+            tabControl.Controls.Add(tabPageProducts);
+            tabControl.Depth = 0;
+            tabControl.Location = new Point(9, 87);
+            tabControl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabControl.MouseState = MaterialSkin.MouseState.HOVER;
+            tabControl.Multiline = true;
+            tabControl.Name = "tabControl";
+            tabControl.SelectedIndex = 0;
+            tabControl.Size = new Size(894, 412);
+            tabControl.TabIndex = 5;
+            tabControl.SelectedIndexChanged += TabControl_Changed;
+            // 
+            // tabPageCompanies
+            // 
+            tabPageCompanies.Controls.Add(listViewCompany);
+            tabPageCompanies.Location = new Point(4, 24);
+            tabPageCompanies.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabPageCompanies.Name = "tabPageCompanies";
+            tabPageCompanies.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabPageCompanies.Size = new Size(886, 384);
+            tabPageCompanies.TabIndex = 0;
+            tabPageCompanies.Text = "Companies";
+            tabPageCompanies.UseVisualStyleBackColor = true;
+            // 
+            // tabPageCategory
+            // 
+            tabPageCategory.Controls.Add(listViewCategory);
+            tabPageCategory.Location = new Point(4, 24);
+            tabPageCategory.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabPageCategory.Name = "tabPageCategory";
+            tabPageCategory.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabPageCategory.Size = new Size(886, 384);
+            tabPageCategory.TabIndex = 3;
+            tabPageCategory.Text = "Categories";
+            tabPageCategory.UseVisualStyleBackColor = true;
+            // 
+            // listViewCategory
+            // 
+            listViewCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            listViewCategory.Location = new Point(4, 3);
+            listViewCategory.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            listViewCategory.Name = "listViewCategory";
+            listViewCategory.Size = new Size(878, 378);
+            listViewCategory.TabIndex = 0;
+            // 
+            // tabPageTypeProduct
+            // 
+            tabPageTypeProduct.Controls.Add(listViewTypeProduct);
+            tabPageTypeProduct.Location = new Point(4, 24);
+            tabPageTypeProduct.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabPageTypeProduct.Name = "tabPageTypeProduct";
+            tabPageTypeProduct.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabPageTypeProduct.Size = new Size(886, 384);
+            tabPageTypeProduct.TabIndex = 5;
+            tabPageTypeProduct.Text = "Types";
+            tabPageTypeProduct.UseVisualStyleBackColor = true;
+            // 
+            // listViewTypeProduct
+            // 
+            listViewTypeProduct.Dock = System.Windows.Forms.DockStyle.Fill;
+            listViewTypeProduct.Location = new Point(4, 3);
+            listViewTypeProduct.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            listViewTypeProduct.Name = "listViewTypeProduct";
+            listViewTypeProduct.Size = new Size(878, 378);
+            listViewTypeProduct.TabIndex = 1;
+            // 
+            // tabPageProducts
+            // 
+            tabPageProducts.Controls.Add(listViewProduct);
+            tabPageProducts.Location = new Point(4, 24);
+            tabPageProducts.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabPageProducts.Name = "tabPageProducts";
+            tabPageProducts.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabPageProducts.Size = new Size(886, 384);
+            tabPageProducts.TabIndex = 6;
+            tabPageProducts.Text = "Products";
+            tabPageProducts.UseVisualStyleBackColor = true;
+            // 
+            // listViewProduct
+            // 
+            listViewProduct.Dock = System.Windows.Forms.DockStyle.Fill;
+            listViewProduct.Location = new Point(4, 3);
+            listViewProduct.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            listViewProduct.Name = "listViewProduct";
+            listViewProduct.Size = new Size(878, 378);
+            listViewProduct.TabIndex = 1;
+            // 
+            // bindingSourcePage
+            // 
+            bindingSourcePage.DataSource = typeof(PageModel);
+            // 
+            // bindingSourcePageProducts
+            // 
+            bindingSourcePageProducts.DataMember = "Items";
+            bindingSourcePageProducts.DataSource = bindingSourcePage;
+            // 
+            // bindingSourcePageCompanies
+            // 
+            bindingSourcePageCompanies.DataMember = "Items";
+            bindingSourcePageCompanies.DataSource = bindingSourcePage;
+            // 
+            // bindingSourcePageCategories
+            // 
+            bindingSourcePageCategories.DataMember = "Items";
+            bindingSourcePageCategories.DataSource = bindingSourcePage;
+            // 
+            // listViewCompany
+            // 
+            listViewCompany.Dock = System.Windows.Forms.DockStyle.Fill;
+            listViewCompany.Location = new Point(4, 3);
+            listViewCompany.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            listViewCompany.Name = "listViewCompany";
+            listViewCompany.Size = new Size(878, 378);
+            listViewCompany.TabIndex = 1;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(780, 435);
-            this.Controls.Add(this.materialTabSelector);
-            this.Controls.Add(this.tabControl);
-            this.Controls.Add(this.menuStrip);
-            this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
-            this.MainMenuStrip = this.menuStrip;
-            this.Name = "MainForm";
-            this.Padding = new System.Windows.Forms.Padding(3, 24, 3, 3);
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Table";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TableForm_FormClosing);
-            this.Load += new System.EventHandler(this.TableForm_Load);
-            this.menuStrip.ResumeLayout(false);
-            this.menuStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageProducts)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageCompanies)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePageCategories)).EndInit();
-            this.tabPageProducts.ResumeLayout(false);
-            this.tabPageTypeProduct.ResumeLayout(false);
-            this.tabPageCategory.ResumeLayout(false);
-            this.tabPageCompanies.ResumeLayout(false);
-            this.tabControl.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new Size(910, 502);
+            Controls.Add(materialTabSelector);
+            Controls.Add(tabControl);
+            Controls.Add(menuStrip);
+            FormStyle = FormStyles.ActionBar_None;
+            MainMenuStrip = menuStrip;
+            Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            Name = "MainForm";
+            Padding = new System.Windows.Forms.Padding(4, 28, 4, 3);
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Table";
+            FormClosing += TableForm_FormClosing;
+            Load += TableForm_Load;
+            menuStrip.ResumeLayout(false);
+            menuStrip.PerformLayout();
+            tabControl.ResumeLayout(false);
+            tabPageCompanies.ResumeLayout(false);
+            tabPageCategory.ResumeLayout(false);
+            tabPageTypeProduct.ResumeLayout(false);
+            tabPageProducts.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)bindingSourcePage).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourcePageProducts).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourcePageCompanies).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourcePageCategories).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -306,12 +308,12 @@ namespace TestTask.Forms
         private System.Windows.Forms.BindingSource bindingSourcePageCategories;
         private MaterialSkin.Controls.MaterialTabControl tabControl;
         private System.Windows.Forms.TabPage tabPageCompanies;
-        private Control.PageTabControls.CompanyListView listViewCompany;
         private System.Windows.Forms.TabPage tabPageCategory;
         private Control.PageTabControls.CategoryListView listViewCategory;
         private System.Windows.Forms.TabPage tabPageTypeProduct;
         private Control.PageTabControls.TypeProductListView listViewTypeProduct;
         private System.Windows.Forms.TabPage tabPageProducts;
         private Control.PageTabControls.ProductListView listViewProduct;
+        private Control.PageTabControls.CompanyListView listViewCompany;
     }
 }

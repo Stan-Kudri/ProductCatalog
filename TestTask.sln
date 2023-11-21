@@ -1,13 +1,13 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34205.153
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTask", "TestTask\TestTask.csproj", "{9509E51F-845B-4829-A941-EDEBE7D6BBEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestTask", "TestTask\TestTask.csproj", "{9509E51F-845B-4829-A941-EDEBE7D6BBEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTask.Core", "TestTask.Core\TestTask.Core.csproj", "{AAD1C004-7096-4A18-9889-D8512763144F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestTask.Core", "TestTask.Core\TestTask.Core.csproj", "{AAD1C004-7096-4A18-9889-D8512763144F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTask.Test", "TestTask.Test\TestTask.Test.csproj", "{924E3A53-6CCD-4857-A98A-24695964D7AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestTask.Test", "TestTask.Test\TestTask.Test.csproj", "{924E3A53-6CCD-4857-A98A-24695964D7AC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{AAD1C004-7096-4A18-9889-D8512763144F} = {AAD1C004-7096-4A18-9889-D8512763144F}
 	EndProjectSection

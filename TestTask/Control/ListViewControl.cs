@@ -112,7 +112,8 @@ namespace TestTask.Control
             LoadData();
         }
 
-        protected void BtnFirstPage_Click(object sender, EventArgs e)
+
+        private void BtnFirstPage_Click(object sender, EventArgs e)
         {
             if (_pagedList.HasPrevious)
             {
@@ -120,15 +121,15 @@ namespace TestTask.Control
             }
         }
 
-        protected void BtnBackPage_Click(object sender, EventArgs e)
+        private void BtnLastPage_Click(object sender, EventArgs e)
         {
-            if (_pagedList.HasPrevious)
+            if (_pagedList.HasNext)
             {
-                Page.Number--;
+                Page.Number = _pagedList.PageCount;
             }
         }
 
-        protected void BtnNextPage_Click(object sender, EventArgs e)
+        private void BtnNextPage_Click(object sender, EventArgs e)
         {
             if (_pagedList.HasNext)
             {
@@ -136,11 +137,11 @@ namespace TestTask.Control
             }
         }
 
-        protected void BtnLastPage_Click(object sender, EventArgs e)
+        private void BtnBackPage_Click(object sender, EventArgs e)
         {
-            if (_pagedList.HasNext)
+            if (_pagedList.HasPrevious)
             {
-                Page.Number = _pagedList.PageCount;
+                Page.Number--;
             }
         }
 
@@ -211,11 +212,11 @@ namespace TestTask.Control
         private void UpdateButtons()
         {
             tbCurrentPage.Visible =
-                btnFirstPage.Enabled = btnFirstPage.Visible =
-                    btnLastPage.Enabled = btnLastPage.Visible =
-                        btnNextPage.Enabled = btnNextPage.Visible =
-                            btnBackPage.Enabled = btnBackPage.Visible =
-                                tbCurrentPage.Enabled = tbCurrentPage.Visible =
+                                        //btnFirstPage.Enabled = btnFirstPage.Visible =
+                                        //btnLastPage.Enabled = btnLastPage.Visible =
+                                        //btnNextPage.Enabled = btnNextPage.Visible =
+                                        //btnBackPage.Enabled = btnBackPage.Visible =
+                                        //tbCurrentPage.Enabled = tbCurrentPage.Visible =
                                         _pagedList.PageCount > 0 ? true : false;
         }
 
