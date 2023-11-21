@@ -212,12 +212,12 @@ namespace TestTask.Control
         private void UpdateButtons()
         {
             tbCurrentPage.Visible =
-                                        //btnFirstPage.Enabled = btnFirstPage.Visible =
-                                        //btnLastPage.Enabled = btnLastPage.Visible =
-                                        //btnNextPage.Enabled = btnNextPage.Visible =
-                                        //btnBackPage.Enabled = btnBackPage.Visible =
-                                        //tbCurrentPage.Enabled = tbCurrentPage.Visible =
-                                        _pagedList.PageCount > 0 ? true : false;
+                btnFirstPage.Enabled = btnFirstPage.Visible =
+                    btnLastPage.Enabled = btnLastPage.Visible =
+                        btnNextPage.Enabled = btnNextPage.Visible =
+                            btnBackPage.Enabled = btnBackPage.Visible =
+                                tbCurrentPage.Enabled = tbCurrentPage.Visible =
+                                    _pagedList.PageCount > 0 ? true : false;
         }
 
         private bool IsNotFirstPageEmpty() => _pagedList.Count == 0 && Page.Number != 1;
