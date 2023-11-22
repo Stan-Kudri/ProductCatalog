@@ -46,6 +46,7 @@ namespace TestTask.Control
 
             cmbPageSize.DataSource = Page.Items;
             Page.ChangeCurrentPage += LoadData;
+            ResizeListView();
         }
 
         public void Closing() => Page.ChangeCurrentPage -= LoadData;
@@ -178,13 +179,7 @@ namespace TestTask.Control
             }
 
             Resizing = true;
-
-            //Column Tage = Width custom size
-            for (int i = 0; i < listView.Columns.Count; i++)
-            {
-                listView.Columns[i].Width = (int)(_percentages[i] * listView.ClientRectangle.Width);
-            }
-
+            ResizeListView();
             Resizing = false;
         }
 
@@ -211,7 +206,7 @@ namespace TestTask.Control
 
         private void UpdateButtons()
         {
-            tbCurrentPage.Visible =
+            tlpPagedCompanies.Visible =
                 btnFirstPage.Enabled = btnFirstPage.Visible =
                     btnLastPage.Enabled = btnLastPage.Visible =
                         btnNextPage.Enabled = btnNextPage.Visible =
@@ -221,5 +216,14 @@ namespace TestTask.Control
         }
 
         private bool IsNotFirstPageEmpty() => _pagedList.Count == 0 && Page.Number != 1;
+
+        private void ResizeListView()
+        {
+            //Column Tage = Width custom size
+            for (int i = 0; i < listView.Columns.Count; i++)
+            {
+                listView.Columns[i].Width = (int)(_percentages[i] * listView.ClientRectangle.Width);
+            }
+        }
     }
 }

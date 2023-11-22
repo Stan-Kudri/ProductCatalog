@@ -44,17 +44,17 @@ namespace TestTask.Forms
             materialTabSelector = new MaterialSkin.Controls.MaterialTabSelector();
             tabControl = new MaterialSkin.Controls.MaterialTabControl();
             tabPageCompanies = new System.Windows.Forms.TabPage();
+            listViewCompany = new Control.PageTabControls.CompanyListView();
             tabPageCategory = new System.Windows.Forms.TabPage();
-            listViewCategory = new Control.PageTabControls.CategoryListView();
             tabPageTypeProduct = new System.Windows.Forms.TabPage();
-            listViewTypeProduct = new Control.PageTabControls.TypeProductListView();
             tabPageProducts = new System.Windows.Forms.TabPage();
-            listViewProduct = new Control.PageTabControls.ProductListView();
             bindingSourcePage = new System.Windows.Forms.BindingSource(components);
             bindingSourcePageProducts = new System.Windows.Forms.BindingSource(components);
             bindingSourcePageCompanies = new System.Windows.Forms.BindingSource(components);
             bindingSourcePageCategories = new System.Windows.Forms.BindingSource(components);
-            listViewCompany = new Control.PageTabControls.CompanyListView();
+            listViewCategory = new Control.PageTabControls.CategoryListView();
+            listViewTypeProduct = new Control.PageTabControls.TypeProductListView();
+            listViewProduct = new Control.PageTabControls.ProductListView();
             menuStrip.SuspendLayout();
             tabControl.SuspendLayout();
             tabPageCompanies.SuspendLayout();
@@ -69,7 +69,7 @@ namespace TestTask.Forms
             // 
             // menuStrip
             // 
-            menuStrip.BackColor = Color.Azure;
+            menuStrip.BackColor = Color.Transparent;
             menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmItemFile });
             menuStrip.Location = new Point(4, 28);
             menuStrip.Name = "menuStrip";
@@ -167,6 +167,15 @@ namespace TestTask.Forms
             tabPageCompanies.Text = "Companies";
             tabPageCompanies.UseVisualStyleBackColor = true;
             // 
+            // listViewCompany
+            // 
+            listViewCompany.Dock = System.Windows.Forms.DockStyle.Fill;
+            listViewCompany.Location = new Point(4, 3);
+            listViewCompany.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            listViewCompany.Name = "listViewCompany";
+            listViewCompany.Size = new Size(878, 378);
+            listViewCompany.TabIndex = 1;
+            // 
             // tabPageCategory
             // 
             tabPageCategory.Controls.Add(listViewCategory);
@@ -178,15 +187,6 @@ namespace TestTask.Forms
             tabPageCategory.TabIndex = 3;
             tabPageCategory.Text = "Categories";
             tabPageCategory.UseVisualStyleBackColor = true;
-            // 
-            // listViewCategory
-            // 
-            listViewCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            listViewCategory.Location = new Point(4, 3);
-            listViewCategory.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            listViewCategory.Name = "listViewCategory";
-            listViewCategory.Size = new Size(878, 378);
-            listViewCategory.TabIndex = 0;
             // 
             // tabPageTypeProduct
             // 
@@ -200,15 +200,6 @@ namespace TestTask.Forms
             tabPageTypeProduct.Text = "Types";
             tabPageTypeProduct.UseVisualStyleBackColor = true;
             // 
-            // listViewTypeProduct
-            // 
-            listViewTypeProduct.Dock = System.Windows.Forms.DockStyle.Fill;
-            listViewTypeProduct.Location = new Point(4, 3);
-            listViewTypeProduct.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            listViewTypeProduct.Name = "listViewTypeProduct";
-            listViewTypeProduct.Size = new Size(878, 378);
-            listViewTypeProduct.TabIndex = 1;
-            // 
             // tabPageProducts
             // 
             tabPageProducts.Controls.Add(listViewProduct);
@@ -220,15 +211,6 @@ namespace TestTask.Forms
             tabPageProducts.TabIndex = 6;
             tabPageProducts.Text = "Products";
             tabPageProducts.UseVisualStyleBackColor = true;
-            // 
-            // listViewProduct
-            // 
-            listViewProduct.Dock = System.Windows.Forms.DockStyle.Fill;
-            listViewProduct.Location = new Point(4, 3);
-            listViewProduct.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            listViewProduct.Name = "listViewProduct";
-            listViewProduct.Size = new Size(878, 378);
-            listViewProduct.TabIndex = 1;
             // 
             // bindingSourcePage
             // 
@@ -249,14 +231,32 @@ namespace TestTask.Forms
             bindingSourcePageCategories.DataMember = "Items";
             bindingSourcePageCategories.DataSource = bindingSourcePage;
             // 
-            // listViewCompany
+            // listViewCategory
             // 
-            listViewCompany.Dock = System.Windows.Forms.DockStyle.Fill;
-            listViewCompany.Location = new Point(4, 3);
-            listViewCompany.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            listViewCompany.Name = "listViewCompany";
-            listViewCompany.Size = new Size(878, 378);
-            listViewCompany.TabIndex = 1;
+            listViewCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            listViewCategory.Location = new Point(4, 3);
+            listViewCategory.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            listViewCategory.Name = "listViewCategory";
+            listViewCategory.Size = new Size(878, 378);
+            listViewCategory.TabIndex = 0;
+            // 
+            // listViewTypeProduct
+            // 
+            listViewTypeProduct.Dock = System.Windows.Forms.DockStyle.Fill;
+            listViewTypeProduct.Location = new Point(4, 3);
+            listViewTypeProduct.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            listViewTypeProduct.Name = "listViewTypeProduct";
+            listViewTypeProduct.Size = new Size(878, 378);
+            listViewTypeProduct.TabIndex = 0;
+            // 
+            // listViewProduct
+            // 
+            listViewProduct.Dock = System.Windows.Forms.DockStyle.Fill;
+            listViewProduct.Location = new Point(4, 3);
+            listViewProduct.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            listViewProduct.Name = "listViewProduct";
+            listViewProduct.Size = new Size(878, 378);
+            listViewProduct.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -309,11 +309,11 @@ namespace TestTask.Forms
         private MaterialSkin.Controls.MaterialTabControl tabControl;
         private System.Windows.Forms.TabPage tabPageCompanies;
         private System.Windows.Forms.TabPage tabPageCategory;
-        private Control.PageTabControls.CategoryListView listViewCategory;
         private System.Windows.Forms.TabPage tabPageTypeProduct;
-        private Control.PageTabControls.TypeProductListView listViewTypeProduct;
         private System.Windows.Forms.TabPage tabPageProducts;
-        private Control.PageTabControls.ProductListView listViewProduct;
         private Control.PageTabControls.CompanyListView listViewCompany;
+        private Control.PageTabControls.CategoryListView listViewCategory;
+        private Control.PageTabControls.TypeProductListView listViewTypeProduct;
+        private Control.PageTabControls.ProductListView listViewProduct;
     }
 }
