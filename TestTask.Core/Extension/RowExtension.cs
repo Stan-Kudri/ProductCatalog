@@ -67,15 +67,20 @@ namespace TestTask.Core.Extension
                 return Result<DateTime>.CreateFail(columnName + " cell is empty", self.RowNum);
             }
 
-            string valueShouldBeNumberMessage = columnName + " should be number";
+            string valueShouldBeDateMessage = columnName + " should be Date";
 
             if (cell.CellType == CellType.Blank)
             {
-                return Result<DateTime>.CreateFail(valueShouldBeNumberMessage, self.RowNum);
+                return Result<DateTime>.CreateFail(valueShouldBeDateMessage, self.RowNum);
             }
 
             try
             {
+                if (cell.CellType == CellType.Numeric)
+                {
+                    return Result<DateTime>.CreateFail(valueShouldBeDateMessage, self.RowNum);
+                }
+
                 if (cell.CellType == CellType.String)
                 {
                     var valueInStringCell = cell.StringCellValue;
@@ -87,7 +92,7 @@ namespace TestTask.Core.Extension
             }
             catch
             {
-                return Result<DateTime>.CreateFail(valueShouldBeNumberMessage, self.RowNum);
+                return Result<DateTime>.CreateFail(valueShouldBeDateMessage, self.RowNum);
             }
         }
 
