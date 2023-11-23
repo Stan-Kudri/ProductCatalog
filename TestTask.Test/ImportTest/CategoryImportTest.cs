@@ -58,21 +58,20 @@ namespace TestTask.Test.ImportTest
 
         [Theory]
         [MemberData(nameof(CategoryItems))]
-        public void Add_All_Item_From_Excel_File(List<Category> exceptCompany)
+        public void Add_All_Item_From_Excel_File(List<Category> exceptCategory)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var categoryService = new CategoryService(dbContext);
+            var service = new CategoryService(dbContext);
             var memoryStream = new MemoryStream(Resources.DataIsAllFilledIn);
-
-            var categoryImporter = new CategoryImporter();
-            var categoryRead = new ExcelImporter<Category>(categoryImporter).Import(memoryStream);
+            var importer = new CategoryImporter();
+            var categoryRead = new ExcelImporter<Category>(importer).Import(memoryStream);
 
             foreach (var item in categoryRead)
             {
                 if (item.Success)
                 {
-                    categoryService.AddImportData(item.Value);
+                    service.AddImportData(item.Value);
                 }
             }
 
@@ -80,7 +79,7 @@ namespace TestTask.Test.ImportTest
             var actualCompanies = dbContext.Category.ToList();
 
             //Assert
-            actualCompanies.Should().Equal(exceptCompany);
+            actualCompanies.Should().Equal(exceptCategory);
         }
 
         [Theory]
@@ -90,10 +89,10 @@ namespace TestTask.Test.ImportTest
             //Arrange
             var memoryStream = new MemoryStream(Resources.NameSheetIsNotCorrect);
 
-            var companyImporter = new CategoryImporter();
+            var importer = new CategoryImporter();
 
             //Act                                 
-            var actualFail = new ExcelImporter<Category>(companyImporter).Import(memoryStream);
+            var actualFail = new ExcelImporter<Category>(importer).Import(memoryStream);
 
             //Assert
             actualFail.Should().Equal(exceptFail);
@@ -106,10 +105,10 @@ namespace TestTask.Test.ImportTest
             //Arrange
             var memoryStream = new MemoryStream(Resources.ColumnNameIsNotCorrect);
 
-            var companyImporter = new CategoryImporter();
+            var importer = new CategoryImporter();
 
             //Act                                 
-            var actualFail = new ExcelImporter<Category>(companyImporter).Import(memoryStream);
+            var actualFail = new ExcelImporter<Category>(importer).Import(memoryStream);
 
             //Assert
             actualFail.Should().Equal(exceptFail);
@@ -122,10 +121,10 @@ namespace TestTask.Test.ImportTest
             //Arrange
             var memoryStream = new MemoryStream(Resources.NotCorrectDataIsAllFilledIn);
 
-            var companyImporter = new CategoryImporter();
+            var importer = new CategoryImporter();
 
             //Act                                 
-            var actualFail = new ExcelImporter<Category>(companyImporter).Import(memoryStream);
+            var actualFail = new ExcelImporter<Category>(importer).Import(memoryStream);
 
             //Assert
             actualFail.Should().Equal(exceptFail);
