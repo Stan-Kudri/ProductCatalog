@@ -30,7 +30,7 @@ namespace TestTask.Core.Import
 
             if (!TryGetSheet(workbook, out var sheet))
             {
-                addMode.Add(Result<T>.CreateFail("Faild to read sheet.", 0));
+                addMode.Add(Result<T>.CreateFail("Failed to read sheet.", 0));
                 return addMode;
             }
 
@@ -63,7 +63,8 @@ namespace TestTask.Core.Import
             for (var i = 0; i < workbook.NumberOfSheets; i++)
             {
                 var sheetName = workbook.GetSheetName(i);
-                if (_importer.IsModelSheet(sheetName))
+                if (_importer.
+                    IsModelSheet(sheetName))
                 {
                     sheet = workbook.GetSheetAt(i);
                     return true;

@@ -52,5 +52,29 @@ namespace TestTask.Core
 
             return Row + ". " + Value.ToString();
         }
+
+        public override bool Equals(object obj) => Equals(obj as Result<T>);
+
+        public bool Equals(Result<T> other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (other.Value == null && Value == null)
+            {
+                return other != null
+                         && other.Success == Success
+                         && other.Error == Error
+                         && other.Row == Row;
+            }
+
+            return other != null
+                    && other.Value.Equals(Value)
+                    && other.Success == Success
+                    && other.Error == Error
+                    && other.Row == Row;
+        }
     }
 }
