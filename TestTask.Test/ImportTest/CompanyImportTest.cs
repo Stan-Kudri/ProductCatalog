@@ -62,6 +62,7 @@ namespace TestTask.Test.ImportTest
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
             var companyService = new CompanyService(dbContext);
+
             var memoryStream = new MemoryStream(Resources.DataIsAllFilledIn);
             var companyImporter = new CompanyImporter();
             var companyRead = new ExcelImporter<Company>(companyImporter).Import(memoryStream);

@@ -4,17 +4,23 @@ using TestTask.Core.Import;
 using TestTask.Core.Import.Importers;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
+using TestTask.Core.Models.Products;
 using TestTask.Core.Models.Types;
 using TestTask.Test.Properties;
 
 namespace TestTask.Test.ImportTest
 {
-    public class TypeImportTest
+    public class ProductImportTest
     {
-        public static IEnumerable<object[]> TypeItems() => new List<object[]>
+        public static IEnumerable<object[]> Items() => new List<object[]>
         {
             new object[]
             {
+                new List<Company>()
+                {
+                    new Company("MF", new DateTime(2000, 6, 7), "Belarus", 1),
+                    new Company("Apple", new DateTime(1973, 7, 12), "USA", 2),
+                },
                 new List<Category>()
                 {
                     new Category("Clothe", 1),
@@ -28,6 +34,12 @@ namespace TestTask.Test.ImportTest
                     new ProductType("Phone", 2, 4),
                     new ProductType("Laptop", 2, 5),
                 },
+                new List<Product>()
+                {
+                    new Product("Polivuri", 1, 1, 1, "", 235, 4),
+                    new Product("Rick&Morty", 1, 1, 2, "", 15, 5),
+                    new Product("Iphone 13", 1, 2, 4, "", 400, 6),
+                },
             }
         };
 
@@ -35,9 +47,9 @@ namespace TestTask.Test.ImportTest
         {
             new object[]
             {
-                new List<Result<ProductType>>()
+                new List<Result<Product>>()
                 {
-                    Result<ProductType>.CreateFail("Failed to read sheet.", 0),
+                    Result<Product>.CreateFail("Failed to read sheet.", 0),
                 },
             }
         };
@@ -46,9 +58,9 @@ namespace TestTask.Test.ImportTest
         {
             new object[]
             {
-                new List<Result<ProductType>>()
+                new List<Result<Product>>()
                 {
-                    Result<ProductType>.CreateFail("Failed to load title.", 0),
+                    Result<Product>.CreateFail("Failed to load title.", 0),
                 },
             }
         };
@@ -57,56 +69,59 @@ namespace TestTask.Test.ImportTest
         {
             new object[]
             {
-                new List<Result<ProductType>>()
+                new List<Result<Product>>()
                 {
-                    Result<ProductType>.CreateFail("Fewer cells than needed", 1),
-                    Result<ProductType>.CreateFail("Id should be number", 2),
-                    Result<ProductType>.CreateFail("Fewer cells than needed", 3),
-                    Result<ProductType>.CreateFail("Fewer cells than needed", 4),
-                    Result<ProductType>.CreateFail("Fewer cells than needed", 5),
+                    Result<Product>.CreateFail("Fewer cells than needed", 1),
+                    Result<Product>.CreateFail("Price should be number", 2),
+                    Result<Product>.CreateFail("Fewer cells than needed", 3),
                 },
             }
         };
 
         [Theory]
-        [MemberData(nameof(TypeItems))]
-        public void Add_All_Item_From_Excel_File(List<Category> categories, List<ProductType> exceptType)
+        [MemberData(nameof(Items))]
+        public void Add_All_Item_From_Excel_File(List<Company> companies, List<Category> categories, List<ProductType> types, List<Product> exceptProduct)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
+            var companyService = new CompanyService(dbContext);
             var categoryService = new CategoryService(dbContext);
             var typeService = new ProductTypeService(dbContext);
+            var productService = new ProductService(dbContext);
+
+            companyService.AddRange(companies);
+            categoryService.AddRange(categories);
+            typeService.AddRange(types);
 
             var memoryStream = new MemoryStream(Resources.DataIsAllFilledIn);
-            var typeImporter = new TypeProductImporter();
-            var typeRead = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
+            var productImporter = new ProductImporter();
+            var productRead = new ExcelImporter<Product>(productImporter).Import(memoryStream);
 
-            categoryService.AddRange(categories);
-            foreach (var item in typeRead)
+            foreach (var item in productRead)
             {
                 if (item.Success)
                 {
-                    typeService.AddImportData(item.Value);
+                    productService.AddImportData(item.Value);
                 }
             }
 
             //Act
-            var actualCompanies = dbContext.Type.ToList();
+            var actualCompanies = dbContext.Product.ToList();
 
             //Assert
-            actualCompanies.Should().Equal(exceptType);
+            actualCompanies.Should().Equal(exceptProduct);
         }
 
         [Theory]
         [MemberData(nameof(FailReadSheet))]
-        public void Reading_File_With_Wrong_Sheet_Name(List<Result<ProductType>>? exceptFail)
+        public void Reading_File_With_Wrong_Sheet_Name(List<Result<Product>>? exceptFail)
         {
             //Arrange
             var memoryStream = new MemoryStream(Resources.NameSheetIsNotCorrect);
-            var typeImporter = new TypeProductImporter();
+            var productImporter = new ProductImporter();
 
             //Act                                 
-            var actualFail = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
+            var actualFail = new ExcelImporter<Product>(productImporter).Import(memoryStream);
 
             //Assert
             actualFail.Should().Equal(exceptFail);
@@ -114,14 +129,14 @@ namespace TestTask.Test.ImportTest
 
         [Theory]
         [MemberData(nameof(FailReadColumn))]
-        public void Reading_File_With_Wrong_Column_Name(List<Result<ProductType>>? exceptFail)
+        public void Reading_File_With_Wrong_Column_Name(List<Result<Product>>? exceptFail)
         {
             //Arrange
             var memoryStream = new MemoryStream(Resources.ColumnNameIsNotCorrect);
-            var typeImporter = new TypeProductImporter();
+            var productImporter = new ProductImporter();
 
             //Act                                 
-            var actualFail = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
+            var actualFail = new ExcelImporter<Product>(productImporter).Import(memoryStream);
 
             //Assert
             actualFail.Should().Equal(exceptFail);
@@ -129,14 +144,14 @@ namespace TestTask.Test.ImportTest
 
         [Theory]
         [MemberData(nameof(FailReadItems))]
-        public void Reading_File_With_Incorrect_Sheet_Data(List<Result<ProductType>>? exceptFail)
+        public void Reading_File_With_Incorrect_Sheet_Data(List<Result<Product>>? exceptFail)
         {
             //Arrange
             var memoryStream = new MemoryStream(Resources.NotCorrectDataIsAllFilledIn);
-            var typeImporter = new TypeProductImporter();
+            var productImporter = new ProductImporter();
 
             //Act                                 
-            var actualFail = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
+            var actualFail = new ExcelImporter<Product>(productImporter).Import(memoryStream);
 
             //Assert
             actualFail.Should().Equal(exceptFail);
