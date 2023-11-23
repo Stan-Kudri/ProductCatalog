@@ -75,17 +75,17 @@ namespace TestTask.Test.ImportTest
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
             var categoryService = new CategoryService(dbContext);
-            var service = new ProductTypeService(dbContext);
+            var typeService = new ProductTypeService(dbContext);
             var memoryStream = new MemoryStream(Resources.DataIsAllFilledIn);
-            var importer = new TypeProductImporter();
-            var categoryRead = new ExcelImporter<ProductType>(importer).Import(memoryStream);
+            var typeImporter = new TypeProductImporter();
+            var categoryRead = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
 
             categoryService.AddRange(categories);
             foreach (var item in categoryRead)
             {
                 if (item.Success)
                 {
-                    service.AddImportData(item.Value);
+                    typeService.AddImportData(item.Value);
                 }
             }
 
@@ -102,11 +102,10 @@ namespace TestTask.Test.ImportTest
         {
             //Arrange
             var memoryStream = new MemoryStream(Resources.NameSheetIsNotCorrect);
-
-            var importer = new TypeProductImporter();
+            var typeImporter = new TypeProductImporter();
 
             //Act                                 
-            var actualFail = new ExcelImporter<ProductType>(importer).Import(memoryStream);
+            var actualFail = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
 
             //Assert
             actualFail.Should().Equal(exceptFail);
@@ -118,11 +117,10 @@ namespace TestTask.Test.ImportTest
         {
             //Arrange
             var memoryStream = new MemoryStream(Resources.ColumnNameIsNotCorrect);
-
-            var importer = new TypeProductImporter();
+            var typeImporter = new TypeProductImporter();
 
             //Act                                 
-            var actualFail = new ExcelImporter<ProductType>(importer).Import(memoryStream);
+            var actualFail = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
 
             //Assert
             actualFail.Should().Equal(exceptFail);
@@ -134,11 +132,10 @@ namespace TestTask.Test.ImportTest
         {
             //Arrange
             var memoryStream = new MemoryStream(Resources.NotCorrectDataIsAllFilledIn);
-
-            var importer = new TypeProductImporter();
+            var typeImporter = new TypeProductImporter();
 
             //Act                                 
-            var actualFail = new ExcelImporter<ProductType>(importer).Import(memoryStream);
+            var actualFail = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
 
             //Assert
             actualFail.Should().Equal(exceptFail);

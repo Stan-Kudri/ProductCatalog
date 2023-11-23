@@ -87,7 +87,6 @@ namespace TestTask.Test.ImportTest
         {
             //Arrange
             var memoryStream = new MemoryStream(Resources.NameSheetIsNotCorrect);
-
             var companyImporter = new CompanyImporter();
 
             //Act                                 
@@ -103,7 +102,6 @@ namespace TestTask.Test.ImportTest
         {
             //Arrange
             var memoryStream = new MemoryStream(Resources.ColumnNameIsNotCorrect);
-
             var companyImporter = new CompanyImporter();
 
             //Act                                 
@@ -119,7 +117,6 @@ namespace TestTask.Test.ImportTest
         {
             //Arrange
             var memoryStream = new MemoryStream(Resources.NotCorrectDataIsAllFilledIn);
-
             var companyImporter = new CompanyImporter();
 
             //Act                                 
