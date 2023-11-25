@@ -98,7 +98,7 @@ namespace TestTask.Core.Models.Products
             _dbContext.Product.RemoveRange(product.ToList());
         }
 
-        public void AddImportData(Product item)
+        public void Upsert(Product item)
         {
             if (_dbContext.Company.FirstOrDefault(e => e.Id == item.CompanyId) == null ||
                 _dbContext.Category.FirstOrDefault(e => e.Id == item.CategoryId) == null ||

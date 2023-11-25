@@ -65,7 +65,7 @@ namespace TestTask.Core.Models.Companies
             }
         }
 
-        public void AddImportData(Company company)
+        public void Upsert(Company company)
         {
             var duplicateId = _dbContext.Company.FirstOrDefault(e => e.Id == company.Id);
             if (duplicateId == null)

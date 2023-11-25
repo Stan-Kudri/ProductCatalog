@@ -87,7 +87,7 @@ namespace TestTask.Core.Models.Types
             _dbContext.Type.RemoveRange(item.ToList());
         }
 
-        public void AddImportData(ProductType item)
+        public void Upsert(ProductType item)
         {
             if (_dbContext.Category.FirstOrDefault(e => e.Id == item.CategoryId) == null)
             {

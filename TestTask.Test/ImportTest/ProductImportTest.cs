@@ -101,7 +101,7 @@ namespace TestTask.Test.ImportTest
             {
                 if (item.Success)
                 {
-                    productService.AddImportData(item.Value);
+                    productService.Upsert(item.Value);
                 }
             }
 
@@ -110,6 +110,7 @@ namespace TestTask.Test.ImportTest
 
             //Assert
             actualCompanies.Should().Equal(exceptProduct);
+            productRead.Should().AllSatisfy(e => e.Success.Should().BeTrue());
         }
 
         [Theory]

@@ -86,12 +86,13 @@ namespace TestTask.Test.ImportTest
             {
                 if (item.Success)
                 {
-                    typeService.AddImportData(item.Value);
+                    typeService.Upsert(item.Value);
                 }
             }
 
             //Act
             var actualCompanies = dbContext.Type.ToList();
+            typeRead.Should().AllSatisfy(e => e.Success.Should().BeTrue());
 
             //Assert
             actualCompanies.Should().Equal(exceptType);

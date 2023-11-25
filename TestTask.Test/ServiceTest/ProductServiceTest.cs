@@ -46,7 +46,7 @@ namespace TestTask.Test.ServiceTest
             },
         };
 
-        public static IEnumerable<object[]> UppdataItemProduct() => new List<object[]>
+        public static IEnumerable<object[]> UpdateItemProduct() => new List<object[]>
         {
             new object[]
             {
@@ -143,7 +143,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(ProductItems))]
-        public void Load_Data_Category(Company company, Category category, ProductType type, List<Product> products)
+        public void The_Service_Should_Add_All_The_Item_Of_Database(Company company, Category category, ProductType type, List<Product> products)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -167,7 +167,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddItemProduct))]
-        public void Equals_Collection_At_Add_Product_In_Service
+        public void Service_Must_Add_The_Item_To_The_Database
             (Company company,
             Category category,
             ProductType type,
@@ -197,13 +197,13 @@ namespace TestTask.Test.ServiceTest
         }
 
         [Theory]
-        [MemberData(nameof(UppdataItemProduct))]
-        public void Equals_Collection_At_Updata_Item_Product
+        [MemberData(nameof(UpdateItemProduct))]
+        public void Service_Must_Update_The_Item_To_The_Database
             (Company company,
             Category category,
             ProductType type,
             List<Product> products,
-            Product updataProduct,
+            Product updateProduct,
             List<Product> expectProducts)
         {
             //Arrange
@@ -218,7 +218,7 @@ namespace TestTask.Test.ServiceTest
             categoryService.Add(category);
             typeService.Add(type);
             productService.AddRange(products);
-            productService.Update(updataProduct);
+            productService.Update(updateProduct);
 
             //Act
             var actualProducts = dbContext.Product.ToList();
@@ -229,7 +229,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(RemoveProduct))]
-        public void Equals_Collection_At_Remove_Item_Product
+        public void Service_Must_Remove_Item_By_ID_To_The_Database
             (Company company,
             Category category,
             ProductType type,
@@ -260,7 +260,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddProductWithBusyId))]
-        public void Expect_Id_Is_Busy
+        public void Add_Items_Did_Not_Happen_Because_The_ID_Are_Busy
             (Company company,
             Category category,
             ProductType type,
@@ -288,7 +288,7 @@ namespace TestTask.Test.ServiceTest
         [MemberData(nameof(AddProductWithCompanyMissing))]
         [MemberData(nameof(AddProductWithCategoryMissing))]
         [MemberData(nameof(AddProductWithTypeMissing))]
-        public void Error_Add_With_Missing_Child_Id
+        public void Did_Not_Happen_Add_Items_Because_The_Missing_Child_Id
             (Company company,
             Category category,
             ProductType type,

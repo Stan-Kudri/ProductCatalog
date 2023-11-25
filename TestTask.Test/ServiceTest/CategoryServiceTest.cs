@@ -41,7 +41,7 @@ namespace TestTask.Test.ServiceTest
             },
         };
 
-        public static IEnumerable<object[]> UppdataItemCategory() => new List<object[]>
+        public static IEnumerable<object[]> UpdateItemCategory() => new List<object[]>
         {
             new object[]
             {
@@ -115,7 +115,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(CategoryItems))]
-        public void Load_Data_Category(List<Category> category)
+        public void The_Service_Should_Add_All_The_Item_Of_Database(List<Category> category)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -131,7 +131,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddItemCategory))]
-        public void Equals_Collection_At_Add_Category_In_Service(List<Category> categories, Category addCategory, List<Category> expectCategories)
+        public void Service_Must_Add_The_Item_To_The_Database(List<Category> categories, Category addCategory, List<Category> expectCategories)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -148,15 +148,15 @@ namespace TestTask.Test.ServiceTest
         }
 
         [Theory]
-        [MemberData(nameof(UppdataItemCategory))]
-        public void Equals_Collection_At_Updata_Item_Category(List<Category> categories, Category uppdataCategory, List<Category> expectCategories)
+        [MemberData(nameof(UpdateItemCategory))]
+        public void Service_Must_Update_The_Item_To_The_Database(List<Category> categories, Category updateCategory, List<Category> expectCategories)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
             var service = new CategoryService(dbContext);
             dbContext.Category.AddRange(categories);
             dbContext.SaveChanges();
-            service.Update(uppdataCategory);
+            service.Update(updateCategory);
 
             //Act
             var actualCategories = dbContext.Category.ToList();
@@ -167,7 +167,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(RemoveRangeCategory))]
-        public void Equals_Collection_At_Remove_Range_Items_Category(List<Category> categories, List<int> removeID, List<Category> expectCategories)
+        public void Service_Must_Remove_Range_Items_By_ID_To_The_Database(List<Category> categories, List<int> removeID, List<Category> expectCategories)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -185,7 +185,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(NameCategoryById))]
-        public void Equals_Name_At_Add_Item_Category(List<Category> categories, int id, string expectName)
+        public void Get_Name_By_ID_From_The_Database(List<Category> categories, int id, string expectName)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -201,7 +201,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddCategoryWithBusyId))]
-        public void Expect_Id_Is_Busy(List<Category> categories, Category category)
+        public void Add_Items_Did_Not_Happen_Because_The_ID_Are_Busy(List<Category> categories, Category category)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();

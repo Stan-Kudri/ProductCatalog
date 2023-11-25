@@ -101,7 +101,7 @@ namespace TestTask.Forms
                     {
                         if (item.Success)
                         {
-                            _companyService.AddImportData(item.Value);
+                            _companyService.Upsert(item.Value);
                         }
                     }
 
@@ -119,7 +119,7 @@ namespace TestTask.Forms
                     {
                         if (item.Success)
                         {
-                            _categoryService.AddImportData(item.Value);
+                            _categoryService.Upsert(item.Value);
                         }
                     }
 
@@ -137,7 +137,7 @@ namespace TestTask.Forms
                     {
                         if (item.Success)
                         {
-                            _typeService.AddImportData(item.Value);
+                            _typeService.Upsert(item.Value);
                         }
                     }
 
@@ -155,7 +155,7 @@ namespace TestTask.Forms
                     {
                         if (item.Success)
                         {
-                            _productService.AddImportData(item.Value);
+                            _productService.Upsert(item.Value);
                         }
                     }
 

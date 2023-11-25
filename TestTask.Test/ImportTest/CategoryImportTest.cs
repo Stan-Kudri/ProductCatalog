@@ -58,7 +58,7 @@ namespace TestTask.Test.ImportTest
 
         [Theory]
         [MemberData(nameof(CategoryItems))]
-        public void Add_All_Item_From_Excel_File(List<Category> exceptCategory)
+        public void Import_Should_Add_All_File_Items(List<Category> exceptCategory)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -71,7 +71,7 @@ namespace TestTask.Test.ImportTest
             {
                 if (item.Success)
                 {
-                    categoryService.AddImportData(item.Value);
+                    categoryService.Upsert(item.Value);
                 }
             }
 
@@ -80,6 +80,7 @@ namespace TestTask.Test.ImportTest
 
             //Assert
             actualCompanies.Should().Equal(exceptCategory);
+            categoryRead.Should().AllSatisfy(e => e.Success.Should().BeTrue());
         }
 
         [Theory]

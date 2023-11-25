@@ -46,7 +46,7 @@ namespace TestTask.Test.ServiceTest
             },
         };
 
-        public static IEnumerable<object[]> UppdataItemCompany() => new List<object[]>
+        public static IEnumerable<object[]> UpdateItemCompany() => new List<object[]>
         {
             new object[]
             {
@@ -123,7 +123,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(CompanyItems))]
-        public void Load_Data_Company(List<Company> companies)
+        public void The_Service_Should_Add_All_The_Item_Of_Database(List<Company> companies)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -139,7 +139,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddItemCompany))]
-        public void Equals_Collection_At_Add_Company_In_Service(List<Company> companies, Company addCompany, List<Company> expectCompanies)
+        public void Service_Must_Add_The_Item_To_The_Database(List<Company> companies, Company addCompany, List<Company> expectCompanies)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -156,15 +156,15 @@ namespace TestTask.Test.ServiceTest
         }
 
         [Theory]
-        [MemberData(nameof(UppdataItemCompany))]
-        public void Equals_Collection_At_Updata_Item_Company(List<Company> companies, Company uppdataCompany, List<Company> expectCompanies)
+        [MemberData(nameof(UpdateItemCompany))]
+        public void Service_Must_Update_The_Item_To_The_Database(List<Company> companies, Company updateCompany, List<Company> expectCompanies)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
             var companyService = new CompanyService(dbContext);
             dbContext.Company.AddRange(companies);
             dbContext.SaveChanges();
-            companyService.Update(uppdataCompany);
+            companyService.Update(updateCompany);
 
             //Act
             var actualCompanies = dbContext.Company.ToList();
@@ -175,7 +175,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(RemoveRangeCompany))]
-        public void Equals_Collection_At_Remove_Range_Items_Company(List<Company> companies, List<int> removeID, List<Company> expectCompanies)
+        public void Service_Must_Remove_Range_Items_By_ID_To_The_Database(List<Company> companies, List<int> removeID, List<Company> expectCompanies)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -193,7 +193,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(NameCompanyById))]
-        public void Equals_Name_At_Add_Item_Company(Company company, int id, string expectName)
+        public void Get_Name_By_ID_From_The_Database(Company company, int id, string expectName)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -209,7 +209,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddCompanyWithBusyId))]
-        public void Expect_Id_Is_Busy(List<Company> companies, Company company)
+        public void Add_Items_Did_Not_Happen_Because_The_ID_Are_Busy(List<Company> companies, Company company)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();

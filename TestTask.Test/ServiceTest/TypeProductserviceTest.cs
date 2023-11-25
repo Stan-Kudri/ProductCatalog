@@ -50,7 +50,7 @@ namespace TestTask.Test.ServiceTest
             },
         };
 
-        public static IEnumerable<object[]> UppdataItemTypeProduct() => new List<object[]>
+        public static IEnumerable<object[]> UpdateItemTypeProduct() => new List<object[]>
         {
             new object[]
             {
@@ -133,7 +133,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(TypeProductItems))]
-        public void Load_Data_Category(List<Category> categories, List<ProductType> types)
+        public void The_Service_Should_Add_All_The_Item_Of_Database(List<Category> categories, List<ProductType> types)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -151,7 +151,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddItemTypeProduct))]
-        public void Equals_Collection_At_Add_Type_Product_In_Service(List<Category> categories, List<ProductType> types, ProductType addType, List<ProductType> expectTypes)
+        public void Service_Must_Add_The_Item_To_The_Database(List<Category> categories, List<ProductType> types, ProductType addType, List<ProductType> expectTypes)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -169,8 +169,8 @@ namespace TestTask.Test.ServiceTest
         }
 
         [Theory]
-        [MemberData(nameof(UppdataItemTypeProduct))]
-        public void Equals_Collection_At_Updata_Item_Type_Product(List<Category> categories, List<ProductType> types, ProductType uppdateType, List<ProductType> expectTypes)
+        [MemberData(nameof(UpdateItemTypeProduct))]
+        public void Service_Must_Update_The_Item_To_The_Database(List<Category> categories, List<ProductType> types, ProductType updateType, List<ProductType> expectTypes)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -178,7 +178,7 @@ namespace TestTask.Test.ServiceTest
             var typeProductService = new ProductTypeService(dbContext);
             categoryService.AddRange(categories);
             typeProductService.AddRange(types);
-            typeProductService.Update(uppdateType);
+            typeProductService.Update(updateType);
 
             //Act
             var actualType = dbContext.Type.ToList();
@@ -189,7 +189,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(RemoveTypeProduct))]
-        public void Equals_Collection_At_Remove_Item_Type_Product(List<Category> categories, List<ProductType> types, int removeID, List<ProductType> expectTypes)
+        public void Service_Must_Remove_Item_By_ID_To_The_Database(List<Category> categories, List<ProductType> types, int removeID, List<ProductType> expectTypes)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -208,7 +208,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddTypeProductWithBusyId))]
-        public void Expect_Id_Is_Busy(List<Category> categories, List<ProductType> types, ProductType addType)
+        public void Add_Items_Did_Not_Happen_Because_The_ID_Are_Busy(List<Category> categories, List<ProductType> types, ProductType addType)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -223,7 +223,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddTypeProductWithCategoryMissing))]
-        public void Error_Add_Type_With_Category_Missing(List<Category> categories, ProductType addType)
+        public void Did_Not_Happen_Add_Items_Because_The_Missing_Child_Id(List<Category> categories, ProductType addType)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
