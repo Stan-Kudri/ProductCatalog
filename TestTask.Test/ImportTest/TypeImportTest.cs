@@ -100,47 +100,50 @@ namespace TestTask.Test.ImportTest
 
         [Theory]
         [MemberData(nameof(FailReadSheet))]
-        public void Reading_File_With_Wrong_Sheet_Name(List<Result<ProductType>>? exceptFail)
+        public void Reading_File_With_Wrong_Sheet_Name(List<Result<ProductType>>? exceptResult)
         {
             //Arrange
             var memoryStream = new MemoryStream(Resources.NameSheetIsNotCorrect);
             var typeImporter = new TypeProductImporter();
 
             //Act                                 
-            var actualFail = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
+            var actualResult = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
 
             //Assert
-            actualFail.Should().Equal(exceptFail);
+            actualResult.Should().Equal(exceptResult);
+            actualResult.Should().AllSatisfy(e => e.Success.Should().BeFalse());
         }
 
         [Theory]
         [MemberData(nameof(FailReadColumn))]
-        public void Reading_File_With_Wrong_Column_Name(List<Result<ProductType>>? exceptFail)
+        public void Reading_File_With_Wrong_Column_Name(List<Result<ProductType>>? exceptResult)
         {
             //Arrange
             var memoryStream = new MemoryStream(Resources.ColumnNameIsNotCorrect);
             var typeImporter = new TypeProductImporter();
 
             //Act                                 
-            var actualFail = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
+            var actualResult = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
 
             //Assert
-            actualFail.Should().Equal(exceptFail);
+            actualResult.Should().Equal(exceptResult);
+            actualResult.Should().AllSatisfy(e => e.Success.Should().BeFalse());
         }
 
         [Theory]
         [MemberData(nameof(FailReadItems))]
-        public void Reading_File_With_Incorrect_Sheet_Data(List<Result<ProductType>>? exceptFail)
+        public void Reading_File_With_Incorrect_Sheet_Data(List<Result<ProductType>>? exceptResult)
         {
             //Arrange
             var memoryStream = new MemoryStream(Resources.NotCorrectDataIsAllFilledIn);
             var typeImporter = new TypeProductImporter();
 
             //Act                                 
-            var actualFail = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
+            var actualResult = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
 
             //Assert
-            actualFail.Should().Equal(exceptFail);
+            actualResult.Should().Equal(exceptResult);
+            actualResult.Should().AllSatisfy(e => e.Success.Should().BeFalse());
         }
     }
 }

@@ -115,7 +115,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(CategoryItems))]
-        public void The_Service_Should_Add_All_The_Item_Of_Database(List<Category> category)
+        public void Service_Should_Add_All_The_Item_Of_Database(List<Category> category)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -131,7 +131,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddItemCategory))]
-        public void Service_Must_Add_The_Item_To_The_Database(List<Category> categories, Category addCategory, List<Category> expectCategories)
+        public void Service_Should_Add_The_Item_To_The_Database(List<Category> categories, Category addCategory, List<Category> expectCategories)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -149,7 +149,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(UpdateItemCategory))]
-        public void Service_Must_Update_The_Item_To_The_Database(List<Category> categories, Category updateCategory, List<Category> expectCategories)
+        public void Service_Should_Update_The_Item_To_The_Database(List<Category> categories, Category updateCategory, List<Category> expectCategories)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -167,7 +167,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(RemoveRangeCategory))]
-        public void Service_Must_Remove_Range_Items_By_ID_To_The_Database(List<Category> categories, List<int> removeID, List<Category> expectCategories)
+        public void Service_Should_Remove_Range_Items_By_ID_To_The_Database(List<Category> categories, List<int> removeID, List<Category> expectCategories)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();

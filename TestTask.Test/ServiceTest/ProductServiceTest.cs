@@ -143,7 +143,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(ProductItems))]
-        public void The_Service_Should_Add_All_The_Item_Of_Database(Company company, Category category, ProductType type, List<Product> products)
+        public void Service_Should_Add_All_The_Item_Of_Database(Company company, Category category, ProductType type, List<Product> products)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -167,7 +167,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddItemProduct))]
-        public void Service_Must_Add_The_Item_To_The_Database
+        public void Service_Should_Add_The_Item_To_The_Database
             (Company company,
             Category category,
             ProductType type,
@@ -198,7 +198,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(UpdateItemProduct))]
-        public void Service_Must_Update_The_Item_To_The_Database
+        public void Service_Shouldt_Update_The_Item_To_The_Database
             (Company company,
             Category category,
             ProductType type,
@@ -229,7 +229,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(RemoveProduct))]
-        public void Service_Must_Remove_Item_By_ID_To_The_Database
+        public void Service_Should_Remove_Item_By_ID_To_The_Database
             (Company company,
             Category category,
             ProductType type,

@@ -123,7 +123,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(CompanyItems))]
-        public void The_Service_Should_Add_All_The_Item_Of_Database(List<Company> companies)
+        public void Service_Should_Add_All_The_Item_Of_Database(List<Company> companies)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -139,7 +139,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddItemCompany))]
-        public void Service_Must_Add_The_Item_To_The_Database(List<Company> companies, Company addCompany, List<Company> expectCompanies)
+        public void Service_Should_Add_The_Item_To_The_Database(List<Company> companies, Company addCompany, List<Company> expectCompanies)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -157,7 +157,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(UpdateItemCompany))]
-        public void Service_Must_Update_The_Item_To_The_Database(List<Company> companies, Company updateCompany, List<Company> expectCompanies)
+        public void Service_Should_Update_The_Item_To_The_Database(List<Company> companies, Company updateCompany, List<Company> expectCompanies)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -175,7 +175,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(RemoveRangeCompany))]
-        public void Service_Must_Remove_Range_Items_By_ID_To_The_Database(List<Company> companies, List<int> removeID, List<Company> expectCompanies)
+        public void Service_Should_Remove_Range_Items_By_ID_To_The_Database(List<Company> companies, List<int> removeID, List<Company> expectCompanies)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();

@@ -133,7 +133,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(TypeProductItems))]
-        public void The_Service_Should_Add_All_The_Item_Of_Database(List<Category> categories, List<ProductType> types)
+        public void Service_Should_Add_All_The_Item_Of_Database(List<Category> categories, List<ProductType> types)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -151,7 +151,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddItemTypeProduct))]
-        public void Service_Must_Add_The_Item_To_The_Database(List<Category> categories, List<ProductType> types, ProductType addType, List<ProductType> expectTypes)
+        public void Service_Should_Add_The_Item_To_The_Database(List<Category> categories, List<ProductType> types, ProductType addType, List<ProductType> expectTypes)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -170,7 +170,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(UpdateItemTypeProduct))]
-        public void Service_Must_Update_The_Item_To_The_Database(List<Category> categories, List<ProductType> types, ProductType updateType, List<ProductType> expectTypes)
+        public void Service_Should_Update_The_Item_To_The_Database(List<Category> categories, List<ProductType> types, ProductType updateType, List<ProductType> expectTypes)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
@@ -189,7 +189,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(RemoveTypeProduct))]
-        public void Service_Must_Remove_Item_By_ID_To_The_Database(List<Category> categories, List<ProductType> types, int removeID, List<ProductType> expectTypes)
+        public void Service_Should_Remove_Item_By_ID_To_The_Database(List<Category> categories, List<ProductType> types, int removeID, List<ProductType> expectTypes)
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
