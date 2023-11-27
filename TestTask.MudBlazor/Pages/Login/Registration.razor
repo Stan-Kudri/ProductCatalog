@@ -1,0 +1,68 @@
+﻿@page "/registration"
+@using TestTask.Core.Models.Users
+@using global::MudBlazor
+
+<PageTitle>Registration</PageTitle>
+
+<MudGrid>
+    <MudItem xs="12" sm="7">
+        <MudPaper Class="pa-4">
+            <MudForm @bind-Errors="@errors">
+                <MudTextField T="string" Label="Username"
+                              InputType="InputType.Text"
+                              Validation="@(new Func<string, IEnumerable<string>>(ValidFormatUsername))" Required="true"
+                              RequiredError="User name is required!" />
+                <MudTextField T="string" Label="Password" HelperText="Choose a strong password"
+                              InputType="InputType.Password"
+                              Validation="@(new Func<string, IEnumerable<string>>(ValidFormatPassword))" Required="true"
+                              RequiredError="Password is required!" />
+            </MudForm>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="5">
+        <MudPaper Class="pa-4 mud-height-full">
+            <MudText Typo="Typo.subtitle2">@($"Errors ({errors.Length})")</MudText>
+            @foreach (var error in errors)
+            {
+                <MudText Color="@Color.Error">@error</MudText>
+            }
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+
+
+@code {
+    string[] errors = { };
+    UserValidator userValidator = new UserValidator();
+
+    private IEnumerable<string> ValidFormatPassword(string password)
+    {
+        if (string.IsNullOrWhiteSpace(password))
+        {
+            yield return "Password is required!";
+            yield break;
+        }
+
+        if (!userValidator.ValidFormatPassword(password, out var message))
+        {
+            yield return message;
+            yield break;
+        }
+    }
+
+    private IEnumerable<string> ValidFormatUsername(string username)
+    {
+        if (string.IsNullOrWhiteSpace(username))
+        {
+            yield return "Username is required!";
+            yield break;
+        }
+
+        if (!userValidator.ValidFormatUsername(username, out var message))
+        {
+            yield return message;
+            yield break;
+        }
+    }
+}
