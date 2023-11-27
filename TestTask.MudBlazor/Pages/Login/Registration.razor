@@ -17,6 +17,10 @@
                               Validation="@(new Func<string, IEnumerable<string>>(ValidFormatPassword))" Required="true"
                               RequiredError="Password is required!" />
             </MudForm>
+        </MudPaper> 
+        <MudPaper Class="pa-4 mt-4">
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Surface" Class="ml-auto">Sign In</MudButton>
         </MudPaper>
     </MudItem>
     <MudItem xs="12" sm="5">
