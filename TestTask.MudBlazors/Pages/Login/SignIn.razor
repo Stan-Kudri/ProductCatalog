@@ -1,0 +1,76 @@
+﻿@page "/login"
+@using System.Text.RegularExpressions
+@using System.ComponentModel.DataAnnotations
+@using TestTask.Core.Models.Users
+
+<h3>SignIn</h3>
+
+<PageTitle>Sign In</PageTitle>
+
+<MudGrid>
+    <MudItem xs="12" sm="7">
+        <MudPaper Class="pa-4">
+            <MudForm @bind-Errors="@errors">
+                <MudTextField T="string" Label="Username"
+                              InputType="InputType.Text"
+                              Validation="@(new Func<string, IEnumerable<string>>(ValidFormatUsername))" Required="true" />
+                <MudTextField T="string" Label="Password" HelperText="Choose a strong password"
+                              InputType="InputType.Password"
+                              Validation="@(new Func<string, IEnumerable<string>>(ValidFormatPassword))" Required="true"
+                              RequiredError="Password is required!" />
+            </MudForm>
+        </MudPaper>
+        <div style="text-align:center">
+            <MudPaper Class="pa-4 mt-4">
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Info" Class="ml-auto">Sign In</MudButton>
+            </MudPaper>
+        </div>
+    </MudItem>
+    <MudItem xs="12" sm="5">
+        <MudPaper Class="pa-4 mud-height-full">
+            <MudText Typo="Typo.subtitle2">@($"Errors ({errors.Length})")</MudText>
+            @foreach (var error in errors)
+            {
+                <MudText Color="@Color.Error">@error</MudText>
+            }
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+
+
+@code {
+    string[] errors = { };
+    UserValidator userValidator = new UserValidator();
+
+    private IEnumerable<string> ValidFormatPassword(string password)
+    {
+        if (string.IsNullOrWhiteSpace(password))
+        {
+            yield return "Password is required!";
+            yield break;
+        }
+
+        if (!userValidator.ValidFormatPassword(password, out var message))
+        {
+            yield return message;
+            yield break;
+        }
+    }
+
+    private IEnumerable<string> ValidFormatUsername(string username)
+    {
+        if (string.IsNullOrWhiteSpace(username))
+        {
+            yield return "Username is required!";
+            yield break;
+        }
+
+        if (!userValidator.ValidFormatUsername(username, out var message))
+        {
+            yield return message;
+            yield break;
+        }
+    }
+}
