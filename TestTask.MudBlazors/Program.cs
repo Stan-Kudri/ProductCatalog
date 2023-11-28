@@ -1,8 +1,13 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using MudBlazor.Services;
+using TestTask.Core;
+using TestTask.Core.Models.Companies;
+using TestTask.Core.Models.Products;
+using TestTask.Core.Models.Types;
+using TestTask.Core.Models.Users;
 using TestTask.MudBlazors.Data;
+
+const string ConnectionName = "DbConnection";
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +18,15 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddMudServices();
+builder.Services.AddSingleton(e => new DbContextFactory(ConnectionName));
+builder.Services.AddScoped(e => e.GetRequiredService<DbContextFactory>().Create());
+//builder.Services.AddScoped<IMessageBox>(e => new MessageBoxShow());
+builder.Services.AddScoped(e => new UserService(e.GetRequiredService<AppDbContext>()));
+builder.Services.AddScoped<CompanyService>();
+builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<CategoryService>();
+builder.Services.AddScoped<ProductTypeService>();
+builder.Services.AddScoped<UserValidator>();
 
 var app = builder.Build();
 

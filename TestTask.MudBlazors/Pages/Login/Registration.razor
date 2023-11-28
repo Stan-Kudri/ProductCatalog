@@ -3,6 +3,7 @@
 @using System.ComponentModel.DataAnnotations
 @using TestTask.Core.Models.Users
 @using TestTask.MudBlazors.Model
+@inject UserService User
 
 <h3>Registration</h3>
 <PageTitle>Registration</PageTitle>
@@ -28,7 +29,7 @@
         </MudPaper>
         <div style="text-align:center">
             <MudPaper Class="pa-4 mt-4">
-                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" >Register</MudButton>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="AddUser">Register</MudButton>
                 <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Info" Class="ml-auto">Sign In</MudButton>     
                 <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Default" Class="ml-auto" OnClick="ClearField">Clear</MudButton>
             </MudPaper>
@@ -53,6 +54,45 @@
 
     string[] errors = { };
     UserValidator userValidator = new UserValidator();
+
+    UserService userService;
+
+    protected override async Task OnInitializedAsync() => userService = User;
+
+    private class Customer
+    {
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+    }
+
+    private interface IDataAccess
+    {
+        public Task<IReadOnlyList<Customer>> GetAllCustomersAsync();
+    }
+
+    private void ClearField() => userModel.Password = userModel.Username = matchPassword = string.Empty;
+
+    private void AddUser()
+    {
+        if (!userValidator.ValidFormatUsername(userModel.Username, out string messageValidUsername))
+        {
+            return;
+        }
+
+        if (!userValidator.ValidFormatPassword(userModel.Password, out string messageValidPassword))
+        {
+            return;
+        }
+
+        if (!userService.IsFreeUsername(userModel.Username))
+        {
+            return;
+        }
+
+        var user = userModel.ToUser();
+
+        userService.Add(user);
+    }
 
     private IEnumerable<string> ValidFormatPassword(string password)
     {
@@ -89,14 +129,6 @@
         if (userModel.Password != arg)
             return "Passwords don't match";
         return null;
-    }
-
-    private void ClearField()
-    {
-        userModel.Password 
-        = userModel.Username 
-        = matchPassword 
-        = string.Empty;
     }
 }
 

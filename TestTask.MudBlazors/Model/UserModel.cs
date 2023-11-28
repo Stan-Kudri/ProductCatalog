@@ -17,9 +17,17 @@ namespace TestTask.MudBlazors.Model
             _password = password;
         }
 
-        public string Username { get; set; }
+        public string Username
+        {
+            get => _username;
+            set => _username = value;
+        }
 
-        public string Password { get; set; }
+        public string Password
+        {
+            get => _password;
+            set => _password = value;
+        }
 
         public User ToUser() => new User(_username, _password);
     }
