@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inject NavigationManager Navigation
 
 <PageTitle>StartPage</PageTitle>
 
@@ -10,14 +11,29 @@
         <MudButton Style="text-anchor:middle"
                    Variant="Variant.Outlined"
                    Color="Color.Primary"
-                   Size="Size.Large">
+                   Size="Size.Large"
+                   OnClick="SignInPage">
             Sign In
         </MudButton>
         <MudButton Style="text-anchor:middle"
                    Variant="Variant.Outlined"
                    Color="Color.Surface"
-                   Size="Size.Large">
+                   Size="Size.Large"
+                   OnClick="RegistrationPage">
             Registration
         </MudButton>
     </MudButtonGroup>
 </div>
+
+@functions 
+{
+    void RegistrationPage()
+    {
+        Navigation.NavigateTo("/registration");
+    }
+
+    void SignInPage()
+    {
+        Navigation.NavigateTo("/login");
+    }
+}
