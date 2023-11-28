@@ -3,7 +3,7 @@
 @using System.ComponentModel.DataAnnotations
 @using TestTask.Core.Models.Users
 @using TestTask.MudBlazors.Model
-@inject UserService User
+@inject UserService UserService
 
 <h3>Registration</h3>
 <PageTitle>Registration</PageTitle>
@@ -55,10 +55,6 @@
     string[] errors = { };
     UserValidator userValidator = new UserValidator();
 
-    UserService userService;
-
-    protected override async Task OnInitializedAsync() => userService = User;
-
     private class Customer
     {
         public string? FirstName { get; set; }
@@ -84,14 +80,14 @@
             return;
         }
 
-        if (!userService.IsFreeUsername(userModel.Username))
+        if (!UserService.IsFreeUsername(userModel.Username))
         {
             return;
         }
 
         var user = userModel.ToUser();
 
-        userService.Add(user);
+        UserService.Add(user);
     }
 
     private IEnumerable<string> ValidFormatPassword(string password)

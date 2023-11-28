@@ -21,7 +21,7 @@ builder.Services.AddMudServices();
 builder.Services.AddSingleton(e => new DbContextFactory(ConnectionName));
 builder.Services.AddScoped(e => e.GetRequiredService<DbContextFactory>().Create());
 //builder.Services.AddScoped<IMessageBox>(e => new MessageBoxShow());
-builder.Services.AddScoped(e => new UserService(e.GetRequiredService<AppDbContext>()));
+builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<CompanyService>();
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<CategoryService>();
