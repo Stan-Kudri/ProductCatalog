@@ -2,6 +2,7 @@
 @using System.Text.RegularExpressions
 @using System.ComponentModel.DataAnnotations
 @using TestTask.Core.Models.Users
+@using TestTask.MudBlazors.Model
 
 <h3>Registration</h3>
 <PageTitle>Registration</PageTitle>
@@ -9,24 +10,27 @@
 <MudGrid>
     <MudItem xs="12" sm="7">
         <MudPaper Class="pa-4">
-            <MudForm @bind-Errors="@errors" Model="passwordField">
+            <MudForm @bind-Errors="@errors" Model="userModel">
                 <MudTextField T="string" Label="Username"
+                              @bind-Value=@userModel.Username
                               InputType="InputType.Text"
                               Validation="@(new Func<string, IEnumerable<string>>(ValidFormatUsername))" Required="true" />
                 <MudTextField T="string" Label="Password" HelperText="Choose a strong password"
                               InputType="InputType.Password"
-                              @bind-Value="passwordField" For="@(() => passwordField)"
+                              @bind-Value="@userModel.Password" For="@(() => userModel.Password)"
                               Validation="@(new Func<string, IEnumerable<string>>(ValidFormatPassword))" Required="true"
                               RequiredError="Password is required!" />
                 <MudTextField T="string" Label="Password" HelperText="Choose a strong password"
+                              @bind-Value="@matchPassword"
                               InputType="InputType.Password"
                               Validation="@(new Func<string, string>(MatchPassword))" />
             </MudForm>
         </MudPaper>
         <div style="text-align:center">
             <MudPaper Class="pa-4 mt-4">
-                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
-                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Info" Class="ml-auto">Sign In</MudButton>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" >Register</MudButton>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Info" Class="ml-auto">Sign In</MudButton>     
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Default" Class="ml-auto" OnClick="ClearField">Clear</MudButton>
             </MudPaper>
         </div>
     </MudItem>
@@ -44,7 +48,9 @@
 
 
 @code {
-    string passwordField = string.Empty;
+    UserModel userModel = new UserModel();
+    string matchPassword = string.Empty;
+
     string[] errors = { };
     UserValidator userValidator = new UserValidator();
 
@@ -80,9 +86,17 @@
 
     private string MatchPassword(string arg)
     {
-        if (passwordField != arg)
+        if (userModel.Password != arg)
             return "Passwords don't match";
         return null;
+    }
+
+    private void ClearField()
+    {
+        userModel.Password 
+        = userModel.Username 
+        = matchPassword 
+        = string.Empty;
     }
 }
 

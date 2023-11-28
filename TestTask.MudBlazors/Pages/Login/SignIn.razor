@@ -2,6 +2,7 @@
 @using System.Text.RegularExpressions
 @using System.ComponentModel.DataAnnotations
 @using TestTask.Core.Models.Users
+@using TestTask.MudBlazors.Model
 
 <h3>SignIn</h3>
 
@@ -10,12 +11,14 @@
 <MudGrid>
     <MudItem xs="12" sm="7">
         <MudPaper Class="pa-4">
-            <MudForm @bind-Errors="@errors">
+            <MudForm @bind-Errors="@errors" Model="userModel">
                 <MudTextField T="string" Label="Username"
+                              @bind-Value=@userModel.Username
                               InputType="InputType.Text"
                               Validation="@(new Func<string, IEnumerable<string>>(ValidFormatUsername))" Required="true" />
                 <MudTextField T="string" Label="Password" HelperText="Choose a strong password"
                               InputType="InputType.Password"
+                              @bind-Value="@userModel.Password" For="@(() => userModel.Password)"
                               Validation="@(new Func<string, IEnumerable<string>>(ValidFormatPassword))" Required="true"
                               RequiredError="Password is required!" />
             </MudForm>
@@ -24,6 +27,7 @@
             <MudPaper Class="pa-4 mt-4">
                 <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
                 <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Info" Class="ml-auto">Sign In</MudButton>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Default" Class="ml-auto" OnClick="ClearField">Clear</MudButton>
             </MudPaper>
         </div>
     </MudItem>
@@ -41,6 +45,8 @@
 
 
 @code {
+    UserModel userModel = new UserModel();
+
     string[] errors = { };
     UserValidator userValidator = new UserValidator();
 
@@ -72,5 +78,12 @@
             yield return message;
             yield break;
         }
+    }
+
+    private void ClearField()
+    {
+        userModel.Password 
+        = userModel.Username 
+        = string.Empty;
     }
 }
