@@ -11,7 +11,7 @@
 <PageTitle>Registration</PageTitle>
 
 <MudGrid>
-    <MudItem xs="12" sm="7">
+    <MudItem xs="12" sm="8">
         <MudPaper Class="pa-4">
             <MudForm @bind-Errors="@errors" Model="userModel">
                 <MudTextField T="string" Label="Username"
@@ -31,13 +31,13 @@
         </MudPaper>
         <div style="text-align:center">
             <MudPaper Class="pa-4 mt-4">
-                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="AddUser">Register</MudButton>
-                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Info" Class="ml-auto">Sign In</MudButton>     
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="AddUser">Registration</MudButton>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Info" Class="ml-auto" OnClick="SignInPage">Sign In</MudButton>
                 <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Default" Class="ml-auto" OnClick="ClearField">Clear</MudButton>
             </MudPaper>
         </div>
     </MudItem>
-    <MudItem xs="12" sm="5">
+    <MudItem xs="12" sm="4">
         <MudPaper Class="pa-4 mud-height-full">
             <MudText Typo="Typo.subtitle2">@($"Errors ({errors.Length})")</MudText>
             @foreach (var error in errors)
@@ -47,6 +47,11 @@
         </MudPaper>
     </MudItem>
 </MudGrid>
+
+@functions 
+{
+    void SignInPage() => Navigation.NavigateTo("/login");
+}
 
 @code {
     UserModel userModel = new UserModel();
