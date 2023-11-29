@@ -29,13 +29,15 @@
                               Validation="@(new Func<string, string>(MatchPassword))" />
             </MudForm>
         </MudPaper>
-        <div style="text-align:center">
-            <MudPaper Class="pa-4 mt-4">
+            <MudPaper Class="pa-4 mt-4"> 
+            <div style="text-align:center">
                 <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="AddUser">Registration</MudButton>
-                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Info" Class="ml-auto" OnClick="SignInPage">Sign In</MudButton>
-                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Default" Class="ml-auto" OnClick="ClearField">Clear</MudButton>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Warning" Class="ml-auto" OnClick="ClearField">Clear</MudButton>
+            </div>
+            <div style="text-align:right">
+                <MudButton ButtonType="ButtonType.Button" Variant="Variant.Outlined" Color="Color.Info" Class="ml-auto" OnClick="SignInPage">Sign In</MudButton>
+            </div>
             </MudPaper>
-        </div>
     </MudItem>
     <MudItem xs="12" sm="4">
         <MudPaper Class="pa-4 mud-height-full">
@@ -58,36 +60,20 @@
     string matchPassword = string.Empty;
 
     string[] errors = { };
-    UserValidator userValidator = new UserValidator();
-
-    private class Customer
-    {
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-    }
+    UserValidator userValidator = new UserValidator();         
 
     private interface IDataAccess
     {
-        public Task<IReadOnlyList<Customer>> GetAllCustomersAsync();
+        public Task<IReadOnlyList<UserModel>> GetAllCustomersAsync();
     }
 
     private void ClearField() => userModel.Password = userModel.Username = matchPassword = string.Empty;
 
     private void AddUser()
     {
-        if (!userValidator.ValidFormatUsername(userModel.Username, out string messageValidUsername))
+        if (errors.Length != 0)
         {
-            return;
-        }
-
-        if (!userValidator.ValidFormatPassword(userModel.Password, out string messageValidPassword))
-        {
-            return;
-        }
-
-        if (!UserService.IsFreeUsername(userModel.Username))
-        {
-            return;
+            return;    
         }
 
         var user = userModel.ToUser();
@@ -113,6 +99,12 @@
 
     private IEnumerable<string> ValidFormatUsername(string username)
     {
+        if (!UserService.IsFreeUsername(userModel.Username))
+        {
+            yield return string.Format($"{userModel.Username} username is taken.");
+            yield break;
+        }
+
         if (string.IsNullOrWhiteSpace(username))
         {
             yield return "Username is required!";

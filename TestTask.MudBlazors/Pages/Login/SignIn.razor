@@ -4,6 +4,7 @@
 @using TestTask.Core.Models.Users
 @using TestTask.MudBlazors.Model
 
+@inject UserService UserService
 @inject NavigationManager Navigation
 
 <PageTitle>Sign In</PageTitle>
@@ -23,13 +24,15 @@
                               RequiredError="Password is required!" />
             </MudForm>
         </MudPaper>
-        <div style="text-align:center">
             <MudPaper Class="pa-4 mt-4">
-                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" >Input</MudButton>
-                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Info" Class="ml-auto" OnClick="RegistrationPage">Registration</MudButton>
-                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Default" Class="ml-auto" OnClick="ClearField">Clear</MudButton>
+            <div style="text-align:center">
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Input</MudButton>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Warning" Class="ml-auto" OnClick="ClearField">Clear</MudButton>
+            </div>
+            <div style ="text-align:right">
+                <MudButton ButtonType="ButtonType.Button" Variant="Variant.Outlined" Color="Color.Info" Class="ml-auto" OnClick="RegistrationPage">Registration</MudButton>
+            </div>
             </MudPaper>
-        </div>
     </MudItem>
     <MudItem xs="12" sm="5">
         <MudPaper Class="pa-4 mud-height-full">
@@ -52,6 +55,13 @@
 
     string[] errors = { };
     UserValidator userValidator = new UserValidator();
+
+    private interface IDataAccess
+    {
+        public Task<IReadOnlyList<UserModel>> GetAllCustomersAsync();
+    }
+
+    private void ClearField() => userModel.Password = userModel.Username = string.Empty;
 
     private IEnumerable<string> ValidFormatPassword(string password)
     {
@@ -76,12 +86,16 @@
             yield break;
         }
 
+        if (UserService.IsFreeUsername(userModel.Username))
+        {
+            yield return string.Format($"{userModel.Username} username does not exist.");
+            yield break;
+        }
+
         if (!userValidator.ValidFormatUsername(username, out var message))
         {
             yield return message;
             yield break;
         }
     }
-
-    private void ClearField() => userModel.Password = userModel.Username = string.Empty;
 }
