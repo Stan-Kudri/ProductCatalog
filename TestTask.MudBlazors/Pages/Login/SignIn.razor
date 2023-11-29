@@ -12,6 +12,7 @@
 <MudGrid>
     <MudItem xs="12" sm="7">
         <MudPaper Class="pa-4">
+            <MudText Typo="Typo.h6" Align="Align.Center"><b>Sign In</b></MudText>
             <MudForm @bind-Errors="@errors" Model="userModel">
                 <MudTextField T="string" Label="Username"
                               @bind-Value=@userModel.Username

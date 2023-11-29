@@ -7,12 +7,10 @@
 @inject UserService UserService
 @inject NavigationManager Navigation
 
-<h3>Registration</h3>
-<PageTitle>Registration</PageTitle>
-
 <MudGrid>
     <MudItem xs="12" sm="8">
         <MudPaper Class="pa-4">
+            <MudText Typo="Typo.h6" Align="Align.Center"><b>Registration</b></MudText>
             <MudForm @bind-Errors="@errors" Model="userModel">
                 <MudTextField T="string" Label="Username"
                               @bind-Value=@userModel.Username
