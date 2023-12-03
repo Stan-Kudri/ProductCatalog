@@ -5,10 +5,11 @@
 @using TestTask.MudBlazors.Model
 
 @inject UserService UserService
+@inject UserValidator UserValidator
 @inject NavigationManager Navigation
 
 <MudGrid>
-    <MudItem xs="12" sm="8">
+    <MudItem xs="12" sm="7">
         <MudPaper Class="pa-4">
             <MudText Typo="Typo.h6" Align="Align.Center"><b>Registration</b></MudText>
             <MudForm @bind-Errors="@errors" Model="userModel">
@@ -27,7 +28,7 @@
                               Validation="@(new Func<string, string>(MatchPassword))" />
             </MudForm>
         </MudPaper>
-            <MudPaper Class="pa-4 mt-4"> 
+        <MudPaper Class="pa-4 mt-4">
             <div style="text-align:center">
                 <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="AddUser">Registration</MudButton>
                 <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Warning" Class="ml-auto" OnClick="ClearField">Clear</MudButton>
@@ -37,7 +38,7 @@
             </div>
             </MudPaper>
     </MudItem>
-    <MudItem xs="12" sm="4">
+    <MudItem xs="12" sm="5">
         <MudPaper Class="pa-4 mud-height-full">
             <MudText Typo="Typo.subtitle2">@($"Errors ({errors.Length})")</MudText>
             @foreach (var error in errors)
@@ -48,17 +49,19 @@
     </MudItem>
 </MudGrid>
 
+
+
+
 @functions 
 {
     void SignInPage() => Navigation.NavigateTo("/login");
 }
 
 @code {
-    UserModel userModel = new UserModel();
+    UserModel userModel{ get; set; } = new UserModel();
     string matchPassword = string.Empty;
 
-    string[] errors = { };
-    UserValidator userValidator = new UserValidator();         
+    string[] errors = { };         
 
     private interface IDataAccess
     {
@@ -88,7 +91,7 @@
             yield break;
         }
 
-        if (!userValidator.ValidFormatPassword(password, out var message))
+        if (!UserValidator.ValidFormatPassword(password, out var message))
         {
             yield return message;
             yield break;
@@ -109,7 +112,7 @@
             yield break;
         }
 
-        if (!userValidator.ValidFormatUsername(username, out var message))
+        if (!UserValidator.ValidFormatUsername(username, out var message))
         {
             yield return message;
             yield break;

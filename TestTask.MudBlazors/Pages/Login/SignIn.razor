@@ -5,6 +5,7 @@
 @using TestTask.MudBlazors.Model
 
 @inject UserService UserService
+@inject UserValidator UserValidator
 @inject NavigationManager Navigation
 
 <PageTitle>Sign In</PageTitle>
@@ -25,15 +26,15 @@
                               RequiredError="Password is required!" />
             </MudForm>
         </MudPaper>
-            <MudPaper Class="pa-4 mt-4">
+        <MudPaper Class="pa-4 mt-4">
             <div style="text-align:center">
-                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Input</MudButton>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="InputInAccount">Input</MudButton>
                 <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Warning" Class="ml-auto" OnClick="ClearField">Clear</MudButton>
             </div>
-            <div style ="text-align:right">
+            <div style="text-align:right">
                 <MudButton ButtonType="ButtonType.Button" Variant="Variant.Outlined" Color="Color.Info" Class="ml-auto" OnClick="RegistrationPage">Registration</MudButton>
             </div>
-            </MudPaper>
+        </MudPaper>
     </MudItem>
     <MudItem xs="12" sm="5">
         <MudPaper Class="pa-4 mud-height-full">
@@ -53,9 +54,9 @@
 
 @code {
     UserModel userModel = new UserModel();
-
     string[] errors = { };
-    UserValidator userValidator = new UserValidator();
+
+    bool isLoginAccount { get; set; } = false;
 
     private interface IDataAccess
     {
@@ -63,6 +64,17 @@
     }
 
     private void ClearField() => userModel.Password = userModel.Username = string.Empty;
+
+    private void InputInAccount()
+    {
+        if (errors.Length != 0)
+        {
+            isLoginAccount = false;
+        }
+
+        var user = userModel.ToUser();
+        isLoginAccount = true;
+    }
 
     private IEnumerable<string> ValidFormatPassword(string password)
     {
@@ -72,7 +84,7 @@
             yield break;
         }
 
-        if (!userValidator.ValidFormatPassword(password, out var message))
+        if (!UserValidator.ValidFormatPassword(password, out var message))
         {
             yield return message;
             yield break;
@@ -93,7 +105,7 @@
             yield break;
         }
 
-        if (!userValidator.ValidFormatUsername(username, out var message))
+        if (!UserValidator.ValidFormatUsername(username, out var message))
         {
             yield return message;
             yield break;

@@ -1,4 +1,6 @@
-﻿@inherits LayoutComponentBase
+﻿@page "/mainlayout"
+
+@inherits LayoutComponentBase
 
 @inject NavigationManager Navigation
 
@@ -8,7 +10,7 @@
 
 <MudLayout>
     <MudAppBar Elevation="0">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" Disabled=true/>
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" Disabled=DisabledAppBar/>
         <MudSpacer />
         <MudTooltip Text="Sign In" Placement="Placement.Left">
             <MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit" OnClick="SignInPage" />
@@ -32,8 +34,15 @@
     void SignInPage() => Navigation.NavigateTo("/login");
 }
 
+
 @code {
-    bool _drawerOpen = true;
+
+    public bool DisabledAppBar { get; set; } = false;
+
+    bool _drawerOpen = false;
+
+    void UpdateDisable()
+        => DisabledAppBar = !DisabledAppBar;
 
     void DrawerToggle()
     {

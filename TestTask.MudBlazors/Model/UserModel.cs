@@ -1,4 +1,5 @@
-﻿using TestTask.Core.Models.Users;
+﻿using Microsoft.AspNetCore.Components;
+using TestTask.Core.Models.Users;
 
 namespace TestTask.MudBlazors.Model
 {
@@ -17,12 +18,14 @@ namespace TestTask.MudBlazors.Model
             _password = password;
         }
 
+        [Parameter]
         public string Username
         {
             get => _username;
             set => _username = value;
         }
 
+        [Parameter]
         public string Password
         {
             get => _password;
