@@ -1,4 +1,5 @@
 ﻿@page "/login"
+
 @using System.Text.RegularExpressions
 @using System.ComponentModel.DataAnnotations
 @using TestTask.Core.Models.Users
@@ -53,10 +54,8 @@
 }
 
 @code {
-    UserModel userModel = new UserModel();
+    UserModel userModel { get; set; } = new UserModel();
     string[] errors = { };
-
-    bool isLoginAccount { get; set; } = false;
 
     private interface IDataAccess
     {
@@ -69,11 +68,10 @@
     {
         if (errors.Length != 0)
         {
-            isLoginAccount = false;
+            return;
         }
 
         var user = userModel.ToUser();
-        isLoginAccount = true;
     }
 
     private IEnumerable<string> ValidFormatPassword(string password)

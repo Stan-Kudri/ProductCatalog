@@ -58,7 +58,7 @@
 }
 
 @code {
-    UserModel userModel{ get; set; } = new UserModel();
+    UserModel userModel { get; set; } = new UserModel();
     string matchPassword = string.Empty;
 
     string[] errors = { };         
@@ -80,7 +80,8 @@
         var user = userModel.ToUser();
 
         UserService.Add(user);
-        Navigation.NavigateTo("/login");
+        Navigation.NavigateTo($"/login");
+        //Navigation.NavigateTo($"/login/{userModel.Username}/{userModel.Password}");
     }
 
     private IEnumerable<string> ValidFormatPassword(string password)
