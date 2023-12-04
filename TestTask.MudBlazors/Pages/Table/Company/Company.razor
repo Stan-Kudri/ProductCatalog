@@ -12,7 +12,8 @@
 }
 else
 {
-    <MudTable Items="companies" Hover="true" SortLabel="Sort By" Elevation="0">
+
+    <MudTable Items="companies" Hover="true" SortLabel="Sort By" Elevation="0" @bind-SelectedItems="selectedItems" MultiSelection="true">
         <HeaderContent>
             <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<TestTask.Core.Models.Companies.Company, object>(x=>x.Id)">Id</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<TestTask.Core.Models.Companies.Company, object>(x=>x.Name)">Name</MudTableSortLabel></MudTh>
@@ -21,18 +22,23 @@ else
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Id">@context.Id</MudTd>
-                <MudTd DataLabel="Name">@context.Name</MudTd>
-                <MudTd DataLabel="Country">@context.Country</MudTd>
-                <MudTd DataLabel="DataCreation">@context.DateCreation.ToString("d")</MudTd>
-            </RowTemplate>
-            <PagerContent>
-                <MudTablePager PageSizeOptions="new int[]{10, 25}" />
-            </PagerContent>
-        </MudTable>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Country">@context.Country</MudTd>
+            <MudTd DataLabel="DataCreation">@context.DateCreation.ToString("d")</MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager PageSizeOptions="new int[]{10, 25}" />
+        </PagerContent>
+        <FooterContent>
+            <MudTd colspan="4">Select All</MudTd>
+        </FooterContent>
+    </MudTable>
 }
 
 
 @code {
+
+    private HashSet<TestTask.Core.Models.Companies.Company> selectedItems = new HashSet<TestTask.Core.Models.Companies.Company>();
     private List<TestTask.Core.Models.Companies.Company>? companies;
 
     protected override void OnInitialized()
