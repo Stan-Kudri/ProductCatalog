@@ -89,7 +89,4 @@
     <Compile Remove="Forms\Step\ProductFormBase.Designer.cs" />
     <EmbeddedResource Remove="Forms\Step\ProductFormBase.resx" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\TestTask.MudBlazors\Shared\SignIn.razor" Link="SignIn.razor" />
-  </ItemGroup>
 </Project>

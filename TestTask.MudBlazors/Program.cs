@@ -5,7 +5,6 @@ using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
 using TestTask.Core.Models.Types;
 using TestTask.Core.Models.Users;
-using TestTask.MudBlazors.Data;
 
 const string ConnectionName = "DbConnection";
 
@@ -16,7 +15,6 @@ StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configurat
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddMudServices();
 builder.Services.AddSingleton(e => new DbContextFactory(ConnectionName));
 builder.Services.AddScoped(e => e.GetRequiredService<DbContextFactory>().Create());

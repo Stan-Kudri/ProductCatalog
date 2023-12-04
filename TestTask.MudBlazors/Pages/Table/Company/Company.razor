@@ -1,0 +1,42 @@
+﻿@page "/company"
+
+@using TestTask.Core.Models.Companies
+@inject CompanyService CompanyService
+
+<PageTitle>Company</PageTitle>
+<MudText Typo="Typo.h5" Align="Align.Center" GutterBottom="true">Company</MudText>
+
+@if (companies == null)
+{
+    <MudProgressCircular Color="Color.Default" Indeterminate="true" />
+}
+else
+{
+    <MudTable Items="companies" Hover="true" SortLabel="Sort By" Elevation="0">
+        <HeaderContent>
+            <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<TestTask.Core.Models.Companies.Company, object>(x=>x.Id)">Id</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<TestTask.Core.Models.Companies.Company, object>(x=>x.Name)">Name</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<TestTask.Core.Models.Companies.Company, object>(x=>x.Country)">Country</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<TestTask.Core.Models.Companies.Company, object>(x=>x.DateCreation)">DateCreation</MudTableSortLabel></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Id">@context.Id</MudTd>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Country">@context.Country</MudTd>
+                <MudTd DataLabel="DataCreation">@context.DateCreation.ToString("d")</MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager PageSizeOptions="new int[]{10, 25}" />
+            </PagerContent>
+        </MudTable>
+}
+
+
+@code {
+    private List<TestTask.Core.Models.Companies.Company>? companies;
+
+    protected override void OnInitialized()
+    {
+        companies = CompanyService.GetAll();
+    }
+}
