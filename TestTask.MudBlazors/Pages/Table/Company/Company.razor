@@ -6,74 +6,49 @@
 <PageTitle>Company</PageTitle>
 <MudText Typo="Typo.h5" Align="Align.Center" GutterBottom="true">Company</MudText>
 
-@if (companies == null)
-{
-    <MudProgressCircular Color="Color.Default" Indeterminate="true" />
-}
-else
-{
-    <MudTable ServerData="@(new Func<TableState, Task<TableData<TestTask.Core.Models.Companies.Company>>>(ServerReload))"
-          Dense="true" Hover="true" @ref="table" Items="companies" SortLabel="Sort By" Elevation="0" @bind-SelectedItems="selectedItems" MultiSelection="true">
-        <ToolBarContent>
-            <MudText Typo="Typo.h6">Periodic Elements</MudText>
-            <MudSpacer />
-            <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
-                          AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-        </ToolBarContent>
-        <HeaderContent>
-            <MudTh><MudTableSortLabel SortLabel="id_field" T="TestTask.Core.Models.Companies.Company">Id</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortLabel="name_field" T="TestTask.Core.Models.Companies.Company">Name</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortLabel="country_field" T="TestTask.Core.Models.Companies.Company">Country</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortLabel="datacreate_field" T="TestTask.Core.Models.Companies.Company">Data Creation</MudTableSortLabel></MudTh>
-        </HeaderContent>
-        <RowTemplate>
-            <MudTd DataLabel="Id">@context.Id</MudTd>
-            <MudTd DataLabel="Name">@context.Name</MudTd>
-            <MudTd DataLabel="Country">@context.Country</MudTd>
-            <MudTd DataLabel="DataCreation">@context.DateCreation.ToString("d")</MudTd>
-        </RowTemplate>
-        <PagerContent>
-            <MudTablePager PageSizeOptions="new int[]{10, 25}" />
-        </PagerContent>
-        <FooterContent>
-            <MudTd colspan="4">Select All</MudTd>
-        </FooterContent>
-    </MudTable>
-}
+<MudTable ServerData="@(new Func<TableState, Task<TableData<TestTask.Core.Models.Companies.Company>>>(ServerReload))"
+          Dense="true" Hover="true" @ref="table" SortLabel="Sort By" Elevation="0" @bind-SelectedItems="selectedItems" MultiSelection="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Periodic Elements</MudText>
+        <MudSpacer />
+        <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortLabel="id_field" T="TestTask.Core.Models.Companies.Company">Id</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="name_field" T="TestTask.Core.Models.Companies.Company">Name</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="country_field" T="TestTask.Core.Models.Companies.Company">Country</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="datacreate_field" T="TestTask.Core.Models.Companies.Company">Data Creation</MudTableSortLabel></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Id">@context.Id</MudTd>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Country">@context.Country</MudTd>
+        <MudTd DataLabel="DataCreation">@context.DateCreation.ToString("d")</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager PageSizeOptions="new int[]{10, 25}" />
+    </PagerContent>
+    <FooterContent>
+        <MudTd colspan="4">Select All</MudTd>
+    </FooterContent>
+</MudTable>
 
 
-@code {
+    @code {
 
     private IEnumerable<TestTask.Core.Models.Companies.Company>? pagedData;
     private MudTable<TestTask.Core.Models.Companies.Company>? table;
+    private HashSet<TestTask.Core.Models.Companies.Company> selectedItems = new HashSet<TestTask.Core.Models.Companies.Company>();
 
     private int totalItems;
-    private string searchString = null;
+    private string? searchString = null;
 
     private async Task<TableData<TestTask.Core.Models.Companies.Company>> ServerReload(TableState state)
     {
-        IEnumerable<TestTask.Core.Models.Companies.Company> data = CompanyService.GetAll();
-        data = data.Where(element =>
-        {
-            if (string.IsNullOrWhiteSpace(searchString))
-            {
-                return true;
-            }
-            if (element.Id.ToString().Contains(searchString, StringComparison.OrdinalIgnoreCase))
-            {
-                return true;
-            }
-            if (element.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase))
-            {
-                return true;
-            }
-            if ($"{element.Country} {element.DateCreation}".Contains(searchString))
-            { 
-                return true; 
-            }
+        IQueryable<TestTask.Core.Models.Companies.Company> data = CompanyService.GetQueryableAll();
 
-            return false;
-        }).ToList();
+        data = string.IsNullOrEmpty(searchString) ? data : data.Where(e => e.Name.Contains(searchString) || e.Country.Contains(searchString) || e.DateCreation.ToString().Contains(searchString));        
 
         totalItems = data.Count();
 
@@ -93,7 +68,7 @@ else
                 break;
         }
 
-        pagedData = data.Skip(state.Page * state.PageSize).Take(state.PageSize).ToArray();
+        pagedData = data.Skip(state.Page * state.PageSize).Take(state.PageSize).ToList();
         return new TableData<TestTask.Core.Models.Companies.Company>() { TotalItems = totalItems, Items = pagedData };
     }
 
@@ -101,13 +76,5 @@ else
     {
         searchString = text;
         table?.ReloadServerData();
-    }
-
-    private HashSet<TestTask.Core.Models.Companies.Company> selectedItems = new HashSet<TestTask.Core.Models.Companies.Company>();
-    private List<TestTask.Core.Models.Companies.Company>? companies;
-
-    protected override void OnInitialized()
-    {
-        companies = CompanyService.GetAll();
     }
 }

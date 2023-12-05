@@ -157,6 +157,6 @@ namespace TestTask.Control.PageTabControls
         private IQueryable<Company> GetSearchName(IQueryable<Company> items)
             => string.IsNullOrEmpty(tbSearchStrName.Text)
             ? items
-            : items.Where(e => e.Name.Contains(tbSearchStrName.Text));
+            : items.Where(e => e.Name.Contains(tbSearchStrName.Text) || e.Country.Contains(tbSearchStrName.Text) || e.DateCreation.ToString().Contains(tbSearchStrName.Text));
     }
 }
