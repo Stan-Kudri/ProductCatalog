@@ -16,6 +16,13 @@
                 <MudSelectItem Value="@typeSort" />
             }
         </MudSelect>
+        <MudSelect T="string?" Label="Select column" Clearable="true" Required="true"
+                   Disabled="@IsNotDisableFilter">
+            @foreach (string? column in sortField.Items)
+            {
+                <MudSelectItem Value="@column"/>
+            }
+        </MudSelect>
         <MudSpacer />
         <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
@@ -49,7 +56,12 @@
 
     private int totalItems;
     private string? searchString = null;
+    private bool? IsAscending { get; set; } = false;
+
+
+    private SortCompanies sortField = new SortCompanies();
     private TypeSortField typeSortField = new TypeSortField();
+    public bool IsNotDisableFilter => IsAscending == null ? false : true;
 
     private async Task<TableData<TestTask.Core.Models.Companies.Company>> ServerReload(TableState state)
     {
