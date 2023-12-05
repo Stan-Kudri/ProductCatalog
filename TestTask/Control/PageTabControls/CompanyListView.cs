@@ -27,7 +27,7 @@ namespace TestTask.Control.PageTabControls
         private CompanyService _companyService;
         private ProductService _productService;
         private SortCompanies _sortField = new SortCompanies();
-        private TypeSortField _typeSort = new TypeSortField();
+        private TypeSortFieldModel _typeSort = new TypeSortFieldModel();
 
         public CompanyListView() => InitializeComponent();
 

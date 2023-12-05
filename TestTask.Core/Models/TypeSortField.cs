@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace TestTask.BindingItem.Pages
+namespace TestTask.Core.Models
 {
-    public class TypeSortField : ModelBase
+    public class TypeSortField
     {
         public const string NoSorting = "No Sorting";
 
         private const string Ascending = "Ascending";
         private const string Descending = "Descending";
 
-        private bool? _isAscending = true;
+        protected bool? _isAscending = true;
 
-        private static Dictionary<string, bool?> _sortMap = new Dictionary<string, bool?>() { { NoSorting, null }, { Ascending, true }, { Descending, false } };
+        protected static Dictionary<string, bool?> _sortMap = new Dictionary<string, bool?>() { { NoSorting, null }, { Ascending, true }, { Descending, false } };
 
         public TypeSortField()
             : this(null)
@@ -36,10 +36,10 @@ namespace TestTask.BindingItem.Pages
 
         public ObservableCollection<string> Items { get; set; } = new ObservableCollection<string>(_sortMap.Keys);
 
-        public bool? IsAscending
+        public virtual bool? IsAscending
         {
             get => _isAscending;
-            set => SetField(ref _isAscending, value);
+            set => _isAscending = value;
         }
 
         public void SetSort(string type)

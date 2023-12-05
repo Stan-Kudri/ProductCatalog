@@ -202,7 +202,7 @@
             // 
             // typeSortFieldBindingSource
             // 
-            typeSortFieldBindingSource.DataSource = typeof(BindingItem.Pages.TypeSortField);
+            typeSortFieldBindingSource.DataSource = typeof(BindingItem.Pages.TypeSortFieldModel);
             // 
             // listView
             // 

@@ -153,7 +153,7 @@ namespace TestTask.Control.PageTabControls
             // 
             // sortPageCategoriesBindingSource
             // 
-            sortPageCategoriesBindingSource.DataSource = typeof(TypeSortField);
+            sortPageCategoriesBindingSource.DataSource = typeof(TypeSortFieldModel);
             // 
             // listView
             // 

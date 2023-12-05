@@ -1,5 +1,6 @@
 ﻿@page "/company"
 
+@using TestTask.Core.Models
 @using TestTask.Core.Models.Companies
 @inject CompanyService CompanyService
 
@@ -9,7 +10,12 @@
 <MudTable ServerData="@(new Func<TableState, Task<TableData<TestTask.Core.Models.Companies.Company>>>(ServerReload))"
           Dense="true" Hover="true" @ref="table" SortLabel="Sort By" Elevation="0" @bind-SelectedItems="selectedItems" MultiSelection="true">
     <ToolBarContent>
-        <MudText Typo="Typo.h6">Periodic Elements</MudText>
+        <MudSelect T="string?" Label="Select type sort" Clearable="true" Required="true">
+            @foreach (string? typeSort in typeSortField.Items)
+            {
+                <MudSelectItem Value="@typeSort" />
+            }
+        </MudSelect>
         <MudSpacer />
         <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
@@ -43,6 +49,7 @@
 
     private int totalItems;
     private string? searchString = null;
+    private TypeSortField typeSortField = new TypeSortField();
 
     private async Task<TableData<TestTask.Core.Models.Companies.Company>> ServerReload(TableState state)
     {
