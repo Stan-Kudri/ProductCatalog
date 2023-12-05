@@ -130,7 +130,7 @@ namespace TestTask.Control.PageTabControls
 
         private void ButtonClearFilter_Click(object sender, EventArgs e)
         {
-            cmbSortField.SelectedItem = SortCompanies.IdSort;
+            cmbSortField.SelectedItem = SortCompaniesModel.IdSort;
             cmbTypeSort.SelectedItem = TypeSortField.NoSorting;
             _sortField.SortField = cmbSortField.SelectedItem.ToString();
             _typeSort.SetSort(cmbTypeSort.SelectedItem.ToString());

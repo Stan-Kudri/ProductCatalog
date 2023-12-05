@@ -171,7 +171,7 @@
             // 
             // sortCompaniesBindingSource
             // 
-            sortCompaniesBindingSource.DataSource = typeof(BindingItem.Pages.Companies.SortCompanies);
+            sortCompaniesBindingSource.DataSource = typeof(BindingItem.Pages.Companies.SortCompaniesModel);
             // 
             // cmbTypeSort
             // 

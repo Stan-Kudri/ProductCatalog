@@ -21,7 +21,10 @@ namespace TestTask.BindingItem.Pages
         {
         }
 
-        public TypeSortFieldModel(bool? isAscending) => _isAscending = isAscending;
+        public TypeSortFieldModel(bool? isAscending)
+            : base(isAscending)
+        {
+        }
 
 
         public override bool? IsAscending
@@ -29,7 +32,7 @@ namespace TestTask.BindingItem.Pages
             get => _isAscending;
             set
             {
-                if (_isAscending != value)
+                if (_isAscending == value)
                 {
                     return;
                 }
