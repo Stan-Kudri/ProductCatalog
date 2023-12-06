@@ -10,14 +10,14 @@
 <MudTable ServerData="@(new Func<TableState, Task<TableData<TestTask.Core.Models.Companies.Company>>>(ServerReload))"
           Dense="true" Hover="true" @ref="table" SortLabel="Sort By" Elevation="0" @bind-SelectedItems="selectedItems" MultiSelection="true">
     <ToolBarContent>
-        <MudSelect T="string?" Label="Select type sort" Clearable="true" Required="true">
+        <MudSelect T="string?" Label="Select type sort" Clearable="true" Required="true" @bind-Value="@valueTypeSort">
             @foreach (string? typeSort in typeSortField.Items)
             {
                 <MudSelectItem Value="@typeSort" />
             }
         </MudSelect>
-        <MudSelect T="string?" Label="Select column" Clearable="true" Required="true"
-                   Disabled="@IsNotDisableFilter">
+        <MudSpacer />
+        <MudSelect T="string?" Label="Select column" Clearable="true" Required="true" Disabled="@isNotDisableFilter">
             @foreach (string? column in sortField.Items)
             {
                 <MudSelectItem Value="@column"/>
@@ -56,12 +56,11 @@
 
     private int totalItems;
     private string? searchString = null;
-    private bool? IsAscending { get; set; } = false;
-
+    private string valueTypeSort { get; set; } = TypeSortField.NoSorting;
+    private bool isNotDisableFilter => valueTypeSort == TypeSortField.NoSorting ? true : false;
 
     private SortCompanies sortField = new SortCompanies();
     private TypeSortField typeSortField = new TypeSortField();
-    public bool IsNotDisableFilter => IsAscending == null ? false : true;
 
     private async Task<TableData<TestTask.Core.Models.Companies.Company>> ServerReload(TableState state)
     {
