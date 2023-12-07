@@ -7,8 +7,8 @@ namespace TestTask.Core.Models.Page
         public const int StartSizePage = 15;
         public const int StartNumberPage = 1;
 
-        private int _number;
-        private int _size;
+        protected int _number;
+        protected int _size;
 
         public Page(int number = 1, int size = 15)
         {
