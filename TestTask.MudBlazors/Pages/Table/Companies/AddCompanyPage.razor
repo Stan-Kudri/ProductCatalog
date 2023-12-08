@@ -1,5 +1,94 @@
-﻿<h3>AddCompanyPage</h3>
+﻿@page "/addcompany"
+@using TestTask.Core.Models.Companies
+@using TestTask.MudBlazors.Model
+
+@inject CompanyService CompanyService
+@inject NavigationManager Navigation
+
+
+<MudCard>
+    <MudCardContent>
+        <MudText Align="Align.Center" Class="mb-n4">Add Company</MudText>
+        <MudSpacer/>
+        <MudForm @bind-Errors="@errors" Model="companyModel">
+            <MudTextField T="string" Label="Name" 
+                InputType="InputType.Text" 
+                Required="true" 
+                @bind-Value=@companyModel.Name 
+                Validation="@(new Func<string, IEnumerable<string>>(ValidFormatText))" />
+            <MudTextField T="string" Label="Country" 
+                InputType="InputType.Text" 
+                Required="true" 
+                @bind-Value=@companyModel.Country
+                Validation="@(new Func<string, IEnumerable<string>>(ValidFormatText))" />
+            <MudDatePicker Label="Date" 
+                MaxDate="DateTime.Now"  
+                Required="true" 
+                @bind-Date=@companyModel.DateCreation/>
+        </MudForm>        
+    </MudCardContent>
+    <MudSpacer/>
+    <div style="text-align:center">
+        <MudTooltip Text="Save" Placement="Placement.Bottom">
+            <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Tertiary" Size="Size.Medium" OnClick="Add"/>
+        </MudTooltip>
+        <MudTooltip Text="Clear" Placement="Placement.Bottom">
+            <MudIconButton Icon="@Icons.Material.Filled.Replay" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Medium" OnClick="Clear" />
+        </MudTooltip>
+        <MudTooltip Text="Close" Placement="Placement.Bottom">
+            <MudIconButton Icon="@Icons.Material.Filled.ExitToApp" Variant="Variant.Filled" Color="Color.Secondary" Size="Size.Medium" OnClick="Close"/>
+        </MudTooltip>
+    </div>
+</MudCard>
+
+@functions
+{
+    void NavigationInCompanyTable() => Navigation.NavigateTo("/company");
+}
 
 @code {
+    private CompanyModel companyModel{ get; set; } = new CompanyModel();
+    string[] errors = { };
 
+    private void Add()
+    {
+        if (errors.Length != 0)
+        {
+            return;
+        }
+        if (!CompanyService.IsFreeName(companyModel.Name))
+        {
+            return;
+        }
+
+        CompanyService.Add(companyModel.GetCompany());
+        NavigationInCompanyTable();
+    }
+
+    private void Clear() => companyModel = new CompanyModel();
+
+    private void Close() => NavigationInCompanyTable();
+
+    private IEnumerable<string> ValidFormatText(string str)
+    {
+        if (string.IsNullOrWhiteSpace(str))
+        {
+            yield return "Password is required";
+            yield break;
+        }
+    }
+
+    private IEnumerable<string> ValidFormatDate(DateTime date)
+    {
+        if (date == null)
+        {
+            yield return "Date is required.";
+            yield break;
+        }
+
+        if (date > DateTime.Now)
+        {
+            yield return "The creation date is not within the valid range.";
+        }
+    }
 }
