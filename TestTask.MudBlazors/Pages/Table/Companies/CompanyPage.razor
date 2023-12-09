@@ -142,7 +142,6 @@
             CompanyService.Remove(item.Id);
         }
 
-        selectedItems = new HashSet<Company>();
         LoadData();
     }
 
@@ -172,6 +171,7 @@
         queriable = sortField.Apply(queriable, typeSortField.IsAscending);
         var result = queriable.GetPagedList<Company>(pageModel);
         companies = result.Items;
+        StateHasChanged();
     }
 
     private IQueryable<Company> GetSearchName(IQueryable<Company> items)
