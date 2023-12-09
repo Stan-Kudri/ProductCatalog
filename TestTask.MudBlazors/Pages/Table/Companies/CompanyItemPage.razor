@@ -1,8 +1,9 @@
 ﻿@page "/addcompany"
+@page "/editcompany/{idCompany:int}"
 
 @using TestTask.Core.Models.Companies
 @using TestTask.MudBlazors.Model
-@using Microsoft.AspNetCore.Components.Routing
+@using TestTask.MudBlazors.Extension
 
 @inject CompanyService CompanyService
 @inject NavigationManager Navigation
@@ -30,17 +31,32 @@
     </MudCardContent>
     <MudSpacer />
     <div style="text-align:center">
-        <MudTooltip Text="Save" Placement="Placement.Bottom">
-            <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Tertiary" Size="Size.Medium" OnClick="Add" />
-        </MudTooltip>
-        <MudTooltip Text="Clear" Placement="Placement.Bottom">
-            <MudIconButton Icon="@Icons.Material.Filled.Replay" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Medium" OnClick="Clear" />
-        </MudTooltip>
+        @if (IsAddItem)
+        {
+            <MudTooltip Text="Save" Placement="Placement.Bottom">
+                <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Tertiary" Size="Size.Medium" OnClick="Add" />
+            </MudTooltip>
+            <MudTooltip Text="Clear" Placement="Placement.Bottom">
+                <MudIconButton Icon="@Icons.Material.Filled.Replay" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Medium" OnClick="ClearData" />
+            </MudTooltip>
+        }
+        else
+        {
+            <MudTooltip Text="Save" Placement="Placement.Bottom">
+                <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Tertiary" Size="Size.Medium" OnClick="Updata" />
+            </MudTooltip>
+            <MudTooltip Text="Replace" Placement="Placement.Bottom">
+                <MudIconButton Icon="@Icons.Material.Filled.Replay" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Medium" OnClick="RecoverPastData" />
+            </MudTooltip>
+        }
+
         <MudTooltip Text="Close" Placement="Placement.Bottom">
             <MudIconButton Icon="@Icons.Material.Filled.ExitToApp" Variant="Variant.Filled" Color="Color.Secondary" Size="Size.Medium" OnClick="Close" />
         </MudTooltip>
     </div>
 </MudCard>
+
+
 
 @functions
 {
@@ -49,8 +65,34 @@
 
 @code {
     private CompanyModel companyModel{ get; set; } = new CompanyModel();
-    string[] errors = { };
+    private string[] errors = { };
+    private bool IsAddItem = true;
 
+    private Company oldCompany;
+
+    [Parameter] public int? idCompany { get; set; } = null; 
+
+    protected override void OnInitialized()
+    {
+        if (idCompany == null)
+        {
+            IsAddItem = true;
+            return;
+        }
+
+        if (idCompany <= 0)
+        {
+            NavigationInCompanyTable();
+        }
+
+        IsAddItem = false;
+        oldCompany = CompanyService.GetCompany((int)idCompany);
+        companyModel = oldCompany.GetCompanyModel();
+    }
+
+    private void Close() => NavigationInCompanyTable();
+
+    //Methods for add item company
     private void Add()
     {
         if (errors.Length != 0)
@@ -68,14 +110,27 @@
         NavigationInCompanyTable();
     }
 
-    private void Clear() => DefoultValue();
+    private void ClearData() => companyModel.ClearData();
 
-    private void Close() => NavigationInCompanyTable();
-
-    private void DefoultValue()
+    //Methods for edit item company
+    private void Updata()
     {
-        companyModel = new CompanyModel();
+        if (errors.Length != 0)
+        {
+            return;
+        }
+
+        var company = companyModel.GetModifyCompany(oldCompany.Id);
+
+        if (oldCompany.Equals(company))
+        {
+            CompanyService.Updata(company);
+        }
+
+        NavigationInCompanyTable();
     }
+
+    private void RecoverPastData() => companyModel = oldCompany.GetCompanyModel();
 
     private IEnumerable<string> ValidFormatText(string str)
     {

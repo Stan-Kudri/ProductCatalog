@@ -41,6 +41,14 @@ namespace TestTask.MudBlazors.Model
             set => _country = value;
         }
 
-        public Company GetCompany() => new Company(Name, (DateTime)DateCreation, _country);
+        public Company GetCompany() => new Company(Name, (DateTime)DateCreation, Country);
+
+        public Company GetModifyCompany(int idOldItem) => new Company(Name, (DateTime)DateCreation, Country, idOldItem);
+
+        public void ClearData()
+        {
+            Name = Country = string.Empty;
+            DateCreation = null;
+        }
     }
 }

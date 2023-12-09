@@ -79,7 +79,7 @@ namespace TestTask.Core.Models.Companies
         public string CompanyName(int id)
             => _dbContext.Company.FirstOrDefault(e => e.Id == id).Name ?? throw new ArgumentException("Interaction element not found.");
 
-        public Company GetCompany(int id)
+        public Company GetCompany(int? id)
             => _dbContext.Company.FirstOrDefault(e => e.Id == id);
 
         public List<Company> GetAll() => _dbContext.Company.Count() > 0 ? _dbContext.Company.ToList() : null;
