@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestTask.Test", "TestTask.T
 		{AAD1C004-7096-4A18-9889-D8512763144F} = {AAD1C004-7096-4A18-9889-D8512763144F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTask.MudBlazors", "TestTask.MudBlazors\TestTask.MudBlazors.csproj", "{613E2ED6-34C7-447C-92BF-15FAC188B365}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestTask.MudBlazors", "TestTask.MudBlazors\TestTask.MudBlazors.csproj", "{613E2ED6-34C7-447C-92BF-15FAC188B365}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

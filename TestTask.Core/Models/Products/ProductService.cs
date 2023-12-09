@@ -30,7 +30,7 @@ namespace TestTask.Core.Models.Products
             _dbContext.SaveChanges();
         }
 
-        public void Update(Product item)
+        public void Updata(Product item)
         {
             if (item == null)
             {
@@ -113,7 +113,7 @@ namespace TestTask.Core.Models.Products
                 Add(item);
             }
 
-            Update(item);
+            Updata(item);
         }
 
         public List<Product> GetAll() => _dbContext.Product.Count() > 0 ? _dbContext.Product.ToList() : null;

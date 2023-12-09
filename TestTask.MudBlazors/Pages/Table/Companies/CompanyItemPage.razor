@@ -1,0 +1,157 @@
+﻿@page "/addcompany"
+@page "/editcompany/{idCompany:int}"
+
+@using TestTask.Core.Models.Companies
+@using TestTask.MudBlazors.Model
+@using TestTask.MudBlazors.Extension
+
+@inject CompanyService CompanyService
+@inject NavigationManager Navigation
+
+<MudCard>
+    <MudCardContent>
+        <MudText Align="Align.Center" Class="mb-n4">Add Company</MudText>
+        <MudSpacer />
+        <MudForm @bind-Errors="@errors" Model="@companyModel">
+            <MudTextField T="string" Label="Name"
+                          InputType="InputType.Text"
+                          Required="true"
+                          @bind-Value=@companyModel.Name
+                          Validation="@(new Func<string, IEnumerable<string>>(ValidFormatText))" />
+            <MudTextField T="string" Label="Country"
+                          InputType="InputType.Text"
+                          Required="true"
+                          @bind-Value=@companyModel.Country
+                          Validation="@(new Func<string, IEnumerable<string>>(ValidFormatText))" />
+            <MudDatePicker Label="Date"
+                           MaxDate="DateTime.Now"
+                           Required="true"
+                           @bind-Date=@companyModel.DateCreation />
+        </MudForm>
+    </MudCardContent>
+    <MudSpacer />
+    <MudStack Spacing="1" Row="true" AlignItems="AlignItems.Start">
+        @if (IsAddItem)
+        {
+            <MudTooltip Text="Save" Placement="Placement.Bottom">
+                <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Tertiary" Size="Size.Medium" OnClick="Add" />
+            </MudTooltip>
+            <MudTooltip Text="Clear" Placement="Placement.Bottom">
+                <MudIconButton Icon="@Icons.Material.Filled.Replay" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Medium" OnClick="ClearData" />
+            </MudTooltip>
+        }
+        else
+        {
+            <MudTooltip Text="Save" Placement="Placement.Bottom">
+                <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Tertiary" Size="Size.Medium" OnClick="Updata" />
+            </MudTooltip>
+            <MudTooltip Text="Replace" Placement="Placement.Bottom">
+                <MudIconButton Icon="@Icons.Material.Filled.Replay" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Medium" OnClick="RecoverPastData" />
+            </MudTooltip>
+        }
+
+        <MudTooltip Text="Close" Placement="Placement.Bottom">
+            <MudIconButton Icon="@Icons.Material.Filled.ExitToApp" Variant="Variant.Filled" Color="Color.Secondary" Size="Size.Medium" OnClick="Close" />
+        </MudTooltip>
+    </MudStack>
+    <MudSpacer />
+</MudCard>
+
+
+
+@functions
+{
+    void NavigationInCompanyTable() => Navigation.NavigateTo("/company");
+}
+
+@code {
+    private CompanyModel companyModel{ get; set; } = new CompanyModel();
+    private string[] errors = { };
+    private bool IsAddItem = true;
+
+    private Company oldCompany;
+
+    [Parameter] public int? idCompany { get; set; } = null; 
+
+    protected override void OnInitialized()
+    {
+        if (idCompany == null)
+        {
+            IsAddItem = true;
+            return;
+        }
+
+        if (idCompany <= 0)
+        {
+            NavigationInCompanyTable();
+        }
+
+        IsAddItem = false;
+        oldCompany = CompanyService.GetCompany((int)idCompany);
+        companyModel = oldCompany.GetCompanyModel();
+    }
+
+    private void Close() => NavigationInCompanyTable();
+
+    //Methods for add item company
+    private void Add()
+    {
+        if (errors.Length != 0)
+        {
+            return;
+        }
+
+        if (!CompanyService.IsFreeName(companyModel.Name))
+        {
+            return;
+        }
+
+        var company = companyModel.GetCompany();
+        CompanyService.Add(company);
+        NavigationInCompanyTable();
+    }
+
+    private void ClearData() => companyModel.ClearData();
+
+    //Methods for edit item company
+    private void Updata()
+    {
+        if (errors.Length != 0)
+        {
+            return;
+        }
+
+        var company = companyModel.GetModifyCompany(oldCompany.Id);
+
+        if (oldCompany.Equals(company))
+        {
+            CompanyService.Updata(company);
+        }
+
+        NavigationInCompanyTable();
+    }
+
+    private void RecoverPastData() => companyModel = oldCompany.GetCompanyModel();
+
+    private IEnumerable<string> ValidFormatText(string str)
+    {
+        if (string.IsNullOrWhiteSpace(str))
+        {
+            yield return "Password is required";
+        }
+    }
+
+    private IEnumerable<string> ValidFormatDate(DateTime date)
+    {
+        if (date == null)
+        {
+            yield return "Date is required.";
+            yield break;
+        }
+
+        if (date > DateTime.Now)
+        {
+            yield return "The creation date is not within the valid range.";
+        }
+    }
+}

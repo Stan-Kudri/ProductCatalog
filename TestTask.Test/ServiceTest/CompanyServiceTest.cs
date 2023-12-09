@@ -164,7 +164,7 @@ namespace TestTask.Test.ServiceTest
             var companyService = new CompanyService(dbContext);
             dbContext.Company.AddRange(companies);
             dbContext.SaveChanges();
-            companyService.Update(updateCompany);
+            companyService.Updata(updateCompany);
 
             //Act
             var actualCompanies = dbContext.Company.ToList();

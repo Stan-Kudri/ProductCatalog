@@ -218,7 +218,7 @@ namespace TestTask.Test.ServiceTest
             categoryService.Add(category);
             typeService.Add(type);
             productService.AddRange(products);
-            productService.Update(updateProduct);
+            productService.Updata(updateProduct);
 
             //Act
             var actualProducts = dbContext.Product.ToList();

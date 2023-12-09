@@ -27,7 +27,7 @@ namespace TestTask.Core.Models.Companies
             _dbContext.SaveChanges();
         }
 
-        public void Update(Category item)
+        public void Updata(Category item)
         {
             if (item == null)
             {
@@ -54,7 +54,7 @@ namespace TestTask.Core.Models.Companies
                 Add(item);
             }
 
-            Update(item);
+            Updata(item);
         }
 
         public void AddRange(List<Category> categories)

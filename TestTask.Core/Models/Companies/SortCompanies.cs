@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using TestTask.Core.Models.Companies;
 
-namespace TestTask.BindingItem.Pages.Companies
+namespace TestTask.Core.Models.Companies
 {
-    public class SortCompanies : ModelBase
+    public class SortCompanies
     {
         public const string IdSort = "Id";
+
         private const bool IsSortAscending = true;
 
-        private string _sortField;
+        protected string _sortField;
+
         private static Dictionary<string, CompanyField> _sortMapField = new Dictionary<string, CompanyField>()
         {
             { "Id", CompanyField.ID },
@@ -30,18 +30,10 @@ namespace TestTask.BindingItem.Pages.Companies
             _sortField = Items[0];
         }
 
-        public string SortField
+        public virtual string SortField
         {
             get => _sortField;
-            set
-            {
-                if (!Items.Contains(value))
-                {
-                    throw new ArgumentException("The resulting string is not a sort element.", value);
-                }
-
-                SetField(ref _sortField, value);
-            }
+            set => _sortField = value;
         }
 
         public ObservableCollection<string> Items = new ObservableCollection<string>();

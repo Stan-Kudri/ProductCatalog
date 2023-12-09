@@ -156,7 +156,7 @@ namespace TestTask.Test.ServiceTest
             var service = new CategoryService(dbContext);
             dbContext.Category.AddRange(categories);
             dbContext.SaveChanges();
-            service.Update(updateCategory);
+            service.Updata(updateCategory);
 
             //Act
             var actualCategories = dbContext.Category.ToList();
