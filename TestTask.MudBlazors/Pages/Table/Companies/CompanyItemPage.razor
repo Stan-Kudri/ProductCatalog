@@ -30,7 +30,7 @@
         </MudForm>
     </MudCardContent>
     <MudSpacer />
-    <div style="text-align:center">
+    <MudStack Spacing="1" Row="true" AlignItems="AlignItems.Start">
         @if (IsAddItem)
         {
             <MudTooltip Text="Save" Placement="Placement.Bottom">
@@ -53,7 +53,8 @@
         <MudTooltip Text="Close" Placement="Placement.Bottom">
             <MudIconButton Icon="@Icons.Material.Filled.ExitToApp" Variant="Variant.Filled" Color="Color.Secondary" Size="Size.Medium" OnClick="Close" />
         </MudTooltip>
-    </div>
+    </MudStack>
+    <MudSpacer />
 </MudCard>
 
 

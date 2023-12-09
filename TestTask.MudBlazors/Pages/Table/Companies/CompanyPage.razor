@@ -59,7 +59,7 @@
         <MudTd colspan="4">Select All</MudTd>
     </FooterContent>
 </MudTable>
-<ToolBarContent>
+<MudStack Spacing="1" Row="true" AlignItems="AlignItems.Start">
     <MudTooltip Text="Add" Placement="Placement.Bottom">
             <MudIconButton Color="Color.Tertiary" Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Size="Size.Medium" OnClick="AddCompanyPage" />
     </MudTooltip>
@@ -69,7 +69,7 @@
     <MudTooltip Text="Remove" Placement="Placement.Bottom">
             <MudIconButton Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Size="Size.Medium" OnClick="Remove" />
     </MudTooltip>
-</ToolBarContent>
+</MudStack>
 
 @functions
 {
