@@ -4,7 +4,7 @@
     {
         void Add(T item);
 
-        void Update(T item);
+        void Updata(T item);
 
         void Remove(int id);
     }

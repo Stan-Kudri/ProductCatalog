@@ -131,7 +131,7 @@ namespace TestTask.Control.PageTabControls
                 }
 
                 var updateItem = editForm.GetEditProduct();
-                _productService.Update(updateItem);
+                _productService.Updata(updateItem);
             }
 
             return true;

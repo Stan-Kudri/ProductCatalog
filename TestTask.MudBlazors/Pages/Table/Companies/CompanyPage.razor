@@ -6,7 +6,9 @@
 @using TestTask.MudBlazors.Model
 @using TestTask.MudBlazors.Extension
 @using Page = TestTask.Core.Models.Page.Page;
+
 @inject CompanyService CompanyService
+@inject NavigationManager Navigation
 
 <PageTitle>Company</PageTitle>
 <MudText Typo="Typo.h5" Align="Align.Center" GutterBottom="true">Company</MudText>
@@ -57,15 +59,23 @@
 </MudTable>
 <ToolBarContent>
     <MudTooltip Text="Add" Placement="Placement.Bottom">
-            <MudIconButton Color="Color.Tertiary" Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Size="Size.Medium" />
+            <MudIconButton Color="Color.Tertiary" Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Size="Size.Medium" OnClick="AddCompanyPage" />
     </MudTooltip>
     <MudTooltip Text="Edit" Placement="Placement.Bottom">
-            <MudIconButton Color="Color.Warning" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Size="Size.Medium" />
+            <MudIconButton Color="Color.Warning" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Size="Size.Medium" OnClick="EditCompanyPage" />
     </MudTooltip>
     <MudTooltip Text="Remove" Placement="Placement.Bottom">
             <MudIconButton Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Size="Size.Medium" />
     </MudTooltip>
 </ToolBarContent>
+
+@functions
+{
+    void AddCompanyPage() => Navigation.NavigateTo("/addcompany");
+
+    //void EditCompanyPage() => Navigation.NavigateTo("/editcompany");Navigation.NavigateTo($"/editcompany/{"Marko"}/{"Belarus"}/{new DateTime(1996,12,19)}");
+    void EditCompanyPage() => Navigation.NavigateTo("editcompany/3");
+}
 
 
     @code {

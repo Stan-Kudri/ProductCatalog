@@ -83,7 +83,7 @@ namespace TestTask.Control.PageTabControls
                 }
 
                 var updateItem = editForm.GetEditCompany();
-                _companyService.Update(updateItem);
+                _companyService.Updata(updateItem);
             }
 
             return true;

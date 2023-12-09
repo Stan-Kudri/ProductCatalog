@@ -42,30 +42,5 @@ namespace TestTask.MudBlazors.Model
         }
 
         public Company GetCompany() => new Company(Name, (DateTime)DateCreation, _country);
-
-        //public Company GetCompany() => ValidField(out var message) ? new Company(Name, (DateTime)DateCreation, _country) : throw new Exception($"{message}");
-
-        private bool ValidField(out string message)
-        {
-            message = string.Empty;
-
-            if (string.IsNullOrEmpty(Name))
-            {
-                message = string.Format($"The Field {nameof(Name)} is not in the correct format.");
-                return false;
-            }
-            if (string.IsNullOrEmpty(Country))
-            {
-                message = string.Format($"The Field {nameof(Country)} is not in the correct format.");
-                return false;
-            }
-            if (DateCreation == null || DateCreation >= DateTime.Now)
-            {
-                message = string.Format($"The Field {nameof(DateCreation)} is not in the correct format.");
-                return false;
-            }
-
-            return true;
-        }
     }
 }

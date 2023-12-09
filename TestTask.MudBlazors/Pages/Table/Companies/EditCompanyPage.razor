@@ -1,13 +1,12 @@
-﻿@page "/addcompany"
+﻿@page "/editcompany/{idCompany:int}"
 
 @using TestTask.Core.Models.Companies
 @using TestTask.MudBlazors.Model
-@using Microsoft.AspNetCore.Components.Routing
 
 @inject CompanyService CompanyService
 @inject NavigationManager Navigation
 
-<MudCard>
+ <MudCard>
     <MudCardContent>
         <MudText Align="Align.Center" Class="mb-n4">Add Company</MudText>
         <MudSpacer />
@@ -31,7 +30,7 @@
     <MudSpacer />
     <div style="text-align:center">
         <MudTooltip Text="Save" Placement="Placement.Bottom">
-            <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Tertiary" Size="Size.Medium" OnClick="Add" />
+            <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Tertiary" Size="Size.Medium" OnClick="Updata" />
         </MudTooltip>
         <MudTooltip Text="Clear" Placement="Placement.Bottom">
             <MudIconButton Icon="@Icons.Material.Filled.Replay" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Medium" OnClick="Clear" />
@@ -49,22 +48,37 @@
 
 @code {
     private CompanyModel companyModel{ get; set; } = new CompanyModel();
+    private Company oldCompany;
     string[] errors = { };
 
-    private void Add()
+    [Parameter] public int idCompany { get; set; } 
+
+    protected override void OnInitialized()
+    {
+        if (idCompany <= 0)
+        {
+            return;
+        }
+
+        oldCompany = CompanyService.GetCompany(idCompany);
+        companyModel = new CompanyModel(oldCompany.Name, oldCompany.DateCreation, oldCompany.Country);
+    }
+
+    private void Updata()
     {
         if (errors.Length != 0)
         {
             return;
         }
 
-        if (!CompanyService.IsFreeName(companyModel.Name))
+        var company = companyModel.GetCompany();
+        company.Id = oldCompany.Id;
+
+        if (oldCompany.Equals(company))
         {
-            return;
+            CompanyService.Updata(company);            
         }
 
-        var company = companyModel.GetCompany();
-        CompanyService.Add(company);
         NavigationInCompanyTable();
     }
 
@@ -73,9 +87,7 @@
     private void Close() => NavigationInCompanyTable();
 
     private void DefoultValue()
-    {
-        companyModel = new CompanyModel();
-    }
+        => companyModel = new CompanyModel(oldCompany.Name, oldCompany.DateCreation, oldCompany.Country);
 
     private IEnumerable<string> ValidFormatText(string str)
     {
@@ -85,7 +97,7 @@
         }
     }
 
-    private IEnumerable<string> ValidFormatDate(DateTime date)
+    private IEnumerable<string> ValidFormatDate(DateTime? date)
     {
         if (date == null)
         {
