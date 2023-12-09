@@ -5,9 +5,11 @@
 @using TestTask.Core.Models.Page
 @using TestTask.MudBlazors.Model
 @using TestTask.MudBlazors.Extension
+@using TestTask.Core
 @using Page = TestTask.Core.Models.Page.Page;
 
 @inject CompanyService CompanyService
+@inject IDialogService DialogService
 @inject NavigationManager Navigation
 
 <PageTitle>Company</PageTitle>
@@ -62,10 +64,10 @@
             <MudIconButton Color="Color.Tertiary" Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Size="Size.Medium" OnClick="AddCompanyPage" />
     </MudTooltip>
     <MudTooltip Text="Edit" Placement="Placement.Bottom">
-            <MudIconButton Color="Color.Warning" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Size="Size.Medium" OnClick="EditCompanyPage" />
+            <MudIconButton Color="Color.Warning" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Size="Size.Medium" OnClick="Update" />
     </MudTooltip>
     <MudTooltip Text="Remove" Placement="Placement.Bottom">
-            <MudIconButton Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Size="Size.Medium" />
+            <MudIconButton Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Size="Size.Medium" OnClick="Remove" />
     </MudTooltip>
 </ToolBarContent>
 
@@ -73,12 +75,13 @@
 {
     void AddCompanyPage() => Navigation.NavigateTo("/addcompany");
 
-    //void EditCompanyPage() => Navigation.NavigateTo("/editcompany");Navigation.NavigateTo($"/editcompany/{"Marko"}/{"Belarus"}/{new DateTime(1996,12,19)}");
-    void EditCompanyPage() => Navigation.NavigateTo("editcompany/3");
+    void EditCompanyPage(int id) => Navigation.NavigateTo($"editcompany/{id}");
 }
 
 
     @code {
+    private const string MessageNotSelectedItem = "No items selected";
+    private const int NoItemsSelected = 0;
 
     private IEnumerable<Company>? companies;
     private HashSet<Company> selectedItems = new HashSet<Company>();
@@ -94,18 +97,52 @@
 
     protected override void OnInitialized() => LoadData();
 
-    private void LoadData()
+    private void Update()
     {
-        IQueryable<Company> queriable = CompanyService.GetQueryableAll();
-        queriable = GetSearchName(queriable);
-        queriable = sortField.Apply(queriable, typeSortField.IsAscending);
-        var result = queriable.GetPagedList<Company>(pageModel);
-        companies = result.Items;
+        if (selectedItems.Count <= NoItemsSelected)
+        {
+            ShowMessageWarning(MessageNotSelectedItem);
+            return;
+        }
+
+        if (selectedItems.Count > 1)
+        {
+            ShowMessageWarning("Select one item.");
+            return;
+        }
+
+        EditCompanyPage(selectedItems.ToArray()[0].Id);
     }
 
-    private void OnSearch(string text)
+    private async void Remove()
     {
-        searchString = text;
+        if (selectedItems.Count <= NoItemsSelected)
+        {
+            ShowMessageWarning(MessageNotSelectedItem);
+            return;
+        }
+
+        bool? result = await DialogService.ShowMessageBox(
+            "Warning",
+            "Delete selecte items?",
+            yesText: "Yes", cancelText: "No");
+
+        if (result != true)
+        {
+            return;
+        }
+
+        RemoveRange();        
+    }
+
+    private void RemoveRange()
+    {   
+        foreach (var item in selectedItems)
+        {
+            CompanyService.Remove(item.Id);
+        }
+
+        selectedItems = new HashSet<Company>();
         LoadData();
     }
 
@@ -122,10 +159,34 @@
         LoadData();
     }
 
+    private void OnSearch(string text)
+    {
+        searchString = text;
+        LoadData();
+    }
+
+    private void LoadData()
+    {
+        IQueryable<Company> queriable = CompanyService.GetQueryableAll();
+        queriable = GetSearchName(queriable);
+        queriable = sortField.Apply(queriable, typeSortField.IsAscending);
+        var result = queriable.GetPagedList<Company>(pageModel);
+        companies = result.Items;
+    }
+
     private IQueryable<Company> GetSearchName(IQueryable<Company> items)
             => string.IsNullOrEmpty(searchString)
             ? items
             : items.Where(e => e.Name.Contains(searchString) 
                             || e.Country.Contains(searchString) 
                             || e.DateCreation.ToString().Contains(searchString));
+
+    private async void ShowMessageWarning(string message)
+    {
+        await DialogService.ShowMessageBox(
+                "Warning",
+                 message,
+                 yesText: "Ok"
+            );
+    }
 }
