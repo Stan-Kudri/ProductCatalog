@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TestTask.Core.Models.Categories;
 
-namespace TestTask.Core.Models.Companies
+namespace TestTask.Core.Models.Categories
 {
     public class CategoryService : IService<Category>
     {
