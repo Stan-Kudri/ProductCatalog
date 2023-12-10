@@ -1,17 +1,5 @@
 ﻿@page "/company"
 
-@using TestTask.Core.Models
-@using TestTask.Core.Models.Companies
-@using TestTask.Core.Models.Page
-@using TestTask.MudBlazors.Model
-@using TestTask.MudBlazors.Extension
-@using TestTask.Core
-@using Page = TestTask.Core.Models.Page.Page;
-
-@inject CompanyService CompanyService
-@inject IDialogService DialogService
-@inject NavigationManager Navigation
-
 <PageTitle>Company</PageTitle>
 <MudText Typo="Typo.h5" Align="Align.Center" GutterBottom="true">Company</MudText>
 <MudTable Items="@companies" Hover="true" SortLabel="Sort By" Elevation="0" @bind-SelectedItems="selectedItems" MultiSelection="true">
@@ -34,10 +22,16 @@
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
         <MudSpacer />
         <MudTooltip Text="Use Filter" Placement="Placement.Top">
-            <MudIconButton Icon="@Icons.Material.Filled.Done" Color="Color.Tertiary" OnClick="@UseFilter"/>
+            <MudIconButton Icon="@Icons.Material.Filled.Search" Color="Color.Tertiary" OnClick="@UseFilter" />
         </MudTooltip> 
         <MudTooltip Text="Remove Filter" Placement="Placement.Top">
             <MudIconButton Icon="@Icons.Material.Filled.Restore" Color="Color.Warning" OnClick="@ClearFilter"/>
+        </MudTooltip>  
+        <MudTooltip Text="Add Item" Placement="Placement.Top">
+            <MudIconButton Icon="@Icons.Material.Filled.Add" Color="Color.Tertiary" OnClick="@AddCompanyPage" />
+        </MudTooltip>
+        <MudTooltip Text="Remove Select Items" Placement="Placement.Top">
+            <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Secondary" OnClick="@Remove" />
         </MudTooltip>
     </ToolBarContent>
     <HeaderContent>
@@ -45,148 +39,23 @@
         <MudTh>Name</MudTh>
         <MudTh>Country</MudTh>
         <MudTh>DateCreation</MudTh>
+        <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Id">@context.Id</MudTd>
         <MudTd DataLabel="Name">@context.Name</MudTd>
         <MudTd DataLabel="Country">@context.Country</MudTd>
         <MudTd DataLabel="DataCreation">@context.DateCreation.ToString("d")</MudTd>
+        <MudTh>
+            <MudTooltip Text="Remove" Placement="Placement.Bottom">
+                <MudIconButton Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Size="Size.Medium" OnClick="@(() => Remove(context.Id))" />
+            </MudTooltip>
+            <MudTooltip Text="Edit" Placement="Placement.Bottom">
+                <MudIconButton Color="Color.Warning" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Size="Size.Medium" Class="ml-1" OnClick="@(() => Update(context.Id))" />
+            </MudTooltip>
+        </MudTh>
     </RowTemplate>
     <PagerContent>
             <MudTablePager PageSizeOptions="pageModel.Items" />
     </PagerContent>
-    <FooterContent>
-        <MudTd colspan="4">Select All</MudTd>
-    </FooterContent>
-</MudTable>
-<MudStack Spacing="1" Row="true" AlignItems="AlignItems.Start">
-    <MudTooltip Text="Add" Placement="Placement.Bottom">
-            <MudIconButton Color="Color.Tertiary" Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Size="Size.Medium" OnClick="AddCompanyPage" />
-    </MudTooltip>
-    <MudTooltip Text="Edit" Placement="Placement.Bottom">
-            <MudIconButton Color="Color.Warning" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Size="Size.Medium" OnClick="Update" />
-    </MudTooltip>
-    <MudTooltip Text="Remove" Placement="Placement.Bottom">
-            <MudIconButton Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Size="Size.Medium" OnClick="Remove" />
-    </MudTooltip>
-</MudStack>
-
-@functions
-{
-    void AddCompanyPage() => Navigation.NavigateTo("/addcompany");
-
-    void EditCompanyPage(int id) => Navigation.NavigateTo($"editcompany/{id}");
-}
-
-
-    @code {
-    private const string MessageNotSelectedItem = "No items selected";
-    private const int NoItemsSelected = 0;
-
-    private IEnumerable<Company>? companies;
-    private HashSet<Company> selectedItems = new HashSet<Company>();
-
-    private int totalItems;
-    private string? searchString = null;
-    private string valueTypeSort { get; set; } = TypeSortField.NoSorting;
-    private bool isNotDisableFilter => valueTypeSort == TypeSortField.NoSorting || valueTypeSort == null ? true : false;
-
-    private SortCompanies sortField = new SortCompanies();
-    private TypeSortField typeSortField = new TypeSortField();
-    private PageModel pageModel = new PageModel();
-
-    protected override void OnInitialized() => LoadData();
-
-    private void Update()
-    {
-        if (selectedItems.Count <= NoItemsSelected)
-        {
-            ShowMessageWarning(MessageNotSelectedItem);
-            return;
-        }
-
-        if (selectedItems.Count > 1)
-        {
-            ShowMessageWarning("Select one item.");
-            return;
-        }
-
-        EditCompanyPage(selectedItems.ToArray()[0].Id);
-    }
-
-    private async void Remove()
-    {
-        if (selectedItems.Count <= NoItemsSelected)
-        {
-            ShowMessageWarning(MessageNotSelectedItem);
-            return;
-        }
-
-        bool? result = await DialogService.ShowMessageBox(
-            "Warning",
-            "Delete selecte items?",
-            yesText: "Yes", cancelText: "No");
-
-        if (result != true)
-        {
-            return;
-        }
-
-        RemoveRange();        
-    }
-
-    private void RemoveRange()
-    {   
-        foreach (var item in selectedItems)
-        {
-            CompanyService.Remove(item.Id);
-        }
-
-        LoadData();
-    }
-
-    private void UseFilter()
-    {
-        typeSortField.SetSort(valueTypeSort);
-        LoadData();
-    }
-
-    private void ClearFilter()
-    {
-        valueTypeSort = TypeSortField.NoSorting;
-        typeSortField.SetSort(valueTypeSort);
-        LoadData();
-    }
-
-    private void OnSearch(string text)
-    {
-        searchString = text;
-        LoadData();
-    }
-
-    private void LoadData()
-    {
-        IQueryable<Company> queriable = CompanyService.GetQueryableAll();
-        queriable = GetSearchName(queriable);
-        queriable = sortField.Apply(queriable, typeSortField.IsAscending);
-        var result = queriable.GetPagedList<Company>(pageModel);
-        companies = result.Items;
-        StateHasChanged();
-    }
-
-    private IQueryable<Company> GetSearchName(IQueryable<Company> items)
-            => string.IsNullOrEmpty(searchString)
-            ? items
-            : items.Where(e => e.Name.Contains(searchString) 
-                            || e.Country.Contains(searchString) 
-                            || e.DateCreation.ToString().Contains(searchString));
-
-    private async void ShowMessageWarning(string message)
-    {
-        await DialogService.ShowMessageBox(
-                "Warning",
-                 message,
-                 yesText: "Ok"
-            );
-    }
-}
+</MudTable>   
