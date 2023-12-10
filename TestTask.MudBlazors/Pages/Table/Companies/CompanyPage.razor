@@ -34,19 +34,26 @@
             <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Secondary" OnClick="@Remove" />
         </MudTooltip>
     </ToolBarContent>
+    <ColGroup>
+        <col style="width: 60px;" />
+        <col style="width: 25%;" />
+        <col style="width: 25%" />
+        <col style="width: 20%" />
+        <col style="width: 40px;" />
+    </ColGroup>
     <HeaderContent>
-        <MudTh>Id</MudTh>
-        <MudTh>Name</MudTh>
-        <MudTh>Country</MudTh>
-        <MudTh>DateCreation</MudTh>
-        <MudTh></MudTh>
+        <MudTh >Id</MudTh>
+        <MudTh >Name</MudTh>
+        <MudTh >Country</MudTh>
+        <MudTh >DateCreation</MudTh>
+        <MudTh ></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="Id">@context.Id</MudTd>
-        <MudTd DataLabel="Name">@context.Name</MudTd>
-        <MudTd DataLabel="Country">@context.Country</MudTd>
-        <MudTd DataLabel="DataCreation">@context.DateCreation.ToString("d")</MudTd>
-        <MudTh>
+        <MudTd DataLabel="Id" >@context.Id</MudTd>
+        <MudTd DataLabel="Name" >@context.Name</MudTd>
+        <MudTd DataLabel="Country" >@context.Country</MudTd>
+        <MudTd DataLabel="DataCreation" >@context.DateCreation.ToString("d")</MudTd>
+        <MudTh Style="text-align:right">
             <MudTooltip Text="Remove" Placement="Placement.Bottom">
                 <MudIconButton Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Size="Size.Medium" OnClick="@(() => Remove(context.Id))" />
             </MudTooltip>
