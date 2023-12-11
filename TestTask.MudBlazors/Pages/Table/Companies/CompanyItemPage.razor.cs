@@ -82,7 +82,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
         {
             if (string.IsNullOrWhiteSpace(str))
             {
-                yield return "Password is required";
+                yield return "Field is required.";
             }
         }
 

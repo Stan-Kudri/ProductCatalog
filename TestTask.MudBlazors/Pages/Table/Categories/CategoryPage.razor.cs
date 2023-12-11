@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using TestTask.Core.Models;
 using TestTask.Core.Models.Categories;
 using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model;
@@ -13,21 +12,19 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
         [Inject] IDialogService DialogService { get; set; }
         [Inject] NavigationManager Navigation { get; set; }
 
+
         private const string MessageNotSelectedItem = "No items selected";
         private const int NoItemsSelected = 0;
 
         private IEnumerable<Category>? categories;
         private HashSet<Category> selectedItems = new HashSet<Category>();
 
-        private int totalItems;
         private string? searchString = null;
 
-        private string valueTypeSort { get; set; } = TypeSortField.NoSorting;
-        private bool isNotDisableFilter => valueTypeSort == TypeSortField.NoSorting || valueTypeSort == null ? true : false;
-
         private SortCategories sortField = new SortCategories();
-        private TypeSortField typeSortField = new TypeSortField();
         private PageModel pageModel = new PageModel();
+
+        private bool IsAscending { get; set; } = true;
 
         protected override void OnInitialized() => LoadData();
 
@@ -96,16 +93,12 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
             LoadData();
         }
 
-        private void UseFilter()
-        {
-            typeSortField.SetSort(valueTypeSort);
-            LoadData();
-        }
+        private void UseFilter() => LoadData();
 
         private void ClearFilter()
         {
-            valueTypeSort = TypeSortField.NoSorting;
-            typeSortField.SetSort(valueTypeSort);
+            IsAscending = true;
+            sortField.Clear();
             LoadData();
         }
 
@@ -119,8 +112,8 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
         {
             IQueryable<Category> queriable = CategoryService.GetQueryableAll();
             queriable = GetSearchName(queriable);
-            queriable = sortField.Apply(queriable, typeSortField.IsAscending);
-            var result = queriable.GetPagedList<Category>(pageModel);
+            queriable = sortField.Apply(queriable, IsAscending);
+            var result = queriable.GetPagedList(pageModel);
             categories = result.Items;
             StateHasChanged();
         }

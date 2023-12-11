@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Bromix.MudBlazor.MaterialDesignIcons" Version="7.2.96.50" />
     <PackageReference Include="MudBlazor" Version="6.11.1" />
   </ItemGroup>
 

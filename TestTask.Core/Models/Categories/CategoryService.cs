@@ -72,6 +72,9 @@ namespace TestTask.Core.Models.Categories
             }
         }
 
+        public Category GetCategory(int id)
+            => _dbContext.Category.FirstOrDefault(e => e.Id == id) ?? throw new ArgumentException("Interaction element not found.");
+
         public string GetName(int id)
             => _dbContext.Category.FirstOrDefault(e => e.Id == id).Name ?? throw new ArgumentException("Interaction element not found.");
 

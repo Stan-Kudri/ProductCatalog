@@ -1,40 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using TestTask.Core.Models.Companies;
 
 namespace TestTask.Core.Models.Categories
 {
     public class SortCategories
     {
-        public const string IdSort = "Id";
+        private IEnumerable<SortType> _sortFields = new HashSet<SortType>() { SortType.Id };
 
-        private const bool IsSortAscending = true;
-
-        protected string _sortField;
-
-        private static Dictionary<string, CategoryField> _sortMapField = new Dictionary<string, CategoryField>()
-        {
-            { "Id", CategoryField.ID },
-            { "Name", CategoryField.Name },
-        };
+        public SortType sortType { get; set; }
 
         public SortCategories()
         {
-            foreach (var item in _sortMapField.Keys)
-            {
-                Items.Add(item);
-            }
 
-            _sortField = Items[0];
         }
 
-        public virtual string SortField
+        public virtual IEnumerable<SortType> SortFields
         {
-            get => _sortField;
-            set => _sortField = value;
+            get => _sortFields;
+            set => _sortFields = value;
         }
-
-        public ObservableCollection<string> Items = new ObservableCollection<string>();
+        public ObservableCollection<SortType> Items { get; set; } = new ObservableCollection<SortType>(SortType.List);
 
         public IQueryable<Category> Apply(IQueryable<Category> items, bool? isSortAscending = true)
         {
@@ -43,22 +30,23 @@ namespace TestTask.Core.Models.Categories
                 return items;
             }
 
-            if (_sortMapField.TryGetValue(_sortField, out var field))
+            if (SortFields.Contains(SortType.Id))
             {
-                switch (field)
-                {
-                    case CategoryField.ID:
-                        return isSortAscending == IsSortAscending
-                            ? items.OrderBy(e => e.Id)
-                            : items.OrderByDescending(e => e.Id);
-                    case CategoryField.Name:
-                        return isSortAscending == IsSortAscending
-                            ? items.OrderBy(e => e.Name)
-                            : items.OrderByDescending(e => e.Name);
-                }
+                IOrderedQueryable<Category> query = SortType.Id.OrderBy(items, (bool)isSortAscending);
+
+                return SortFields.Contains(SortType.Name)
+                        ? SortType.Name.ThenBy(query, (bool)isSortAscending)
+                        : query;
+            }
+
+            else if (SortFields.Contains(SortType.Name))
+            {
+                return SortType.Name.OrderBy(items, (bool)isSortAscending);
             }
 
             return items;
         }
+
+        public void Clear() => _sortFields = new HashSet<SortType>();
     }
 }
