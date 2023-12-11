@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TestTask.Core.Models.Categories;
 
-namespace TestTask.Core.Models.Companies
+namespace TestTask.Core.Models.Categories
 {
     public class CategoryService : IService<Category>
     {
@@ -72,6 +71,9 @@ namespace TestTask.Core.Models.Companies
                 Remove(id);
             }
         }
+
+        public Category GetCategory(int id)
+            => _dbContext.Category.FirstOrDefault(e => e.Id == id) ?? throw new ArgumentException("Interaction element not found.");
 
         public string GetName(int id)
             => _dbContext.Category.FirstOrDefault(e => e.Id == id).Name ?? throw new ArgumentException("Interaction element not found.");

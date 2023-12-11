@@ -1,5 +1,5 @@
-﻿@page "/addcompany"
-@page "/editcompany/{idCompany:int}"
+﻿@page "/addcategory"
+@page "/editcategory/{idCategory:int}"
 
 @using TestTask.Core.Models.Companies
 
@@ -7,29 +7,20 @@
     <MudCardContent>
         <MudText Align="Align.Center" Class="mb-n4">Add Company</MudText>
         <MudSpacer />
-        <MudForm @bind-Errors="@errors" Model="@companyModel">
+        <MudForm @bind-Errors="@errors" Model="@categoryModel">
             <MudTextField T="string" Label="Name"
                           InputType="InputType.Text"
                           Required="true"
-                          @bind-Value=@companyModel.Name
+                          @bind-Value=@categoryModel.Name
                           Validation="@(new Func<string, IEnumerable<string>>(ValidFormatText))" />
-            <MudTextField T="string" Label="Country"
-                          InputType="InputType.Text"
-                          Required="true"
-                          @bind-Value=@companyModel.Country
-                          Validation="@(new Func<string, IEnumerable<string>>(ValidFormatText))" />
-            <MudDatePicker Label="Date"
-                           MaxDate="DateTime.Now"
-                           Required="true"
-                           @bind-Date=@companyModel.DateCreation />
         </MudForm>
         <MudCardActions>
             @if (IsAddItem)
             {
                 <MudTooltip Text="Save" Placement="Placement.Bottom">
-                    <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Tertiary" Size="Size.Medium" OnClick="Add"/>
+                    <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Tertiary" Size="Size.Medium" OnClick="Add" />
                 </MudTooltip>
-                <MudTooltip Text="Clear" Placement="Placement.Bottom" >
+                <MudTooltip Text="Clear" Placement="Placement.Bottom">
                     <MudIconButton Icon="@Icons.Material.Filled.Reply" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Medium" OnClick="ClearData" Class="ml-1" />
                 </MudTooltip>
             }
@@ -47,5 +38,5 @@
                 <MudIconButton Icon="@Icons.Material.Filled.ArrowForward" Variant="Variant.Filled" Color="Color.Secondary" Size="Size.Medium" OnClick="Close" Class="ml-1" />
             </MudTooltip>
         </MudCardActions>
-    </MudCardContent>     
+    </MudCardContent>
 </MudCard>
