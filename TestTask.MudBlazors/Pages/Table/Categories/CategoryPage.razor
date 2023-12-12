@@ -8,32 +8,33 @@
 <MudText Typo="Typo.h5" Align="Align.Center" GutterBottom="true">Category</MudText>
 <MudTable Items="@categories" Hover="true" SortLabel="Sort By" Elevation="0" @bind-SelectedItems="selectedItems" MultiSelection="true">
     <ToolBarContent>
-        <MudSpacer />
         <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-        <MudToggleIconButton @bind-Toggled="@IsAscending"
-                             Icon="@MaterialDesignIcons.Normal.SortAlphabeticalDescending" Color="@Color.Primary" Title="Descending" Size="Size.Large"
-                             ToggledIcon="@MaterialDesignIcons.Normal.SortAlphabeticalAscending" ToggledColor="@Color.Primary" ToggledTitle="Ascending" ToggledSize="Size.Large" />
 
-        <MudSelect T="SortType" Label="Sort" MultiSelection="true" @bind-Value="sortField.sortType" @bind-SelectedValues="sortField.SortFields"
+        <MudSelect T="SortType" Style="align-items:end" Label="Sort" MultiSelection="true" @bind-Value="sortField.sortType" @bind-SelectedValues="sortField.SortFields"
                    SelectAll="true" SelectAllText="Sort by all columns" AdornmentIcon="@Icons.Material.Filled.Search">
             @foreach (var state in sortField.Items)
             {
                 <MudSelectItem T="SortType" Value="@state" />
             }
         </MudSelect>
-        <MudSpacer />
+        <div style="align-items:end" >
+            <MudToggleIconButton @bind-Toggled="@IsAscending" Class="mr-5"
+                                 Icon="@MaterialDesignIcons.Normal.SortAlphabeticalDescending" Color="@Color.Primary" Title="Descending" Size="Size.Large"
+                                 ToggledIcon="@MaterialDesignIcons.Normal.SortAlphabeticalAscending" ToggledColor="@Color.Primary" ToggledTitle="Ascending" ToggledSize="Size.Large" />
+            <MudSpacer />
+        </div>
         <MudTooltip Text="Use Filter" Placement="Placement.Top">
-            <MudIconButton Icon="@Icons.Material.Filled.Search" Color="Color.Tertiary" OnClick="@UseFilter" />
+            <MudIconButton Icon="@Icons.Material.Filled.Search" Color="Color.Primary" OnClick="@UseFilter" />
         </MudTooltip>
         <MudTooltip Text="Remove Filter" Placement="Placement.Top">
-            <MudIconButton Icon="@MaterialDesignIcons.Normal.FilterOff" Color="Color.Warning" OnClick="@ClearFilter" />
+            <MudIconButton Icon="@MaterialDesignIcons.Normal.FilterOff" Color="Color.Primary" OnClick="@ClearFilter" />
         </MudTooltip>
         <MudTooltip Text="Add Item" Placement="Placement.Top">
-            <MudIconButton Icon="@Icons.Material.Filled.Add" Color="Color.Tertiary" OnClick="@AddCategoryPage" />
+            <MudIconButton Icon="@Icons.Material.Filled.Add" Color="Color.Primary" OnClick="@AddCategoryPage" />
         </MudTooltip>
         <MudTooltip Text="Remove Select Items" Placement="Placement.Top">
-            <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Secondary" OnClick="@Remove" />
+            <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Primary" OnClick="@Remove" />
         </MudTooltip>
     </ToolBarContent>
     <ColGroup>
@@ -51,14 +52,14 @@
         <MudTd DataLabel="Name" >@context.Name</MudTd>
         <MudTh Style="text-align:right">
             <MudTooltip Text="Remove" Placement="Placement.Bottom">
-                <MudIconButton Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Size="Size.Medium" OnClick="@(() => Remove(context.Id))" />
+                <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" Size="Size.Medium" OnClick="@(() => Remove(context.Id))" />
             </MudTooltip>
             <MudTooltip Text="Edit" Placement="Placement.Bottom">
-                <MudIconButton Color="Color.Warning" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Size="Size.Medium" Class="ml-1" OnClick="@(() => Update(context.Id))" />
+                <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Outlined" Size="Size.Medium" Class="ml-1" OnClick="@(() => Update(context.Id))" />
             </MudTooltip>
         </MudTh>
     </RowTemplate>
     <PagerContent>
-        <MudTablePager PageSizeOptions="pageModel.Items" />
+        <MudTablePager HorizontalAlignment="HorizontalAlignment.Center" PageSizeOptions="pageModel.Items" />
     </PagerContent>
 </MudTable>
