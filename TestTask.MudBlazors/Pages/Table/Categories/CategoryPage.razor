@@ -2,7 +2,6 @@
 
 @using Bromix.MudBlazor.MaterialDesignIcons
 @using TestTask.Core.Models.Categories
-@using TestTask.Core.Models.Companies
 
 <PageTitle>Category</PageTitle>
 <MudText Typo="Typo.h5" Align="Align.Center" GutterBottom="true">Category</MudText>
@@ -11,11 +10,11 @@
         <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
 
-        <MudSelect T="SortType" Style="align-items:end" Label="Sort" MultiSelection="true" @bind-Value="sortField.sortType" @bind-SelectedValues="sortField.SortFields"
+        <MudSelect T="SortTypeCategories" Style="align-items:end" Label="Sort" MultiSelection="true" @bind-Value="sortField.sortType" @bind-SelectedValues="sortField.SortFields"
                    SelectAll="true" SelectAllText="Sort by all columns" AdornmentIcon="@Icons.Material.Filled.Search">
             @foreach (var state in sortField.Items)
             {
-                <MudSelectItem T="SortType" Value="@state" />
+                <MudSelectItem T="SortTypeCategories" Value="@state" />
             }
         </MudSelect>
         <div style="align-items:end" >

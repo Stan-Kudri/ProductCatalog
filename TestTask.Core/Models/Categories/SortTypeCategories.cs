@@ -1,15 +1,14 @@
 ﻿using Ardalis.SmartEnum;
 using System.Linq;
-using TestTask.Core.Models.Categories;
 
-namespace TestTask.Core.Models.Companies
+namespace TestTask.Core.Models.Categories
 {
-    public abstract class SortType : SmartEnum<SortType>
+    public abstract class SortTypeCategories : SmartEnum<SortTypeCategories>
     {
-        public static readonly SortType Id = new IdSortType("Id", 0);
-        public static readonly SortType Name = new NameSortType("Name", 1);
+        public static readonly SortTypeCategories Id = new IdSortType("Id", 0);
+        public static readonly SortTypeCategories Name = new NameSortType("Name", 1);
 
-        public SortType(string name, int value)
+        public SortTypeCategories(string name, int value)
             : base(name, value)
         {
         }
@@ -23,7 +22,7 @@ namespace TestTask.Core.Models.Companies
         }
     }
 
-    partial class IdSortType : SortType
+    partial class IdSortType : SortTypeCategories
     {
         public IdSortType(string name, int value)
             : base(name, value)
@@ -35,7 +34,7 @@ namespace TestTask.Core.Models.Companies
         public override IOrderedQueryable<Category> ThenBy(IOrderedQueryable<Category> query, bool asc) => asc ? query.ThenBy(e => e.Id) : query.ThenByDescending(e => e.Id);
     }
 
-    partial class NameSortType : SortType
+    partial class NameSortType : SortTypeCategories
     {
         public NameSortType(string name, int value)
             : base(name, value)

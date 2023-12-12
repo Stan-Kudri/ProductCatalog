@@ -32,23 +32,6 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
 
         private void EditCategpryPage(int id) => Navigation.NavigateTo($"editcategory/{id}");
 
-        private async Task Update()
-        {
-            if (selectedItems.Count <= NoItemsSelected)
-            {
-                await ShowMessageWarning(MessageNotSelectedItem);
-                return;
-            }
-
-            if (selectedItems.Count > 1)
-            {
-                await ShowMessageWarning("Select one item.");
-                return;
-            }
-
-            EditCategpryPage(selectedItems.ToArray()[0].Id);
-        }
-
         private async Task Remove()
         {
             if (selectedItems.Count <= NoItemsSelected)
@@ -77,7 +60,7 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
 
         private void Update(int id) => EditCategpryPage(id);
 
-        private async void Remove(int id)
+        private async Task Remove(int id)
         {
             bool? result = await DialogService.ShowMessageBox(
                "Warning",

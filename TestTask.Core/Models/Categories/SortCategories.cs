@@ -1,27 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using TestTask.Core.Models.Companies;
 
 namespace TestTask.Core.Models.Categories
 {
     public class SortCategories
     {
-        private IEnumerable<SortType> _sortFields = new HashSet<SortType>() { SortType.Id };
+        private IEnumerable<SortTypeCategories> _sortFields = new HashSet<SortTypeCategories>() { SortTypeCategories.Id };
 
-        public SortType sortType { get; set; }
+        public SortTypeCategories sortType { get; set; }
 
         public SortCategories()
         {
 
         }
 
-        public virtual IEnumerable<SortType> SortFields
+        public virtual IEnumerable<SortTypeCategories> SortFields
         {
             get => _sortFields;
             set => _sortFields = value;
         }
-        public ObservableCollection<SortType> Items { get; set; } = new ObservableCollection<SortType>(SortType.List);
+        public ObservableCollection<SortTypeCategories> Items { get; set; } = new ObservableCollection<SortTypeCategories>(SortTypeCategories.List);
 
         public IQueryable<Category> Apply(IQueryable<Category> items, bool? isSortAscending = true)
         {
@@ -30,23 +29,23 @@ namespace TestTask.Core.Models.Categories
                 return items;
             }
 
-            if (SortFields.Contains(SortType.Id))
+            if (SortFields.Contains(SortTypeCategories.Id))
             {
-                IOrderedQueryable<Category> query = SortType.Id.OrderBy(items, (bool)isSortAscending);
+                IOrderedQueryable<Category> query = SortTypeCategories.Id.OrderBy(items, (bool)isSortAscending);
 
-                return SortFields.Contains(SortType.Name)
-                        ? SortType.Name.ThenBy(query, (bool)isSortAscending)
+                return SortFields.Contains(SortTypeCategories.Name)
+                        ? SortTypeCategories.Name.ThenBy(query, (bool)isSortAscending)
                         : query;
             }
 
-            else if (SortFields.Contains(SortType.Name))
+            else if (SortFields.Contains(SortTypeCategories.Name))
             {
-                return SortType.Name.OrderBy(items, (bool)isSortAscending);
+                return SortTypeCategories.Name.OrderBy(items, (bool)isSortAscending);
             }
 
             return items;
         }
 
-        public void Clear() => _sortFields = new HashSet<SortType>();
+        public void Clear() => _sortFields = new HashSet<SortTypeCategories>();
     }
 }

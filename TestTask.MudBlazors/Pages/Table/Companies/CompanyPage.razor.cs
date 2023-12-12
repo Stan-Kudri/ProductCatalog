@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using TestTask.Core.Models;
 using TestTask.Core.Models.Companies;
 using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model;
@@ -19,16 +18,12 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
         private IEnumerable<Company>? companies;
         private HashSet<Company> selectedItems = new HashSet<Company>();
 
-        private int totalItems;
         private string? searchString = null;
 
-        private string valueTypeSort { get; set; } = TypeSortField.NoSorting;
-
-        private bool isNotDisableFilter => valueTypeSort == TypeSortField.NoSorting || valueTypeSort == null ? true : false;
-
-        private SortCompanies sortField = new SortCompanies();
-        private TypeSortField typeSortField = new TypeSortField();
+        private SortCompany sortField = new SortCompany();
         private PageModel pageModel = new PageModel();
+
+        private bool IsAscending { get; set; } = true;
 
         protected override void OnInitialized() => LoadData();
 
@@ -36,7 +31,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 
         private void EditCompanyPage(int id) => Navigation?.NavigateTo($"editcompany/{id}");
 
-        private async void Remove()
+        private async Task Remove()
         {
             if (selectedItems.Count <= NoItemsSelected)
             {
@@ -64,7 +59,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 
         private void Update(int id) => EditCompanyPage(id);
 
-        private async void Remove(int id)
+        private async Task Remove(int id)
         {
             bool? result = await DialogService.ShowMessageBox(
                "Warning",
@@ -80,16 +75,12 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
             LoadData();
         }
 
-        private void UseFilter()
-        {
-            typeSortField.SetSort(valueTypeSort);
-            LoadData();
-        }
+        private void UseFilter() => LoadData();
 
         private void ClearFilter()
         {
-            valueTypeSort = TypeSortField.NoSorting;
-            typeSortField.SetSort(valueTypeSort);
+            IsAscending = true;
+            sortField.Clear();
             LoadData();
         }
 
@@ -103,7 +94,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
         {
             IQueryable<Company> queriable = CompanyService.GetQueryableAll();
             queriable = GetSearchName(queriable);
-            queriable = sortField.Apply(queriable, typeSortField.IsAscending);
+            queriable = sortField.Apply(queriable, IsAscending);
             var result = queriable.GetPagedList(pageModel);
             companies = result.Items;
             StateHasChanged();

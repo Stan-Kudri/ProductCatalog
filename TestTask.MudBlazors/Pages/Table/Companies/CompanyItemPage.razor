@@ -2,10 +2,18 @@
 @page "/editcompany/{idCompany:int}"
 
 @using TestTask.Core.Models.Companies
+@using Bromix.MudBlazor.MaterialDesignIcons
 
 <MudCard>
     <MudCardContent>
-        <MudText Align="Align.Center" Class="mb-n4">Add Company</MudText>
+        @if (IsAddItem)
+        {
+            <MudText Align="Align.Center" Class="mb-n4">Add Company</MudText>
+        }
+        else
+        {
+            <MudText Align="Align.Center" Class="mb-n4">Edit Company</MudText>
+        }
         <MudSpacer />
         <MudForm @bind-Errors="@errors" Model="@companyModel">
             <MudTextField T="string" Label="Name"
@@ -27,24 +35,24 @@
             @if (IsAddItem)
             {
                 <MudTooltip Text="Save" Placement="Placement.Bottom">
-                    <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Tertiary" Size="Size.Medium" OnClick="Add"/>
+                    <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" OnClick="Add" />
                 </MudTooltip>
                 <MudTooltip Text="Clear" Placement="Placement.Bottom" >
-                    <MudIconButton Icon="@Icons.Material.Filled.Reply" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Medium" OnClick="ClearData" Class="ml-1" />
+                    <MudIconButton Icon="@MaterialDesignIcons.Normal.Broom" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" OnClick="ClearData" Class="ml-1" />
                 </MudTooltip>
             }
             else
             {
                 <MudTooltip Text="Save" Placement="Placement.Bottom">
-                    <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Tertiary" Size="Size.Medium" OnClick="Updata" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" OnClick="Updata" />
                 </MudTooltip>
                 <MudTooltip Text="Replace" Placement="Placement.Bottom">
-                    <MudIconButton Icon="@Icons.Material.Filled.Reply" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Medium" OnClick="RecoverPastData" Class="ml-1" />
+                    <MudIconButton Icon="@MaterialDesignIcons.Normal.Broom" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" OnClick="RecoverPastData" Class="ml-1" />
                 </MudTooltip>
             }
 
             <MudTooltip Text="Close" Placement="Placement.Bottom">
-                <MudIconButton Icon="@Icons.Material.Filled.ArrowForward" Variant="Variant.Filled" Color="Color.Secondary" Size="Size.Medium" OnClick="Close" Class="ml-1" />
+                <MudIconButton Icon="@Icons.Material.Filled.ArrowForward" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" OnClick="Close" Class="ml-1" />
             </MudTooltip>
         </MudCardActions>
     </MudCardContent>     
