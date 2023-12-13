@@ -160,7 +160,10 @@ namespace TestTask.Control.PageTabControls
         }
 
         public void Remove(Entity entity)
-            => _productService.Remove(entity.Id);
+        {
+            _productService.RemoveProductRelatedToType(entity.Id);
+            _productService.Remove(entity.Id);
+        }
 
         private void ButtonUseFilter_Click(object sender, EventArgs e) => LoadData();
 

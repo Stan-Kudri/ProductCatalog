@@ -178,7 +178,7 @@ namespace TestTask.Test.ServiceTest
             var typeProductService = new ProductTypeService(dbContext);
             categoryService.AddRange(categories);
             typeProductService.AddRange(types);
-            typeProductService.Update(updateType);
+            typeProductService.Updata(updateType);
 
             //Act
             var actualType = dbContext.Type.ToList();

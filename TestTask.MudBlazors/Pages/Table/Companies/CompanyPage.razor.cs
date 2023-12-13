@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using TestTask.Core.Models.Companies;
+using TestTask.Core.Models.Products;
 using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model;
 
@@ -9,6 +10,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
     public partial class CompanyPage
     {
         [Inject] CompanyService CompanyService { get; set; }
+        [Inject] ProductService ProductService { get; set; }
         [Inject] IDialogService DialogService { get; set; }
         [Inject] NavigationManager Navigation { get; set; }
 
@@ -51,6 +53,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 
             foreach (var item in selectedItems)
             {
+                ProductService.RemoveProductRelatedToCompany(item.Id);
                 CompanyService.Remove(item.Id);
             }
 
@@ -71,6 +74,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
                 return;
             }
 
+            ProductService.RemoveProductRelatedToCompany(id);
             CompanyService.Remove(id);
             LoadData();
         }

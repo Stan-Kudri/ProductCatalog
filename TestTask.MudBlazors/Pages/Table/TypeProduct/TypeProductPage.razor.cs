@@ -1,46 +1,43 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Products;
 using TestTask.Core.Models.Types;
 using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model;
 
-namespace TestTask.MudBlazors.Pages.Table.Categories
+namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 {
-    public partial class CategoryPage
+    public partial class TypeProductPage
     {
-        [Inject] CategoryService CategoryService { get; set; }
-        [Inject] ProductTypeService ProductTypeService { get; set; }
+        [Inject] ProductTypeService TypeService { get; set; }
         [Inject] ProductService ProductService { get; set; }
         [Inject] IDialogService DialogService { get; set; }
         [Inject] NavigationManager Navigation { get; set; }
 
-
         private const string MessageNotSelectedItem = "No items selected";
         private const int NoItemsSelected = 0;
 
-        private IEnumerable<Category>? categories;
-        private HashSet<Category> selectedItems = new HashSet<Category>();
+        private IEnumerable<ProductType>? typeProduct;
+        private HashSet<ProductType> selectedItems = new HashSet<ProductType>();
 
         private string? searchString = null;
 
-        private SortCategories sortField = new SortCategories();
+        private SortType sortField = new SortType();
         private PageModel pageModel = new PageModel();
 
         private bool IsAscending { get; set; } = true;
 
         protected override void OnInitialized() => LoadData();
 
-        private void AddCategoryPage() => Navigation.NavigateTo("/addcategory");
+        private void AddCompanyPage() => Navigation?.NavigateTo("/addtype");
 
-        private void EditCategpryPage(int id) => Navigation.NavigateTo($"editcategory/{id}");
+        private void EditTypePage(int id) => Navigation?.NavigateTo($"edittype/{id}");
 
         private async Task Remove()
         {
             if (selectedItems.Count <= NoItemsSelected)
             {
-                await ShowMessageWarning(MessageNotSelectedItem);
+                ShowMessageWarning(MessageNotSelectedItem);
                 return;
             }
 
@@ -56,15 +53,14 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
 
             foreach (var item in selectedItems)
             {
-                ProductTypeService.RemoveProductRelatedToCategory(item.Id);
-                ProductService.RemoveProductRelatedToCategory(item.Id);
-                CategoryService.Remove(item.Id);
+                ProductService.RemoveProductRelatedToType(item.Id);
+                TypeService.Remove(item.Id);
             }
 
             LoadData();
         }
 
-        private void Update(int id) => EditCategpryPage(id);
+        private void Update(int id) => EditTypePage(id);
 
         private async Task Remove(int id)
         {
@@ -78,9 +74,8 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
                 return;
             }
 
-            ProductTypeService.RemoveProductRelatedToCategory(id);
-            ProductService.RemoveProductRelatedToCategory(id);
-            CategoryService.Remove(id);
+            ProductService.RemoveProductRelatedToType(id);
+            TypeService.Remove(id);
             LoadData();
         }
 
@@ -101,26 +96,21 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
 
         private void LoadData()
         {
-            IQueryable<Category> queriable = CategoryService.GetQueryableAll();
+            IQueryable<ProductType> queriable = TypeService.GetQueryableAll();
             queriable = GetSearchName(queriable);
             queriable = sortField.Apply(queriable, IsAscending);
             var result = queriable.GetPagedList(pageModel);
-            categories = result.Items;
+            typeProduct = result.Items;
             StateHasChanged();
         }
 
-        private IQueryable<Category> GetSearchName(IQueryable<Category> items)
+        private IQueryable<ProductType> GetSearchName(IQueryable<ProductType> items)
                 => string.IsNullOrEmpty(searchString)
                 ? items
-                : items.Where(e => e.Name.Contains(searchString));
+                : items.Where(e => e.Name.Contains(searchString)
+                                || e.Category.Name.Contains(searchString));
 
-        private Task ShowMessageWarning(string message)
-        {
-            return DialogService.ShowMessageBox(
-                    "Warning",
-                     message,
-                     yesText: "Ok"
-                );
-        }
+        private async void ShowMessageWarning(string message)
+            => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
     }
 }

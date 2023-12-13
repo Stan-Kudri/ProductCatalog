@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using TestTask.Core.Models.Companies;
 using TestTask.MudBlazors.Extension;
-using TestTask.MudBlazors.Model;
+using TestTask.MudBlazors.Model.TableComponent;
 
 namespace TestTask.MudBlazors.Pages.Table.Companies
 {

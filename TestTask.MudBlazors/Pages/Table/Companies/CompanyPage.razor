@@ -9,7 +9,8 @@
     <ToolBarContent>
 
         <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
-                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0">
+        </MudTextField>
 
         <MudSelect T="SortTypeCompany" Style="align-items:end" Label="Sort" MultiSelection="true" @bind-Value="sortField.sortType" @bind-SelectedValues="sortField.SortFields"
                    SelectAll="true" SelectAllText="Sort by all columns" AdornmentIcon="@Icons.Material.Filled.Search">
@@ -18,13 +19,13 @@
                 <MudSelectItem T="SortTypeCompany" Value="@state" />
             }
         </MudSelect>
+
         <div style="align-items:end">
             <MudToggleIconButton @bind-Toggled="@IsAscending" Class="mr-5"
                                  Icon="@MaterialDesignIcons.Normal.SortAlphabeticalDescending" Color="@Color.Primary" Title="Descending" Size="Size.Large"
                                  ToggledIcon="@MaterialDesignIcons.Normal.SortAlphabeticalAscending" ToggledColor="@Color.Primary" ToggledTitle="Ascending" ToggledSize="Size.Large" />
             <MudSpacer />
         </div>
-
 
         <MudTooltip Text="Use Filter" Placement="Placement.Top">
             <MudIconButton Icon="@Icons.Material.Filled.Search" Color="Color.Primary" OnClick="@UseFilter" />
@@ -38,7 +39,9 @@
         <MudTooltip Text="Remove Select Items" Placement="Placement.Top">
             <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Primary" OnClick="@Remove" />
         </MudTooltip>
+
     </ToolBarContent>
+
     <ColGroup>
         <col style="width: 60px;" />
         <col style="width: 25%;" />
@@ -67,7 +70,9 @@
             </MudTooltip>
         </MudTh>
     </RowTemplate>
+
     <PagerContent>
             <MudTablePager HorizontalAlignment="HorizontalAlignment.Center" PageSizeOptions="pageModel.Items" />
     </PagerContent>
+
 </MudTable>   

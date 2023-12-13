@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using TestTask.Core.Models.Categories;
 
-namespace TestTask.MudBlazors.Model
+namespace TestTask.MudBlazors.Model.TableComponent
 {
     public class CategoryModel
     {

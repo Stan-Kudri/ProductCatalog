@@ -1,6 +1,7 @@
 ﻿using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
-using TestTask.MudBlazors.Model;
+using TestTask.Core.Models.Types;
+using TestTask.MudBlazors.Model.TableComponent;
 
 namespace TestTask.MudBlazors.Extension
 {
@@ -10,5 +11,8 @@ namespace TestTask.MudBlazors.Extension
             => new CompanyModel(company.Name, company.DateCreation, company.Country);
 
         public static CategoryModel GetCategoryModel(this Category category) => new CategoryModel(category.Name);
+
+        public static TypeProductModel GetTypeProductModel(this ProductType type)
+          => new TypeProductModel(type.Name, type.Category);
     }
 }

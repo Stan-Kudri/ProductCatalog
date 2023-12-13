@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using TestTask.Core.Models.Categories;
 using TestTask.MudBlazors.Extension;
-using TestTask.MudBlazors.Model;
+using TestTask.MudBlazors.Model.TableComponent;
 
 namespace TestTask.MudBlazors.Pages.Table.Categories
 {
