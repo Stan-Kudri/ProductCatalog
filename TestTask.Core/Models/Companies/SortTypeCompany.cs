@@ -29,7 +29,6 @@ namespace TestTask.Core.Models.Companies
         public IdSortType(string name, int value)
             : base(name, value)
         {
-
         }
 
         public override IOrderedQueryable<Company> OrderBy(IQueryable<Company> query, bool asc) => asc ? query.OrderBy(e => e.Id) : query.OrderByDescending(e => e.Id);
@@ -41,7 +40,6 @@ namespace TestTask.Core.Models.Companies
         public NameSortType(string name, int value)
             : base(name, value)
         {
-
         }
 
         public override IOrderedQueryable<Company> OrderBy(IQueryable<Company> query, bool asc) => asc ? query.OrderBy(e => e.Name) : query.OrderByDescending(e => e.Name);
@@ -53,7 +51,6 @@ namespace TestTask.Core.Models.Companies
         public CountrySortType(string name, int value)
             : base(name, value)
         {
-
         }
 
         public override IOrderedQueryable<Company> OrderBy(IQueryable<Company> query, bool asc) => asc ? query.OrderBy(e => e.Country) : query.OrderByDescending(e => e.Country);
@@ -65,7 +62,6 @@ namespace TestTask.Core.Models.Companies
         public DataCreatSortType(string name, int value)
             : base(name, value)
         {
-
         }
 
         public override IOrderedQueryable<Company> OrderBy(IQueryable<Company> query, bool asc) => asc ? query.OrderBy(e => e.DateCreation) : query.OrderByDescending(e => e.DateCreation);

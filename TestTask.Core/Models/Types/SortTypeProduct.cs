@@ -7,6 +7,7 @@ namespace TestTask.Core.Models.Types
     {
         public static readonly SortTypeProduct Id = new IdSortType("Id", 0);
         public static readonly SortTypeProduct Name = new NameSortType("Name", 1);
+        public static readonly SortTypeProduct Category = new CategorySortType("Category", 1);
 
         public SortTypeProduct(string name, int value)
             : base(name, value)
@@ -27,7 +28,6 @@ namespace TestTask.Core.Models.Types
         public IdSortType(string name, int value)
             : base(name, value)
         {
-
         }
 
         public override IOrderedQueryable<ProductType> OrderBy(IQueryable<ProductType> query, bool asc) => asc ? query.OrderBy(e => e.Id) : query.OrderByDescending(e => e.Id);
@@ -39,7 +39,6 @@ namespace TestTask.Core.Models.Types
         public NameSortType(string name, int value)
             : base(name, value)
         {
-
         }
 
         public override IOrderedQueryable<ProductType> OrderBy(IQueryable<ProductType> query, bool asc) => asc ? query.OrderBy(e => e.Name) : query.OrderByDescending(e => e.Name);
@@ -51,7 +50,6 @@ namespace TestTask.Core.Models.Types
         public CategorySortType(string name, int value)
             : base(name, value)
         {
-
         }
 
         public override IOrderedQueryable<ProductType> OrderBy(IQueryable<ProductType> query, bool asc) => asc ? query.OrderBy(e => e.Category.Name) : query.OrderByDescending(e => e.Category.Name);
