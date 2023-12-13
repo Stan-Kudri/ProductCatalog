@@ -98,6 +98,18 @@ namespace TestTask.Core.Models.Products
             _dbContext.Product.RemoveRange(product.ToList());
         }
 
+        public void RemoveProductRelatedToType(int typeId)
+        {
+            var product = _dbContext.Product.Where(e => e.TypeId == typeId).Select(e => e);
+
+            if (product.Count() <= 0)
+            {
+                return;
+            }
+
+            _dbContext.Product.RemoveRange(product.ToList());
+        }
+
         public void Upsert(Product item)
         {
             if (_dbContext.Company.FirstOrDefault(e => e.Id == item.CompanyId) == null ||

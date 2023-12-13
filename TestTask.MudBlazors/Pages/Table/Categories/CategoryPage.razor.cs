@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using TestTask.Core.Models.Categories;
+using TestTask.Core.Models.Products;
+using TestTask.Core.Models.Types;
 using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model;
 
@@ -9,6 +11,8 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
     public partial class CategoryPage
     {
         [Inject] CategoryService CategoryService { get; set; }
+        [Inject] ProductTypeService ProductTypeService { get; set; }
+        [Inject] ProductService ProductService { get; set; }
         [Inject] IDialogService DialogService { get; set; }
         [Inject] NavigationManager Navigation { get; set; }
 
@@ -52,6 +56,8 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
 
             foreach (var item in selectedItems)
             {
+                ProductTypeService.RemoveProductRelatedToCategory(item.Id);
+                ProductService.RemoveProductRelatedToCategory(item.Id);
                 CategoryService.Remove(item.Id);
             }
 
@@ -72,6 +78,8 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
                 return;
             }
 
+            ProductTypeService.RemoveProductRelatedToCategory(id);
+            ProductService.RemoveProductRelatedToCategory(id);
             CategoryService.Remove(id);
             LoadData();
         }
