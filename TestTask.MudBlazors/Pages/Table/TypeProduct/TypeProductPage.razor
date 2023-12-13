@@ -12,7 +12,7 @@
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0">
         </MudTextField>
         
-        <MudSelect T="SortTypeProduct" Style="align-items:end" Label="Sort" MultiSelection="true" @bind-bind-Value="sortField.sortType" @bind-bind-SelectedValues="sortField.SortFields"
+        <MudSelect T="SortTypeProduct" Style="align-items:end" Label="Sort" MultiSelection="true" @bind-Value="sortField.sortType" @bind-SelectedValues="sortField.SortFields"
                     SelectAll="true" SelectAllText="Sort by all columns" AdornmentIcon="@Icons.Material.Filled.Search">
                     @foreach (var state in sortField.Items)
                     {

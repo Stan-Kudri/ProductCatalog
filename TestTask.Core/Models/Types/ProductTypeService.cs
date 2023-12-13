@@ -32,7 +32,7 @@ namespace TestTask.Core.Models.Types
             _dbContext.SaveChanges();
         }
 
-        public void Update(ProductType item)
+        public void Updata(ProductType item)
         {
             if (item == null)
             {
@@ -100,10 +100,14 @@ namespace TestTask.Core.Models.Types
                 Add(item);
             }
 
-            Update(item);
+            Updata(item);
         }
 
         public List<ProductType> GetAll() => _dbContext.Type.Count() > 0 ? _dbContext.Type.ToList() : null;
+
+        public bool IsFreeName(string name) => _dbContext.Type.FirstOrDefault(e => e.Name == name) == null;
+
+        public ProductType GetItem(int id) => _dbContext.Type.FirstOrDefault(e => e.Id == id) ?? throw new ArgumentException("Interaction element not found.");
 
         public IQueryable<ProductType> GetQueryableAll() => _dbContext.Type.Include(e => e.Category).Select(e => e);
     }
