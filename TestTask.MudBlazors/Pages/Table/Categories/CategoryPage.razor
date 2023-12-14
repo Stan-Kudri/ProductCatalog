@@ -12,9 +12,9 @@
 
         <MudSelect T="SortTypeCategories" Style="align-items:end" Label="Sort" MultiSelection="true" @bind-Value="sortField.sortType" @bind-SelectedValues="sortField.SortFields"
                    SelectAll="true" SelectAllText="Sort by all columns" AdornmentIcon="@Icons.Material.Filled.Search">
-            @foreach (var state in sortField.Items)
+            @foreach (var item in sortField.Items)
             {
-                <MudSelectItem T="SortTypeCategories" Value="@state" />
+                <MudSelectItem T="SortTypeCategories" Value="@item" />
             }
         </MudSelect>
         <div style="align-items:end" >

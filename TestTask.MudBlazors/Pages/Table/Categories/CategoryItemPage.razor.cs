@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using TestTask.Core.Models.Categories;
 using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model.TableComponent;
@@ -8,6 +9,7 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
     public partial class CategoryItemPage
     {
         [Inject] CategoryService? CategoryService { get; set; }
+        [Inject] IDialogService DialogService { get; set; }
         [Inject] NavigationManager? Navigation { get; set; }
 
         private CategoryModel categoryModel { get; set; } = new CategoryModel();
@@ -39,15 +41,16 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
         private void Close() => NavigationInCompanyTable();
 
         //Methods for add item company
-        private void Add()
+        private async Task Add()
         {
             if (errors.Length != 0)
             {
                 return;
             }
 
-            if (!CategoryService.IsFreeName(categoryModel.Name))
+            if (!CheckTheCompletionFields(out var message))
             {
+                ShowMessageWarning(message);
                 return;
             }
 
@@ -59,10 +62,16 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
         private void ClearData() => categoryModel.ClearData();
 
         //Methods for edit item company
-        private void Updata()
+        private async Task Updata()
         {
             if (errors.Length != 0)
             {
+                return;
+            }
+
+            if (!CheckTheCompletionFields(out var message))
+            {
+                ShowMessageWarning(message);
                 return;
             }
 
@@ -86,6 +95,28 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
             {
                 yield return "Field is required.";
             }
+        }
+
+        private async void ShowMessageWarning(string message)
+            => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
+
+        private bool CheckTheCompletionFields(out string message)
+        {
+            message = string.Empty;
+
+            if (categoryModel.Name == null || categoryModel.Name == string.Empty)
+            {
+                message = "Name is required.";
+                return false;
+            }
+
+            if (!CategoryService.IsFreeName(categoryModel.Name))
+            {
+                message = "Name is not free.";
+                return false;
+            }
+
+            return true;
         }
     }
 }

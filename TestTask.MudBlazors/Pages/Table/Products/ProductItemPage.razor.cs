@@ -1,53 +1,61 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using TestTask.Core.Models.Categories;
+using TestTask.Core.Models.Companies;
+using TestTask.Core.Models.Products;
 using TestTask.Core.Models.Types;
 using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model.TableComponent;
 
-namespace TestTask.MudBlazors.Pages.Table.TypeProduct
+namespace TestTask.MudBlazors.Pages.Table.Products
 {
-    public partial class TypeProductItemPage
+    public partial class ProductItemPage
     {
-        [Inject] ProductTypeService? ProductTypeService { get; set; }
+        [Inject] ProductService? ProductService { get; set; }
+        [Inject] CompanyService? CompanyService { get; set; }
         [Inject] CategoryService? CategoryService { get; set; }
+        [Inject] ProductTypeService? ProductTypeService { get; set; }
         [Inject] IDialogService DialogService { get; set; }
         [Inject] NavigationManager? Navigation { get; set; }
 
-        private TypeProductModel typeProductModel { get; set; } = new TypeProductModel();
+        private ProductModel productModel { get; set; } = new ProductModel();
         private string[] errors = { };
         private bool IsAddItem = true;
 
-        private ProductType oldTypeProduct;
+        private Product oldProduct;
 
+        private List<Company> selectCompanies = new List<Company>();
         private List<Category> selectCategories = new List<Category>();
+        private List<ProductType> selectTypes = new List<ProductType>();
 
-        [Parameter] public int? idProductType { get; set; } = null;
+        [Parameter] public int? idProduct { get; set; } = null;
 
         protected override void OnInitialized()
         {
+            selectCompanies = CompanyService.GetAll();
             selectCategories = CategoryService.GetAll();
+            selectTypes = ProductTypeService.GetAll();
 
-            if (idProductType == null)
+            if (idProduct == null)
             {
                 IsAddItem = true;
                 return;
             }
 
-            if (idProductType <= 0)
+            if (idProduct <= 0)
             {
                 NavigationInTypeProductTable();
             }
 
             IsAddItem = false;
-            oldTypeProduct = ProductTypeService.GetItem((int)idProductType);
-            typeProductModel = oldTypeProduct.GetTypeProductModel();
+            oldProduct = ProductService.GetItem((int)idProduct);
+            productModel = oldProduct.GetProductModel();
         }
 
         private void Close() => NavigationInTypeProductTable();
 
         //Methods for add item type product
-        private async Task Add()
+        private void Add()
         {
             if (errors.Length != 0)
             {
@@ -60,15 +68,15 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
                 return;
             }
 
-            var typeProduct = typeProductModel.GetProductType();
-            ProductTypeService.Add(typeProduct);
+            var typeProduct = productModel.GetProductType();
+            ProductService.Add(typeProduct);
             NavigationInTypeProductTable();
         }
 
-        private void ClearData() => typeProductModel.ClearData();
+        private void ClearData() => productModel.ClearData();
 
         //Methods for edit item type product
-        private async Task Updata()
+        private void Updata()
         {
             if (errors.Length != 0)
             {
@@ -81,17 +89,22 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
                 return;
             }
 
-            var typeProduct = typeProductModel.GetModifyType(oldTypeProduct.Id);
+            var typeProduct = productModel.GetModifyType(oldProduct.Id);
 
-            if (!oldTypeProduct.Equals(typeProduct))
+            if (!oldProduct.Equals(typeProduct))
             {
-                ProductTypeService.Updata(typeProduct);
+                ProductService.Updata(typeProduct);
             }
 
             NavigationInTypeProductTable();
         }
 
-        private void RecoverPastData() => typeProductModel = oldTypeProduct.GetTypeProductModel();
+        private void RecoverPastData() => productModel = oldProduct.GetProductModel();
+
+        private void NavigationInTypeProductTable() => Navigation.NavigateTo("/product");
+
+        private async void ShowMessageWarning(string message)
+            => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
 
         private IEnumerable<string> ValidFormatText(string str)
         {
@@ -101,38 +114,51 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
             }
         }
 
-        private IEnumerable<string> ValidSelectCategory(Category? category)
+        private IEnumerable<string> ValidFormatPrice(string str)
         {
-            if (category == null)
+            if (!decimal.TryParse(str, out var value))
             {
                 yield return "Field is required.";
             }
         }
 
-        private void NavigationInTypeProductTable() => Navigation.NavigateTo("/typeproduct");
-
-        private async void ShowMessageWarning(string message)
-            => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
-
         private bool CheckTheCompletionFields(out string message)
         {
             message = string.Empty;
 
-            if (typeProductModel.Name == null || typeProductModel.Name == string.Empty)
+            if (productModel.Name == null || productModel.Name == string.Empty)
             {
                 message = "Name is required.";
                 return false;
             }
 
-            if (!ProductTypeService.IsFreeName(typeProductModel.Name))
+            if (!ProductService.IsFreeName(productModel.Name))
             {
                 message = "Name is not free.";
                 return false;
             }
 
-            if (typeProductModel.Category == null)
+            if (productModel.Price <= 0)
+            {
+                message = "Price is required";
+                return false;
+            }
+
+            if (productModel.Company == null)
+            {
+                message = "Company not selected.";
+                return false;
+            }
+
+            if (productModel.Category == null)
             {
                 message = "Category not selected.";
+                return false;
+            }
+
+            if (productModel.ProductType == null)
+            {
+                message = "Product Type not selected.";
                 return false;
             }
 
