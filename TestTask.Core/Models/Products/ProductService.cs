@@ -130,6 +130,10 @@ namespace TestTask.Core.Models.Products
 
         public List<Product> GetAll() => _dbContext.Product.Count() > 0 ? _dbContext.Product.ToList() : null;
 
+        public bool IsFreeName(string name) => _dbContext.Product.FirstOrDefault(e => e.Name == name) == null;
+
+        public Product GetItem(int id) => _dbContext.Product.FirstOrDefault(e => e.Id == id) ?? throw new ArgumentException("Interaction element not found.");
+
         public IQueryable<Product> GetQueryableAll()
             => _dbContext.Product.Include(e => e.Company).Include(e => e.Category).ThenInclude(e => e.Types).Select(e => e);
 
