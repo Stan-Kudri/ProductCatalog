@@ -30,56 +30,44 @@ namespace TestTask.Core.Models.Companies
                 return items;
             }
 
+            IOrderedQueryable<Company> query = null;
+
             if (SortFields.Contains(SortTypeCompany.Id))
             {
-                IOrderedQueryable<Company> query = SortTypeCompany.Id.OrderBy(items, (bool)isSortAscending);
+                query = SortTypeCompany.Id.OrderBy(items, (bool)isSortAscending);
+            }
 
-                if (SortFields.Contains(SortTypeCompany.Name))
+            if (SortFields.Contains(SortTypeCompany.Name))
+            {
+                if (query == null)
                 {
-                    query = SortTypeCompany.Name.ThenBy(query, (bool)isSortAscending);
+                    query = SortTypeCompany.Name.OrderBy(items, (bool)isSortAscending);
                 }
 
-                if (SortFields.Contains(SortTypeCompany.Country))
+                query = SortTypeCompany.Name.ThenBy(query, (bool)isSortAscending);
+            }
+
+            if (SortFields.Contains(SortTypeCompany.Country))
+            {
+                if (query == null)
                 {
-                    query = SortTypeCompany.Country.ThenBy(query, (bool)isSortAscending);
+                    query = SortTypeCompany.Country.OrderBy(items, (bool)isSortAscending);
                 }
 
-                return SortFields.Contains(SortTypeCompany.DataCreate)
-                        ? SortTypeCompany.DataCreate.ThenBy(query, (bool)isSortAscending)
-                        : query;
+                query = SortTypeCompany.Country.ThenBy(query, (bool)isSortAscending);
             }
 
-            else if (SortFields.Contains(SortTypeCompany.Name))
+            if (SortFields.Contains(SortTypeCompany.DataCreate))
             {
-                IOrderedQueryable<Company> query = SortTypeCompany.Name.OrderBy(items, (bool)isSortAscending);
-
-                if (SortFields.Contains(SortTypeCompany.Country))
+                if (query == null)
                 {
-                    query = SortTypeCompany.Country.ThenBy(query, (bool)isSortAscending);
+                    query = SortTypeCompany.DataCreate.OrderBy(items, (bool)isSortAscending);
                 }
 
-                return SortFields.Contains(SortTypeCompany.DataCreate)
-                        ? SortTypeCompany.DataCreate.ThenBy(query, (bool)isSortAscending)
-                        : query;
+                query = SortTypeCompany.DataCreate.ThenBy(query, (bool)isSortAscending);
             }
 
-            else if (SortFields.Contains(SortTypeCompany.Country))
-            {
-                IOrderedQueryable<Company> query = SortTypeCompany.Country.OrderBy(items, (bool)isSortAscending);
-
-                return SortFields.Contains(SortTypeCompany.DataCreate)
-                        ? SortTypeCompany.DataCreate.ThenBy(query, (bool)isSortAscending)
-                        : query;
-            }
-
-            else if (SortFields.Contains(SortTypeCompany.DataCreate))
-            {
-                return SortFields.Contains(SortTypeCompany.DataCreate)
-                        ? SortTypeCompany.DataCreate.OrderBy(items, (bool)isSortAscending)
-                        : items;
-            }
-
-            return items;
+            return query == null ? items : query;
         }
 
         public void Clear() => _sortFields = new HashSet<SortTypeCompany>();

@@ -29,35 +29,35 @@ namespace TestTask.Core.Models.Types
                 return items;
             }
 
+
+            IOrderedQueryable<ProductType> query = null;
+
             if (SortFields.Contains(SortTypeProduct.Id))
             {
-                IOrderedQueryable<ProductType> query = SortTypeProduct.Id.OrderBy(items, (bool)isSortAscending);
-
-                if (SortFields.Contains(SortTypeProduct.Name))
-                {
-                    query = SortTypeProduct.Name.ThenBy(query, (bool)isSortAscending);
-                }
-
-                return SortFields.Contains(SortTypeProduct.Category)
-                        ? SortTypeProduct.Category.ThenBy(query, (bool)isSortAscending)
-                        : query;
+                query = SortTypeProduct.Id.OrderBy(items, (bool)isSortAscending);
             }
 
             if (SortFields.Contains(SortTypeProduct.Name))
             {
-                IOrderedQueryable<ProductType> query = SortTypeProduct.Name.OrderBy(items, (bool)isSortAscending);
+                if (query == null)
+                {
+                    query = SortTypeProduct.Name.OrderBy(items, (bool)isSortAscending);
+                }
 
-                return SortFields.Contains(SortTypeProduct.Category)
-                        ? SortTypeProduct.Category.ThenBy(query, (bool)isSortAscending)
-                        : query;
+                query = SortTypeProduct.Name.ThenBy(query, (bool)isSortAscending);
             }
 
             if (SortFields.Contains(SortTypeProduct.Category))
             {
-                return SortTypeProduct.Category.OrderBy(items, (bool)isSortAscending);
+                if (query == null)
+                {
+                    query = SortTypeProduct.Category.OrderBy(items, (bool)isSortAscending);
+                }
+
+                query = SortTypeProduct.Category.ThenBy(query, (bool)isSortAscending);
             }
 
-            return items;
+            return query == null ? items : query;
         }
 
         public void Clear() => _sortFields = new HashSet<SortTypeProduct>();
