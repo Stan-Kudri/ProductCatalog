@@ -62,7 +62,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
                 return;
             }
 
-            if (!IsValidField(out var message))
+            if (!CheckTheCompletionFields(out var message))
             {
                 ShowMessageWarning(message);
                 return;
@@ -83,13 +83,13 @@ namespace TestTask.MudBlazors.Pages.Table.Products
                 return;
             }
 
-            var typeProduct = productModel.GetModifyType(oldProduct.Id);
-
-            if (!IsValidField(out var message))
+            if (!CheckTheCompletionFields(out var message))
             {
                 ShowMessageWarning(message);
                 return;
             }
+
+            var typeProduct = productModel.GetModifyType(oldProduct.Id);
 
             if (!oldProduct.Equals(typeProduct))
             {
@@ -122,13 +122,25 @@ namespace TestTask.MudBlazors.Pages.Table.Products
             }
         }
 
-        private bool IsValidField(out string message)
+        private bool CheckTheCompletionFields(out string message)
         {
             message = string.Empty;
+
+            if (productModel.Name == null || productModel.Name == string.Empty)
+            {
+                message = "Name is required.";
+                return false;
+            }
 
             if (!ProductService.IsFreeName(productModel.Name))
             {
                 message = "Name is not free.";
+                return false;
+            }
+
+            if (productModel.Price <= 0)
+            {
+                message = "Price is required";
                 return false;
             }
 

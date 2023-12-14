@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using TestTask.Core.Models.Companies;
 using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model.TableComponent;
@@ -8,6 +9,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
     public partial class CompanyItemPage
     {
         [Inject] CompanyService? CompanyService { get; set; }
+        [Inject] IDialogService DialogService { get; set; }
         [Inject] NavigationManager? Navigation { get; set; }
 
         private CompanyModel companyModel { get; set; } = new CompanyModel();
@@ -39,15 +41,16 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
         private void Close() => NavigationInCompanyTable();
 
         //Methods for add item company
-        private void Add()
+        private async Task Add()
         {
             if (errors.Length != 0)
             {
                 return;
             }
 
-            if (!CompanyService.IsFreeName(companyModel.Name))
+            if (!CheckTheCompletionFields(out var message))
             {
+                ShowMessageWarning(message);
                 return;
             }
 
@@ -59,10 +62,16 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
         private void ClearData() => companyModel.ClearData();
 
         //Methods for edit item company
-        private void Updata()
+        private async Task Updata()
         {
             if (errors.Length != 0)
             {
+                return;
+            }
+
+            if (!CheckTheCompletionFields(out var message))
+            {
+                ShowMessageWarning(message);
                 return;
             }
 
@@ -101,5 +110,27 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
         }
 
         private void NavigationInCompanyTable() => Navigation.NavigateTo("/company");
+
+        private async void ShowMessageWarning(string message)
+            => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
+
+        private bool CheckTheCompletionFields(out string message)
+        {
+            message = string.Empty;
+
+            if (companyModel.Name == null || companyModel.Name == string.Empty)
+            {
+                message = "Name is required.";
+                return false;
+            }
+
+            if (!CompanyService.IsFreeName(companyModel.Name))
+            {
+                message = "Name is not free.";
+                return false;
+            }
+
+            return true;
+        }
     }
 }

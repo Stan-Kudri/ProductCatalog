@@ -47,22 +47,16 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
         private void Close() => NavigationInTypeProductTable();
 
         //Methods for add item type product
-        private void Add()
+        private async Task Add()
         {
             if (errors.Length != 0)
             {
                 return;
             }
 
-            if (!ProductTypeService.IsFreeName(typeProductModel.Name))
+            if (!CheckTheCompletionFields(out var message))
             {
-                ShowMessageWarning("Name is not free.");
-                return;
-            }
-
-            if (typeProductModel.Category == null)
-            {
-                ShowMessageWarning("Category not selected.");
+                ShowMessageWarning(message);
                 return;
             }
 
@@ -74,10 +68,16 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
         private void ClearData() => typeProductModel.ClearData();
 
         //Methods for edit item type product
-        private void Updata()
+        private async Task Updata()
         {
             if (errors.Length != 0)
             {
+                return;
+            }
+
+            if (!CheckTheCompletionFields(out var message))
+            {
+                ShowMessageWarning(message);
                 return;
             }
 
@@ -113,5 +113,30 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 
         private async void ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
+
+        private bool CheckTheCompletionFields(out string message)
+        {
+            message = string.Empty;
+
+            if (typeProductModel.Name == null || typeProductModel.Name == string.Empty)
+            {
+                message = "Name is required.";
+                return false;
+            }
+
+            if (!ProductTypeService.IsFreeName(typeProductModel.Name))
+            {
+                message = "Name is not free.";
+                return false;
+            }
+
+            if (typeProductModel.Category == null)
+            {
+                message = "Category not selected.";
+                return false;
+            }
+
+            return true;
+        }
     }
 }
