@@ -1,22 +1,22 @@
-﻿@page "/typeproduct"
+﻿@page "/product"
 
 @using Bromix.MudBlazor.MaterialDesignIcons
-@using TestTask.Core.Models.Types
+@using TestTask.Core.Models.Products
 
-<PageTitle>Type Product</PageTitle>
-<MudText Typo="Typo.h5" Align="Align.Center" GutterBottom="true">Type Product</MudText>
-<MudTable Items="@typeProduct" Hover="true" SortLabel="Sort By" Elevation="0" @bind-SelectedItems="selectedItems" MultiSelection="true">
+<PageTitle>Product</PageTitle>
+<MudText Typo="Typo.h5" Align="Align.Center" GutterBottom="true">Product</MudText>
+<MudTable Items="@product" Hover="true" SortLabel="Sort By" Elevation="0" @bind-SelectedItems="selectedItems" MultiSelection="true">
     <ToolBarContent>
 
         <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0">
         </MudTextField>
-        
-        <MudSelect T="SortTypeProduct" Style="align-items:end" Label="Sort" MultiSelection="true" @bind-Value="sortField.sortType" @bind-SelectedValues="sortField.SortFields"
-                    SelectAll="true" SelectAllText="Sort by all columns" AdornmentIcon="@Icons.Material.Filled.Search">
-                    @foreach (var item in sortField.Items)
-                    {
-                <MudSelectItem T="SortTypeProduct" Value="@item" />
+
+        <MudSelect T="SortFieldProduct" Style="align-items:end" Label="Sort" MultiSelection="true" @bind-Value="sortField.sortType" @bind-SelectedValues="sortField.SortFields"
+                   SelectAll="true" SelectAllText="Sort by all columns" AdornmentIcon="@Icons.Material.Filled.Search">
+            @foreach (var item in sortField.Items)
+            {
+                <MudSelectItem T="SortFieldProduct" Value="@item" />
             }
         </MudSelect>
 
@@ -44,20 +44,29 @@
 
     <ColGroup>
         <col style="width: 60px;" />
-        <col style="width: 30%;" />
-        <col style="width: 30%;" />
+        <col style="width: 15%;" />
+        <col style="width: 15%;" />
+        <col style="width: 15%;" />
+        <col style="width: 15%;" />
+        <col style="width: 15%;" />
         <col style="width: 40px;" />
     </ColGroup>
     <HeaderContent>
         <MudTh>Id</MudTh>
         <MudTh>Name</MudTh>
+        <MudTh>Company</MudTh>
         <MudTh>Category</MudTh>
+        <MudTh>Type Product</MudTh>
+        <MudTh>Price</MudTh>
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="Id">@context.Id</MudTd>
+            <MudTd DataLabel="Id">@context.Id</MudTd>
             <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Company">@context.Company.ToString()</MudTd>
             <MudTd DataLabel="Category">@context.Category.ToString()</MudTd>
+            <MudTd DataLabel="Type Product">@context.Type.ToString()</MudTd>
+            <MudTd DataLabel="Price">@context.Price</MudTd>
             <MudTh Style="text-align:right">
                 <MudTooltip Text="Remove" Placement="Placement.Bottom">
                     <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" Size="Size.Medium" OnClick="@(() => Remove(context.Id))" />
