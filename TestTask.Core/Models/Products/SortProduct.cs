@@ -29,109 +29,64 @@ namespace TestTask.Core.Models.Products
                 return items;
             }
 
+            IOrderedQueryable<Product> query = null;
+
             if (SortFields.Contains(SortFieldProduct.Id))
             {
-                IOrderedQueryable<Product> query = SortFieldProduct.Id.OrderBy(items, (bool)isSortAscending);
-
-                if (SortFields.Contains(SortFieldProduct.Name))
-                {
-                    query = SortFieldProduct.Name.ThenBy(query, (bool)isSortAscending);
-                }
-
-                if (SortFields.Contains(SortFieldProduct.Category))
-                {
-                    query = SortFieldProduct.Category.ThenBy(query, (bool)isSortAscending);
-                }
-
-                if (SortFields.Contains(SortFieldProduct.Category))
-                {
-                    query = SortFieldProduct.Category.ThenBy(query, (bool)isSortAscending);
-                }
-
-                if (SortFields.Contains(SortFieldProduct.ProductType))
-                {
-                    query = SortFieldProduct.ProductType.ThenBy(query, (bool)isSortAscending);
-                }
-
-                return SortFields.Contains(SortFieldProduct.Price)
-                        ? SortFieldProduct.Price.ThenBy(query, (bool)isSortAscending)
-                        : query;
+                query = SortFieldProduct.Id.OrderBy(items, (bool)isSortAscending);
             }
 
             if (SortFields.Contains(SortFieldProduct.Name))
             {
-                IOrderedQueryable<Product> query = SortFieldProduct.Name.OrderBy(items, (bool)isSortAscending);
-
-                if (SortFields.Contains(SortFieldProduct.Category))
+                if (query == null)
                 {
-                    query = SortFieldProduct.Category.ThenBy(query, (bool)isSortAscending);
+                    query = SortFieldProduct.Name.OrderBy(items, (bool)isSortAscending);
                 }
 
-                if (SortFields.Contains(SortFieldProduct.Category))
+                query = SortFieldProduct.Name.ThenBy(query, (bool)isSortAscending);
+            }
+
+            if (SortFields.Contains(SortFieldProduct.Company))
+            {
+                if (query == null)
                 {
-                    query = SortFieldProduct.Category.ThenBy(query, (bool)isSortAscending);
+                    query = SortFieldProduct.Company.OrderBy(items, (bool)isSortAscending);
                 }
 
-                if (SortFields.Contains(SortFieldProduct.ProductType))
-                {
-                    query = SortFieldProduct.ProductType.ThenBy(query, (bool)isSortAscending);
-                }
-
-                return SortFields.Contains(SortFieldProduct.Price)
-                        ? SortFieldProduct.Price.ThenBy(query, (bool)isSortAscending)
-                        : query;
+                query = SortFieldProduct.Company.ThenBy(query, (bool)isSortAscending);
             }
 
             if (SortFields.Contains(SortFieldProduct.Category))
             {
-                IOrderedQueryable<Product> query = SortFieldProduct.Category.OrderBy(items, (bool)isSortAscending);
-
-                if (SortFields.Contains(SortFieldProduct.Category))
+                if (query == null)
                 {
-                    query = SortFieldProduct.Category.ThenBy(query, (bool)isSortAscending);
+                    query = SortFieldProduct.Category.OrderBy(items, (bool)isSortAscending);
                 }
 
-                if (SortFields.Contains(SortFieldProduct.ProductType))
-                {
-                    query = SortFieldProduct.ProductType.ThenBy(query, (bool)isSortAscending);
-                }
-
-                return SortFields.Contains(SortFieldProduct.Price)
-                        ? SortFieldProduct.Price.ThenBy(query, (bool)isSortAscending)
-                        : query;
-            }
-
-            if (SortFields.Contains(SortFieldProduct.Category))
-            {
-                IOrderedQueryable<Product> query = SortFieldProduct.Category.OrderBy(items, (bool)isSortAscending);
-
-                if (SortFields.Contains(SortFieldProduct.ProductType))
-                {
-                    query = SortFieldProduct.ProductType.ThenBy(query, (bool)isSortAscending);
-                }
-
-                return SortFields.Contains(SortFieldProduct.Price)
-                        ? SortFieldProduct.Price.ThenBy(query, (bool)isSortAscending)
-                        : query;
+                query = SortFieldProduct.Category.ThenBy(query, (bool)isSortAscending);
             }
 
             if (SortFields.Contains(SortFieldProduct.ProductType))
             {
-                IOrderedQueryable<Product> query = SortFieldProduct.ProductType.OrderBy(items, (bool)isSortAscending);
+                if (query == null)
+                {
+                    query = SortFieldProduct.ProductType.OrderBy(items, (bool)isSortAscending);
+                }
 
-                return SortFields.Contains(SortFieldProduct.Price)
-                        ? SortFieldProduct.Price.ThenBy(query, (bool)isSortAscending)
-                        : query;
+                query = SortFieldProduct.ProductType.ThenBy(query, (bool)isSortAscending);
             }
 
-            if (SortFields.Contains(SortFieldProduct.ProductType))
+            if (SortFields.Contains(SortFieldProduct.Price))
             {
-                return SortFields.Contains(SortFieldProduct.Price)
-                        ? SortFieldProduct.Price.OrderBy(items, (bool)isSortAscending)
-                        : items;
+                if (query == null)
+                {
+                    query = SortFieldProduct.Price.OrderBy(items, (bool)isSortAscending);
+                }
+
+                query = SortFieldProduct.Price.ThenBy(query, (bool)isSortAscending);
             }
 
-            return items;
+            return query == null ? items : query;
         }
 
         public void Clear() => _sortFields = new HashSet<SortFieldProduct>();
