@@ -32,9 +32,9 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
 
         protected override void OnInitialized() => LoadData();
 
-        private void AddCategoryPage() => Navigation.NavigateTo("/addcategory");
+        private void AddCategoryPage() => Navigation.NavigateTo($"/category");
 
-        private void EditCategpryPage(int id) => Navigation.NavigateTo($"editcategory/{id}");
+        private void EditCategpryPage(int id) => Navigation.NavigateTo($"category/{id}");
 
         private async Task Remove()
         {
@@ -84,12 +84,16 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
             LoadData();
         }
 
-        private void UseFilter() => LoadData();
-
         private void ClearFilter()
         {
             IsAscending = true;
             sortField.Clear();
+            LoadData();
+        }
+
+        public void OnToggledChanged(bool toggled)
+        {
+            IsAscending = toggled;
             LoadData();
         }
 

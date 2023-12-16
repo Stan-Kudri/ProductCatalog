@@ -1,16 +1,27 @@
 ﻿using Ardalis.SmartEnum;
+using System;
 using System.Linq;
+using System.Linq.Expressions;
+using TestTask.Core.Models.Categories;
+using TestTask.Core.Models.Companies;
+using TestTask.Core.Models.Types;
 
 namespace TestTask.Core.Models.Products
 {
-    public abstract class SortFieldProduct : SmartEnum<SortFieldProduct>
+    public interface ISortableSmartEnum<T>
     {
-        public static readonly SortFieldProduct Id = new IdSortProduct("Id", 0);
-        public static readonly SortFieldProduct Name = new NameSortProduct("Name", 1);
-        public static readonly SortFieldProduct Company = new CompanySortProduct("Company", 2);
-        public static readonly SortFieldProduct Category = new CategorySortProduct("Category", 3);
-        public static readonly SortFieldProduct ProductType = new ProductTypeSortProduct("Product Type", 4);
-        public static readonly SortFieldProduct Price = new PriceSortProduct("Price", 5);
+        IOrderedQueryable<T> OrderBy(IQueryable<T> query, bool asc);
+        IOrderedQueryable<T> ThenBy(IOrderedQueryable<T> query, bool asc);
+    }
+
+    public abstract class SortFieldProduct : SmartEnum<SortFieldProduct>, ISortableSmartEnum<Product>
+    {
+        public static readonly SortFieldProduct Id = new SortType<int>("Id", 0, e => e.Id);
+        public static readonly SortFieldProduct Name = new SortType<string>("Name", 1, e => e.Name);
+        public static readonly SortFieldProduct Company = new SortType<Company>("Company", 2, e => e.Company);
+        public static readonly SortFieldProduct Category = new SortType<Category>("Category", 3, e => e.Category);
+        public static readonly SortFieldProduct ProductType = new SortType<ProductType>("Product Type", 4, e => e.Type);
+        public static readonly SortFieldProduct Price = new SortType<decimal>("Price", 5, e => e.Price);
 
         public SortFieldProduct(string name, int value)
             : base(name, value)
@@ -24,89 +35,22 @@ namespace TestTask.Core.Models.Products
         {
             return base.Name;
         }
-    }
 
-    partial class IdSortProduct : SortFieldProduct
-    {
-        public IdSortProduct(string name, int value)
-            : base(name, value)
+        private sealed class SortType<TKey> : SortFieldProduct
         {
+            private readonly Expression<Func<Product, TKey>> _expression;
+
+            public SortType(string name, int value, Expression<Func<Product, TKey>> expression)
+                : base(name, value)
+            {
+                _expression = expression;
+            }
+
+            public override IOrderedQueryable<Product> OrderBy(IQueryable<Product> query, bool asc)
+            => asc ? query.OrderBy(_expression) : query.OrderByDescending(_expression);
+
+            public override IOrderedQueryable<Product> ThenBy(IOrderedQueryable<Product> query, bool asc)
+                => asc ? query.ThenBy(_expression) : query.ThenByDescending(_expression);
         }
-
-        public override IOrderedQueryable<Product> OrderBy(IQueryable<Product> query, bool asc)
-            => asc ? query.OrderBy(e => e.Id) : query.OrderByDescending(e => e.Id);
-
-        public override IOrderedQueryable<Product> ThenBy(IOrderedQueryable<Product> query, bool asc)
-            => asc ? query.ThenBy(e => e.Id) : query.ThenByDescending(e => e.Id);
-    }
-
-    partial class NameSortProduct : SortFieldProduct
-    {
-        public NameSortProduct(string name, int value)
-            : base(name, value)
-        {
-        }
-
-        public override IOrderedQueryable<Product> OrderBy(IQueryable<Product> query, bool asc)
-            => asc ? query.OrderBy(e => e.Name) : query.OrderByDescending(e => e.Name);
-
-        public override IOrderedQueryable<Product> ThenBy(IOrderedQueryable<Product> query, bool asc)
-            => asc ? query.ThenBy(e => e.Name) : query.ThenByDescending(e => e.Name);
-    }
-
-    partial class CompanySortProduct : SortFieldProduct
-    {
-        public CompanySortProduct(string name, int value)
-            : base(name, value)
-        {
-        }
-
-        public override IOrderedQueryable<Product> OrderBy(IQueryable<Product> query, bool asc)
-            => asc ? query.OrderBy(e => e.Company.Name) : query.OrderByDescending(e => e.Company.Name);
-
-        public override IOrderedQueryable<Product> ThenBy(IOrderedQueryable<Product> query, bool asc)
-            => asc ? query.ThenBy(e => e.Company.Name) : query.ThenByDescending(e => e.Company.Name);
-    }
-
-    partial class CategorySortProduct : SortFieldProduct
-    {
-        public CategorySortProduct(string name, int value)
-            : base(name, value)
-        {
-        }
-
-        public override IOrderedQueryable<Product> OrderBy(IQueryable<Product> query, bool asc)
-            => asc ? query.OrderBy(e => e.Category.Name) : query.OrderByDescending(e => e.Category.Name);
-
-        public override IOrderedQueryable<Product> ThenBy(IOrderedQueryable<Product> query, bool asc)
-            => asc ? query.ThenBy(e => e.Category.Name) : query.ThenByDescending(e => e.Category.Name);
-    }
-
-    partial class ProductTypeSortProduct : SortFieldProduct
-    {
-        public ProductTypeSortProduct(string name, int value)
-            : base(name, value)
-        {
-        }
-
-        public override IOrderedQueryable<Product> OrderBy(IQueryable<Product> query, bool asc)
-            => asc ? query.OrderBy(e => e.Type.Name) : query.OrderByDescending(e => e.Type.Name);
-
-        public override IOrderedQueryable<Product> ThenBy(IOrderedQueryable<Product> query, bool asc)
-            => asc ? query.ThenBy(e => e.Type.Name) : query.ThenByDescending(e => e.Type.Name);
-    }
-
-    partial class PriceSortProduct : SortFieldProduct
-    {
-        public PriceSortProduct(string name, int value)
-            : base(name, value)
-        {
-        }
-
-        public override IOrderedQueryable<Product> OrderBy(IQueryable<Product> query, bool asc)
-            => asc ? query.OrderBy(e => e.Price) : query.OrderByDescending(e => e.Price);
-
-        public override IOrderedQueryable<Product> ThenBy(IOrderedQueryable<Product> query, bool asc)
-            => asc ? query.ThenBy(e => e.Price) : query.ThenByDescending(e => e.Price);
     }
 }

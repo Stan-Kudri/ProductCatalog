@@ -22,25 +22,25 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 
         private List<Category> selectCategories = new List<Category>();
 
-        [Parameter] public int? idProductType { get; set; } = null;
+        [Parameter] public int? Id { get; set; } = null;
 
         protected override void OnInitialized()
         {
             selectCategories = CategoryService.GetAll();
 
-            if (idProductType == null)
+            if (Id == null)
             {
                 IsAddItem = true;
                 return;
             }
 
-            if (idProductType <= 0)
+            if (Id <= 0)
             {
                 NavigationInTypeProductTable();
             }
 
             IsAddItem = false;
-            oldTypeProduct = ProductTypeService.GetItem((int)idProductType);
+            oldTypeProduct = ProductTypeService.GetItem((int)Id);
             typeProductModel = oldTypeProduct.GetTypeProductModel();
         }
 
@@ -109,7 +109,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
             }
         }
 
-        private void NavigationInTypeProductTable() => Navigation.NavigateTo("/typeproduct");
+        private void NavigationInTypeProductTable() => Navigation.NavigateTo("/table");
 
         private async void ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");

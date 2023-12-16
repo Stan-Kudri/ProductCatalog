@@ -18,23 +18,23 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
 
         private Category oldItem;
 
-        [Parameter] public int? idCategory { get; set; } = null;
+        [Parameter] public int? Id { get; set; } = null;
 
         protected override void OnInitialized()
         {
-            if (idCategory == null)
+            if (Id == null)
             {
                 IsAddItem = true;
                 return;
             }
 
-            if (idCategory <= 0)
+            if (Id <= 0)
             {
                 NavigationInCompanyTable();
             }
 
             IsAddItem = false;
-            oldItem = CategoryService.GetCategory((int)idCategory);
+            oldItem = CategoryService.GetCategory((int)Id);
             categoryModel = oldItem.GetCategoryModel();
         }
 
@@ -85,7 +85,7 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
             NavigationInCompanyTable();
         }
 
-        private void NavigationInCompanyTable() => Navigation.NavigateTo("/category");
+        private void NavigationInCompanyTable() => Navigation.NavigateTo("/category/list");
 
         private void RecoverPastData() => categoryModel = oldItem.GetCategoryModel();
 

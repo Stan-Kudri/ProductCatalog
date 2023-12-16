@@ -29,9 +29,9 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 
         protected override void OnInitialized() => LoadData();
 
-        private void AddCompanyPage() => Navigation?.NavigateTo("/addtype");
+        private void AddPage() => Navigation?.NavigateTo("/type");
 
-        private void EditTypePage(int id) => Navigation?.NavigateTo($"edittype/{id}");
+        private void EditTypePage(int id) => Navigation?.NavigateTo($"type/{id}");
 
         private async Task Remove()
         {
@@ -79,7 +79,11 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
             LoadData();
         }
 
-        private void UseFilter() => LoadData();
+        public void OnToggledChanged(bool toggled)
+        {
+            IsAscending = toggled;
+            LoadData();
+        }
 
         private void ClearFilter()
         {

@@ -18,23 +18,23 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 
         private Company oldCompany;
 
-        [Parameter] public int? idCompany { get; set; } = null;
+        [Parameter] public int? Id { get; set; } = null;
 
         protected override void OnInitialized()
         {
-            if (idCompany == null)
+            if (Id == null)
             {
                 IsAddItem = true;
                 return;
             }
 
-            if (idCompany <= 0)
+            if (Id <= 0)
             {
                 NavigationInCompanyTable();
             }
 
             IsAddItem = false;
-            oldCompany = CompanyService.GetCompany((int)idCompany);
+            oldCompany = CompanyService.GetCompany((int)Id);
             companyModel = oldCompany.GetCompanyModel();
         }
 

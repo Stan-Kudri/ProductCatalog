@@ -27,11 +27,15 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 
         private bool IsAscending { get; set; } = true;
 
-        protected override void OnInitialized() => LoadData();
+        protected override void OnInitialized()
+        {
 
-        private void AddCompanyPage() => Navigation?.NavigateTo("/addcompany");
+            LoadData();
+        }
 
-        private void EditCompanyPage(int id) => Navigation?.NavigateTo($"editcompany/{id}");
+        private void AddPage() => Navigation?.NavigateTo("/company");
+
+        private void EditCompanyPage(int id) => Navigation?.NavigateTo($"company/{id}");
 
         private async Task Remove()
         {
@@ -79,12 +83,16 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
             LoadData();
         }
 
-        private void UseFilter() => LoadData();
-
         private void ClearFilter()
         {
             IsAscending = true;
             sortField.Clear();
+            LoadData();
+        }
+
+        public void OnToggledChanged(bool toggled)
+        {
+            IsAscending = toggled;
             LoadData();
         }
 

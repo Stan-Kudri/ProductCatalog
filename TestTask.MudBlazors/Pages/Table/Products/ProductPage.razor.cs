@@ -27,9 +27,9 @@ namespace TestTask.MudBlazors.Pages.Table.Products
 
         protected override void OnInitialized() => LoadData();
 
-        private void AddCompanyPage() => Navigation?.NavigateTo("/addproduct");
+        private void AddPage() => Navigation?.NavigateTo("/product");
 
-        private void EditTypePage(int id) => Navigation?.NavigateTo($"editproduct/{id}");
+        private void EditPage(int id) => Navigation?.NavigateTo($"product/{id}");
 
         private async Task Remove()
         {
@@ -57,7 +57,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
             LoadData();
         }
 
-        private void Update(int id) => EditTypePage(id);
+        private void Update(int id) => EditPage(id);
 
         private async Task Remove(int id)
         {
@@ -75,12 +75,16 @@ namespace TestTask.MudBlazors.Pages.Table.Products
             LoadData();
         }
 
-        private void UseFilter() => LoadData();
-
         private void ClearFilter()
         {
             IsAscending = true;
             sortField.Clear();
+            LoadData();
+        }
+
+        public void OnToggledChanged(bool toggled)
+        {
+            IsAscending = toggled;
             LoadData();
         }
 

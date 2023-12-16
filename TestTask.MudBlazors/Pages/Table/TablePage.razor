@@ -1,0 +1,24 @@
+﻿@page "/table"
+
+ @using Table
+ @using Table.TypeProduct
+
+ <MudPaper>
+    <MudTabs Rounded="true" AlwaysShowScrollButtons="true" Color="@Color.Info">
+        <MudSpacer></MudSpacer>
+        <MudTabPanel Text="Company">
+            <DynamicComponent Type="typeof(Companies.CompanyPage)" />
+        </MudTabPanel>
+        <MudTabPanel Text="Category">
+            <DynamicComponent Type="typeof(Categories.CategoryPage)" />
+        </MudTabPanel>
+        <MudTabPanel Text="Type Product">
+            <DynamicComponent Type="typeof(TypeProduct.TypeProductPage)" />
+        </MudTabPanel>
+        <MudTabPanel Text="Product">
+            <DynamicComponent Type="typeof(Products.ProductPage)" />
+        </MudTabPanel>
+    </MudTabs>
+ </MudPaper>
+
+

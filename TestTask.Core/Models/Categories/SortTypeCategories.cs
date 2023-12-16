@@ -1,12 +1,15 @@
 ﻿using Ardalis.SmartEnum;
+using System;
 using System.Linq;
+using System.Linq.Expressions;
+using TestTask.Core.Models.Products;
 
 namespace TestTask.Core.Models.Categories
 {
-    public abstract class SortTypeCategories : SmartEnum<SortTypeCategories>
+    public abstract class SortTypeCategories : SmartEnum<SortTypeCategories>, ISortableSmartEnum<Category>
     {
-        public static readonly SortTypeCategories Id = new IdSortType("Id", 0);
-        public static readonly SortTypeCategories Name = new NameSortType("Name", 1);
+        public static readonly SortTypeCategories Id = new SortType<int>("Id", 0, e => e.Id);
+        public static readonly SortTypeCategories Name = new SortType<string>("Name", 1, e => e.Name);
 
         public SortTypeCategories(string name, int value)
             : base(name, value)
@@ -20,29 +23,22 @@ namespace TestTask.Core.Models.Categories
         {
             return base.Name;
         }
-    }
 
-    partial class IdSortType : SortTypeCategories
-    {
-        public IdSortType(string name, int value)
-            : base(name, value)
+        private sealed class SortType<TKey> : SortTypeCategories
         {
+            private readonly Expression<Func<Category, TKey>> _expression;
 
+            public SortType(string name, int value, Expression<Func<Category, TKey>> expression)
+                : base(name, value)
+            {
+                _expression = expression;
+            }
+
+            public override IOrderedQueryable<Category> OrderBy(IQueryable<Category> query, bool asc)
+                => asc ? query.OrderBy(_expression) : query.OrderByDescending(_expression);
+
+            public override IOrderedQueryable<Category> ThenBy(IOrderedQueryable<Category> query, bool asc)
+                => asc ? query.ThenBy(_expression) : query.ThenByDescending(_expression);
         }
-
-        public override IOrderedQueryable<Category> OrderBy(IQueryable<Category> query, bool asc) => asc ? query.OrderBy(e => e.Id) : query.OrderByDescending(e => e.Id);
-        public override IOrderedQueryable<Category> ThenBy(IOrderedQueryable<Category> query, bool asc) => asc ? query.ThenBy(e => e.Id) : query.ThenByDescending(e => e.Id);
-    }
-
-    partial class NameSortType : SortTypeCategories
-    {
-        public NameSortType(string name, int value)
-            : base(name, value)
-        {
-
-        }
-
-        public override IOrderedQueryable<Category> OrderBy(IQueryable<Category> query, bool asc) => asc ? query.OrderBy(e => e.Name) : query.OrderByDescending(e => e.Name);
-        public override IOrderedQueryable<Category> ThenBy(IOrderedQueryable<Category> query, bool asc) => asc ? query.ThenBy(e => e.Name) : query.ThenByDescending(e => e.Name);
     }
 }

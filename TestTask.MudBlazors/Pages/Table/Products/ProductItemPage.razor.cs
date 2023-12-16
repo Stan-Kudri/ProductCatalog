@@ -28,7 +28,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
         private List<Category> selectCategories = new List<Category>();
         private List<ProductType> selectTypes = new List<ProductType>();
 
-        [Parameter] public int? idProduct { get; set; } = null;
+        [Parameter] public int? Id { get; set; } = null;
 
         protected override void OnInitialized()
         {
@@ -36,19 +36,19 @@ namespace TestTask.MudBlazors.Pages.Table.Products
             selectCategories = CategoryService.GetAll();
             selectTypes = ProductTypeService.GetAll();
 
-            if (idProduct == null)
+            if (Id == null)
             {
                 IsAddItem = true;
                 return;
             }
 
-            if (idProduct <= 0)
+            if (Id <= 0)
             {
                 NavigationInTypeProductTable();
             }
 
             IsAddItem = false;
-            oldProduct = ProductService.GetItem((int)idProduct);
+            oldProduct = ProductService.GetItem((int)Id);
             productModel = oldProduct.GetProductModel();
         }
 
@@ -101,7 +101,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
 
         private void RecoverPastData() => productModel = oldProduct.GetProductModel();
 
-        private void NavigationInTypeProductTable() => Navigation.NavigateTo("/product");
+        private void NavigationInTypeProductTable() => Navigation.NavigateTo("/table");
 
         private async void ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");

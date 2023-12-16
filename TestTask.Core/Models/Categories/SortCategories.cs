@@ -22,28 +22,10 @@ namespace TestTask.Core.Models.Categories
         }
         public ObservableCollection<SortTypeCategories> Items { get; set; } = new ObservableCollection<SortTypeCategories>(SortTypeCategories.List);
 
-        public IQueryable<Category> Apply(IQueryable<Category> items, bool? isSortAscending = true)
+        public IQueryable<Category> Apply(IQueryable<Category> items, bool? ascending = true)
         {
-            if (isSortAscending == null)
-            {
-                return items;
-            }
-
-            if (SortFields.Contains(SortTypeCategories.Id))
-            {
-                IOrderedQueryable<Category> query = SortTypeCategories.Id.OrderBy(items, (bool)isSortAscending);
-
-                return SortFields.Contains(SortTypeCategories.Name)
-                        ? SortTypeCategories.Name.ThenBy(query, (bool)isSortAscending)
-                        : query;
-            }
-
-            else if (SortFields.Contains(SortTypeCategories.Name))
-            {
-                return SortTypeCategories.Name.OrderBy(items, (bool)isSortAscending);
-            }
-
-            return items;
+            var sorter = new Sorter<Category, SortTypeCategories>(SortTypeCategories.Id);
+            return sorter.Apply(items, _sortFields, ascending);
         }
 
         public void Clear() => _sortFields = new HashSet<SortTypeCategories>();
