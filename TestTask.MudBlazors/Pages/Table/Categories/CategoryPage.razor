@@ -64,11 +64,11 @@
             <MudTd DataLabel="Id">@context.Id</MudTd>
                 <MudTd DataLabel="Name">@context.Name</MudTd>
                 <MudTh Style="text-align:right">
-                    <MudTooltip Text="Remove" Placement="Placement.Bottom">
-                        <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" Size="Size.Medium" OnClick="@(() => Remove(context.Id))" />
-                    </MudTooltip>
                     <MudTooltip Text="Edit" Placement="Placement.Bottom">
                         <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Outlined" Size="Size.Medium" Class="ml-1" OnClick="@(() => Update(context.Id))" />
+                    </MudTooltip>
+                    <MudTooltip Text="Remove" Placement="Placement.Bottom">
+                        <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" Size="Size.Medium" OnClick="@(() => Remove(context.Id))" />
                     </MudTooltip>
                 </MudTh>
             </RowTemplate>

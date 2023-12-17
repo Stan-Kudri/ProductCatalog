@@ -55,6 +55,12 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
                 return;
             }
 
+            if (!CategoryService.IsFreeName(categoryModel.Name))
+            {
+                ShowMessageWarning("Name is not free.");
+                return;
+            }
+
             var item = categoryModel.GetCategory();
             CategoryService.Add(item);
             NavigationInCompanyTable();
@@ -108,12 +114,6 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
             if (categoryModel.Name == null || categoryModel.Name == string.Empty)
             {
                 message = "Name is required.";
-                return false;
-            }
-
-            if (!CategoryService.IsFreeName(categoryModel.Name))
-            {
-                message = "Name is not free.";
                 return false;
             }
 

@@ -55,6 +55,14 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
                 return;
             }
 
+
+
+            if (!CompanyService.IsFreeName(companyModel.Name))
+            {
+                ShowMessageWarning("Name is not free.");
+                return;
+            }
+
             var company = companyModel.GetCompany();
             CompanyService.Add(company);
             NavigationInCompanyTable();
@@ -125,9 +133,9 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
                 return false;
             }
 
-            if (!CompanyService.IsFreeName(companyModel.Name))
+            if (companyModel.DateCreation == null)
             {
-                message = "Name is not free.";
+                message = "The company creation date has not been selected.";
                 return false;
             }
 

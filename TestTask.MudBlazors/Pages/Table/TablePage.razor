@@ -5,7 +5,7 @@
 @using TestTask.MudBlazors.Model
 
  <MudPaper>
-    <MudTabs Rounded="true" AlwaysShowScrollButtons="true" Color="@Color.Info" ActivePanelIndex="@SelectIndexTab">
+    <MudTabs Rounded="true" AlwaysShowScrollButtons="true" ActivePanelIndex="@SelectIndexTab" Border="true" Centered="true">
         <MudSpacer></MudSpacer>
         <MudTabPanel Text="Company">
             <DynamicComponent Type="typeof(Companies.CompanyPage)" />

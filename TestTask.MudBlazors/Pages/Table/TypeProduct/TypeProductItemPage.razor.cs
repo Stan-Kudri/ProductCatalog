@@ -61,6 +61,12 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
                 return;
             }
 
+            if (!ProductTypeService.IsFreeName(typeProductModel.Name))
+            {
+                ShowMessageWarning("Name is not free.");
+                return;
+            }
+
             var typeProduct = typeProductModel.GetProductType();
             ProductTypeService.Add(typeProduct);
             NavigationInTypeProductTable();
@@ -114,12 +120,6 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
             if (typeProductModel.Name == null || typeProductModel.Name == string.Empty)
             {
                 message = "Name is required.";
-                return false;
-            }
-
-            if (!ProductTypeService.IsFreeName(typeProductModel.Name))
-            {
-                message = "Name is not free.";
                 return false;
             }
 
