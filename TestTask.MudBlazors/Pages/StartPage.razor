@@ -8,18 +8,18 @@
 <MudText Typo="Typo.h2" Align="Align.Center" Color="Color.Info" GutterBottom="true">Sign in to your account to work with tables. </MudText>
 
 <div style="text-align:center">
-    <MudButtonGroup Style="text-anchor:initial" Color="Color.Primary" Variant="Variant.Filled" Size="Size.Large" OverrideStyles="false">
-        <MudButton Style="text-anchor:initial"
-                   Variant="Variant.Outlined"
-                   Color="Color.Primary"
+    <MudButtonGroup OverrideStyles="false">
+        <MudButton Style="width: 200px; height: 60px;"
+                   Variant="Variant.Filled"
+                   Color="Color.Surface"
                    Size="Size.Large"
                    Class="mr-6"
                    OnClick="SignInPage">
             Sign In
         </MudButton>
-        <MudButton Style="text-anchor:initial"
-                   Variant="Variant.Outlined"
-                   Color="Color.Surface"
+        <MudButton Style="width: 200px; height: 60px;"
+                   Variant="Variant.Filled"
+                   Color="Color.Primary"
                    Size="Size.Large"
                    Class="ml-6"
                    OnClick="RegistrationPage">
@@ -32,11 +32,11 @@
 {
     void RegistrationPage()
     {
-        Navigation.NavigateTo("/registration");
+        Navigation.NavigateTo($"/login/{false}");
     }
 
     void SignInPage()
     {
-        Navigation.NavigateTo("/login");
+        Navigation.NavigateTo($"/login/{true}");
     }
 }
