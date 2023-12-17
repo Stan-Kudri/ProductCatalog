@@ -1,10 +1,11 @@
-﻿@page "/table"
+﻿@page "/table/{selectindextab:int?}"
 
  @using Table
  @using Table.TypeProduct
+@using TestTask.MudBlazors.Model
 
  <MudPaper>
-    <MudTabs Rounded="true" AlwaysShowScrollButtons="true" Color="@Color.Info">
+    <MudTabs Rounded="true" AlwaysShowScrollButtons="true" Color="@Color.Info" ActivePanelIndex="@SelectIndexTab">
         <MudSpacer></MudSpacer>
         <MudTabPanel Text="Company">
             <DynamicComponent Type="typeof(Companies.CompanyPage)" />
@@ -21,4 +22,9 @@
     </MudTabs>
  </MudPaper>
 
+ @code
+{
+    [Parameter]
+    public int SelectIndexTab{ get; set; } = TabTable.Company.ActiveTabIndex;
+ }
 

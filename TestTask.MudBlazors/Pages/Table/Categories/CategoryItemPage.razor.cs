@@ -2,6 +2,7 @@
 using MudBlazor;
 using TestTask.Core.Models.Categories;
 using TestTask.MudBlazors.Extension;
+using TestTask.MudBlazors.Model;
 using TestTask.MudBlazors.Model.TableComponent;
 
 namespace TestTask.MudBlazors.Pages.Table.Categories
@@ -85,7 +86,7 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
             NavigationInCompanyTable();
         }
 
-        private void NavigationInCompanyTable() => Navigation.NavigateTo("/category/list");
+        private void NavigationInCompanyTable() => Navigation.NavigateTo($"/table/{TabTable.Category.ActiveTabIndex}");
 
         private void RecoverPastData() => categoryModel = oldItem.GetCategoryModel();
 

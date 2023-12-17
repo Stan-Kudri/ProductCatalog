@@ -52,7 +52,7 @@ namespace TestTask.Core
             configurationProduct.Property(e => e.CompanyId).IsRequired().HasColumnName("companyId");
             configurationProduct.Property(e => e.CategoryId).IsRequired().HasColumnName("categoryId");
             configurationProduct.Property(e => e.TypeId).IsRequired().HasColumnName("typeId");
-            configurationProduct.Property(e => e.Price).IsRequired().HasColumnType("NUMERIC").HasColumnName("price");
+            configurationProduct.Property(e => e.Price).IsRequired().HasColumnType("NUMERIC").HasColumnName("price").HasConversion<double>();
             configurationProduct.Property(e => e.Destination).HasColumnName("destination");
             configurationProduct.HasOne(e => e.Company).WithMany(e => e.Product).HasForeignKey(e => e.CompanyId);
             configurationProduct.HasOne(e => e.Category).WithMany(e => e.Products).HasForeignKey(e => e.CategoryId);

@@ -5,6 +5,7 @@ using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
 using TestTask.Core.Models.Types;
 using TestTask.MudBlazors.Extension;
+using TestTask.MudBlazors.Model;
 using TestTask.MudBlazors.Model.TableComponent;
 
 namespace TestTask.MudBlazors.Pages.Table.Products
@@ -101,7 +102,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
 
         private void RecoverPastData() => productModel = oldProduct.GetProductModel();
 
-        private void NavigationInTypeProductTable() => Navigation.NavigateTo("/table");
+        private void NavigationInTypeProductTable() => Navigation.NavigateTo($"/table/{TabTable.Product.ActiveTabIndex}");
 
         private async void ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");

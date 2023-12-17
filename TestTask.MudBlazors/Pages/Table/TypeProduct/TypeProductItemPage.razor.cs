@@ -3,6 +3,7 @@ using MudBlazor;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Types;
 using TestTask.MudBlazors.Extension;
+using TestTask.MudBlazors.Model;
 using TestTask.MudBlazors.Model.TableComponent;
 
 namespace TestTask.MudBlazors.Pages.Table.TypeProduct
@@ -101,15 +102,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
             }
         }
 
-        private IEnumerable<string> ValidSelectCategory(Category? category)
-        {
-            if (category == null)
-            {
-                yield return "Field is required.";
-            }
-        }
-
-        private void NavigationInTypeProductTable() => Navigation.NavigateTo("/table");
+        private void NavigationInTypeProductTable() => Navigation.NavigateTo($"/table/{TabTable.TypeProduct.ActiveTabIndex}");
 
         private async void ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");

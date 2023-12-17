@@ -2,6 +2,7 @@
 using MudBlazor;
 using TestTask.Core.Models.Companies;
 using TestTask.MudBlazors.Extension;
+using TestTask.MudBlazors.Model;
 using TestTask.MudBlazors.Model.TableComponent;
 
 namespace TestTask.MudBlazors.Pages.Table.Companies
@@ -109,7 +110,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
             }
         }
 
-        private void NavigationInCompanyTable() => Navigation.NavigateTo("/company");
+        private void NavigationInCompanyTable() => Navigation.NavigateTo($"/table/{TabTable.Company.ActiveTabIndex}");
 
         private async void ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");

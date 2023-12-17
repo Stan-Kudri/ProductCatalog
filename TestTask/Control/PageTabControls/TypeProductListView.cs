@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using TestTask.BindingItem.Pages.Companies;
-using TestTask.BindingItem.Pages.TypeProduct;
 using TestTask.Control.PageTabControls.Model;
 using TestTask.Core;
 using TestTask.Core.Models;
@@ -27,7 +26,7 @@ namespace TestTask.Control.PageTabControls
         private CategoryService _categoryService;
         private ProductTypeService _typeService;
         private IMessageBox _messageBox;
-        private SortTypeProduct _sortField = new SortTypeProduct();
+        private BindingItem.Pages.TypeProduct.SortTypeProduct _sortField = new BindingItem.Pages.TypeProduct.SortTypeProduct();
         private TypeSortField _typeSort = new TypeSortField();
 
         public TypeProductListView() => InitializeComponent();
