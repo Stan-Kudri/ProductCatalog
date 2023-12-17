@@ -17,6 +17,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
 
         private IEnumerable<Product>? product;
         private HashSet<Product> selectedItems = new HashSet<Product>();
+        private bool isSelectItems = true;
 
         private string? searchString = null;
 
@@ -26,6 +27,12 @@ namespace TestTask.MudBlazors.Pages.Table.Products
         private bool IsAscending { get; set; } = true;
 
         protected override void OnInitialized() => LoadData();
+
+        private void OnSelectItems(HashSet<Product> items)
+        {
+            selectedItems = items;
+            isSelectItems = selectedItems.Count <= 0;
+        }
 
         private void AddPage() => Navigation?.NavigateTo("/product");
 

@@ -19,6 +19,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 
         private IEnumerable<Company>? companies;
         private HashSet<Company> selectedItems = new HashSet<Company>();
+        private bool isSelectItems = true;
 
         private string? searchString = null;
 
@@ -27,10 +28,12 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 
         private bool IsAscending { get; set; } = true;
 
-        protected override void OnInitialized()
-        {
+        protected override void OnInitialized() => LoadData();
 
-            LoadData();
+        private void OnSelectItems(HashSet<Company> items)
+        {
+            selectedItems = items;
+            isSelectItems = selectedItems.Count <= 0;
         }
 
         private void AddPage() => Navigation?.NavigateTo("/company");

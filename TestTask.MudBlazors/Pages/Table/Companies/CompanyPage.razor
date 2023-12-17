@@ -40,12 +40,12 @@
             <MudIconButton Icon="@Icons.Material.Filled.Add" OnClick="@AddPage" Color="Color.Primary" Variant="Variant.Text" />
         </MudTooltip>
         <MudTooltip Text="Remove Select Items" Placement="Placement.Top" >
-            <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="@Remove" Color="Color.Primary" Variant="Variant.Text" />
+            <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="@Remove" Color="Color.Primary" Variant="Variant.Text" Disabled="@isSelectItems" />
         </MudTooltip>
 
     </MudToolBar>
-
-    <MudTable Items="@companies" Hover="true" SortLabel="Sort By" Elevation="0" @bind-SelectedItems="selectedItems" MultiSelection="true" Dense="true">
+           
+    <MudTable Items="@companies" Hover="true" SortLabel="Sort By" Elevation="0" MultiSelection="true" Dense="true" T="Company" SelectedItemsChanged="OnSelectItems">
 
         <ColGroup>
             <col style="width: 60px;" />

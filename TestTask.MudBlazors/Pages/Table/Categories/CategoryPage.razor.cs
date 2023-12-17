@@ -22,6 +22,7 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
 
         private IEnumerable<Category>? categories;
         private HashSet<Category> selectedItems = new HashSet<Category>();
+        private bool isSelectItems = true;
 
         private string? searchString = null;
 
@@ -31,6 +32,13 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
         private bool IsAscending { get; set; } = true;
 
         protected override void OnInitialized() => LoadData();
+
+
+        private void OnSelectItems(HashSet<Category> items)
+        {
+            selectedItems = items;
+            isSelectItems = selectedItems.Count <= 0;
+        }
 
         private void AddCategoryPage() => Navigation.NavigateTo($"/category");
 
