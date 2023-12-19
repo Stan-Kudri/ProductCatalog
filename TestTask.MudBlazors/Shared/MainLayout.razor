@@ -1,4 +1,11 @@
 ﻿@page "/mainlayout"
+@using TestTask.Core.Import
+@using TestTask.Core.Import.Importers
+@using TestTask.Core.Models.Categories
+@using TestTask.Core.Models.Companies
+@using TestTask.Core.Models.Products
+@using TestTask.Core.Models.Types
+@using TestTask.MudBlazors.Pages
 
 @inherits LayoutComponentBase
 
@@ -10,9 +17,11 @@
 
 <MudLayout>
     <MudAppBar Elevation="0">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" Disabled=DisabledAppBar/>
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())"/>
+        <ImportExcel></ImportExcel>
         <MudSpacer />
-        <MudTooltip Text="Sign In" Placement="Placement.Left">
+        <MudTooltip Text="Sign In">
+            <MudSpacer></MudSpacer>
             <MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit" OnClick="SignInPage" />
         </MudTooltip>
     </MudAppBar>
@@ -36,16 +45,8 @@
 
 
 @code {
+    private bool _drawerOpen = false;
 
-    public bool DisabledAppBar { get; set; } = false;
-
-    bool _drawerOpen = false;
-
-    void UpdateDisable()
-        => DisabledAppBar = !DisabledAppBar;
-
-    void DrawerToggle()
-    {
-        _drawerOpen = !_drawerOpen;
-    }
+    private void DrawerToggle() => _drawerOpen = !_drawerOpen;
+    }                
 }
