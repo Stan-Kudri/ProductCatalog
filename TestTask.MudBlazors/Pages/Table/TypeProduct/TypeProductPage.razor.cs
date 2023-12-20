@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using TestTask.Core.Import;
 using TestTask.Core.Models.Products;
 using TestTask.Core.Models.Types;
 using TestTask.MudBlazors.Extension;
@@ -11,6 +13,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
     {
         [Inject] ProductTypeService TypeService { get; set; }
         [Inject] ProductService ProductService { get; set; }
+        [Inject] ExcelImporter<ProductType> ExcelImportProductType { get; set; }
         [Inject] IDialogService DialogService { get; set; }
         [Inject] NavigationManager Navigation { get; set; }
 
@@ -97,6 +100,26 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
             IsAscending = true;
             sortField.Clear();
             LoadData();
+        }
+
+        private async Task UploadFiles(IBrowserFile fileload)
+        {
+            if (fileload.Size == decimal.Zero)
+            {
+                return;
+            }
+
+            var buffer = new byte[fileload.Size];
+            await fileload.OpenReadStream().ReadAsync(buffer);
+
+            var typeProductRead = ExcelImportProductType.Import(buffer);
+            foreach (var row in typeProductRead)
+            {
+                if (row.Success)
+                {
+                    TypeService.Upsert(row.Value);
+                }
+            }
         }
 
         private void OnSearch(string text)

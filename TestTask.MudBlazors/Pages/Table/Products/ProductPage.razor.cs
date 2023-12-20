@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using TestTask.Core.Import;
 using TestTask.Core.Models.Products;
 using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model;
@@ -9,6 +11,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
     public partial class ProductPage
     {
         [Inject] ProductService ProductService { get; set; }
+        [Inject] ExcelImporter<Product> ExcelImportProduct { get; set; }
         [Inject] IDialogService DialogService { get; set; }
         [Inject] NavigationManager Navigation { get; set; }
 
@@ -87,6 +90,26 @@ namespace TestTask.MudBlazors.Pages.Table.Products
             IsAscending = true;
             sortField.Clear();
             LoadData();
+        }
+
+        private async Task UploadFiles(IBrowserFile fileload)
+        {
+            if (fileload.Size == decimal.Zero)
+            {
+                return;
+            }
+
+            var buffer = new byte[fileload.Size];
+            await fileload.OpenReadStream().ReadAsync(buffer);
+
+            var productRead = ExcelImportProduct.Import(buffer);
+            foreach (var row in productRead)
+            {
+                if (row.Success)
+                {
+                    ProductService.Upsert(row.Value);
+                }
+            }
         }
 
         public void OnToggledChanged(bool toggled)
