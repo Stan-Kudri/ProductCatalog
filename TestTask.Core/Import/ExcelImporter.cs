@@ -23,6 +23,9 @@ namespace TestTask.Core.Import
             }
         }
 
+        public List<Result<T>> Import(byte[]? bytes)
+            => Import(new MemoryStream(bytes));
+
         public List<Result<T>> Import(Stream stream)
         {
             var workbook = new XSSFWorkbook(stream);

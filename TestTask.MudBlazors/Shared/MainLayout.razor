@@ -5,11 +5,14 @@
 @using TestTask.Core.Models.Companies
 @using TestTask.Core.Models.Products
 @using TestTask.Core.Models.Types
-@using TestTask.MudBlazors.Pages
+@using TestTask.MudBlazors.Pages.Import
+@using Bromix.MudBlazor.MaterialDesignIcons
 
 @inherits LayoutComponentBase
 
 @inject NavigationManager Navigation
+
+@inject IDialogService DialogService
 
 <MudThemeProvider />
 <MudDialogProvider />
@@ -18,11 +21,11 @@
 <MudLayout>
     <MudAppBar Elevation="0">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())"/>
-        <ImportExcel></ImportExcel>
+        <MudIconButton Icon="@MaterialDesignIcons.Normal.FileImport" Color="Color.Inherit" OnClick="OpenDialog" />
         <MudSpacer />
         <MudTooltip Text="Sign In">
             <MudSpacer></MudSpacer>
-            <MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit" OnClick="SignInPage" />
+            <MudIconButton Icon="@MaterialDesignIcons.Normal.Account" Color="Color.Inherit" OnClick="SignInPage" />
         </MudTooltip>
     </MudAppBar>
     <MudDrawer @bind-Open="_drawerOpen" Elevation="1">
@@ -48,5 +51,13 @@
     private bool _drawerOpen = false;
 
     private void DrawerToggle() => _drawerOpen = !_drawerOpen;
-    }                
+
+
+
+    private void OpenDialog()
+    {
+        DialogOptions closeOnEscapeKey = new DialogOptions() { CloseOnEscapeKey = true };
+
+        DialogService.Show<DialogImportData>("Import table", closeOnEscapeKey);
+    }
 }

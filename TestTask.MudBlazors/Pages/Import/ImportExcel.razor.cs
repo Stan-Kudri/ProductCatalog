@@ -6,7 +6,7 @@ using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
 using TestTask.Core.Models.Types;
 
-namespace TestTask.MudBlazors.Pages
+namespace TestTask.MudBlazors.Pages.Import
 {
     public partial class ImportExcel
     {
@@ -24,7 +24,7 @@ namespace TestTask.MudBlazors.Pages
             var buffer = new byte[fileload.Size];
             await fileload.OpenReadStream().ReadAsync(buffer);
 
-            var companyRead = ExcelImportCompany.Import(new MemoryStream(buffer));
+            var companyRead = ExcelImportCompany.Import(buffer);
             foreach (var item in companyRead)
             {
                 if (item.Success)
@@ -33,7 +33,7 @@ namespace TestTask.MudBlazors.Pages
                 }
             }
 
-            var categoryRead = ExcelImportCategory.Import(new MemoryStream(buffer));
+            var categoryRead = ExcelImportCategory.Import(buffer);
             foreach (var item in categoryRead)
             {
                 if (item.Success)
@@ -42,7 +42,7 @@ namespace TestTask.MudBlazors.Pages
                 }
             }
 
-            var typeProductRead = ExcelImportTypeProduct.Import(new MemoryStream(buffer));
+            var typeProductRead = ExcelImportTypeProduct.Import(buffer);
             foreach (var item in typeProductRead)
             {
                 if (item.Success)
@@ -51,7 +51,7 @@ namespace TestTask.MudBlazors.Pages
                 }
             }
 
-            var productRead = ExcelImportProduct.Import(new MemoryStream(buffer));
+            var productRead = ExcelImportProduct.Import(buffer);
             foreach (var item in productRead)
             {
                 if (item.Success)
