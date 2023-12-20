@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using TestTask.Core.Import;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Products;
 using TestTask.Core.Models.Types;
@@ -12,6 +14,7 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
     {
         [Inject] CategoryService CategoryService { get; set; }
         [Inject] ProductTypeService ProductTypeService { get; set; }
+        [Inject] ExcelImporter<Category> ExcelImportCategory { get; set; }
         [Inject] ProductService ProductService { get; set; }
         [Inject] IDialogService DialogService { get; set; }
         [Inject] NavigationManager Navigation { get; set; }
@@ -97,6 +100,26 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
             IsAscending = true;
             sortField.Clear();
             LoadData();
+        }
+
+        private async Task UploadFiles(IBrowserFile fileload)
+        {
+            if (fileload.Size == decimal.Zero)
+            {
+                return;
+            }
+
+            var buffer = new byte[fileload.Size];
+            await fileload.OpenReadStream().ReadAsync(buffer);
+
+            var categoryRead = ExcelImportCategory.Import(buffer);
+            foreach (var row in categoryRead)
+            {
+                if (row.Success)
+                {
+                    CategoryService.Upsert(row.Value);
+                }
+            }
         }
 
         public void OnToggledChanged(bool toggled)
