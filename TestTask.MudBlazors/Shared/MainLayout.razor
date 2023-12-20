@@ -1,8 +1,18 @@
 ﻿@page "/mainlayout"
+@using TestTask.Core.Import
+@using TestTask.Core.Import.Importers
+@using TestTask.Core.Models.Categories
+@using TestTask.Core.Models.Companies
+@using TestTask.Core.Models.Products
+@using TestTask.Core.Models.Types
+@using TestTask.MudBlazors.Pages.Import
+@using Bromix.MudBlazor.MaterialDesignIcons
 
 @inherits LayoutComponentBase
 
 @inject NavigationManager Navigation
+
+@inject IDialogService DialogService
 
 <MudThemeProvider />
 <MudDialogProvider />
@@ -10,10 +20,12 @@
 
 <MudLayout>
     <MudAppBar Elevation="0">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" Disabled=DisabledAppBar/>
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())"/>
+        <MudIconButton Icon="@MaterialDesignIcons.Normal.FileImport" Color="Color.Inherit" OnClick="OpenDialog" />
         <MudSpacer />
-        <MudTooltip Text="Sign In" Placement="Placement.Left">
-            <MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit" OnClick="SignInPage" />
+        <MudTooltip Text="Sign In">
+            <MudSpacer></MudSpacer>
+            <MudIconButton Icon="@MaterialDesignIcons.Normal.Account" Color="Color.Inherit" OnClick="SignInPage" />
         </MudTooltip>
     </MudAppBar>
     <MudDrawer @bind-Open="_drawerOpen" Elevation="1">
@@ -36,16 +48,16 @@
 
 
 @code {
+    private bool _drawerOpen = false;
 
-    public bool DisabledAppBar { get; set; } = false;
+    private void DrawerToggle() => _drawerOpen = !_drawerOpen;
 
-    bool _drawerOpen = false;
 
-    void UpdateDisable()
-        => DisabledAppBar = !DisabledAppBar;
 
-    void DrawerToggle()
+    private void OpenDialog()
     {
-        _drawerOpen = !_drawerOpen;
+        DialogOptions closeOnEscapeKey = new DialogOptions() { CloseOnEscapeKey = true };
+
+        DialogService.Show<DialogImportData>("Import table", closeOnEscapeKey);
     }
 }

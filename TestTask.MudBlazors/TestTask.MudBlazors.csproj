@@ -4,12 +4,13 @@
 	  <TargetFramework>net7.0</TargetFramework>
 	  <Nullable>enable</Nullable>
 	  <ImplicitUsings>enable</ImplicitUsings>
+	  <StartupObject></StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Bromix.MudBlazor.MaterialDesignIcons" Version="7.2.96.50" />
     <PackageReference Include="FluentValidation" Version="11.8.1" />
-    <PackageReference Include="MudBlazor" Version="6.11.1" />
+    <PackageReference Include="MudBlazor" Version="6.11.2" />
   </ItemGroup>
 
   <ItemGroup>

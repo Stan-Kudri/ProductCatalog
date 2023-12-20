@@ -1,0 +1,22 @@
+﻿@using TestTask.Core.Import
+@using TestTask.MudBlazors.Pages.Import
+
+<MudDialog>
+    <DialogContent>
+        <MudSelect T="ImportTable" Style="align-items:end" Label="Select table" MultiSelection="true" @bind-Value="selectTable.importTable" @bind-SelectedValues="selectTable.SelectTable"
+                   SelectAll="true" SelectAllText="All">
+            @foreach (var item in selectTable.Items)
+            {
+                <MudSelectItem T="ImportTable" Value="@item" />
+            }
+        </MudSelect>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudFileUpload T="IBrowserFile" Accept=".xlsx,.xls,.xlsm" FilesChanged="UploadFiles">
+            <ButtonTemplate>
+                <MudButton HtmlTag="label" Color="Color.Primary" for="@context.Id" title="Import Excel" OnClick="Cancel">Ok</MudButton>
+            </ButtonTemplate>
+        </MudFileUpload>
+    </DialogActions>
+</MudDialog>

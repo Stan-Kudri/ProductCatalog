@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using MudBlazor.Services;
 using TestTask.Core;
+using TestTask.Core.Import;
+using TestTask.Core.Import.Importers;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
@@ -27,6 +29,15 @@ builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<ProductTypeService>();
 builder.Services.AddScoped<UserValidator>();
+builder.Services.AddSingleton(e => new CompanyImporter());
+builder.Services.AddSingleton(e => new ProductImporter());
+builder.Services.AddSingleton(e => new ProductImporter());
+builder.Services.AddSingleton(e => new CategoryImporter());
+builder.Services.AddSingleton(e => new TypeProductImporter());
+builder.Services.AddSingleton(e => new ExcelImporter<Company>(e.GetRequiredService<CompanyImporter>()));
+builder.Services.AddSingleton(e => new ExcelImporter<Product>(e.GetRequiredService<ProductImporter>()));
+builder.Services.AddSingleton(e => new ExcelImporter<Category>(e.GetRequiredService<CategoryImporter>()));
+builder.Services.AddSingleton(e => new ExcelImporter<ProductType>(e.GetRequiredService<TypeProductImporter>()));
 
 var app = builder.Build();
 
