@@ -119,6 +119,7 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
                     CategoryService.Upsert(row.Value);
                 }
             }
+            LoadData();
         }
 
         public void OnToggledChanged(bool toggled)

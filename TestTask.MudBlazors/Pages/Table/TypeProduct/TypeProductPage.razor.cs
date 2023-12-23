@@ -120,6 +120,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
                     TypeService.Upsert(row.Value);
                 }
             }
+            LoadData();
         }
 
         private void OnSearch(string text)

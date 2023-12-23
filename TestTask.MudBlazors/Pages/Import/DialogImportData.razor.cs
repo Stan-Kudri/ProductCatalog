@@ -36,6 +36,7 @@ namespace TestTask.MudBlazors.Pages.Import
 
             var buffer = new byte[fileload.Size];
             await fileload.OpenReadStream().ReadAsync(buffer);
+            Cancel();
 
             if (selectedTable.SelectTable.Contains(ImportTable.Company))
             {

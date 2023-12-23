@@ -110,6 +110,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
                     ProductService.Upsert(row.Value);
                 }
             }
+            LoadData();
         }
 
         public void OnToggledChanged(bool toggled)

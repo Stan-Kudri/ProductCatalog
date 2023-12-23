@@ -114,6 +114,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
                     CompanyService.Upsert(row.Value);
                 }
             }
+            LoadData();
         }
 
         public void OnToggledChanged(bool toggled)
