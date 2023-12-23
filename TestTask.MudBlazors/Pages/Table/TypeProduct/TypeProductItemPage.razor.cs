@@ -55,7 +55,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
                 return;
             }
 
-            if (!CheckTheCompletionFields(out var message))
+            if (!ValidateFields(out var message))
             {
                 ShowMessageWarning(message);
                 return;
@@ -82,7 +82,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
                 return;
             }
 
-            if (!CheckTheCompletionFields(out var message))
+            if (!ValidateFields(out var message))
             {
                 ShowMessageWarning(message);
                 return;
@@ -113,7 +113,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
         private async void ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
 
-        private bool CheckTheCompletionFields(out string message)
+        private bool ValidateFields(out string message)
         {
             message = string.Empty;
 

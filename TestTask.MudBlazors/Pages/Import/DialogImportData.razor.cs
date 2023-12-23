@@ -23,13 +23,13 @@ namespace TestTask.MudBlazors.Pages.Import
 
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; } = null!;
 
-        private ImportSelectTable selectTable = new ImportSelectTable();
+        private ImportSelectTable selectedTable = new ImportSelectTable();
 
         private void Cancel() => MudDialog.Cancel();
 
         private async Task UploadFiles(IBrowserFile fileload)
         {
-            if (selectTable.SelectTable.Count() == 0 || fileload.Size == decimal.Zero)
+            if (selectedTable.SelectTable.Count() == 0 || fileload.Size == decimal.Zero)
             {
                 return;
             }
@@ -37,7 +37,7 @@ namespace TestTask.MudBlazors.Pages.Import
             var buffer = new byte[fileload.Size];
             await fileload.OpenReadStream().ReadAsync(buffer);
 
-            if (selectTable.SelectTable.Contains(ImportTable.Company))
+            if (selectedTable.SelectTable.Contains(ImportTable.Company))
             {
                 var companyRead = ExcelImportCompany.Import(buffer);
                 foreach (var row in companyRead)
@@ -49,7 +49,7 @@ namespace TestTask.MudBlazors.Pages.Import
                 }
             }
 
-            if (selectTable.SelectTable.Contains(ImportTable.Category))
+            if (selectedTable.SelectTable.Contains(ImportTable.Category))
             {
                 var categoryRead = ExcelImportCategory.Import(buffer);
                 foreach (var row in categoryRead)
@@ -61,7 +61,7 @@ namespace TestTask.MudBlazors.Pages.Import
                 }
             }
 
-            if (selectTable.SelectTable.Contains(ImportTable.TypeProduct))
+            if (selectedTable.SelectTable.Contains(ImportTable.TypeProduct))
             {
                 var typeProductRead = ExcelImportTypeProduct.Import(buffer);
                 foreach (var row in typeProductRead)
@@ -73,7 +73,7 @@ namespace TestTask.MudBlazors.Pages.Import
                 }
             }
 
-            if (selectTable.SelectTable.Contains(ImportTable.Product))
+            if (selectedTable.SelectTable.Contains(ImportTable.Product))
             {
                 var productRead = ExcelImportProduct.Import(buffer);
                 foreach (var row in productRead)

@@ -3,9 +3,9 @@
 
 <MudDialog>
     <DialogContent>
-        <MudSelect T="ImportTable" Style="align-items:end" Label="Select table" MultiSelection="true" @bind-Value="selectTable.importTable" @bind-SelectedValues="selectTable.SelectTable"
+        <MudSelect T="ImportTable" Style="align-items:end" Label="Select table" MultiSelection="true" @bind-Value="selectedTable.importTable" @bind-SelectedValues="selectedTable.SelectTable"
                    SelectAll="true" SelectAllText="All">
-            @foreach (var item in selectTable.Items)
+            @foreach (var item in selectedTable.Items)
             {
                 <MudSelectItem T="ImportTable" Value="@item" />
             }

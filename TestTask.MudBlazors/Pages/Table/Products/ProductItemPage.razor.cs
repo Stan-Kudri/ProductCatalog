@@ -63,7 +63,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
                 return;
             }
 
-            if (!CheckTheCompletionFields(out var message))
+            if (!ValidateFields(out var message))
             {
                 ShowMessageWarning(message);
                 return;
@@ -90,7 +90,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
                 return;
             }
 
-            if (!CheckTheCompletionFields(out var message))
+            if (!ValidateFields(out var message))
             {
                 ShowMessageWarning(message);
                 return;
@@ -129,7 +129,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
             }
         }
 
-        private bool CheckTheCompletionFields(out string message)
+        private bool ValidateFields(out string message)
         {
             message = string.Empty;
 
