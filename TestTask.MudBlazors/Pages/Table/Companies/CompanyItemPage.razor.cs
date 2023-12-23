@@ -55,8 +55,6 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
                 return;
             }
 
-
-
             if (!CompanyService.IsFreeName(companyModel.Name))
             {
                 ShowMessageWarning("Name is not free.");

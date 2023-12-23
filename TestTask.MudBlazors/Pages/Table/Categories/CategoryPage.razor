@@ -10,8 +10,7 @@
     <MudToolBar>
 
         <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
-                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" Style="max-width:300px;">
-        </MudTextField>
+                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" Style="max-width:300px;"/>
 
         <MudSelect T="SortTypeCategories" Style="align-items:end" Label="Sort" MultiSelection="true" @bind-Value="sortField.sortType" @bind-SelectedValues="sortField.SortFields"
                    SelectAll="true" SelectAllText="All" OnClose="@LoadData">
@@ -22,12 +21,11 @@
         </MudSelect>
 
         <div style="align-items:end">
-            <MudToggleIconButton Toggled="@IsAscending" ToggledChanged="@OnToggledChanged" Class="mr-5"
+            <MudToggleIconButton Toggled="@isAscending" ToggledChanged="@OnToggledChanged" Class="mr-5"
                                  Icon="@MaterialDesignIcons.Normal.SortAlphabeticalDescending" Color="@Color.Primary" Title="Descending" Size="Size.Large"
                                  ToggledIcon="@MaterialDesignIcons.Normal.SortAlphabeticalAscending" ToggledColor="@Color.Primary" ToggledTitle="Ascending" ToggledSize="Size.Large" />
             <MudSpacer />
         </div>
-
 
         <MudTooltip Text="Remove Filter" Placement="Placement.Top">
             <MudIconButton Icon="@MaterialDesignIcons.Normal.FilterOff" OnClick="@ClearFilter" Color="Color.Primary" Variant="Variant.Text" />
@@ -37,13 +35,16 @@
 
     <MudToolBar>
 
-        <MudSpacer></MudSpacer>
+        <MudSpacer/>
+
         <MudTooltip Text="Add Item" Placement="Placement.Top">
             <MudIconButton Icon="@Icons.Material.Filled.Add" OnClick="@AddCategoryPage" Color="Color.Primary" Variant="Variant.Text" />
         </MudTooltip>
+
         <MudTooltip Text="Remove Select Items" Placement="Placement.Top">
             <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="@Remove" Color="Color.Primary" Variant="Variant.Text" Disabled="@isSelectItems" />
         </MudTooltip>
+
         <MudFileUpload T="IBrowserFile" Accept=".xlsx,.xls,.xlsm" FilesChanged="UploadFiles">
             <ButtonTemplate>
                 <MudIconButton HtmlTag="label" Icon="@MaterialDesignIcons.Normal.FileImport" Color="Color.Primary" for="@context.Id" title="Import Excel" />
@@ -59,26 +60,29 @@
             <col style="width: 20%;" />
             <col style="width: 40px;" />
         </ColGroup>
+
         <HeaderContent>
             <MudTh>Id</MudTh>
             <MudTh>Name</MudTh>
             <MudTh></MudTh>
         </HeaderContent>
+
         <RowTemplate>
             <MudTd DataLabel="Id">@context.Id</MudTd>
-                <MudTd DataLabel="Name">@context.Name</MudTd>
-                <MudTh Style="text-align:right">
-                    <MudTooltip Text="Edit" Placement="Placement.Bottom">
-                        <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Outlined" Size="Size.Medium" Class="ml-1" OnClick="@(() => Update(context.Id))" />
-                    </MudTooltip>
-                    <MudTooltip Text="Remove" Placement="Placement.Bottom">
-                        <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" Size="Size.Medium" OnClick="@(() => Remove(context.Id))" />
-                    </MudTooltip>
-                </MudTh>
-            </RowTemplate>
-            <PagerContent>
-                <MudTablePager HorizontalAlignment="HorizontalAlignment.Center" PageSizeOptions="pageModel.Items" />
-            </PagerContent>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTh Style="text-align:right">
+                <MudTooltip Text="Edit" Placement="Placement.Bottom">
+                    <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Outlined" Size="Size.Medium" Class="ml-1" OnClick="@(() => Update(context.Id))" />
+                </MudTooltip>
+                <MudTooltip Text="Remove" Placement="Placement.Bottom">
+                    <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" Size="Size.Medium" OnClick="@(() => Remove(context.Id))" />
+                </MudTooltip>
+            </MudTh>
+        </RowTemplate>
+
+        <PagerContent>
+            <MudTablePager HorizontalAlignment="HorizontalAlignment.Center" PageSizeOptions="pageModel.Items" />
+        </PagerContent>
 
         </MudTable>
 

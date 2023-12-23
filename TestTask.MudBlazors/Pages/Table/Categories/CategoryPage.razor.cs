@@ -32,10 +32,9 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
         private SortCategories sortField = new SortCategories();
         private PageModel pageModel = new PageModel();
 
-        private bool IsAscending { get; set; } = true;
+        private bool isAscending { get; set; } = true;
 
         protected override void OnInitialized() => LoadData();
-
 
         private void OnSelectItems(HashSet<Category> items)
         {
@@ -97,7 +96,7 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
 
         private void ClearFilter()
         {
-            IsAscending = true;
+            isAscending = true;
             sortField.Clear();
             LoadData();
         }
@@ -124,7 +123,7 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
 
         public void OnToggledChanged(bool toggled)
         {
-            IsAscending = toggled;
+            isAscending = toggled;
             LoadData();
         }
 
@@ -138,7 +137,7 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
         {
             IQueryable<Category> queriable = CategoryService.GetQueryableAll();
             queriable = GetSearchName(queriable);
-            queriable = sortField.Apply(queriable, IsAscending);
+            queriable = sortField.Apply(queriable, isAscending);
             var result = queriable.GetPagedList(pageModel);
             categories = result.Items;
             StateHasChanged();
@@ -149,13 +148,7 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
                 ? items
                 : items.Where(e => e.Name.Contains(searchString));
 
-        private Task ShowMessageWarning(string message)
-        {
-            return DialogService.ShowMessageBox(
-                    "Warning",
-                     message,
-                     yesText: "Ok"
-                );
-        }
+        private async Task ShowMessageWarning(string message)
+            => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
     }
 }

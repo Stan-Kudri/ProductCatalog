@@ -21,7 +21,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
 
         private ProductModel productModel { get; set; } = new ProductModel();
         private string[] errors = { };
-        private bool IsAddItem = true;
+        private bool isAddItem = true;
 
         private Product? oldProduct;
 
@@ -39,7 +39,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
 
             if (Id == null)
             {
-                IsAddItem = true;
+                isAddItem = true;
                 return;
             }
 
@@ -48,7 +48,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
                 NavigationInTypeProductTable();
             }
 
-            IsAddItem = false;
+            isAddItem = false;
             oldProduct = ProductService.GetItem((int)Id);
             productModel = oldProduct.GetProductModel();
         }
@@ -68,8 +68,6 @@ namespace TestTask.MudBlazors.Pages.Table.Products
                 ShowMessageWarning(message);
                 return;
             }
-
-
 
             if (!ProductService.IsFreeName(productModel.Name))
             {

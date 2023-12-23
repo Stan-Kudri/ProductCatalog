@@ -27,7 +27,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
         private SortProduct sortField = new SortProduct();
         private PageModel pageModel = new PageModel();
 
-        private bool IsAscending { get; set; } = true;
+        private bool isAscending { get; set; } = true;
 
         protected override void OnInitialized() => LoadData();
 
@@ -87,7 +87,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
 
         private void ClearFilter()
         {
-            IsAscending = true;
+            isAscending = true;
             sortField.Clear();
             LoadData();
         }
@@ -114,7 +114,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
 
         public void OnToggledChanged(bool toggled)
         {
-            IsAscending = toggled;
+            isAscending = toggled;
             LoadData();
         }
 
@@ -128,7 +128,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
         {
             IQueryable<Product> queriable = ProductService.GetQueryableAll();
             queriable = GetSearchName(queriable);
-            queriable = sortField.Apply(queriable, IsAscending);
+            queriable = sortField.Apply(queriable, isAscending);
             var result = queriable.GetPagedList(pageModel);
             product = result.Items;
             StateHasChanged();
@@ -143,7 +143,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
                                 || e.Type.Name.Contains(searchString)
                                 || e.Price.ToString().Contains(searchString));
 
-        private async void ShowMessageWarning(string message)
+        private async Task ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
     }
 }

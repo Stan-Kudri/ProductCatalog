@@ -17,7 +17,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 
         private TypeProductModel typeProductModel { get; set; } = new TypeProductModel();
         private string[] errors = { };
-        private bool IsAddItem = true;
+        private bool isAddItem = true;
 
         private ProductType? oldTypeProduct;
 
@@ -31,7 +31,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 
             if (Id == null)
             {
-                IsAddItem = true;
+                isAddItem = true;
                 return;
             }
 
@@ -40,7 +40,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
                 NavigationInTypeProductTable();
             }
 
-            IsAddItem = false;
+            isAddItem = false;
             oldTypeProduct = ProductTypeService.GetItem((int)Id);
             typeProductModel = oldTypeProduct.GetTypeProductModel();
         }
