@@ -9,15 +9,15 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 {
     public partial class CompanyItemPage
     {
-        [Inject] CompanyService? CompanyService { get; set; }
-        [Inject] IDialogService DialogService { get; set; }
-        [Inject] NavigationManager? Navigation { get; set; }
+        [Inject] private CompanyService CompanyService { get; set; } = null!;
+        [Inject] private IDialogService DialogService { get; set; } = null!;
+        [Inject] private NavigationManager Navigation { get; set; } = null!;
 
         private CompanyModel companyModel { get; set; } = new CompanyModel();
         private string[] errors = { };
         private bool IsAddItem = true;
 
-        private Company oldCompany;
+        private Company? oldCompany;
 
         [Parameter] public int? Id { get; set; } = null;
 
@@ -49,13 +49,11 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
                 return;
             }
 
-            if (!CheckTheCompletionFields(out var message))
+            if (!ValidateFields(out var message))
             {
                 ShowMessageWarning(message);
                 return;
             }
-
-
 
             if (!CompanyService.IsFreeName(companyModel.Name))
             {
@@ -78,7 +76,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
                 return;
             }
 
-            if (!CheckTheCompletionFields(out var message))
+            if (!ValidateFields(out var message))
             {
                 ShowMessageWarning(message);
                 return;
@@ -120,10 +118,10 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 
         private void NavigationInCompanyTable() => Navigation.NavigateTo($"/table/{TabTable.Company.ActiveTabIndex}");
 
-        private async void ShowMessageWarning(string message)
+        private async Task ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
 
-        private bool CheckTheCompletionFields(out string message)
+        private bool ValidateFields(out string message)
         {
             message = string.Empty;
 

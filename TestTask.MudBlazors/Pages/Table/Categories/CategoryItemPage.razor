@@ -5,6 +5,7 @@
 
 <MudCard>
     <MudCardContent>
+
         @if (IsAddItem)
         {
             <MudText Align="Align.Center" Class="mb-n4">Add Category</MudText>            
@@ -13,7 +14,9 @@
         {
             <MudText Align="Align.Center" Class="mb-n4">Edit Category</MudText>
         }
+
         <MudSpacer />
+
         <MudForm @bind-Errors="@errors" Model="@categoryModel">
             <MudTextField T="string" Label="Name"
                           InputType="InputType.Text"
@@ -21,7 +24,9 @@
                           @bind-Value=@categoryModel.Name
                           Validation="@(new Func<string, IEnumerable<string>>(ValidFormatText))" />
         </MudForm>
+
         <MudCardActions>
+
             @if (IsAddItem)
             {
                 <MudTooltip Text="Save" Placement="Placement.Bottom">
@@ -44,6 +49,7 @@
             <MudTooltip Text="Close" Placement="Placement.Bottom">
                 <MudIconButton Icon="@Icons.Material.Filled.ArrowForward" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" OnClick="Close" Class="ml-1" />
             </MudTooltip>
+
         </MudCardActions>
     </MudCardContent>
 </MudCard>

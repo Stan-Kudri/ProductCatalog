@@ -11,11 +11,11 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 {
     public partial class TypeProductPage
     {
-        [Inject] ProductTypeService TypeService { get; set; }
-        [Inject] ProductService ProductService { get; set; }
-        [Inject] ExcelImporter<ProductType> ExcelImportProductType { get; set; }
-        [Inject] IDialogService DialogService { get; set; }
-        [Inject] NavigationManager Navigation { get; set; }
+        [Inject] private ProductTypeService TypeService { get; set; } = null!;
+        [Inject] private ProductService ProductService { get; set; } = null!;
+        [Inject] private ExcelImporter<ProductType> ExcelImportProductType { get; set; } = null!;
+        [Inject] private IDialogService DialogService { get; set; } = null!;
+        [Inject] private NavigationManager Navigation { get; set; } = null!;
 
         private const string MessageNotSelectedItem = "No items selected";
         private const int NoItemsSelected = 0;
@@ -29,7 +29,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
         private SortType sortField = new SortType();
         private PageModel pageModel = new PageModel();
 
-        private bool IsAscending { get; set; } = true;
+        private bool isAscending { get; set; } = true;
 
         protected override void OnInitialized() => LoadData();
 
@@ -91,13 +91,13 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 
         public void OnToggledChanged(bool toggled)
         {
-            IsAscending = toggled;
+            isAscending = toggled;
             LoadData();
         }
 
         private void ClearFilter()
         {
-            IsAscending = true;
+            isAscending = true;
             sortField.Clear();
             LoadData();
         }
@@ -132,7 +132,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
         {
             IQueryable<ProductType> queriable = TypeService.GetQueryableAll();
             queriable = GetSearchName(queriable);
-            queriable = sortField.Apply(queriable, IsAscending);
+            queriable = sortField.Apply(queriable, isAscending);
             var result = queriable.GetPagedList(pageModel);
             typeProduct = result.Items;
             StateHasChanged();
@@ -144,7 +144,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
                 : items.Where(e => e.Name.Contains(searchString)
                                 || e.Category.Name.Contains(searchString));
 
-        private async void ShowMessageWarning(string message)
+        private async Task ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
     }
 }

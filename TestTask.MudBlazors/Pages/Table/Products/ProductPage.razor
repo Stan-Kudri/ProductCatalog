@@ -22,7 +22,7 @@
         </MudSelect>
 
         <div style="align-items:end">
-            <MudToggleIconButton Toggled="@IsAscending" ToggledChanged="@OnToggledChanged" Class="mr-5"
+            <MudToggleIconButton Toggled="@isAscending" ToggledChanged="@OnToggledChanged" Class="mr-5"
                                  Icon="@MaterialDesignIcons.Normal.SortAlphabeticalDescending" Color="@Color.Primary" Title="Descending" Size="Size.Large"
                                  ToggledIcon="@MaterialDesignIcons.Normal.SortAlphabeticalAscending" ToggledColor="@Color.Primary" ToggledTitle="Ascending" ToggledSize="Size.Large" />
             <MudSpacer />
@@ -62,6 +62,7 @@
             <col style="width: 15%;" />
             <col style="width: 40px;" />
         </ColGroup>
+
         <HeaderContent>
             <MudTh>Id</MudTh>
             <MudTh>Name</MudTh>
@@ -71,27 +72,27 @@
             <MudTh>Price</MudTh>
             <MudTh></MudTh>
         </HeaderContent>
+
         <RowTemplate>
             <MudTd DataLabel="Id">@context.Id</MudTd>
-                <MudTd DataLabel="Name">@context.Name</MudTd>
-                <MudTd DataLabel="Company">@context.Company.ToString()</MudTd>
-                <MudTd DataLabel="Category">@context.Category.ToString()</MudTd>
-                <MudTd DataLabel="Type Product">@context.Type.ToString()</MudTd>
-                <MudTd DataLabel="Price">@context.Price</MudTd>
-                <MudTh Style="text-align:right">
-                    <MudTooltip Text="Edit" Placement="Placement.Bottom">
-                        <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Outlined" Size="Size.Medium" Class="ml-1" OnClick="@(() => Update(context.Id))" />
-                    </MudTooltip>
-                    <MudTooltip Text="Remove" Placement="Placement.Bottom">
-                        <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" Size="Size.Medium" OnClick="@(() => Remove(context.Id))" />
-                    </MudTooltip>
-                </MudTh>
-            </RowTemplate>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Company">@context.Company.ToString()</MudTd>
+            <MudTd DataLabel="Category">@context.Category.ToString()</MudTd>
+            <MudTd DataLabel="Type Product">@context.Type.ToString()</MudTd>
+            <MudTd DataLabel="Price">@context.Price</MudTd>
+            <MudTh Style="text-align:right">
+                <MudTooltip Text="Edit" Placement="Placement.Bottom">
+                    <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Outlined" Size="Size.Medium" Class="ml-1" OnClick="@(() => Update(context.Id))" />
+                </MudTooltip>
+                <MudTooltip Text="Remove" Placement="Placement.Bottom">
+                    <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" Size="Size.Medium" OnClick="@(() => Remove(context.Id))" />
+                </MudTooltip>
+            </MudTh>
+        </RowTemplate>
 
-            <PagerContent>
-                <MudTablePager HorizontalAlignment="HorizontalAlignment.Center" PageSizeOptions="pageModel.Items" />
-            </PagerContent>
+        <PagerContent>
+            <MudTablePager HorizontalAlignment="HorizontalAlignment.Center" PageSizeOptions="pageModel.Items" />
+        </PagerContent>
 
         </MudTable>
-
     </MudPaper>

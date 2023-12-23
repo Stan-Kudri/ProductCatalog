@@ -10,16 +10,16 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 {
     public partial class TypeProductItemPage
     {
-        [Inject] ProductTypeService? ProductTypeService { get; set; }
-        [Inject] CategoryService? CategoryService { get; set; }
-        [Inject] IDialogService DialogService { get; set; }
-        [Inject] NavigationManager? Navigation { get; set; }
+        [Inject] private ProductTypeService ProductTypeService { get; set; } = null!;
+        [Inject] private CategoryService CategoryService { get; set; } = null!;
+        [Inject] private IDialogService DialogService { get; set; } = null!;
+        [Inject] private NavigationManager Navigation { get; set; } = null!;
 
         private TypeProductModel typeProductModel { get; set; } = new TypeProductModel();
         private string[] errors = { };
-        private bool IsAddItem = true;
+        private bool isAddItem = true;
 
-        private ProductType oldTypeProduct;
+        private ProductType? oldTypeProduct;
 
         private List<Category> selectCategories = new List<Category>();
 
@@ -31,7 +31,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 
             if (Id == null)
             {
-                IsAddItem = true;
+                isAddItem = true;
                 return;
             }
 
@@ -40,7 +40,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
                 NavigationInTypeProductTable();
             }
 
-            IsAddItem = false;
+            isAddItem = false;
             oldTypeProduct = ProductTypeService.GetItem((int)Id);
             typeProductModel = oldTypeProduct.GetTypeProductModel();
         }
@@ -55,7 +55,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
                 return;
             }
 
-            if (!CheckTheCompletionFields(out var message))
+            if (!ValidateFields(out var message))
             {
                 ShowMessageWarning(message);
                 return;
@@ -82,7 +82,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
                 return;
             }
 
-            if (!CheckTheCompletionFields(out var message))
+            if (!ValidateFields(out var message))
             {
                 ShowMessageWarning(message);
                 return;
@@ -110,10 +110,10 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 
         private void NavigationInTypeProductTable() => Navigation.NavigateTo($"/table/{TabTable.TypeProduct.ActiveTabIndex}");
 
-        private async void ShowMessageWarning(string message)
+        private async Task ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
 
-        private bool CheckTheCompletionFields(out string message)
+        private bool ValidateFields(out string message)
         {
             message = string.Empty;
 

@@ -6,7 +6,8 @@
 
 <MudCard>
     <MudCardContent>
-        @if (IsAddItem)
+
+        @if (isAddItem)
         {
             <MudText Align="Align.Center" Class="mb-n4">Add Type Product</MudText>
         }
@@ -14,7 +15,9 @@
         {
             <MudText Align="Align.Center" Class="mb-n4">Edit Type Product</MudText>
         }
+
         <MudSpacer />
+
         <MudForm @bind-Errors="@errors" Model="@typeProductModel">
 
             <MudTextField T="string" Label="Name"
@@ -31,8 +34,10 @@
             </MudSelect>
 
         </MudForm>
+
         <MudCardActions>
-            @if (IsAddItem)
+
+            @if (isAddItem)
             {
                 <MudTooltip Text="Save" Placement="Placement.Bottom">
                     <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" OnClick="Add" />
@@ -54,6 +59,7 @@
             <MudTooltip Text="Close" Placement="Placement.Bottom">
                 <MudIconButton Icon="@Icons.Material.Filled.ArrowForward" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" OnClick="Close" Class="ml-1" />
             </MudTooltip>
+
         </MudCardActions>
     </MudCardContent>
 </MudCard>

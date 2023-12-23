@@ -11,11 +11,11 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 {
     public partial class CompanyPage
     {
-        [Inject] CompanyService CompanyService { get; set; }
-        [Inject] ProductService ProductService { get; set; }
-        [Inject] ExcelImporter<Company> ExcelImportCompany { get; set; }
-        [Inject] IDialogService DialogService { get; set; }
-        [Inject] NavigationManager Navigation { get; set; }
+        [Inject] private CompanyService CompanyService { get; set; } = null!;
+        [Inject] private ProductService ProductService { get; set; } = null!;
+        [Inject] private ExcelImporter<Company> ExcelImportCompany { get; set; } = null!;
+        [Inject] private IDialogService DialogService { get; set; } = null!;
+        [Inject] private NavigationManager Navigation { get; set; } = null!;
 
         private const string MessageNotSelectedItem = "No items selected";
         private const int NoItemsSelected = 0;
@@ -29,7 +29,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
         private SortCompany sortField = new SortCompany();
         private PageModel pageModel = new PageModel();
 
-        private bool IsAscending { get; set; } = true;
+        private bool isAscending { get; set; } = true;
 
         protected override void OnInitialized() => LoadData();
 
@@ -91,7 +91,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 
         private void ClearFilter()
         {
-            IsAscending = true;
+            isAscending = true;
             sortField.Clear();
             LoadData();
         }
@@ -118,7 +118,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 
         public void OnToggledChanged(bool toggled)
         {
-            IsAscending = toggled;
+            isAscending = toggled;
             LoadData();
         }
 
@@ -132,7 +132,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
         {
             IQueryable<Company> queriable = CompanyService.GetQueryableAll();
             queriable = GetSearchName(queriable);
-            queriable = sortField.Apply(queriable, IsAscending);
+            queriable = sortField.Apply(queriable, isAscending);
             var result = queriable.GetPagedList(pageModel);
             companies = result.Items;
             StateHasChanged();
@@ -145,13 +145,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
                                 || e.Country.Contains(searchString)
                                 || e.DateCreation.ToString().Contains(searchString));
 
-        private async void ShowMessageWarning(string message)
-        {
-            await DialogService.ShowMessageBox(
-                    "Warning",
-                     message,
-                     yesText: "Ok"
-                );
-        }
+        private async Task ShowMessageWarning(string message)
+            => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
     }
 }
