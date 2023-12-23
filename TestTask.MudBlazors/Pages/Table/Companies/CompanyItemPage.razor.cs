@@ -118,7 +118,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 
         private void NavigationInCompanyTable() => Navigation.NavigateTo($"/table/{TabTable.Company.ActiveTabIndex}");
 
-        private async void ShowMessageWarning(string message)
+        private async Task ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
 
         private bool ValidateFields(out string message)

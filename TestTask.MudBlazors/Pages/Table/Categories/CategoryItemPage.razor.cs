@@ -104,7 +104,7 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
             }
         }
 
-        private async void ShowMessageWarning(string message)
+        private async Task ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
 
         private bool ValidateFields(out string message)

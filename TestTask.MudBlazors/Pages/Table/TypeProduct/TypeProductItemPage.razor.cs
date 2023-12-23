@@ -110,7 +110,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 
         private void NavigationInTypeProductTable() => Navigation.NavigateTo($"/table/{TabTable.TypeProduct.ActiveTabIndex}");
 
-        private async void ShowMessageWarning(string message)
+        private async Task ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
 
         private bool ValidateFields(out string message)
