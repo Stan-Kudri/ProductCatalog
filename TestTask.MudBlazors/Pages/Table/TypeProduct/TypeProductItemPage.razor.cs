@@ -10,16 +10,16 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 {
     public partial class TypeProductItemPage
     {
-        [Inject] ProductTypeService? ProductTypeService { get; set; }
-        [Inject] CategoryService? CategoryService { get; set; }
-        [Inject] IDialogService DialogService { get; set; }
-        [Inject] NavigationManager? Navigation { get; set; }
+        [Inject] private ProductTypeService ProductTypeService { get; set; } = null!;
+        [Inject] private CategoryService CategoryService { get; set; } = null!;
+        [Inject] private IDialogService DialogService { get; set; } = null!;
+        [Inject] private NavigationManager Navigation { get; set; } = null!;
 
         private TypeProductModel typeProductModel { get; set; } = new TypeProductModel();
         private string[] errors = { };
         private bool IsAddItem = true;
 
-        private ProductType oldTypeProduct;
+        private ProductType? oldTypeProduct;
 
         private List<Category> selectCategories = new List<Category>();
 

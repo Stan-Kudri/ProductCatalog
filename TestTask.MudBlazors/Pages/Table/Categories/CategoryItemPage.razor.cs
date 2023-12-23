@@ -9,15 +9,15 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
 {
     public partial class CategoryItemPage
     {
-        [Inject] CategoryService? CategoryService { get; set; }
-        [Inject] IDialogService DialogService { get; set; }
-        [Inject] NavigationManager? Navigation { get; set; }
+        [Inject] private CategoryService CategoryService { get; set; } = null!;
+        [Inject] private IDialogService DialogService { get; set; } = null!;
+        [Inject] private NavigationManager Navigation { get; set; } = null!;
 
         private CategoryModel categoryModel { get; set; } = new CategoryModel();
         private string[] errors = { };
         private bool IsAddItem = true;
 
-        private Category oldItem;
+        private Category? oldItem;
 
         [Parameter] public int? Id { get; set; } = null;
 

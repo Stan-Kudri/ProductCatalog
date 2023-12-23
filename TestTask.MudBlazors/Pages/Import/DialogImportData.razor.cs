@@ -11,17 +11,17 @@ namespace TestTask.MudBlazors.Pages.Import
 {
     public partial class DialogImportData
     {
-        [Inject] CompanyService CompanyService { get; set; }
-        [Inject] CategoryService CategoryService { get; set; }
-        [Inject] ProductTypeService ProductTypeService { get; set; }
-        [Inject] ProductService ProductService { get; set; }
-        [Inject] ExcelImporter<Company> ExcelImportCompany { get; set; }
-        [Inject] ExcelImporter<Category> ExcelImportCategory { get; set; }
-        [Inject] ExcelImporter<ProductType> ExcelImportTypeProduct { get; set; }
-        [Inject] ExcelImporter<Product> ExcelImportProduct { get; set; }
+        [Inject] private CompanyService CompanyService { get; set; } = null!;
+        [Inject] private CategoryService CategoryService { get; set; } = null!;
+        [Inject] private ProductTypeService ProductTypeService { get; set; } = null!;
+        [Inject] private ProductService ProductService { get; set; } = null!;
+        [Inject] private ExcelImporter<Company> ExcelImportCompany { get; set; } = null!;
+        [Inject] private ExcelImporter<Category> ExcelImportCategory { get; set; } = null!;
+        [Inject] private ExcelImporter<ProductType> ExcelImportTypeProduct { get; set; } = null!;
+        [Inject] private ExcelImporter<Product> ExcelImportProduct { get; set; } = null!;
 
 
-        [CascadingParameter] public MudDialogInstance MudDialog { get; set; }
+        [CascadingParameter] private MudDialogInstance MudDialog { get; set; } = null!;
 
         private ImportSelectTable selectTable = new ImportSelectTable();
 

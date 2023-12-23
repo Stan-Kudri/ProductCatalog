@@ -10,10 +10,10 @@ namespace TestTask.MudBlazors.Pages.Table.Products
 {
     public partial class ProductPage
     {
-        [Inject] ProductService ProductService { get; set; }
-        [Inject] ExcelImporter<Product> ExcelImportProduct { get; set; }
-        [Inject] IDialogService DialogService { get; set; }
-        [Inject] NavigationManager Navigation { get; set; }
+        [Inject] private ProductService ProductService { get; set; } = null!;
+        [Inject] private ExcelImporter<Product> ExcelImportProduct { get; set; } = null!;
+        [Inject] private IDialogService DialogService { get; set; } = null!;
+        [Inject] private NavigationManager Navigation { get; set; } = null!;
 
         private const string MessageNotSelectedItem = "No items selected";
         private const int NoItemsSelected = 0;

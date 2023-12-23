@@ -9,15 +9,15 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 {
     public partial class CompanyItemPage
     {
-        [Inject] CompanyService? CompanyService { get; set; }
-        [Inject] IDialogService DialogService { get; set; }
-        [Inject] NavigationManager? Navigation { get; set; }
+        [Inject] private CompanyService CompanyService { get; set; } = null!;
+        [Inject] private IDialogService DialogService { get; set; } = null!;
+        [Inject] private NavigationManager Navigation { get; set; } = null!;
 
         private CompanyModel companyModel { get; set; } = new CompanyModel();
         private string[] errors = { };
         private bool IsAddItem = true;
 
-        private Company oldCompany;
+        private Company? oldCompany;
 
         [Parameter] public int? Id { get; set; } = null;
 

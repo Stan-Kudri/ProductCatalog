@@ -11,11 +11,11 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 {
     public partial class CompanyPage
     {
-        [Inject] CompanyService CompanyService { get; set; }
-        [Inject] ProductService ProductService { get; set; }
-        [Inject] ExcelImporter<Company> ExcelImportCompany { get; set; }
-        [Inject] IDialogService DialogService { get; set; }
-        [Inject] NavigationManager Navigation { get; set; }
+        [Inject] private CompanyService CompanyService { get; set; } = null!;
+        [Inject] private ProductService ProductService { get; set; } = null!;
+        [Inject] private ExcelImporter<Company> ExcelImportCompany { get; set; } = null!;
+        [Inject] private IDialogService DialogService { get; set; } = null!;
+        [Inject] private NavigationManager Navigation { get; set; } = null!;
 
         private const string MessageNotSelectedItem = "No items selected";
         private const int NoItemsSelected = 0;

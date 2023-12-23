@@ -12,12 +12,12 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
 {
     public partial class CategoryPage
     {
-        [Inject] CategoryService CategoryService { get; set; }
-        [Inject] ProductTypeService ProductTypeService { get; set; }
-        [Inject] ExcelImporter<Category> ExcelImportCategory { get; set; }
-        [Inject] ProductService ProductService { get; set; }
-        [Inject] IDialogService DialogService { get; set; }
-        [Inject] NavigationManager Navigation { get; set; }
+        [Inject] private CategoryService CategoryService { get; set; } = null!;
+        [Inject] private ProductTypeService ProductTypeService { get; set; } = null!;
+        [Inject] private ExcelImporter<Category> ExcelImportCategory { get; set; } = null!;
+        [Inject] private ProductService ProductService { get; set; } = null!;
+        [Inject] private IDialogService DialogService { get; set; } = null!;
+        [Inject] private NavigationManager Navigation { get; set; } = null!;
 
 
         private const string MessageNotSelectedItem = "No items selected";

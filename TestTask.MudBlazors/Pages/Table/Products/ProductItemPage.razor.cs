@@ -12,18 +12,18 @@ namespace TestTask.MudBlazors.Pages.Table.Products
 {
     public partial class ProductItemPage
     {
-        [Inject] ProductService? ProductService { get; set; }
-        [Inject] CompanyService? CompanyService { get; set; }
-        [Inject] CategoryService? CategoryService { get; set; }
-        [Inject] ProductTypeService? ProductTypeService { get; set; }
-        [Inject] IDialogService DialogService { get; set; }
-        [Inject] NavigationManager? Navigation { get; set; }
+        [Inject] private ProductService ProductService { get; set; } = null!;
+        [Inject] private CompanyService CompanyService { get; set; } = null!;
+        [Inject] private CategoryService CategoryService { get; set; } = null!;
+        [Inject] private ProductTypeService ProductTypeService { get; set; } = null!;
+        [Inject] private IDialogService DialogService { get; set; } = null!;
+        [Inject] private NavigationManager Navigation { get; set; } = null!;
 
         private ProductModel productModel { get; set; } = new ProductModel();
         private string[] errors = { };
         private bool IsAddItem = true;
 
-        private Product oldProduct;
+        private Product? oldProduct;
 
         private List<Company> selectCompanies = new List<Company>();
         private List<Category> selectCategories = new List<Category>();
