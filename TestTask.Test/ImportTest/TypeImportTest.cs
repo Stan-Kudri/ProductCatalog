@@ -74,8 +74,8 @@ namespace TestTask.Test.ImportTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var categoryService = new CategoryService(dbContext);
-            var typeService = new ProductTypeService(dbContext);
+            var categoryService = new CategoryRepository(dbContext);
+            var typeService = new ProductTypeRepository(dbContext);
 
             var memoryStream = new MemoryStream(Resources.DataIsAllFilledIn);
             var typeImporter = new TypeProductImporter();

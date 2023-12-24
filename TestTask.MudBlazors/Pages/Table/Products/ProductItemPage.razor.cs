@@ -12,10 +12,10 @@ namespace TestTask.MudBlazors.Pages.Table.Products
 {
     public partial class ProductItemPage
     {
-        [Inject] private ProductService ProductService { get; set; } = null!;
-        [Inject] private CompanyService CompanyService { get; set; } = null!;
-        [Inject] private CategoryService CategoryService { get; set; } = null!;
-        [Inject] private ProductTypeService ProductTypeService { get; set; } = null!;
+        [Inject] private ProductRepository ProductRepository { get; set; } = null!;
+        [Inject] private CompanyRepository CompanyRepository { get; set; } = null!;
+        [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
+        [Inject] private ProductTypeRepository ProductTypeRepository { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
         [Inject] private NavigationManager Navigation { get; set; } = null!;
 
@@ -33,9 +33,9 @@ namespace TestTask.MudBlazors.Pages.Table.Products
 
         protected override void OnInitialized()
         {
-            selectCompanies = CompanyService.GetAll();
-            selectCategories = CategoryService.GetAll();
-            selectTypes = ProductTypeService.GetAll();
+            selectCompanies = CompanyRepository.GetAll();
+            selectCategories = CategoryRepository.GetAll();
+            selectTypes = ProductTypeRepository.GetAll();
 
             if (Id == null)
             {
@@ -49,7 +49,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
             }
 
             isAddItem = false;
-            oldProduct = ProductService.GetItem((int)Id);
+            oldProduct = ProductRepository.GetItem((int)Id);
             productModel = oldProduct.GetProductModel();
         }
 
@@ -69,14 +69,14 @@ namespace TestTask.MudBlazors.Pages.Table.Products
                 return;
             }
 
-            if (!ProductService.IsFreeName(productModel.Name))
+            if (!ProductRepository.IsFreeName(productModel.Name))
             {
                 ShowMessageWarning("Name is not free.");
                 return;
             }
 
             var typeProduct = productModel.GetProductType();
-            ProductService.Add(typeProduct);
+            ProductRepository.Add(typeProduct);
             NavigationInTypeProductTable();
         }
 
@@ -100,7 +100,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
 
             if (!oldProduct.Equals(typeProduct))
             {
-                ProductService.Updata(typeProduct);
+                ProductRepository.Updata(typeProduct);
             }
 
             NavigationInTypeProductTable();

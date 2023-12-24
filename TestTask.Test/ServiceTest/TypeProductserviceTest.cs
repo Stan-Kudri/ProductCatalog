@@ -137,8 +137,8 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var categoryService = new CategoryService(dbContext);
-            var typeProductService = new ProductTypeService(dbContext);
+            var categoryService = new CategoryRepository(dbContext);
+            var typeProductService = new ProductTypeRepository(dbContext);
             categoryService.AddRange(categories);
             typeProductService.AddRange(types);
 
@@ -155,8 +155,8 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var categoryService = new CategoryService(dbContext);
-            var typeProductService = new ProductTypeService(dbContext);
+            var categoryService = new CategoryRepository(dbContext);
+            var typeProductService = new ProductTypeRepository(dbContext);
             categoryService.AddRange(categories);
             typeProductService.AddRange(types);
             typeProductService.Add(addType);
@@ -174,8 +174,8 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var categoryService = new CategoryService(dbContext);
-            var typeProductService = new ProductTypeService(dbContext);
+            var categoryService = new CategoryRepository(dbContext);
+            var typeProductService = new ProductTypeRepository(dbContext);
             categoryService.AddRange(categories);
             typeProductService.AddRange(types);
             typeProductService.Updata(updateType);
@@ -193,8 +193,8 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var categoryService = new CategoryService(dbContext);
-            var typeProductService = new ProductTypeService(dbContext);
+            var categoryService = new CategoryRepository(dbContext);
+            var typeProductService = new ProductTypeRepository(dbContext);
             categoryService.AddRange(categories);
             typeProductService.AddRange(types);
             typeProductService.Remove(removeID);
@@ -212,8 +212,8 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var categoryService = new CategoryService(dbContext);
-            var typeProductService = new ProductTypeService(dbContext);
+            var categoryService = new CategoryRepository(dbContext);
+            var typeProductService = new ProductTypeRepository(dbContext);
             categoryService.AddRange(categories);
             typeProductService.AddRange(types);
 
@@ -227,8 +227,8 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var categoryService = new CategoryService(dbContext);
-            var typeProductService = new ProductTypeService(dbContext);
+            var categoryService = new CategoryRepository(dbContext);
+            var typeProductService = new ProductTypeRepository(dbContext);
             categoryService.AddRange(categories);
 
             //Assert

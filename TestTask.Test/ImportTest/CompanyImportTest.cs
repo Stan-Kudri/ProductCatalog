@@ -61,7 +61,7 @@ namespace TestTask.Test.ImportTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var companyService = new CompanyService(dbContext);
+            var companyService = new CompanyRepository(dbContext);
 
             var memoryStream = new MemoryStream(Resources.DataIsAllFilledIn);
             var companyImporter = new CompanyImporter();

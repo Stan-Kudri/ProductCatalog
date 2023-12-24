@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace TestTask.Core.Models.Types
 {
-    public class ProductTypeService
+    public class ProductTypeRepository : IRepository<ProductType>
     {
         private readonly AppDbContext _dbContext;
 
-        public ProductTypeService(AppDbContext appDbContext) => _dbContext = appDbContext;
+        public ProductTypeRepository(AppDbContext appDbContext) => _dbContext = appDbContext;
 
         public void Add(ProductType item)
         {

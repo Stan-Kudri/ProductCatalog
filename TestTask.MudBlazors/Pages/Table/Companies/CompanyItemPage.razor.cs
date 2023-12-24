@@ -9,7 +9,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 {
     public partial class CompanyItemPage
     {
-        [Inject] private CompanyService CompanyService { get; set; } = null!;
+        [Inject] private CompanyRepository CompanyRepository { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
         [Inject] private NavigationManager Navigation { get; set; } = null!;
 
@@ -35,7 +35,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
             }
 
             IsAddItem = false;
-            oldCompany = CompanyService.GetCompany((int)Id);
+            oldCompany = CompanyRepository.GetCompany((int)Id);
             companyModel = oldCompany.GetCompanyModel();
         }
 
@@ -55,14 +55,14 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
                 return;
             }
 
-            if (!CompanyService.IsFreeName(companyModel.Name))
+            if (!CompanyRepository.IsFreeName(companyModel.Name))
             {
                 ShowMessageWarning("Name is not free.");
                 return;
             }
 
             var company = companyModel.GetCompany();
-            CompanyService.Add(company);
+            CompanyRepository.Add(company);
             NavigationInCompanyTable();
         }
 
@@ -86,7 +86,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 
             if (!oldCompany.Equals(company))
             {
-                CompanyService.Updata(company);
+                CompanyRepository.Updata(company);
             }
 
             NavigationInCompanyTable();

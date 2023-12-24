@@ -1,30 +1,27 @@
 ﻿@page "/table/{selectindextab:int?}"
 
- @using Table
- @using Table.TypeProduct
+ @using Table             
  @using TestTask.MudBlazors.Model
+ @using TestTask.MudBlazors.Pages.Table.Companies
+ @using TestTask.MudBlazors.Pages.Table.Categories
+ @using TestTask.MudBlazors.Pages.Table.TypeProduct
+ @using TestTask.MudBlazors.Pages.Table.Products
 
 <MudPaper>
     <MudTabs Rounded="true" AlwaysShowScrollButtons="true" ActivePanelIndex="@SelectIndexTab" Border="true" Centered="true">
         <MudSpacer></MudSpacer>
         <MudTabPanel Text="Company">
-            <DynamicComponent Type="typeof(Companies.CompanyPage)" />
+            <CompanyPage/>
         </MudTabPanel>
         <MudTabPanel Text="Category">
-            <DynamicComponent Type="typeof(Categories.CategoryPage)" />
+            <CategoryPage/>
         </MudTabPanel>
-        <MudTabPanel Text="Type Product">
-            <DynamicComponent Type="typeof(TypeProduct.TypeProductPage)" />
+        <MudTabPanel Text="Type Product"> 
+            <ProductPage/>
         </MudTabPanel>
         <MudTabPanel Text="Product">
-            <DynamicComponent Type="typeof(Products.ProductPage)" />
+            <TypeProductPage/>
         </MudTabPanel>
     </MudTabs>
  </MudPaper>
-
- @code
-{
-    [Parameter]
-    public int SelectIndexTab{ get; set; } = TabTable.Company.ActiveTabIndex;
-}
 

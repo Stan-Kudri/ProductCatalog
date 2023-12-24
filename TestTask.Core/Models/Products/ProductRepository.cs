@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace TestTask.Core.Models.Products
 {
-    public class ProductService : IService<Product>
+    public class ProductRepository : IRepository<Product>
     {
         private readonly AppDbContext _dbContext;
 
-        public ProductService(AppDbContext appDbContext) => _dbContext = appDbContext;
+        public ProductRepository(AppDbContext appDbContext) => _dbContext = appDbContext;
 
         public void Add(Product item)
         {

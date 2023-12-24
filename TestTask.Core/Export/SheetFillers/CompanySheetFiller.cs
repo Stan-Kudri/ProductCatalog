@@ -8,10 +8,10 @@ namespace TestTask.Core.Export.SheetFillers
 {
     public class CompanySheetFiller : ISheetFiller
     {
-        private readonly CompanyService _companyService;
+        private readonly CompanyRepository _companyService;
         private readonly List<CompanyField> _columnMap = CreateColumnMap();
 
-        public CompanySheetFiller(CompanyService companyService) => _companyService = companyService;
+        public CompanySheetFiller(CompanyRepository companyService) => _companyService = companyService;
 
         public string Name => "Company";
 

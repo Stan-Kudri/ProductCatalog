@@ -11,8 +11,8 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 {
     public partial class TypeProductPage
     {
-        [Inject] private ProductTypeService TypeService { get; set; } = null!;
-        [Inject] private ProductService ProductService { get; set; } = null!;
+        [Inject] private ProductTypeRepository ProductTypeRepository { get; set; } = null!;
+        [Inject] private ProductRepository ProductRepository { get; set; } = null!;
         [Inject] private ExcelImporter<ProductType> ExcelImportProductType { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
         [Inject] private NavigationManager Navigation { get; set; } = null!;
@@ -63,8 +63,8 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 
             foreach (var item in selectedItems)
             {
-                ProductService.RemoveProductRelatedToType(item.Id);
-                TypeService.Remove(item.Id);
+                ProductRepository.RemoveProductRelatedToType(item.Id);
+                ProductTypeRepository.Remove(item.Id);
             }
 
             LoadData();
@@ -84,8 +84,8 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
                 return;
             }
 
-            ProductService.RemoveProductRelatedToType(id);
-            TypeService.Remove(id);
+            ProductRepository.RemoveProductRelatedToType(id);
+            ProductTypeRepository.Remove(id);
             LoadData();
         }
 
@@ -117,7 +117,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
             {
                 if (row.Success)
                 {
-                    TypeService.Upsert(row.Value);
+                    ProductTypeRepository.Upsert(row.Value);
                 }
             }
             LoadData();
@@ -131,7 +131,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 
         private void LoadData()
         {
-            IQueryable<ProductType> queriable = TypeService.GetQueryableAll();
+            IQueryable<ProductType> queriable = ProductTypeRepository.GetQueryableAll();
             queriable = GetSearchName(queriable);
             queriable = sortField.Apply(queriable, isAscending);
             var result = queriable.GetPagedList(pageModel);

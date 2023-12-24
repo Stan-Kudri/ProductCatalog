@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using System.Globalization;
 using TestTask.Core.Import;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
@@ -11,8 +12,8 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 {
     public partial class CompanyPage
     {
-        [Inject] private CompanyService CompanyService { get; set; } = null!;
-        [Inject] private ProductService ProductService { get; set; } = null!;
+        [Inject] private CompanyRepository CompanyRepository { get; set; } = null!;
+        [Inject] private ProductRepository ProductRepository { get; set; } = null!;
         [Inject] private ExcelImporter<Company> ExcelImportCompany { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
         [Inject] private NavigationManager Navigation { get; set; } = null!;
@@ -63,8 +64,8 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 
             foreach (var item in selectedItems)
             {
-                ProductService.RemoveProductRelatedToCompany(item.Id);
-                CompanyService.Remove(item.Id);
+                ProductRepository.RemoveProductRelatedToCompany(item.Id);
+                CompanyRepository.Remove(item.Id);
             }
 
             LoadData();
@@ -84,8 +85,8 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
                 return;
             }
 
-            ProductService.RemoveProductRelatedToCompany(id);
-            CompanyService.Remove(id);
+            ProductRepository.RemoveProductRelatedToCompany(id);
+            CompanyRepository.Remove(id);
             LoadData();
         }
 
@@ -111,7 +112,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
             {
                 if (row.Success)
                 {
-                    CompanyService.Upsert(row.Value);
+                    CompanyRepository.Upsert(row.Value);
                 }
             }
             LoadData();
@@ -131,7 +132,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
 
         private void LoadData()
         {
-            IQueryable<Company> queriable = CompanyService.GetQueryableAll();
+            IQueryable<Company> queriable = CompanyRepository.GetQueryableAll();
             queriable = GetSearchName(queriable);
             queriable = sortField.Apply(queriable, isAscending);
             var result = queriable.GetPagedList(pageModel);
@@ -144,7 +145,7 @@ namespace TestTask.MudBlazors.Pages.Table.Companies
                 ? items
                 : items.Where(e => e.Name.Contains(searchString)
                                 || e.Country.Contains(searchString)
-                                || e.DateCreation.ToString().Contains(searchString));
+                                || e.DateCreation.ToString(CultureInfo.InvariantCulture).Contains(searchString));
 
         private async Task ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");

@@ -24,8 +24,8 @@ namespace TestTask.Control.PageTabControls
         private const int IndexColumnCountry = 3;
 
         private IServiceProvider _serviceProvider;
-        private CompanyService _companyService;
-        private ProductService _productService;
+        private CompanyRepository _companyService;
+        private ProductRepository _productService;
         private SortCompaniesModel _sortField = new SortCompaniesModel();
         private TypeSortFieldModel _typeSort = new TypeSortFieldModel();
 
@@ -42,8 +42,8 @@ namespace TestTask.Control.PageTabControls
         public void Initialize(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            _companyService = _serviceProvider.GetRequiredService<CompanyService>();
-            _productService = _serviceProvider.GetRequiredService<ProductService>();
+            _companyService = _serviceProvider.GetRequiredService<CompanyRepository>();
+            _productService = _serviceProvider.GetRequiredService<ProductRepository>();
             listView.Initialize(this, serviceProvider.GetRequiredService<IMessageBox>());
 
             cmbSortField.DataSource = _sortField.Items;

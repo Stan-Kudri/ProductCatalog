@@ -119,7 +119,7 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var categoryService = new CategoryService(dbContext);
+            var categoryService = new CategoryRepository(dbContext);
             categoryService.AddRange(category);
 
             //Act
@@ -135,7 +135,7 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var service = new CategoryService(dbContext);
+            var service = new CategoryRepository(dbContext);
             dbContext.Category.AddRange(categories);
             dbContext.SaveChanges();
             service.Add(addCategory);
@@ -153,7 +153,7 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var service = new CategoryService(dbContext);
+            var service = new CategoryRepository(dbContext);
             dbContext.Category.AddRange(categories);
             dbContext.SaveChanges();
             service.Updata(updateCategory);
@@ -171,7 +171,7 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var service = new CategoryService(dbContext);
+            var service = new CategoryRepository(dbContext);
             dbContext.Category.AddRange(categories);
             dbContext.SaveChanges();
             service.RemoveRange(removeID);
@@ -189,7 +189,7 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var service = new CategoryService(dbContext);
+            var service = new CategoryRepository(dbContext);
             service.AddRange(categories);
 
             //Act
@@ -205,7 +205,7 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var service = new CategoryService(dbContext);
+            var service = new CategoryRepository(dbContext);
             service.AddRange(categories);
 
             //Assert

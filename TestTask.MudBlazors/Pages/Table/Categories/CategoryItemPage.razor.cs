@@ -9,7 +9,7 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
 {
     public partial class CategoryItemPage
     {
-        [Inject] private CategoryService CategoryService { get; set; } = null!;
+        [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
         [Inject] private NavigationManager Navigation { get; set; } = null!;
 
@@ -35,7 +35,7 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
             }
 
             IsAddItem = false;
-            oldItem = CategoryService.GetCategory((int)Id);
+            oldItem = CategoryRepository.GetCategory((int)Id);
             categoryModel = oldItem.GetCategoryModel();
         }
 
@@ -55,14 +55,14 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
                 return;
             }
 
-            if (!CategoryService.IsFreeName(categoryModel.Name))
+            if (!CategoryRepository.IsFreeName(categoryModel.Name))
             {
                 ShowMessageWarning("Name is not free.");
                 return;
             }
 
             var item = categoryModel.GetCategory();
-            CategoryService.Add(item);
+            CategoryRepository.Add(item);
             NavigationInCompanyTable();
         }
 
@@ -86,7 +86,7 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
 
             if (!oldItem.Equals(item))
             {
-                CategoryService.Updata(item);
+                CategoryRepository.Updata(item);
             }
 
             NavigationInCompanyTable();

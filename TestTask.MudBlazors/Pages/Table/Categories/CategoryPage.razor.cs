@@ -12,10 +12,10 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
 {
     public partial class CategoryPage
     {
-        [Inject] private CategoryService CategoryService { get; set; } = null!;
-        [Inject] private ProductTypeService ProductTypeService { get; set; } = null!;
+        [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
+        [Inject] private ProductTypeRepository ProductTypeRepository { get; set; } = null!;
+        [Inject] private ProductRepository ProductRepository { get; set; } = null!;
         [Inject] private ExcelImporter<Category> ExcelImportCategory { get; set; } = null!;
-        [Inject] private ProductService ProductService { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
         [Inject] private NavigationManager Navigation { get; set; } = null!;
 
@@ -66,9 +66,9 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
 
             foreach (var item in selectedItems)
             {
-                ProductTypeService.RemoveProductRelatedToCategory(item.Id);
-                ProductService.RemoveProductRelatedToCategory(item.Id);
-                CategoryService.Remove(item.Id);
+                ProductTypeRepository.RemoveProductRelatedToCategory(item.Id);
+                ProductRepository.RemoveProductRelatedToCategory(item.Id);
+                CategoryRepository.Remove(item.Id);
             }
 
             LoadData();
@@ -88,9 +88,9 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
                 return;
             }
 
-            ProductTypeService.RemoveProductRelatedToCategory(id);
-            ProductService.RemoveProductRelatedToCategory(id);
-            CategoryService.Remove(id);
+            ProductTypeRepository.RemoveProductRelatedToCategory(id);
+            ProductRepository.RemoveProductRelatedToCategory(id);
+            CategoryRepository.Remove(id);
             LoadData();
         }
 
@@ -116,7 +116,7 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
             {
                 if (row.Success)
                 {
-                    CategoryService.Upsert(row.Value);
+                    CategoryRepository.Upsert(row.Value);
                 }
             }
             LoadData();
@@ -136,7 +136,7 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
 
         private void LoadData()
         {
-            IQueryable<Category> queriable = CategoryService.GetQueryableAll();
+            IQueryable<Category> queriable = CategoryRepository.GetQueryableAll();
             queriable = GetSearchName(queriable);
             queriable = sortField.Apply(queriable, isAscending);
             var result = queriable.GetPagedList(pageModel);

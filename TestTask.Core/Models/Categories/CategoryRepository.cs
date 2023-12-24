@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace TestTask.Core.Models.Categories
 {
-    public class CategoryService : IService<Category>
+    public class CategoryRepository : IRepository<Category>
     {
         private readonly AppDbContext _dbContext;
 
-        public CategoryService(AppDbContext appDbContext) => _dbContext = appDbContext;
+        public CategoryRepository(AppDbContext appDbContext) => _dbContext = appDbContext;
 
         public void Add(Category item)
         {

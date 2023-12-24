@@ -127,7 +127,7 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var companyService = new CompanyService(dbContext);
+            var companyService = new CompanyRepository(dbContext);
             companyService.AddRange(companies);
 
             //Act
@@ -143,7 +143,7 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var companyService = new CompanyService(dbContext);
+            var companyService = new CompanyRepository(dbContext);
             dbContext.Company.AddRange(companies);
             dbContext.SaveChanges();
             companyService.Add(addCompany);
@@ -161,7 +161,7 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var companyService = new CompanyService(dbContext);
+            var companyService = new CompanyRepository(dbContext);
             dbContext.Company.AddRange(companies);
             dbContext.SaveChanges();
             companyService.Updata(updateCompany);
@@ -179,7 +179,7 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var companyService = new CompanyService(dbContext);
+            var companyService = new CompanyRepository(dbContext);
             dbContext.Company.AddRange(companies);
             dbContext.SaveChanges();
             companyService.RemoveRange(removeID);
@@ -197,7 +197,7 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var companyService = new CompanyService(dbContext);
+            var companyService = new CompanyRepository(dbContext);
             companyService.Add(company);
 
             //Act
@@ -213,7 +213,7 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var companyService = new CompanyService(dbContext);
+            var companyService = new CompanyRepository(dbContext);
             companyService.AddRange(companies);
 
             //Assert

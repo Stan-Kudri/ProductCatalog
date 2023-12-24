@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace TestTask.Core.Models.Companies
 {
-    public class CompanyService : IService<Company>
+    public class CompanyRepository : IRepository<Company>
     {
         private readonly AppDbContext _dbContext;
 
-        public CompanyService(AppDbContext appDbContext) => _dbContext = appDbContext;
+        public CompanyRepository(AppDbContext appDbContext) => _dbContext = appDbContext;
 
         public void Add(Company item)
         {

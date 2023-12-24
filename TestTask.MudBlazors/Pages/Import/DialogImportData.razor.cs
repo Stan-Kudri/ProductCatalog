@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using TestTask.Core.Import;
+using TestTask.Core.Models;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
@@ -11,15 +12,14 @@ namespace TestTask.MudBlazors.Pages.Import
 {
     public partial class DialogImportData
     {
-        [Inject] private CompanyService CompanyService { get; set; } = null!;
-        [Inject] private CategoryService CategoryService { get; set; } = null!;
-        [Inject] private ProductTypeService ProductTypeService { get; set; } = null!;
-        [Inject] private ProductService ProductService { get; set; } = null!;
+        [Inject] private CompanyRepository CompanyRepository { get; set; } = null!;
+        [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
+        [Inject] private ProductTypeRepository ProductTypeRepository { get; set; } = null!;
+        [Inject] private ProductRepository ProductRepository { get; set; } = null!;
         [Inject] private ExcelImporter<Company> ExcelImportCompany { get; set; } = null!;
         [Inject] private ExcelImporter<Category> ExcelImportCategory { get; set; } = null!;
         [Inject] private ExcelImporter<ProductType> ExcelImportTypeProduct { get; set; } = null!;
         [Inject] private ExcelImporter<Product> ExcelImportProduct { get; set; } = null!;
-
 
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; } = null!;
 
@@ -27,62 +27,40 @@ namespace TestTask.MudBlazors.Pages.Import
 
         private void Cancel() => MudDialog.Cancel();
 
-        private async Task UploadFiles(IBrowserFile fileload)
+        private async Task UploadData(IBrowserFile fileload)
         {
             if (selectedTable.SelectTable.Count() == 0 || fileload.Size == decimal.Zero)
             {
                 return;
             }
 
-            var buffer = new byte[fileload.Size];
-            await fileload.OpenReadStream().ReadAsync(buffer);
+            using var memoryStream = new MemoryStream();
+            using var fileStream = fileload.OpenReadStream();
+            await fileStream.CopyToAsync(memoryStream);
+
             Cancel();
 
-            if (selectedTable.SelectTable.Contains(ImportTable.Company))
+            Import(ImportTable.Company, memoryStream, ExcelImportCompany, CompanyRepository);
+            Import(ImportTable.Category, memoryStream, ExcelImportCategory, CategoryRepository);
+            Import(ImportTable.TypeProduct, memoryStream, ExcelImportTypeProduct, ProductTypeRepository);
+            Import(ImportTable.Product, memoryStream, ExcelImportProduct, ProductRepository);
+            StateHasChanged();
+        }
+
+        private void Import<T>(ImportTable table, MemoryStream memoryStream, ExcelImporter<T> excelImporter, IRepository<T> repository)
+        {
+            if (!selectedTable.SelectTable.Contains(table))
             {
-                var companyRead = ExcelImportCompany.Import(buffer);
-                foreach (var row in companyRead)
-                {
-                    if (row.Success)
-                    {
-                        CompanyService.Upsert(row.Value);
-                    }
-                }
+                return;
             }
 
-            if (selectedTable.SelectTable.Contains(ImportTable.Category))
+            memoryStream.Position = 0;
+            var readItems = excelImporter.Import(new NonClosableStream(memoryStream));
+            foreach (var row in readItems)
             {
-                var categoryRead = ExcelImportCategory.Import(buffer);
-                foreach (var row in categoryRead)
+                if (row.Success)
                 {
-                    if (row.Success)
-                    {
-                        CategoryService.Upsert(row.Value);
-                    }
-                }
-            }
-
-            if (selectedTable.SelectTable.Contains(ImportTable.TypeProduct))
-            {
-                var typeProductRead = ExcelImportTypeProduct.Import(buffer);
-                foreach (var row in typeProductRead)
-                {
-                    if (row.Success)
-                    {
-                        ProductTypeService.Upsert(row.Value);
-                    }
-                }
-            }
-
-            if (selectedTable.SelectTable.Contains(ImportTable.Product))
-            {
-                var productRead = ExcelImportProduct.Import(buffer);
-                foreach (var row in productRead)
-                {
-                    if (row.Success)
-                    {
-                        ProductService.Upsert(row.Value);
-                    }
+                    repository.Upsert(row.Value);
                 }
             }
         }

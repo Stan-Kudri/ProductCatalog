@@ -10,7 +10,7 @@ namespace TestTask.Forms.Companies
     public partial class CompanyFormBase : BaseForm
     {
         protected readonly IMessageBox _messageBox;
-        protected readonly CompanyService _companyService;
+        protected readonly CompanyRepository _companyService;
 
         private CompanyFormBase()
         {
@@ -21,7 +21,7 @@ namespace TestTask.Forms.Companies
         {
             InitializeComponent();
             _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
-            _companyService = serviceProvider.GetRequiredService<CompanyService>();
+            _companyService = serviceProvider.GetRequiredService<CompanyRepository>();
         }
 
         protected virtual void BtnSave_Click(object sender, EventArgs e)

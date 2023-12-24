@@ -62,7 +62,7 @@ namespace TestTask.Test.ImportTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var categoryService = new CategoryService(dbContext);
+            var categoryService = new CategoryRepository(dbContext);
             var memoryStream = new MemoryStream(Resources.DataIsAllFilledIn);
             var categoryImporter = new CategoryImporter();
             var categoryRead = new ExcelImporter<Category>(categoryImporter).Import(memoryStream);

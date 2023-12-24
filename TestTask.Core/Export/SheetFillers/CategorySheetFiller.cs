@@ -9,10 +9,10 @@ namespace TestTask.Core.Export.SheetFillers
 {
     public class CategorySheetFiller : ISheetFiller
     {
-        private readonly CategoryService _categoryService;
+        private readonly CategoryRepository _categoryService;
         private readonly List<CategoryField> _columnMap = CreateColumnMap();
 
-        public CategorySheetFiller(CategoryService categoryService) => _categoryService = categoryService;
+        public CategorySheetFiller(CategoryRepository categoryService) => _categoryService = categoryService;
 
         public string Name => "Category";
 

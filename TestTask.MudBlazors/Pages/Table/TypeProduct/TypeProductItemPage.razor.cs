@@ -10,8 +10,8 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 {
     public partial class TypeProductItemPage
     {
-        [Inject] private ProductTypeService ProductTypeService { get; set; } = null!;
-        [Inject] private CategoryService CategoryService { get; set; } = null!;
+        [Inject] private ProductTypeRepository ProductTypeRepository { get; set; } = null!;
+        [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
         [Inject] private NavigationManager Navigation { get; set; } = null!;
 
@@ -27,7 +27,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 
         protected override void OnInitialized()
         {
-            selectCategories = CategoryService.GetAll();
+            selectCategories = CategoryRepository.GetAll();
 
             if (Id == null)
             {
@@ -41,7 +41,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
             }
 
             isAddItem = false;
-            oldTypeProduct = ProductTypeService.GetItem((int)Id);
+            oldTypeProduct = ProductTypeRepository.GetItem((int)Id);
             typeProductModel = oldTypeProduct.GetTypeProductModel();
         }
 
@@ -61,14 +61,14 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
                 return;
             }
 
-            if (!ProductTypeService.IsFreeName(typeProductModel.Name))
+            if (!ProductTypeRepository.IsFreeName(typeProductModel.Name))
             {
                 ShowMessageWarning("Name is not free.");
                 return;
             }
 
             var typeProduct = typeProductModel.GetProductType();
-            ProductTypeService.Add(typeProduct);
+            ProductTypeRepository.Add(typeProduct);
             NavigationInTypeProductTable();
         }
 
@@ -92,7 +92,7 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
 
             if (!oldTypeProduct.Equals(typeProduct))
             {
-                ProductTypeService.Updata(typeProduct);
+                ProductTypeRepository.Updata(typeProduct);
             }
 
             NavigationInTypeProductTable();

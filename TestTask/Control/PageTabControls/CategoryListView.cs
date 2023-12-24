@@ -21,8 +21,8 @@ namespace TestTask.Control.PageTabControls
         private const int IndexColumnName = 1;
 
         private IServiceProvider _serviceProvider;
-        private CategoryService _categoryService;
-        private ProductService _productService;
+        private CategoryRepository _categoryService;
+        private ProductRepository _productService;
         private TypeSortField _typeSort = new TypeSortField();
 
         public CategoryListView() => InitializeComponent();
@@ -36,8 +36,8 @@ namespace TestTask.Control.PageTabControls
         public void Initialize(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            _categoryService = _serviceProvider.GetRequiredService<CategoryService>();
-            _productService = _serviceProvider.GetRequiredService<ProductService>();
+            _categoryService = _serviceProvider.GetRequiredService<CategoryRepository>();
+            _productService = _serviceProvider.GetRequiredService<ProductRepository>();
             listView.Initialize(this, serviceProvider.GetRequiredService<IMessageBox>());
             cmbSortName.DataSource = _typeSort.Items;
             cmbSortName.SelectedItem = _typeSort.SortType;

@@ -24,7 +24,10 @@ namespace TestTask.Core.Import
         }
 
         public List<Result<T>> Import(byte[]? bytes)
-            => Import(new MemoryStream(bytes));
+        {
+            using var stream = new MemoryStream(bytes);
+            return Import(stream);
+        }
 
         public List<Result<T>> Import(Stream stream)
         {

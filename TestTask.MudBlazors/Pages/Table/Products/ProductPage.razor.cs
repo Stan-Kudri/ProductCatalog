@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using System.Globalization;
 using TestTask.Core.Import;
 using TestTask.Core.Models.Products;
 using TestTask.MudBlazors.Extension;
@@ -10,7 +11,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
 {
     public partial class ProductPage
     {
-        [Inject] private ProductService ProductService { get; set; } = null!;
+        [Inject] private ProductRepository ProductRepository { get; set; } = null!;
         [Inject] private ExcelImporter<Product> ExcelImportProduct { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
         [Inject] private NavigationManager Navigation { get; set; } = null!;
@@ -61,7 +62,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
 
             foreach (var item in selectedItems)
             {
-                ProductService.Remove(item.Id);
+                ProductRepository.Remove(item.Id);
             }
 
             LoadData();
@@ -81,7 +82,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
                 return;
             }
 
-            ProductService.Remove(id);
+            ProductRepository.Remove(id);
             LoadData();
         }
 
@@ -107,7 +108,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
             {
                 if (row.Success)
                 {
-                    ProductService.Upsert(row.Value);
+                    ProductRepository.Upsert(row.Value);
                 }
             }
             LoadData();
@@ -127,7 +128,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
 
         private void LoadData()
         {
-            IQueryable<Product> queriable = ProductService.GetQueryableAll();
+            IQueryable<Product> queriable = ProductRepository.GetQueryableAll();
             queriable = GetSearchName(queriable);
             queriable = sortField.Apply(queriable, isAscending);
             var result = queriable.GetPagedList(pageModel);
@@ -142,7 +143,7 @@ namespace TestTask.MudBlazors.Pages.Table.Products
                                 || e.Company.Name.Contains(searchString)
                                 || e.Category.Name.Contains(searchString)
                                 || e.Type.Name.Contains(searchString)
-                                || e.Price.ToString().Contains(searchString));
+                                || e.Price.ToString(CultureInfo.InvariantCulture).Contains(searchString));
 
         private async Task ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");

@@ -24,20 +24,20 @@ namespace TestTask.Forms
         private const string Type = "Type";
 
         private readonly IServiceProvider _serviceProvider;
-        private readonly CompanyService _companyService;
-        private readonly ProductService _productService;
-        private readonly CategoryService _categoryService;
-        private readonly ProductTypeService _typeService;
+        private readonly CompanyRepository _companyService;
+        private readonly ProductRepository _productService;
+        private readonly CategoryRepository _categoryService;
+        private readonly ProductTypeRepository _typeService;
         private readonly IMessageBox _messageBox;
 
         public MainForm(IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;
-            _companyService = _serviceProvider.GetRequiredService<CompanyService>();
-            _categoryService = _serviceProvider.GetRequiredService<CategoryService>();
-            _typeService = _serviceProvider.GetRequiredService<ProductTypeService>();
-            _productService = _serviceProvider.GetRequiredService<ProductService>();
+            _companyService = _serviceProvider.GetRequiredService<CompanyRepository>();
+            _categoryService = _serviceProvider.GetRequiredService<CategoryRepository>();
+            _typeService = _serviceProvider.GetRequiredService<ProductTypeRepository>();
+            _productService = _serviceProvider.GetRequiredService<ProductRepository>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
         }
 
