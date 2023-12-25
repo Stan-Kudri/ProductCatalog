@@ -20,6 +20,7 @@ namespace TestTask.MudBlazors.Pages.Import
         [Inject] private ExcelImporter<Category> ExcelImportCategory { get; set; } = null!;
         [Inject] private ExcelImporter<ProductType> ExcelImportTypeProduct { get; set; } = null!;
         [Inject] private ExcelImporter<Product> ExcelImportProduct { get; set; } = null!;
+        [Inject] private NavigationManager Navigation { get; set; } = null!;
 
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; } = null!;
 
@@ -44,7 +45,8 @@ namespace TestTask.MudBlazors.Pages.Import
             Import(ImportTable.Category, memoryStream, ExcelImportCategory, CategoryRepository);
             Import(ImportTable.TypeProduct, memoryStream, ExcelImportTypeProduct, ProductTypeRepository);
             Import(ImportTable.Product, memoryStream, ExcelImportProduct, ProductRepository);
-            StateHasChanged();
+
+            Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
         }
 
         private void Import<T>(ImportTable table, MemoryStream memoryStream, ExcelImporter<T> excelImporter, IRepository<T> repository)
