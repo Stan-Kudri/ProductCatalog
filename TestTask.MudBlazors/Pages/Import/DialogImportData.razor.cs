@@ -39,7 +39,7 @@ namespace TestTask.MudBlazors.Pages.Import
             using var fileStream = fileload.OpenReadStream();
             await fileStream.CopyToAsync(memoryStream);
 
-            Cancel();
+            MudDialog.Cancel();
 
             Import(ImportTable.Company, memoryStream, ExcelImportCompany, CompanyRepository);
             Import(ImportTable.Category, memoryStream, ExcelImportCategory, CategoryRepository);

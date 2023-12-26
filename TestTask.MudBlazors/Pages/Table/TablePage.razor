@@ -1,4 +1,4 @@
-﻿@page "/table/{selectindextab:int?}"
+﻿@page "/table/{SelectIndexTab:int?}"
 
  @using Table             
  @using TestTask.MudBlazors.Model
@@ -6,21 +6,25 @@
  @using TestTask.MudBlazors.Pages.Table.Categories
  @using TestTask.MudBlazors.Pages.Table.TypeProduct
  @using TestTask.MudBlazors.Pages.Table.Products
+ @using Bromix.MudBlazor.MaterialDesignIcons
 
 <MudPaper>
-    <MudTabs Rounded="true" AlwaysShowScrollButtons="true" ActivePanelIndex="@SelectIndexTab" Border="true" Centered="true">
+    <MudToolBar>
+        <MudIconButton Icon="@MaterialDesignIcons.Normal.FileImport" Color="Color.Primary" OnClick="OpenDialog" Title="Import Data" />
+    </MudToolBar>
+    <MudTabs Rounded="true" AlwaysShowScrollButtons="true" ActivePanelIndex="@SelectIndexTab" Border="true" Centered="true" ActivePanelIndexChanged="@NavigationSelectTab">
         <MudSpacer/>
         <MudTabPanel Text="Company">
-            <CompanyPage/>
+            <DynamicComponent Type="typeof(Companies.CompanyPage)" />
         </MudTabPanel>
         <MudTabPanel Text="Category">
-            <CategoryPage/>
+            <DynamicComponent Type="typeof(Categories.CategoryPage)" />
         </MudTabPanel>
         <MudTabPanel Text="Type Product">
-            <ProductPage/>
+            <DynamicComponent Type="typeof(TypeProduct.TypeProductPage)" />
         </MudTabPanel>
         <MudTabPanel Text="Product">
-            <TypeProductPage/>
+            <DynamicComponent Type="typeof(Products.ProductPage)" />
         </MudTabPanel>
     </MudTabs>
  </MudPaper>

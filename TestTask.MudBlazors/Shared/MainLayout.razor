@@ -12,8 +12,6 @@
 
 @inject NavigationManager Navigation
 
-@inject IDialogService DialogService
-
 <MudThemeProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
@@ -22,7 +20,6 @@
 
     <MudAppBar Elevation="0">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())"/>
-        <MudIconButton Icon="@MaterialDesignIcons.Normal.FileImport" Color="Color.Inherit" OnClick="OpenDialog" />
         <MudSpacer />
         <MudTooltip Text="Sign In">
             <MudSpacer></MudSpacer>
@@ -55,11 +52,4 @@
     private bool _drawerOpen = false;
 
     private void DrawerToggle() => _drawerOpen = !_drawerOpen;
-
-    private void OpenDialog()
-    {
-        DialogOptions closeOnEscapeKey = new DialogOptions() { CloseOnEscapeKey = true };
-
-        DialogService.Show<DialogImportData>("Import table", closeOnEscapeKey);
-    }
 }
