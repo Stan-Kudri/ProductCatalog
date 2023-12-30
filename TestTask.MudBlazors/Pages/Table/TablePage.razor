@@ -6,11 +6,13 @@
  @using TestTask.MudBlazors.Pages.Table.Categories
  @using TestTask.MudBlazors.Pages.Table.TypeProduct
  @using TestTask.MudBlazors.Pages.Table.Products
+ @using TestTask.MudBlazors.Pages.Export
  @using Bromix.MudBlazor.MaterialDesignIcons
 
 <MudPaper>
     <MudToolBar>
         <MudSpacer />
+        <ExportExcel></ExportExcel>
         <MudButton StartIcon="@MaterialDesignIcons.Normal.FileImport" Color="Color.Primary" OnClick="OpenDialog">Import EXCEL</MudButton>
     </MudToolBar>
     <MudTabs Rounded="true" AlwaysShowScrollButtons="true" ActivePanelIndex="@SelectIndexTab" Border="true" Centered="true" ActivePanelIndexChanged="@NavigationSelectTab">
