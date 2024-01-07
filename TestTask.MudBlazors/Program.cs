@@ -3,12 +3,16 @@ using MudBlazor.Services;
 using TestTask.Core;
 using TestTask.Core.Import;
 using TestTask.Core.Import.Importers;
+using TestTask.Core.Models;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
 using TestTask.Core.Models.Types;
 using TestTask.Core.Models.Users;
 using TestTask.MudBlazors.Model;
+using TestTask.MudBlazors.Pages.Table.Model;
+using TestTask.MudBlazors.Pages.Table.PageTableView;
+using TestTask.MudBlazors.Pages.Table.TablePages;
 
 const string ConnectionName = "DbConnection";
 
@@ -38,6 +42,11 @@ builder.Services.AddSingleton(e => new ExcelImporter<Company>(e.GetRequiredServi
 builder.Services.AddSingleton(e => new ExcelImporter<Product>(e.GetRequiredService<ProductImporter>()));
 builder.Services.AddSingleton(e => new ExcelImporter<Category>(e.GetRequiredService<CategoryImporter>()));
 builder.Services.AddSingleton(e => new ExcelImporter<ProductType>(e.GetRequiredService<TypeProductImporter>()));
+
+builder.Services.AddScoped<CompanyTable>();
+builder.Services.AddScoped<CompanyDetailProvider>();
+builder.Services.AddScoped<ITableDetailProvider<Company>>(e => e.GetRequiredService<CompanyDetailProvider>());
+builder.Services.AddScoped<ISortEntity<Company, CompanySortType>>(e => new SortCompany());
 
 var app = builder.Build();
 

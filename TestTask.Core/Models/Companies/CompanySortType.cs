@@ -6,14 +6,14 @@ using TestTask.Core.Models.Products;
 
 namespace TestTask.Core.Models.Companies
 {
-    public abstract class SortTypeCompany : SmartEnum<SortTypeCompany>, ISortableSmartEnum<Company>
+    public abstract class CompanySortType : SmartEnum<CompanySortType>, ISortableSmartEnum<Company>
     {
-        public static readonly SortTypeCompany Id = new SortType<int>("Id", 0, e => e.Id);
-        public static readonly SortTypeCompany Name = new SortType<string>("Name", 1, e => e.Name);
-        public static readonly SortTypeCompany Country = new SortType<string>("Country", 2, e => e.Country);
-        public static readonly SortTypeCompany DataCreate = new SortType<DateTime>("DataCreate", 3, e => e.DateCreation);
+        public static readonly CompanySortType Id = new SortType<int>("Id", 0, e => e.Id);
+        public static readonly CompanySortType Name = new SortType<string>("Name", 1, e => e.Name);
+        public static readonly CompanySortType Country = new SortType<string>("Country", 2, e => e.Country);
+        public static readonly CompanySortType DataCreate = new SortType<DateTime>("DataCreate", 3, e => e.DateCreation);
 
-        public SortTypeCompany(string name, int value)
+        public CompanySortType(string name, int value)
             : base(name, value)
         {
         }
@@ -23,7 +23,7 @@ namespace TestTask.Core.Models.Companies
 
         public override string ToString() => base.Name;
 
-        private sealed class SortType<TKey> : SortTypeCompany
+        private sealed class SortType<TKey> : CompanySortType
         {
             private readonly Expression<Func<Company, TKey>> _expression;
 
