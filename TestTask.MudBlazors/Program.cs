@@ -43,7 +43,7 @@ builder.Services.AddSingleton(e => new ExcelImporter<Product>(e.GetRequiredServi
 builder.Services.AddSingleton(e => new ExcelImporter<Category>(e.GetRequiredService<CategoryImporter>()));
 builder.Services.AddSingleton(e => new ExcelImporter<ProductType>(e.GetRequiredService<TypeProductImporter>()));
 
-builder.Services.AddScoped<CompanyTable>();
+builder.Services.AddScoped<CompanyPage>();
 builder.Services.AddScoped<CompanyDetailProvider>();
 builder.Services.AddScoped<ITableDetailProvider<Company>>(e => e.GetRequiredService<CompanyDetailProvider>());
 builder.Services.AddScoped<ISortEntity<Company, CompanySortType>>(e => new SortCompany());

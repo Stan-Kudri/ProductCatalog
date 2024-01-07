@@ -2,11 +2,11 @@
 
 namespace TestTask.MudBlazors.Pages.Table.TablePages
 {
-    public partial class CompanyTable : IDataProcessor
+    public partial class CompanyPage : IDataProcessor
     {
         private NavigationManager _navigation;
 
-        public CompanyTable(NavigationManager navigation)
+        public CompanyPage(NavigationManager navigation)
         {
             _navigation = navigation;
         }

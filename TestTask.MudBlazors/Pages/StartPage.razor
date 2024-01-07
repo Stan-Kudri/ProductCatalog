@@ -6,7 +6,7 @@
 @using TestTask.MudBlazors.Pages.Table.TablePages
 
 @inject NavigationManager Navigation
-@inject CompanyTable CompanyTable
+@inject CompanyPage CompanyTable
 
 <PageTitle>StartPage</PageTitle>
 
@@ -33,7 +33,7 @@
     </MudButtonGroup>
 </div>
 
-<TableViewPage TSortType="SortCompanyType" T="Company" DataProcessor=CompanyTable></TableViewPage>
+<TableViewPage TSortType="CompanySortType" T="Company" DataProcessor=CompanyTable></TableViewPage>
 
 @functions 
 {

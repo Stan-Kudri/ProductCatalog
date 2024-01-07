@@ -6,8 +6,13 @@
  @using TestTask.MudBlazors.Pages.Table.Categories
  @using TestTask.MudBlazors.Pages.Table.TypeProduct
  @using TestTask.MudBlazors.Pages.Table.Products
+ @using TestTask.MudBlazors.Pages.Table.TablePages
  @using TestTask.MudBlazors.Pages.Export
+ @using TestTask.Core.Models.Companies
  @using Bromix.MudBlazor.MaterialDesignIcons
+
+
+@inject CompanyPage CompanyPage
 
 <MudPaper>
     <MudToolBar>
@@ -18,7 +23,7 @@
     <MudTabs Rounded="true" AlwaysShowScrollButtons="true" ActivePanelIndex="@SelectIndexTab" Border="true" Centered="true" ActivePanelIndexChanged="@NavigationSelectTab">
         <MudSpacer/>
         <MudTabPanel Text="Company">
-            <DynamicComponent Type="typeof(Companies.CompanyPage)" />
+            <TableViewPage TSortType="CompanySortType" T="Company" DataProcessor=CompanyPage></TableViewPage>
         </MudTabPanel>
         <MudTabPanel Text="Category">
             <DynamicComponent Type="typeof(Categories.CategoryPage)" />
