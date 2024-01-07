@@ -1,7 +1,8 @@
-﻿@using Bromix.MudBlazor.MaterialDesignIcons
-@using TestTask.Core.Models.Types
+﻿@using TestTask.Core.Models
+@using Bromix.MudBlazor.MaterialDesignIcons
 
-<PageTitle>Type Product</PageTitle>
+@typeparam T
+@typeparam TSortType
 
 <MudPaper>
 
@@ -10,13 +11,11 @@
         <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" Style="max-width:300px;"/>
 
-        <MudSpacer />
-
-        <MudSelect T="SortTypeProduct" Style="align-items:end" Label="Sort" MultiSelection="true" @bind-Value="sortField.sortType" @bind-SelectedValues="sortField.SortFields"
+        <MudSelect T="TSortType" Style="align-items:end" Label="Sort" MultiSelection="true" @bind-Value="SortField.sortType" @bind-SelectedValues="SortField.SortFields"
                    SelectAll="true" SelectAllText="All" OnClose="@LoadData">
-            @foreach (var item in sortField.Items)
+            @foreach (var item in SortField.Items)
             {
-                <MudSelectItem T="SortTypeProduct" Value="@item" />
+                <MudSelectItem T="TSortType" Value="@item" />
             }
         </MudSelect>
 
@@ -27,17 +26,18 @@
             <MudSpacer />
         </div>
 
+
         <MudTooltip Text="Off Filter" Placement="Placement.Top">
             <MudIconButton Icon="@MaterialDesignIcons.Normal.FilterOff" OnClick="@ClearFilter" Color="Color.Primary" Variant="Variant.Text" />
         </MudTooltip>
 
     </MudToolBar>
 
-    <MudToolBar>
+    <MudToolBar >
 
         <MudSpacer/>
-        <MudIconButton Icon="@Icons.Material.Filled.Add" OnClick="@AddPage" Color="Color.Primary" Variant="Variant.Text" Title="Add Item" />
-        <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="@Remove" Color="Color.Primary" Variant="Variant.Text" Disabled="@isSelectItems" Title="Remove Select Items" />           
+        <MudIconButton Icon="@Icons.Material.Filled.Add" OnClick="@DataProcessor.AddItemPage" Color="Color.Primary" Variant="Variant.Text" Title="Add Item" />
+        <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="@Remove" Color="Color.Primary" Variant="Variant.Text" Disabled="@isSelectItems" Title="Remove Select Items" />
         <MudFileUpload T="IBrowserFile" Accept=".xlsx,.xls,.xlsm" FilesChanged="UploadFiles" style="padding:0; margin:0;">
             <ButtonTemplate>
                 <MudIconButton HtmlTag="label" Icon="@MaterialDesignIcons.Normal.FileImport" Color="Color.Primary" for="@context.Id" title="Import Excel" />
@@ -45,27 +45,31 @@
         </MudFileUpload>
 
     </MudToolBar>
-
-    <MudTable Items="@typeProduct" Hover="true" SortLabel="Sort By" Elevation="0" MultiSelection="true" Dense="true" T="ProductType" SelectedItemsChanged="OnSelectItems">
+           
+    <MudTable Items="@items" Hover="true" SortLabel="Sort By" Elevation="0" MultiSelection="true" Dense="true" T="T" SelectedItemsChanged="OnSelectItems">
 
         <ColGroup>
-            <col style="width: 60px;" />
-            <col style="width: 30%;" />
-            <col style="width: 30%;" />
+            @for (var i = 0; i < TableProvider.Columns.Count; i++)
+            {
+                <col style="width: @TableProvider.Columns[i].WidthValuePercent%;" />
+            }
             <col style="width: 40px;" />
+            
         </ColGroup>
-
+                
         <HeaderContent>
-            <MudTh>Id</MudTh>
-            <MudTh>Name</MudTh>
-            <MudTh>Category</MudTh>
+            @foreach(var item in TableProvider.Columns)
+            {
+                <MudTh>@item.Name</MudTh>    
+            }
             <MudTh></MudTh>
         </HeaderContent>
 
         <RowTemplate>
-            <MudTd DataLabel="Id">@context.Id</MudTd>
-            <MudTd DataLabel="Name">@context.Name</MudTd>
-            <MudTd DataLabel="Category">@context.Category.ToString()</MudTd>
+            @foreach (var item in TableProvider.Columns)
+            {
+                <MudTd DataLabel="@item.Name">@item.ValueSelector(@context)</MudTd>
+            }
             <MudTh Style="text-align:right">
                 <MudTooltip Text="Edit" Placement="Placement.Bottom">
                     <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Outlined" Size="Size.Medium" Class="ml-1" OnClick="@(() => Update(context.Id))" />
@@ -74,7 +78,7 @@
                     <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" Size="Size.Medium" OnClick="@(() => Remove(context.Id))" />
                 </MudTooltip>
             </MudTh>
-        </RowTemplate>
+         </RowTemplate>
 
         <PagerContent>
             <MudTablePager HorizontalAlignment="HorizontalAlignment.Center" PageSizeOptions="pageModel.Items" />
@@ -82,4 +86,4 @@
 
         </MudTable>
 
-    </MudPaper>
+</MudPaper>

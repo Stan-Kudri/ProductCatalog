@@ -1,23 +1,23 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using TestTask.Core.Models.Categories;
+using TestTask.Core.Models.Companies;
 using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model;
 using TestTask.MudBlazors.Model.TableComponent;
 
-namespace TestTask.MudBlazors.Pages.Table.Categories
+namespace TestTask.MudBlazors.Pages.Table.ItemTable
 {
-    public partial class CategoryItemPage
+    public partial class CompanyItemPage
     {
-        [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
+        [Inject] private CompanyRepository CompanyRepository { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
         [Inject] private NavigationManager Navigation { get; set; } = null!;
 
-        private CategoryModel categoryModel { get; set; } = new CategoryModel();
+        private CompanyModel companyModel { get; set; } = new CompanyModel();
         private string[] errors = { };
         private bool IsAddItem = true;
 
-        private Category? oldItem;
+        private Company? oldCompany;
 
         [Parameter] public int? Id { get; set; } = null;
 
@@ -35,8 +35,8 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
             }
 
             IsAddItem = false;
-            oldItem = CategoryRepository.GetCategory((int)Id);
-            categoryModel = oldItem.GetCategoryModel();
+            oldCompany = CompanyRepository.GetCompany((int)Id);
+            companyModel = oldCompany.GetCompanyModel();
         }
 
         private void Close() => NavigationInCompanyTable();
@@ -55,18 +55,18 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
                 return;
             }
 
-            if (!CategoryRepository.IsFreeName(categoryModel.Name))
+            if (!CompanyRepository.IsFreeName(companyModel.Name))
             {
                 ShowMessageWarning("Name is not free.");
                 return;
             }
 
-            var item = categoryModel.GetCategory();
-            CategoryRepository.Add(item);
+            var company = companyModel.GetCompany();
+            CompanyRepository.Add(company);
             NavigationInCompanyTable();
         }
 
-        private void ClearData() => categoryModel.ClearData();
+        private void ClearData() => companyModel.ClearData();
 
         //Methods for edit item company
         private async Task Updata()
@@ -82,19 +82,17 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
                 return;
             }
 
-            var item = categoryModel.GetModifyCategory(oldItem.Id);
+            var company = companyModel.GetModifyCompany(oldCompany.Id);
 
-            if (!oldItem.Equals(item))
+            if (!oldCompany.Equals(company))
             {
-                CategoryRepository.Updata(item);
+                CompanyRepository.Updata(company);
             }
 
             NavigationInCompanyTable();
         }
 
-        private void NavigationInCompanyTable() => Navigation.NavigateTo($"/table/{TabTable.Category.ActiveTabIndex}");
-
-        private void RecoverPastData() => categoryModel = oldItem.GetCategoryModel();
+        private void RecoverPastData() => companyModel = oldCompany.GetCompanyModel();
 
         private IEnumerable<string> ValidFormatText(string str)
         {
@@ -104,6 +102,22 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
             }
         }
 
+        private IEnumerable<string> ValidFormatDate(DateTime date)
+        {
+            if (date == null)
+            {
+                yield return "Date is required.";
+                yield break;
+            }
+
+            if (date > DateTime.Now)
+            {
+                yield return "The creation date is not within the valid range.";
+            }
+        }
+
+        private void NavigationInCompanyTable() => Navigation.NavigateTo($"/table/{TabTable.Company.ActiveTabIndex}");
+
         private async Task ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
 
@@ -111,9 +125,15 @@ namespace TestTask.MudBlazors.Pages.Table.Categories
         {
             message = string.Empty;
 
-            if (categoryModel.Name == null || categoryModel.Name == string.Empty)
+            if (companyModel.Name == null || companyModel.Name == string.Empty)
             {
                 message = "Name is required.";
+                return false;
+            }
+
+            if (companyModel.DateCreation == null)
+            {
+                message = "The company creation date has not been selected.";
                 return false;
             }
 

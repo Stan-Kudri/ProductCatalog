@@ -8,22 +8,16 @@ using TestTask.Core.Models.Types;
 
 namespace TestTask.Core.Models.Products
 {
-    public interface ISortableSmartEnum<T>
+    public abstract class ProductSortType : SmartEnum<ProductSortType>, ISortableSmartEnum<Product>
     {
-        IOrderedQueryable<T> OrderBy(IQueryable<T> query, bool asc);
-        IOrderedQueryable<T> ThenBy(IOrderedQueryable<T> query, bool asc);
-    }
+        public static readonly ProductSortType Id = new SortType<int>("Id", 0, e => e.Id);
+        public static readonly ProductSortType Name = new SortType<string>("Name", 1, e => e.Name);
+        public static readonly ProductSortType Company = new SortType<Company>("Company", 2, e => e.Company);
+        public static readonly ProductSortType Category = new SortType<Category>("Category", 3, e => e.Category);
+        public static readonly ProductSortType ProductType = new SortType<ProductType>("Product Type", 4, e => e.Type);
+        public static readonly ProductSortType Price = new SortType<decimal>("Price", 5, e => e.Price);
 
-    public abstract class SortFieldProduct : SmartEnum<SortFieldProduct>, ISortableSmartEnum<Product>
-    {
-        public static readonly SortFieldProduct Id = new SortType<int>("Id", 0, e => e.Id);
-        public static readonly SortFieldProduct Name = new SortType<string>("Name", 1, e => e.Name);
-        public static readonly SortFieldProduct Company = new SortType<Company>("Company", 2, e => e.Company);
-        public static readonly SortFieldProduct Category = new SortType<Category>("Category", 3, e => e.Category);
-        public static readonly SortFieldProduct ProductType = new SortType<ProductType>("Product Type", 4, e => e.Type);
-        public static readonly SortFieldProduct Price = new SortType<decimal>("Price", 5, e => e.Price);
-
-        public SortFieldProduct(string name, int value)
+        public ProductSortType(string name, int value)
             : base(name, value)
         {
         }
@@ -31,12 +25,9 @@ namespace TestTask.Core.Models.Products
         public abstract IOrderedQueryable<Product> OrderBy(IQueryable<Product> query, bool asc);
         public abstract IOrderedQueryable<Product> ThenBy(IOrderedQueryable<Product> query, bool asc);
 
-        public override string ToString()
-        {
-            return base.Name;
-        }
+        public override string ToString() => base.Name;
 
-        private sealed class SortType<TKey> : SortFieldProduct
+        private sealed class SortType<TKey> : ProductSortType
         {
             private readonly Expression<Func<Product, TKey>> _expression;
 

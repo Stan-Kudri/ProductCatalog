@@ -1,53 +1,47 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using TestTask.Core.Models.Categories;
-using TestTask.Core.Models.Types;
 using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model;
 using TestTask.MudBlazors.Model.TableComponent;
 
-namespace TestTask.MudBlazors.Pages.Table.TypeProduct
+namespace TestTask.MudBlazors.Pages.Table.ItemTable
 {
-    public partial class TypeProductItemPage
+    public partial class CategoryItemPage
     {
-        [Inject] private ProductTypeRepository ProductTypeRepository { get; set; } = null!;
         [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
         [Inject] private NavigationManager Navigation { get; set; } = null!;
 
-        private TypeProductModel typeProductModel { get; set; } = new TypeProductModel();
+        private CategoryModel categoryModel { get; set; } = new CategoryModel();
         private string[] errors = { };
-        private bool isAddItem = true;
+        private bool IsAddItem = true;
 
-        private ProductType? oldTypeProduct;
-
-        private List<Category> selectCategories = new List<Category>();
+        private Category? oldItem;
 
         [Parameter] public int? Id { get; set; } = null;
 
         protected override void OnInitialized()
         {
-            selectCategories = CategoryRepository.GetAll();
-
             if (Id == null)
             {
-                isAddItem = true;
+                IsAddItem = true;
                 return;
             }
 
             if (Id <= 0)
             {
-                NavigationInTypeProductTable();
+                NavigationInCompanyTable();
             }
 
-            isAddItem = false;
-            oldTypeProduct = ProductTypeRepository.GetItem((int)Id);
-            typeProductModel = oldTypeProduct.GetTypeProductModel();
+            IsAddItem = false;
+            oldItem = CategoryRepository.GetCategory((int)Id);
+            categoryModel = oldItem.GetCategoryModel();
         }
 
-        private void Close() => NavigationInTypeProductTable();
+        private void Close() => NavigationInCompanyTable();
 
-        //Methods for add item type product
+        //Methods for add item company
         private async Task Add()
         {
             if (errors.Length != 0)
@@ -61,20 +55,20 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
                 return;
             }
 
-            if (!ProductTypeRepository.IsFreeName(typeProductModel.Name))
+            if (!CategoryRepository.IsFreeName(categoryModel.Name))
             {
                 ShowMessageWarning("Name is not free.");
                 return;
             }
 
-            var typeProduct = typeProductModel.GetProductType();
-            ProductTypeRepository.Add(typeProduct);
-            NavigationInTypeProductTable();
+            var item = categoryModel.GetCategory();
+            CategoryRepository.Add(item);
+            NavigationInCompanyTable();
         }
 
-        private void ClearData() => typeProductModel.ClearData();
+        private void ClearData() => categoryModel.ClearData();
 
-        //Methods for edit item type product
+        //Methods for edit item company
         private async Task Updata()
         {
             if (errors.Length != 0)
@@ -88,17 +82,19 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
                 return;
             }
 
-            var typeProduct = typeProductModel.GetModifyType(oldTypeProduct.Id);
+            var item = categoryModel.GetModifyCategory(oldItem.Id);
 
-            if (!oldTypeProduct.Equals(typeProduct))
+            if (!oldItem.Equals(item))
             {
-                ProductTypeRepository.Updata(typeProduct);
+                CategoryRepository.Updata(item);
             }
 
-            NavigationInTypeProductTable();
+            NavigationInCompanyTable();
         }
 
-        private void RecoverPastData() => typeProductModel = oldTypeProduct.GetTypeProductModel();
+        private void NavigationInCompanyTable() => Navigation.NavigateTo($"/table/{TabTable.Category.ActiveTabIndex}");
+
+        private void RecoverPastData() => categoryModel = oldItem.GetCategoryModel();
 
         private IEnumerable<string> ValidFormatText(string str)
         {
@@ -108,8 +104,6 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
             }
         }
 
-        private void NavigationInTypeProductTable() => Navigation.NavigateTo($"/table/{TabTable.TypeProduct.ActiveTabIndex}");
-
         private async Task ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
 
@@ -117,15 +111,9 @@ namespace TestTask.MudBlazors.Pages.Table.TypeProduct
         {
             message = string.Empty;
 
-            if (typeProductModel.Name == null || typeProductModel.Name == string.Empty)
+            if (categoryModel.Name == null || categoryModel.Name == string.Empty)
             {
                 message = "Name is required.";
-                return false;
-            }
-
-            if (typeProductModel.Category == null)
-            {
-                message = "Category not selected.";
                 return false;
             }
 
