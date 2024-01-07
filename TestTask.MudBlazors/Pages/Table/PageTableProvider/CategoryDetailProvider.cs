@@ -11,7 +11,10 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableProvider
         private readonly ProductRepository _productRepository;
         private readonly ProductTypeRepository _productTypeRepository;
 
-        public CategoryDetailProvider(CategoryRepository categoryRepository, ProductRepository productRepository, ProductTypeRepository productTypeRepository)
+        public CategoryDetailProvider
+            (CategoryRepository categoryRepository,
+            ProductRepository productRepository,
+            ProductTypeRepository productTypeRepository)
         {
             _categoryRepository = categoryRepository;
             _productRepository = productRepository;
@@ -20,8 +23,8 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableProvider
 
         public IReadOnlyList<ListTableColumn> Columns => new List<ListTableColumn>
         {
-            new ListTableColumn("ID", 15, e => ((Category)e).Id),
-            new ListTableColumn("Name", 25, e => ((Category)e).Name),
+            new ListTableColumn("ID", 25, e => ((Category)e).Id),
+            new ListTableColumn("Name", 35, e => ((Category)e).Name),
         };
 
         public IQueryable<Category> GetQueryableAll()

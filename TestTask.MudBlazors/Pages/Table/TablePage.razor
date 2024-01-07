@@ -2,17 +2,19 @@
 
  @using Table             
  @using TestTask.MudBlazors.Model
- @using TestTask.MudBlazors.Pages.Table.TypeProduct
- @using TestTask.MudBlazors.Pages.Table.Products
  @using TestTask.MudBlazors.Pages.Table.TablePages
  @using TestTask.MudBlazors.Pages.Export
  @using TestTask.Core.Models.Companies
  @using TestTask.Core.Models.Categories
+ @using TestTask.Core.Models.Types
+ @using TestTask.Core.Models.Products
  @using Bromix.MudBlazor.MaterialDesignIcons
 
 
 @inject CompanyPage CompanyPage
 @inject CategoryPage CategoryPage
+@inject TypePage TypePage
+@inject ProductPage ProductPage
 
 <MudPaper>
     <MudToolBar>
@@ -29,10 +31,10 @@
             <TableViewPage TSortType="CategoriesSortType" T="Category" DataProcessor=CategoryPage></TableViewPage>
         </MudTabPanel>
         <MudTabPanel Text="Type Product">
-            <DynamicComponent Type="typeof(TypeProduct.TypeProductPage)" />
+            <TableViewPage TSortType="ProductTypeSortType" T="ProductType" DataProcessor=TypePage></TableViewPage>
         </MudTabPanel>
         <MudTabPanel Text="Product">
-            <DynamicComponent Type="typeof(Products.ProductPage)" />
+            <TableViewPage TSortType="ProductSortType" T="Product" DataProcessor=ProductPage></TableViewPage>
         </MudTabPanel>
     </MudTabs>
  </MudPaper>

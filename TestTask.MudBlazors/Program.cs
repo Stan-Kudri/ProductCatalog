@@ -54,6 +54,16 @@ builder.Services.AddScoped<CategoryDetailProvider>();
 builder.Services.AddScoped<ITableDetailProvider<Category>>(e => e.GetRequiredService<CategoryDetailProvider>());
 builder.Services.AddScoped<ISortEntity<Category, CategoriesSortType>>(e => new SortCategories());
 
+builder.Services.AddScoped<TypePage>();
+builder.Services.AddScoped<TypeDetailProvider>();
+builder.Services.AddScoped<ITableDetailProvider<ProductType>>(e => e.GetRequiredService<TypeDetailProvider>());
+builder.Services.AddScoped<ISortEntity<ProductType, ProductTypeSortType>>(e => new SortType());
+
+builder.Services.AddScoped<ProductPage>();
+builder.Services.AddScoped<ProductDetailProvider>();
+builder.Services.AddScoped<ITableDetailProvider<Product>>(e => e.GetRequiredService<ProductDetailProvider>());
+builder.Services.AddScoped<ISortEntity<Product, ProductSortType>>(e => new SortProduct());
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
