@@ -6,12 +6,12 @@ using TestTask.Core.Models.Products;
 
 namespace TestTask.Core.Models.Categories
 {
-    public abstract class SortTypeCategories : SmartEnum<SortTypeCategories>, ISortableSmartEnum<Category>
+    public abstract class CategoriesSortType : SmartEnum<CategoriesSortType>, ISortableSmartEnum<Category>
     {
-        public static readonly SortTypeCategories Id = new SortType<int>("Id", 0, e => e.Id);
-        public static readonly SortTypeCategories Name = new SortType<string>("Name", 1, e => e.Name);
+        public static readonly CategoriesSortType Id = new SortType<int>("Id", 0, e => e.Id);
+        public static readonly CategoriesSortType Name = new SortType<string>("Name", 1, e => e.Name);
 
-        public SortTypeCategories(string name, int value)
+        public CategoriesSortType(string name, int value)
             : base(name, value)
         {
         }
@@ -24,7 +24,7 @@ namespace TestTask.Core.Models.Categories
             return base.Name;
         }
 
-        private sealed class SortType<TKey> : SortTypeCategories
+        private sealed class SortType<TKey> : CategoriesSortType
         {
             private readonly Expression<Func<Category, TKey>> _expression;
 

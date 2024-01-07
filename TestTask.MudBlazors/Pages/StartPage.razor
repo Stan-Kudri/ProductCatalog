@@ -1,12 +1,6 @@
 ﻿@page "/"
 
-@using TestTask.Core.Models.Companies
-@using TestTask.MudBlazors.Pages
-@using TestTask.MudBlazors.Pages.Table
-@using TestTask.MudBlazors.Pages.Table.TablePages
-
 @inject NavigationManager Navigation
-@inject CompanyPage CompanyTable
 
 <PageTitle>StartPage</PageTitle>
 
@@ -32,8 +26,6 @@
         </MudButton>
     </MudButtonGroup>
 </div>
-
-<TableViewPage TSortType="CompanySortType" T="Company" DataProcessor=CompanyTable></TableViewPage>
 
 @functions 
 {

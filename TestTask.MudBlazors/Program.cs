@@ -11,6 +11,7 @@ using TestTask.Core.Models.Types;
 using TestTask.Core.Models.Users;
 using TestTask.MudBlazors.Model;
 using TestTask.MudBlazors.Pages.Table.Model;
+using TestTask.MudBlazors.Pages.Table.PageTableProvider;
 using TestTask.MudBlazors.Pages.Table.PageTableView;
 using TestTask.MudBlazors.Pages.Table.TablePages;
 
@@ -47,6 +48,11 @@ builder.Services.AddScoped<CompanyPage>();
 builder.Services.AddScoped<CompanyDetailProvider>();
 builder.Services.AddScoped<ITableDetailProvider<Company>>(e => e.GetRequiredService<CompanyDetailProvider>());
 builder.Services.AddScoped<ISortEntity<Company, CompanySortType>>(e => new SortCompany());
+
+builder.Services.AddScoped<CategoryPage>();
+builder.Services.AddScoped<CategoryDetailProvider>();
+builder.Services.AddScoped<ITableDetailProvider<Category>>(e => e.GetRequiredService<CategoryDetailProvider>());
+builder.Services.AddScoped<ISortEntity<Category, CategoriesSortType>>(e => new SortCategories());
 
 var app = builder.Build();
 

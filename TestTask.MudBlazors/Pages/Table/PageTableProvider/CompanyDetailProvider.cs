@@ -41,8 +41,6 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableView
         }
 
         public void Upsert(Company entity)
-        {
-            _companyRepository.Upsert(entity);
-        }
+            => _companyRepository.Upsert(entity);
     }
 }
