@@ -73,7 +73,10 @@ namespace TestTask.MudBlazors.Pages
         private string? MatchPassword(string arg)
         {
             if (userModel.Password != arg)
+            {
                 return "Passwords don't match";
+            }
+
             return null;
         }
     }

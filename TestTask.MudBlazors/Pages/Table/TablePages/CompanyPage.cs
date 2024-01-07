@@ -6,8 +6,7 @@ namespace TestTask.MudBlazors.Pages.Table.TablePages
     {
         private readonly NavigationManager _navigation;
 
-        public CompanyPage(NavigationManager navigation)
-            => _navigation = navigation;
+        public CompanyPage(NavigationManager navigation) => _navigation = navigation;
 
         public void AddItemPage() => _navigation.NavigateTo("/company");
 

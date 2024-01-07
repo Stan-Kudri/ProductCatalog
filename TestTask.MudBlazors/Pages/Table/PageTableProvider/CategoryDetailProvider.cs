@@ -42,7 +42,6 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableProvider
             _categoryRepository.Remove(id);
         }
 
-        public void Upsert(Category entity)
-            => _categoryRepository.Upsert(entity);
+        public void Upsert(Category entity) => _categoryRepository.Upsert(entity);
     }
 }

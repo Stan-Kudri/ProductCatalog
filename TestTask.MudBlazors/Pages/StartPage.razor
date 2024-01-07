@@ -29,13 +29,7 @@
 
 @functions 
 {
-    void RegistrationPage()
-    {
-        Navigation.NavigateTo($"/login/{false}");
-    }
+    void RegistrationPage() => Navigation.NavigateTo($"/login/{false}");
 
-    void SignInPage()
-    {
-        Navigation.NavigateTo($"/login/{true}");
-    }
+    void SignInPage() => Navigation.NavigateTo($"/login/{true}");
 }

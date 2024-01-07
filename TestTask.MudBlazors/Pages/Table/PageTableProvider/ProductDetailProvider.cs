@@ -36,6 +36,5 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableProvider
         public void Remove(int id) => _productRepository.Remove(id);
 
         public void Upsert(Product entity) => _productRepository.Upsert(entity);
-
     }
 }

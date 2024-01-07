@@ -40,7 +40,6 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableView
             _companyRepository.Remove(id);
         }
 
-        public void Upsert(Company entity)
-            => _companyRepository.Upsert(entity);
+        public void Upsert(Company entity) => _companyRepository.Upsert(entity);
     }
 }
