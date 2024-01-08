@@ -40,14 +40,14 @@
                 }
             </MudSelect>
 
-            <MudSelect T="Category" Label="Category" @bind-Value="productModel.Category" AdornmentIcon="@Icons.Material.Filled.ShortText">
+            <MudSelect T="Category" Label="Category" AdornmentIcon="@Icons.Material.Filled.ShortText" Value="@productModel.Category" ValueChanged="ChangeValueCategory">
                 @foreach (var item in selectCategories)
                 {
                     <MudSelectItem T="Category" Value="@item" />
                 }
             </MudSelect>
 
-            <MudSelect T="ProductType" Label="Product Type" @bind-Value="productModel.ProductType" AdornmentIcon="@Icons.Material.Filled.ShortText">
+            <MudSelect T="ProductType" Label="Product Type" @bind-Value="productModel.ProductType" AdornmentIcon="@Icons.Material.Filled.ShortText" Disabled="@isDisabledType">
                 @foreach (var item in selectTypes)
                 {
                     <MudSelectItem T="ProductType" Value="@item" />

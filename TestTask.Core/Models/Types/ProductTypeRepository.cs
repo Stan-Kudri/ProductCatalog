@@ -105,6 +105,9 @@ namespace TestTask.Core.Models.Types
 
         public List<ProductType> GetAll() => _dbContext.Type.Count() > 0 ? _dbContext.Type.ToList() : null;
 
+        public List<ProductType> GetListTypesByCategory(int idCategory)
+            => _dbContext.Type.Where(e => e.CategoryId == idCategory).Select(e => e).ToList();
+
         public bool IsFreeName(string name) => _dbContext.Type.FirstOrDefault(e => e.Name == name) == null;
 
         public ProductType GetItem(int id) => _dbContext.Type.FirstOrDefault(e => e.Id == id) ?? throw new ArgumentException("Interaction element not found.");

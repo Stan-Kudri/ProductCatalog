@@ -22,6 +22,7 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
         private ProductModel productModel { get; set; } = new ProductModel();
         private string[] errors = { };
         private bool isAddItem = true;
+        private bool isDisabledType = true;
 
         private Product? oldProduct;
 
@@ -35,7 +36,6 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
         {
             selectCompanies = CompanyRepository.GetAll();
             selectCategories = CategoryRepository.GetAll();
-            selectTypes = ProductTypeRepository.GetAll();
 
             if (Id == null)
             {
@@ -104,6 +104,20 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
             }
 
             NavigationInTypeProductTable();
+        }
+
+        private void ChangeValueCategory(Category? item)
+        {
+            productModel.Category = item;
+
+            if (productModel.Category == null)
+            {
+                isDisabledType = true;
+                return;
+            }
+
+            isDisabledType = false;
+            selectTypes = ProductTypeRepository.GetListTypesByCategory(item.Id);
         }
 
         private void RecoverPastData() => productModel = oldProduct.GetProductModel();
