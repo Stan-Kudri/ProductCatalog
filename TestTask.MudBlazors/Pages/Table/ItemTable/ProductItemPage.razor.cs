@@ -75,8 +75,8 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
                 return;
             }
 
-            var typeProduct = productModel.GetProductType();
-            ProductRepository.Add(typeProduct);
+            var product = productModel.GetProductType();
+            ProductRepository.Add(product);
             NavigationInTypeProductTable();
         }
 
@@ -96,15 +96,23 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
                 return;
             }
 
-            var typeProduct = productModel.GetModifyType(oldProduct.Id);
+            var product = productModel.GetModifyType(oldProduct.Id);
 
-            if (!oldProduct.Equals(typeProduct))
+            if (!ProductRepository.IsFreeNameItemUpsert(product))
             {
-                ProductRepository.Updata(typeProduct);
+                ShowMessageWarning("Name is not free.");
+                return;
+            }
+
+            if (!oldProduct.Equals(product))
+            {
+                ProductRepository.Updata(product);
             }
 
             NavigationInTypeProductTable();
         }
+
+        private void RecoverPastData() => productModel = oldProduct.GetProductModel();
 
         private void ChangeValueCategory(Category? item)
         {
@@ -119,8 +127,6 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
             isDisabledType = false;
             selectTypes = ProductTypeRepository.GetListTypesByCategory(productModel.Category.Id);
         }
-
-        private void RecoverPastData() => productModel = oldProduct.GetProductModel();
 
         private void NavigationInTypeProductTable() => Navigation.NavigateTo($"/table/{TabTable.Product.ActiveTabIndex}");
 

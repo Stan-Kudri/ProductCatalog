@@ -84,6 +84,12 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
 
             var company = companyModel.GetModifyCompany(oldCompany.Id);
 
+            if (!CompanyRepository.IsFreeNameItemUpsert(company))
+            {
+                ShowMessageWarning("Name is not free.");
+                return;
+            }
+
             if (!oldCompany.Equals(company))
             {
                 CompanyRepository.Updata(company);
@@ -99,20 +105,6 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
             if (string.IsNullOrWhiteSpace(str))
             {
                 yield return "Field is required.";
-            }
-        }
-
-        private IEnumerable<string> ValidFormatDate(DateTime date)
-        {
-            if (date == null)
-            {
-                yield return "Date is required.";
-                yield break;
-            }
-
-            if (date > DateTime.Now)
-            {
-                yield return "The creation date is not within the valid range.";
             }
         }
 

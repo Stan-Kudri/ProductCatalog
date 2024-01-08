@@ -96,6 +96,18 @@ namespace TestTask.Core.Models.Products
 
         public bool IsFreeName(string name) => _dbContext.Product.FirstOrDefault(e => e.Name == name) == null;
 
+        public bool IsFreeNameItemUpsert(Product item)
+        {
+            var busyItem = _dbContext.Product.FirstOrDefault(e => e.Name == item.Name);
+
+            if (busyItem != null && item.Id != busyItem.Id)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public Product GetItem(int id) => _dbContext.Product.FirstOrDefault(e => e.Id == id) ?? throw new ArgumentException("Interaction element not found.");
 
         public IQueryable<Product> GetQueryableAll()

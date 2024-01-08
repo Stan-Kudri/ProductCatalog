@@ -87,5 +87,17 @@ namespace TestTask.Core.Models.Companies
         public IQueryable<Company> GetQueryableAll() => _dbContext.Company.Select(e => e);
 
         public bool IsFreeName(string name) => _dbContext.Company.FirstOrDefault(e => e.Name == name) == null;
+
+        public bool IsFreeNameItemUpsert(Company item)
+        {
+            var busyItem = _dbContext.Company.FirstOrDefault(e => e.Name == item.Name);
+
+            if (busyItem != null && item.Id != busyItem.Id)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

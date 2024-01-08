@@ -83,5 +83,17 @@ namespace TestTask.Core.Models.Categories
         public IQueryable<Category> GetQueryableAll() => _dbContext.Category;
 
         public bool IsFreeName(string name) => _dbContext.Category.FirstOrDefault(e => e.Name == name) == null;
+
+        public bool IsFreeNameItemUpsert(Category item)
+        {
+            var busyItem = _dbContext.Category.FirstOrDefault(e => e.Name == item.Name);
+
+            if (busyItem != null && item.Id != busyItem.Id)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

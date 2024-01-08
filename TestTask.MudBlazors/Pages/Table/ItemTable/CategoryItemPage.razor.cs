@@ -84,6 +84,12 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
 
             var item = categoryModel.GetModifyCategory(oldItem.Id);
 
+            if (!CategoryRepository.IsFreeNameItemUpsert(item))
+            {
+                ShowMessageWarning("Name is not free.");
+                return;
+            }
+
             if (!oldItem.Equals(item))
             {
                 CategoryRepository.Updata(item);
@@ -96,6 +102,9 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
 
         private void RecoverPastData() => categoryModel = oldItem.GetCategoryModel();
 
+        private async Task ShowMessageWarning(string message)
+            => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
+
         private IEnumerable<string> ValidFormatText(string str)
         {
             if (string.IsNullOrWhiteSpace(str))
@@ -104,14 +113,11 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
             }
         }
 
-        private async Task ShowMessageWarning(string message)
-            => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
-
         private bool ValidateFields(out string message)
         {
             message = string.Empty;
 
-            if (categoryModel.Name == null || categoryModel.Name == string.Empty)
+            if (string.IsNullOrWhiteSpace(categoryModel.Name))
             {
                 message = "Name is required.";
                 return false;

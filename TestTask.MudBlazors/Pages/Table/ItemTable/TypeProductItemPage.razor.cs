@@ -90,6 +90,12 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
 
             var typeProduct = typeProductModel.GetModifyType(oldTypeProduct.Id);
 
+            if (!ProductTypeRepository.IsFreeNameItemUpsert(typeProduct))
+            {
+                ShowMessageWarning("Name is not free.");
+                return;
+            }
+
             if (!oldTypeProduct.Equals(typeProduct))
             {
                 ProductTypeRepository.Updata(typeProduct);
