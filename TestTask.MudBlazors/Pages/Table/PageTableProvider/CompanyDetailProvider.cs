@@ -34,11 +34,7 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableView
                                 || e.Country.Contains(searchString)
                                 || e.DateCreation.ToString(CultureInfo.InvariantCulture).Contains(searchString));
 
-        public void Remove(int id)
-        {
-            _productRepository.RemoveProductRelatedToCompany(id);
-            _companyRepository.Remove(id);
-        }
+        public void Remove(int id) => _companyRepository.Remove(id);
 
         public void Upsert(Company entity) => _companyRepository.Upsert(entity);
     }

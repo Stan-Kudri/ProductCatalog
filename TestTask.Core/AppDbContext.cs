@@ -56,7 +56,7 @@ namespace TestTask.Core
             configurationProduct.Property(e => e.Destination).HasColumnName("destination");
             configurationProduct.HasOne(e => e.Company).WithMany(e => e.Product).HasForeignKey(e => e.CompanyId).OnDelete(DeleteBehavior.Cascade);
             configurationProduct.HasOne(e => e.Category).WithMany(e => e.Products).HasForeignKey(e => e.CategoryId).OnDelete(DeleteBehavior.Cascade);
-            configurationProduct.HasOne(e => e.Type).WithMany(e => e.Products).HasForeignKey(e => e.TypeId).OnDelete(DeleteBehavior.Cascade);
+            configurationProduct.HasOne(e => e.Type).WithMany(e => e.Products).HasForeignKey(e => e.TypeId);
 
             var configurationCategory = modelBuilder.Entity<Category>();
             configurationCategory.ToTable("category");

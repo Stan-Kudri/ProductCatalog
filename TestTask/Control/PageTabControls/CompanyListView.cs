@@ -109,11 +109,7 @@ namespace TestTask.Control.PageTabControls
             return new PagedList<Entity>(result, result.PageNumber, result.PageSize, result.TotalItems);
         }
 
-        public void Remove(Entity entity)
-        {
-            _productService.RemoveProductRelatedToCompany(entity.Id);
-            _companyService.Remove(entity.Id);
-        }
+        public void Remove(Entity entity) => _companyService.Remove(entity.Id);
 
         private void ButtonUseFilter_Click(object sender, EventArgs e) => LoadData();
 

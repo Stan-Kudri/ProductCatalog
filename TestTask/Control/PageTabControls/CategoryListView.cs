@@ -7,7 +7,6 @@ using TestTask.Control.PageTabControls.Model;
 using TestTask.Core;
 using TestTask.Core.Models;
 using TestTask.Core.Models.Categories;
-using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Page;
 using TestTask.Core.Models.Products;
 using TestTask.Extension;
@@ -97,11 +96,7 @@ namespace TestTask.Control.PageTabControls
             return new PagedList<Entity>(result, result.PageNumber, result.PageSize, result.TotalItems);
         }
 
-        public void Remove(Entity entity)
-        {
-            _productService.RemoveProductRelatedToCategory(entity.Id);
-            _categoryService.Remove(entity.Id);
-        }
+        public void Remove(Entity entity) => _categoryService.Remove(entity.Id);
 
         private void ButtonUseFilter_Click(object sender, EventArgs e) => LoadData();
 

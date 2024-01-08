@@ -117,7 +117,7 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
             }
 
             isDisabledType = false;
-            selectTypes = ProductTypeRepository.GetListTypesByCategory(item.Id);
+            selectTypes = ProductTypeRepository.GetListTypesByCategory(productModel.Category.Id);
         }
 
         private void RecoverPastData() => productModel = oldProduct.GetProductModel();

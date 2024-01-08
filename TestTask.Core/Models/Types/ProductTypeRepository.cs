@@ -75,18 +75,6 @@ namespace TestTask.Core.Models.Types
             }
         }
 
-        public void RemoveProductRelatedToCategory(int categoryId)
-        {
-            var item = _dbContext.Type.Where(e => e.CategoryId == categoryId).Select(e => e);
-
-            if (item.Count() <= 0)
-            {
-                return;
-            }
-
-            _dbContext.Type.RemoveRange(item.ToList());
-        }
-
         public void Upsert(ProductType item)
         {
             if (_dbContext.Category.FirstOrDefault(e => e.Id == item.CategoryId) == null)
