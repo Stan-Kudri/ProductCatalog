@@ -54,8 +54,8 @@ namespace TestTask.Core
             configurationProduct.Property(e => e.TypeId).IsRequired().HasColumnName("typeId");
             configurationProduct.Property(e => e.Price).IsRequired().HasColumnType("NUMERIC").HasColumnName("price").HasConversion<double>();
             configurationProduct.Property(e => e.Destination).HasColumnName("destination");
-            configurationProduct.HasOne(e => e.Company).WithMany(e => e.Product).HasForeignKey(e => e.CompanyId);
-            configurationProduct.HasOne(e => e.Category).WithMany(e => e.Products).HasForeignKey(e => e.CategoryId);
+            configurationProduct.HasOne(e => e.Company).WithMany(e => e.Product).HasForeignKey(e => e.CompanyId).OnDelete(DeleteBehavior.Cascade);
+            configurationProduct.HasOne(e => e.Category).WithMany(e => e.Products).HasForeignKey(e => e.CategoryId).OnDelete(DeleteBehavior.Cascade);
             configurationProduct.HasOne(e => e.Type).WithMany(e => e.Products).HasForeignKey(e => e.TypeId);
 
             var configurationCategory = modelBuilder.Entity<Category>();
@@ -71,7 +71,7 @@ namespace TestTask.Core
             configurationType.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
             configurationType.HasIndex(e => e.Name).IsUnique();
             configurationType.Property(e => e.Name).IsRequired().HasMaxLength(128).HasColumnName("name").HasMaxLength(128);
-            configurationType.HasOne(e => e.Category).WithMany(e => e.Types).HasForeignKey(e => e.CategoryId);
+            configurationType.HasOne(e => e.Category).WithMany(e => e.Types).HasForeignKey(e => e.CategoryId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

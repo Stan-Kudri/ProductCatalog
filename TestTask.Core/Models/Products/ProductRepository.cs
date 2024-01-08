@@ -74,42 +74,6 @@ namespace TestTask.Core.Models.Products
             }
         }
 
-        public void RemoveProductRelatedToCompany(int companyId)
-        {
-            var product = _dbContext.Product.Where(e => e.CompanyId == companyId).Select(e => e);
-
-            if (product.Count() <= 0)
-            {
-                return;
-            }
-
-            _dbContext.Product.RemoveRange(product.ToList());
-        }
-
-        public void RemoveProductRelatedToCategory(int categoryId)
-        {
-            var product = _dbContext.Product.Where(e => e.CategoryId == categoryId).Select(e => e);
-
-            if (product.Count() <= 0)
-            {
-                return;
-            }
-
-            _dbContext.Product.RemoveRange(product.ToList());
-        }
-
-        public void RemoveProductRelatedToType(int typeId)
-        {
-            var product = _dbContext.Product.Where(e => e.TypeId == typeId).Select(e => e);
-
-            if (product.Count() <= 0)
-            {
-                return;
-            }
-
-            _dbContext.Product.RemoveRange(product.ToList());
-        }
-
         public void Upsert(Product item)
         {
             if (_dbContext.Company.FirstOrDefault(e => e.Id == item.CompanyId) == null ||

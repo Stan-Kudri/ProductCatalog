@@ -35,12 +35,7 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableProvider
                 ? items
                 : items.Where(e => e.Name.Contains(searchString));
 
-        public void Remove(int id)
-        {
-            _productRepository.RemoveProductRelatedToCategory(id);
-            _productTypeRepository.RemoveProductRelatedToCategory(id);
-            _categoryRepository.Remove(id);
-        }
+        public void Remove(int id) => _categoryRepository.Remove(id);
 
         public void Upsert(Category entity) => _categoryRepository.Upsert(entity);
     }

@@ -75,18 +75,6 @@ namespace TestTask.Core.Models.Types
             }
         }
 
-        public void RemoveProductRelatedToCategory(int categoryId)
-        {
-            var item = _dbContext.Type.Where(e => e.CategoryId == categoryId).Select(e => e);
-
-            if (item.Count() <= 0)
-            {
-                return;
-            }
-
-            _dbContext.Type.RemoveRange(item.ToList());
-        }
-
         public void Upsert(ProductType item)
         {
             if (_dbContext.Category.FirstOrDefault(e => e.Id == item.CategoryId) == null)
@@ -104,6 +92,9 @@ namespace TestTask.Core.Models.Types
         }
 
         public List<ProductType> GetAll() => _dbContext.Type.Count() > 0 ? _dbContext.Type.ToList() : null;
+
+        public List<ProductType> GetListTypesByCategory(int idCategory)
+            => _dbContext.Type.Where(e => e.CategoryId == idCategory).Select(e => e).ToList();
 
         public bool IsFreeName(string name) => _dbContext.Type.FirstOrDefault(e => e.Name == name) == null;
 
