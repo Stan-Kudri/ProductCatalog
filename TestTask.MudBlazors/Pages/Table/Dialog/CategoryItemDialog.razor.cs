@@ -2,16 +2,16 @@
 using MudBlazor;
 using TestTask.Core.Models.Categories;
 using TestTask.MudBlazors.Extension;
-using TestTask.MudBlazors.Model;
 using TestTask.MudBlazors.Model.TableComponent;
+using TestTask.MudBlazors.Pages.Table.Model;
 
-namespace TestTask.MudBlazors.Pages.Table.ItemTable
+namespace TestTask.MudBlazors.Pages.Table.Dialog
 {
-    public partial class CategoryItemPage
+    public partial class CategoryItemDialog : IItemDialog
     {
+        [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
         [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
-        [Inject] private NavigationManager Navigation { get; set; } = null!;
 
         private CategoryModel categoryModel { get; set; } = new CategoryModel();
         private string[] errors = { };
@@ -31,7 +31,7 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
 
             if (Id <= 0)
             {
-                NavigationInCompanyTable();
+                throw new Exception("The ID value can't be less than zero.");
             }
 
             IsAddItem = false;
@@ -39,7 +39,7 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
             categoryModel = oldItem.GetCategoryModel();
         }
 
-        private void Close() => NavigationInCompanyTable();
+        private void Close() => MudDialog.Cancel();
 
         //Methods for add item company
         private async Task Add()
@@ -51,19 +51,20 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
 
             if (!ValidateFields(out var message))
             {
-                ShowMessageWarning(message);
+                await ShowMessageWarning(message);
                 return;
             }
 
             if (!CategoryRepository.IsFreeName(categoryModel.Name))
             {
-                ShowMessageWarning("Name is not free.");
+                await ShowMessageWarning("Name is not free.");
                 return;
             }
 
             var item = categoryModel.GetCategory();
             CategoryRepository.Add(item);
-            NavigationInCompanyTable();
+
+            MudDialog.Close();
         }
 
         private void ClearData() => categoryModel.ClearData();
@@ -78,7 +79,7 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
 
             if (!ValidateFields(out var message))
             {
-                ShowMessageWarning(message);
+                await ShowMessageWarning(message);
                 return;
             }
 
@@ -86,7 +87,7 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
 
             if (!CategoryRepository.IsFreeNameItemUpsert(item))
             {
-                ShowMessageWarning("Name is not free.");
+                await ShowMessageWarning("Name is not free.");
                 return;
             }
 
@@ -95,10 +96,8 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
                 CategoryRepository.Updata(item);
             }
 
-            NavigationInCompanyTable();
+            MudDialog.Close();
         }
-
-        private void NavigationInCompanyTable() => Navigation.NavigateTo($"/table/{TabTable.Category.ActiveTabIndex}");
 
         private void RecoverPastData() => categoryModel = oldItem.GetCategoryModel();
 

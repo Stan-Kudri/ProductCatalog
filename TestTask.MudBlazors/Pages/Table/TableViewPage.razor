@@ -2,7 +2,8 @@
 @using Bromix.MudBlazor.MaterialDesignIcons
 
 @typeparam T
-@typeparam TSortType
+@typeparam TSortType   
+@typeparam TItemDialog
 
 <MudPaper>
 
@@ -36,7 +37,7 @@
     <MudToolBar >
 
         <MudSpacer/>
-        <MudIconButton Icon="@Icons.Material.Filled.Add" OnClick="@DataProcessor.AddItemPage" Color="Color.Primary" Variant="Variant.Text" Title="Add Item" />
+        <MudIconButton Icon="@Icons.Material.Filled.Add" OnClick="@((e) => SaveDialogItem())" Color="Color.Primary" Variant="Variant.Text" Title="Add Item" />
         <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="@Remove" Color="Color.Primary" Variant="Variant.Text" Disabled="@isSelectItems" Title="Remove Select Items" />
         <MudFileUpload T="IBrowserFile" Accept=".xlsx,.xls,.xlsm" FilesChanged="UploadFiles" style="padding:0; margin:0;">
             <ButtonTemplate>
@@ -72,7 +73,7 @@
             }
             <MudTh Style="text-align:right">
                 <MudTooltip Text="Edit" Placement="Placement.Bottom">
-                    <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Outlined" Size="Size.Medium" Class="ml-1" OnClick="@(() => Update(context.Id))" />
+                    <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Outlined" Size="Size.Medium" Class="ml-1" OnClick="@((e) => SaveDialogItem(context.Id))"/>
                 </MudTooltip>
                 <MudTooltip Text="Remove" Placement="Placement.Bottom">
                     <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" Size="Size.Medium" OnClick="@(() => Remove(context.Id))" />

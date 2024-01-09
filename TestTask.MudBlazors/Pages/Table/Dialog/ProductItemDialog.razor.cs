@@ -5,19 +5,19 @@ using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
 using TestTask.Core.Models.Types;
 using TestTask.MudBlazors.Extension;
-using TestTask.MudBlazors.Model;
 using TestTask.MudBlazors.Model.TableComponent;
+using TestTask.MudBlazors.Pages.Table.Model;
 
-namespace TestTask.MudBlazors.Pages.Table.ItemTable
+namespace TestTask.MudBlazors.Pages.Table.Dialog
 {
-    public partial class ProductItemPage
+    public partial class ProductItemDialog : IItemDialog
     {
+        [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
         [Inject] private ProductRepository ProductRepository { get; set; } = null!;
         [Inject] private CompanyRepository CompanyRepository { get; set; } = null!;
         [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
         [Inject] private ProductTypeRepository ProductTypeRepository { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
-        [Inject] private NavigationManager Navigation { get; set; } = null!;
 
         private ProductModel productModel { get; set; } = new ProductModel();
         private string[] errors = { };
@@ -45,7 +45,7 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
 
             if (Id <= 0)
             {
-                NavigationInTypeProductTable();
+                throw new Exception("The ID value can't be less than zero.");
             }
 
             isAddItem = false;
@@ -53,10 +53,10 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
             productModel = oldProduct.GetProductModel();
         }
 
-        private void Close() => NavigationInTypeProductTable();
+        private void Close() => MudDialog.Cancel();
 
         //Methods for add item type product
-        private void Add()
+        private async Task Add()
         {
             if (errors.Length != 0)
             {
@@ -65,25 +65,26 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
 
             if (!ValidateFields(out var message))
             {
-                ShowMessageWarning(message);
+                await ShowMessageWarning(message);
                 return;
             }
 
             if (!ProductRepository.IsFreeName(productModel.Name))
             {
-                ShowMessageWarning("Name is not free.");
+                await ShowMessageWarning("Name is not free.");
                 return;
             }
 
             var product = productModel.GetProductType();
             ProductRepository.Add(product);
-            NavigationInTypeProductTable();
+
+            MudDialog.Close();
         }
 
         private void ClearData() => productModel.ClearData();
 
         //Methods for edit item type product
-        private void Updata()
+        private async Task Updata()
         {
             if (errors.Length != 0)
             {
@@ -92,7 +93,7 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
 
             if (!ValidateFields(out var message))
             {
-                ShowMessageWarning(message);
+                await ShowMessageWarning(message);
                 return;
             }
 
@@ -100,7 +101,7 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
 
             if (!ProductRepository.IsFreeNameItemUpsert(product))
             {
-                ShowMessageWarning("Name is not free.");
+                await ShowMessageWarning("Name is not free.");
                 return;
             }
 
@@ -109,7 +110,7 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
                 ProductRepository.Updata(product);
             }
 
-            NavigationInTypeProductTable();
+            MudDialog.Close();
         }
 
         private void RecoverPastData() => productModel = oldProduct.GetProductModel();
@@ -127,8 +128,6 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
             isDisabledType = false;
             selectTypes = ProductTypeRepository.GetListTypesByCategory(productModel.Category.Id);
         }
-
-        private void NavigationInTypeProductTable() => Navigation.NavigateTo($"/table/{TabTable.Product.ActiveTabIndex}");
 
         private async Task ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");

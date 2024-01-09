@@ -1,20 +1,15 @@
 ﻿@page "/table/{SelectIndexTab:int?}"
 
  @using Table             
+ @using TestTask.MudBlazors.Pages.Table.Dialog
+ @using TestTask.MudBlazors.Pages.Table.Model
  @using TestTask.MudBlazors.Model
- @using TestTask.MudBlazors.Pages.Table.TablePages
  @using TestTask.MudBlazors.Pages.Export
  @using TestTask.Core.Models.Companies
  @using TestTask.Core.Models.Categories
  @using TestTask.Core.Models.Types
  @using TestTask.Core.Models.Products
  @using Bromix.MudBlazor.MaterialDesignIcons
-
-
-@inject CompanyPage CompanyPage
-@inject CategoryPage CategoryPage
-@inject TypePage TypePage
-@inject ProductPage ProductPage
 
 <MudPaper>
     <MudToolBar>
@@ -25,16 +20,16 @@
     <MudTabs Rounded="true" AlwaysShowScrollButtons="true" ActivePanelIndex="@SelectIndexTab" Border="true" Centered="true" ActivePanelIndexChanged="@NavigationSelectTab">
         <MudSpacer/>
         <MudTabPanel Text="Company">
-            <TableViewPage TSortType="CompanySortType" T="Company" DataProcessor=CompanyPage></TableViewPage>
+            <TableViewPage TSortType="CompanySortType" T="Company" TItemDialog=CompanyItemDialog></TableViewPage>
         </MudTabPanel>
         <MudTabPanel Text="Category">
-            <TableViewPage TSortType="CategoriesSortType" T="Category" DataProcessor=CategoryPage></TableViewPage>
+            <TableViewPage TSortType="CategoriesSortType" T="Category" TItemDialog=CategoryItemDialog></TableViewPage>
         </MudTabPanel>
         <MudTabPanel Text="Type Product">
-            <TableViewPage TSortType="ProductTypeSortType" T="ProductType" DataProcessor=TypePage></TableViewPage>
+            <TableViewPage TSortType="ProductTypeSortType" T="ProductType" TItemDialog=ProductTypeItemDialog></TableViewPage>
         </MudTabPanel>
         <MudTabPanel Text="Product">
-            <TableViewPage TSortType="ProductSortType" T="Product" DataProcessor=ProductPage></TableViewPage>
+            <TableViewPage TSortType="ProductSortType" T="Product" TItemDialog=ProductItemDialog></TableViewPage>
         </MudTabPanel>
     </MudTabs>
  </MudPaper>

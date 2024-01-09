@@ -3,17 +3,17 @@ using MudBlazor;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Types;
 using TestTask.MudBlazors.Extension;
-using TestTask.MudBlazors.Model;
 using TestTask.MudBlazors.Model.TableComponent;
+using TestTask.MudBlazors.Pages.Table.Model;
 
-namespace TestTask.MudBlazors.Pages.Table.ItemTable
+namespace TestTask.MudBlazors.Pages.Table.Dialog
 {
-    public partial class TypeProductItemPage
+    public partial class ProductTypeItemDialog : IItemDialog
     {
+        [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
         [Inject] private ProductTypeRepository ProductTypeRepository { get; set; } = null!;
         [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
-        [Inject] private NavigationManager Navigation { get; set; } = null!;
 
         private TypeProductModel typeProductModel { get; set; } = new TypeProductModel();
         private string[] errors = { };
@@ -37,7 +37,7 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
 
             if (Id <= 0)
             {
-                NavigationInTypeProductTable();
+                throw new Exception("The ID value can't be less than zero.");
             }
 
             isAddItem = false;
@@ -45,7 +45,7 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
             typeProductModel = oldTypeProduct.GetTypeProductModel();
         }
 
-        private void Close() => NavigationInTypeProductTable();
+        private void Close() => MudDialog.Cancel();
 
         //Methods for add item type product
         private async Task Add()
@@ -69,7 +69,8 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
 
             var typeProduct = typeProductModel.GetProductType();
             ProductTypeRepository.Add(typeProduct);
-            NavigationInTypeProductTable();
+
+            MudDialog.Close();
         }
 
         private void ClearData() => typeProductModel.ClearData();
@@ -101,7 +102,7 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
                 ProductTypeRepository.Updata(typeProduct);
             }
 
-            NavigationInTypeProductTable();
+            MudDialog.Close();
         }
 
         private void RecoverPastData() => typeProductModel = oldTypeProduct.GetTypeProductModel();
@@ -113,8 +114,6 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
                 yield return "Field is required.";
             }
         }
-
-        private void NavigationInTypeProductTable() => Navigation.NavigateTo($"/table/{TabTable.TypeProduct.ActiveTabIndex}");
 
         private async Task ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");

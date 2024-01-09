@@ -2,16 +2,16 @@
 using MudBlazor;
 using TestTask.Core.Models.Companies;
 using TestTask.MudBlazors.Extension;
-using TestTask.MudBlazors.Model;
 using TestTask.MudBlazors.Model.TableComponent;
+using TestTask.MudBlazors.Pages.Table.Model;
 
-namespace TestTask.MudBlazors.Pages.Table.ItemTable
+namespace TestTask.MudBlazors.Pages.Table.Dialog
 {
-    public partial class CompanyItemPage
+    public partial class CompanyItemDialog : IItemDialog
     {
+        [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
         [Inject] private CompanyRepository CompanyRepository { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
-        [Inject] private NavigationManager Navigation { get; set; } = null!;
 
         private CompanyModel companyModel { get; set; } = new CompanyModel();
         private string[] errors = { };
@@ -31,7 +31,7 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
 
             if (Id <= 0)
             {
-                NavigationInCompanyTable();
+                throw new Exception("The ID value can't be less than zero.");
             }
 
             IsAddItem = false;
@@ -39,7 +39,7 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
             companyModel = oldCompany.GetCompanyModel();
         }
 
-        private void Close() => NavigationInCompanyTable();
+        private void Close() => MudDialog.Cancel();
 
         //Methods for add item company
         private async Task Add()
@@ -51,19 +51,20 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
 
             if (!ValidateFields(out var message))
             {
-                ShowMessageWarning(message);
+                await ShowMessageWarning(message);
                 return;
             }
 
             if (!CompanyRepository.IsFreeName(companyModel.Name))
             {
-                ShowMessageWarning("Name is not free.");
+                await ShowMessageWarning("Name is not free.");
                 return;
             }
 
             var company = companyModel.GetCompany();
             CompanyRepository.Add(company);
-            NavigationInCompanyTable();
+
+            MudDialog.Close();
         }
 
         private void ClearData() => companyModel.ClearData();
@@ -78,7 +79,7 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
 
             if (!ValidateFields(out var message))
             {
-                ShowMessageWarning(message);
+                await ShowMessageWarning(message);
                 return;
             }
 
@@ -86,7 +87,7 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
 
             if (!CompanyRepository.IsFreeNameItemUpsert(company))
             {
-                ShowMessageWarning("Name is not free.");
+                await ShowMessageWarning("Name is not free.");
                 return;
             }
 
@@ -95,7 +96,7 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
                 CompanyRepository.Updata(company);
             }
 
-            NavigationInCompanyTable();
+            MudDialog.Close();
         }
 
         private void RecoverPastData() => companyModel = oldCompany.GetCompanyModel();
@@ -107,8 +108,6 @@ namespace TestTask.MudBlazors.Pages.Table.ItemTable
                 yield return "Field is required.";
             }
         }
-
-        private void NavigationInCompanyTable() => Navigation.NavigateTo($"/table/{TabTable.Company.ActiveTabIndex}");
 
         private async Task ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");

@@ -11,17 +11,16 @@ using TestTask.MudBlazors.Pages.Table.Model;
 
 namespace TestTask.MudBlazors.Pages.Table
 {
-    public partial class TableViewPage<T, TSortType>
+    public partial class TableViewPage<T, TSortType, TItemDialog>
         where TSortType : SmartEnum<TSortType>
         where T : Entity
+        where TItemDialog : ComponentBase, IItemDialog
     {
         [Inject] private ExcelImporter<T> ExcelImport { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
         [Inject] private ITableDetailProvider<T> TableProvider { get; set; } = null!;
         [Inject] private ISortEntity<T, TSortType> SortField { get; set; } = null!;
         [Inject] protected NavigationManager Navigation { get; set; } = null!;
-
-        [Parameter] public required IDataProcessor DataProcessor { get; set; }
 
         private const string MessageNotSelectedItem = "No items selected";
         private const int NoItemsSelected = 0;
@@ -37,6 +36,21 @@ namespace TestTask.MudBlazors.Pages.Table
 
         protected override void OnInitialized() => LoadData();
 
+        private async Task SaveDialogItem(int? id = null)
+        {
+            var parameters = new DialogParameters<TItemDialog> { { x => x.Id, id } };
+            var options = new DialogOptions { CloseOnEscapeKey = true, FullWidth = true };
+            var title = id == null ? "Add Item" : "Edit Item";
+
+            var dialog = await DialogService.ShowAsync<TItemDialog>(title, parameters, options);
+            var result = await dialog.Result;
+
+            if (result.Canceled)
+            {
+                return;
+            }
+        }
+
         private void OnSelectItems(HashSet<T> items)
         {
             selectedItems = items;
@@ -47,7 +61,7 @@ namespace TestTask.MudBlazors.Pages.Table
         {
             if (selectedItems.Count <= NoItemsSelected)
             {
-                ShowMessageWarning(MessageNotSelectedItem);
+                await ShowMessageWarning(MessageNotSelectedItem);
                 return;
             }
 
@@ -68,8 +82,6 @@ namespace TestTask.MudBlazors.Pages.Table
 
             LoadData();
         }
-
-        private void Update(int id) => DataProcessor.EditItemPage(id);
 
         private async Task Remove(int id)
         {
@@ -139,12 +151,5 @@ namespace TestTask.MudBlazors.Pages.Table
 
         private async Task ShowMessageWarning(string message)
             => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
-    }
-
-    public interface IDataProcessor
-    {
-        void AddItemPage();
-
-        void EditItemPage(int id);
     }
 }

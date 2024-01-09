@@ -1,0 +1,42 @@
+﻿@using TestTask.Core.Models.Companies
+@using Bromix.MudBlazor.MaterialDesignIcons
+
+<MudContainer>
+    <MudForm @bind-Errors="@errors" Model="@categoryModel">
+        <MudTextField T="string" Label="Name"
+                      InputType="InputType.Text"
+                      Required="true"
+                      @bind-Value=@categoryModel.Name
+                      Validation="@(new Func<string, IEnumerable<string>>(ValidFormatText))" />
+    </MudForm>
+
+    <MudSpacer></MudSpacer>
+
+    <MudCardContent Style="align-content:center">
+
+        @if (IsAddItem)
+        {
+            <MudTooltip Text="Save" Placement="Placement.Bottom">
+                <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" OnClick="Add" />
+            </MudTooltip>
+            <MudTooltip Text="Clear" Placement="Placement.Bottom">
+                <MudIconButton Icon="@MaterialDesignIcons.Normal.Broom" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" OnClick="ClearData" Class="ml-1" />
+            </MudTooltip>
+        }
+        else
+        {
+            <MudTooltip Text="Save" Placement="Placement.Bottom">
+                <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" OnClick="Updata" />
+            </MudTooltip>
+            <MudTooltip Text="Replace" Placement="Placement.Bottom">
+                <MudIconButton Icon="@MaterialDesignIcons.Normal.Broom" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" OnClick="RecoverPastData" Class="ml-1" />
+            </MudTooltip>
+        }
+
+        <MudTooltip Text="Close" Placement="Placement.Bottom">
+            <MudIconButton Icon="@Icons.Material.Filled.ArrowForward" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" OnClick="Close" Class="ml-1" />
+        </MudTooltip>
+
+    </MudCardContent>
+
+</MudContainer>
