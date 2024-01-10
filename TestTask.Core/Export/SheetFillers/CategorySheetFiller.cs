@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TestTask.Core.Models.Categories;
-using TestTask.Core.Models.Companies;
 
 namespace TestTask.Core.Export.SheetFillers
 {
@@ -28,6 +27,12 @@ namespace TestTask.Core.Export.SheetFillers
             }
 
             var numberRow = 0;
+
+            var allItems = _categoryService.GetAll();
+            if (allItems == null || allItems.Count <= 0)
+            {
+                return;
+            }
 
             foreach (var item in _categoryService.GetAll())
             {

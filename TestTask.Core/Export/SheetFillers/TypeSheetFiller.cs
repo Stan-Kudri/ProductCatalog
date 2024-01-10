@@ -28,6 +28,12 @@ namespace TestTask.Core.Export.SheetFillers
 
             var numberRow = 0;
 
+            var allItems = _typeService.GetAll();
+            if (allItems == null || allItems.Count <= 0)
+            {
+                return;
+            }
+
             foreach (var item in _typeService.GetAll())
             {
                 numberRow++;
