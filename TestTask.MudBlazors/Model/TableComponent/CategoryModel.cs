@@ -11,10 +11,7 @@ namespace TestTask.MudBlazors.Model.TableComponent
         {
         }
 
-        public CategoryModel(string name)
-        {
-            Name = name;
-        }
+        public CategoryModel(string name) => Name = name;
 
         [Parameter]
         public string Name
@@ -27,9 +24,6 @@ namespace TestTask.MudBlazors.Model.TableComponent
 
         public Category GetModifyCategory(int idOldItem) => new Category(Name, idOldItem);
 
-        public void ClearData()
-        {
-            Name = string.Empty;
-        }
+        public void ClearData() => Name = string.Empty;
     }
 }

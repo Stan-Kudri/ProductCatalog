@@ -16,6 +16,7 @@ namespace TestTask.MudBlazors.Pages.Table
         where T : Entity
         where TItemDialog : ComponentBase, IItemDialog
     {
+        [Inject] private ISnackbar Snackbar { get; set; } = null!;
         [Inject] private ExcelImporter<T> ExcelImport { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
         [Inject] private ITableDetailProvider<T> TableProvider { get; set; } = null!;
@@ -45,9 +46,10 @@ namespace TestTask.MudBlazors.Pages.Table
             var dialog = await DialogService.ShowAsync<TItemDialog>(title, parameters, options);
             var result = await dialog.Result;
 
-            if (result.Canceled)
+            if (!result.Canceled)
             {
-                return;
+                Snackbar.Add(title, Severity.Success);
+                LoadData();
             }
         }
 
@@ -81,6 +83,7 @@ namespace TestTask.MudBlazors.Pages.Table
             }
 
             LoadData();
+            Snackbar.Add("Remove items", Severity.Success);
         }
 
         private async Task Remove(int id)
@@ -97,6 +100,7 @@ namespace TestTask.MudBlazors.Pages.Table
 
             TableProvider.Remove(id);
             LoadData();
+            Snackbar.Add("Remove item", Severity.Success);
         }
 
         private void ClearFilter()
@@ -124,7 +128,9 @@ namespace TestTask.MudBlazors.Pages.Table
                     TableProvider.Upsert(row.Value);
                 }
             }
+
             LoadData();
+            Snackbar.Add("Upload data", Severity.Success);
         }
 
         public void OnToggledChanged(bool toggled)

@@ -12,7 +12,6 @@ namespace TestTask.MudBlazors.Model
         public TabTable(string name, int value)
             : base(name, value)
         {
-
         }
 
         public int ActiveTabIndex => Value;
