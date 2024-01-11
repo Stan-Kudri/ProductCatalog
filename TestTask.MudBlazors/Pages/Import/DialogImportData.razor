@@ -1,13 +1,13 @@
-﻿@    using TestTask.Core.Import
-@    using TestTask.MudBlazors.Pages.Import
+﻿@using TestTask.Core.DataTable
+@using TestTask.MudBlazors.Pages.Import
 
 <MudDialog>
     <DialogContent>
-        <MudSelect T="ImportTable" Style="align-items:end" Label="Select table" MultiSelection="true" @bind-Value="selectedTable.Table" 
-                   @bind-SelectedValues="selectedTable.SelectTable" SelectAll="true" SelectAllText="All">
+        <MudSelect T="Table" Style="align-items:end" Label="Select table" MultiSelection="true" @bind-Value="selectedTable.Table"
+                   @bind-SelectedValues="selectedTable.SelectTables" SelectAll="true" SelectAllText="All">
             @foreach (var item in selectedTable.Items)
             {
-                <MudSelectItem T="ImportTable" Value="@item" />
+                <MudSelectItem T="Table" Value="@item" />
             }
         </MudSelect>
     </DialogContent>
