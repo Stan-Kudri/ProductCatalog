@@ -3,5 +3,20 @@
 @using TestTask.Core.Models.Companies
 @using TestTask.Core.Models.Products
 @using TestTask.Core.Models.Types
+@using TestTask.Core.DataTable
 
-<MudButton StartIcon="@MaterialDesignIcons.Normal.FileExport" Color="Color.Tertiary" @onclick="@DownloadFile">Export EXCEL</MudButton>
+<MudDialog>
+    <DialogContent>
+        <MudSelect T="Table" Style="align-items:end" Label="Select table" MultiSelection="true" @bind-Value="selectedTable.Table"
+                   @bind-SelectedValues="selectedTable.SelectTables" SelectAll="true" SelectAllText="All">
+            @foreach (var item in selectedTable.Items)
+            {
+                <MudSelectItem T="Table" Value="@item" />
+            }
+        </MudSelect>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton @onclick="@DownloadFile">Ok</MudButton>
+    </DialogActions>
+</MudDialog>

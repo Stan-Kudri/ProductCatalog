@@ -14,8 +14,8 @@
 <MudPaper>
     <MudToolBar>
         <MudSpacer />
-        <ExportExcel></ExportExcel>
-        <MudButton StartIcon="@MaterialDesignIcons.Normal.FileImport" Color="Color.Primary" OnClick="OpenDialog">Import EXCEL</MudButton>
+        <MudButton StartIcon="@MaterialDesignIcons.Normal.FileExport" Color="Color.Tertiary" OnClick="OpenDialogExport">Export EXCEL</MudButton>
+        <MudButton StartIcon="@MaterialDesignIcons.Normal.FileImport" Color="Color.Primary" OnClick="OpenDialogImport">Import EXCEL</MudButton>
     </MudToolBar>
     <MudTabs Rounded="true" AlwaysShowScrollButtons="true" ActivePanelIndex="@SelectIndexTab" Border="true" Centered="true" ActivePanelIndexChanged="@NavigationSelectTab">
         <MudSpacer/>
