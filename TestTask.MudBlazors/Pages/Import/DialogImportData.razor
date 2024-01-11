@@ -1,22 +1,24 @@
-﻿@using TestTask.Core.Import
+﻿@using TestTask.Core.DataTable
 @using TestTask.MudBlazors.Pages.Import
 
 <MudDialog>
     <DialogContent>
-        <MudSelect T="ImportTable" Style="align-items:end" Label="Select table" MultiSelection="true" @bind-Value="selectedTable.importTable" 
-                   @bind-SelectedValues="selectedTable.SelectTable" SelectAll="true" SelectAllText="All">
+        <MudSelect T="Table" Style="align-items:end" Label="Select table" MultiSelection="true" @bind-Value="selectedTable.Table"
+                   @bind-SelectedValues="selectedTable.SelectTables" SelectAll="true" SelectAllText="All">
             @foreach (var item in selectedTable.Items)
             {
-                <MudSelectItem T="ImportTable" Value="@item" />
+                <MudSelectItem T="Table" Value="@item" />
             }
         </MudSelect>
     </DialogContent>
-    <DialogActions>
-        <MudButton OnClick="Cancel">Cancel</MudButton>
-        <MudFileUpload T="IBrowserFile" Accept=".xlsx,.xls,.xlsm" FilesChanged="UploadData">
-            <ButtonTemplate>
-                <MudButton HtmlTag="label" for="@context.Id" title="Import Excel" >Ok</MudButton>
-            </ButtonTemplate>
-        </MudFileUpload>
+    <DialogActions>        
+        <MudContainer>
+            <MudFileUpload T="IBrowserFile" Accept=".xlsx,.xls,.xlsm" FilesChanged="UploadData" style="align-content:center">
+                <ButtonTemplate>
+                    <MudButton OnClick="Cancel">Cancel</MudButton>
+                    <MudButton HtmlTag="label" for="@context.Id" title="Import Excel" >Ok</MudButton>
+                </ButtonTemplate>
+            </MudFileUpload> 
+        </MudContainer>          
     </DialogActions>
 </MudDialog>

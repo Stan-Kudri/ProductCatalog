@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using TestTask.MudBlazors.Model;
+using TestTask.MudBlazors.Pages.Export;
 using TestTask.MudBlazors.Pages.Import;
 
 namespace TestTask.MudBlazors.Pages.Table
@@ -19,10 +20,16 @@ namespace TestTask.MudBlazors.Pages.Table
             Navigation.NavigateTo($"/table/{SelectIndexTab}");
         }
 
-        private async void OpenDialog()
+        private async void OpenDialogImport()
         {
             DialogOptions closeOnEscapeKey = new DialogOptions { CloseOnEscapeKey = true };
             DialogService.Show<DialogImportData>("Import table", closeOnEscapeKey);
+        }
+
+        private async void OpenDialogExport()
+        {
+            DialogOptions closeOnEscapeKey = new DialogOptions { CloseOnEscapeKey = true };
+            DialogService.Show<ExportExcel>("Export table", closeOnEscapeKey);
         }
     }
 }

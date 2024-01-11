@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using TestTask.Core.DataTable;
 using TestTask.Core.Import;
 using TestTask.Core.Models;
 using TestTask.Core.Models.Categories;
@@ -24,13 +25,13 @@ namespace TestTask.MudBlazors.Pages.Import
 
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; } = null!;
 
-        private ImportSelectTable selectedTable = new ImportSelectTable();
+        private SelectTable selectedTable = new SelectTable();
 
         private void Cancel() => MudDialog.Cancel();
 
         private async Task UploadData(IBrowserFile fileload)
         {
-            if (selectedTable.SelectTable.Count() == 0 || fileload.Size == decimal.Zero)
+            if (selectedTable.SelectTables.Count() == 0 || fileload.Size == decimal.Zero)
             {
                 return;
             }
@@ -41,17 +42,17 @@ namespace TestTask.MudBlazors.Pages.Import
 
             MudDialog.Cancel();
 
-            Import(ImportTable.Company, memoryStream, ExcelImportCompany, CompanyRepository);
-            Import(ImportTable.Category, memoryStream, ExcelImportCategory, CategoryRepository);
-            Import(ImportTable.TypeProduct, memoryStream, ExcelImportTypeProduct, ProductTypeRepository);
-            Import(ImportTable.Product, memoryStream, ExcelImportProduct, ProductRepository);
+            Import(Core.DataTable.Table.Company, memoryStream, ExcelImportCompany, CompanyRepository);
+            Import(Core.DataTable.Table.Category, memoryStream, ExcelImportCategory, CategoryRepository);
+            Import(Core.DataTable.Table.TypeProduct, memoryStream, ExcelImportTypeProduct, ProductTypeRepository);
+            Import(Core.DataTable.Table.Product, memoryStream, ExcelImportProduct, ProductRepository);
 
             Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
         }
 
-        private void Import<T>(ImportTable table, MemoryStream memoryStream, ExcelImporter<T> excelImporter, IRepository<T> repository)
+        private void Import<T>(Core.DataTable.Table table, MemoryStream memoryStream, ExcelImporter<T> excelImporter, IRepository<T> repository)
         {
-            if (!selectedTable.SelectTable.Contains(table))
+            if (!selectedTable.SelectTables.Contains(table))
             {
                 return;
             }
