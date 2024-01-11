@@ -5,20 +5,16 @@ using NPOI.XSSF.UserModel;
 using TestTask.Core.DataTable;
 using TestTask.Core.Export.SheetFillers;
 using TestTask.Core.Import;
-using TestTask.Core.Models.Categories;
-using TestTask.Core.Models.Companies;
-using TestTask.Core.Models.Products;
-using TestTask.Core.Models.Types;
 using ItemSelected = TestTask.Core.DataTable.Table;
 
 namespace TestTask.MudBlazors.Pages.Export
 {
     public partial class ExportExcel
     {
-        [Inject] private CompanyRepository CompanyRepository { get; set; } = null!;
-        [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
-        [Inject] private ProductTypeRepository ProductTypeRepository { get; set; } = null!;
-        [Inject] private ProductRepository ProductRepository { get; set; } = null!;
+        [Inject] private CompanySheetFiller CompanySheetFiller { get; set; } = null!;
+        [Inject] private CategorySheetFiller CategorySheetFiller { get; set; } = null!;
+        [Inject] private TypeSheetFiller TypeSheetFiller { get; set; } = null!;
+        [Inject] private ProductSheetFiller ProductSheetFiller { get; set; } = null!;
         [Inject] private IJSRuntime JS { get; set; } = null!;
 
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; } = null!;
@@ -58,19 +54,19 @@ namespace TestTask.MudBlazors.Pages.Export
 
             if (selectedTable.SelectTables.Contains(ItemSelected.Company))
             {
-                fillers.Add(new CompanySheetFiller(CompanyRepository));
+                fillers.Add(CompanySheetFiller);
             }
             if (selectedTable.SelectTables.Contains(ItemSelected.Category))
             {
-                fillers.Add(new CategorySheetFiller(CategoryRepository));
+                fillers.Add(CategorySheetFiller);
             }
             if (selectedTable.SelectTables.Contains(ItemSelected.TypeProduct))
             {
-                fillers.Add(new TypeSheetFiller(ProductTypeRepository));
+                fillers.Add(TypeSheetFiller);
             }
             if (selectedTable.SelectTables.Contains(ItemSelected.Product))
             {
-                fillers.Add(new ProductSheetFiller(ProductRepository));
+                fillers.Add(ProductSheetFiller);
             }
 
             return fillers.ToArray();

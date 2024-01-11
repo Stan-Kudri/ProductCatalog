@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using MudBlazor.Services;
 using TestTask.Core;
+using TestTask.Core.Export.SheetFillers;
 using TestTask.Core.Import;
 using TestTask.Core.Import.Importers;
 using TestTask.Core.Models;
@@ -40,6 +41,10 @@ builder.Services.AddSingleton(e => new ExcelImporter<Company>(e.GetRequiredServi
 builder.Services.AddSingleton(e => new ExcelImporter<Product>(e.GetRequiredService<ProductImporter>()));
 builder.Services.AddSingleton(e => new ExcelImporter<Category>(e.GetRequiredService<CategoryImporter>()));
 builder.Services.AddSingleton(e => new ExcelImporter<ProductType>(e.GetRequiredService<TypeProductImporter>()));
+builder.Services.AddScoped<CompanySheetFiller>();
+builder.Services.AddScoped<CategorySheetFiller>();
+builder.Services.AddScoped<TypeSheetFiller>();
+builder.Services.AddScoped<ProductSheetFiller>();
 
 builder.Services.AddScoped<CompanyDetailProvider>();
 builder.Services.AddScoped<ITableDetailProvider<Company>>(e => e.GetRequiredService<CompanyDetailProvider>());

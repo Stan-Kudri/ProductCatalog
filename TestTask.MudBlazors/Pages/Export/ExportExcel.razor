@@ -16,7 +16,9 @@
         </MudSelect>
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Cancel">Cancel</MudButton>
-        <MudButton @onclick="@DownloadFile">Ok</MudButton>
+        <MudContainer>
+            <MudButton OnClick="Cancel">Cancel</MudButton>
+            <MudButton @onclick="@DownloadFile">Ok</MudButton>
+        </MudContainer>
     </DialogActions>
 </MudDialog>
