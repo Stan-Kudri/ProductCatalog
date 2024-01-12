@@ -1,4 +1,4 @@
-﻿@page "/table/{SelectIndexTab:int?}"
+﻿@page "/table/"
 
  @using Table             
  @using TestTask.MudBlazors.Pages.Table.Dialog
@@ -17,7 +17,7 @@
         <MudButton StartIcon="@MaterialDesignIcons.Normal.FileExport" Color="Color.Tertiary" OnClick="OpenDialogExport">Export EXCEL</MudButton>
         <MudButton StartIcon="@MaterialDesignIcons.Normal.FileImport" Color="Color.Primary" OnClick="OpenDialogImport">Import EXCEL</MudButton>
     </MudToolBar>
-    <MudTabs Rounded="true" AlwaysShowScrollButtons="true" ActivePanelIndex="@SelectIndexTab" Border="true" Centered="true" ActivePanelIndexChanged="@NavigationSelectTab">
+    <MudTabs Rounded="true" AlwaysShowScrollButtons="true" Border="true" Centered="true" >
         <MudSpacer/>
         <MudTabPanel Text="Company">
             <TableViewPage TSortType="CompanySortType" T="Company" TItemDialog=CompanyItemDialog></TableViewPage>

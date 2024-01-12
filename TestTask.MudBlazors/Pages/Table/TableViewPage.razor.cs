@@ -67,12 +67,9 @@ namespace TestTask.MudBlazors.Pages.Table
                 return;
             }
 
-            bool? result = await DialogService.ShowMessageBox(
-                "Warning",
-                "Delete selecte items?",
-                yesText: "Yes", cancelText: "No");
+            var result = await DialogService.DialogYesNoShowAsync("Warning", "Delete selecte items?");
 
-            if (result != true)
+            if (result != null && result.Canceled)
             {
                 return;
             }
@@ -88,12 +85,9 @@ namespace TestTask.MudBlazors.Pages.Table
 
         private async Task Remove(int id)
         {
-            bool? result = await DialogService.ShowMessageBox(
-               "Warning",
-               "Delete selecte items?",
-               yesText: "Yes", cancelText: "No");
+            var result = await DialogService.DialogYesNoShowAsync("Warning", "Delete items?");
 
-            if (result != true)
+            if (result != null && result.Canceled)
             {
                 return;
             }
