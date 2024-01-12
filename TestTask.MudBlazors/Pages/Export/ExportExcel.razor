@@ -7,7 +7,7 @@
 
 <MudDialog>
     <DialogContent>
-        <MudSelect T="Table" Style="align-items:end" Label="Select table" MultiSelection="true" @bind-Value="selectedTable.Table"
+        <MudSelect T="Table" Label="Select table" MultiSelection="true" @bind-Value="selectedTable.Table"
                    @bind-SelectedValues="selectedTable.SelectTables" SelectAll="true" SelectAllText="All">
             @foreach (var item in selectedTable.Items)
             {
@@ -16,9 +16,9 @@
         </MudSelect>
     </DialogContent>
     <DialogActions>
-        <MudContainer>
-            <MudButton OnClick="Cancel">Cancel</MudButton>
-            <MudButton @onclick="@DownloadFile">Ok</MudButton>
+        <MudContainer Style="align-items:center">
+            <MudButton Style="max-width: 60px; max-height : 30px;" Variant="Variant.Filled" OnClick="Cancel">Cancel</MudButton>
+            <MudButton Style="max-width: 60px; max-height : 30px;" Variant="Variant.Filled" Class="ml-4" @onclick="@DownloadFile">Ok</MudButton>
         </MudContainer>
     </DialogActions>
 </MudDialog>
