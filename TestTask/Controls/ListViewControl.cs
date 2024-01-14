@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Windows.Forms;
 using TestTask.BindingItem;
-using TestTask.Control.PageTabControls.Model;
+using TestTask.Controls.PageTabControls.Model;
 using TestTask.Core;
 using TestTask.Core.Models;
 using TestTask.Core.Models.Page;
 
-namespace TestTask.Control
+namespace TestTask.Controls
 {
     public partial class ListViewControl : BaseUserControl
     {

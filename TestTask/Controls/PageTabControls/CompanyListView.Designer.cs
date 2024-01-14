@@ -1,4 +1,4 @@
-﻿namespace TestTask.Control.PageTabControls
+﻿namespace TestTask.Controls.PageTabControls
 {
     partial class CompanyListView
     {
@@ -30,22 +30,22 @@
         {
             components = new System.ComponentModel.Container();
             tlpFilter = new System.Windows.Forms.TableLayoutPanel();
-            labelSortField = new System.Windows.Forms.Label();
             labelTypeSort = new System.Windows.Forms.Label();
             labelSearchName = new System.Windows.Forms.Label();
             buttonClearFilter = new MaterialSkin.Controls.MaterialButton();
             buttonUseFilter = new MaterialSkin.Controls.MaterialButton();
-            cmbSortField = new System.Windows.Forms.ComboBox();
-            sortCompaniesBindingSource = new System.Windows.Forms.BindingSource(components);
+            tbSearchStrName = new System.Windows.Forms.TextBox();
             cmbTypeSort = new System.Windows.Forms.ComboBox();
             itemsBindingSourceTypeField = new System.Windows.Forms.BindingSource(components);
             typeSortFieldBindingSource = new System.Windows.Forms.BindingSource(components);
-            tbSearchStrName = new System.Windows.Forms.TextBox();
+            cmbSortField = new System.Windows.Forms.ComboBox();
+            sortCompaniesBindingSource = new System.Windows.Forms.BindingSource(components);
             listView = new ListViewControl();
+            labelSortField = new System.Windows.Forms.Label();
             tlpFilter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)sortCompaniesBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)itemsBindingSourceTypeField).BeginInit();
             ((System.ComponentModel.ISupportInitialize)typeSortFieldBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)sortCompaniesBindingSource).BeginInit();
             SuspendLayout();
             // 
             // tlpFilter
@@ -59,14 +59,14 @@
             tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
             tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
             tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            tlpFilter.Controls.Add(labelSortField, 4, 0);
-            tlpFilter.Controls.Add(labelTypeSort, 2, 0);
             tlpFilter.Controls.Add(labelSearchName, 0, 0);
             tlpFilter.Controls.Add(buttonClearFilter, 7, 0);
             tlpFilter.Controls.Add(buttonUseFilter, 6, 0);
             tlpFilter.Controls.Add(cmbSortField, 5, 0);
-            tlpFilter.Controls.Add(cmbTypeSort, 3, 0);
             tlpFilter.Controls.Add(tbSearchStrName, 1, 0);
+            tlpFilter.Controls.Add(labelTypeSort, 2, 0);
+            tlpFilter.Controls.Add(labelSortField, 4, 0);
+            tlpFilter.Controls.Add(cmbTypeSort, 3, 0);
             tlpFilter.Location = new System.Drawing.Point(1, -1);
             tlpFilter.Margin = new System.Windows.Forms.Padding(1);
             tlpFilter.Name = "tlpFilter";
@@ -74,19 +74,6 @@
             tlpFilter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tlpFilter.Size = new System.Drawing.Size(874, 37);
             tlpFilter.TabIndex = 9;
-            // 
-            // labelSortField
-            // 
-            labelSortField.AutoSize = true;
-            labelSortField.Dock = System.Windows.Forms.DockStyle.Bottom;
-            labelSortField.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            labelSortField.Location = new System.Drawing.Point(420, 13);
-            labelSortField.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
-            labelSortField.Name = "labelSortField";
-            labelSortField.Size = new System.Drawing.Size(81, 19);
-            labelSortField.TabIndex = 12;
-            labelSortField.Text = "Column:";
-            labelSortField.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelTypeSort
             // 
@@ -156,22 +143,14 @@
             buttonUseFilter.UseVisualStyleBackColor = true;
             buttonUseFilter.Click += ButtonUseFilter_Click;
             // 
-            // cmbSortField
+            // tbSearchStrName
             // 
-            cmbSortField.DataSource = sortCompaniesBindingSource;
-            cmbSortField.Dock = System.Windows.Forms.DockStyle.Bottom;
-            cmbSortField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbSortField.FormattingEnabled = true;
-            cmbSortField.Location = new System.Drawing.Point(508, 11);
-            cmbSortField.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            cmbSortField.Name = "cmbSortField";
-            cmbSortField.Size = new System.Drawing.Size(131, 23);
-            cmbSortField.TabIndex = 5;
-            cmbSortField.SelectedIndexChanged += CmbSortField_Changed;
-            // 
-            // sortCompaniesBindingSource
-            // 
-            sortCompaniesBindingSource.DataSource = typeof(BindingItem.Pages.Companies.SortCompaniesModel);
+            tbSearchStrName.Dock = System.Windows.Forms.DockStyle.Bottom;
+            tbSearchStrName.Location = new System.Drawing.Point(108, 11);
+            tbSearchStrName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tbSearchStrName.Name = "tbSearchStrName";
+            tbSearchStrName.Size = new System.Drawing.Size(96, 23);
+            tbSearchStrName.TabIndex = 3;
             // 
             // cmbTypeSort
             // 
@@ -195,14 +174,22 @@
             // 
             typeSortFieldBindingSource.DataSource = typeof(BindingItem.Pages.TypeSortFieldModel);
             // 
-            // tbSearchStrName
+            // cmbSortField
             // 
-            tbSearchStrName.Dock = System.Windows.Forms.DockStyle.Bottom;
-            tbSearchStrName.Location = new System.Drawing.Point(108, 11);
-            tbSearchStrName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tbSearchStrName.Name = "tbSearchStrName";
-            tbSearchStrName.Size = new System.Drawing.Size(96, 23);
-            tbSearchStrName.TabIndex = 3;
+            cmbSortField.DataSource = sortCompaniesBindingSource;
+            cmbSortField.Dock = System.Windows.Forms.DockStyle.Bottom;
+            cmbSortField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbSortField.FormattingEnabled = true;
+            cmbSortField.Location = new System.Drawing.Point(508, 11);
+            cmbSortField.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            cmbSortField.Name = "cmbSortField";
+            cmbSortField.Size = new System.Drawing.Size(131, 23);
+            cmbSortField.TabIndex = 5;
+            cmbSortField.SelectedIndexChanged += CmbSortField_Changed;
+            // 
+            // sortCompaniesBindingSource
+            // 
+            sortCompaniesBindingSource.DataSource = typeof(BindingItem.Pages.Companies.SortCompaniesModel);
             // 
             // listView
             // 
@@ -217,6 +204,19 @@
             listView.TabIndex = 10;
             listView.SizeChanged += ListView_SizeChanged;
             // 
+            // labelSortField
+            // 
+            labelSortField.AutoSize = true;
+            labelSortField.Dock = System.Windows.Forms.DockStyle.Bottom;
+            labelSortField.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            labelSortField.Location = new System.Drawing.Point(420, 13);
+            labelSortField.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
+            labelSortField.Name = "labelSortField";
+            labelSortField.Size = new System.Drawing.Size(81, 19);
+            labelSortField.TabIndex = 12;
+            labelSortField.Text = "Column";
+            labelSortField.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // CompanyListView
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -228,9 +228,9 @@
             Size = new System.Drawing.Size(875, 381);
             tlpFilter.ResumeLayout(false);
             tlpFilter.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)sortCompaniesBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)itemsBindingSourceTypeField).EndInit();
             ((System.ComponentModel.ISupportInitialize)typeSortFieldBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)sortCompaniesBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -248,7 +248,7 @@
         private System.Windows.Forms.BindingSource itemsBindingSourceTypeField;
         private System.Windows.Forms.BindingSource typeSortFieldBindingSource;
         private System.Windows.Forms.Label labelSearchName;
-        private System.Windows.Forms.Label labelSortField;
         private System.Windows.Forms.Label labelTypeSort;
+        private System.Windows.Forms.Label labelSortField;
     }
 }

@@ -6,7 +6,7 @@ namespace TestTask.Core.Models.Companies
 {
     public class SortCompany : ISortEntity<Company, CompanySortType>
     {
-        private IEnumerable<CompanySortType> _sortFields = new HashSet<CompanySortType>() { CompanySortType.Id };
+        protected IEnumerable<CompanySortType> _sortFields = new HashSet<CompanySortType>() { CompanySortType.Id };
 
         public CompanySortType sortType { get; set; }
 

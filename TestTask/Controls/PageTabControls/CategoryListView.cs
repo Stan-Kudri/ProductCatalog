@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using TestTask.Control.PageTabControls.Model;
+using TestTask.Controls.PageTabControls.Model;
 using TestTask.Core;
 using TestTask.Core.Models;
 using TestTask.Core.Models.Categories;
@@ -12,7 +12,7 @@ using TestTask.Core.Models.Products;
 using TestTask.Extension;
 using TestTask.Forms.Categories;
 
-namespace TestTask.Control.PageTabControls
+namespace TestTask.Controls.PageTabControls
 {
     public partial class CategoryListView : UserControl, IListViewDataProvider, IInitialize, ILoad
     {

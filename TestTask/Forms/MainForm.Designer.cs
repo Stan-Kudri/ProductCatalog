@@ -44,7 +44,7 @@ namespace TestTask.Forms
             materialTabSelector = new MaterialSkin.Controls.MaterialTabSelector();
             tabControl = new MaterialSkin.Controls.MaterialTabControl();
             tabPageCompanies = new System.Windows.Forms.TabPage();
-            listViewCompany = new Control.PageTabControls.CompanyListView();
+            listViewCompany = new Controls.PageTabControls.CompanyListView();
             tabPageCategory = new System.Windows.Forms.TabPage();
             tabPageTypeProduct = new System.Windows.Forms.TabPage();
             tabPageProducts = new System.Windows.Forms.TabPage();
@@ -52,9 +52,9 @@ namespace TestTask.Forms
             bindingSourcePageProducts = new System.Windows.Forms.BindingSource(components);
             bindingSourcePageCompanies = new System.Windows.Forms.BindingSource(components);
             bindingSourcePageCategories = new System.Windows.Forms.BindingSource(components);
-            listViewCategory = new Control.PageTabControls.CategoryListView();
-            listViewTypeProduct = new Control.PageTabControls.TypeProductListView();
-            listViewProduct = new Control.PageTabControls.ProductListView();
+            listViewCategory = new Controls.PageTabControls.CategoryListView();
+            listViewTypeProduct = new Controls.PageTabControls.TypeProductListView();
+            listViewProduct = new Controls.PageTabControls.ProductListView();
             menuStrip.SuspendLayout();
             tabControl.SuspendLayout();
             tabPageCompanies.SuspendLayout();
@@ -311,9 +311,9 @@ namespace TestTask.Forms
         private System.Windows.Forms.TabPage tabPageCategory;
         private System.Windows.Forms.TabPage tabPageTypeProduct;
         private System.Windows.Forms.TabPage tabPageProducts;
-        private Control.PageTabControls.CompanyListView listViewCompany;
-        private Control.PageTabControls.CategoryListView listViewCategory;
-        private Control.PageTabControls.TypeProductListView listViewTypeProduct;
-        private Control.PageTabControls.ProductListView listViewProduct;
+        private Controls.PageTabControls.CompanyListView listViewCompany;
+        private Controls.PageTabControls.CategoryListView listViewCategory;
+        private Controls.PageTabControls.TypeProductListView listViewTypeProduct;
+        private Controls.PageTabControls.ProductListView listViewProduct;
     }
 }

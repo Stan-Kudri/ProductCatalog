@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using TestTask.BindingItem.Pages.Products;
-using TestTask.Control.PageTabControls.Model;
+using TestTask.Controls.PageTabControls.Model;
 using TestTask.Core;
 using TestTask.Core.Models;
 using TestTask.Core.Models.Categories;
@@ -15,7 +15,7 @@ using TestTask.Core.Models.Types;
 using TestTask.Extension;
 using TestTask.Forms.Products;
 
-namespace TestTask.Control.PageTabControls
+namespace TestTask.Controls.PageTabControls
 {
     public partial class ProductListView : UserControl, IListViewDataProvider, IInitialize, ILoad
     {

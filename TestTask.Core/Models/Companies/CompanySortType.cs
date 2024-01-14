@@ -2,7 +2,6 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
-using TestTask.Core.Models.Products;
 
 namespace TestTask.Core.Models.Companies
 {
@@ -23,7 +22,7 @@ namespace TestTask.Core.Models.Companies
 
         public override string ToString() => base.Name;
 
-        private sealed class SortType<TKey> : CompanySortType
+        protected sealed class SortType<TKey> : CompanySortType
         {
             private readonly Expression<Func<Company, TKey>> _expression;
 

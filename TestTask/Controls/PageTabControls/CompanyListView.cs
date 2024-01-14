@@ -5,16 +5,15 @@ using System.Linq;
 using System.Windows.Forms;
 using TestTask.BindingItem.Pages;
 using TestTask.BindingItem.Pages.Companies;
-using TestTask.Control.PageTabControls.Model;
+using TestTask.Controls.PageTabControls.Model;
 using TestTask.Core;
 using TestTask.Core.Models;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Page;
-using TestTask.Core.Models.Products;
 using TestTask.Extension;
 using TestTask.Forms.Companies;
 
-namespace TestTask.Control.PageTabControls
+namespace TestTask.Controls.PageTabControls
 {
     public partial class CompanyListView : UserControl, IListViewDataProvider, IInitialize, ILoad
     {
@@ -25,7 +24,6 @@ namespace TestTask.Control.PageTabControls
 
         private IServiceProvider _serviceProvider;
         private CompanyRepository _companyService;
-        private ProductRepository _productService;
         private SortCompaniesModel _sortField = new SortCompaniesModel();
         private TypeSortFieldModel _typeSort = new TypeSortFieldModel();
 
@@ -43,7 +41,6 @@ namespace TestTask.Control.PageTabControls
         {
             _serviceProvider = serviceProvider;
             _companyService = _serviceProvider.GetRequiredService<CompanyRepository>();
-            _productService = _serviceProvider.GetRequiredService<ProductRepository>();
             listView.Initialize(this, serviceProvider.GetRequiredService<IMessageBox>());
 
             cmbSortField.DataSource = _sortField.Items;

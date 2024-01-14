@@ -7,12 +7,10 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableProvider
     public class TypeDetailProvider : ITableDetailProvider<ProductType>
     {
         private readonly ProductTypeRepository _typeRepository;
-        private readonly ProductRepository _productRepository;
 
         public TypeDetailProvider(ProductTypeRepository productTypeRepository, ProductRepository productRepository)
         {
             _typeRepository = productTypeRepository;
-            _productRepository = productRepository;
         }
 
         public IReadOnlyList<ListTableColumn> Columns => new List<ListTableColumn>

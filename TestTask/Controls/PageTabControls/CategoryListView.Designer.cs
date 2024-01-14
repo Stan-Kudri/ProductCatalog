@@ -1,6 +1,6 @@
 ﻿using TestTask.BindingItem.Pages;
 
-namespace TestTask.Control.PageTabControls
+namespace TestTask.Controls.PageTabControls
 {
     partial class CategoryListView
     {

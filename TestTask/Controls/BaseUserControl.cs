@@ -1,7 +1,7 @@
 ﻿using MaterialSkin;
 using System.Windows.Forms;
 
-namespace TestTask.Control
+namespace TestTask.Controls
 {
     public partial class BaseUserControl : UserControl, IMaterialControl
     {

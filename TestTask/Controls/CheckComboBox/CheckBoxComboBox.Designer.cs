@@ -1,11 +1,11 @@
-﻿namespace TestTask.Control
+﻿namespace TestTask.Controls.CheckComboBox
 {
-    partial class BaseUserControl
+    partial class CheckBoxComboBox
     {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        protected System.ComponentModel.IContainer components = null;
+        private System.ComponentModel.IContainer components = null;
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         }
 
         #endregion
