@@ -6,19 +6,20 @@ namespace TestTask.Core.Models.Companies
 {
     public class SortCompany : ISortEntity<Company, CompanySortType>
     {
-        private IEnumerable<CompanySortType> _sortFields = new HashSet<CompanySortType>() { CompanySortType.Id };
-
-        public CompanySortType sortType { get; set; }
+        protected IEnumerable<CompanySortType> _sortFields = new HashSet<CompanySortType>() { CompanySortType.Id };
 
         public SortCompany()
         {
         }
+
+        public CompanySortType sortType { get; set; }
 
         public virtual IEnumerable<CompanySortType> SortFields
         {
             get => _sortFields;
             set => _sortFields = value;
         }
+
         public ObservableCollection<CompanySortType> Items { get; set; } = new ObservableCollection<CompanySortType>(CompanySortType.List);
 
         public IQueryable<Company> Apply(IQueryable<Company> items, bool? ascending = true)

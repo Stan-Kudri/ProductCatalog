@@ -8,12 +8,10 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableView
     public class CompanyDetailProvider : ITableDetailProvider<Company>
     {
         private readonly CompanyRepository _companyRepository;
-        private readonly ProductRepository _productRepository;
 
         public CompanyDetailProvider(CompanyRepository companyRepository, ProductRepository productRepository)
         {
             _companyRepository = companyRepository;
-            _productRepository = productRepository;
         }
 
         public IReadOnlyList<ListTableColumn> Columns => new List<ListTableColumn>

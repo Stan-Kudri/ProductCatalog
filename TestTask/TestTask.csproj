@@ -36,20 +36,20 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="Control\BaseUserControl.cs">
+    <Compile Update="Controls\BaseUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Control\PageTabControls\CategoryListView.cs">
+    <Compile Update="Controls\PageTabControls\CategoryListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Control\ListViewControl.cs" />
-    <Compile Update="Control\PageTabControls\CompanyListView.cs">
+    <Compile Update="Controls\ListViewControl.cs" />
+    <Compile Update="Controls\PageTabControls\CompanyListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Control\PageTabControls\TypeProductListView.cs">
+    <Compile Update="Controls\PageTabControls\TypeProductListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Control\PageTabControls\ProductListView.cs">
+    <Compile Update="Controls\PageTabControls\ProductListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -88,5 +88,8 @@
     <Compile Remove="Forms\Step\ProductFormBase.cs" />
     <Compile Remove="Forms\Step\ProductFormBase.Designer.cs" />
     <EmbeddedResource Remove="Forms\Step\ProductFormBase.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BindingItem\Pages\TypeProduct\" />
   </ItemGroup>
 </Project>

@@ -2,7 +2,6 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
-using TestTask.Core.Models.Products;
 
 namespace TestTask.Core.Models.Categories
 {
@@ -19,10 +18,7 @@ namespace TestTask.Core.Models.Categories
         public abstract IOrderedQueryable<Category> OrderBy(IQueryable<Category> query, bool asc);
         public abstract IOrderedQueryable<Category> ThenBy(IOrderedQueryable<Category> query, bool asc);
 
-        public override string ToString()
-        {
-            return base.Name;
-        }
+        public override string ToString() => base.Name;
 
         private sealed class SortType<TKey> : CategoriesSortType
         {
