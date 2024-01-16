@@ -41,11 +41,9 @@ namespace TestTask.Controls.PageTabControls
             btnTypeSort = new MaterialSkin.Controls.MaterialButton();
             checkCmbField = new CheckComboBox.CheckBoxComboBox();
             itemsBindingSourceSortName = new System.Windows.Forms.BindingSource(components);
-            sortPageCategoriesBindingSource = new System.Windows.Forms.BindingSource(components);
             listView = new ListViewControl();
             tlpFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)itemsBindingSourceSortName).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)sortPageCategoriesBindingSource).BeginInit();
             SuspendLayout();
             // 
             // tlpFilter
@@ -186,11 +184,6 @@ namespace TestTask.Controls.PageTabControls
             // itemsBindingSourceSortName
             // 
             itemsBindingSourceSortName.DataMember = "Items";
-            itemsBindingSourceSortName.DataSource = sortPageCategoriesBindingSource;
-            // 
-            // sortPageCategoriesBindingSource
-            // 
-            sortPageCategoriesBindingSource.DataSource = typeof(TypeSortFieldModel);
             // 
             // listView
             // 
@@ -217,7 +210,6 @@ namespace TestTask.Controls.PageTabControls
             tlpFilter.ResumeLayout(false);
             tlpFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)itemsBindingSourceSortName).EndInit();
-            ((System.ComponentModel.ISupportInitialize)sortPageCategoriesBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -229,7 +221,6 @@ namespace TestTask.Controls.PageTabControls
         private System.Windows.Forms.TextBox tbSearchStrName;
         private ListViewControl listView;
         private System.Windows.Forms.BindingSource itemsBindingSourceSortName;
-        private System.Windows.Forms.BindingSource sortPageCategoriesBindingSource;
         private MaterialSkin.Controls.MaterialButton buttonUseFilter;
         private System.Windows.Forms.Label labelSearchName;
         private System.Windows.Forms.Label labelSortName;
