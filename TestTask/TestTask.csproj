@@ -36,6 +36,12 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="BindingItem\Pages\TypeProduct\**" />
+    <EmbeddedResource Remove="BindingItem\Pages\TypeProduct\**" />
+    <None Remove="BindingItem\Pages\TypeProduct\**" />
+    <Page Remove="BindingItem\Pages\TypeProduct\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Controls\BaseUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -88,8 +94,5 @@
     <Compile Remove="Forms\Step\ProductFormBase.cs" />
     <Compile Remove="Forms\Step\ProductFormBase.Designer.cs" />
     <EmbeddedResource Remove="Forms\Step\ProductFormBase.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BindingItem\Pages\TypeProduct\" />
   </ItemGroup>
 </Project>
