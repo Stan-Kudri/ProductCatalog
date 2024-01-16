@@ -90,6 +90,6 @@
     <EmbeddedResource Remove="Forms\Step\ProductFormBase.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BindingItem\Pages\Companies\" />
+    <Folder Include="BindingItem\Pages\TypeProduct\" />
   </ItemGroup>
 </Project>

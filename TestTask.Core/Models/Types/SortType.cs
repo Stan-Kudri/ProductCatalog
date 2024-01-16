@@ -6,7 +6,7 @@ namespace TestTask.Core.Models.Types
 {
     public class SortType : ISortEntity<ProductType, ProductTypeSortType>
     {
-        private IEnumerable<ProductTypeSortType> _sortFields = new HashSet<ProductTypeSortType>() { ProductTypeSortType.Id };
+        protected IEnumerable<ProductTypeSortType> _sortFields = new HashSet<ProductTypeSortType>() { ProductTypeSortType.Id };
 
         public ProductTypeSortType sortType { get; set; }
 
