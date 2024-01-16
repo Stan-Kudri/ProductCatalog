@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using TestTask.BindingItem.Pages.Companies;
+using TestTask.BindingItem.Pages.TypeProduct;
 using TestTask.Controls.PageTabControls.Model;
 using TestTask.Core;
 using TestTask.Core.Models;
@@ -126,7 +126,7 @@ namespace TestTask.Controls.PageTabControls
 
         private void ButtonClearFilter_Click(object sender, EventArgs e)
         {
-            cmbSortField.SelectedItem = SortCompaniesModel.IdSort;
+            cmbSortField.SelectedItem = SortTypeProduct.IdSort;
             cmbTypeSort.SelectedItem = TypeSortField.NoSorting;
             _sortField.SortField = cmbSortField.SelectedItem.ToString();
             _typeSort.SetSort(cmbTypeSort.SelectedItem.ToString());

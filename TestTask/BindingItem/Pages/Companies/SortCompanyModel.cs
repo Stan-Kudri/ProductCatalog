@@ -14,18 +14,18 @@ namespace TestTask.BindingItem.Pages.Companies
         private string[] _selectField;
 
         public SortCompanyModel()
-        {
-            _selectField = Items.Select(e => e.ToString()).ToArray();
-        }
+            => _selectField = Items.Select(e => e.ToString()).ToArray();
 
         public string[] SelectField => _selectField;
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            if (PropertyChanged != null)
+            if (PropertyChanged == null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                return;
             }
+
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public override IEnumerable<CompanySortType> SortFields

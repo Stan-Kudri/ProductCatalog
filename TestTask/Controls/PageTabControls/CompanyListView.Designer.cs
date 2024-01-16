@@ -37,15 +37,11 @@
             tbSearchStrName = new System.Windows.Forms.TextBox();
             labelTypeSort = new System.Windows.Forms.Label();
             checkCmbField = new CheckComboBox.CheckBoxComboBox();
-            sortCompaniesBindingSource = new System.Windows.Forms.BindingSource(components);
             itemsBindingSourceTypeField = new System.Windows.Forms.BindingSource(components);
-            typeSortFieldBindingSource = new System.Windows.Forms.BindingSource(components);
             listView = new ListViewControl();
             btnTypeSort = new MaterialSkin.Controls.MaterialButton();
             tlpFilter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)sortCompaniesBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)itemsBindingSourceTypeField).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)typeSortFieldBindingSource).BeginInit();
             SuspendLayout();
             // 
             // tlpFilter
@@ -163,18 +159,9 @@
             checkCmbField.Size = new System.Drawing.Size(256, 23);
             checkCmbField.TabIndex = 13;
             // 
-            // sortCompaniesBindingSource
-            // 
-            sortCompaniesBindingSource.DataSource = typeof(BindingItem.Pages.Companies.SortCompaniesModel);
-            // 
             // itemsBindingSourceTypeField
             // 
             itemsBindingSourceTypeField.DataMember = "Items";
-            itemsBindingSourceTypeField.DataSource = typeSortFieldBindingSource;
-            // 
-            // typeSortFieldBindingSource
-            // 
-            typeSortFieldBindingSource.DataSource = typeof(BindingItem.Pages.TypeSortFieldModel);
             // 
             // listView
             // 
@@ -220,9 +207,7 @@
             Size = new System.Drawing.Size(875, 381);
             tlpFilter.ResumeLayout(false);
             tlpFilter.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)sortCompaniesBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)itemsBindingSourceTypeField).EndInit();
-            ((System.ComponentModel.ISupportInitialize)typeSortFieldBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -234,9 +219,7 @@
         private MaterialSkin.Controls.MaterialButton buttonClearFilter;
         private System.Windows.Forms.TextBox tbSearchStrName;
         private MaterialSkin.Controls.MaterialButton buttonUseFilter;
-        private System.Windows.Forms.BindingSource sortCompaniesBindingSource;
         private System.Windows.Forms.BindingSource itemsBindingSourceTypeField;
-        private System.Windows.Forms.BindingSource typeSortFieldBindingSource;
         private System.Windows.Forms.Label labelSearchName;
         private System.Windows.Forms.Label labelTypeSort;
         private CheckComboBox.CheckBoxComboBox checkCmbField;
