@@ -8,17 +8,18 @@ namespace TestTask.Core.Models.Companies
     {
         protected IEnumerable<CompanySortType> _sortFields = new HashSet<CompanySortType>() { CompanySortType.Id };
 
-        public CompanySortType sortType { get; set; }
-
         public SortCompany()
         {
         }
+
+        public CompanySortType sortType { get; set; }
 
         public virtual IEnumerable<CompanySortType> SortFields
         {
             get => _sortFields;
             set => _sortFields = value;
         }
+
         public ObservableCollection<CompanySortType> Items { get; set; } = new ObservableCollection<CompanySortType>(CompanySortType.List);
 
         public IQueryable<Company> Apply(IQueryable<Company> items, bool? ascending = true)

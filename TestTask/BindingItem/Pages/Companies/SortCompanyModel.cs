@@ -1,20 +1,51 @@
-﻿using TestTask.Core.Models.Companies;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using TestTask.Core.Models.Companies;
 
 namespace TestTask.BindingItem.Pages.Companies
 {
-    public abstract class SortCompanyModel : CompanySortType
+    public class SortCompanyModel : SortCompany
     {
-        public SortCompanyModel(string name, int value)
-        : base(name, value)
+        private event PropertyChangedEventHandler PropertyChanged;
+
+        private string[] _selectField;
+
+        public SortCompanyModel()
         {
+            _selectField = Items.Select(e => e.ToString()).ToArray();
         }
 
-        public SortCompanyModel(string name, int value, bool isSelectField)
-            : this(name, value)
+        public string[] SelectField => _selectField;
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            IsSelectField = isSelectField;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
-        public bool IsSelectField { get; set; } = false;
+        public override IEnumerable<CompanySortType> SortFields
+        {
+            get => _sortFields;
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("The result is not null.", nameof(value));
+                }
+
+                if (_sortFields == value)
+                {
+                    return;
+                }
+
+                _sortFields = value;
+                OnPropertyChanged(nameof(_sortFields));
+            }
+        }
     }
 }
