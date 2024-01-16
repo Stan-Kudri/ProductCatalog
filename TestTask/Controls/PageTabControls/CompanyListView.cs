@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using TestTask.BindingItem.Pages;
-using TestTask.BindingItem.Pages.Companies;
+using TestTask.BindingItem.Pages.Sort;
 using TestTask.Controls.PageTabControls.Model;
 using TestTask.Core;
 using TestTask.Core.Models;
@@ -98,7 +98,6 @@ namespace TestTask.Controls.PageTabControls
         {
             var queriable = _companyService.GetQueryableAll();
             queriable = GetSearchName(queriable);
-            SelectSortField();
             queriable = _selectSortField.Apply(queriable, _isAscending);
             var result = queriable.GetPagedList(page);
             return new PagedList<Entity>(result, result.PageNumber, result.PageSize, result.TotalItems);
@@ -134,6 +133,7 @@ namespace TestTask.Controls.PageTabControls
             foreach (string item in checkCmbField.Items)
             {
                 var checkBoxItem = checkCmbField.CheckBoxItems[item];
+
                 if (checkBoxItem.Checked && CompanySortType.TryFromName(item, out var sortField))
                 {
                     selectField.Add(sortField);

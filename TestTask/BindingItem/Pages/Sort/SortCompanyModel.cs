@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using TestTask.Core.Models.Companies;
 
-namespace TestTask.BindingItem.Pages.Companies
+namespace TestTask.BindingItem.Pages.Sort
 {
     public class SortCompanyModel : SortCompany
     {

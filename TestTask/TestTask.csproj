@@ -89,4 +89,7 @@
     <Compile Remove="Forms\Step\ProductFormBase.Designer.cs" />
     <EmbeddedResource Remove="Forms\Step\ProductFormBase.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BindingItem\Pages\Companies\" />
+  </ItemGroup>
 </Project>

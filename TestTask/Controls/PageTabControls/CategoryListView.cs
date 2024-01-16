@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using TestTask.BindingItem.Pages;
+using TestTask.BindingItem.Pages.Sort;
 using TestTask.Controls.PageTabControls.Model;
 using TestTask.Core;
 using TestTask.Core.Models;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Page;
-using TestTask.Core.Models.Products;
 using TestTask.Extension;
 using TestTask.Forms.Categories;
 
@@ -21,8 +22,8 @@ namespace TestTask.Controls.PageTabControls
 
         private IServiceProvider _serviceProvider;
         private CategoryRepository _categoryService;
-        private ProductRepository _productService;
-        private TypeSortField _typeSort = new TypeSortField();
+        private SortCategoryModel _selectSortField = new SortCategoryModel();
+        private bool _isAscending = true;
 
         public CategoryListView() => InitializeComponent();
 
@@ -36,10 +37,8 @@ namespace TestTask.Controls.PageTabControls
         {
             _serviceProvider = serviceProvider;
             _categoryService = _serviceProvider.GetRequiredService<CategoryRepository>();
-            _productService = _serviceProvider.GetRequiredService<ProductRepository>();
             listView.Initialize(this, serviceProvider.GetRequiredService<IMessageBox>());
-            cmbSortName.DataSource = _typeSort.Items;
-            cmbSortName.SelectedItem = _typeSort.SortType;
+            checkCmbField.Items.AddRange(_selectSortField.SelectField);
         }
 
         public void LoadData() => listView.LoadData();
@@ -91,47 +90,64 @@ namespace TestTask.Controls.PageTabControls
         {
             var queriable = _categoryService.GetQueryableAll();
             queriable = GetSearchName(queriable);
-            queriable = GetSortName(queriable);
+            queriable = _selectSortField.Apply(queriable, _isAscending);
             var result = queriable.GetPagedList(page);
             return new PagedList<Entity>(result, result.PageNumber, result.PageSize, result.TotalItems);
         }
 
         public void Remove(Entity entity) => _categoryService.Remove(entity.Id);
 
-        private void ButtonUseFilter_Click(object sender, EventArgs e) => LoadData();
+        private void ButtonUseFilter_Click(object sender, EventArgs e)
+        {
+            SelectSortField();
+            LoadData();
+        }
 
         private void ButtonClearFilter_Click(object sender, EventArgs e)
         {
-            cmbSortName.SelectedItem = TypeSortField.NoSorting;
-            _typeSort.SetSort(cmbSortName.SelectedItem.ToString());
             tbSearchStrName.Text = string.Empty;
+            _selectSortField.SortFields = new HashSet<CategoriesSortType>();
+            checkCmbField.ClearSelection();
             LoadData();
         }
 
         private void ListView_SizeChanged(object sender, EventArgs e)
             => listView.ChangeSizeColumnListView();
 
-        private void CmbSortName_Changed(object sender, EventArgs e)
-        {
-            _typeSort.SetSort(cmbSortName.SelectedItem.ToString());
-            LoadData();
-        }
-
         private IQueryable<Category> GetSearchName(IQueryable<Category> items)
             => string.IsNullOrEmpty(tbSearchStrName.Text)
             ? items
             : items.Where(e => e.Name.Contains(tbSearchStrName.Text));
 
-        private IQueryable<Category> GetSortName(IQueryable<Category> items)
+        private void SelectSortField()
         {
-            if (_typeSort.IsAscending == null)
+            var selectField = new HashSet<CategoriesSortType>();
+            foreach (string item in checkCmbField.Items)
             {
-                return items;
+                var checkBoxItem = checkCmbField.CheckBoxItems[item];
+
+                if (checkBoxItem.Checked && CategoriesSortType.TryFromName(item, out var sortField))
+                {
+                    selectField.Add(sortField);
+                }
+            }
+            _selectSortField.SortFields = selectField;
+        }
+
+        private void BtnTypeSort_Click(object sender, EventArgs e)
+        {
+            if (_isAscending)
+            {
+                _isAscending = false;
+                btnTypeSort.Text = TypeSortFields.Descending.Name;
+            }
+            else
+            {
+                _isAscending = true;
+                btnTypeSort.Text = TypeSortFields.Ascending.Name;
             }
 
-            return (bool)_typeSort.IsAscending
-                    ? items.OrderBy(e => e.Name).Select(e => e)
-                    : items.OrderByDescending(e => e.Name).Select(e => e);
+            LoadData();
         }
     }
 }

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            CheckComboBox.CheckBoxProperties checkBoxProperties2 = new CheckComboBox.CheckBoxProperties();
+            CheckComboBox.CheckBoxProperties checkBoxProperties1 = new CheckComboBox.CheckBoxProperties();
             tlpFilter = new System.Windows.Forms.TableLayoutPanel();
             labelSearchName = new System.Windows.Forms.Label();
             buttonClearFilter = new MaterialSkin.Controls.MaterialButton();
@@ -37,9 +37,9 @@
             tbSearchStrName = new System.Windows.Forms.TextBox();
             labelTypeSort = new System.Windows.Forms.Label();
             checkCmbField = new CheckComboBox.CheckBoxComboBox();
+            btnTypeSort = new MaterialSkin.Controls.MaterialButton();
             itemsBindingSourceTypeField = new System.Windows.Forms.BindingSource(components);
             listView = new ListViewControl();
-            btnTypeSort = new MaterialSkin.Controls.MaterialButton();
             tlpFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)itemsBindingSourceTypeField).BeginInit();
             SuspendLayout();
@@ -51,10 +51,9 @@
             tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8F));
             tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4F));
+            tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
             tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
-            tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
             tlpFilter.Controls.Add(labelSearchName, 0, 0);
             tlpFilter.Controls.Add(buttonClearFilter, 6, 0);
             tlpFilter.Controls.Add(buttonUseFilter, 5, 0);
@@ -149,8 +148,8 @@
             // 
             // checkCmbField
             // 
-            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
-            checkCmbField.CheckBoxProperties = checkBoxProperties2;
+            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
+            checkCmbField.CheckBoxProperties = checkBoxProperties1;
             checkCmbField.DisplayMemberSingleItem = "";
             checkCmbField.Dock = System.Windows.Forms.DockStyle.Bottom;
             checkCmbField.FormattingEnabled = true;
@@ -158,6 +157,27 @@
             checkCmbField.Name = "checkCmbField";
             checkCmbField.Size = new System.Drawing.Size(256, 23);
             checkCmbField.TabIndex = 13;
+            // 
+            // btnTypeSort
+            // 
+            btnTypeSort.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnTypeSort.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            btnTypeSort.Depth = 0;
+            btnTypeSort.Dock = System.Windows.Forms.DockStyle.Bottom;
+            btnTypeSort.HighEmphasis = true;
+            btnTypeSort.Icon = null;
+            btnTypeSort.Location = new System.Drawing.Point(622, 6);
+            btnTypeSort.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btnTypeSort.MouseState = MaterialSkin.MouseState.HOVER;
+            btnTypeSort.Name = "btnTypeSort";
+            btnTypeSort.NoAccentTextColor = System.Drawing.Color.Empty;
+            btnTypeSort.Size = new System.Drawing.Size(26, 25);
+            btnTypeSort.TabIndex = 14;
+            btnTypeSort.Text = "↑";
+            btnTypeSort.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            btnTypeSort.UseAccentColor = false;
+            btnTypeSort.UseVisualStyleBackColor = true;
+            btnTypeSort.Click += BtnTypeSort_Click;
             // 
             // itemsBindingSourceTypeField
             // 
@@ -175,26 +195,6 @@
             listView.Size = new System.Drawing.Size(877, 343);
             listView.TabIndex = 10;
             listView.SizeChanged += ListView_SizeChanged;
-            // 
-            // btnTypeSort
-            // 
-            btnTypeSort.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            btnTypeSort.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            btnTypeSort.Depth = 0;
-            btnTypeSort.HighEmphasis = true;
-            btnTypeSort.Icon = null;
-            btnTypeSort.Location = new System.Drawing.Point(622, 6);
-            btnTypeSort.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            btnTypeSort.MouseState = MaterialSkin.MouseState.HOVER;
-            btnTypeSort.Name = "btnTypeSort";
-            btnTypeSort.NoAccentTextColor = System.Drawing.Color.Empty;
-            btnTypeSort.Size = new System.Drawing.Size(26, 25);
-            btnTypeSort.TabIndex = 14;
-            btnTypeSort.Text = "↑";
-            btnTypeSort.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            btnTypeSort.UseAccentColor = false;
-            btnTypeSort.UseVisualStyleBackColor = true;
-            btnTypeSort.Click += BtnTypeSort_Click;
             // 
             // CompanyListView
             // 
