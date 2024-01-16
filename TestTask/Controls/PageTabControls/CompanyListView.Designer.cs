@@ -79,7 +79,7 @@
             labelSearchName.Name = "labelSearchName";
             labelSearchName.Size = new System.Drawing.Size(63, 19);
             labelSearchName.TabIndex = 10;
-            labelSearchName.Text = "Search ";
+            labelSearchName.Text = "Search :";
             labelSearchName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // buttonClearFilter
@@ -90,12 +90,12 @@
             buttonClearFilter.Dock = System.Windows.Forms.DockStyle.Bottom;
             buttonClearFilter.HighEmphasis = true;
             buttonClearFilter.Icon = null;
-            buttonClearFilter.Location = new System.Drawing.Point(761, 7);
+            buttonClearFilter.Location = new System.Drawing.Point(770, 7);
             buttonClearFilter.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             buttonClearFilter.MouseState = MaterialSkin.MouseState.HOVER;
             buttonClearFilter.Name = "buttonClearFilter";
             buttonClearFilter.NoAccentTextColor = System.Drawing.Color.Empty;
-            buttonClearFilter.Size = new System.Drawing.Size(108, 23);
+            buttonClearFilter.Size = new System.Drawing.Size(99, 23);
             buttonClearFilter.TabIndex = 1;
             buttonClearFilter.Text = "Clear Filter";
             buttonClearFilter.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -111,7 +111,7 @@
             buttonUseFilter.Dock = System.Windows.Forms.DockStyle.Bottom;
             buttonUseFilter.HighEmphasis = true;
             buttonUseFilter.Icon = null;
-            buttonUseFilter.Location = new System.Drawing.Point(657, 7);
+            buttonUseFilter.Location = new System.Drawing.Point(666, 7);
             buttonUseFilter.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             buttonUseFilter.MouseState = MaterialSkin.MouseState.HOVER;
             buttonUseFilter.Name = "buttonUseFilter";
@@ -143,7 +143,7 @@
             labelTypeSort.Name = "labelTypeSort";
             labelTypeSort.Size = new System.Drawing.Size(63, 19);
             labelTypeSort.TabIndex = 11;
-            labelTypeSort.Text = "Sort by:";
+            labelTypeSort.Text = "Sort by :";
             labelTypeSort.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // checkCmbField
@@ -171,7 +171,7 @@
             btnTypeSort.MouseState = MaterialSkin.MouseState.HOVER;
             btnTypeSort.Name = "btnTypeSort";
             btnTypeSort.NoAccentTextColor = System.Drawing.Color.Empty;
-            btnTypeSort.Size = new System.Drawing.Size(26, 25);
+            btnTypeSort.Size = new System.Drawing.Size(35, 25);
             btnTypeSort.TabIndex = 14;
             btnTypeSort.Text = "↑";
             btnTypeSort.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;

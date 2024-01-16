@@ -3,7 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using TestTask.BindingItem.Pages.Products;
+using TestTask.BindingItem.Pages;
+using TestTask.BindingItem.Pages.Sort;
 using TestTask.Controls.PageTabControls.Model;
 using TestTask.Core;
 using TestTask.Core.Models;
@@ -36,8 +37,8 @@ namespace TestTask.Controls.PageTabControls
         private ProductTypeRepository _typeService;
         private ProductRepository _productService;
         private IMessageBox _messageBox;
-        private SortProducts _sortField = new SortProducts();
-        private TypeSortField _typeSort = new TypeSortField();
+        private SortProductModel _selectSortField = new SortProductModel();
+        private bool _isAscending = true;
 
         public ProductListView() => InitializeComponent();
 
@@ -64,12 +65,7 @@ namespace TestTask.Controls.PageTabControls
             _typeService = _serviceProvider.GetRequiredService<ProductTypeRepository>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
             listView.Initialize(this, serviceProvider.GetRequiredService<IMessageBox>());
-
-            cmbSortField.DataSource = _sortField.Items;
-            cmbSortField.SelectedItem = _sortField.SortField;
-            cmbTypeSort.DataSource = _typeSort.Items;
-            cmbTypeSort.SelectedItem = _typeSort.SortType;
-
+            checkCmbField.Items.AddRange(_selectSortField.SelectField);
         }
 
         public void LoadData() => listView.LoadData();
@@ -154,46 +150,26 @@ namespace TestTask.Controls.PageTabControls
         {
             var queriable = _productService.GetQueryableAll();
             queriable = GetSearchType(queriable);
-            queriable = _sortField.Apply(queriable, _typeSort.IsAscending);
+            queriable = _selectSortField.Apply(queriable, _isAscending);
             var result = queriable.GetPagedList(page);
             return new PagedList<Entity>(result, result.PageNumber, result.PageSize, result.TotalItems);
         }
 
         public void Remove(Entity entity) => _productService.Remove(entity.Id);
 
-        private void ButtonUseFilter_Click(object sender, EventArgs e) => LoadData();
+        private void ButtonUseFilter_Click(object sender, EventArgs e)
+        {
+            SelectSortField();
+            LoadData();
+        }
 
         private void ButtonClearFilter_Click(object sender, EventArgs e)
         {
-            cmbSortField.SelectedItem = SortProducts.IdSort;
-            cmbTypeSort.SelectedItem = TypeSortField.NoSorting;
-            _sortField.SortField = cmbSortField.SelectedItem.ToString();
-            _typeSort.SetSort(cmbTypeSort.SelectedItem.ToString());
             tbSearchStrName.Text = string.Empty;
-            LoadData();
-        }
-
-        private void CmbSortField_Changed(object sender, EventArgs e)
-        {
-            _sortField.SortField = cmbSortField.SelectedItem.ToString();
-            LoadData();
-        }
-
-        private void CmbTypeSort_Changed(object sender, EventArgs e)
-        {
-            _typeSort.SetSort(cmbTypeSort.SelectedItem.ToString());
-
-            if (_typeSort.IsAscending == null)
-            {
-                cmbSortField.Enabled = cmbSortField.Visible
-                    = labelSortField.Enabled = labelSortField.Visible = false;
-            }
-            else
-            {
-                cmbSortField.Enabled = cmbSortField.Visible
-                        = labelSortField.Enabled = labelSortField.Visible = true;
-            }
-
+            _selectSortField.SortFields = new HashSet<ProductSortType>();
+            checkCmbField.ClearSelection();
+            _isAscending = true;
+            btnTypeSort.Text = TypeSortFields.Ascending.Name;
             LoadData();
         }
 
@@ -204,5 +180,37 @@ namespace TestTask.Controls.PageTabControls
             => string.IsNullOrEmpty(tbSearchStrName.Text)
             ? items
             : items.Where(e => e.Name.Contains(tbSearchStrName.Text));
+
+
+        private void SelectSortField()
+        {
+            var selectField = new HashSet<ProductSortType>();
+            foreach (string item in checkCmbField.Items)
+            {
+                var checkBoxItem = checkCmbField.CheckBoxItems[item];
+
+                if (checkBoxItem.Checked && ProductSortType.TryFromName(item, out var sortField))
+                {
+                    selectField.Add(sortField);
+                }
+            }
+            _selectSortField.SortFields = selectField;
+        }
+
+        private void BtnTypeSort_Click(object sender, EventArgs e)
+        {
+            if (_isAscending)
+            {
+                _isAscending = false;
+                btnTypeSort.Text = TypeSortFields.Descending.Name;
+            }
+            else
+            {
+                _isAscending = true;
+                btnTypeSort.Text = TypeSortFields.Ascending.Name;
+            }
+
+            LoadData();
+        }
     }
 }

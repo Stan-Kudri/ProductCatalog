@@ -93,7 +93,7 @@
             labelSearchName.Name = "labelSearchName";
             labelSearchName.Size = new System.Drawing.Size(63, 19);
             labelSearchName.TabIndex = 16;
-            labelSearchName.Text = "Search";
+            labelSearchName.Text = "Search : ";
             labelSearchName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // buttonClearFilter

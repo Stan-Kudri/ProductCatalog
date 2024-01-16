@@ -29,23 +29,19 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            CheckComboBox.CheckBoxProperties checkBoxProperties1 = new CheckComboBox.CheckBoxProperties();
             listView = new ListViewControl();
             tlpFilter = new System.Windows.Forms.TableLayoutPanel();
             labelSearchName = new System.Windows.Forms.Label();
             buttonClearFilter = new MaterialSkin.Controls.MaterialButton();
             buttonUseFilter = new MaterialSkin.Controls.MaterialButton();
-            cmbSortField = new System.Windows.Forms.ComboBox();
-            sortProductsBindingSource = new System.Windows.Forms.BindingSource(components);
             tbSearchStrName = new System.Windows.Forms.TextBox();
-            labelSortField = new System.Windows.Forms.Label();
-            cmbTypeSort = new System.Windows.Forms.ComboBox();
-            itemsBindingSourceSortType = new System.Windows.Forms.BindingSource(components);
-            typeSortFieldBindingSource = new System.Windows.Forms.BindingSource(components);
             labelTypeSort = new System.Windows.Forms.Label();
+            checkCmbField = new CheckComboBox.CheckBoxComboBox();
+            btnTypeSort = new MaterialSkin.Controls.MaterialButton();
+            itemsBindingSourceSortType = new System.Windows.Forms.BindingSource(components);
             tlpFilter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)sortProductsBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)itemsBindingSourceSortType).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)typeSortFieldBindingSource).BeginInit();
             SuspendLayout();
             // 
             // listView
@@ -63,23 +59,22 @@
             // 
             // tlpFilter
             // 
-            tlpFilter.ColumnCount = 8;
+            tlpFilter.ColumnCount = 7;
+            tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8F));
+            tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8F));
+            tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
             tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
             tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
-            tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9F));
-            tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
-            tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
-            tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
+            tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             tlpFilter.Controls.Add(labelSearchName, 0, 0);
-            tlpFilter.Controls.Add(buttonClearFilter, 7, 0);
-            tlpFilter.Controls.Add(buttonUseFilter, 6, 0);
-            tlpFilter.Controls.Add(cmbSortField, 5, 0);
+            tlpFilter.Controls.Add(buttonClearFilter, 6, 0);
+            tlpFilter.Controls.Add(buttonUseFilter, 5, 0);
             tlpFilter.Controls.Add(tbSearchStrName, 1, 0);
-            tlpFilter.Controls.Add(labelSortField, 4, 0);
-            tlpFilter.Controls.Add(cmbTypeSort, 3, 0);
-            tlpFilter.Controls.Add(labelTypeSort, 2, 0);
+            tlpFilter.Controls.Add(labelTypeSort, 1, 0);
+            tlpFilter.Controls.Add(checkCmbField, 3, 0);
+            tlpFilter.Controls.Add(btnTypeSort, 4, 0);
             tlpFilter.Location = new System.Drawing.Point(1, -1);
             tlpFilter.Margin = new System.Windows.Forms.Padding(1);
             tlpFilter.Name = "tlpFilter";
@@ -92,13 +87,13 @@
             // 
             labelSearchName.AutoSize = true;
             labelSearchName.Dock = System.Windows.Forms.DockStyle.Bottom;
-            labelSearchName.Font = new System.Drawing.Font("Times New Roman", 12F);
+            labelSearchName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             labelSearchName.Location = new System.Drawing.Point(3, 13);
             labelSearchName.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
             labelSearchName.Name = "labelSearchName";
-            labelSearchName.Size = new System.Drawing.Size(98, 19);
+            labelSearchName.Size = new System.Drawing.Size(63, 19);
             labelSearchName.TabIndex = 13;
-            labelSearchName.Text = "Search name";
+            labelSearchName.Text = "Search :";
             labelSearchName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // buttonClearFilter
@@ -109,12 +104,12 @@
             buttonClearFilter.Dock = System.Windows.Forms.DockStyle.Bottom;
             buttonClearFilter.HighEmphasis = true;
             buttonClearFilter.Icon = null;
-            buttonClearFilter.Location = new System.Drawing.Point(761, 7);
+            buttonClearFilter.Location = new System.Drawing.Point(770, 7);
             buttonClearFilter.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             buttonClearFilter.MouseState = MaterialSkin.MouseState.HOVER;
             buttonClearFilter.Name = "buttonClearFilter";
             buttonClearFilter.NoAccentTextColor = System.Drawing.Color.Empty;
-            buttonClearFilter.Size = new System.Drawing.Size(108, 23);
+            buttonClearFilter.Size = new System.Drawing.Size(99, 23);
             buttonClearFilter.TabIndex = 1;
             buttonClearFilter.Text = "Clear Filter";
             buttonClearFilter.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -130,12 +125,12 @@
             buttonUseFilter.Dock = System.Windows.Forms.DockStyle.Bottom;
             buttonUseFilter.HighEmphasis = true;
             buttonUseFilter.Icon = null;
-            buttonUseFilter.Location = new System.Drawing.Point(648, 7);
+            buttonUseFilter.Location = new System.Drawing.Point(666, 7);
             buttonUseFilter.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             buttonUseFilter.MouseState = MaterialSkin.MouseState.HOVER;
             buttonUseFilter.Name = "buttonUseFilter";
             buttonUseFilter.NoAccentTextColor = System.Drawing.Color.Empty;
-            buttonUseFilter.Size = new System.Drawing.Size(103, 23);
+            buttonUseFilter.Size = new System.Drawing.Size(94, 23);
             buttonUseFilter.TabIndex = 4;
             buttonUseFilter.Text = "Use Filter";
             buttonUseFilter.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -143,79 +138,64 @@
             buttonUseFilter.UseVisualStyleBackColor = true;
             buttonUseFilter.Click += ButtonUseFilter_Click;
             // 
-            // cmbSortField
-            // 
-            cmbSortField.DataSource = sortProductsBindingSource;
-            cmbSortField.Dock = System.Windows.Forms.DockStyle.Bottom;
-            cmbSortField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbSortField.FormattingEnabled = true;
-            cmbSortField.Location = new System.Drawing.Point(508, 11);
-            cmbSortField.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            cmbSortField.Name = "cmbSortField";
-            cmbSortField.Size = new System.Drawing.Size(131, 23);
-            cmbSortField.TabIndex = 5;
-            cmbSortField.SelectedIndexChanged += CmbSortField_Changed;
-            // 
-            // sortProductsBindingSource
-            // 
-            sortProductsBindingSource.DataSource = typeof(BindingItem.Pages.Products.SortProducts);
-            // 
             // tbSearchStrName
             // 
             tbSearchStrName.Dock = System.Windows.Forms.DockStyle.Bottom;
-            tbSearchStrName.Location = new System.Drawing.Point(108, 11);
+            tbSearchStrName.Location = new System.Drawing.Point(73, 11);
             tbSearchStrName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tbSearchStrName.Name = "tbSearchStrName";
-            tbSearchStrName.Size = new System.Drawing.Size(96, 23);
+            tbSearchStrName.Size = new System.Drawing.Size(210, 23);
             tbSearchStrName.TabIndex = 3;
-            // 
-            // labelSortField
-            // 
-            labelSortField.AutoSize = true;
-            labelSortField.Dock = System.Windows.Forms.DockStyle.Bottom;
-            labelSortField.Font = new System.Drawing.Font("Times New Roman", 12F);
-            labelSortField.Location = new System.Drawing.Point(420, 13);
-            labelSortField.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
-            labelSortField.Name = "labelSortField";
-            labelSortField.Size = new System.Drawing.Size(81, 19);
-            labelSortField.TabIndex = 15;
-            labelSortField.Text = "Column:";
-            labelSortField.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cmbTypeSort
-            // 
-            cmbTypeSort.DataSource = itemsBindingSourceSortType;
-            cmbTypeSort.Dock = System.Windows.Forms.DockStyle.Bottom;
-            cmbTypeSort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbTypeSort.FormattingEnabled = true;
-            cmbTypeSort.Location = new System.Drawing.Point(290, 11);
-            cmbTypeSort.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            cmbTypeSort.Name = "cmbTypeSort";
-            cmbTypeSort.Size = new System.Drawing.Size(123, 23);
-            cmbTypeSort.TabIndex = 12;
-            cmbTypeSort.SelectedIndexChanged += CmbTypeSort_Changed;
-            // 
-            // itemsBindingSourceSortType
-            // 
-            itemsBindingSourceSortType.DataMember = "Items";
-            itemsBindingSourceSortType.DataSource = typeSortFieldBindingSource;
-            // 
-            // typeSortFieldBindingSource
-            // 
-            typeSortFieldBindingSource.DataSource = typeof(BindingItem.Pages.TypeSortFieldModel);
             // 
             // labelTypeSort
             // 
             labelTypeSort.AutoSize = true;
             labelTypeSort.Dock = System.Windows.Forms.DockStyle.Bottom;
-            labelTypeSort.Font = new System.Drawing.Font("Times New Roman", 12F);
-            labelTypeSort.Location = new System.Drawing.Point(211, 13);
+            labelTypeSort.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            labelTypeSort.Location = new System.Drawing.Point(290, 13);
             labelTypeSort.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
             labelTypeSort.Name = "labelTypeSort";
-            labelTypeSort.Size = new System.Drawing.Size(72, 19);
+            labelTypeSort.Size = new System.Drawing.Size(63, 19);
             labelTypeSort.TabIndex = 14;
-            labelTypeSort.Text = "Sort by:";
+            labelTypeSort.Text = "Sort by :";
             labelTypeSort.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // checkCmbField
+            // 
+            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
+            checkCmbField.CheckBoxProperties = checkBoxProperties1;
+            checkCmbField.DisplayMemberSingleItem = "";
+            checkCmbField.Dock = System.Windows.Forms.DockStyle.Bottom;
+            checkCmbField.FormattingEnabled = true;
+            checkCmbField.Location = new System.Drawing.Point(359, 11);
+            checkCmbField.Name = "checkCmbField";
+            checkCmbField.Size = new System.Drawing.Size(256, 23);
+            checkCmbField.TabIndex = 20;
+            // 
+            // btnTypeSort
+            // 
+            btnTypeSort.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnTypeSort.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            btnTypeSort.Depth = 0;
+            btnTypeSort.Dock = System.Windows.Forms.DockStyle.Bottom;
+            btnTypeSort.HighEmphasis = true;
+            btnTypeSort.Icon = null;
+            btnTypeSort.Location = new System.Drawing.Point(622, 6);
+            btnTypeSort.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btnTypeSort.MouseState = MaterialSkin.MouseState.HOVER;
+            btnTypeSort.Name = "btnTypeSort";
+            btnTypeSort.NoAccentTextColor = System.Drawing.Color.Empty;
+            btnTypeSort.Size = new System.Drawing.Size(35, 25);
+            btnTypeSort.TabIndex = 21;
+            btnTypeSort.Text = "↑";
+            btnTypeSort.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            btnTypeSort.UseAccentColor = false;
+            btnTypeSort.UseVisualStyleBackColor = true;
+            btnTypeSort.Click += BtnTypeSort_Click;
+            // 
+            // itemsBindingSourceSortType
+            // 
+            itemsBindingSourceSortType.DataMember = "Items";
             // 
             // ProductListView
             // 
@@ -229,9 +209,7 @@
             SizeChanged += ListView_SizeChanged;
             tlpFilter.ResumeLayout(false);
             tlpFilter.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)sortProductsBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)itemsBindingSourceSortType).EndInit();
-            ((System.ComponentModel.ISupportInitialize)typeSortFieldBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -243,13 +221,10 @@
         private MaterialSkin.Controls.MaterialButton buttonClearFilter;
         private System.Windows.Forms.TextBox tbSearchStrName;
         private MaterialSkin.Controls.MaterialButton buttonUseFilter;
-        private System.Windows.Forms.ComboBox cmbSortField;
-        private System.Windows.Forms.BindingSource sortProductsBindingSource;
-        private System.Windows.Forms.ComboBox cmbTypeSort;
         private System.Windows.Forms.BindingSource itemsBindingSourceSortType;
-        private System.Windows.Forms.BindingSource typeSortFieldBindingSource;
         private System.Windows.Forms.Label labelSearchName;
-        private System.Windows.Forms.Label labelSortField;
         private System.Windows.Forms.Label labelTypeSort;
+        private CheckComboBox.CheckBoxComboBox checkCmbField;
+        private MaterialSkin.Controls.MaterialButton btnTypeSort;
     }
 }

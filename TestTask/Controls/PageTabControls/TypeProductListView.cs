@@ -121,8 +121,8 @@ namespace TestTask.Controls.PageTabControls
 
         private void ButtonUseFilter_Click(object sender, EventArgs e)
         {
-            LoadData();
             SelectSortField();
+            LoadData();
         }
 
         private void ButtonClearFilter_Click(object sender, EventArgs e)
@@ -130,6 +130,8 @@ namespace TestTask.Controls.PageTabControls
             tbSearchStrName.Text = string.Empty;
             _selectSortField.SortFields = new HashSet<ProductTypeSortType>();
             checkCmbField.ClearSelection();
+            _isAscending = true;
+            btnTypeSort.Text = TypeSortFields.Ascending.Name;
             LoadData();
         }
 

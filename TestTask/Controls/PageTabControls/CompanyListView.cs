@@ -116,6 +116,8 @@ namespace TestTask.Controls.PageTabControls
             tbSearchStrName.Text = string.Empty;
             _selectSortField.SortFields = new HashSet<CompanySortType>();
             checkCmbField.ClearSelection();
+            _isAscending = true;
+            btnTypeSort.Text = TypeSortFields.Ascending.Name;
             LoadData();
         }
 

@@ -81,7 +81,7 @@ namespace TestTask.Controls.PageTabControls
             labelSortName.Name = "labelSortName";
             labelSortName.Size = new System.Drawing.Size(63, 19);
             labelSortName.TabIndex = 9;
-            labelSortName.Text = "Sort by";
+            labelSortName.Text = "Sort by :";
             labelSortName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelSearchName
@@ -94,7 +94,7 @@ namespace TestTask.Controls.PageTabControls
             labelSearchName.Name = "labelSearchName";
             labelSearchName.Size = new System.Drawing.Size(63, 19);
             labelSearchName.TabIndex = 9;
-            labelSearchName.Text = "Search";
+            labelSearchName.Text = "Search : ";
             labelSearchName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // buttonClearFilter
