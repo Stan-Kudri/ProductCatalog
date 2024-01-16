@@ -39,10 +39,10 @@ namespace TestTask.Controls.PageTabControls
             tbSearchStrName = new System.Windows.Forms.TextBox();
             buttonUseFilter = new MaterialSkin.Controls.MaterialButton();
             btnTypeSort = new MaterialSkin.Controls.MaterialButton();
+            checkCmbField = new CheckComboBox.CheckBoxComboBox();
             itemsBindingSourceSortName = new System.Windows.Forms.BindingSource(components);
             sortPageCategoriesBindingSource = new System.Windows.Forms.BindingSource(components);
             listView = new ListViewControl();
-            checkCmbField = new CheckComboBox.CheckBoxComboBox();
             tlpFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)itemsBindingSourceSortName).BeginInit();
             ((System.ComponentModel.ISupportInitialize)sortPageCategoriesBindingSource).BeginInit();
@@ -169,6 +169,19 @@ namespace TestTask.Controls.PageTabControls
             btnTypeSort.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             btnTypeSort.UseAccentColor = false;
             btnTypeSort.UseVisualStyleBackColor = true;
+            btnTypeSort.Click += BtnTypeSort_Click;
+            // 
+            // checkCmbField
+            // 
+            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
+            checkCmbField.CheckBoxProperties = checkBoxProperties1;
+            checkCmbField.DisplayMemberSingleItem = "";
+            checkCmbField.Dock = System.Windows.Forms.DockStyle.Bottom;
+            checkCmbField.FormattingEnabled = true;
+            checkCmbField.Location = new System.Drawing.Point(359, 11);
+            checkCmbField.Name = "checkCmbField";
+            checkCmbField.Size = new System.Drawing.Size(256, 23);
+            checkCmbField.TabIndex = 16;
             // 
             // itemsBindingSourceSortName
             // 
@@ -191,18 +204,6 @@ namespace TestTask.Controls.PageTabControls
             listView.Size = new System.Drawing.Size(877, 343);
             listView.TabIndex = 8;
             listView.SizeChanged += ListView_SizeChanged;
-            // 
-            // checkCmbField
-            // 
-            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
-            checkCmbField.CheckBoxProperties = checkBoxProperties1;
-            checkCmbField.DisplayMemberSingleItem = "";
-            checkCmbField.Dock = System.Windows.Forms.DockStyle.Bottom;
-            checkCmbField.FormattingEnabled = true;
-            checkCmbField.Location = new System.Drawing.Point(359, 11);
-            checkCmbField.Name = "checkCmbField";
-            checkCmbField.Size = new System.Drawing.Size(256, 23);
-            checkCmbField.TabIndex = 16;
             // 
             // CategoryListView
             // 
