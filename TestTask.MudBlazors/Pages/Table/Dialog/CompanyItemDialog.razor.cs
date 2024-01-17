@@ -15,7 +15,7 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
 
         private CompanyModel companyModel { get; set; } = new CompanyModel();
         private string[] errors = { };
-        private bool IsAddItem = true;
+        private bool isAddItem = true;
 
         private Company? oldCompany;
 
@@ -25,7 +25,7 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
         {
             if (Id == null)
             {
-                IsAddItem = true;
+                isAddItem = true;
                 return;
             }
 
@@ -34,7 +34,7 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
                 throw new Exception("The ID value can't be less than zero.");
             }
 
-            IsAddItem = false;
+            isAddItem = false;
             oldCompany = CompanyRepository.GetCompany((int)Id);
             companyModel = oldCompany.GetCompanyModel();
         }

@@ -15,7 +15,7 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
 
         private CategoryModel categoryModel { get; set; } = new CategoryModel();
         private string[] errors = { };
-        private bool IsAddItem = true;
+        private bool isAddItem = true;
 
         private Category? oldItem;
 
@@ -25,7 +25,7 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
         {
             if (Id == null)
             {
-                IsAddItem = true;
+                isAddItem = true;
                 return;
             }
 
@@ -34,7 +34,7 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
                 throw new Exception("The ID value can't be less than zero.");
             }
 
-            IsAddItem = false;
+            isAddItem = false;
             oldItem = CategoryRepository.GetCategory((int)Id);
             categoryModel = oldItem.GetCategoryModel();
         }
