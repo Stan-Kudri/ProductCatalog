@@ -48,24 +48,24 @@
         @if (isAddItem)
         {
             <MudTooltip Text="Save" Placement="Placement.Bottom">
-                <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" OnClick="Add" />
+                <MudButton Style="max-width: 100px; max-height : 40px;" Size="Size.Medium" Color="Color.Primary" Variant="Variant.Outlined" OnClick="Add">Save</MudButton>
             </MudTooltip>
             <MudTooltip Text="Clear" Placement="Placement.Bottom">
-                <MudIconButton Icon="@MaterialDesignIcons.Normal.Broom" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" OnClick="ClearData" Class="ml-1" />
+                <MudButton Class="ml-1" Style="max-width: 100px; max-height : 40px;" Size="Size.Medium" Color="Color.Primary" Variant="Variant.Outlined" OnClick="ClearData">Clear</MudButton>
             </MudTooltip>
         }
         else
         {
             <MudTooltip Text="Save" Placement="Placement.Bottom">
-                <MudIconButton Icon="@Icons.Material.Filled.Save" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" OnClick="Updata" />
+                <MudButton Style="max-width: 100px; max-height : 40px;" Size="Size.Medium" Color="Color.Primary" Variant="Variant.Outlined" OnClick="Updata">Save</MudButton>
             </MudTooltip>
             <MudTooltip Text="Replace" Placement="Placement.Bottom">
-                <MudIconButton Icon="@MaterialDesignIcons.Normal.Broom" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" OnClick="RecoverPastData" Class="ml-1" />
+                <MudButton Class="ml-1" Style="max-width: 100px; max-height : 40px;" Size="Size.Medium" Color="Color.Primary" Variant="Variant.Outlined" OnClick="RecoverPastData">Recover</MudButton>
             </MudTooltip>
         }
 
         <MudTooltip Text="Close" Placement="Placement.Bottom">
-            <MudIconButton Icon="@Icons.Material.Filled.ArrowForward" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" OnClick="Close" Class="ml-1" />
+            <MudButton Class="ml-1" Style="max-width: 100px; max-height : 40px;" Size="Size.Medium" Color="Color.Primary" Variant="Variant.Outlined" OnClick="Close">Close</MudButton>
         </MudTooltip>
 
     </MudCardContent>
