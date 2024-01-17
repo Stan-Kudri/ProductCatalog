@@ -8,7 +8,7 @@ namespace TestTask.Core.Models.Products
     {
         protected IEnumerable<ProductSortType> _sortFields = new HashSet<ProductSortType>() { ProductSortType.Id };
 
-        public ProductSortType sortType { get; set; }
+        public ProductSortType SortType { get; set; }
 
         public SortProduct()
         {

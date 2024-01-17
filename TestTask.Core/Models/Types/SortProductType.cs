@@ -4,13 +4,13 @@ using System.Linq;
 
 namespace TestTask.Core.Models.Types
 {
-    public class SortType : ISortEntity<ProductType, ProductTypeSortType>
+    public class SortProductType : ISortEntity<ProductType, ProductTypeSortType>
     {
         protected IEnumerable<ProductTypeSortType> _sortFields = new HashSet<ProductTypeSortType>() { ProductTypeSortType.Id };
 
-        public ProductTypeSortType sortType { get; set; }
+        public ProductTypeSortType SortType { get; set; }
 
-        public SortType()
+        public SortProductType()
         {
         }
 

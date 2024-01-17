@@ -12,7 +12,7 @@ namespace TestTask.Core.Models.Companies
         {
         }
 
-        public CompanySortType sortType { get; set; }
+        public CompanySortType SortType { get; set; }
 
         public virtual IEnumerable<CompanySortType> SortFields
         {

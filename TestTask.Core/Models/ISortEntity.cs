@@ -11,13 +11,14 @@ namespace TestTask.Core.Models
     {
         static IEnumerable<TSortType> _sortFields;
 
-        TSortType sortType { get; set; }
+        TSortType SortType { get; set; }
 
         virtual IEnumerable<TSortType> SortFields
         {
             get => _sortFields;
             set => _sortFields = value;
         }
+
         ObservableCollection<TSortType> Items { get; set; }
 
         IQueryable<T> Apply(IQueryable<T> items, bool? ascending = true);

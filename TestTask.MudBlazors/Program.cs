@@ -56,7 +56,7 @@ builder.Services.AddScoped<ISortEntity<Category, CategoriesSortType>>(e => new S
 
 builder.Services.AddScoped<TypeDetailProvider>();
 builder.Services.AddScoped<ITableDetailProvider<ProductType>>(e => e.GetRequiredService<TypeDetailProvider>());
-builder.Services.AddScoped<ISortEntity<ProductType, ProductTypeSortType>>(e => new SortType());
+builder.Services.AddScoped<ISortEntity<ProductType, ProductTypeSortType>>(e => new SortProductType());
 
 builder.Services.AddScoped<ProductDetailProvider>();
 builder.Services.AddScoped<ITableDetailProvider<Product>>(e => e.GetRequiredService<ProductDetailProvider>());

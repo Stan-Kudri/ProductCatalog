@@ -10,7 +10,7 @@ using TestTask.Core.Models.Types;
 
 namespace TestTask.BindingItem.Pages.Sort
 {
-    public class SortTypeProductModel : SortType
+    public class SortTypeProductModel : SortProductType
     {
         private event PropertyChangedEventHandler PropertyChanged;
 
