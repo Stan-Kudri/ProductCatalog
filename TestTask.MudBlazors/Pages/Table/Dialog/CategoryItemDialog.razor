@@ -10,9 +10,9 @@
                       Validation="@(new Func<string, IEnumerable<string>>(ValidFormatText))" />
     </MudForm>
 
-    <MudSpacer></MudSpacer>
+    <MudSpacer/>
 
-    <MudCardContent Style="align-content:center">
+    <MudToolBar DisableGutters="true" Class="relative d-flex justify-end gap-1">
 
         @if (isAddItem)
         {
@@ -20,7 +20,7 @@
                 <MudButton Style="max-width: 100px; max-height : 40px;" Size="Size.Medium" Color="Color.Primary" Variant="Variant.Outlined" OnClick="Add">Save</MudButton>
             </MudTooltip>
             <MudTooltip Text="Clear" Placement="Placement.Bottom">
-                <MudButton Class="ml-1" Style="max-width: 100px; max-height : 40px;" Size="Size.Medium" Color="Color.Primary" Variant="Variant.Outlined" OnClick="ClearData">Clear</MudButton>
+                <MudButton Style="max-width: 100px; max-height : 40px;" Size="Size.Medium" Color="Color.Primary" Variant="Variant.Outlined" OnClick="ClearData">Clear</MudButton>
             </MudTooltip>
         }
         else
@@ -34,9 +34,9 @@
         }
 
         <MudTooltip Text="Close" Placement="Placement.Bottom">
-            <MudButton Class="ml-1" Style="max-width: 100px; max-height : 40px;" Size="Size.Medium" Color="Color.Primary" Variant="Variant.Outlined" OnClick="Close">Close</MudButton>
+            <MudButton Style="max-width: 100px; max-height : 40px;" Size="Size.Medium" Color="Color.Primary" Variant="Variant.Outlined" OnClick="Close">Close</MudButton>
         </MudTooltip>
 
-    </MudCardContent>
+    </MudToolBar>
 
 </MudContainer>
