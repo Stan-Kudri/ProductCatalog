@@ -1,79 +1,68 @@
 ﻿@page "/login/{IsSignIn:bool}"
 
-<MudGrid>
+@attribute [AllowAnonymous]
 
-    <MudItem xs="12" sm="7">
+<MudContainer Style="align-items:center; max-width:600px; max-height:600px">
 
-        <MudPaper Class="pa-4">
+    @if (IsSignIn)
+    {
+        <MudText Typo="Typo.h4" Align="Align.Center"><b>Sign In</b></MudText>
+        <div>
+            <MudLink Underline="Underline.None" Typo="Typo.h6" Color="Color.Dark">Don't have an account yet?</MudLink>
+            <MudLink Typo="Typo.h6" Color="Color.Info" OnClick="RegistrationPage">Register</MudLink>
+        </div>
+    }
+    else
+    {
+        <MudText Typo="Typo.h4" Align="Align.Center"><b>Registration</b></MudText>
+        <div>
+            <MudLink Underline="Underline.None" Typo="Typo.h6" Color="Color.Dark">Already have an account?</MudLink>
+            <MudLink Typo="Typo.h6" Color="Color.Info" OnClick="SignInPage">Sign In</MudLink>
+        </div>
+    }
 
-            @if (IsSignIn)
-            {
-                <MudText Typo="Typo.h6" Align="Align.Center"><b>Sign In</b></MudText>
-            }
-            else
-            {
-                <MudText Typo="Typo.h6" Align="Align.Center"><b>Registration</b></MudText>
-            }  
-            
-            <MudForm @bind-Errors="@errors" Model="userModel">
-                <MudTextField T="string" Label="Username"
-                              @bind-Value=@userModel.Username
-                              InputType="InputType.Text"
-                              Validation="@(new Func<string, IEnumerable<string>>(ValidFormatUsername))" Required="true" />
-                <MudTextField T="string" Label="Password" HelperText="Choose a strong password"
-                              InputType="InputType.Password"
-                              @bind-Value="@userModel.Password" For="@(() => userModel.Password)"
-                              Validation="@(new Func<string, IEnumerable<string>>(ValidFormatPassword))" Required="true"
-                              RequiredError="Password is required!" />
-                @if (!IsSignIn)
-                {
-                    <MudTextField T="string" Label="Password" HelperText="Choose a strong password"
-                    @bind-Value="@matchPassword"
-                    InputType="InputType.Password"
-                    Validation="@(new Func<string, string>(MatchPassword))" />
-                }
-            </MudForm>
+    <MudForm @bind-Errors="@errors" Model="userModel" Style="border-block-end-width:4;">
+        <MudTextField T="string" Label="Username" Style="font-size: 16px;" Class="mt-4"
+                      @bind-Value=@userModel.Username
+                      InputType="InputType.Text" Variant="Variant.Outlined"
+                      Validation="@(new Func<string, IEnumerable<string>>(ValidFormatUsername))" Required="true" />
+        <MudTextField T="string" Label="Password" HelperText="Choose a strong password" Style="font-size: 16px;" Class="mt-4"
+                      InputType="InputType.Password" Variant="Variant.Outlined"
+                      @bind-Value="@userModel.Password" For="@(() => userModel.Password)"
+                      Validation="@(new Func<string, IEnumerable<string>>(ValidFormatPassword))" Required="true"
+                      RequiredError="Password is required!" />
+        @if (!IsSignIn)
+        {
+            <MudTextField T="string" Label="Repeat password" HelperText="Choose a strong password" Style="font-size: 16px;" Class="mt-4"
+                          @bind-Value="@matchPassword" Variant="Variant.Outlined"
+                          InputType="InputType.Password"
+                          Validation="@(new Func<string, string>(MatchPassword))" />
+        }
+    </MudForm>
 
-        </MudPaper>
-
-        <MudPaper Class="pa-4 mt-4">
-
-            <div style="text-align:center">
-                <MudButton 
-                    ButtonType="ButtonType.Submit" Variant="Variant.Filled" 
-                    Color="Color.Primary" Class="ml-auto" OnClick="AddUser" 
-                    Style="width: 100px; height: 40px;">Registration 
-                </MudButton>
-                <MudButton 
-                    ButtonType="ButtonType.Submit" Variant="Variant.Filled" 
-                    Color="Color.Warning" Class="ml-auto" OnClick="ClearField" 
-                    Style="width: 100px; height: 40px;">Clear
-                </MudButton>
-            </div>
-            <div style="text-align:right">
-                @if (IsSignIn)
-                {
-                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Outlined" Color="Color.Info" Class="ml-auto" OnClick="RegistrationPage">Registration</MudButton>
-                }
-                else
-                {
-                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Outlined" Color="Color.Info" Class="ml-auto" OnClick="SignInPage">Sign In</MudButton>
-                }
-            </div>
-
-        </MudPaper>
-
-    </MudItem>
-
-    <MudItem xs="12" sm="5">
-        <MudPaper Class="pa-4 mud-height-full">
-            <MudText Typo="Typo.subtitle2">@($"Errors ({errors.Length})")</MudText>
-            @foreach (var error in errors)
-            {
-                <MudText Color="@Color.Error">@error</MudText>
-            }
-        </MudPaper>
-    </MudItem>
-
-</MudGrid>
+    <div style="text-align:center">
+        @if (IsSignIn)
+        {
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Outlined"
+                       Color="Color.Primary" Class="mr-2" OnClick="SignIn"
+                       Style="width: 100px; height: 40px;">
+                Sign In
+            </MudButton>
+        }
+        else
+        {
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Outlined"
+                       Color="Color.Primary" Class="mr-2" OnClick="AddUser"
+                       Style="width: 100px; height: 40px;">
+                Registration
+            </MudButton>
+        }
+        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Outlined"
+                   Color="Color.Warning" Class="ml-2" OnClick="ClearField"
+                   Style="width: 100px; height: 40px;">
+            Clear
+        </MudButton>
+    </div>
+    
+</MudContainer>
 

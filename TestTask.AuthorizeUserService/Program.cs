@@ -1,14 +1,18 @@
-using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
-using TestTask.MudBlazors;
-using TestTask.MudBlazors.Authentications;
+using MudBlazor.Services;
+using TestTask.AuthorizeUserService.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
 
-builder.AppWebApplicationBuilder();
-builder.Services.AddScoped<AuthenticationStateProvider, AuthenticationUser>();
+// Add services to the container.
+builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
+builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddMudServices();
 
 var app = builder.Build();
 

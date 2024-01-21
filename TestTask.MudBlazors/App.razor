@@ -1,6 +1,12 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
+﻿@inject NavigationManager Navigation
+
+<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+       <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+            <NotAuthorized>
+                <MudLink Typo="Typo.h4" Color="Color.Info" OnClick="SignInPage">Go through the user authorization process.</MudLink>
+            </NotAuthorized>
+        </AuthorizeRouteView>
     </Found>
     <NotFound>
         <PageTitle>Not found</PageTitle>
@@ -9,3 +15,8 @@
         </LayoutView>
     </NotFound>
 </Router>
+
+@functions
+{
+    void SignInPage() => Navigation.NavigateTo($"/login/{true}");
+}

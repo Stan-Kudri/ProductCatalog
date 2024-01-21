@@ -17,9 +17,21 @@ namespace TestTask.MudBlazors.Pages
         [Parameter] public bool IsSignIn { get; set; } = false;
 
         private void SignInPage() => Navigation.NavigateTo($"/login/{true}");
+
         private void RegistrationPage() => Navigation.NavigateTo($"/login/{false}");
 
         private void ClearField() => userModel.Password = userModel.Username = matchPassword = string.Empty;
+
+        private void SignIn()
+        {
+            if (errors.Length != 0)
+            {
+                return;
+            }
+
+            var user = userModel.ToUser();
+
+        }
 
         private void AddUser()
         {
@@ -51,7 +63,7 @@ namespace TestTask.MudBlazors.Pages
 
         private IEnumerable<string> ValidFormatUsername(string username)
         {
-            if (!UserService.IsFreeUsername(userModel.Username))
+            if (!IsSignIn && !UserService.IsFreeUsername(userModel.Username))
             {
                 yield return string.Format($"{userModel.Username} username is taken.");
                 yield break;
