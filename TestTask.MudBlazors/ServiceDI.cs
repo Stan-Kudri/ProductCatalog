@@ -1,4 +1,5 @@
-﻿using MudBlazor.Services;
+﻿using MudBlazor;
+using MudBlazor.Services;
 using TestTask.Core;
 using TestTask.Core.Export.SheetFillers;
 using TestTask.Core.Import;
@@ -24,7 +25,14 @@ namespace TestTask.MudBlazors
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
-            builder.Services.AddMudServices();
+            builder.Services.AddMudServices(configuration =>
+            {
+                configuration.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomRight;
+                configuration.SnackbarConfiguration.HideTransitionDuration = 100;
+                configuration.SnackbarConfiguration.ShowTransitionDuration = 100;
+                configuration.SnackbarConfiguration.VisibleStateDuration = 3000;
+                configuration.SnackbarConfiguration.ShowCloseIcon = false;
+            });
             builder.Services.AddSingleton(e => new DbContextFactory(ConnectionName));
             builder.Services.AddScoped(e => e.GetRequiredService<DbContextFactory>().Create());
             builder.Services.AddScoped<UserService>();

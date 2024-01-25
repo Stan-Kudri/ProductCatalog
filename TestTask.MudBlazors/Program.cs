@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using TestTask.MudBlazors;
@@ -8,7 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
 
 builder.AppWebApplicationBuilder();
-builder.Services.AddScoped<AuthenticationStateProvider, AuthenticationUser>();
+builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddScoped<WebsiteAuthenticator>();
+builder.Services.AddScoped<AuthenticationStateProvider>(e => e.GetRequiredService<WebsiteAuthenticator>());
 
 var app = builder.Build();
 

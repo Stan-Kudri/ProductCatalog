@@ -1,14 +1,18 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using TestTask.Core.Models.Users;
+using TestTask.MudBlazors.Authentications;
 using TestTask.MudBlazors.Model;
 
 namespace TestTask.MudBlazors.Pages
 {
     public partial class Login
     {
-        [Inject] UserService UserService { get; set; }
-        [Inject] UserValidator UserValidator { get; set; }
-        [Inject] NavigationManager Navigation { get; set; }
+        [Inject] private ISnackbar Snackbar { get; set; } = null!;
+        [Inject] UserService UserService { get; set; } = null!;
+        [Inject] UserValidator UserValidator { get; set; } = null!;
+        [Inject] NavigationManager Navigation { get; set; } = null!;
+        [Inject] WebsiteAuthenticator WebsiteAuthenticator { get; set; } = null!;
 
         private UserModel userModel { get; set; } = new UserModel();
         private string matchPassword = string.Empty;
@@ -22,7 +26,7 @@ namespace TestTask.MudBlazors.Pages
 
         private void ClearField() => userModel.Password = userModel.Username = matchPassword = string.Empty;
 
-        private void SignIn()
+        private async Task SignIn()
         {
             if (errors.Length != 0)
             {
@@ -31,6 +35,14 @@ namespace TestTask.MudBlazors.Pages
 
             var user = userModel.ToUser();
 
+            if (user == null)
+            {
+                throw new Exception("User not found in database.");
+            }
+
+            await WebsiteAuthenticator.LoginAsync(user);
+            Navigation.NavigateTo("/table");
+            Snackbar.Add($"Sign in account : {user.Username}", Severity.Success);
         }
 
         private void AddUser()

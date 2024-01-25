@@ -32,6 +32,12 @@ namespace TestTask.Core.Models.Users
         {
             message = string.Empty;
 
+            if (password == null)
+            {
+                message = "Password value is Null.";
+                return false;
+            }
+
             if (password.Length < MinLengthPass)
             {
                 message = "Your password isn’t strong enough, try making it longer.";
