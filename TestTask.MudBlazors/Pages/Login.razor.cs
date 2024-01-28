@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using MudBlazor;
 using TestTask.Core.Models.Users;
 using TestTask.MudBlazors.Authentications;
 using TestTask.MudBlazors.Model;
@@ -8,7 +7,6 @@ namespace TestTask.MudBlazors.Pages
 {
     public partial class Login
     {
-        [Inject] private ISnackbar Snackbar { get; set; } = null!;
         [Inject] UserService UserService { get; set; } = null!;
         [Inject] UserValidator UserValidator { get; set; } = null!;
         [Inject] NavigationManager Navigation { get; set; } = null!;
@@ -42,7 +40,6 @@ namespace TestTask.MudBlazors.Pages
 
             await WebsiteAuthenticator.LoginAsync(user);
             Navigation.NavigateTo("/table");
-            Snackbar.Add($"Sign in account : {user.Username}", Severity.Success);
         }
 
         private void AddUser()
