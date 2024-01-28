@@ -30,12 +30,15 @@
         <AuthorizeView>
 
             <Authorized>
-                <MudMenu FullWidth="true" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+                <MudMenu FullWidth="true" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Style="align-items:center">
                     <ActivatorContent>
-                        <MudChip Icon="@MaterialDesignIcons.Normal.Account" Color="Color.Secondary">@WebsiteAuthenticator.GetUsername()</MudChip>
+                        <MudChip Icon="@MaterialDesignIcons.Normal.Account" Label="true" Class="pa-4"
+                                 Style="@($"color:{Colors.Grey.Lighten4};background:{Colors.LightBlue.Accent4};")">
+                                 @WebsiteAuthenticator.GetUsername()
+                        </MudChip>
                     </ActivatorContent>
                     <ChildContent>
-                            <MudMenuItem Class="pa-4 red-text text-accent-4" OnClick="WebsiteAuthenticator.ExitAccountAsync">Sign Out</MudMenuItem>
+                            <MudMenuItem Class="pa-1 red-text text-accent-2" Style="text-align:center" OnClick="WebsiteAuthenticator.ExitAccountAsync">Sign Out</MudMenuItem>
                     </ChildContent>
                 </MudMenu>
             </Authorized>
