@@ -39,7 +39,6 @@ namespace TestTask.MudBlazors.Pages
             }
 
             await WebsiteAuthenticator.LoginAsync(user);
-            Navigation.NavigateTo("/table");
         }
 
         private void AddUser()

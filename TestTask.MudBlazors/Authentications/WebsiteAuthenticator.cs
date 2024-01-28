@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Authorization;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using MudBlazor;
 using Newtonsoft.Json;
@@ -13,22 +14,23 @@ namespace TestTask.MudBlazors.Authentications
         private readonly ISnackbar _snackbar;
         private readonly ProtectedLocalStorage _localStorage;
         private readonly UserService _userService;
+        private readonly NavigationManager _navigationManager;
 
         private User? _user = null;
 
-        public WebsiteAuthenticator(ProtectedLocalStorage protectedLocalStorage, UserService userService, ISnackbar snackbar)
+        public WebsiteAuthenticator(ProtectedLocalStorage protectedLocalStorage, UserService userService, ISnackbar snackbar, NavigationManager navigationManager)
         {
             _localStorage = protectedLocalStorage;
             _userService = userService;
             _snackbar = snackbar;
+            _navigationManager = navigationManager;
         }
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            var claimsPrincipal = new ClaimsPrincipal();
-
             try
             {
+                var claimsPrincipal = new ClaimsPrincipal();
                 var storedPrincipal = await _localStorage.GetAsync<string>(StorageConstants.IdentyToken);
 
                 if (storedPrincipal.Success)
@@ -42,13 +44,14 @@ namespace TestTask.MudBlazors.Authentications
                         claimsPrincipal = new(identity);
                     }
                 }
+
+                return new AuthenticationState(claimsPrincipal);
             }
 
             catch
             {
+                return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
             }
-
-            return new AuthenticationState(claimsPrincipal);
         }
 
         public async Task LoginAsync(User userModel)
@@ -62,6 +65,7 @@ namespace TestTask.MudBlazors.Authentications
                 claimsPrincipal = new ClaimsPrincipal(identity);
                 await _localStorage.SetAsync(StorageConstants.IdentyToken, JsonConvert.SerializeObject(userModel));
                 _snackbar.Add($"Sign in account : {userModel.Username}", Severity.Success);
+                _navigationManager.NavigateTo("/table");
             }
             else
             {
