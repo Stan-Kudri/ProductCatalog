@@ -34,7 +34,7 @@ namespace TestTask.Core.Models.Users
 
             if (password == null)
             {
-                message = "Password value is Null.";
+                message = "Password should not be empty.";
                 return false;
             }
 

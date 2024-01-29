@@ -16,7 +16,7 @@ namespace TestTask.MudBlazors.Authentications
         private readonly UserService _userService;
         private readonly NavigationManager _navigationManager;
 
-        private User? _user = null;
+        private int? _userId = null;
 
         public WebsiteAuthenticator(ProtectedLocalStorage protectedLocalStorage, UserService userService, ISnackbar snackbar, NavigationManager navigationManager)
         {
@@ -58,10 +58,10 @@ namespace TestTask.MudBlazors.Authentications
         {
             var claimsPrincipal = new ClaimsPrincipal();
 
-            if (!_userService.IsUserData(userModel))
+            if (_userService.IsUserData(userModel))
             {
                 var identity = CreateIdentityFromUser(userModel);
-                _user = userModel;
+                _userId = userModel.Id;
                 claimsPrincipal = new ClaimsPrincipal(identity);
                 await _localStorage.SetAsync(StorageConstants.IdentyToken, JsonConvert.SerializeObject(userModel));
                 _snackbar.Add($"Sign in account : {userModel.Username}", Severity.Success);
@@ -69,7 +69,7 @@ namespace TestTask.MudBlazors.Authentications
             }
             else
             {
-                _user = null;
+                _userId = null;
                 _snackbar.Add($"Account login failed.", Severity.Warning);
             }
 
@@ -86,15 +86,15 @@ namespace TestTask.MudBlazors.Authentications
         public void ExitAccountAsync()
             => NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(new ClaimsPrincipal())));
 
-        public string GetUsername() => _user != null ? _user.Username : string.Empty;
+        public string GetUsername() => _userId != null ? _userService.;
 
         private static ClaimsIdentity CreateIdentityFromUser(User user)
             => new ClaimsIdentity(new Claim[] {
                     new(ClaimTypes.Name, user.Username),
-                    new(ClaimTypes.Hash, user.PasswordHash), },
+                    new(ClaimTypes.NameIdentifier, user.Id.ToString()), },
                                  "Authentication");
 
         private (User?, bool) LookUpUser(User? user)
-            => user == null ? (user, false) : (user, _userService.IsUserData(user));
+            => user == null ? (user, false) : (user, !_userService.IsUserData(user));
     }
 }
