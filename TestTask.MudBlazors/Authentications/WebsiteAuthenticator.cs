@@ -16,7 +16,7 @@ namespace TestTask.MudBlazors.Authentications
         private readonly UserService _userService;
         private readonly NavigationManager _navigationManager;
 
-        private int? _userId = null;
+        private int _userId;
 
         public WebsiteAuthenticator(ProtectedLocalStorage protectedLocalStorage, UserService userService, ISnackbar snackbar, NavigationManager navigationManager)
         {
@@ -60,8 +60,9 @@ namespace TestTask.MudBlazors.Authentications
 
             if (_userService.IsUserData(userModel))
             {
-                var identity = CreateIdentityFromUser(userModel);
+                userModel.Id = _userService.GetIdUser(userModel);
                 _userId = userModel.Id;
+                var identity = CreateIdentityFromUser(userModel);
                 claimsPrincipal = new ClaimsPrincipal(identity);
                 await _localStorage.SetAsync(StorageConstants.IdentyToken, JsonConvert.SerializeObject(userModel));
                 _snackbar.Add($"Sign in account : {userModel.Username}", Severity.Success);
@@ -69,7 +70,6 @@ namespace TestTask.MudBlazors.Authentications
             }
             else
             {
-                _userId = null;
                 _snackbar.Add($"Account login failed.", Severity.Warning);
             }
 
@@ -86,7 +86,8 @@ namespace TestTask.MudBlazors.Authentications
         public void ExitAccountAsync()
             => NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(new ClaimsPrincipal())));
 
-        public string GetUsername() => _userId != null ? _userService.;
+        public string GetUsername()
+            => _userId != 0 ? _userService.GetUsername(_userId) : throw new Exception("Authentication error.");
 
         private static ClaimsIdentity CreateIdentityFromUser(User user)
             => new ClaimsIdentity(new Claim[] {
