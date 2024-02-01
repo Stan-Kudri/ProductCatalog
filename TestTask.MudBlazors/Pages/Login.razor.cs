@@ -10,7 +10,8 @@ namespace TestTask.MudBlazors.Pages
         [Inject] UserService UserService { get; set; } = null!;
         [Inject] UserValidator UserValidator { get; set; } = null!;
         [Inject] NavigationManager Navigation { get; set; } = null!;
-        [Inject] WebsiteAuthenticator WebsiteAuthenticator { get; set; } = null!;
+        [Inject] ServiceAuthenticationProvider ServiceAuthenticationProvider { get; set; } = null!;
+        [Inject] AuthenticationUser AuthenticationUser { get; set; } = null!;
 
         private UserModel userModel { get; set; } = new UserModel();
         private string matchPassword = string.Empty;
@@ -26,19 +27,9 @@ namespace TestTask.MudBlazors.Pages
 
         private async Task SignIn()
         {
-            if (errors.Length != 0)
-            {
-                return;
-            }
-
-            var user = userModel.ToUser();
-
-            if (user == null)
-            {
-                throw new Exception("User not found in database.");
-            }
-
-            await WebsiteAuthenticator.LoginAsync(user);
+            ServiceAuthenticationProvider.LoginAsync(userModel.ToUser());
+            await AuthenticationUser.AccountAsync(ServiceAuthenticationProvider);
+            StateHasChanged();
         }
 
         private void AddUser()

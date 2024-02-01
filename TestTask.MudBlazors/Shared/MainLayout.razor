@@ -16,7 +16,8 @@
 
 @inject NavigationManager Navigation
 @inject ProtectedLocalStorage LocalStorage
-@inject WebsiteAuthenticator WebsiteAuthenticator
+@inject AuthenticationUser AuthenticationUser
+@inject ServiceAuthenticationProvider ServiceAuthenticationProvider
 
 <MudThemeProvider />
 <MudDialogProvider />
@@ -34,11 +35,11 @@
                     <ActivatorContent>
                         <MudChip Icon="@MaterialDesignIcons.Normal.Account" Label="true" Class="pa-4"
                                  Style="@($"color:{Colors.Grey.Lighten4};background:{Colors.LightBlue.Accent4};")">
-                                 @WebsiteAuthenticator.GetUsername()
+                                 @AuthenticationUser.Username
                         </MudChip>
                     </ActivatorContent>
                     <ChildContent>
-                            <MudMenuItem Class="pa-1 red-text text-accent-2" Style="text-align:center" OnClick="WebsiteAuthenticator.ExitAccountAsync">Sign Out</MudMenuItem>
+                        <MudMenuItem Class="pa-1 red-text text-accent-2" Style="text-align:center" OnClick="ServiceAuthenticationProvider.ExitAccountAsync">Sign Out</MudMenuItem>
                     </ChildContent>
                 </MudMenu>
             </Authorized>

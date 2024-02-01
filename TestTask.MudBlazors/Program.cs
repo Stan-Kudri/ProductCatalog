@@ -9,9 +9,14 @@ var builder = WebApplication.CreateBuilder(args);
 StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
 
 builder.AppWebApplicationBuilder();
+
 builder.Services.AddBlazoredLocalStorage();
-builder.Services.AddScoped<WebsiteAuthenticator>();
-builder.Services.AddScoped<AuthenticationStateProvider>(e => e.GetRequiredService<WebsiteAuthenticator>());
+
+builder.Services.AddScoped<AuthenticationUser>();
+builder.Services.AddScoped<AuthenticationService>();
+builder.Services.AddScoped<ServiceAuthenticationProvider>();
+builder.Services.AddScoped<AuthenticationStateProvider>(e => e.GetRequiredService<ServiceAuthenticationProvider>());
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
