@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using TestTask.Core.Models.Users;
-using TestTask.MudBlazors.Authentications;
+using TestTask.MudBlazors.Authenticate;
 using TestTask.MudBlazors.Model;
 
 namespace TestTask.MudBlazors.Pages
@@ -10,8 +10,7 @@ namespace TestTask.MudBlazors.Pages
         [Inject] UserService UserService { get; set; } = null!;
         [Inject] UserValidator UserValidator { get; set; } = null!;
         [Inject] NavigationManager Navigation { get; set; } = null!;
-        [Inject] ServiceAuthenticationProvider ServiceAuthenticationProvider { get; set; } = null!;
-        [Inject] AuthenticationUser AuthenticationUser { get; set; } = null!;
+        [Inject] BlazorAppLoginService BlazorAppLoginService { get; set; } = null!;
 
         private UserModel userModel { get; set; } = new UserModel();
         private string matchPassword = string.Empty;
@@ -27,9 +26,11 @@ namespace TestTask.MudBlazors.Pages
 
         private async Task SignIn()
         {
-            ServiceAuthenticationProvider.LoginAsync(userModel.ToUser());
-            await AuthenticationUser.AccountAsync(ServiceAuthenticationProvider);
-            StateHasChanged();
+            var loginResult = await BlazorAppLoginService.LoginAsync(userModel.ToUser());
+            if (loginResult)
+            {
+                Navigation.NavigateTo("/table", true);
+            }
         }
 
         private void AddUser()

@@ -7,7 +7,7 @@
 @using TestTask.Core.Models.Companies
 @using TestTask.Core.Models.Products
 @using TestTask.Core.Models.Types
-@using TestTask.MudBlazors.Authentications
+@using TestTask.MudBlazors.Authenticate
 @using TestTask.MudBlazors.Pages.Import
 @using Bromix.MudBlazor.MaterialDesignIcons
 @using TestTask.MudBlazors.Pages.Table.Model
@@ -15,9 +15,7 @@
 @inherits LayoutComponentBase
 
 @inject NavigationManager Navigation
-@inject ProtectedLocalStorage LocalStorage
-@inject AuthenticationUser AuthenticationUser
-@inject ServiceAuthenticationProvider ServiceAuthenticationProvider
+@inject BlazorAppLoginService BlazorAppLoginService
 
 <MudThemeProvider />
 <MudDialogProvider />
@@ -28,18 +26,18 @@
     <MudAppBar Elevation="0">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())"/>
         <MudSpacer />
-        <AuthorizeView>
+        <AuthorizeView Context="auth">
 
             <Authorized>
                 <MudMenu FullWidth="true" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Style="align-items:center">
                     <ActivatorContent>
                         <MudChip Icon="@MaterialDesignIcons.Normal.Account" Label="true" Class="pa-4"
                                  Style="@($"color:{Colors.Grey.Lighten4};background:{Colors.LightBlue.Accent4};")">
-                                 @AuthenticationUser.Username
+                                 @auth.User.Identity.Name
                         </MudChip>
                     </ActivatorContent>
                     <ChildContent>
-                        <MudMenuItem Class="pa-1 red-text text-accent-2" Style="text-align:center" OnClick="ServiceAuthenticationProvider.ExitAccountAsync">Sign Out</MudMenuItem>
+                        <MudMenuItem Class="pa-1 red-text text-accent-2" Style="text-align:center" OnClick="BlazorAppLoginService.LogoutAsync">Sign Out</MudMenuItem>
                     </ChildContent>
                 </MudMenu>
             </Authorized>
