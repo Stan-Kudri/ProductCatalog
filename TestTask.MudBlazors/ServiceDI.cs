@@ -32,6 +32,7 @@ namespace TestTask.MudBlazors
                 configuration.SnackbarConfiguration.ShowTransitionDuration = 100;
                 configuration.SnackbarConfiguration.VisibleStateDuration = 3000;
                 configuration.SnackbarConfiguration.ShowCloseIcon = false;
+                configuration.SnackbarConfiguration.ClearAfterNavigation = false;
             });
             builder.Services.AddSingleton(e => new DbContextFactory(ConnectionName));
             builder.Services.AddScoped(e => e.GetRequiredService<DbContextFactory>().Create());

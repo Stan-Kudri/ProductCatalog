@@ -17,6 +17,7 @@
 
 @inject NavigationManager Navigation
 @inject BlazorAppLoginService BlazorAppLoginService
+@inject ISnackbar Snackbar
 
 <MudThemeProvider />
 <MudDialogProvider />
@@ -40,7 +41,7 @@
                         </MudChip>
                     </ActivatorContent>
                     <ChildContent>
-                        <MudMenuItem Class="pa-1 red-text text-accent-2" Style="text-align:center" OnClick="BlazorAppLoginService.LogoutAsync">Sign Out</MudMenuItem>
+                        <MudMenuItem Class="pa-1 red-text text-accent-2" Style="text-align:center" OnClick="LogoutAsync">Sign Out</MudMenuItem>
                     </ChildContent>
                 </MudMenu>
             </Authorized>
@@ -72,7 +73,7 @@
 
 @functions
 {
-    void SignInPage() => Navigation.NavigateTo($"/login/{true}");
+    private void SignInPage() => Navigation.NavigateTo($"/login/{true}");
 }
 
 
@@ -80,4 +81,10 @@
     private bool _drawerOpen = false;
 
     private void DrawerToggle() => _drawerOpen = !_drawerOpen;
+
+    private async Task LogoutAsync()
+    {
+        await BlazorAppLoginService.LogoutAsync();
+        Snackbar.Add("User logout", Severity.Info);
+    }
 }
