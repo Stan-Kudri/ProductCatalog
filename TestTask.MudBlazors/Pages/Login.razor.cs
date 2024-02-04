@@ -1,14 +1,21 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
+using MudBlazor;
 using TestTask.Core.Models.Users;
+using TestTask.MudBlazors.Authenticate;
 using TestTask.MudBlazors.Model;
 
 namespace TestTask.MudBlazors.Pages
 {
     public partial class Login
     {
-        [Inject] UserService UserService { get; set; }
-        [Inject] UserValidator UserValidator { get; set; }
-        [Inject] NavigationManager Navigation { get; set; }
+        [Inject] private UserService UserService { get; set; } = null!;
+        [Inject] private UserValidator UserValidator { get; set; } = null!;
+        [Inject] private NavigationManager Navigation { get; set; } = null!;
+        [Inject] private BlazorAppLoginService BlazorAppLoginService { get; set; } = null!;
+        [Inject] private ISnackbar Snackbar { get; set; } = null!;
+
+        [CascadingParameter] protected Task<AuthenticationState> AuthState { get; set; }
 
         private UserModel userModel { get; set; } = new UserModel();
         private string matchPassword = string.Empty;
@@ -17,9 +24,24 @@ namespace TestTask.MudBlazors.Pages
         [Parameter] public bool IsSignIn { get; set; } = false;
 
         private void SignInPage() => Navigation.NavigateTo($"/login/{true}");
+
         private void RegistrationPage() => Navigation.NavigateTo($"/login/{false}");
 
         private void ClearField() => userModel.Password = userModel.Username = matchPassword = string.Empty;
+
+        private async Task SignIn()
+        {
+            var loginResult = await BlazorAppLoginService.LoginAsync(userModel.ToUser());
+
+            if (!loginResult)
+            {
+                Snackbar.Add($"Account login failed.", Severity.Warning);
+                return;
+            }
+
+            Snackbar.Add($"Sign in account : {userModel.Username}", Severity.Success);
+            Navigation.NavigateTo("/table", true);
+        }
 
         private void AddUser()
         {
@@ -31,6 +53,7 @@ namespace TestTask.MudBlazors.Pages
             var user = userModel.ToUser();
 
             UserService.Add(user);
+            Snackbar.Add($"Account registered", Severity.Success);
             SignInPage();
         }
 
@@ -51,7 +74,7 @@ namespace TestTask.MudBlazors.Pages
 
         private IEnumerable<string> ValidFormatUsername(string username)
         {
-            if (!UserService.IsFreeUsername(userModel.Username))
+            if (!IsSignIn && !UserService.IsFreeUsername(userModel.Username))
             {
                 yield return string.Format($"{userModel.Username} username is taken.");
                 yield break;

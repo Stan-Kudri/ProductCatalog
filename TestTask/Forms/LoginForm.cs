@@ -83,7 +83,7 @@ namespace TestTask.Forms
 
             user = new UserModel(username, password).ToUser();
 
-            if (_userService.IsUserData(user))
+            if (!_userService.IsUserData(user))
             {
                 message = "Invalid username or password.";
                 return false;

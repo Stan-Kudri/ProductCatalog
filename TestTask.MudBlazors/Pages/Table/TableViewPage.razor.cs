@@ -24,6 +24,8 @@ namespace TestTask.MudBlazors.Pages.Table
         [Inject] protected NavigationManager Navigation { get; set; } = null!;
 
         private const string MessageNotSelectedItem = "No items selected";
+        private const string MessageRemoveItem = "Remove item.";
+        private const string MessageEditItem = "Upload data";
         private const int NoItemsSelected = 0;
 
         private IEnumerable<T>? items;
@@ -80,7 +82,7 @@ namespace TestTask.MudBlazors.Pages.Table
             }
 
             LoadData();
-            Snackbar.Add("Remove items", Severity.Success);
+            Snackbar.Add(MessageRemoveItem, Severity.Success);
         }
 
         private async Task Remove(int id)
@@ -94,7 +96,7 @@ namespace TestTask.MudBlazors.Pages.Table
 
             TableProvider.Remove(id);
             LoadData();
-            Snackbar.Add("Remove item", Severity.Success);
+            Snackbar.Add(MessageRemoveItem, Severity.Success);
         }
 
         private void ClearFilter()
@@ -124,7 +126,7 @@ namespace TestTask.MudBlazors.Pages.Table
             }
 
             LoadData();
-            Snackbar.Add("Upload data", Severity.Success);
+            Snackbar.Add(MessageEditItem, Severity.Success);
         }
 
         public void OnToggledChanged(bool toggled)

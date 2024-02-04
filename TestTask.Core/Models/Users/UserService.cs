@@ -29,6 +29,19 @@ namespace TestTask.Core.Models.Users
             _dbContext.Users.FirstOrDefault(e => e.Username == username) == null;
 
         public bool IsUserData(User user) =>
-            _dbContext.Users.FirstOrDefault(e => e.Username == user.Username && e.PasswordHash == user.PasswordHash) == null;
+            _dbContext.Users.FirstOrDefault(e => e.Username == user.Username && e.PasswordHash == user.PasswordHash) != null;
+
+        public User GetUser(string username, string passwordHash)
+            => _dbContext.Users.FirstOrDefault(e => e.Username == username && e.PasswordHash == passwordHash);
+
+
+        public int GetIdUser(User user)
+            => _dbContext.Users.FirstOrDefault(e => e.Username == user.Username && e.PasswordHash == user.PasswordHash).Id;
+
+        public string GetUsername(int id)
+            => _dbContext.Users.FirstOrDefault(e => e.Id == id).Username;
+
+        public User GetUser(int id)
+            => _dbContext.Users.FirstOrDefault(e => e.Id == id);
     }
 }

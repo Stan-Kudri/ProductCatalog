@@ -13,6 +13,7 @@ namespace TestTask.Core.Models.Users
         public User(string username, string password)
         {
             var validator = new UserValidator();
+
             if (!validator.ValidFormatPassword(password, out var messageValidPass))
             {
                 throw new ArgumentException(messageValidPass, nameof(password));

@@ -1,16 +1,23 @@
 ﻿@page "/mainlayout"
+
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @using TestTask.Core.Import
 @using TestTask.Core.Import.Importers
 @using TestTask.Core.Models.Categories
 @using TestTask.Core.Models.Companies
 @using TestTask.Core.Models.Products
 @using TestTask.Core.Models.Types
+@using TestTask.MudBlazors.Authenticate
 @using TestTask.MudBlazors.Pages.Import
 @using Bromix.MudBlazor.MaterialDesignIcons
+@using TestTask.MudBlazors.Pages.Table.Model
+@using TestTask.MudBlazors.Pages
 
 @inherits LayoutComponentBase
 
 @inject NavigationManager Navigation
+@inject BlazorAppLoginService BlazorAppLoginService
+@inject ISnackbar Snackbar
 
 <MudThemeProvider />
 <MudDialogProvider />
@@ -19,12 +26,34 @@
 <MudLayout>
 
     <MudAppBar Elevation="0">
+
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())"/>
         <MudSpacer />
-        <MudTooltip Text="Sign In">
-            <MudSpacer/>
-            <MudIconButton Icon="@MaterialDesignIcons.Normal.Account" Color="Color.Inherit" OnClick="SignInPage" />
-        </MudTooltip>
+
+        <AuthorizeView Context="auth">
+
+            <Authorized>
+                <MudMenu FullWidth="true" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Style="align-items:center">
+                    <ActivatorContent>
+                        <MudChip Icon="@MaterialDesignIcons.Normal.Account" Label="true" Class="pa-4"
+                                 Style="@($"color:{Colors.Grey.Lighten4};background:{Colors.LightBlue.Accent4};")">
+                                 @auth.User.Identity.Name
+                        </MudChip>
+                    </ActivatorContent>
+                    <ChildContent>
+                        <MudMenuItem Class="pa-1 red-text text-accent-2" Style="text-align:center" OnClick="LogoutAsync">Sign Out</MudMenuItem>
+                    </ChildContent>
+                </MudMenu>
+            </Authorized>
+
+            <NotAuthorized>
+                <MudTooltip Text="Sign In">
+                    <MudIconButton Icon="@MaterialDesignIcons.Normal.Account" Color="Color.Inherit" OnClick="SignInPage" />
+                </MudTooltip>
+            </NotAuthorized>
+
+        </AuthorizeView>
+        
     </MudAppBar>
 
     <MudDrawer @bind-Open="_drawerOpen" Elevation="1">
@@ -44,7 +73,7 @@
 
 @functions
 {
-    void SignInPage() => Navigation.NavigateTo($"/login/{true}");
+    private void SignInPage() => Navigation.NavigateTo($"/login/{true}");
 }
 
 
@@ -52,4 +81,10 @@
     private bool _drawerOpen = false;
 
     private void DrawerToggle() => _drawerOpen = !_drawerOpen;
+
+    private async Task LogoutAsync()
+    {
+        await BlazorAppLoginService.LogoutAsync();
+        Snackbar.Add("User logout", Severity.Info);
+    }
 }
