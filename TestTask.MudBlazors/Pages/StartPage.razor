@@ -1,9 +1,11 @@
 ﻿@page "/"
 
 @using System.Security.Claims
+@using TestTask.MudBlazors.Authenticate
 @using TestTask.MudBlazors.Pages.Table.Dialog
 
 @inject NavigationManager Navigation
+@inject BlazorAppLoginService BlazorAppLoginService
 
 @attribute [AllowAnonymous]
 
@@ -23,7 +25,7 @@
         </MudButton>
         <MudButton Style="width: 200px; height: 60px;"
                    Variant="Variant.Filled"
-                   Color="Color.Primary"
+                   Color="Color.Surface"
                    Size="Size.Large"
                    Class="ml-6"
                    OnClick="RegistrationPage">
@@ -34,7 +36,23 @@
 
 @functions 
 {
-    void RegistrationPage() => Navigation.NavigateTo($"/login/{false}");
+    private void RegistrationPage() => Navigation.NavigateTo($"/login/{false}");
 
-    void SignInPage() => Navigation.NavigateTo($"/login/{true}");
+    private void SignInPage() => Navigation.NavigateTo($"/login/{true}");
+}
+
+@code
+{
+    [CascadingParameter] protected Task<AuthenticationState> AuthState { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+        var user = (await AuthState).User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            Navigation.NavigateTo("/table");
+        }
+    }
 }

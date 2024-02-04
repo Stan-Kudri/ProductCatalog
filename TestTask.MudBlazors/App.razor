@@ -1,11 +1,13 @@
-﻿@inject NavigationManager Navigation
+﻿@using TestTask.MudBlazors.Pages
+
+@inject NavigationManager Navigation
 
 <CascadingAuthenticationState>
     <Router AppAssembly="@typeof(App).Assembly">
         <Found Context="routeData">
            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
                 <NotAuthorized>
-                    <MudLink Typo="Typo.h4" Color="Color.Info" OnClick="SignInPage">Go through the user authorization process.</MudLink>
+                    <StartPage></StartPage>
                 </NotAuthorized>
             </AuthorizeRouteView>
         </Found>
@@ -17,8 +19,3 @@
         </NotFound>
     </Router>
 </CascadingAuthenticationState>
-
-@functions
-{
-    void SignInPage() => Navigation.NavigateTo($"/login/{true}");
-}

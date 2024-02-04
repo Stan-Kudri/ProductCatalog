@@ -11,6 +11,7 @@
 @using TestTask.MudBlazors.Pages.Import
 @using Bromix.MudBlazor.MaterialDesignIcons
 @using TestTask.MudBlazors.Pages.Table.Model
+@using TestTask.MudBlazors.Pages
 
 @inherits LayoutComponentBase
 
@@ -24,8 +25,10 @@
 <MudLayout>
 
     <MudAppBar Elevation="0">
+
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())"/>
         <MudSpacer />
+
         <AuthorizeView Context="auth">
 
             <Authorized>
