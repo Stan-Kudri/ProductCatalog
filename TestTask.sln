@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestTask.Test", "TestTask.T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestTask.MudBlazors", "TestTask.MudBlazors\TestTask.MudBlazors.csproj", "{613E2ED6-34C7-447C-92BF-15FAC188B365}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTask.Migrations", "TestTask.Migrations\TestTask.Migrations.csproj", "{EF67FD6C-9C53-4013-9387-E8C15B4EA11A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{613E2ED6-34C7-447C-92BF-15FAC188B365}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{613E2ED6-34C7-447C-92BF-15FAC188B365}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{613E2ED6-34C7-447C-92BF-15FAC188B365}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF67FD6C-9C53-4013-9387-E8C15B4EA11A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF67FD6C-9C53-4013-9387-E8C15B4EA11A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF67FD6C-9C53-4013-9387-E8C15B4EA11A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF67FD6C-9C53-4013-9387-E8C15B4EA11A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
