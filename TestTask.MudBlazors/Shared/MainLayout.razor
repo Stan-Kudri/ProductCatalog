@@ -12,6 +12,7 @@
 @using Bromix.MudBlazor.MaterialDesignIcons
 @using TestTask.MudBlazors.Pages.Table.Model
 @using TestTask.MudBlazors.Pages
+@using TestTask.MudBlazors.Model
 
 @inherits LayoutComponentBase
 
@@ -61,6 +62,15 @@
             <MudText Typo="Typo.h6">TestTask</MudText>
         </MudDrawerHeader>
         <NavMenu />
+        <AuthorizeView Context="auth">
+            <Authorized> 
+                @if (auth.User.IsInRole(UserRoles.Admin))
+                {
+                    <MudNavLink Href="users" Match="NavLinkMatch.All" Icon="@MaterialDesignIcons.Normal.AccountDetails">Registered Users</MudNavLink>
+                }
+            </Authorized>
+        </AuthorizeView>
+        
     </MudDrawer>
 
     <MudMainContent>
