@@ -6,8 +6,7 @@ namespace TestTask.Core.Models.Users
     {
         public static UserRole Basic = new UserRole("Basic Role", 0);
 
-        public static UserRole Admin = new UserRole("Administration", 2);
-
+        public static UserRole Admin = new UserRole("Administration", 1);
 
         public UserRole(string name, int value)
             : base(name, value)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TestTask.Core.Extension;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
@@ -33,6 +34,7 @@ namespace TestTask.Core
             configurationUser.HasIndex(e => e.Username).IsUnique();
             configurationUser.Property(e => e.Username).IsRequired().HasColumnName("username").HasMaxLength(128);
             configurationUser.Property(e => e.PasswordHash).IsRequired().HasColumnName("passwordHash").HasMaxLength(128);
+            configurationUser.Property(e => e.UserRole).HasColumnName("role").HasDefaultValue(UserRole.Basic).SmartEnumConversion();
 
             var configurationCompany = modelBuilder.Entity<Company>();
             configurationCompany.ToTable("company");
