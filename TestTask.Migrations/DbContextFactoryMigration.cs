@@ -10,9 +10,11 @@ namespace TestTask.Migrations
 
         public AppDbContext CreateDbContext(string[] args)
         {
-            var builder = new DbContextOptionsBuilder().UseSqlite($"Data Source={ConnectionName}.db", b => b.MigrationsAssembly(typeof(DbContextFactoryMigration).Assembly.FullName));
-            var dbContext = new AppDbContext(builder.Options);
-            return dbContext;
+            var builder = new DbContextOptionsBuilder().UseSqlite(
+                $"Data Source={ConnectionName}.db",
+                b => b.MigrationsAssembly(typeof(DbContextFactoryMigration).Assembly.FullName));
+
+            return new AppDbContext(builder.Options);
         }
     }
 }

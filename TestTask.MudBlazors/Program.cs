@@ -1,18 +1,13 @@
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using TestTask.MudBlazors;
-using TestTask.MudBlazors.Authenticate;
 
 var builder = WebApplication.CreateBuilder(args);
 
 StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
 
 builder.AppWebApplicationBuilder();
+builder.AuthenicateDIBuilder();
 
-
-builder.Services.AddTransient<BlazorAppLoginService>();
-builder.Services.AddScoped<AuthenticationStateProvider, BlazorAuthStateProvider>();
-builder.Services.AddTransient<IUsersAuthenticate, UsersAuthenticateService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

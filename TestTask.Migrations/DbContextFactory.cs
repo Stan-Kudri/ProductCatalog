@@ -17,7 +17,7 @@ namespace TestTask.Migrations
             });
 
             var dbContext = new AppDbContext(builder.Options);
-            dbContext.Database.Migrate();
+            dbContext.Migrate();
 
             return dbContext;
         }
