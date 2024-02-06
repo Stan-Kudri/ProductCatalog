@@ -71,7 +71,6 @@ namespace TestTask.MudBlazors.Authenticate
             _navigation.NavigateTo("/", true);
         }
 
-
         private async Task RemoveAuthDataFromStorageAsync()
         {
             await _localStorage.DeleteAsync(TokenKey);

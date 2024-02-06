@@ -12,5 +12,7 @@ namespace TestTask.Core.Models.Users
             : base(name, value)
         {
         }
+
+        public override string ToString() => Name;
     }
 }

@@ -1,0 +1,39 @@
+﻿@page "/users"
+
+@using TestTask.Core.Models.Users
+@using TestTask.MudBlazors.Model
+
+@attribute [Authorize(Roles = UserRoles.Admin)]
+
+<MudText Typo="Typo.h5" Align="Align.Center" Color="Color.Info" GutterBottom="true">Registered Users</MudText>
+
+<MudPaper>
+
+    <MudTable Items="@items" Hover="true" SortLabel="Sort By" Elevation="0" Dense="false" T="User">
+
+        <ColGroup>
+            <col style="width: 25%;" />
+            <col style="width: 50%;" />
+            <col style="width: 25%;" />
+        </ColGroup>
+
+        <HeaderContent>
+            <MudTd Style="text-align:center">Username</MudTd>
+            <MudTd Style="text-align:center">PasswordHash</MudTd>
+            <MudTd Style="text-align:center">Role</MudTd>
+        </HeaderContent>
+
+        <RowTemplate>
+            <MudTh Style="text-align:center" DataLabel="Username">@context.Username</MudTh>
+            <MudTh Style="text-align:center" DataLabel="PasswordHash">@context.PasswordHash</MudTh>
+            <MudTh Style="text-align:center" DataLabel="Role">@context.UserRole</MudTh>
+        </RowTemplate>
+
+        <PagerContent>
+            <MudTablePager HorizontalAlignment="HorizontalAlignment.Center" PageSizeOptions="pageModel.Items" />
+        </PagerContent>
+
+    </MudTable>
+
+</MudPaper>
+
