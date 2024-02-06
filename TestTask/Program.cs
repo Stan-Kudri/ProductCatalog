@@ -16,6 +16,7 @@ using TestTask.Forms.Categories;
 using TestTask.Forms.Companies;
 using TestTask.Forms.Products;
 using TestTask.Forms.Type;
+using TestTask.Migrations;
 
 namespace TestTask
 {

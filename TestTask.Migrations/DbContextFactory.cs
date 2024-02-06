@@ -1,14 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TestTask.Core;
-using TestTask.Migrations;
 
-namespace TestTask.MudBlazors.DbContext
+namespace TestTask.Migrations
 {
-    public class FileDbContextFactory
+    public class DbContextFactory
     {
         public string _connectionName;
 
-        public FileDbContextFactory(string connectionName) => _connectionName = connectionName;
+        public DbContextFactory(string connectionName) => _connectionName = connectionName;
 
         public AppDbContext Create()
         {

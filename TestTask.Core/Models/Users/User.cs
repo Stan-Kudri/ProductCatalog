@@ -32,6 +32,8 @@ namespace TestTask.Core.Models.Users
 
         public string PasswordHash { get; set; } = string.Empty;
 
+        //public UserRole UserRole { get; set; } = UserRole.Basic;
+
         private string GetPaswordHash(string password)
         {
             MD5 MD5Hash = MD5.Create();
