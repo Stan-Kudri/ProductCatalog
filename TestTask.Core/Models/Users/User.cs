@@ -28,9 +28,17 @@ namespace TestTask.Core.Models.Users
             PasswordHash = GetPaswordHash(password);
         }
 
+        public User(string username, string passwordHash, UserRole userRole)
+            : this(username, passwordHash)
+        {
+            UserRole = userRole;
+        }
+
         public string Username { get; set; } = string.Empty;
 
         public string PasswordHash { get; set; } = string.Empty;
+
+        public UserRole UserRole { get; set; } = UserRole.Basic;
 
         private string GetPaswordHash(string password)
         {

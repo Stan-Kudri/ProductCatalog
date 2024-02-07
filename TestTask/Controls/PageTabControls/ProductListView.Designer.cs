@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            CheckComboBox.CheckBoxProperties checkBoxProperties1 = new CheckComboBox.CheckBoxProperties();
+            CheckComboBox.CheckBoxProperties checkBoxProperties2 = new CheckComboBox.CheckBoxProperties();
             listView = new ListViewControl();
             tlpFilter = new System.Windows.Forms.TableLayoutPanel();
             labelSearchName = new System.Windows.Forms.Label();
@@ -88,8 +88,8 @@
             labelSearchName.AutoSize = true;
             labelSearchName.Dock = System.Windows.Forms.DockStyle.Bottom;
             labelSearchName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            labelSearchName.Location = new System.Drawing.Point(3, 13);
-            labelSearchName.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
+            labelSearchName.Location = new System.Drawing.Point(3, 10);
+            labelSearchName.Margin = new System.Windows.Forms.Padding(3, 0, 3, 8);
             labelSearchName.Name = "labelSearchName";
             labelSearchName.Size = new System.Drawing.Size(63, 19);
             labelSearchName.TabIndex = 13;
@@ -141,8 +141,8 @@
             // tbSearchStrName
             // 
             tbSearchStrName.Dock = System.Windows.Forms.DockStyle.Bottom;
-            tbSearchStrName.Location = new System.Drawing.Point(73, 11);
-            tbSearchStrName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tbSearchStrName.Location = new System.Drawing.Point(73, 8);
+            tbSearchStrName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 6);
             tbSearchStrName.Name = "tbSearchStrName";
             tbSearchStrName.Size = new System.Drawing.Size(210, 23);
             tbSearchStrName.TabIndex = 3;
@@ -152,8 +152,8 @@
             labelTypeSort.AutoSize = true;
             labelTypeSort.Dock = System.Windows.Forms.DockStyle.Bottom;
             labelTypeSort.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            labelTypeSort.Location = new System.Drawing.Point(290, 13);
-            labelTypeSort.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
+            labelTypeSort.Location = new System.Drawing.Point(290, 10);
+            labelTypeSort.Margin = new System.Windows.Forms.Padding(3, 0, 3, 8);
             labelTypeSort.Name = "labelTypeSort";
             labelTypeSort.Size = new System.Drawing.Size(63, 19);
             labelTypeSort.TabIndex = 14;
@@ -162,12 +162,13 @@
             // 
             // checkCmbField
             // 
-            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
-            checkCmbField.CheckBoxProperties = checkBoxProperties1;
+            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
+            checkCmbField.CheckBoxProperties = checkBoxProperties2;
             checkCmbField.DisplayMemberSingleItem = "";
             checkCmbField.Dock = System.Windows.Forms.DockStyle.Bottom;
             checkCmbField.FormattingEnabled = true;
-            checkCmbField.Location = new System.Drawing.Point(359, 11);
+            checkCmbField.Location = new System.Drawing.Point(359, 8);
+            checkCmbField.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
             checkCmbField.Name = "checkCmbField";
             checkCmbField.Size = new System.Drawing.Size(256, 23);
             checkCmbField.TabIndex = 20;

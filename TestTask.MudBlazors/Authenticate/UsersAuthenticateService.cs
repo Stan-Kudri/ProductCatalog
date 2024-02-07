@@ -30,6 +30,7 @@ namespace TestTask.MudBlazors.Authenticate
                     new Claim(ClaimTypes.Name, user.Username),
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(ClaimTypes.Role, user.UserRole.ToString(), ClaimValueTypes.String)
                 };
 
             var token = JwtTokenHelper.MakeToken(authClaims, _configuration);

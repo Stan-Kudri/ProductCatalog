@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TestTask.Core\TestTask.Core.csproj" />
+    <ProjectReference Include="..\TestTask.Migrations\TestTask.Migrations.csproj" />
   </ItemGroup>
 
 </Project>

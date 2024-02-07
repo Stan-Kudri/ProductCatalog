@@ -7,17 +7,15 @@
 @using TestTask.Core.Models.Companies
 @using TestTask.Core.Models.Products
 @using TestTask.Core.Models.Types
+@using TestTask.Core.Models.Users
 @using TestTask.MudBlazors.Authenticate
 @using TestTask.MudBlazors.Pages.Import
 @using Bromix.MudBlazor.MaterialDesignIcons
 @using TestTask.MudBlazors.Pages.Table.Model
 @using TestTask.MudBlazors.Pages
+@using TestTask.MudBlazors.Model
 
 @inherits LayoutComponentBase
-
-@inject NavigationManager Navigation
-@inject BlazorAppLoginService BlazorAppLoginService
-@inject ISnackbar Snackbar
 
 <MudThemeProvider />
 <MudDialogProvider />
@@ -56,11 +54,20 @@
         
     </MudAppBar>
 
-    <MudDrawer @bind-Open="_drawerOpen" Elevation="1">
+    <MudDrawer @bind-Open="_drawerOpen" Elevation="6" Style="font-size:12px">
         <MudDrawerHeader>
-            <MudText Typo="Typo.h6">TestTask</MudText>
+            <MudText Typo="Typo.h5" Style="font: italic small-caps bold 16px/2 cursive;">MudBlazor</MudText>
         </MudDrawerHeader>
         <NavMenu />
+        <AuthorizeView Context="auth">
+            <Authorized> 
+                @if (auth.User.IsInRole(Role.Admin))
+                {
+                    <MudNavLink Href="users" Match="NavLinkMatch.All" Icon="@MaterialDesignIcons.Normal.AccountDetails">Users</MudNavLink>
+                }
+            </Authorized>
+        </AuthorizeView>
+        
     </MudDrawer>
 
     <MudMainContent>
@@ -70,21 +77,3 @@
     </MudMainContent>
 
 </MudLayout>
-
-@functions
-{
-    private void SignInPage() => Navigation.NavigateTo($"/login/{true}");
-}
-
-
-@code {
-    private bool _drawerOpen = false;
-
-    private void DrawerToggle() => _drawerOpen = !_drawerOpen;
-
-    private async Task LogoutAsync()
-    {
-        await BlazorAppLoginService.LogoutAsync();
-        Snackbar.Add("User logout", Severity.Info);
-    }
-}

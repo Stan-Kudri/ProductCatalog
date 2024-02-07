@@ -1,6 +1,6 @@
-﻿using MudBlazor;
+﻿using Microsoft.AspNetCore.Components.Authorization;
+using MudBlazor;
 using MudBlazor.Services;
-using TestTask.Core;
 using TestTask.Core.Export.SheetFillers;
 using TestTask.Core.Import;
 using TestTask.Core.Import.Importers;
@@ -10,6 +10,8 @@ using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
 using TestTask.Core.Models.Types;
 using TestTask.Core.Models.Users;
+using TestTask.Migrations;
+using TestTask.MudBlazors.Authenticate;
 using TestTask.MudBlazors.Pages.Table.Model;
 using TestTask.MudBlazors.Pages.Table.PageTableProvider;
 using TestTask.MudBlazors.Pages.Table.PageTableView;
@@ -71,6 +73,13 @@ namespace TestTask.MudBlazors
             builder.Services.AddScoped<ProductDetailProvider>();
             builder.Services.AddScoped<ITableDetailProvider<Product>>(e => e.GetRequiredService<ProductDetailProvider>());
             builder.Services.AddScoped<ISortEntity<Product, ProductSortType>>(e => new SortProduct());
+        }
+
+        public static void AuthenicateDIBuilder(this WebApplicationBuilder? builder)
+        {
+            builder.Services.AddTransient<BlazorAppLoginService>();
+            builder.Services.AddScoped<AuthenticationStateProvider, BlazorAuthStateProvider>();
+            builder.Services.AddTransient<IUsersAuthenticate, UsersAuthenticateService>();
         }
     }
 }

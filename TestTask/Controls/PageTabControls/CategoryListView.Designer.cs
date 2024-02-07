@@ -76,8 +76,8 @@ namespace TestTask.Controls.PageTabControls
             labelSortName.AutoSize = true;
             labelSortName.Dock = System.Windows.Forms.DockStyle.Bottom;
             labelSortName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            labelSortName.Location = new System.Drawing.Point(290, 13);
-            labelSortName.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
+            labelSortName.Location = new System.Drawing.Point(290, 10);
+            labelSortName.Margin = new System.Windows.Forms.Padding(3, 0, 3, 8);
             labelSortName.Name = "labelSortName";
             labelSortName.Size = new System.Drawing.Size(63, 19);
             labelSortName.TabIndex = 9;
@@ -89,8 +89,8 @@ namespace TestTask.Controls.PageTabControls
             labelSearchName.AutoSize = true;
             labelSearchName.Dock = System.Windows.Forms.DockStyle.Bottom;
             labelSearchName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            labelSearchName.Location = new System.Drawing.Point(3, 13);
-            labelSearchName.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
+            labelSearchName.Location = new System.Drawing.Point(3, 10);
+            labelSearchName.Margin = new System.Windows.Forms.Padding(3, 0, 3, 8);
             labelSearchName.Name = "labelSearchName";
             labelSearchName.Size = new System.Drawing.Size(63, 19);
             labelSearchName.TabIndex = 9;
@@ -121,8 +121,8 @@ namespace TestTask.Controls.PageTabControls
             // tbSearchStrName
             // 
             tbSearchStrName.Dock = System.Windows.Forms.DockStyle.Bottom;
-            tbSearchStrName.Location = new System.Drawing.Point(73, 11);
-            tbSearchStrName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tbSearchStrName.Location = new System.Drawing.Point(73, 8);
+            tbSearchStrName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 6);
             tbSearchStrName.Name = "tbSearchStrName";
             tbSearchStrName.Size = new System.Drawing.Size(210, 23);
             tbSearchStrName.TabIndex = 3;
@@ -176,7 +176,8 @@ namespace TestTask.Controls.PageTabControls
             checkCmbField.DisplayMemberSingleItem = "";
             checkCmbField.Dock = System.Windows.Forms.DockStyle.Bottom;
             checkCmbField.FormattingEnabled = true;
-            checkCmbField.Location = new System.Drawing.Point(359, 11);
+            checkCmbField.Location = new System.Drawing.Point(359, 8);
+            checkCmbField.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
             checkCmbField.Name = "checkCmbField";
             checkCmbField.Size = new System.Drawing.Size(256, 23);
             checkCmbField.TabIndex = 16;
