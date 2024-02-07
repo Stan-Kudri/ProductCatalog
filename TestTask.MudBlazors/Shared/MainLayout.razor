@@ -7,6 +7,7 @@
 @using TestTask.Core.Models.Companies
 @using TestTask.Core.Models.Products
 @using TestTask.Core.Models.Types
+@using TestTask.Core.Models.Users
 @using TestTask.MudBlazors.Authenticate
 @using TestTask.MudBlazors.Pages.Import
 @using Bromix.MudBlazor.MaterialDesignIcons
@@ -64,7 +65,7 @@
         <NavMenu />
         <AuthorizeView Context="auth">
             <Authorized> 
-                @if (auth.User.IsInRole(UserRoles.Admin))
+                @if (auth.User.IsInRole(Role.Admin))
                 {
                     <MudNavLink Href="users" Match="NavLinkMatch.All" Icon="@MaterialDesignIcons.Normal.AccountDetails">Registered Users</MudNavLink>
                 }
