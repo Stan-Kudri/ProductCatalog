@@ -20,7 +20,7 @@ namespace TestTask.MudBlazors.Pages.Table
         [Inject] private ExcelImporter<T> ExcelImport { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
         [Inject] private ITableDetailProvider<T> TableProvider { get; set; } = null!;
-        [Inject] private ISortEntity<T, TSortType> SortField { get; set; } = null!;
+        [Inject] private ISortEntity<T> SortField { get; set; } = null!;
         [Inject] protected NavigationManager Navigation { get; set; } = null!;
 
         private const string MessageNotSelectedItem = "No items selected";

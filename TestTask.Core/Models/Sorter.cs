@@ -4,17 +4,16 @@ using TestTask.Core.Models.Products;
 
 namespace TestTask.Core.Models
 {
-    public sealed class Sorter<T, TEnum>
-        where TEnum : ISortableSmartEnum<T>
+    public sealed class Sorter<T>
     {
-        private readonly TEnum _defaultValue;
+        private readonly ISortableSmartEnum<T> _defaultValue;
 
-        public Sorter(TEnum defaultValue)
+        public Sorter(ISortableSmartEnum<T> defaultValue)
         {
             _defaultValue = defaultValue;
         }
 
-        public IQueryable<T> Apply(IQueryable<T> items, IEnumerable<TEnum> sortFields, bool? ascending = true)
+        public IQueryable<T> Apply(IQueryable<T> items, IEnumerable<ISortableSmartEnum<T>> sortFields, bool? ascending = true)
         {
             if (ascending == null)
             {

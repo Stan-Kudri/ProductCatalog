@@ -1,18 +1,22 @@
 ﻿using Ardalis.SmartEnum;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using TestTask.Core.Models.Categories;
 
 namespace TestTask.Core.Models.Types
 {
-    public abstract class ProductTypeSortType : SmartEnum<ProductTypeSortType>, ISortableSmartEnum<ProductType>
+    public abstract class ProductTypeSortField : SmartEnum<ProductTypeSortField>, ISortableSmartEnum<ProductType>, ISortableSmartEnumOperation<ProductType>
     {
-        public static readonly ProductTypeSortType Id = new SortType<int>("Id", 0, e => e.Id);
-        public static readonly ProductTypeSortType Name = new SortType<string>("Name", 1, e => e.Name);
-        public static readonly ProductTypeSortType Category = new SortType<Category>("Category", 2, e => e.Category);
+        public static readonly ProductTypeSortField Id = new SortType<int>("Id", 0, e => e.Id);
+        public static readonly ProductTypeSortField Name = new SortType<string>("Name", 1, e => e.Name);
+        public static readonly ProductTypeSortField Category = new SortType<Category>("Category", 2, e => e.Category);
 
-        public ProductTypeSortType(string name, int value)
+        static ISortableSmartEnum<ProductType> ISortableSmartEnumOperation<ProductType>.DefaultValue => Id;
+        static IReadOnlyCollection<ISortableSmartEnum<ProductType>> ISortableSmartEnumOperation<ProductType>.List => List;
+
+        public ProductTypeSortField(string name, int value)
             : base(name, value)
         {
         }
@@ -22,7 +26,7 @@ namespace TestTask.Core.Models.Types
 
         public override string ToString() => base.Name;
 
-        private sealed class SortType<TKey> : ProductTypeSortType
+        private sealed class SortType<TKey> : ProductTypeSortField
         {
             private readonly Expression<Func<ProductType, TKey>> _expression;
 

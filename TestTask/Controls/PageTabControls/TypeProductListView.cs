@@ -120,42 +120,16 @@ namespace TestTask.Controls.PageTabControls
         public void Remove(Entity entity) => _typeService.Remove(entity.Id);
 
         private void ButtonUseFilter_Click(object sender, EventArgs e)
-        {
-            SelectSortField();
-            LoadData();
-        }
+            => UsedFilter();
 
         private void ButtonClearFilter_Click(object sender, EventArgs e)
         {
             tbSearchStrName.Text = string.Empty;
-            _selectSortField.SortFields = new HashSet<ProductTypeSortType>();
+            _selectSortField.SortFields = new HashSet<ProductTypeSortField>();
             checkCmbField.ClearSelection();
             _isAscending = true;
             btnTypeSort.Text = TypeSortFields.Ascending.Name;
             LoadData();
-        }
-
-        private void ListView_SizeChanged(object sender, EventArgs e)
-            => listView.ChangeSizeColumnListView();
-
-        private IQueryable<ProductType> GetSearchType(IQueryable<ProductType> items)
-            => string.IsNullOrEmpty(tbSearchStrName.Text)
-            ? items
-            : items.Where(e => e.Name.Contains(tbSearchStrName.Text));
-
-        private void SelectSortField()
-        {
-            var selectField = new HashSet<ProductTypeSortType>();
-            foreach (string item in checkCmbField.Items)
-            {
-                var checkBoxItem = checkCmbField.CheckBoxItems[item];
-
-                if (checkBoxItem.Checked && ProductTypeSortType.TryFromName(item, out var sortField))
-                {
-                    selectField.Add(sortField);
-                }
-            }
-            _selectSortField.SortFields = selectField;
         }
 
         private void BtnTypeSort_Click(object sender, EventArgs e)
@@ -171,6 +145,35 @@ namespace TestTask.Controls.PageTabControls
                 btnTypeSort.Text = TypeSortFields.Ascending.Name;
             }
 
+            UsedFilter();
+        }
+
+        private void ListView_SizeChanged(object sender, EventArgs e)
+            => listView.ChangeSizeColumnListView();
+
+        private IQueryable<ProductType> GetSearchType(IQueryable<ProductType> items)
+            => string.IsNullOrEmpty(tbSearchStrName.Text)
+            ? items
+            : items.Where(e => e.Name.Contains(tbSearchStrName.Text));
+
+        private void SelectSortField()
+        {
+            var selectField = new HashSet<ProductTypeSortField>();
+            foreach (string item in checkCmbField.Items)
+            {
+                var checkBoxItem = checkCmbField.CheckBoxItems[item];
+
+                if (checkBoxItem.Checked && ProductTypeSortField.TryFromName(item, out var sortField))
+                {
+                    selectField.Add(sortField);
+                }
+            }
+            _selectSortField.SortFields = selectField;
+        }
+
+        private void UsedFilter()
+        {
+            SelectSortField();
             LoadData();
         }
     }
