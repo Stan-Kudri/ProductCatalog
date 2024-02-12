@@ -60,19 +60,19 @@ namespace TestTask.MudBlazors
 
             builder.Services.AddScoped<CompanyDetailProvider>();
             builder.Services.AddScoped<ITableDetailProvider<Company>>(e => e.GetRequiredService<CompanyDetailProvider>());
-            builder.Services.AddScoped<ISortEntity<Company, CompanySortType>>(e => new SortCompany());
+            builder.Services.AddScoped<ISortEntity<Company>>(e => new SortCompany());
 
             builder.Services.AddScoped<CategoryDetailProvider>();
             builder.Services.AddScoped<ITableDetailProvider<Category>>(e => e.GetRequiredService<CategoryDetailProvider>());
-            builder.Services.AddScoped<ISortEntity<Category, CategoriesSortType>>(e => new SortCategories());
+            builder.Services.AddScoped<ISortEntity<Category>>(e => new SortCategories());
 
             builder.Services.AddScoped<TypeDetailProvider>();
             builder.Services.AddScoped<ITableDetailProvider<ProductType>>(e => e.GetRequiredService<TypeDetailProvider>());
-            builder.Services.AddScoped<ISortEntity<ProductType, ProductTypeSortType>>(e => new SortProductType());
+            builder.Services.AddScoped<ISortEntity<ProductType>>(e => new SortProductType());
 
             builder.Services.AddScoped<ProductDetailProvider>();
             builder.Services.AddScoped<ITableDetailProvider<Product>>(e => e.GetRequiredService<ProductDetailProvider>());
-            builder.Services.AddScoped<ISortEntity<Product, ProductSortType>>(e => new SortProduct());
+            builder.Services.AddScoped<ISortEntity<Product>>(e => new SortProduct());
         }
 
         public static void AuthenicateDIBuilder(this WebApplicationBuilder? builder)

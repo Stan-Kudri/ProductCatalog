@@ -5,24 +5,17 @@ using System.Linq;
 
 namespace TestTask.Core.Models
 {
-    public interface ISortEntity<T, TSortType>
-        where TSortType : SmartEnum<TSortType>
+    public interface ISortEntity<T>
         where T : Entity
     {
-        static IEnumerable<TSortType> _sortFields;
+        ISortableSmartEnum<T> SortField { get; set; }
 
-        TSortType SortType { get; set; }
+        IEnumerable<ISortableSmartEnum<T>> SortFields { get; set; }
 
-        virtual IEnumerable<TSortType> SortFields
-        {
-            get => _sortFields;
-            set => _sortFields = value;
-        }
-
-        ObservableCollection<TSortType> Items { get; set; }
+        ObservableCollection<ISortableSmartEnum<T>> Items { get; set; }
 
         IQueryable<T> Apply(IQueryable<T> items, bool? ascending = true);
 
-        void Clear() => _sortFields = new HashSet<TSortType>();
+        void Clear() => SortFields = new HashSet<ISortableSmartEnum<T>>();
     }
 }

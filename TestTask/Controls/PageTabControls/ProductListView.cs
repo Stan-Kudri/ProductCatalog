@@ -158,43 +158,16 @@ namespace TestTask.Controls.PageTabControls
         public void Remove(Entity entity) => _productService.Remove(entity.Id);
 
         private void ButtonUseFilter_Click(object sender, EventArgs e)
-        {
-            SelectSortField();
-            LoadData();
-        }
+            => UsedFilter();
 
         private void ButtonClearFilter_Click(object sender, EventArgs e)
         {
             tbSearchStrName.Text = string.Empty;
-            _selectSortField.SortFields = new HashSet<ProductSortType>();
+            _selectSortField.SortFields = new HashSet<ProductSortField>();
             checkCmbField.ClearSelection();
             _isAscending = true;
             btnTypeSort.Text = TypeSortFields.Ascending.Name;
             LoadData();
-        }
-
-        private void ListView_SizeChanged(object sender, EventArgs e)
-            => listView.ChangeSizeColumnListView();
-
-        private IQueryable<Product> GetSearchType(IQueryable<Product> items)
-            => string.IsNullOrEmpty(tbSearchStrName.Text)
-            ? items
-            : items.Where(e => e.Name.Contains(tbSearchStrName.Text));
-
-
-        private void SelectSortField()
-        {
-            var selectField = new HashSet<ProductSortType>();
-            foreach (string item in checkCmbField.Items)
-            {
-                var checkBoxItem = checkCmbField.CheckBoxItems[item];
-
-                if (checkBoxItem.Checked && ProductSortType.TryFromName(item, out var sortField))
-                {
-                    selectField.Add(sortField);
-                }
-            }
-            _selectSortField.SortFields = selectField;
         }
 
         private void BtnTypeSort_Click(object sender, EventArgs e)
@@ -210,6 +183,36 @@ namespace TestTask.Controls.PageTabControls
                 btnTypeSort.Text = TypeSortFields.Ascending.Name;
             }
 
+            UsedFilter();
+        }
+
+        private void ListView_SizeChanged(object sender, EventArgs e)
+            => listView.ChangeSizeColumnListView();
+
+        private IQueryable<Product> GetSearchType(IQueryable<Product> items)
+            => string.IsNullOrEmpty(tbSearchStrName.Text)
+            ? items
+            : items.Where(e => e.Name.Contains(tbSearchStrName.Text));
+
+
+        private void SelectSortField()
+        {
+            var selectField = new HashSet<ProductSortField>();
+            foreach (string item in checkCmbField.Items)
+            {
+                var checkBoxItem = checkCmbField.CheckBoxItems[item];
+
+                if (checkBoxItem.Checked && ProductSortField.TryFromName(item, out var sortField))
+                {
+                    selectField.Add(sortField);
+                }
+            }
+            _selectSortField.SortFields = selectField;
+        }
+
+        private void UsedFilter()
+        {
+            SelectSortField();
             LoadData();
         }
     }

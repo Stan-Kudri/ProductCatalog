@@ -1,16 +1,20 @@
 ﻿using Ardalis.SmartEnum;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
 namespace TestTask.Core.Models.Categories
 {
-    public abstract class CategoriesSortType : SmartEnum<CategoriesSortType>, ISortableSmartEnum<Category>
+    public abstract class CategoriesSortField : SmartEnum<CategoriesSortField>, ISortableSmartEnum<Category>, ISortableSmartEnumOperation<Category>
     {
-        public static readonly CategoriesSortType Id = new SortType<int>("Id", 0, e => e.Id);
-        public static readonly CategoriesSortType Name = new SortType<string>("Name", 1, e => e.Name);
+        public static readonly CategoriesSortField Id = new SortType<int>("Id", 0, e => e.Id);
+        public static readonly CategoriesSortField Name = new SortType<string>("Name", 1, e => e.Name);
 
-        public CategoriesSortType(string name, int value)
+        static ISortableSmartEnum<Category> ISortableSmartEnumOperation<Category>.DefaultValue => Id;
+        static IReadOnlyCollection<ISortableSmartEnum<Category>> ISortableSmartEnumOperation<Category>.List => List;
+
+        public CategoriesSortField(string name, int value)
             : base(name, value)
         {
         }
@@ -20,7 +24,7 @@ namespace TestTask.Core.Models.Categories
 
         public override string ToString() => base.Name;
 
-        private sealed class SortType<TKey> : CategoriesSortType
+        private sealed class SortType<TKey> : CategoriesSortField
         {
             private readonly Expression<Func<Category, TKey>> _expression;
 

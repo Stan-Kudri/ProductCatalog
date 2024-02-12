@@ -1,5 +1,6 @@
 ﻿using Ardalis.SmartEnum;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using TestTask.Core.Models.Categories;
@@ -8,16 +9,19 @@ using TestTask.Core.Models.Types;
 
 namespace TestTask.Core.Models.Products
 {
-    public abstract class ProductSortType : SmartEnum<ProductSortType>, ISortableSmartEnum<Product>
+    public abstract class ProductSortField : SmartEnum<ProductSortField>, ISortableSmartEnum<Product>, ISortableSmartEnumOperation<Product>
     {
-        public static readonly ProductSortType Id = new SortType<int>("Id", 0, e => e.Id);
-        public static readonly ProductSortType Name = new SortType<string>("Name", 1, e => e.Name);
-        public static readonly ProductSortType Company = new SortType<Company>("Company", 2, e => e.Company);
-        public static readonly ProductSortType Category = new SortType<Category>("Category", 3, e => e.Category);
-        public static readonly ProductSortType ProductType = new SortType<ProductType>("Product Type", 4, e => e.Type);
-        public static readonly ProductSortType Price = new SortType<decimal>("Price", 5, e => e.Price);
+        public static readonly ProductSortField Id = new SortType<int>("Id", 0, e => e.Id);
+        public static readonly ProductSortField Name = new SortType<string>("Name", 1, e => e.Name);
+        public static readonly ProductSortField Company = new SortType<Company>("Company", 2, e => e.Company);
+        public static readonly ProductSortField Category = new SortType<Category>("Category", 3, e => e.Category);
+        public static readonly ProductSortField ProductType = new SortType<ProductType>("Product Type", 4, e => e.Type);
+        public static readonly ProductSortField Price = new SortType<decimal>("Price", 5, e => e.Price);
 
-        public ProductSortType(string name, int value)
+        static ISortableSmartEnum<Product> ISortableSmartEnumOperation<Product>.DefaultValue => Id;
+        static IReadOnlyCollection<ISortableSmartEnum<Product>> ISortableSmartEnumOperation<Product>.List => List;
+
+        public ProductSortField(string name, int value)
             : base(name, value)
         {
         }
@@ -27,7 +31,7 @@ namespace TestTask.Core.Models.Products
 
         public override string ToString() => base.Name;
 
-        private sealed class SortType<TKey> : ProductSortType
+        private sealed class SortType<TKey> : ProductSortField
         {
             private readonly Expression<Func<Product, TKey>> _expression;
 
