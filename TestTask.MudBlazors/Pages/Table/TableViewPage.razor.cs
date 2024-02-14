@@ -23,8 +23,8 @@ namespace TestTask.MudBlazors.Pages.Table
         [Inject] private ISortEntity<T> SortField { get; set; } = null!;
         [Inject] protected NavigationManager Navigation { get; set; } = null!;
 
-        private const string MessageNotSelectedItem = "No items selected";
-        private const string MessageRemoveItem = "Remove item.";
+        private const string MessageNotSelectedItem = "No items selected.";
+        private const string MessageRemoveItem = "Remove item";
         private const string MessageEditItem = "Upload data";
         private const int NoItemsSelected = 0;
 

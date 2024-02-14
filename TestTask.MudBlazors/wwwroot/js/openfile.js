@@ -1,6 +1,6 @@
-﻿function BlazorDownloadFile(filename, content) {
-    // https://www.meziantou.net/generating-and-downloading-a-file-in-a-blazor-webassembly-application.htm 
-
+﻿function BlazorDownloadFile(filename, content)
+{
+    // https://www.meziantou.net/generating-and-downloading-a-file-in-a-blazor-webassembly-application.htm
     // Create the URL
     const file = new File([content], filename, { type: "application/octet-stream" });
     const exportUrl = URL.createObjectURL(file);

@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using TestTask.Core.Models.Companies;
+﻿using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
 using TestTask.MudBlazors.Pages.Table.Model;
 
@@ -30,7 +29,7 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableView
                 ? items
                 : items.Where(e => e.Name.Contains(searchString)
                                 || e.Country.Contains(searchString)
-                                || e.DateCreation.ToString(CultureInfo.InvariantCulture).Contains(searchString));
+                                || e.DateCreation.ToString().Contains(searchString));
 
         public void Remove(int id) => _companyRepository.Remove(id);
 
