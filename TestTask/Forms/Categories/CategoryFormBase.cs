@@ -21,15 +21,15 @@ namespace TestTask.Forms.Categories
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
         }
 
-        private void CategoryFormBase_Load(object sender, EventArgs e) => SetDefaultValueData();
+        protected void FormBase_Load(object sender, EventArgs e) => SetDefaultValueData();
 
-        private void BtnClose_Click(object sender, EventArgs e)
+        protected void BtnClose_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
         }
 
-        private void BtnClear_Click(object sender, EventArgs e) => SetDefaultValueData();
+        protected void BtnClear_Click(object sender, EventArgs e) => SetDefaultValueData();
 
         protected virtual void BtnSave_Click(object sender, EventArgs e)
         {
@@ -56,7 +56,7 @@ namespace TestTask.Forms.Categories
             return true;
         }
 
-        public CategoryModel GetCategoryModel()
+        public CategoryModel GetItemModel()
         {
             if (tbCategory.Text == string.Empty)
             {

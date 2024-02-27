@@ -8,10 +8,10 @@ namespace TestTask.Core.Export.SheetFillers
 {
     public class CompanySheetFiller : ISheetFiller
     {
-        private readonly CompanyRepository _companyService;
+        private readonly CompanyRepository _companyRepository;
         private readonly List<CompanyField> _columnMap = CreateColumnMap();
 
-        public CompanySheetFiller(CompanyRepository companyService) => _companyService = companyService;
+        public CompanySheetFiller(CompanyRepository companyRepository) => _companyRepository = companyRepository;
 
         public string Name => "Company";
 
@@ -28,13 +28,13 @@ namespace TestTask.Core.Export.SheetFillers
 
             var numberRow = 0;
 
-            var allItems = _companyService.GetAll();
+            var allItems = _companyRepository.GetAll();
             if (allItems == null || allItems.Count <= 0)
             {
                 return;
             }
 
-            foreach (var item in _companyService.GetAll())
+            foreach (var item in _companyRepository.GetAll())
             {
                 numberRow++;
                 row = sheet.CreateRow(numberRow);

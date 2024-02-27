@@ -9,7 +9,6 @@ namespace TestTask.Forms.Type
 {
     public partial class EditProductTypeForm : ProductTypeBaseForm
     {
-
         private ProductType _oldItem;
         private ProductType _editItem;
 
@@ -41,12 +40,6 @@ namespace TestTask.Forms.Type
             }
 
             DialogResult = DialogResult.OK;
-        }
-
-        protected override void BtnClose_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
         }
 
         protected override void TypeBaseForm_Load(object sender, EventArgs e)

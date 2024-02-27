@@ -37,7 +37,7 @@ namespace TestTask.Forms.Products
         private ProductType SelectedType =>
             cmbTypeValue.SelectedValue != null ? (ProductType)cmbTypeValue.SelectedValue : throw new Exception("Wrong combo box format");
 
-        protected virtual void BtnAdd_Click(object sender, EventArgs e)
+        protected virtual void BtnSave_Click(object sender, EventArgs e)
         {
             if (!IsDataFilled(out var message))
             {

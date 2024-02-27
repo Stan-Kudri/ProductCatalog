@@ -8,10 +8,10 @@ namespace TestTask.Core.Export.SheetFillers
 {
     public class TypeSheetFiller : ISheetFiller
     {
-        private readonly ProductTypeRepository _typeService;
+        private readonly ProductTypeRepository _typeRepository;
         private readonly List<ProductTypeField> _columnMap = CreateColumnMap();
 
-        public TypeSheetFiller(ProductTypeRepository stepService) => _typeService = stepService;
+        public TypeSheetFiller(ProductTypeRepository stepService) => _typeRepository = stepService;
 
         public string Name => "Type";
 
@@ -28,13 +28,13 @@ namespace TestTask.Core.Export.SheetFillers
 
             var numberRow = 0;
 
-            var allItems = _typeService.GetAll();
+            var allItems = _typeRepository.GetAll();
             if (allItems == null || allItems.Count <= 0)
             {
                 return;
             }
 
-            foreach (var item in _typeService.GetAll())
+            foreach (var item in _typeRepository.GetAll())
             {
                 numberRow++;
                 row = sheet.CreateRow(numberRow);

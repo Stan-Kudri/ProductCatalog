@@ -74,19 +74,19 @@ namespace TestTask.Test.ImportTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var categoryService = new CategoryRepository(dbContext);
-            var typeService = new ProductTypeRepository(dbContext);
+            var categoryRepository = new CategoryRepository(dbContext);
+            var typeRepository = new ProductTypeRepository(dbContext);
 
             var memoryStream = new MemoryStream(Resources.DataIsAllFilledIn);
             var typeImporter = new TypeProductImporter();
             var typeRead = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
 
-            categoryService.AddRange(categories);
+            categoryRepository.AddRange(categories);
             foreach (var item in typeRead)
             {
                 if (item.Success)
                 {
-                    typeService.Upsert(item.Value);
+                    typeRepository.Upsert(item.Value);
                 }
             }
 

@@ -22,7 +22,7 @@ namespace TestTask.Forms.Categories
                 return;
             }
 
-            _editItem = GetCategoryModel().ToCategory(_oldItem.Id);
+            _editItem = GetItemModel().ToCategory(_oldItem.Id);
             if (!_oldItem.Equals(_editItem))
             {
                 _messageBox.ShowInfo("The category has not been modified.");

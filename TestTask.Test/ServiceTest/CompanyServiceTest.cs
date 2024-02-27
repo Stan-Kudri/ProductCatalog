@@ -127,8 +127,8 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var companyService = new CompanyRepository(dbContext);
-            companyService.AddRange(companies);
+            var companyRepository = new CompanyRepository(dbContext);
+            companyRepository.AddRange(companies);
 
             //Act
             var actualCompanies = dbContext.Company.ToList();
@@ -143,10 +143,10 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var companyService = new CompanyRepository(dbContext);
+            var companyRepository = new CompanyRepository(dbContext);
             dbContext.Company.AddRange(companies);
             dbContext.SaveChanges();
-            companyService.Add(addCompany);
+            companyRepository.Add(addCompany);
 
             //Act
             var actualCompanies = dbContext.Company.ToList();
@@ -161,10 +161,10 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var companyService = new CompanyRepository(dbContext);
+            var companyRepository = new CompanyRepository(dbContext);
             dbContext.Company.AddRange(companies);
             dbContext.SaveChanges();
-            companyService.Updata(updateCompany);
+            companyRepository.Updata(updateCompany);
 
             //Act
             var actualCompanies = dbContext.Company.ToList();
@@ -179,10 +179,10 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var companyService = new CompanyRepository(dbContext);
+            var companyRepository = new CompanyRepository(dbContext);
             dbContext.Company.AddRange(companies);
             dbContext.SaveChanges();
-            companyService.RemoveRange(removeID);
+            companyRepository.RemoveRange(removeID);
 
             //Act
             var actualCompanies = dbContext.Company.ToList();
@@ -197,11 +197,11 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var companyService = new CompanyRepository(dbContext);
-            companyService.Add(company);
+            var companyRepository = new CompanyRepository(dbContext);
+            companyRepository.Add(company);
 
             //Act
-            var actualName = companyService.CompanyName(id);
+            var actualName = companyRepository.CompanyName(id);
 
             //Assert
             actualName.Equals(expectName);
@@ -213,11 +213,11 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var companyService = new CompanyRepository(dbContext);
-            companyService.AddRange(companies);
+            var companyRepository = new CompanyRepository(dbContext);
+            companyRepository.AddRange(companies);
 
             //Assert
-            Assert.Throws<ArgumentException>(() => { companyService.Add(company); });
+            Assert.Throws<ArgumentException>(() => { companyRepository.Add(company); });
         }
     }
 }

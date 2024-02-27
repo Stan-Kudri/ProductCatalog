@@ -16,6 +16,7 @@ using TestTask.Forms.Categories;
 using TestTask.Forms.Companies;
 using TestTask.Forms.Products;
 using TestTask.Forms.Type;
+using TestTask.Messages;
 using TestTask.Migrations;
 
 namespace TestTask
@@ -53,6 +54,8 @@ namespace TestTask
                 .AddTransient<EditCategoryForm>()
                 .AddTransient<AddProductTypeForm>()
                 .AddTransient<EditProductTypeForm>()
+                .AddScoped<MessageByTable<ProductType>>()
+                .AddScoped<MessageByTable<Product>>()
                 .AddSingleton(e => new OpenFileDialog { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
                 .AddSingleton(e => new SaveFileDialog() { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
                 .AddSingleton(e => new CompanyImporter())

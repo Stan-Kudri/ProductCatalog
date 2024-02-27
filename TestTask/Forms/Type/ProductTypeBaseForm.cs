@@ -38,7 +38,7 @@ namespace TestTask.Forms.Type
 
         protected virtual void BtnClear_Click(object sender, EventArgs e) => SetDefaultValueData();
 
-        protected virtual void BtnClose_Click(object sender, EventArgs e)
+        protected void BtnClose_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace TestTask.Core.Models
 {
@@ -15,5 +16,7 @@ namespace TestTask.Core.Models
         void AddRange(List<T> items);
 
         void RemoveRange(List<int> listId);
+
+        IQueryable<T> GetQueryableAll();
     }
 }

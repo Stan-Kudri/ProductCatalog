@@ -29,7 +29,7 @@ namespace TestTask.Forms.Products
             _categories.ChangedCategory += ReplaceTypeProduct;
         }
 
-        protected override void BtnAdd_Click(object sender, EventArgs e)
+        protected override void BtnSave_Click(object sender, EventArgs e)
         {
             if (!IsDataFilled(out var message))
             {

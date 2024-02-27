@@ -21,7 +21,8 @@ namespace TestTask.Controls.PageTabControls
         private const int IndexColumnName = 1;
 
         private IServiceProvider _serviceProvider;
-        private CategoryRepository _categoryService;
+        private CategoryRepository _categoryRepository;
+
         private SortCategoryModel _selectSortField = new SortCategoryModel();
         private bool _isAscending = true;
 
@@ -36,9 +37,10 @@ namespace TestTask.Controls.PageTabControls
         public void Initialize(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            _categoryService = _serviceProvider.GetRequiredService<CategoryRepository>();
+            _categoryRepository = _serviceProvider.GetRequiredService<CategoryRepository>();
             listView.Initialize(this, serviceProvider.GetRequiredService<IMessageBox>());
             checkCmbField.Items.AddRange(_selectSortField.SelectField);
+            LoadData();
         }
 
         public void LoadData() => listView.LoadData();
@@ -52,8 +54,8 @@ namespace TestTask.Controls.PageTabControls
                     return false;
                 }
 
-                var item = addForm.GetCategoryModel().ToCategory();
-                _categoryService.Add(item);
+                var item = addForm.GetItemModel().ToCategory();
+                _categoryRepository.Add(item);
             }
 
             return true;
@@ -72,7 +74,7 @@ namespace TestTask.Controls.PageTabControls
                 }
 
                 var updateItem = editForm.EditItem();
-                _categoryService.Updata(updateItem);
+                _categoryRepository.Updata(updateItem);
             }
 
             return true;
@@ -88,14 +90,14 @@ namespace TestTask.Controls.PageTabControls
 
         public PagedList<Entity> GetPage(Page page)
         {
-            var queriable = _categoryService.GetQueryableAll();
+            var queriable = _categoryRepository.GetQueryableAll();
             queriable = GetSearchName(queriable);
             queriable = _selectSortField.Apply(queriable, _isAscending);
             var result = queriable.GetPagedList(page);
             return new PagedList<Entity>(result, result.PageNumber, result.PageSize, result.TotalItems);
         }
 
-        public void Remove(Entity entity) => _categoryService.Remove(entity.Id);
+        public void Remove(Entity entity) => _categoryRepository.Remove(entity.Id);
 
         private void ButtonUseFilter_Click(object sender, EventArgs e)
             => UsedFilter();

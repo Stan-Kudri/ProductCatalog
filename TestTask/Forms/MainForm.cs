@@ -24,20 +24,20 @@ namespace TestTask.Forms
         private const string Type = "Type";
 
         private readonly IServiceProvider _serviceProvider;
-        private readonly CompanyRepository _companyService;
-        private readonly ProductRepository _productService;
-        private readonly CategoryRepository _categoryService;
-        private readonly ProductTypeRepository _typeService;
+        private readonly CompanyRepository _companyRepository;
+        private readonly ProductRepository _productRepository;
+        private readonly CategoryRepository _categoryRepository;
+        private readonly ProductTypeRepository _typeRepository;
         private readonly IMessageBox _messageBox;
 
         public MainForm(IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;
-            _companyService = _serviceProvider.GetRequiredService<CompanyRepository>();
-            _categoryService = _serviceProvider.GetRequiredService<CategoryRepository>();
-            _typeService = _serviceProvider.GetRequiredService<ProductTypeRepository>();
-            _productService = _serviceProvider.GetRequiredService<ProductRepository>();
+            _companyRepository = _serviceProvider.GetRequiredService<CompanyRepository>();
+            _categoryRepository = _serviceProvider.GetRequiredService<CategoryRepository>();
+            _typeRepository = _serviceProvider.GetRequiredService<ProductTypeRepository>();
+            _productRepository = _serviceProvider.GetRequiredService<ProductRepository>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
         }
 
@@ -101,7 +101,7 @@ namespace TestTask.Forms
                     {
                         if (item.Success)
                         {
-                            _companyService.Upsert(item.Value);
+                            _companyRepository.Upsert(item.Value);
                         }
                     }
 
@@ -119,7 +119,7 @@ namespace TestTask.Forms
                     {
                         if (item.Success)
                         {
-                            _categoryService.Upsert(item.Value);
+                            _categoryRepository.Upsert(item.Value);
                         }
                     }
 
@@ -137,7 +137,7 @@ namespace TestTask.Forms
                     {
                         if (item.Success)
                         {
-                            _typeService.Upsert(item.Value);
+                            _typeRepository.Upsert(item.Value);
                         }
                     }
 
@@ -155,7 +155,7 @@ namespace TestTask.Forms
                     {
                         if (item.Success)
                         {
-                            _productService.Upsert(item.Value);
+                            _productRepository.Upsert(item.Value);
                         }
                     }
 
@@ -180,10 +180,10 @@ namespace TestTask.Forms
 
                 var path = exportFileData.FileName;
 
-                var companySheetFiller = new CompanySheetFiller(_companyService);
-                var productSheetFiller = new ProductSheetFiller(_productService);
-                var categorySheetFiller = new CategorySheetFiller(_categoryService);
-                var typeSheetFiller = new TypeSheetFiller(_typeService);
+                var companySheetFiller = new CompanySheetFiller(_companyRepository);
+                var productSheetFiller = new ProductSheetFiller(_productRepository);
+                var categorySheetFiller = new CategorySheetFiller(_categoryRepository);
+                var typeSheetFiller = new TypeSheetFiller(_typeRepository);
 
                 var fillers = new ISheetFiller[]
                 {

@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using TestTask.Core;
 
-namespace TestTask
+namespace TestTask.Messages
 {
     public class MessageBoxShow : IMessageBox
     {

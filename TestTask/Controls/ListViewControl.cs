@@ -113,7 +113,6 @@ namespace TestTask.Controls
             LoadData();
         }
 
-
         private void BtnFirstPage_Click(object sender, EventArgs e)
         {
             if (_pagedList.HasPrevious)

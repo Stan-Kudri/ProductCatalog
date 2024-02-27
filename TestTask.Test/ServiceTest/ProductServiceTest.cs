@@ -148,15 +148,15 @@ namespace TestTask.Test.ServiceTest
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
 
-            var companyService = new CompanyRepository(dbContext);
-            var categoryService = new CategoryRepository(dbContext);
-            var typeService = new ProductTypeRepository(dbContext);
-            var productService = new ProductRepository(dbContext);
+            var companyRepository = new CompanyRepository(dbContext);
+            var categoryRepository = new CategoryRepository(dbContext);
+            var typeRepository = new ProductTypeRepository(dbContext);
+            var productRepository = new ProductRepository(dbContext);
 
-            companyService.Add(company);
-            categoryService.Add(category);
-            typeService.Add(type);
-            productService.AddRange(products);
+            companyRepository.Add(company);
+            categoryRepository.Add(category);
+            typeRepository.Add(type);
+            productRepository.AddRange(products);
 
             //Act
             var actualProducts = dbContext.Product.ToList();
@@ -178,16 +178,16 @@ namespace TestTask.Test.ServiceTest
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
 
-            var companyService = new CompanyRepository(dbContext);
-            var categoryService = new CategoryRepository(dbContext);
-            var typeService = new ProductTypeRepository(dbContext);
-            var productService = new ProductRepository(dbContext);
+            var companyRepository = new CompanyRepository(dbContext);
+            var categoryRepository = new CategoryRepository(dbContext);
+            var typeRepository = new ProductTypeRepository(dbContext);
+            var productRepository = new ProductRepository(dbContext);
 
-            companyService.Add(company);
-            categoryService.Add(category);
-            typeService.Add(type);
-            productService.AddRange(products);
-            productService.Add(addProduct);
+            companyRepository.Add(company);
+            categoryRepository.Add(category);
+            typeRepository.Add(type);
+            productRepository.AddRange(products);
+            productRepository.Add(addProduct);
 
             //Act
             var actualProducts = dbContext.Product.ToList();
@@ -209,16 +209,16 @@ namespace TestTask.Test.ServiceTest
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
 
-            var companyService = new CompanyRepository(dbContext);
-            var categoryService = new CategoryRepository(dbContext);
-            var typeService = new ProductTypeRepository(dbContext);
-            var productService = new ProductRepository(dbContext);
+            var companyRepository = new CompanyRepository(dbContext);
+            var categoryRepository = new CategoryRepository(dbContext);
+            var typeRepository = new ProductTypeRepository(dbContext);
+            var productRepository = new ProductRepository(dbContext);
 
-            companyService.Add(company);
-            categoryService.Add(category);
-            typeService.Add(type);
-            productService.AddRange(products);
-            productService.Updata(updateProduct);
+            companyRepository.Add(company);
+            categoryRepository.Add(category);
+            typeRepository.Add(type);
+            productRepository.AddRange(products);
+            productRepository.Updata(updateProduct);
 
             //Act
             var actualProducts = dbContext.Product.ToList();
@@ -240,16 +240,16 @@ namespace TestTask.Test.ServiceTest
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
 
-            var companyService = new CompanyRepository(dbContext);
-            var categoryService = new CategoryRepository(dbContext);
-            var typeService = new ProductTypeRepository(dbContext);
-            var productService = new ProductRepository(dbContext);
+            var companyRepository = new CompanyRepository(dbContext);
+            var categoryRepository = new CategoryRepository(dbContext);
+            var typeRepository = new ProductTypeRepository(dbContext);
+            var productRepository = new ProductRepository(dbContext);
 
-            companyService.Add(company);
-            categoryService.Add(category);
-            typeService.Add(type);
-            productService.AddRange(products);
-            productService.Remove(removeId);
+            companyRepository.Add(company);
+            categoryRepository.Add(category);
+            typeRepository.Add(type);
+            productRepository.AddRange(products);
+            productRepository.Remove(removeId);
 
             //Act
             var actualProducts = dbContext.Product.ToList();
@@ -270,18 +270,18 @@ namespace TestTask.Test.ServiceTest
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
 
-            var companyService = new CompanyRepository(dbContext);
-            var categoryService = new CategoryRepository(dbContext);
-            var typeService = new ProductTypeRepository(dbContext);
-            var productService = new ProductRepository(dbContext);
+            var companyRepository = new CompanyRepository(dbContext);
+            var categoryRepository = new CategoryRepository(dbContext);
+            var typeRepository = new ProductTypeRepository(dbContext);
+            var productRepository = new ProductRepository(dbContext);
 
-            companyService.Add(company);
-            categoryService.Add(category);
-            typeService.Add(type);
-            productService.AddRange(products);
+            companyRepository.Add(company);
+            categoryRepository.Add(category);
+            typeRepository.Add(type);
+            productRepository.AddRange(products);
 
             //Assert
-            Assert.Throws<ArgumentException>(() => { productService.Add(product); });
+            Assert.Throws<ArgumentException>(() => { productRepository.Add(product); });
         }
 
         [Theory]
@@ -297,17 +297,17 @@ namespace TestTask.Test.ServiceTest
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
 
-            var companyService = new CompanyRepository(dbContext);
-            var categoryService = new CategoryRepository(dbContext);
-            var typeService = new ProductTypeRepository(dbContext);
-            var productService = new ProductRepository(dbContext);
+            var companyRepository = new CompanyRepository(dbContext);
+            var categoryRepository = new CategoryRepository(dbContext);
+            var typeRepository = new ProductTypeRepository(dbContext);
+            var productRepository = new ProductRepository(dbContext);
 
-            companyService.Add(company);
-            categoryService.Add(category);
-            typeService.Add(type);
+            companyRepository.Add(company);
+            categoryRepository.Add(category);
+            typeRepository.Add(type);
 
             //Assert
-            Assert.Throws<Exception>(() => { productService.Add(product); });
+            Assert.Throws<Exception>(() => { productRepository.Add(product); });
         }
     }
 }

@@ -31,7 +31,7 @@ namespace TestTask.Controls.PageTabControls
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            CheckComboBox.CheckBoxProperties checkBoxProperties1 = new CheckComboBox.CheckBoxProperties();
+            CheckComboBox.CheckBoxProperties checkBoxProperties = new CheckComboBox.CheckBoxProperties();
             tlpFilter = new System.Windows.Forms.TableLayoutPanel();
             labelSortName = new System.Windows.Forms.Label();
             labelSearchName = new System.Windows.Forms.Label();
@@ -171,8 +171,8 @@ namespace TestTask.Controls.PageTabControls
             // 
             // checkCmbField
             // 
-            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
-            checkCmbField.CheckBoxProperties = checkBoxProperties1;
+            checkBoxProperties.ForeColor = System.Drawing.SystemColors.ControlText;
+            checkCmbField.CheckBoxProperties = checkBoxProperties;
             checkCmbField.DisplayMemberSingleItem = "";
             checkCmbField.Dock = System.Windows.Forms.DockStyle.Bottom;
             checkCmbField.FormattingEnabled = true;
