@@ -23,7 +23,8 @@ namespace TestTask.Controls.PageTabControls
         private const int IndexColumnCountry = 3;
 
         private IServiceProvider _serviceProvider;
-        private CompanyRepository _companyService;
+        private CompanyRepository _companyRepository;
+
         private SortCompanyModel _selectSortField = new SortCompanyModel();
         private bool _isAscending = true;
 
@@ -40,7 +41,7 @@ namespace TestTask.Controls.PageTabControls
         public void Initialize(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            _companyService = _serviceProvider.GetRequiredService<CompanyRepository>();
+            _companyRepository = _serviceProvider.GetRequiredService<CompanyRepository>();
             listView.Initialize(this, serviceProvider.GetRequiredService<IMessageBox>());
             checkCmbField.Items.AddRange(_selectSortField.SelectField);
             LoadData();
@@ -58,7 +59,7 @@ namespace TestTask.Controls.PageTabControls
                 }
 
                 var item = addForm.GetCompanyModel().ToCompany();
-                _companyService.Add(item);
+                _companyRepository.Add(item);
             }
 
             return true;
@@ -77,7 +78,7 @@ namespace TestTask.Controls.PageTabControls
                 }
 
                 var updateItem = editForm.GetEditCompany();
-                _companyService.Updata(updateItem);
+                _companyRepository.Updata(updateItem);
             }
 
             return true;
@@ -96,19 +97,19 @@ namespace TestTask.Controls.PageTabControls
 
         public PagedList<Entity> GetPage(Page page)
         {
-            var queriable = _companyService.GetQueryableAll();
+            var queriable = _companyRepository.GetQueryableAll();
             queriable = GetSearchName(queriable);
             queriable = _selectSortField.Apply(queriable, _isAscending);
             var result = queriable.GetPagedList(page);
             return new PagedList<Entity>(result, result.PageNumber, result.PageSize, result.TotalItems);
         }
 
-        public void Remove(Entity entity) => _companyService.Remove(entity.Id);
+        public void Remove(Entity entity) => _companyRepository.Remove(entity.Id);
 
         private void ButtonUseFilter_Click(object sender, EventArgs e)
             => UsedFilter();
 
-        private void ButtonClearFilter_Click(object sender, EventArgs e)
+        private void BtnClearFilter_Click(object sender, EventArgs e)
         {
             tbSearchStrName.Text = string.Empty;
             _selectSortField.SortFields = new HashSet<CompanySortField>();

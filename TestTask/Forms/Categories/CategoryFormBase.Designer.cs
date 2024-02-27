@@ -1,8 +1,9 @@
-﻿namespace TestTask.Forms.Categories
-{
-    partial class CategoryFormBase
-    {
+﻿using TestTask.BindingItem;
 
+namespace TestTask.Forms.Categories
+{
+    partial class CategoryFormBase: BaseForm
+    {
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -175,7 +176,7 @@
             this.Name = "CategoryFormBase";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CategoryForm";
-            this.Load += new System.EventHandler(this.CategoryFormBase_Load);
+            this.Load += new System.EventHandler(this.FormBase_Load);
             this.tlpText.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.categoryModelBindingSource)).EndInit();
             this.tlpButtonCategory.ResumeLayout(false);

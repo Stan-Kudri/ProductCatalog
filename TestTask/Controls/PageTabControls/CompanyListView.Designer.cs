@@ -101,7 +101,7 @@
             buttonClearFilter.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             buttonClearFilter.UseAccentColor = false;
             buttonClearFilter.UseVisualStyleBackColor = true;
-            buttonClearFilter.Click += ButtonClearFilter_Click;
+            buttonClearFilter.Click += BtnClearFilter_Click;
             // 
             // buttonUseFilter
             // 

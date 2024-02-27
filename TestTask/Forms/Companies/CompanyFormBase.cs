@@ -10,7 +10,7 @@ namespace TestTask.Forms.Companies
     public partial class CompanyFormBase : BaseForm
     {
         protected readonly IMessageBox _messageBox;
-        protected readonly CompanyRepository _companyService;
+        protected readonly CompanyRepository _companyRepository;
 
         private CompanyFormBase()
         {
@@ -21,7 +21,7 @@ namespace TestTask.Forms.Companies
         {
             InitializeComponent();
             _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
-            _companyService = serviceProvider.GetRequiredService<CompanyRepository>();
+            _companyRepository = serviceProvider.GetRequiredService<CompanyRepository>();
         }
 
         protected virtual void BtnSave_Click(object sender, EventArgs e)
@@ -34,7 +34,7 @@ namespace TestTask.Forms.Companies
                 return;
             }
 
-            if (!_companyService.IsFreeName(nameCompany))
+            if (!_companyRepository.IsFreeName(nameCompany))
             {
                 _messageBox.ShowWarning("Name company is not free.");
                 return;

@@ -61,7 +61,7 @@ namespace TestTask.Test.ImportTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var companyService = new CompanyRepository(dbContext);
+            var companyRepository = new CompanyRepository(dbContext);
 
             var memoryStream = new MemoryStream(Resources.DataIsAllFilledIn);
             var companyImporter = new CompanyImporter();
@@ -71,7 +71,7 @@ namespace TestTask.Test.ImportTest
             {
                 if (item.Success)
                 {
-                    companyService.Upsert(item.Value);
+                    companyRepository.Upsert(item.Value);
                 }
             }
 

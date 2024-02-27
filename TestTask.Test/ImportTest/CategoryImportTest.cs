@@ -3,7 +3,6 @@ using TestTask.Core;
 using TestTask.Core.Import;
 using TestTask.Core.Import.Importers;
 using TestTask.Core.Models.Categories;
-using TestTask.Core.Models.Companies;
 using TestTask.Test.Properties;
 
 namespace TestTask.Test.ImportTest
@@ -62,7 +61,7 @@ namespace TestTask.Test.ImportTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var categoryService = new CategoryRepository(dbContext);
+            var categoryRepository = new CategoryRepository(dbContext);
             var memoryStream = new MemoryStream(Resources.DataIsAllFilledIn);
             var categoryImporter = new CategoryImporter();
             var categoryRead = new ExcelImporter<Category>(categoryImporter).Import(memoryStream);
@@ -71,7 +70,7 @@ namespace TestTask.Test.ImportTest
             {
                 if (item.Success)
                 {
-                    categoryService.Upsert(item.Value);
+                    categoryRepository.Upsert(item.Value);
                 }
             }
 

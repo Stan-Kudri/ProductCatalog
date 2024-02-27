@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using TestTask.Core.Models.Categories;
-using TestTask.Core.Models.Companies;
 
 namespace TestTask.Test.ServiceTest
 {
@@ -119,8 +118,8 @@ namespace TestTask.Test.ServiceTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var categoryService = new CategoryRepository(dbContext);
-            categoryService.AddRange(category);
+            var categoryRepository = new CategoryRepository(dbContext);
+            categoryRepository.AddRange(category);
 
             //Act
             var actualCompanies = dbContext.Category.ToList();

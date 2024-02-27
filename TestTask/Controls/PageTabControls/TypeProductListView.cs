@@ -13,6 +13,7 @@ using TestTask.Core.Models.Page;
 using TestTask.Core.Models.Types;
 using TestTask.Extension;
 using TestTask.Forms.Type;
+using TestTask.Messages;
 
 namespace TestTask.Controls.PageTabControls
 {
@@ -24,9 +25,11 @@ namespace TestTask.Controls.PageTabControls
         private const int IndexColumnIdCategory = 3;
 
         private IServiceProvider _serviceProvider;
-        private CategoryRepository _categoryService;
-        private ProductTypeRepository _typeService;
+        private CategoryRepository _categoryRepository;
+        private ProductTypeRepository _typeRepository;
+
         private IMessageBox _messageBox;
+        private MessageByTable<ProductType> _messageByTable;
         private SortTypeProductModel _selectSortField = new SortTypeProductModel();
         private bool _isAscending = true;
 
@@ -43,22 +46,23 @@ namespace TestTask.Controls.PageTabControls
         public void Initialize(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            _categoryService = _serviceProvider.GetRequiredService<CategoryRepository>();
-            _typeService = _serviceProvider.GetRequiredService<ProductTypeRepository>();
+            _categoryRepository = _serviceProvider.GetRequiredService<CategoryRepository>();
+            _typeRepository = _serviceProvider.GetRequiredService<ProductTypeRepository>();
             _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
+            _messageByTable = _serviceProvider.GetRequiredService<MessageByTable<ProductType>>();
             listView.Initialize(this, serviceProvider.GetRequiredService<IMessageBox>());
             checkCmbField.Items.AddRange(_selectSortField.SelectField);
+            LoadData();
         }
 
         public void LoadData() => listView.LoadData();
 
         public bool Add()
         {
-            var listCategory = _categoryService.GetQueryableAll();
+            var listCategory = _categoryRepository.GetQueryableAll();
 
-            if (listCategory.Count() == 0)
+            if (!_messageByTable.ShouldNotBeEmpty(listCategory))
             {
-                _messageBox.ShowWarning("Add a category to the table to add a product.");
                 return false;
             }
 
@@ -72,7 +76,7 @@ namespace TestTask.Controls.PageTabControls
                 }
 
                 var item = addForm.GetTypeProductModel().ToProductType();
-                _typeService.Add(item);
+                _typeRepository.Add(item);
             }
 
             return true;
@@ -80,7 +84,7 @@ namespace TestTask.Controls.PageTabControls
 
         public bool Edit(Entity entity)
         {
-            var listCategory = _categoryService.GetAll();
+            var listCategory = _categoryRepository.GetAll();
             var oldItem = (ProductType)entity;
 
             using (var editForm = _serviceProvider.GetRequiredService<EditProductTypeForm>())
@@ -93,7 +97,7 @@ namespace TestTask.Controls.PageTabControls
                 }
 
                 var updateItem = editForm.GetEditTypeProduct();
-                _typeService.Updata(updateItem);
+                _typeRepository.Updata(updateItem);
             }
 
             return true;
@@ -110,14 +114,14 @@ namespace TestTask.Controls.PageTabControls
 
         public PagedList<Entity> GetPage(Page page)
         {
-            var queriable = _typeService.GetQueryableAll();
+            var queriable = _typeRepository.GetQueryableAll();
             queriable = GetSearchType(queriable);
             queriable = _selectSortField.Apply(queriable, _isAscending);
             var result = queriable.GetPagedList(page);
             return new PagedList<Entity>(result, result.PageNumber, result.PageSize, result.TotalItems);
         }
 
-        public void Remove(Entity entity) => _typeService.Remove(entity.Id);
+        public void Remove(Entity entity) => _typeRepository.Remove(entity.Id);
 
         private void ButtonUseFilter_Click(object sender, EventArgs e)
             => UsedFilter();

@@ -52,9 +52,7 @@
     <Compile Update="Controls\PageTabControls\CompanyListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Controls\PageTabControls\TypeProductListView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="Controls\PageTabControls\TypeProductListView.cs" />
     <Compile Update="Controls\PageTabControls\ProductListView.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -84,14 +84,14 @@ namespace TestTask.Test.ImportTest
         {
             //Arrange
             var dbContext = new TestDbContextFactory().Create();
-            var companyService = new CompanyRepository(dbContext);
-            var categoryService = new CategoryRepository(dbContext);
-            var typeService = new ProductTypeRepository(dbContext);
-            var productService = new ProductRepository(dbContext);
+            var companyRepository = new CompanyRepository(dbContext);
+            var categoryRepository = new CategoryRepository(dbContext);
+            var typeRepository = new ProductTypeRepository(dbContext);
+            var productRepository = new ProductRepository(dbContext);
 
-            companyService.AddRange(companies);
-            categoryService.AddRange(categories);
-            typeService.AddRange(types);
+            companyRepository.AddRange(companies);
+            categoryRepository.AddRange(categories);
+            typeRepository.AddRange(types);
 
             var memoryStream = new MemoryStream(Resources.DataIsAllFilledIn);
             var productImporter = new ProductImporter();
@@ -101,7 +101,7 @@ namespace TestTask.Test.ImportTest
             {
                 if (item.Success)
                 {
-                    productService.Upsert(item.Value);
+                    productRepository.Upsert(item.Value);
                 }
             }
 
