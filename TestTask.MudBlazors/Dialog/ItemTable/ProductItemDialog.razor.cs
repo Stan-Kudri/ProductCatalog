@@ -49,8 +49,9 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
                 throw new Exception("The ID value can't be less than zero.");
             }
 
-            isAddItem = false;
+            isAddItem = isDisabledType = false;
             oldProduct = ProductRepository.GetItem((int)Id);
+            selectTypes = ProductTypeRepository.GetListTypesByCategory(oldProduct.CategoryId);
             productModel = oldProduct.GetProductModel();
         }
 
@@ -118,7 +119,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
         {
             productModel.Category = item;
 
-            if (productModel.Category == null)
+            if (productModel.Category == null || productModel.Category.Types == null)
             {
                 isDisabledType = true;
                 return;
