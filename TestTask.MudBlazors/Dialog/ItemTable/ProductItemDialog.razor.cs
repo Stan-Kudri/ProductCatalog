@@ -8,7 +8,7 @@ using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model.TableComponent;
 using TestTask.MudBlazors.Pages.Table.Model;
 
-namespace TestTask.MudBlazors.Pages.Table.Dialog
+namespace TestTask.MudBlazors.Dialog.ItemTable
 {
     public partial class ProductItemDialog : IItemDialog
     {

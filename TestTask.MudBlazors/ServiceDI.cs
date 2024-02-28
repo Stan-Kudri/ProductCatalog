@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using MudBlazor.Services;
+using TestTask.Core;
 using TestTask.Core.Export.SheetFillers;
 using TestTask.Core.Import;
 using TestTask.Core.Import.Importers;
@@ -12,6 +13,7 @@ using TestTask.Core.Models.Types;
 using TestTask.Core.Models.Users;
 using TestTask.Migrations;
 using TestTask.MudBlazors.Authenticate;
+using TestTask.MudBlazors.Messages;
 using TestTask.MudBlazors.Pages.Table.Model;
 using TestTask.MudBlazors.Pages.Table.PageTableProvider;
 using TestTask.MudBlazors.Pages.Table.PageTableView;
@@ -38,6 +40,7 @@ namespace TestTask.MudBlazors
             });
             builder.Services.AddSingleton(e => new DbContextFactory(ConnectionName));
             builder.Services.AddScoped(e => e.GetRequiredService<DbContextFactory>().Create());
+            builder.Services.AddScoped<IMessageBox, MessageDialog>();
             builder.Services.AddScoped<UserService>();
             builder.Services.AddScoped<CompanyRepository>();
             builder.Services.AddScoped<ProductRepository>();
