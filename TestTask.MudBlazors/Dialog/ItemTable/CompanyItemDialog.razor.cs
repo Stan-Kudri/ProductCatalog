@@ -1,23 +1,24 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using TestTask.Core.Models.Categories;
+using TestTask.Core;
+using TestTask.Core.Models.Companies;
 using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model.TableComponent;
 using TestTask.MudBlazors.Pages.Table.Model;
 
-namespace TestTask.MudBlazors.Pages.Table.Dialog
+namespace TestTask.MudBlazors.Dialog.ItemTable
 {
-    public partial class CategoryItemDialog : IItemDialog
+    public partial class CompanyItemDialog : IItemDialog
     {
         [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
-        [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
-        [Inject] private IDialogService DialogService { get; set; } = null!;
+        [Inject] private CompanyRepository CompanyRepository { get; set; } = null!;
+        [Inject] private IMessageBox MessageDialog { get; set; } = null!;
 
-        private CategoryModel categoryModel { get; set; } = new CategoryModel();
+        private CompanyModel companyModel { get; set; } = new CompanyModel();
         private string[] errors = { };
         private bool isAddItem = true;
 
-        private Category? oldItem;
+        private Company? oldCompany;
 
         [Parameter] public int? Id { get; set; } = null;
 
@@ -35,13 +36,12 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
             }
 
             isAddItem = false;
-            oldItem = CategoryRepository.GetCategory((int)Id);
-            categoryModel = oldItem.GetCategoryModel();
+            oldCompany = CompanyRepository.GetCompany((int)Id);
+            companyModel = oldCompany.GetCompanyModel();
         }
 
         private void Close() => MudDialog.Cancel();
 
-        //Methods for add item company
         private async Task Add()
         {
             if (errors.Length != 0)
@@ -51,25 +51,24 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
 
             if (!ValidateFields(out var message))
             {
-                await ShowMessageWarning(message);
+                await MessageDialog.ShowWarning(message);
                 return;
             }
 
-            if (!CategoryRepository.IsFreeName(categoryModel.Name))
+            if (!CompanyRepository.IsFreeName(companyModel.Name))
             {
-                await ShowMessageWarning("Name is not free.");
+                await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
-            var item = categoryModel.GetCategory();
-            CategoryRepository.Add(item);
+            var company = companyModel.GetCompany();
+            CompanyRepository.Add(company);
 
             MudDialog.Close();
         }
 
-        private void ClearData() => categoryModel.ClearData();
+        private void ClearData() => companyModel.ClearData();
 
-        //Methods for edit item company
         private async Task Updata()
         {
             if (errors.Length != 0)
@@ -79,30 +78,27 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
 
             if (!ValidateFields(out var message))
             {
-                await ShowMessageWarning(message);
+                await MessageDialog.ShowWarning(message);
                 return;
             }
 
-            var item = categoryModel.GetModifyCategory(oldItem.Id);
+            var company = companyModel.GetModifyCompany(oldCompany.Id);
 
-            if (!CategoryRepository.IsFreeNameItemUpsert(item))
+            if (!CompanyRepository.IsFreeNameItemUpsert(company))
             {
-                await ShowMessageWarning("Name is not free.");
+                await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
-            if (!oldItem.Equals(item))
+            if (!oldCompany.Equals(company))
             {
-                CategoryRepository.Updata(item);
+                CompanyRepository.Updata(company);
             }
 
             MudDialog.Close();
         }
 
-        private void RecoverPastData() => categoryModel = oldItem.GetCategoryModel();
-
-        private async Task ShowMessageWarning(string message)
-            => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
+        private void RecoverPastData() => companyModel = oldCompany.GetCompanyModel();
 
         private IEnumerable<string> ValidFormatText(string str)
         {
@@ -116,9 +112,15 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
         {
             message = string.Empty;
 
-            if (string.IsNullOrWhiteSpace(categoryModel.Name))
+            if (companyModel.Name == null || companyModel.Name == string.Empty)
             {
                 message = "Name is required.";
+                return false;
+            }
+
+            if (companyModel.DateCreation == null)
+            {
+                message = "The company creation date has not been selected.";
                 return false;
             }
 

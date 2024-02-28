@@ -25,11 +25,11 @@ namespace TestTask.Forms.Type
         private Category SelectedCategory =>
             cmbListCategory.SelectedValue != null ? (Category)cmbListCategory.SelectedValue : throw new Exception("Wrong combo box format");
 
-        protected virtual void BtnSave_Click(object sender, EventArgs e)
+        protected virtual async void BtnSave_Click(object sender, EventArgs e)
         {
             if (!IsDataFilled(out var message))
             {
-                _messageBox.ShowInfo(message);
+                await _messageBox.ShowInfo(message);
                 return;
             }
 

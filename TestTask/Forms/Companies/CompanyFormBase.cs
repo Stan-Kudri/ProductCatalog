@@ -24,25 +24,25 @@ namespace TestTask.Forms.Companies
             _companyRepository = serviceProvider.GetRequiredService<CompanyRepository>();
         }
 
-        protected virtual void BtnSave_Click(object sender, EventArgs e)
+        protected virtual async void BtnSave_Click(object sender, EventArgs e)
         {
             var nameCompany = tbNameCompany.Text;
 
             if (nameCompany == string.Empty)
             {
-                _messageBox.ShowWarning("Fill in the field Name");
+                await _messageBox.ShowWarning("Fill in the field Name");
                 return;
             }
 
             if (!_companyRepository.IsFreeName(nameCompany))
             {
-                _messageBox.ShowWarning("Name company is not free.");
+                await _messageBox.ShowWarning("Name company is not free.");
                 return;
             }
 
             if (tbContry.Text == string.Empty)
             {
-                _messageBox.ShowWarning("Enter the company's country.");
+                await _messageBox.ShowWarning("Enter the company's country.");
             }
 
             DialogResult = DialogResult.OK;

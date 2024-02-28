@@ -16,11 +16,11 @@ namespace TestTask.ChildForms.Import
             _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
         }
 
-        private void BtnImportData_Click(object sender, EventArgs e)
+        private async void BtnImportData_Click(object sender, EventArgs e)
         {
             if (!cbCompany.Checked && !cbProduct.Checked && !cbCategory.Checked && !cbType.Checked)
             {
-                _messageBox.ShowWarning("The tables to load are not selected.");
+                await _messageBox.ShowWarning("The tables to load are not selected.");
                 return;
             }
 

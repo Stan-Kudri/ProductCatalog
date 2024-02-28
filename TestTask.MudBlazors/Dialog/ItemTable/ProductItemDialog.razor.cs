@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using TestTask.Core;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
@@ -8,7 +9,7 @@ using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model.TableComponent;
 using TestTask.MudBlazors.Pages.Table.Model;
 
-namespace TestTask.MudBlazors.Pages.Table.Dialog
+namespace TestTask.MudBlazors.Dialog.ItemTable
 {
     public partial class ProductItemDialog : IItemDialog
     {
@@ -17,7 +18,7 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
         [Inject] private CompanyRepository CompanyRepository { get; set; } = null!;
         [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
         [Inject] private ProductTypeRepository ProductTypeRepository { get; set; } = null!;
-        [Inject] private IDialogService DialogService { get; set; } = null!;
+        [Inject] private IMessageBox MessageDialog { get; set; } = null!;
 
         private ProductModel productModel { get; set; } = new ProductModel();
         private string[] errors = { };
@@ -48,14 +49,14 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
                 throw new Exception("The ID value can't be less than zero.");
             }
 
-            isAddItem = false;
+            isAddItem = isDisabledType = false;
             oldProduct = ProductRepository.GetItem((int)Id);
+            selectTypes = ProductTypeRepository.GetListTypesByCategory(oldProduct.CategoryId);
             productModel = oldProduct.GetProductModel();
         }
 
         private void Close() => MudDialog.Cancel();
 
-        //Methods for add item type product
         private async Task Add()
         {
             if (errors.Length != 0)
@@ -65,13 +66,13 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
 
             if (!ValidateFields(out var message))
             {
-                await ShowMessageWarning(message);
+                await MessageDialog.ShowWarning(message);
                 return;
             }
 
             if (!ProductRepository.IsFreeName(productModel.Name))
             {
-                await ShowMessageWarning("Name is not free.");
+                await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
@@ -83,7 +84,6 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
 
         private void ClearData() => productModel.ClearData();
 
-        //Methods for edit item type product
         private async Task Updata()
         {
             if (errors.Length != 0)
@@ -93,7 +93,7 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
 
             if (!ValidateFields(out var message))
             {
-                await ShowMessageWarning(message);
+                await MessageDialog.ShowWarning(message);
                 return;
             }
 
@@ -101,7 +101,7 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
 
             if (!ProductRepository.IsFreeNameItemUpsert(product))
             {
-                await ShowMessageWarning("Name is not free.");
+                await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
@@ -119,7 +119,7 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
         {
             productModel.Category = item;
 
-            if (productModel.Category == null)
+            if (productModel.Category == null || productModel.Category.Types == null)
             {
                 isDisabledType = true;
                 return;
@@ -128,9 +128,6 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
             isDisabledType = false;
             selectTypes = ProductTypeRepository.GetListTypesByCategory(productModel.Category.Id);
         }
-
-        private async Task ShowMessageWarning(string message)
-            => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
 
         private IEnumerable<string> ValidFormatText(string str)
         {

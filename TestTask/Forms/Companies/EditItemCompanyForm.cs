@@ -18,23 +18,23 @@ namespace TestTask.Forms.Companies
 
         public void Initialize(Company company) => _oldCompany = company;
 
-        protected override void BtnSave_Click(object sender, EventArgs e)
+        protected override async void BtnSave_Click(object sender, EventArgs e)
         {
             if (tbNameCompany.Text == string.Empty)
             {
-                _messageBox.ShowWarning("Fill in the field Name");
+                await _messageBox.ShowWarning("Fill in the field Name");
                 return;
             }
 
             if (tbContry.Text == string.Empty)
             {
-                _messageBox.ShowWarning("Enter the company's country.");
+                await _messageBox.ShowWarning("Enter the company's country.");
             }
 
             _editCompany = GetCompanyModel().ToCompany(_oldCompany.Id);
             if (!_oldCompany.Equals(_editCompany))
             {
-                _messageBox.ShowInfo("The company has not been modified.");
+                await _messageBox.ShowInfo("The company has not been modified.");
                 DialogResult = DialogResult.Cancel;
             }
 

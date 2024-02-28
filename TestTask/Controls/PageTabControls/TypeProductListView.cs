@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestTask.BindingItem.Pages;
 using TestTask.BindingItem.Pages.Sort;
@@ -57,11 +58,11 @@ namespace TestTask.Controls.PageTabControls
 
         public void LoadData() => listView.LoadData();
 
-        public bool Add()
+        public async Task<bool> Add()
         {
             var listCategory = _categoryRepository.GetQueryableAll();
 
-            if (!_messageByTable.ShouldNotBeEmpty(listCategory))
+            if (!await _messageByTable.ShouldNotBeEmpty(listCategory))
             {
                 return false;
             }

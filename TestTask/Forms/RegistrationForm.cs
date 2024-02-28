@@ -24,11 +24,11 @@ namespace TestTask.Forms
         private void RegistrationForm_FormClosing(object sender, FormClosingEventArgs e)
             => DialogResult = DialogResult.Cancel;
 
-        private void BtnSignUpNow_Click(object sender, System.EventArgs e)
+        private async void BtnSignUpNow_Click(object sender, System.EventArgs e)
         {
             if (!ValidateData(out var message, out var user))
             {
-                _messageBox.ShowInfo(message);
+                await _messageBox.ShowInfo(message);
                 return;
             }
 

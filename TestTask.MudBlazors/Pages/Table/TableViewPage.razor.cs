@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using TestTask.Core;
 using TestTask.Core.Import;
 using TestTask.Core.Models;
 using TestTask.Core.Models.Page;
@@ -18,6 +19,7 @@ namespace TestTask.MudBlazors.Pages.Table
     {
         [Inject] private ISnackbar Snackbar { get; set; } = null!;
         [Inject] private ExcelImporter<T> ExcelImport { get; set; } = null!;
+        [Inject] private IMessageBox MessageDialog { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
         [Inject] private ITableDetailProvider<T> TableProvider { get; set; } = null!;
         [Inject] private ISortEntity<T> SortField { get; set; } = null!;
@@ -65,13 +67,11 @@ namespace TestTask.MudBlazors.Pages.Table
         {
             if (selectedItems.Count <= NoItemsSelected)
             {
-                await ShowMessageWarning(MessageNotSelectedItem);
+                await MessageDialog.ShowWarning(MessageNotSelectedItem);
                 return;
             }
 
-            var result = await DialogService.DialogYesNoShowAsync("Warning", "Delete selecte items?");
-
-            if (result != null && result.Canceled)
+            if (!await MessageDialog.ShowQuestion("Delete selecte items?"))
             {
                 return;
             }
@@ -87,9 +87,7 @@ namespace TestTask.MudBlazors.Pages.Table
 
         private async Task Remove(int id)
         {
-            var result = await DialogService.DialogYesNoShowAsync("Warning", "Delete items?");
-
-            if (result != null && result.Canceled)
+            if (!await MessageDialog.ShowQuestion("Delete items?"))
             {
                 return;
             }
@@ -150,8 +148,5 @@ namespace TestTask.MudBlazors.Pages.Table
             items = result.Items;
             StateHasChanged();
         }
-
-        private async Task ShowMessageWarning(string message)
-            => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
     }
 }

@@ -24,18 +24,18 @@ namespace TestTask.Forms.Type
             _oldItem = oldItem;
         }
 
-        protected override void BtnSave_Click(object sender, EventArgs e)
+        protected override async void BtnSave_Click(object sender, EventArgs e)
         {
             if (!IsDataFilled(out var message))
             {
-                _messageBox.ShowInfo(message);
+                await _messageBox.ShowInfo(message);
                 return;
             }
 
             _editItem = GetTypeProductModel().ToProductType(_oldItem.Id);
             if (!_oldItem.Equals(_editItem))
             {
-                _messageBox.ShowInfo("The product has not been modified.");
+                await _messageBox.ShowInfo("The product has not been modified.");
                 DialogResult = DialogResult.Cancel;
             }
 

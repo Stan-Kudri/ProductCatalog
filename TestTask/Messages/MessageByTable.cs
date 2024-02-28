@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using TestTask.Core;
 using TestTask.Core.Models;
 
@@ -16,11 +17,11 @@ namespace TestTask.Messages
             _entityName = typeof(TName).Name;
         }
 
-        public bool ShouldNotBeEmpty<T>(IQueryable<T> items)
+        public async Task<bool> ShouldNotBeEmpty<T>(IQueryable<T> items)
         {
             if (items.Count() == 0)
             {
-                _messageBox.ShowWarning($"No {typeof(T).Name} was found that can be linked to the {_entityName}.");
+                await _messageBox.ShowWarning($"No {typeof(T).Name} was found that can be linked to the {_entityName}.");
                 return false;
             }
 

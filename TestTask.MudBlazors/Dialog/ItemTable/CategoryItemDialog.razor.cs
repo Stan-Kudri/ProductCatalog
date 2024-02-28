@@ -1,34 +1,29 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using TestTask.Core;
 using TestTask.Core.Models.Categories;
-using TestTask.Core.Models.Types;
 using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model.TableComponent;
 using TestTask.MudBlazors.Pages.Table.Model;
 
-namespace TestTask.MudBlazors.Pages.Table.Dialog
+namespace TestTask.MudBlazors.Dialog.ItemTable
 {
-    public partial class ProductTypeItemDialog : IItemDialog
+    public partial class CategoryItemDialog : IItemDialog
     {
         [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
-        [Inject] private ProductTypeRepository ProductTypeRepository { get; set; } = null!;
         [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
-        [Inject] private IDialogService DialogService { get; set; } = null!;
+        [Inject] private IMessageBox MessageDialog { get; set; } = null!;
 
-        private TypeProductModel typeProductModel { get; set; } = new TypeProductModel();
+        private CategoryModel categoryModel { get; set; } = new CategoryModel();
         private string[] errors = { };
         private bool isAddItem = true;
 
-        private ProductType? oldTypeProduct;
-
-        private List<Category> selectCategories = new List<Category>();
+        private Category? oldItem;
 
         [Parameter] public int? Id { get; set; } = null;
 
         protected override void OnInitialized()
         {
-            selectCategories = CategoryRepository.GetAll();
-
             if (Id == null)
             {
                 isAddItem = true;
@@ -41,13 +36,12 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
             }
 
             isAddItem = false;
-            oldTypeProduct = ProductTypeRepository.GetItem((int)Id);
-            typeProductModel = oldTypeProduct.GetTypeProductModel();
+            oldItem = CategoryRepository.GetCategory((int)Id);
+            categoryModel = oldItem.GetCategoryModel();
         }
 
         private void Close() => MudDialog.Cancel();
 
-        //Methods for add item type product
         private async Task Add()
         {
             if (errors.Length != 0)
@@ -57,25 +51,24 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
 
             if (!ValidateFields(out var message))
             {
-                ShowMessageWarning(message);
+                await MessageDialog.ShowWarning(message);
                 return;
             }
 
-            if (!ProductTypeRepository.IsFreeName(typeProductModel.Name))
+            if (!CategoryRepository.IsFreeName(categoryModel.Name))
             {
-                ShowMessageWarning("Name is not free.");
+                await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
-            var typeProduct = typeProductModel.GetProductType();
-            ProductTypeRepository.Add(typeProduct);
+            var item = categoryModel.GetCategory();
+            CategoryRepository.Add(item);
 
             MudDialog.Close();
         }
 
-        private void ClearData() => typeProductModel.ClearData();
+        private void ClearData() => categoryModel.ClearData();
 
-        //Methods for edit item type product
         private async Task Updata()
         {
             if (errors.Length != 0)
@@ -85,27 +78,27 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
 
             if (!ValidateFields(out var message))
             {
-                ShowMessageWarning(message);
+                await MessageDialog.ShowWarning(message);
                 return;
             }
 
-            var typeProduct = typeProductModel.GetModifyType(oldTypeProduct.Id);
+            var item = categoryModel.GetModifyCategory(oldItem.Id);
 
-            if (!ProductTypeRepository.IsFreeNameItemUpsert(typeProduct))
+            if (!CategoryRepository.IsFreeNameItemUpsert(item))
             {
-                ShowMessageWarning("Name is not free.");
+                await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
-            if (!oldTypeProduct.Equals(typeProduct))
+            if (!oldItem.Equals(item))
             {
-                ProductTypeRepository.Updata(typeProduct);
+                CategoryRepository.Updata(item);
             }
 
             MudDialog.Close();
         }
 
-        private void RecoverPastData() => typeProductModel = oldTypeProduct.GetTypeProductModel();
+        private void RecoverPastData() => categoryModel = oldItem.GetCategoryModel();
 
         private IEnumerable<string> ValidFormatText(string str)
         {
@@ -115,22 +108,13 @@ namespace TestTask.MudBlazors.Pages.Table.Dialog
             }
         }
 
-        private async Task ShowMessageWarning(string message)
-            => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
-
         private bool ValidateFields(out string message)
         {
             message = string.Empty;
 
-            if (typeProductModel.Name == null || typeProductModel.Name == string.Empty)
+            if (string.IsNullOrWhiteSpace(categoryModel.Name))
             {
                 message = "Name is required.";
-                return false;
-            }
-
-            if (typeProductModel.Category == null)
-            {
-                message = "Category not selected.";
                 return false;
             }
 

@@ -14,18 +14,18 @@ namespace TestTask.Forms.Categories
 
         public void Initialize(Category oldItem) => _oldItem = oldItem;
 
-        protected override void BtnSave_Click(object sender, EventArgs e)
+        protected override async void BtnSave_Click(object sender, EventArgs e)
         {
             if (!IsDataFilled(out var message))
             {
-                _messageBox.ShowInfo(message);
+                await _messageBox.ShowInfo(message);
                 return;
             }
 
             _editItem = GetItemModel().ToCategory(_oldItem.Id);
             if (!_oldItem.Equals(_editItem))
             {
-                _messageBox.ShowInfo("The category has not been modified.");
+                await _messageBox.ShowInfo("The category has not been modified.");
                 DialogResult = DialogResult.Cancel;
             }
 

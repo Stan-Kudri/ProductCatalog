@@ -31,11 +31,11 @@ namespace TestTask.Forms.Categories
 
         protected void BtnClear_Click(object sender, EventArgs e) => SetDefaultValueData();
 
-        protected virtual void BtnSave_Click(object sender, EventArgs e)
+        protected virtual async void BtnSave_Click(object sender, EventArgs e)
         {
             if (!IsDataFilled(out var message))
             {
-                _messageBox.ShowWarning(message);
+                await _messageBox.ShowWarning(message);
                 return;
             }
 

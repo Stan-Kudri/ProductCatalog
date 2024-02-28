@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestTask.BindingItem.Pages;
 using TestTask.BindingItem.Pages.Sort;
@@ -49,20 +50,20 @@ namespace TestTask.Controls.PageTabControls
 
         public void LoadData() => listView.LoadData();
 
-        public bool Add()
+        public Task<bool> Add()
         {
             using (var addForm = _serviceProvider.GetRequiredService<AddItemCompanyForm>())
             {
                 if (addForm.ShowDialog() != DialogResult.OK)
                 {
-                    return false;
+                    return Task.FromResult(false);
                 }
 
                 var item = addForm.GetCompanyModel().ToCompany();
                 _companyRepository.Add(item);
             }
 
-            return true;
+            return Task.FromResult(true);
         }
 
         public bool Edit(Entity entity)

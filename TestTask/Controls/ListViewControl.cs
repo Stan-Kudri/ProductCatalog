@@ -51,21 +51,21 @@ namespace TestTask.Controls
 
         public void Closing() => Page.ChangeCurrentPage -= LoadData;
 
-        private void BtnAddItem_Click(object sender, EventArgs e)
+        private async void BtnAddItem_Click(object sender, EventArgs e)
         {
-            if (_provider.Add())
+            if (await _provider.Add())
             {
                 LoadData();
             }
         }
 
-        private void BtnEditItem_Click(object sender, EventArgs e)
+        private async void BtnEditItem_Click(object sender, EventArgs e)
         {
             var indexEditItem = listView.SelectedIndices.Cast<int>();
 
             if (indexEditItem.Count() != 1)
             {
-                _messageBox.ShowWarning("Select one item.");
+                await _messageBox.ShowWarning("Select one item.");
                 return;
             }
 
@@ -79,17 +79,17 @@ namespace TestTask.Controls
             }
         }
 
-        private void BtnDeleteItems_Click(object sender, EventArgs e)
+        private async void BtnDeleteItems_Click(object sender, EventArgs e)
         {
             var selectedRowIndex = listView.SelectedIndices;
 
             if (selectedRowIndex.Count == NoItemsSelected)
             {
-                _messageBox.ShowWarning(MessageNotSelectedItem);
+                await _messageBox.ShowWarning(MessageNotSelectedItem);
                 return;
             }
 
-            if (!_messageBox.ShowQuestion("Delete selected items?"))
+            if (!await _messageBox.ShowQuestion("Delete selected items?"))
             {
                 foreach (ListViewItem item in listView.Items)
                 {
