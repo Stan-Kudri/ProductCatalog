@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using TestTask.Core;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Types;
 using TestTask.MudBlazors.Extension;
@@ -13,7 +14,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
         [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
         [Inject] private ProductTypeRepository ProductTypeRepository { get; set; } = null!;
         [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
-        [Inject] private IDialogService DialogService { get; set; } = null!;
+        [Inject] private IMessageBox MessageDialog { get; set; } = null!;
 
         private TypeProductModel typeProductModel { get; set; } = new TypeProductModel();
         private string[] errors = { };
@@ -47,7 +48,6 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
         private void Close() => MudDialog.Cancel();
 
-        //Methods for add item type product
         private async Task Add()
         {
             if (errors.Length != 0)
@@ -57,13 +57,13 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
             if (!ValidateFields(out var message))
             {
-                ShowMessageWarning(message);
+                await MessageDialog.ShowWarning(message);
                 return;
             }
 
             if (!ProductTypeRepository.IsFreeName(typeProductModel.Name))
             {
-                ShowMessageWarning("Name is not free.");
+                await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
@@ -75,7 +75,6 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
         private void ClearData() => typeProductModel.ClearData();
 
-        //Methods for edit item type product
         private async Task Updata()
         {
             if (errors.Length != 0)
@@ -85,7 +84,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
             if (!ValidateFields(out var message))
             {
-                ShowMessageWarning(message);
+                await MessageDialog.ShowWarning(message);
                 return;
             }
 
@@ -93,7 +92,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
             if (!ProductTypeRepository.IsFreeNameItemUpsert(typeProduct))
             {
-                ShowMessageWarning("Name is not free.");
+                await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
@@ -114,9 +113,6 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
                 yield return "Field is required.";
             }
         }
-
-        private async Task ShowMessageWarning(string message)
-            => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
 
         private bool ValidateFields(out string message)
         {

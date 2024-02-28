@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using TestTask.Core;
 using TestTask.Core.Models.Companies;
 using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model.TableComponent;
@@ -11,7 +12,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
     {
         [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
         [Inject] private CompanyRepository CompanyRepository { get; set; } = null!;
-        [Inject] private IDialogService DialogService { get; set; } = null!;
+        [Inject] private IMessageBox MessageDialog { get; set; } = null!;
 
         private CompanyModel companyModel { get; set; } = new CompanyModel();
         private string[] errors = { };
@@ -41,7 +42,6 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
         private void Close() => MudDialog.Cancel();
 
-        //Methods for add item company
         private async Task Add()
         {
             if (errors.Length != 0)
@@ -51,13 +51,13 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
             if (!ValidateFields(out var message))
             {
-                await ShowMessageWarning(message);
+                await MessageDialog.ShowWarning(message);
                 return;
             }
 
             if (!CompanyRepository.IsFreeName(companyModel.Name))
             {
-                await ShowMessageWarning("Name is not free.");
+                await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
@@ -69,7 +69,6 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
         private void ClearData() => companyModel.ClearData();
 
-        //Methods for edit item company
         private async Task Updata()
         {
             if (errors.Length != 0)
@@ -79,7 +78,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
             if (!ValidateFields(out var message))
             {
-                await ShowMessageWarning(message);
+                await MessageDialog.ShowWarning(message);
                 return;
             }
 
@@ -87,7 +86,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
             if (!CompanyRepository.IsFreeNameItemUpsert(company))
             {
-                await ShowMessageWarning("Name is not free.");
+                await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
@@ -108,9 +107,6 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
                 yield return "Field is required.";
             }
         }
-
-        private async Task ShowMessageWarning(string message)
-            => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
 
         private bool ValidateFields(out string message)
         {

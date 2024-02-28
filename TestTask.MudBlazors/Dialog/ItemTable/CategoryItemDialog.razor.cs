@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using TestTask.Core;
 using TestTask.Core.Models.Categories;
 using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model.TableComponent;
@@ -11,7 +12,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
     {
         [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
         [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
-        [Inject] private IDialogService DialogService { get; set; } = null!;
+        [Inject] private IMessageBox MessageDialog { get; set; } = null!;
 
         private CategoryModel categoryModel { get; set; } = new CategoryModel();
         private string[] errors = { };
@@ -41,7 +42,6 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
         private void Close() => MudDialog.Cancel();
 
-        //Methods for add item company
         private async Task Add()
         {
             if (errors.Length != 0)
@@ -51,13 +51,13 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
             if (!ValidateFields(out var message))
             {
-                await ShowMessageWarning(message);
+                await MessageDialog.ShowWarning(message);
                 return;
             }
 
             if (!CategoryRepository.IsFreeName(categoryModel.Name))
             {
-                await ShowMessageWarning("Name is not free.");
+                await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
@@ -69,7 +69,6 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
         private void ClearData() => categoryModel.ClearData();
 
-        //Methods for edit item company
         private async Task Updata()
         {
             if (errors.Length != 0)
@@ -79,7 +78,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
             if (!ValidateFields(out var message))
             {
-                await ShowMessageWarning(message);
+                await MessageDialog.ShowWarning(message);
                 return;
             }
 
@@ -87,7 +86,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
             if (!CategoryRepository.IsFreeNameItemUpsert(item))
             {
-                await ShowMessageWarning("Name is not free.");
+                await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
@@ -100,9 +99,6 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
         }
 
         private void RecoverPastData() => categoryModel = oldItem.GetCategoryModel();
-
-        private async Task ShowMessageWarning(string message)
-            => await DialogService.ShowMessageBox("Warning", message, yesText: "Ok");
 
         private IEnumerable<string> ValidFormatText(string str)
         {

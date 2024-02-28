@@ -19,7 +19,7 @@ namespace TestTask.MudBlazors.Pages.Table
     {
         [Inject] private ISnackbar Snackbar { get; set; } = null!;
         [Inject] private ExcelImporter<T> ExcelImport { get; set; } = null!;
-        [Inject] private IMessageBox MessageBox { get; set; } = null!;
+        [Inject] private IMessageBox MessageDialog { get; set; } = null!;
         [Inject] private IDialogService DialogService { get; set; } = null!;
         [Inject] private ITableDetailProvider<T> TableProvider { get; set; } = null!;
         [Inject] private ISortEntity<T> SortField { get; set; } = null!;
@@ -67,11 +67,11 @@ namespace TestTask.MudBlazors.Pages.Table
         {
             if (selectedItems.Count <= NoItemsSelected)
             {
-                await MessageBox.ShowWarning(MessageNotSelectedItem);
+                await MessageDialog.ShowWarning(MessageNotSelectedItem);
                 return;
             }
 
-            if (!await MessageBox.ShowQuestion("Delete selecte items?"))
+            if (!await MessageDialog.ShowQuestion("Delete selecte items?"))
             {
                 return;
             }
@@ -87,7 +87,7 @@ namespace TestTask.MudBlazors.Pages.Table
 
         private async Task Remove(int id)
         {
-            if (!await MessageBox.ShowQuestion("Delete items?"))
+            if (!await MessageDialog.ShowQuestion("Delete items?"))
             {
                 return;
             }
