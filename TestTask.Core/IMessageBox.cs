@@ -1,15 +1,17 @@
-﻿namespace TestTask.Core
+﻿using System.Threading.Tasks;
+
+namespace TestTask.Core
 {
     public interface IMessageBox
     {
-        void ShowInfo(string message);
+        Task ShowInfo(string message);
 
-        void ShowWarning(string message);
+        Task ShowWarning(string message);
 
-        void ShowWarning(string message, string title);
+        Task ShowWarning(string message, string title);
 
-        void ShowError(string message);
+        Task ShowError(string message);
 
-        bool ShowQuestion(string message);
+        Task<bool> ShowQuestion(string message);
     }
 }

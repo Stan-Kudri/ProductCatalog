@@ -1,18 +1,36 @@
-﻿using System.Windows.Forms;
+﻿using System.Threading.Tasks;
+using System.Windows.Forms;
 using TestTask.Core;
 
 namespace TestTask.Messages
 {
     public class MessageBoxShow : IMessageBox
     {
-        public void ShowInfo(string message) => MessageBox.Show(message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        public Task ShowInfo(string message)
+        {
+            MessageBox.Show(message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return Task.CompletedTask;
+        }
 
-        public void ShowWarning(string message) => MessageBox.Show(message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        public Task ShowWarning(string message)
+        {
+            MessageBox.Show(message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return Task.CompletedTask;
+        }
 
-        public void ShowWarning(string message, string caption) => MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        public Task ShowWarning(string message, string caption)
+        {
+            MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return Task.CompletedTask;
+        }
 
-        public void ShowError(string message) => MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        public Task ShowError(string message)
+        {
+            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return Task.CompletedTask;
+        }
 
-        public bool ShowQuestion(string message) => MessageBox.Show(message, "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+        public Task<bool> ShowQuestion(string message)
+            => Task.FromResult(MessageBox.Show(message, "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes);
     }
 }

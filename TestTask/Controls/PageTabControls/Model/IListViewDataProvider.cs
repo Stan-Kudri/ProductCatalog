@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestTask.Core.Models;
 using TestTask.Core.Models.Page;
@@ -17,6 +18,6 @@ namespace TestTask.Controls.PageTabControls.Model
 
         bool Edit(Entity entity);
 
-        bool Add();
+        Task<bool> Add();
     }
 }

@@ -61,7 +61,7 @@ namespace TestTask.Forms
         private void TableForm_FormClosing(object sender, FormClosingEventArgs e)
             => DialogResult = DialogResult.Cancel;
 
-        private void TsmImportFromExcel_Click(object sender, EventArgs e)
+        private async void TsmImportFromExcel_Click(object sender, EventArgs e)
         {
             var loadTable = new Dictionary<string, bool>()
             {
@@ -107,7 +107,7 @@ namespace TestTask.Forms
 
                     if (!companyRead.IsNoErrorLine(out var message))
                     {
-                        _messageBox.ShowWarning(message, Company);
+                        await _messageBox.ShowWarning(message, Company);
                     }
                 }
 
@@ -125,7 +125,7 @@ namespace TestTask.Forms
 
                     if (!categoryRead.IsNoErrorLine(out var message))
                     {
-                        _messageBox.ShowWarning(message, Category);
+                        await _messageBox.ShowWarning(message, Category);
                     }
                 }
 
@@ -143,7 +143,7 @@ namespace TestTask.Forms
 
                     if (!typeRead.IsNoErrorLine(out var message))
                     {
-                        _messageBox.ShowWarning(message, Category);
+                        await _messageBox.ShowWarning(message, Category);
                     }
                 }
 
@@ -161,7 +161,7 @@ namespace TestTask.Forms
 
                     if (!productRead.IsNoErrorLine(out var message))
                     {
-                        _messageBox.ShowWarning(message, Product);
+                        await _messageBox.ShowWarning(message, Product);
                     }
                 }
             }

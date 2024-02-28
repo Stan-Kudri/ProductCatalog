@@ -37,11 +37,11 @@ namespace TestTask.Forms
             }
         }
 
-        private void BtnSignIn_Click(object sender, EventArgs e)
+        private async void BtnSignIn_Click(object sender, EventArgs e)
         {
             if (!ValidateData(out var message, out var user))
             {
-                _messageBox.ShowInfo(message);
+                await _messageBox.ShowInfo(message);
                 return;
             }
 
