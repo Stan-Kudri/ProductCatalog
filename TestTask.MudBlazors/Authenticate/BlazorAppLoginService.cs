@@ -60,6 +60,7 @@ namespace TestTask.MudBlazors.Authenticate
                 {
                     await LogoutAsync();
                 }
+
                 return claims;
             }
             return emptyResut;
@@ -72,8 +73,6 @@ namespace TestTask.MudBlazors.Authenticate
         }
 
         private async Task RemoveAuthDataFromStorageAsync()
-        {
-            await _localStorage.DeleteAsync(TokenKey);
-        }
+            => await _localStorage.DeleteAsync(TokenKey);
     }
 }
