@@ -1,6 +1,4 @@
 ﻿using TestTask.Core.Models.Categories;
-using TestTask.Core.Models.Products;
-using TestTask.Core.Models.Types;
 using TestTask.MudBlazors.Pages.Table.Model;
 
 namespace TestTask.MudBlazors.Pages.Table.PageTableProvider
@@ -9,13 +7,8 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableProvider
     {
         private readonly CategoryRepository _categoryRepository;
 
-        public CategoryDetailProvider
-            (CategoryRepository categoryRepository,
-            ProductRepository productRepository,
-            ProductTypeRepository productTypeRepository)
-        {
-            _categoryRepository = categoryRepository;
-        }
+        public CategoryDetailProvider(CategoryRepository categoryRepository)
+            => _categoryRepository = categoryRepository;
 
         public IReadOnlyList<ListTableColumn> Columns => new List<ListTableColumn>
         {

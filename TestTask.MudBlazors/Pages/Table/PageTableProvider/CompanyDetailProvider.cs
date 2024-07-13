@@ -1,5 +1,4 @@
 ﻿using TestTask.Core.Models.Companies;
-using TestTask.Core.Models.Products;
 using TestTask.MudBlazors.Pages.Table.Model;
 
 namespace TestTask.MudBlazors.Pages.Table.PageTableView
@@ -8,10 +7,8 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableView
     {
         private readonly CompanyRepository _companyRepository;
 
-        public CompanyDetailProvider(CompanyRepository companyRepository, ProductRepository productRepository)
-        {
-            _companyRepository = companyRepository;
-        }
+        public CompanyDetailProvider(CompanyRepository companyRepository)
+            => _companyRepository = companyRepository;
 
         public IReadOnlyList<ListTableColumn> Columns => new List<ListTableColumn>
         {

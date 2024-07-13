@@ -121,11 +121,11 @@ namespace TestTask.Controls
             }
         }
 
-        private void BtnLastPage_Click(object sender, EventArgs e)
+        private void BtnBackPage_Click(object sender, EventArgs e)
         {
-            if (_pagedList.HasNext)
+            if (_pagedList.HasPrevious)
             {
-                Page.Number = _pagedList.PageCount;
+                Page.Number--;
             }
         }
 
@@ -137,11 +137,11 @@ namespace TestTask.Controls
             }
         }
 
-        private void BtnBackPage_Click(object sender, EventArgs e)
+        private void BtnLastPage_Click(object sender, EventArgs e)
         {
-            if (_pagedList.HasPrevious)
+            if (_pagedList.HasNext)
             {
-                Page.Number--;
+                Page.Number = _pagedList.PageCount;
             }
         }
 
@@ -207,9 +207,9 @@ namespace TestTask.Controls
         {
             tlpPagedCompanies.Visible =
                 btnFirstPage.Enabled = btnFirstPage.Visible =
-                    btnLastPage.Enabled = btnLastPage.Visible =
+                    btnBackPage.Enabled = btnBackPage.Visible =
                         btnNextPage.Enabled = btnNextPage.Visible =
-                            btnBackPage.Enabled = btnBackPage.Visible =
+                            btnLastPage.Enabled = btnLastPage.Visible =
                                 tbCurrentPage.Enabled = tbCurrentPage.Visible =
                                     _pagedList.PageCount > 0 ? true : false;
         }

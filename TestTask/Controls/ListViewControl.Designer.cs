@@ -38,9 +38,9 @@
             tlpPagedCompanies = new System.Windows.Forms.TableLayoutPanel();
             tbCurrentPage = new System.Windows.Forms.TextBox();
             btnFirstPage = new MaterialSkin.Controls.MaterialButton();
-            btnLastPage = new MaterialSkin.Controls.MaterialButton();
-            btnNextPage = new MaterialSkin.Controls.MaterialButton();
             btnBackPage = new MaterialSkin.Controls.MaterialButton();
+            btnNextPage = new MaterialSkin.Controls.MaterialButton();
+            btnLastPage = new MaterialSkin.Controls.MaterialButton();
             cmbPageSize = new System.Windows.Forms.ComboBox();
             labelPageSize = new System.Windows.Forms.Label();
             toolTip = new System.Windows.Forms.ToolTip(components);
@@ -211,9 +211,9 @@
             tlpPagedCompanies.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             tlpPagedCompanies.Controls.Add(tbCurrentPage, 2, 0);
             tlpPagedCompanies.Controls.Add(btnFirstPage, 0, 0);
-            tlpPagedCompanies.Controls.Add(btnLastPage, 1, 0);
+            tlpPagedCompanies.Controls.Add(btnBackPage, 1, 0);
             tlpPagedCompanies.Controls.Add(btnNextPage, 3, 0);
-            tlpPagedCompanies.Controls.Add(btnBackPage, 4, 0);
+            tlpPagedCompanies.Controls.Add(btnLastPage, 4, 0);
             tlpPagedCompanies.Dock = System.Windows.Forms.DockStyle.Fill;
             tlpPagedCompanies.Location = new System.Drawing.Point(351, 3);
             tlpPagedCompanies.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -257,28 +257,28 @@
             btnFirstPage.UseVisualStyleBackColor = true;
             btnFirstPage.Click += BtnFirstPage_Click;
             // 
-            // btnLastPage
+            // btnBackPage
             // 
-            btnLastPage.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            btnLastPage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            btnLastPage.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            btnLastPage.Depth = 0;
-            btnLastPage.FlatAppearance.BorderSize = 0;
-            btnLastPage.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            btnLastPage.HighEmphasis = true;
-            btnLastPage.Icon = null;
-            btnLastPage.Location = new System.Drawing.Point(32, 6);
-            btnLastPage.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            btnLastPage.MouseState = MaterialSkin.MouseState.HOVER;
-            btnLastPage.Name = "btnLastPage";
-            btnLastPage.NoAccentTextColor = System.Drawing.Color.Empty;
-            btnLastPage.Size = new System.Drawing.Size(20, 26);
-            btnLastPage.TabIndex = 11;
-            btnLastPage.Text = "<";
-            btnLastPage.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            btnLastPage.UseAccentColor = false;
-            btnLastPage.UseVisualStyleBackColor = true;
-            btnLastPage.Click += BtnLastPage_Click;
+            btnBackPage.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnBackPage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnBackPage.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            btnBackPage.Depth = 0;
+            btnBackPage.FlatAppearance.BorderSize = 0;
+            btnBackPage.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            btnBackPage.HighEmphasis = true;
+            btnBackPage.Icon = null;
+            btnBackPage.Location = new System.Drawing.Point(32, 6);
+            btnBackPage.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btnBackPage.MouseState = MaterialSkin.MouseState.HOVER;
+            btnBackPage.Name = "btnBackPage";
+            btnBackPage.NoAccentTextColor = System.Drawing.Color.Empty;
+            btnBackPage.Size = new System.Drawing.Size(20, 26);
+            btnBackPage.TabIndex = 11;
+            btnBackPage.Text = "<";
+            btnBackPage.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            btnBackPage.UseAccentColor = false;
+            btnBackPage.UseVisualStyleBackColor = true;
+            btnBackPage.Click += BtnBackPage_Click;
             // 
             // btnNextPage
             // 
@@ -303,28 +303,28 @@
             btnNextPage.UseVisualStyleBackColor = true;
             btnNextPage.Click += BtnNextPage_Click;
             // 
-            // btnBackPage
+            // btnLastPage
             // 
-            btnBackPage.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            btnBackPage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            btnBackPage.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            btnBackPage.Depth = 0;
-            btnBackPage.FlatAppearance.BorderSize = 0;
-            btnBackPage.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            btnBackPage.HighEmphasis = true;
-            btnBackPage.Icon = null;
-            btnBackPage.Location = new System.Drawing.Point(140, 6);
-            btnBackPage.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            btnBackPage.MouseState = MaterialSkin.MouseState.HOVER;
-            btnBackPage.Name = "btnBackPage";
-            btnBackPage.NoAccentTextColor = System.Drawing.Color.Empty;
-            btnBackPage.Size = new System.Drawing.Size(21, 26);
-            btnBackPage.TabIndex = 13;
-            btnBackPage.Text = ">>";
-            btnBackPage.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            btnBackPage.UseAccentColor = false;
-            btnBackPage.UseVisualStyleBackColor = true;
-            btnBackPage.Click += BtnBackPage_Click;
+            btnLastPage.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            btnLastPage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnLastPage.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            btnLastPage.Depth = 0;
+            btnLastPage.FlatAppearance.BorderSize = 0;
+            btnLastPage.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            btnLastPage.HighEmphasis = true;
+            btnLastPage.Icon = null;
+            btnLastPage.Location = new System.Drawing.Point(140, 6);
+            btnLastPage.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btnLastPage.MouseState = MaterialSkin.MouseState.HOVER;
+            btnLastPage.Name = "btnLastPage";
+            btnLastPage.NoAccentTextColor = System.Drawing.Color.Empty;
+            btnLastPage.Size = new System.Drawing.Size(21, 26);
+            btnLastPage.TabIndex = 13;
+            btnLastPage.Text = ">>";
+            btnLastPage.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            btnLastPage.UseAccentColor = false;
+            btnLastPage.UseVisualStyleBackColor = true;
+            btnLastPage.Click += BtnLastPage_Click;
             // 
             // cmbPageSize
             // 
@@ -343,7 +343,7 @@
             // 
             labelPageSize.AutoSize = true;
             labelPageSize.Dock = System.Windows.Forms.DockStyle.Fill;
-            labelPageSize.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            labelPageSize.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             labelPageSize.Location = new System.Drawing.Point(3, 0);
             labelPageSize.Name = "labelPageSize";
             labelPageSize.Size = new System.Drawing.Size(98, 44);
@@ -388,9 +388,9 @@
         protected System.Windows.Forms.TextBox tbCurrentPage;
         protected System.Windows.Forms.ToolTip toolTip;
         protected MaterialSkin.Controls.MaterialButton btnFirstPage;
-        protected MaterialSkin.Controls.MaterialButton btnLastPage;
-        protected MaterialSkin.Controls.MaterialButton btnNextPage;
         protected MaterialSkin.Controls.MaterialButton btnBackPage;
+        protected MaterialSkin.Controls.MaterialButton btnNextPage;
+        protected MaterialSkin.Controls.MaterialButton btnLastPage;
         protected System.Windows.Forms.Label labelPageSize;
         private System.ComponentModel.IContainer components;
     }

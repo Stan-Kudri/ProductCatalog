@@ -82,7 +82,21 @@
          </RowTemplate>
 
         <PagerContent>
-            <MudTablePager HorizontalAlignment="HorizontalAlignment.Center" PageSizeOptions="pageModel.Items" />
+            <MudGrid>
+                <MudItem xs="12" sm="4">
+                    <MudSelect T="int" Label="Show on page" @bind-Value="pageModel.Size" SelectedValuesChanged="LoadData" Style="max-width:200px;" Class="ml-4">
+                        @foreach (var sizePage in pageModel.Items)
+                        {
+                            <MudSelectItem T="int" Value="@sizePage" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="12" sm="4" Style="align-self:center">
+                    <div style="text-align:center;">
+                        <MudPagination SelectedChanged="PageChanged" BoundaryCount="1" MiddleCount="3" Count="pagedList.PageCount" Class="align-self-center" />
+                    </div>
+                </MudItem>
+            </MudGrid>
         </PagerContent>
 
         </MudTable>

@@ -4,8 +4,10 @@ namespace TestTask.MudBlazors.Model
 {
     public class PageModel : Page
     {
+        private const int FirstSizePage = 15;
+
         public PageModel()
-            : base()
+            : base(StartNumberPage, FirstSizePage)
         {
         }
 
@@ -14,7 +16,7 @@ namespace TestTask.MudBlazors.Model
         {
         }
 
-        public int[] Items { get; set; } = new int[] { 15, 30, 60 };
+        public int[] Items { get; set; } = new int[] { FirstSizePage, 30, 60 };
 
         public Page GetPage() => new Page(_number, _size);
 
