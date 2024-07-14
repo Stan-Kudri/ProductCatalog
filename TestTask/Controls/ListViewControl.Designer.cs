@@ -338,6 +338,7 @@
             cmbPageSize.Name = "cmbPageSize";
             cmbPageSize.Size = new System.Drawing.Size(131, 23);
             cmbPageSize.TabIndex = 17;
+            cmbPageSize.SelectedIndexChanged += CmbPageSize_Changed;
             // 
             // labelPageSize
             // 
