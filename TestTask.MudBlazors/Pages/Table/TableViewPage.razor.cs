@@ -36,6 +36,7 @@ namespace TestTask.MudBlazors.Pages.Table
 
         private string? searchString = null;
         private PageModel pageModel = new PageModel();
+        private PagedList<T>? pagedList = null;
 
         private bool isAscending { get; set; } = true;
 
@@ -139,13 +140,19 @@ namespace TestTask.MudBlazors.Pages.Table
             LoadData();
         }
 
+        private void PageChanged(int i)
+        {
+            pageModel.Number = i;
+            LoadData();
+        }
+
         private void LoadData()
         {
             IQueryable<T> queriable = TableProvider.GetQueryableAll();
             queriable = TableProvider.GetSearchName(queriable, searchString);
             queriable = SortField.Apply(queriable, isAscending);
-            PagedList<T> result = queriable.GetPagedList(pageModel);
-            items = result.Items;
+            pagedList = queriable.GetPagedList(pageModel);
+            5items = pagedList.Items;
             StateHasChanged();
         }
     }

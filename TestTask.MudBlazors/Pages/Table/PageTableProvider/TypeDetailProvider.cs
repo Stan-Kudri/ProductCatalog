@@ -1,5 +1,4 @@
-﻿using TestTask.Core.Models.Products;
-using TestTask.Core.Models.Types;
+﻿using TestTask.Core.Models.Types;
 using TestTask.MudBlazors.Pages.Table.Model;
 
 namespace TestTask.MudBlazors.Pages.Table.PageTableProvider
@@ -8,10 +7,8 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableProvider
     {
         private readonly ProductTypeRepository _typeRepository;
 
-        public TypeDetailProvider(ProductTypeRepository productTypeRepository, ProductRepository productRepository)
-        {
-            _typeRepository = productTypeRepository;
-        }
+        public TypeDetailProvider(ProductTypeRepository productTypeRepository)
+            => _typeRepository = productTypeRepository;
 
         public IReadOnlyList<ListTableColumn> Columns => new List<ListTableColumn>
         {
