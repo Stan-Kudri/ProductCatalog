@@ -1,19 +1,45 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using TestTask.Core;
+using TestTask.Core.DataTable;
 using TestTask.Forms;
+using TestTask.Model;
 
 namespace TestTask.ChildForms.Import
 {
     public partial class ImportDatabaseForm : BaseForm
     {
-        IMessageBox _messageBox;
+        private readonly IMessageBox _messageBox;
+        private readonly SelectTableModel _selectTable = new SelectTableModel();
 
         public ImportDatabaseForm(IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
+        }
+
+        public HashSet<Tables> GetSelectTable()
+        {
+            if (cbCompany.Checked)
+            {
+                _selectTable.Add(Tables.Company);
+            }
+            if (cbProduct.Checked)
+            {
+                _selectTable.Add(Tables.Product);
+            }
+            if (cbCategory.Checked)
+            {
+                _selectTable.Add(Tables.TypeProduct);
+            }
+            if (cbType.Checked)
+            {
+                _selectTable.Add(Tables.Category);
+            }
+
+            return _selectTable.SelectTables;
         }
 
         private async void BtnImportData_Click(object sender, EventArgs e)
@@ -27,13 +53,5 @@ namespace TestTask.ChildForms.Import
             DialogResult = DialogResult.OK;
             Close();
         }
-
-        public bool IsDownloadTableCompany => cbCompany.Checked;
-
-        public bool IsDownloadTableProduct => cbProduct.Checked;
-
-        public bool IsDownloadTableType => cbCategory.Checked;
-
-        public bool IsDownloadTableCategory => cbType.Checked;
     }
 }

@@ -42,15 +42,15 @@ namespace TestTask.MudBlazors.Pages.Import
 
             MudDialog.Cancel();
 
-            Import(Core.DataTable.Table.Company, memoryStream, ExcelImportCompany, CompanyRepository);
-            Import(Core.DataTable.Table.Category, memoryStream, ExcelImportCategory, CategoryRepository);
-            Import(Core.DataTable.Table.TypeProduct, memoryStream, ExcelImportTypeProduct, ProductTypeRepository);
-            Import(Core.DataTable.Table.Product, memoryStream, ExcelImportProduct, ProductRepository);
+            Import(Tables.Company, memoryStream, ExcelImportCompany, CompanyRepository);
+            Import(Tables.Category, memoryStream, ExcelImportCategory, CategoryRepository);
+            Import(Tables.TypeProduct, memoryStream, ExcelImportTypeProduct, ProductTypeRepository);
+            Import(Tables.Product, memoryStream, ExcelImportProduct, ProductRepository);
 
             Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
         }
 
-        private void Import<T>(Core.DataTable.Table table, MemoryStream memoryStream, ExcelImporter<T> excelImporter, IRepository<T> repository)
+        private void Import<T>(Tables table, MemoryStream memoryStream, ExcelImporter<T> excelImporter, IRepository<T> repository)
         {
             if (!selectedTable.SelectTables.Contains(table))
             {

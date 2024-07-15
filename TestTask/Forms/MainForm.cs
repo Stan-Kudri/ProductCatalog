@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using TestTask.ChildForms.Import;
 using TestTask.Controls.PageTabControls.Model;
 using TestTask.Core;
+using TestTask.Core.DataTable;
 using TestTask.Core.Export;
 using TestTask.Core.Export.SheetFillers;
 using TestTask.Core.Extension;
@@ -63,13 +64,7 @@ namespace TestTask.Forms
 
         private async void TsmImportFromExcel_Click(object sender, EventArgs e)
         {
-            var loadTable = new Dictionary<string, bool>()
-            {
-                { Company, false },
-                { Product, false },
-                { Category, false },
-                { Type, false },
-            };
+            var selectTable = new HashSet<Tables>();
 
             using (var impotDbForExcel = _serviceProvider.GetRequiredService<ImportDatabaseForm>())
             {
@@ -78,10 +73,7 @@ namespace TestTask.Forms
                     return;
                 }
 
-                loadTable[Company] = impotDbForExcel.IsDownloadTableCompany;
-                loadTable[Product] = impotDbForExcel.IsDownloadTableProduct;
-                loadTable[Category] = impotDbForExcel.IsDownloadTableCategory;
-                loadTable[Type] = impotDbForExcel.IsDownloadTableType;
+                selectTable = impotDbForExcel.GetSelectTable();
             }
 
             using (var openReplaceDataFromFile = _serviceProvider.GetRequiredService<OpenFileDialog>())
@@ -93,7 +85,7 @@ namespace TestTask.Forms
 
                 var path = openReplaceDataFromFile.FileName;
 
-                if (loadTable[Company])
+                if (selectTable.Contains(Tables.Company))
                 {
                     var companyRead = _serviceProvider.GetRequiredService<ExcelImporter<Company>>().ImportFromFile(path);
 
@@ -111,11 +103,11 @@ namespace TestTask.Forms
                     }
                 }
 
-                if (loadTable[Category])
+                if (selectTable.Contains(Tables.Category))
                 {
-                    var categoryRead = _serviceProvider.GetRequiredService<ExcelImporter<Category>>().ImportFromFile(path);
+                    var companyRead = _serviceProvider.GetRequiredService<ExcelImporter<Category>>().ImportFromFile(path);
 
-                    foreach (var item in categoryRead)
+                    foreach (var item in companyRead)
                     {
                         if (item.Success)
                         {
@@ -123,13 +115,13 @@ namespace TestTask.Forms
                         }
                     }
 
-                    if (!categoryRead.IsNoErrorLine(out var message))
+                    if (!companyRead.IsNoErrorLine(out var message))
                     {
                         await _messageBox.ShowWarning(message, Category);
                     }
                 }
 
-                if (loadTable[Type])
+                if (selectTable.Contains(Tables.TypeProduct))
                 {
                     var typeRead = _serviceProvider.GetRequiredService<ExcelImporter<ProductType>>().ImportFromFile(path);
 
@@ -143,11 +135,11 @@ namespace TestTask.Forms
 
                     if (!typeRead.IsNoErrorLine(out var message))
                     {
-                        await _messageBox.ShowWarning(message, Category);
+                        await _messageBox.ShowWarning(message, Type);
                     }
                 }
 
-                if (loadTable[Product])
+                if (selectTable.Contains(Tables.Product))
                 {
                     var productRead = _serviceProvider.GetRequiredService<ExcelImporter<Product>>().ImportFromFile(path);
 
@@ -180,17 +172,12 @@ namespace TestTask.Forms
 
                 var path = exportFileData.FileName;
 
-                var companySheetFiller = new CompanySheetFiller(_companyRepository);
-                var productSheetFiller = new ProductSheetFiller(_productRepository);
-                var categorySheetFiller = new CategorySheetFiller(_categoryRepository);
-                var typeSheetFiller = new TypeSheetFiller(_typeRepository);
-
                 var fillers = new ISheetFiller[]
                 {
-                    companySheetFiller,
-                    productSheetFiller,
-                    categorySheetFiller,
-                    typeSheetFiller,
+                    new CompanySheetFiller(_companyRepository),
+                    new ProductSheetFiller(_productRepository),
+                    new CategorySheetFiller(_categoryRepository),
+                    new TypeSheetFiller(_typeRepository),
                 };
 
                 var writeExcel = new ExcelExporter(fillers);

@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using TestTask.Core.DataTable;
 
-namespace TestTask.Core.DataTable
+namespace TestTask.Model
 {
-    public class SelectTable
+    public class SelectTableModel
     {
-        protected IEnumerable<Tables> _selectTable = new HashSet<Tables>();
+        protected HashSet<Tables> _selectTable = new HashSet<Tables>();
 
         public Tables Table { get; set; }
 
-        public SelectTable()
-        {
-        }
+        public void Add(Tables table)
+            => _selectTable.Add(table);
 
-        public virtual IEnumerable<Tables> SelectTables
+        public virtual HashSet<Tables> SelectTables
         {
             get => _selectTable;
             set => _selectTable = value;
