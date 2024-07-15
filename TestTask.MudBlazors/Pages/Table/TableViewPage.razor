@@ -47,7 +47,7 @@
 
     </MudToolBar>
            
-    <MudTable Items="@items" Hover="true" SortLabel="Sort By" Elevation="0" MultiSelection="true" Dense="true" T="T" SelectedItemsChanged="OnSelectItems">
+    <MudTable Items="@items" Hover="true" SortLabel="Sort By" Elevation="0" MultiSelection="true" Dense="true" T="T" SelectedItemsChanged="OnSelectItems" RowsPerPage="pageModel.Size">
 
         <ColGroup>
             @for (var i = 0; i < TableProvider.Columns.Count; i++)

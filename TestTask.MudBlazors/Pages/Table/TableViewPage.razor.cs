@@ -152,7 +152,7 @@ namespace TestTask.MudBlazors.Pages.Table
             queriable = TableProvider.GetSearchName(queriable, searchString);
             queriable = SortField.Apply(queriable, isAscending);
             pagedList = queriable.GetPagedList(pageModel);
-            items = pagedList.Items;
+            5items = pagedList.Items;
             StateHasChanged();
         }
     }
