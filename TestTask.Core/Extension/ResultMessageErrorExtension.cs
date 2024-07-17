@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TestTask.Core.Models;
 
 namespace TestTask.Core.Extension
 {
@@ -10,6 +11,7 @@ namespace TestTask.Core.Extension
         private const string FirstMessage = "Errors when importing data:";
 
         public static bool IsNoErrorLine<T>(this List<Result<T>> result, out string message)
+           where T : Entity
         {
             var errorsStr = new List<string>();
             message = string.Empty;

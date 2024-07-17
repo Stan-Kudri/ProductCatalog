@@ -3,10 +3,12 @@ using NPOI.XSSF.UserModel;
 using System.Collections.Generic;
 using System.IO;
 using TestTask.Core.Import.Importers;
+using TestTask.Core.Models;
 
 namespace TestTask.Core.Import
 {
     public class ExcelImporter<T>
+        where T : Entity
     {
         private IImporter<T> _importer;
 

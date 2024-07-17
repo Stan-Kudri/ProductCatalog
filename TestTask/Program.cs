@@ -19,6 +19,7 @@ using TestTask.Forms.Type;
 using TestTask.Messages;
 using TestTask.Migrations;
 using TestTask.Model;
+using TestTask.Model.Importer;
 
 namespace TestTask
 {
@@ -67,6 +68,10 @@ namespace TestTask
                 .AddSingleton(e => new ExcelImporter<Product>(e.GetRequiredService<ProductImporter>()))
                 .AddSingleton(e => new ExcelImporter<Category>(e.GetRequiredService<CategoryImporter>()))
                 .AddSingleton(e => new ExcelImporter<ProductType>(e.GetRequiredService<TypeProductImporter>()))
+                .AddSingleton<ExcelImporterCompany>()
+                .AddSingleton<ExcelImporterCategory>()
+                .AddSingleton<ExcelImporterTypeProduct>()
+                .AddSingleton<ExcelImporterProduct>()
                 .AddSingleton<ExcelImporterModel>();
 
             var container = collection.BuildServiceProvider();

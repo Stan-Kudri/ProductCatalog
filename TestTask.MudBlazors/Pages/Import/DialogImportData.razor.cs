@@ -51,6 +51,7 @@ namespace TestTask.MudBlazors.Pages.Import
         }
 
         private void Import<T>(Tables table, MemoryStream memoryStream, ExcelImporter<T> excelImporter, IRepository<T> repository)
+            where T : Entity
         {
             if (!selectedTable.SelectTables.Contains(table))
             {

@@ -22,7 +22,7 @@ namespace TestTask.Forms
         private readonly ProductRepository _productRepository;
         private readonly CategoryRepository _categoryRepository;
         private readonly ProductTypeRepository _typeRepository;
-        private readonly ExcelImporterModel _excelImporter;
+        private readonly ExcelImporterModel _importExcel;
 
         public MainForm(IServiceProvider serviceProvider)
         {
@@ -32,7 +32,7 @@ namespace TestTask.Forms
             _categoryRepository = _serviceProvider.GetRequiredService<CategoryRepository>();
             _typeRepository = _serviceProvider.GetRequiredService<ProductTypeRepository>();
             _productRepository = _serviceProvider.GetRequiredService<ProductRepository>();
-            _excelImporter = _serviceProvider.GetRequiredService<ExcelImporterModel>();
+            _importExcel = _serviceProvider.GetRequiredService<ExcelImporterModel>();
         }
 
         private void TableForm_Load(object sender, EventArgs e)
@@ -77,8 +77,7 @@ namespace TestTask.Forms
                 }
 
                 var path = openReplaceDataFromFile.FileName;
-
-                await _excelImporter.UpsertData(selectTable, path);
+                await _importExcel.UpdataDB(selectTable, path);
             }
 
             LoadDataSelectTabPage();
