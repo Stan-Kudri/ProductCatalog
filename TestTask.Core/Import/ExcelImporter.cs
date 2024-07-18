@@ -3,26 +3,20 @@ using NPOI.XSSF.UserModel;
 using System.Collections.Generic;
 using System.IO;
 using TestTask.Core.Import.Importers;
-using TestTask.Core.Models;
 
 namespace TestTask.Core.Import
 {
     public class ExcelImporter<T>
-        where T : Entity
     {
         private IImporter<T> _importer;
 
         public ExcelImporter(IImporter<T> importer)
-        {
-            _importer = importer;
-        }
+            => _importer = importer;
 
         public List<Result<T>> ImportFromFile(string path)
         {
-            using (var file = File.OpenRead(path))
-            {
-                return Import(file);
-            }
+            using var file = File.OpenRead(path);
+            return Import(file);
         }
 
         public List<Result<T>> Import(byte[]? bytes)
@@ -71,8 +65,7 @@ namespace TestTask.Core.Import
             for (var i = 0; i < workbook.NumberOfSheets; i++)
             {
                 var sheetName = workbook.GetSheetName(i);
-                if (_importer.
-                    IsModelSheet(sheetName))
+                if (_importer.IsModelSheet(sheetName))
                 {
                     sheet = workbook.GetSheetAt(i);
                     return true;

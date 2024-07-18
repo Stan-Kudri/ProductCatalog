@@ -5,24 +5,12 @@ using TestTask.Model.Importer;
 
 namespace TestTask.Model
 {
-    public class ExcelImporterModel
+    public sealed class ExcelImporterModel
     {
-        private readonly List<IExcelImpoterTable> _excelImporterTables;
+        private readonly IEnumerable<IExcelImpoterTable> _excelImporterTables;
 
-        public ExcelImporterModel(
-            ExcelImporterCompany excelImporterCompany,
-            ExcelImporterCategory excelImporterCategory,
-            ExcelImporterTypeProduct excelImporterTypeProduct,
-            ExcelImporterProduct excelImporterProduct)
-        {
-            _excelImporterTables = new List<IExcelImpoterTable>()
-            {
-                excelImporterCompany,
-                excelImporterCategory,
-                excelImporterTypeProduct,
-                excelImporterProduct,
-            };
-        }
+        public ExcelImporterModel(IEnumerable<IExcelImpoterTable> excelImpoterTables)
+            => _excelImporterTables = excelImpoterTables;
 
         public async Task UpdataDB(HashSet<Tables> selectTables, string path)
         {

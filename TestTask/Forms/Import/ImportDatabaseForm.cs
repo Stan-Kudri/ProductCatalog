@@ -5,14 +5,12 @@ using System.Windows.Forms;
 using TestTask.Core;
 using TestTask.Core.DataTable;
 using TestTask.Forms;
-using TestTask.Model;
 
 namespace TestTask.ChildForms.Import
 {
     public partial class ImportDatabaseForm : BaseForm
     {
         private readonly IMessageBox _messageBox;
-        private readonly SelectTableModel _selectTable = new SelectTableModel();
 
         public ImportDatabaseForm(IServiceProvider serviceProvider)
         {
@@ -20,31 +18,32 @@ namespace TestTask.ChildForms.Import
             _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
         }
 
+        private Dictionary<Tables, bool> SelectTables = new Dictionary<Tables, bool>()
+        {
+            { Tables.Company, true},
+            { Tables.Category, true},
+            { Tables.TypeProduct, true},
+            { Tables.Product, true}
+        };
+
         public HashSet<Tables> GetSelectTable()
         {
-            if (cbCompany.Checked)
+            var selectTable = new HashSet<Tables>();
+
+            foreach (var table in SelectTables)
             {
-                _selectTable.Add(Tables.Company);
-            }
-            if (cbProduct.Checked)
-            {
-                _selectTable.Add(Tables.Product);
-            }
-            if (cbCategory.Checked)
-            {
-                _selectTable.Add(Tables.TypeProduct);
-            }
-            if (cbType.Checked)
-            {
-                _selectTable.Add(Tables.Category);
+                if (table.Value)
+                {
+                    selectTable.Add(table.Key);
+                }
             }
 
-            return _selectTable.SelectTables;
+            return selectTable;
         }
 
         private async void BtnImportData_Click(object sender, EventArgs e)
         {
-            if (!cbCompany.Checked && !cbProduct.Checked && !cbCategory.Checked && !cbType.Checked)
+            if (!SelectTables.ContainsValue(true))
             {
                 await _messageBox.ShowWarning("The tables to load are not selected.");
                 return;
@@ -53,5 +52,17 @@ namespace TestTask.ChildForms.Import
             DialogResult = DialogResult.OK;
             Close();
         }
+
+        private void cbCompany_CheckedChanged(object sender, EventArgs e)
+            => SelectTables[Tables.Company] = cbCompany.Checked;
+
+        private void cbProduct_CheckedChanged(object sender, EventArgs e)
+            => SelectTables[Tables.Product] = cbProduct.Checked;
+
+        private void cbType_CheckedChanged(object sender, EventArgs e)
+            => SelectTables[Tables.TypeProduct] = cbType.Checked;
+
+        private void cbCategory_CheckedChanged(object sender, EventArgs e)
+            => SelectTables[Tables.Category] = cbCategory.Checked;
     }
 }
