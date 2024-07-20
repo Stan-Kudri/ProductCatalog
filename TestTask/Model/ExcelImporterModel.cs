@@ -16,7 +16,7 @@ namespace TestTask.Model
         {
             foreach (var table in _excelImporterTables)
             {
-                await table.UpsertData(selectTables, path);
+                await table.ImportAsync(selectTables, path);
             }
         }
     }

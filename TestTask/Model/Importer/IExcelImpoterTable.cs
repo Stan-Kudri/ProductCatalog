@@ -6,6 +6,6 @@ namespace TestTask.Model.Importer
 {
     public interface IExcelImpoterTable
     {
-        Task UpsertData(HashSet<Tables> selectTable, string path);
+        Task ImportAsync(HashSet<Tables> selectTable, string path);
     }
 }

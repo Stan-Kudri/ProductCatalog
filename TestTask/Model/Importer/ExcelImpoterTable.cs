@@ -22,7 +22,7 @@ namespace TestTask.Model.Importer
             _excelImport = excelImport;
         }
 
-        public async Task UpsertData(HashSet<Tables> selectTable, string path)
+        public async Task ImportAsync(HashSet<Tables> selectTable, string path)
         {
             if (selectTable.Contains(Tables.Company))
             {

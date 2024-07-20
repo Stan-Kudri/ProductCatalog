@@ -16,6 +16,11 @@ namespace TestTask.ChildForms.Import
         {
             InitializeComponent();
             _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
+            cbCompany.Checked
+                = cbCategory.Checked
+                = cbType.Checked
+                = cbProduct.Checked
+                = true;
         }
 
         private Dictionary<Tables, bool> SelectTables = new Dictionary<Tables, bool>()
