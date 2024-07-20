@@ -5,7 +5,7 @@ using NPOI.XSSF.UserModel;
 using TestTask.Core.DataTable;
 using TestTask.Core.Export.SheetFillers;
 using TestTask.Core.Import;
-using ItemSelected = TestTask.Core.DataTable.Table;
+using ItemSelected = TestTask.Core.DataTable.Tables;
 
 namespace TestTask.MudBlazors.Pages.Export
 {

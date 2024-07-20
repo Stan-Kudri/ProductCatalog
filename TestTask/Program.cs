@@ -18,6 +18,8 @@ using TestTask.Forms.Products;
 using TestTask.Forms.Type;
 using TestTask.Messages;
 using TestTask.Migrations;
+using TestTask.Model;
+using TestTask.Model.Importer;
 
 namespace TestTask
 {
@@ -58,14 +60,19 @@ namespace TestTask
                 .AddScoped<MessageByTable<Product>>()
                 .AddSingleton(e => new OpenFileDialog { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
                 .AddSingleton(e => new SaveFileDialog() { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
-                .AddSingleton(e => new CompanyImporter())
-                .AddSingleton(e => new ProductImporter())
-                .AddSingleton(e => new CategoryImporter())
-                .AddSingleton(e => new TypeProductImporter())
-                .AddSingleton(e => new ExcelImporter<Company>(e.GetRequiredService<CompanyImporter>()))
-                .AddSingleton(e => new ExcelImporter<Product>(e.GetRequiredService<ProductImporter>()))
-                .AddSingleton(e => new ExcelImporter<Category>(e.GetRequiredService<CategoryImporter>()))
-                .AddSingleton(e => new ExcelImporter<ProductType>(e.GetRequiredService<TypeProductImporter>()));
+                .AddSingleton<IImporter<Company>>(e => new CompanyImporter())
+                .AddSingleton<IImporter<Product>>(e => new ProductImporter())
+                .AddSingleton<IImporter<Category>>(e => new CategoryImporter())
+                .AddSingleton<IImporter<ProductType>>(e => new TypeProductImporter())
+                .AddSingleton<ExcelImporter<Company>>()
+                .AddSingleton<ExcelImporter<Product>>()
+                .AddSingleton<ExcelImporter<Category>>()
+                .AddSingleton<ExcelImporter<ProductType>>()
+                .AddSingleton<IExcelImpoterTable, ExcelImporterCompany>()
+                .AddSingleton<IExcelImpoterTable, ExcelImporterCategory>()
+                .AddSingleton<IExcelImpoterTable, ExcelImporterTypeProduct>()
+                .AddSingleton<IExcelImpoterTable, ExcelImporterProduct>()
+                .AddSingleton<ExcelImporterModel>();
 
             var container = collection.BuildServiceProvider();
 
