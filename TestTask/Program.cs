@@ -2,20 +2,14 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows.Forms;
-using TestTask.ChildForms.Import;
 using TestTask.Core;
 using TestTask.Core.Import;
 using TestTask.Core.Import.Importers;
-using TestTask.Core.Models.Categories;
-using TestTask.Core.Models.Companies;
+using TestTask.Core.Models;
 using TestTask.Core.Models.Products;
 using TestTask.Core.Models.Types;
 using TestTask.Core.Models.Users;
 using TestTask.Forms;
-using TestTask.Forms.Categories;
-using TestTask.Forms.Companies;
-using TestTask.Forms.Products;
-using TestTask.Forms.Type;
 using TestTask.Messages;
 using TestTask.Migrations;
 using TestTask.Model;
@@ -38,40 +32,39 @@ namespace TestTask
                 .AddScoped(e => e.GetRequiredService<DbContextFactory>().Create())
                 .AddScoped<IMessageBox>(e => new MessageBoxShow())
                 .AddScoped<UserService>()
-                .AddScoped<CompanyRepository>()
-                .AddScoped<ProductRepository>()
-                .AddScoped<CategoryRepository>()
-                .AddScoped<ProductTypeRepository>()
                 .AddScoped<UserValidator>()
-                .AddSingleton<BaseForm>()
-                .AddTransient<LoginForm>()
-                .AddTransient<RegistrationForm>()
-                .AddTransient<ImportDatabaseForm>()
-                .AddTransient<MainForm>()
-                .AddTransient<AddItemCompanyForm>()
-                .AddTransient<EditItemCompanyForm>()
-                .AddTransient<AddItemProductForm>()
-                .AddTransient<EditItemProductForm>()
-                .AddTransient<AddCategoryForm>()
-                .AddTransient<EditCategoryForm>()
-                .AddTransient<AddProductTypeForm>()
-                .AddTransient<EditProductTypeForm>()
                 .AddScoped<MessageByTable<ProductType>>()
                 .AddScoped<MessageByTable<Product>>()
                 .AddSingleton(e => new OpenFileDialog { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
                 .AddSingleton(e => new SaveFileDialog() { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
-                .AddSingleton<IImporter<Company>>(e => new CompanyImporter())
-                .AddSingleton<IImporter<Product>>(e => new ProductImporter())
-                .AddSingleton<IImporter<Category>>(e => new CategoryImporter())
-                .AddSingleton<IImporter<ProductType>>(e => new TypeProductImporter())
-                .AddSingleton<ExcelImporter<Company>>()
-                .AddSingleton<ExcelImporter<Product>>()
-                .AddSingleton<ExcelImporter<Category>>()
-                .AddSingleton<ExcelImporter<ProductType>>()
-                .AddSingleton<IExcelImpoterTable, ExcelImporterCompany>()
-                .AddSingleton<IExcelImpoterTable, ExcelImporterCategory>()
-                .AddSingleton<IExcelImpoterTable, ExcelImporterTypeProduct>()
-                .AddSingleton<IExcelImpoterTable, ExcelImporterProduct>()
+
+                .Scan(scan => scan
+                    .FromAssemblies(typeof(IRepository<>).Assembly)
+                        .AddClasses(repository => repository.AssignableTo(typeof(IRepository<>)))
+                        .AsSelf()
+                        .WithScopedLifetime()
+
+                    .FromAssemblies(typeof(BaseForm).Assembly)
+                        .AddClasses(form => form.AssignableTo(typeof(BaseForm)))
+                        .AsSelf()
+                        .WithTransientLifetime()
+
+                    .FromAssemblies(typeof(IImporter<>).Assembly, typeof(ExcelImporter<>).Assembly, typeof(IExcelImpoterTable).Assembly)
+
+                        .AddClasses(importer => importer.AssignableTo(typeof(IImporter<>)))
+                        .AsImplementedInterfaces()
+                        .WithSingletonLifetime()
+
+                        .AddClasses(importer => importer.AssignableTo(typeof(ExcelImporter<>)))
+                        .AsSelf()
+                        .WithSingletonLifetime()
+
+                        .AddClasses(importer => importer.AssignableTo<IExcelImpoterTable>())
+                        .AsImplementedInterfaces()
+                        .WithSingletonLifetime()
+
+                        )
+
                 .AddSingleton<ExcelImporterModel>();
 
             var container = collection.BuildServiceProvider();
