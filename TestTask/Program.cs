@@ -61,9 +61,7 @@ namespace TestTask
 
                         .AddClasses(importer => importer.AssignableTo<IExcelImpoterTable>())
                         .AsImplementedInterfaces()
-                        .WithSingletonLifetime()
-
-                        )
+                        .WithSingletonLifetime())
 
                 .AddSingleton<ExcelImporterModel>();
 
@@ -76,7 +74,7 @@ namespace TestTask
                     var materialSkinManager = MaterialSkinManager.Instance;
                     materialSkinManager.AddFormToManage(loginForm);
                     materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-                    materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey600, Primary.BlueGrey400, Primary.Grey800, Accent.Pink100, TextShade.WHITE);
+                    materialSkinManager.ColorScheme = new ColorScheme(Primary.Cyan900, Primary.Grey600, Primary.Cyan100, Accent.DeepPurple700, TextShade.WHITE);
                     Application.EnableVisualStyles();
                     Application.Run(loginForm);
                 }
