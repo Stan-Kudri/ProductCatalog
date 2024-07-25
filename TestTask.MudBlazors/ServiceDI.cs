@@ -6,17 +6,11 @@ using TestTask.Core.Export.SheetFillers;
 using TestTask.Core.Import;
 using TestTask.Core.Import.Importers;
 using TestTask.Core.Models;
-using TestTask.Core.Models.Categories;
-using TestTask.Core.Models.Companies;
-using TestTask.Core.Models.Products;
-using TestTask.Core.Models.Types;
 using TestTask.Core.Models.Users;
 using TestTask.Migrations;
 using TestTask.MudBlazors.Authenticate;
 using TestTask.MudBlazors.Messages;
 using TestTask.MudBlazors.Pages.Table.Model;
-using TestTask.MudBlazors.Pages.Table.PageTableProvider;
-using TestTask.MudBlazors.Pages.Table.PageTableView;
 
 namespace TestTask.MudBlazors
 {
@@ -42,40 +36,39 @@ namespace TestTask.MudBlazors
             builder.Services.AddScoped(e => e.GetRequiredService<DbContextFactory>().Create());
             builder.Services.AddScoped<IMessageBox, MessageDialog>();
             builder.Services.AddScoped<UserService>();
-            builder.Services.AddScoped<CompanyRepository>();
-            builder.Services.AddScoped<ProductRepository>();
-            builder.Services.AddScoped<CategoryRepository>();
-            builder.Services.AddScoped<ProductTypeRepository>();
             builder.Services.AddScoped<UserValidator>();
-            builder.Services.AddSingleton(e => new CompanyImporter());
-            builder.Services.AddSingleton(e => new ProductImporter());
-            builder.Services.AddSingleton(e => new ProductImporter());
-            builder.Services.AddSingleton(e => new CategoryImporter());
-            builder.Services.AddSingleton(e => new TypeProductImporter());
-            builder.Services.AddSingleton(e => new ExcelImporter<Company>(e.GetRequiredService<CompanyImporter>()));
-            builder.Services.AddSingleton(e => new ExcelImporter<Product>(e.GetRequiredService<ProductImporter>()));
-            builder.Services.AddSingleton(e => new ExcelImporter<Category>(e.GetRequiredService<CategoryImporter>()));
-            builder.Services.AddSingleton(e => new ExcelImporter<ProductType>(e.GetRequiredService<TypeProductImporter>()));
-            builder.Services.AddScoped<CompanySheetFiller>();
-            builder.Services.AddScoped<CategorySheetFiller>();
-            builder.Services.AddScoped<TypeSheetFiller>();
-            builder.Services.AddScoped<ProductSheetFiller>();
 
-            builder.Services.AddScoped<CompanyDetailProvider>();
-            builder.Services.AddScoped<ITableDetailProvider<Company>>(e => e.GetRequiredService<CompanyDetailProvider>());
-            builder.Services.AddScoped<ISortEntity<Company>>(e => new SortCompany());
+            builder.Services.Scan(scan => scan
+                                    .FromAssemblies(typeof(IRepository<>).Assembly)
 
-            builder.Services.AddScoped<CategoryDetailProvider>();
-            builder.Services.AddScoped<ITableDetailProvider<Category>>(e => e.GetRequiredService<CategoryDetailProvider>());
-            builder.Services.AddScoped<ISortEntity<Category>>(e => new SortCategories());
+                                        .AddClasses(repository => repository.AssignableTo(typeof(IRepository<>)))
+                                        .AsSelf()
+                                        .WithScopedLifetime()
 
-            builder.Services.AddScoped<TypeDetailProvider>();
-            builder.Services.AddScoped<ITableDetailProvider<ProductType>>(e => e.GetRequiredService<TypeDetailProvider>());
-            builder.Services.AddScoped<ISortEntity<ProductType>>(e => new SortProductType());
+                                    .FromAssemblies(typeof(IImporter<>).Assembly, typeof(ExcelImporter<>).Assembly)
 
-            builder.Services.AddScoped<ProductDetailProvider>();
-            builder.Services.AddScoped<ITableDetailProvider<Product>>(e => e.GetRequiredService<ProductDetailProvider>());
-            builder.Services.AddScoped<ISortEntity<Product>>(e => new SortProduct());
+                                       .AddClasses(importer => importer.AssignableTo(typeof(IImporter<>)))
+                                       .AsImplementedInterfaces()
+                                       .WithSingletonLifetime()
+
+                                       .AddClasses(importer => importer.AssignableTo(typeof(ExcelImporter<>)))
+                                       .AsSelf()
+                                       .WithSingletonLifetime()
+
+                                    .FromAssemblies(typeof(ITableDetailProvider<>).Assembly, typeof(ISortEntity<>).Assembly, typeof(ISheetFiller).Assembly)
+
+                                        .AddClasses(table => table.AssignableTo(typeof(ITableDetailProvider<>)))
+                                        .AsImplementedInterfaces()
+                                        .WithScopedLifetime()
+
+                                        .AddClasses(sort => sort.AssignableTo(typeof(ISortEntity<>)))
+                                        .AsImplementedInterfaces()
+                                        .WithScopedLifetime()
+
+                                        .AddClasses(sheetFiller => sheetFiller.AssignableTo(typeof(ISheetFiller)))
+                                        .AsSelf()
+                                        .WithScopedLifetime()
+                                        );
         }
 
         public static void AuthenicateDIBuilder(this WebApplicationBuilder? builder)
