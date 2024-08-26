@@ -8,7 +8,7 @@ namespace TestTask.Extension
     {
         public static async Task<bool> ShouldNotBeEmpty<T>(this IMessageBox messageBox, IQueryable<T> items, string entityName)
         {
-            if (items.Count() == 0)
+            if (!items.Any())
             {
                 await messageBox.ShowWarning($"No {typeof(T).Name} was found that can be linked to the {entityName}.");
                 return false;

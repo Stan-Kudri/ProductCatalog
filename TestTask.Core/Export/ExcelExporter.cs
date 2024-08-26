@@ -10,9 +10,7 @@ namespace TestTask.Core.Export
         private readonly IReadOnlyCollection<ISheetFiller> _fillers;
 
         public ExcelExporter(IReadOnlyCollection<ISheetFiller> fillers)
-        {
-            _fillers = fillers;
-        }
+            => _fillers = fillers;
 
         public void Export(Stream destination)
         {
@@ -29,10 +27,8 @@ namespace TestTask.Core.Export
 
         public void ExportToFile(string path)
         {
-            using (var fileStream = File.OpenWrite(Path.Combine(path)))
-            {
-                Export(fileStream);
-            }
+            using var fileStream = File.OpenWrite(Path.Combine(path));
+            Export(fileStream);
         }
     }
 }

@@ -92,12 +92,7 @@ namespace TestTask.Core.Models.Companies
         {
             var busyItem = _dbContext.Company.FirstOrDefault(e => e.Name == item.Name);
 
-            if (busyItem != null && item.Id != busyItem.Id)
-            {
-                return false;
-            }
-
-            return true;
+            return busyItem == null || item.Id == busyItem.Id;
         }
     }
 }

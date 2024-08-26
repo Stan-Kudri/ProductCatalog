@@ -12,7 +12,12 @@ namespace TestTask.Core.Models
 
         protected bool? _isAscending = true;
 
-        private static Dictionary<string, bool?> _sortMap = new Dictionary<string, bool?>() { { NoSorting, null }, { Ascending, true }, { Descending, false } };
+        private static Dictionary<string, bool?> _sortMap = new Dictionary<string, bool?>()
+        {
+            { NoSorting, null },
+            { Ascending, true },
+            { Descending, false }
+        };
 
         public TypeSortField()
             : this(null)

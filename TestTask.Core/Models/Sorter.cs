@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TestTask.Core.Models.Products;
 
 namespace TestTask.Core.Models
 {
@@ -9,9 +8,7 @@ namespace TestTask.Core.Models
         private readonly ISortableSmartEnum<T> _defaultValue;
 
         public Sorter(ISortableSmartEnum<T> defaultValue)
-        {
-            _defaultValue = defaultValue;
-        }
+            => _defaultValue = defaultValue;
 
         public IQueryable<T> Apply(IQueryable<T> items, IEnumerable<ISortableSmartEnum<T>> sortFields, bool? ascending = true)
         {

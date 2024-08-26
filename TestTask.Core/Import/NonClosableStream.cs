@@ -6,10 +6,7 @@ namespace TestTask.Core.Import
     {
         private readonly Stream _root;
 
-        public NonClosableStream(Stream root)
-        {
-            _root = root;
-        }
+        public NonClosableStream(Stream root) => _root = root;
 
         public bool AllowClose { get; set; }
 

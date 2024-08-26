@@ -12,8 +12,8 @@ namespace TestTask.BindingItem
         public CompanyModel(string name, DateTime dateCreation, string country)
         {
             _name = name;
-            _dateCreation = dateCreation == null ? throw new ArgumentException("The company creation date cannot be zero.", nameof(dateCreation)) : _dateCreation = dateCreation;
             _country = country;
+            _dateCreation = dateCreation == null ? throw new ArgumentException("The company creation date cannot be zero.", nameof(dateCreation)) : _dateCreation = dateCreation;
         }
 
         public string Name

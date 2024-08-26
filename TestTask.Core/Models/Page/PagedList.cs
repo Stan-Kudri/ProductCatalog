@@ -48,7 +48,10 @@ namespace TestTask.Core.Models.Page
 
         public List<T> Items { get; private set; }
 
-        public int PageCount => PageSize != 0 ? (int)Math.Ceiling((double)TotalItems / PageSize) : 0;
+        public int PageCount
+            => PageSize != 0
+                ? (int)Math.Ceiling((double)TotalItems / PageSize)
+                : 0;
 
         public bool HasPrevious => PageNumber > 1;
 

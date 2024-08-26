@@ -29,10 +29,7 @@ namespace TestTask.Core.Models.Categories
             private readonly Expression<Func<Category, TKey>> _expression;
 
             public SortType(string name, int value, Expression<Func<Category, TKey>> expression)
-                : base(name, value)
-            {
-                _expression = expression;
-            }
+                : base(name, value) => _expression = expression;
 
             public override IOrderedQueryable<Category> OrderBy(IQueryable<Category> query, bool asc)
                 => asc ? query.OrderBy(_expression) : query.OrderByDescending(_expression);

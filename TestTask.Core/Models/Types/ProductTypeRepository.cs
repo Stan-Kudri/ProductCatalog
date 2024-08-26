@@ -103,12 +103,7 @@ namespace TestTask.Core.Models.Types
         {
             var busyItem = _dbContext.Type.FirstOrDefault(e => e.Name == item.Name);
 
-            if (busyItem != null && item.Id != busyItem.Id)
-            {
-                return false;
-            }
-
-            return true;
+            return busyItem == null || item.Id == busyItem.Id;
         }
 
         public ProductType GetItem(int id) => _dbContext.Type.FirstOrDefault(e => e.Id == id) ?? throw new ArgumentException("Interaction element not found.");

@@ -87,13 +87,7 @@ namespace TestTask.Core.Models.Categories
         public bool IsFreeNameItemUpsert(Category item)
         {
             var busyItem = _dbContext.Category.FirstOrDefault(e => e.Name == item.Name);
-
-            if (busyItem != null && item.Id != busyItem.Id)
-            {
-                return false;
-            }
-
-            return true;
+            return busyItem == null || item.Id == busyItem.Id;
         }
     }
 }

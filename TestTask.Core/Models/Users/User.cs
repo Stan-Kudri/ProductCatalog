@@ -29,10 +29,7 @@ namespace TestTask.Core.Models.Users
         }
 
         public User(string username, string passwordHash, UserRole userRole)
-            : this(username, passwordHash)
-        {
-            UserRole = userRole;
-        }
+            : this(username, passwordHash) => UserRole = userRole;
 
         public string Username { get; set; } = string.Empty;
 

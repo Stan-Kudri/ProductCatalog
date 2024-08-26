@@ -68,7 +68,7 @@ namespace TestTask.MudBlazors
                                         .AddClasses(sheetFiller => sheetFiller.AssignableTo(typeof(ISheetFiller)))
                                         .AsSelf()
                                         .WithScopedLifetime()
-                                        );
+                                    );
         }
 
         public static void AuthenicateDIBuilder(this WebApplicationBuilder? builder)

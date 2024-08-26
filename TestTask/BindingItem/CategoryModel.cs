@@ -6,10 +6,7 @@ namespace TestTask.BindingItem
     {
         private string _name;
 
-        public CategoryModel(string name)
-        {
-            _name = name;
-        }
+        public CategoryModel(string name) => _name = name;
 
         public string Name
         {

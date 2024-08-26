@@ -36,13 +36,10 @@ namespace TestTask.Core.Models.Products
             private readonly Expression<Func<Product, TKey>> _expression;
 
             public SortType(string name, int value, Expression<Func<Product, TKey>> expression)
-                : base(name, value)
-            {
-                _expression = expression;
-            }
+                : base(name, value) => _expression = expression;
 
             public override IOrderedQueryable<Product> OrderBy(IQueryable<Product> query, bool asc)
-            => asc ? query.OrderBy(_expression) : query.OrderByDescending(_expression);
+                => asc ? query.OrderBy(_expression) : query.OrderByDescending(_expression);
 
             public override IOrderedQueryable<Product> ThenBy(IOrderedQueryable<Product> query, bool asc)
                 => asc ? query.ThenBy(_expression) : query.ThenByDescending(_expression);

@@ -25,15 +25,16 @@ namespace TestTask.Core.Models.Users
             _dbContext.SaveChanges();
         }
 
-        public bool IsFreeUsername(string username) =>
-            _dbContext.Users.FirstOrDefault(e => e.Username == username) == null;
+        public bool IsFreeUsername(string username)
+            => _dbContext.Users.FirstOrDefault(e => e.Username == username) == null;
 
-        public bool IsUserData(User user) =>
-            _dbContext.Users.FirstOrDefault(e => e.Username == user.Username && e.PasswordHash == user.PasswordHash) != null;
+        public bool IsUserData(User user)
+            => _dbContext.Users.FirstOrDefault(e => e.Username == user.Username && e.PasswordHash == user.PasswordHash) != null;
 
         public User GetUser(string username, string passwordHash)
             => _dbContext.Users.FirstOrDefault(e => e.Username == username && e.PasswordHash == passwordHash);
 
-        public IQueryable<User> GetQueryableAll() => _dbContext.Users.Select(e => e);
+        public IQueryable<User> GetQueryableAll()
+            => _dbContext.Users.Select(e => e);
     }
 }

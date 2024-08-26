@@ -13,7 +13,9 @@ namespace TestTask.Core.Models.Categories
 
         public Category(string name, int id)
             : this(name)
-            => Id = id > 0 ? Id = id : throw new ArgumentException("The ID must be greater than zero.", nameof(id));
+            => Id = id > 0
+                    ? Id = id
+                    : throw new ArgumentException("The ID must be greater than zero.", nameof(id));
 
         public Category(string name, List<Product> product = null, List<ProductType> type = null)
         {

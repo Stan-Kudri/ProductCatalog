@@ -12,9 +12,9 @@ namespace TestTask.Core.Models.Companies
 
         public Company(string name, DateTime dateCreation, string country, int id)
             : this(name, dateCreation, country)
-        {
-            Id = id > 0 ? Id = id : throw new ArgumentException("The ID must be greater than zero.", nameof(id));
-        }
+            => Id = id > 0
+                    ? Id = id
+                    : throw new ArgumentException("The ID must be greater than zero.", nameof(id));
 
         public Company(string name, DateTime dateCreation, string country, List<Product> products = null)
         {
