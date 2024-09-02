@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using TestTask.Core;
+using TestTask.Core.DBContext;
 
 namespace TestTask.Test
 {

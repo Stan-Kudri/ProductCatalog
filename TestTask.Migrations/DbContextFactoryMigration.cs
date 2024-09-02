@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using TestTask.Core;
+using TestTask.Core.DBContext;
 
 namespace TestTask.Migrations
 {

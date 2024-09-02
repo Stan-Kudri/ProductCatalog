@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using TestTask.Core.DBContext;
 
 namespace TestTask.Core.Models.Users
 {

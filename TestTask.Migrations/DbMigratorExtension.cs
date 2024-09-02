@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.DependencyInjection;
-using TestTask.Core;
+using TestTask.Core.DBContext;
 
 namespace TestTask.Migrations
 {
