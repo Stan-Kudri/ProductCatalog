@@ -5,12 +5,12 @@ namespace TestTask.Core.Models
 {
     public sealed class Sorter<T>
     {
-        private readonly ISortableSmartEnum<T> _defaultValue;
+        private readonly ISortableField<T> _defaultValue;
 
-        public Sorter(ISortableSmartEnum<T> defaultValue)
+        public Sorter(ISortableField<T> defaultValue)
             => _defaultValue = defaultValue;
 
-        public IQueryable<T> Apply(IQueryable<T> items, IEnumerable<ISortableSmartEnum<T>> sortFields, bool? ascending = true)
+        public IQueryable<T> Apply(IQueryable<T> items, IEnumerable<ISortableField<T>> sortFields, bool? ascending = true)
         {
             if (ascending == null)
             {

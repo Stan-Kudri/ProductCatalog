@@ -57,13 +57,8 @@ namespace TestTask.Forms.Categories
         }
 
         public CategoryModel GetItemModel()
-        {
-            if (tbCategory.Text == string.Empty)
-            {
-                throw new Exception("The Category field is filled in incorrectly.");
-            }
-
-            return new CategoryModel(tbCategory.Text);
-        }
+            => tbCategory.Text == string.Empty
+                ? throw new Exception("The Category field is filled in incorrectly.")
+                : new CategoryModel(tbCategory.Text);
     }
 }

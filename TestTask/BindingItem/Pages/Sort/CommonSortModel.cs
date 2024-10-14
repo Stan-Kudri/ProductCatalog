@@ -38,7 +38,7 @@ namespace TestTask.BindingItem.Pages.Sort
         public IQueryable<T> Apply(IQueryable<T> items, bool? ascending = true)
             => _sortType.Apply(items, ascending);
 
-        public IEnumerable<ISortableSmartEnum<T>> SortFields
+        public IEnumerable<ISortableField<T>> SortFields
         {
             get => _sortType.SortFields;
             set
@@ -58,13 +58,13 @@ namespace TestTask.BindingItem.Pages.Sort
             }
         }
 
-        public ISortableSmartEnum<T> SortField
+        public ISortableField<T> SortField
         {
             get => _sortType.SortField;
             set => _sortType.SortField = value;
         }
 
-        public ObservableCollection<ISortableSmartEnum<T>> Items
+        public ObservableCollection<ISortableField<T>> Items
         {
             get => _sortType.Items;
             set => _sortType.Items = value;

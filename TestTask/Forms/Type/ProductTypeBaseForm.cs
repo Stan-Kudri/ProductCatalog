@@ -22,8 +22,10 @@ namespace TestTask.Forms.Type
             _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
         }
 
-        private Category SelectedCategory =>
-            cmbListCategory.SelectedValue != null ? (Category)cmbListCategory.SelectedValue : throw new Exception("Wrong combo box format");
+        private Category SelectedCategory
+            => cmbListCategory.SelectedValue != null
+            ? (Category)cmbListCategory.SelectedValue
+            : throw new Exception("Wrong combo box format");
 
         protected virtual async void BtnSave_Click(object sender, EventArgs e)
         {
@@ -78,12 +80,9 @@ namespace TestTask.Forms.Type
         {
             var name = tbName.Text;
 
-            if (name == string.Empty || name == null)
-            {
-                throw new Exception("The name type field is filled in incorrectly.");
-            }
-
-            return new ProductTypeModel(name, SelectedCategory);
+            return name == string.Empty || name == null
+                ? throw new Exception("The name type field is filled in incorrectly.")
+                : new ProductTypeModel(name, SelectedCategory);
         }
     }
 }

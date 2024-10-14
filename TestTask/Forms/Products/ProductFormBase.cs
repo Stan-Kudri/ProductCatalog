@@ -141,13 +141,8 @@ namespace TestTask.Forms.Products
             => _types.ReplaceCollection(itmes);
 
         public ProductModel GetProductModel()
-        {
-            if (!decimal.TryParse(tbPrice.Text, out var price))
-            {
-                throw new Exception("The Price field is filled in incorrectly.");
-            }
-
-            return new ProductModel(tbName.Text, SelectedCompany, SelectedCategory, SelectedType, price, tbDestination.Text);
-        }
+            => !decimal.TryParse(tbPrice.Text, out var price)
+                ? throw new Exception("The Price field is filled in incorrectly.")
+                : new ProductModel(tbName.Text, SelectedCompany, SelectedCategory, SelectedType, price, tbDestination.Text);
     }
 }

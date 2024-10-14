@@ -6,14 +6,14 @@ using System.Linq;
 namespace TestTask.Core.Models
 {
     public class SortEntity<T, TSortField> : ISortEntity<T>
-        where TSortField : SmartEnum<TSortField>, ISortableSmartEnum<T>, ISortableSmartEnumOperation<T>
+        where TSortField : SmartEnum<TSortField>, ISortableField<T>, ISortableSmartEnumOperation<T>
         where T : Entity
     {
-        public ISortableSmartEnum<T> SortField { get; set; }
+        public ISortableField<T> SortField { get; set; }
 
-        public IEnumerable<ISortableSmartEnum<T>> SortFields { get; set; } = new HashSet<ISortableSmartEnum<T>>() { TSortField.DefaultValue };
+        public IEnumerable<ISortableField<T>> SortFields { get; set; } = new HashSet<ISortableField<T>>() { TSortField.DefaultValue };
 
-        public ObservableCollection<ISortableSmartEnum<T>> Items { get; set; } = new ObservableCollection<ISortableSmartEnum<T>>(TSortField.List);
+        public ObservableCollection<ISortableField<T>> Items { get; set; } = new ObservableCollection<ISortableField<T>>(TSortField.List);
 
         public IQueryable<T> Apply(IQueryable<T> items, bool? ascending = true)
         {

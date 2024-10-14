@@ -12,11 +12,11 @@
         <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" Style="max-width:300px;"/>
 
-        <MudSelect T="ISortableSmartEnum<T>" Style="align-items:end" Label="Sort" MultiSelection="true" @bind-Value="SortField.SortField" @bind-SelectedValues="SortField.SortFields"
+        <MudSelect T="ISortableField<T>" Style="align-items:end" Label="Sort" MultiSelection="true" @bind-Value="SortField.SortField" @bind-SelectedValues="SortField.SortFields"
                    SelectAll="true" SelectAllText="All" OnClose="@LoadData">
             @foreach (var item in SortField.Items)
             {
-                <MudSelectItem T="ISortableSmartEnum<T>" Value="@item" />
+                <MudSelectItem T="ISortableField<T>" Value="@item" />
             }
         </MudSelect>
 

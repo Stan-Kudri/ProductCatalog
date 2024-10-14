@@ -34,8 +34,6 @@ namespace TestTask.BindingItem
             set => SetField(ref _country, value);
         }
 
-        public static CompanyModel GetModeModel(string name, DateTime dateCreation, string country) => new CompanyModel(name, dateCreation, country);
-
         public Company ToCompany() => new Company(_name, _dateCreation, _country);
 
         public Company ToCompany(int id) => new Company(_name, _dateCreation, _country, id);

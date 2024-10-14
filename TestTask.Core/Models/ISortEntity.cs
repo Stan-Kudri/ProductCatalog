@@ -8,14 +8,14 @@ namespace TestTask.Core.Models
     public interface ISortEntity<T>
         where T : Entity
     {
-        ISortableSmartEnum<T> SortField { get; set; }
+        ISortableField<T> SortField { get; set; }
 
-        IEnumerable<ISortableSmartEnum<T>> SortFields { get; set; }
+        IEnumerable<ISortableField<T>> SortFields { get; set; }
 
-        ObservableCollection<ISortableSmartEnum<T>> Items { get; set; }
+        ObservableCollection<ISortableField<T>> Items { get; set; }
 
         IQueryable<T> Apply(IQueryable<T> items, bool? ascending = true);
 
-        void Clear() => SortFields = new HashSet<ISortableSmartEnum<T>>();
+        void Clear() => SortFields = new HashSet<ISortableField<T>>();
     }
 }
