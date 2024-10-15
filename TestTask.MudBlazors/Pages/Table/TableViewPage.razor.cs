@@ -6,6 +6,7 @@ using TestTask.Core;
 using TestTask.Core.Import;
 using TestTask.Core.Models;
 using TestTask.Core.Models.Page;
+using TestTask.Core.Models.SortModel;
 using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model;
 using TestTask.MudBlazors.Pages.Table.Model;

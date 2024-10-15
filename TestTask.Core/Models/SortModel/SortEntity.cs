@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace TestTask.Core.Models
+namespace TestTask.Core.Models.SortModel
 {
     public class SortEntity<T, TSortField> : ISortEntity<T>
         where TSortField : SmartEnum<TSortField>, ISortableField<T>, ISortableSmartEnumOperation<T>

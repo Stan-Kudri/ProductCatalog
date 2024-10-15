@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace TestTask.Core.Models
+namespace TestTask.Core.Models.SortModel
 {
     public class SortableSmartEnumField<TSmartEnum, T> : SmartEnum<TSmartEnum>, ISortableField<T>, ISortableSmartEnumOperation<T>
         where TSmartEnum : SortableSmartEnumField<TSmartEnum, T>
         where T : Entity
     {
-        private ISortableField<T> _field;
-
         private static readonly SortableField<T, int> Id = new SortableField<T, int>(e => e.Id);
+
+        private ISortableField<T> _field;
 
         public SortableSmartEnumField(string name, int value, ISortableField<T> field) : base(name, value)
         {

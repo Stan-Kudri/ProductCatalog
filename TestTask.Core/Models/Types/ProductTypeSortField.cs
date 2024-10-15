@@ -1,4 +1,6 @@
-﻿namespace TestTask.Core.Models.Types
+﻿using TestTask.Core.Models.SortModel;
+
+namespace TestTask.Core.Models.Types
 {
     public class ProductTypeSortField : SortableSmartEnumField<ProductTypeSortField, ProductType>
     {

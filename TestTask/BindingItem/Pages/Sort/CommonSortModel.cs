@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using TestTask.Core.Models;
+using TestTask.Core.Models.SortModel;
 
 namespace TestTask.BindingItem.Pages.Sort
 {

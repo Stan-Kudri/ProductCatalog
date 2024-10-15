@@ -41,7 +41,9 @@ namespace TestTask.Core.Models.Categories
 
         public void Remove(int id)
         {
-            var category = _dbContext.Category.FirstOrDefault(e => e.Id == id) ?? throw new InvalidOperationException("Interaction element not found.");
+            var category = _dbContext.Category.FirstOrDefault(e => e.Id == id)
+                            ?? throw new InvalidOperationException("Interaction element not found.");
+
             _dbContext.Category.Remove(category);
             _dbContext.SaveChanges();
         }
@@ -49,6 +51,7 @@ namespace TestTask.Core.Models.Categories
         public void Upsert(Category item)
         {
             var duplicateId = _dbContext.Category.FirstOrDefault(e => e.Id == item.Id);
+
             if (duplicateId == null)
             {
                 Add(item);
@@ -74,16 +77,20 @@ namespace TestTask.Core.Models.Categories
         }
 
         public Category GetCategory(int id)
-            => _dbContext.Category.FirstOrDefault(e => e.Id == id) ?? throw new ArgumentException("Interaction element not found.");
+            => _dbContext.Category.FirstOrDefault(e => e.Id == id)
+            ?? throw new ArgumentException("Interaction element not found.");
 
         public string GetName(int id)
-            => _dbContext.Category.FirstOrDefault(e => e.Id == id).Name ?? throw new ArgumentException("Interaction element not found.");
+            => _dbContext.Category.FirstOrDefault(e => e.Id == id).Name
+            ?? throw new ArgumentException("Interaction element not found.");
 
-        public List<Category> GetAll() => _dbContext.Category.Count() > 0 ? _dbContext.Category.ToList() : null;
+        public List<Category> GetAll()
+            => _dbContext.Category.Count() > 0 ? _dbContext.Category.ToList() : null;
 
         public IQueryable<Category> GetQueryableAll() => _dbContext.Category;
 
-        public bool IsFreeName(string name) => _dbContext.Category.FirstOrDefault(e => e.Name == name) == null;
+        public bool IsFreeName(string name)
+            => _dbContext.Category.FirstOrDefault(e => e.Name == name) == null;
 
         public bool IsFreeNameItemUpsert(Category item)
         {

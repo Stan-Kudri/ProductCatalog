@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace TestTask.Core.Models
+namespace TestTask.Core.Models.SortModel
 {
     public interface ISortableField<T>
     {

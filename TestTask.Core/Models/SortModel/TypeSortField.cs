@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace TestTask.Core.Models
+namespace TestTask.Core.Models.SortModel
 {
     public class TypeSortField
     {

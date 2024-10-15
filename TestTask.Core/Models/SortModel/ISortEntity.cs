@@ -1,9 +1,8 @@
-﻿using Ardalis.SmartEnum;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace TestTask.Core.Models
+namespace TestTask.Core.Models.SortModel
 {
     public interface ISortEntity<T>
         where T : Entity

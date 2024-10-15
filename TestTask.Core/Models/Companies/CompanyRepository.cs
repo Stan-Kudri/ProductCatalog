@@ -34,7 +34,8 @@ namespace TestTask.Core.Models.Companies
                 throw new ArgumentNullException("The format of the transmitted data is incorrect.", nameof(item));
             }
 
-            var oldItem = _dbContext.Company.FirstOrDefault(e => e.Id == item.Id) ?? throw new InvalidOperationException("Interaction element not found.");
+            var oldItem = _dbContext.Company.FirstOrDefault(e => e.Id == item.Id)
+                            ?? throw new InvalidOperationException("Interaction element not found.");
 
             oldItem.Name = item.Name;
             oldItem.DateCreation = item.DateCreation;
@@ -45,7 +46,9 @@ namespace TestTask.Core.Models.Companies
 
         public void Remove(int id)
         {
-            var company = _dbContext.Company.FirstOrDefault(e => e.Id == id) ?? throw new InvalidOperationException("Interaction element not found.");
+            var company = _dbContext.Company.FirstOrDefault(e => e.Id == id)
+                            ?? throw new InvalidOperationException("Interaction element not found.");
+
             _dbContext.Company.Remove(company);
             _dbContext.SaveChanges();
         }
@@ -69,6 +72,7 @@ namespace TestTask.Core.Models.Companies
         public void Upsert(Company company)
         {
             var duplicateId = _dbContext.Company.FirstOrDefault(e => e.Id == company.Id);
+
             if (duplicateId == null)
             {
                 Add(company);
@@ -78,21 +82,24 @@ namespace TestTask.Core.Models.Companies
         }
 
         public string CompanyName(int id)
-            => _dbContext.Company.FirstOrDefault(e => e.Id == id).Name ?? throw new ArgumentException("Interaction element not found.");
+            => _dbContext.Company.FirstOrDefault(e => e.Id == id).Name
+            ?? throw new ArgumentException("Interaction element not found.");
 
         public Company GetCompany(int? id)
             => _dbContext.Company.FirstOrDefault(e => e.Id == id);
 
-        public List<Company> GetAll() => _dbContext.Company.Count() > 0 ? _dbContext.Company.ToList() : null;
+        public List<Company> GetAll()
+            => _dbContext.Company.Count() > 0 ? _dbContext.Company.ToList() : null;
 
-        public IQueryable<Company> GetQueryableAll() => _dbContext.Company.Select(e => e);
+        public IQueryable<Company> GetQueryableAll()
+            => _dbContext.Company.Select(e => e);
 
-        public bool IsFreeName(string name) => _dbContext.Company.FirstOrDefault(e => e.Name == name) == null;
+        public bool IsFreeName(string name)
+            => _dbContext.Company.FirstOrDefault(e => e.Name == name) == null;
 
         public bool IsFreeNameItemUpsert(Company item)
         {
             var busyItem = _dbContext.Company.FirstOrDefault(e => e.Name == item.Name);
-
             return busyItem == null || item.Id == busyItem.Id;
         }
     }

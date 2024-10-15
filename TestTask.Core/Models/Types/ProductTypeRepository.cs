@@ -45,7 +45,8 @@ namespace TestTask.Core.Models.Types
                 throw new Exception("Category ID does not exist.");
             }
 
-            var oldItem = _dbContext.Type.FirstOrDefault(e => e.Id == item.Id) ?? throw new InvalidOperationException("Interaction element not found.");
+            var oldItem = _dbContext.Type.FirstOrDefault(e => e.Id == item.Id)
+                            ?? throw new InvalidOperationException("Interaction element not found.");
 
             oldItem.Name = item.Name;
             oldItem.CategoryId = item.CategoryId;
@@ -55,7 +56,9 @@ namespace TestTask.Core.Models.Types
 
         public void Remove(int id)
         {
-            var item = _dbContext.Type.FirstOrDefault(e => e.Id == id) ?? throw new InvalidOperationException("Interaction element not found.");
+            var item = _dbContext.Type.FirstOrDefault(e => e.Id == id)
+                        ?? throw new InvalidOperationException("Interaction element not found.");
+
             _dbContext.Type.Remove(item);
             _dbContext.SaveChanges();
         }
@@ -92,23 +95,27 @@ namespace TestTask.Core.Models.Types
             Updata(item);
         }
 
-        public List<ProductType> GetAll() => _dbContext.Type.Count() > 0 ? _dbContext.Type.ToList() : null;
+        public List<ProductType> GetAll()
+            => _dbContext.Type.Count() > 0 ? _dbContext.Type.ToList() : null;
 
         public List<ProductType> GetListTypesByCategory(int idCategory)
             => _dbContext.Type.Where(e => e.CategoryId == idCategory).Select(e => e).ToList();
 
-        public bool IsFreeName(string name) => _dbContext.Type.FirstOrDefault(e => e.Name == name) == null;
+        public bool IsFreeName(string name)
+            => _dbContext.Type.FirstOrDefault(e => e.Name == name) == null;
 
 
         public bool IsFreeNameItemUpsert(ProductType item)
         {
             var busyItem = _dbContext.Type.FirstOrDefault(e => e.Name == item.Name);
-
             return busyItem == null || item.Id == busyItem.Id;
         }
 
-        public ProductType GetItem(int id) => _dbContext.Type.FirstOrDefault(e => e.Id == id) ?? throw new ArgumentException("Interaction element not found.");
+        public ProductType GetItem(int id)
+            => _dbContext.Type.FirstOrDefault(e => e.Id == id)
+            ?? throw new ArgumentException("Interaction element not found.");
 
-        public IQueryable<ProductType> GetQueryableAll() => _dbContext.Type.Include(e => e.Category).Select(e => e);
+        public IQueryable<ProductType> GetQueryableAll()
+            => _dbContext.Type.Include(e => e.Category).Select(e => e);
     }
 }

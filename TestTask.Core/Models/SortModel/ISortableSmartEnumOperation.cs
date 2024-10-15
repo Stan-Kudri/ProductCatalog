@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TestTask.Core.Models
+namespace TestTask.Core.Models.SortModel
 {
     public interface ISortableSmartEnumOperation<T>
     {

@@ -40,7 +40,8 @@ namespace TestTask.Core.Models.Products
 
             InvalidDBForItemProduct(item);
 
-            var oldItem = _dbContext.Product.FirstOrDefault(e => e.Id == item.Id) ?? throw new InvalidOperationException("Interaction element not found.");
+            var oldItem = _dbContext.Product.FirstOrDefault(e => e.Id == item.Id)
+                            ?? throw new InvalidOperationException("Interaction element not found.");
 
             oldItem.Name = item.Name;
             oldItem.CompanyId = item.CompanyId;
@@ -54,7 +55,8 @@ namespace TestTask.Core.Models.Products
 
         public void Remove(int id)
         {
-            var item = _dbContext.Product.FirstOrDefault(e => e.Id == id) ?? throw new InvalidOperationException("Interaction element not found.");
+            var item = _dbContext.Product.FirstOrDefault(e => e.Id == id)
+                        ?? throw new InvalidOperationException("Interaction element not found.");
             _dbContext.Product.Remove(item);
             _dbContext.SaveChanges();
         }
@@ -100,11 +102,12 @@ namespace TestTask.Core.Models.Products
         public bool IsFreeNameItemUpsert(Product item)
         {
             var busyItem = _dbContext.Product.FirstOrDefault(e => e.Name == item.Name);
-
             return busyItem == null || item.Id == busyItem.Id;
         }
 
-        public Product GetItem(int id) => _dbContext.Product.FirstOrDefault(e => e.Id == id) ?? throw new ArgumentException("Interaction element not found.");
+        public Product GetItem(int id)
+            => _dbContext.Product.FirstOrDefault(e => e.Id == id)
+            ?? throw new ArgumentException("Interaction element not found.");
 
         public IQueryable<Product> GetQueryableAll()
             => _dbContext.Product.Include(e => e.Company).Include(e => e.Category).ThenInclude(e => e.Types).Select(e => e);

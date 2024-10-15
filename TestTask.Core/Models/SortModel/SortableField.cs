@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace TestTask.Core.Models
+namespace TestTask.Core.Models.SortModel
 {
     public class SortableField<T, TKey>
         : ISortableField<T> where T : Entity

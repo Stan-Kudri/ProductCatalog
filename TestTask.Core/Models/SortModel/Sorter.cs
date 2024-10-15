@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace TestTask.Core.Models
+namespace TestTask.Core.Models.SortModel
 {
     public sealed class Sorter<T>
     {

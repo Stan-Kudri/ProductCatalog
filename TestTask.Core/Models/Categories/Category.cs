@@ -35,7 +35,8 @@ namespace TestTask.Core.Models.Categories
         public bool Equals(Category other)
             => other != null && other.Id == Id && other.Name == Name;
 
-        public override int GetHashCode() => Id.GetHashCode() + Name.GetHashCode();
+        public override int GetHashCode()
+            => Id.GetHashCode() + Name.GetHashCode();
 
         public override string ToString() => Name;
     }
