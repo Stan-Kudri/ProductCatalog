@@ -10,14 +10,13 @@ namespace TestTask.Core.Models.SortModel
         where TSmartEnum : SortableSmartEnumField<TSmartEnum, T>
         where T : Entity
     {
-        private static readonly SortableField<T, int> Id = new SortableField<T, int>(e => e.Id);
+        private static readonly SortableSmartEnumField<TSmartEnum, T> Id = new SortableSmartEnumField<TSmartEnum, T>("Id", 0, CreateField(e => e.Id));
 
         private ISortableField<T> _field;
 
-        public SortableSmartEnumField(string name, int value, ISortableField<T> field) : base(name, value)
-        {
-            _field = field;
-        }
+        public SortableSmartEnumField(string name, int value, ISortableField<T> field)
+            : base(name, value) => _field = field;
+
 
         public static ISortableField<T> DefaultValue => Id;
 
