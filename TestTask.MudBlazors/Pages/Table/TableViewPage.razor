@@ -77,7 +77,7 @@
             {
                 <MudTd DataLabel="@item.Name">@item.ValueSelector(@context)</MudTd>
             }
-            <MudTh Style="text-align:center">
+            <MudTh Class="d-flex justify-center">
                 <MudTooltip Text="Edit" Placement="Placement.Bottom">
                     <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Outlined" Size="Size.Medium" OnClick="@((e) => SaveDialogItem(context.Id))" />
                 </MudTooltip>
