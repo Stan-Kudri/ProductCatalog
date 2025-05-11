@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using TestTask.Core.DBContext;
 
@@ -85,9 +86,9 @@ namespace TestTask.Core.Models.Categories
             ?? throw new ArgumentException("Interaction element not found.");
 
         public List<Category> GetAll()
-            => _dbContext.Category.Count() > 0 ? _dbContext.Category.ToList() : null;
+            => _dbContext.Category.Count() > 0 ? _dbContext.Category.AsNoTracking().ToList() : null;
 
-        public IQueryable<Category> GetQueryableAll() => _dbContext.Category;
+        public IQueryable<Category> GetQueryableAll() => _dbContext.Category.AsNoTracking();
 
         public bool IsFreeName(string name)
             => _dbContext.Category.FirstOrDefault(e => e.Name == name) == null;

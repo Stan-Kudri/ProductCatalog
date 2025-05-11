@@ -95,7 +95,7 @@ namespace TestTask.Core.Models.Products
             Updata(item);
         }
 
-        public List<Product> GetAll() => _dbContext.Product.Count() > 0 ? _dbContext.Product.ToList() : null;
+        public List<Product> GetAll() => _dbContext.Product.Count() > 0 ? _dbContext.Product.AsNoTracking().ToList() : null;
 
         public bool IsFreeName(string name) => _dbContext.Product.FirstOrDefault(e => e.Name == name) == null;
 
@@ -110,7 +110,7 @@ namespace TestTask.Core.Models.Products
             ?? throw new ArgumentException("Interaction element not found.");
 
         public IQueryable<Product> GetQueryableAll()
-            => _dbContext.Product.Include(e => e.Company).Include(e => e.Category).ThenInclude(e => e.Types).Select(e => e);
+            => _dbContext.Product.Include(e => e.Company).Include(e => e.Category).ThenInclude(e => e.Types).AsNoTracking();
 
         private void InvalidDBForItemProduct(Product item)
         {

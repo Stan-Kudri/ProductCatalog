@@ -18,6 +18,7 @@ namespace TestTask.Core.DataTable
             get => _selectTable;
             set => _selectTable = value;
         }
+
         public ObservableCollection<Tables> Items { get; set; } = new ObservableCollection<Tables>(Tables.List);
     }
 }

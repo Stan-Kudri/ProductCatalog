@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using TestTask.Core.DBContext;
 
@@ -89,10 +90,10 @@ namespace TestTask.Core.Models.Companies
             => _dbContext.Company.FirstOrDefault(e => e.Id == id);
 
         public List<Company> GetAll()
-            => _dbContext.Company.Count() > 0 ? _dbContext.Company.ToList() : null;
+            => _dbContext.Company.Count() > 0 ? _dbContext.Company.AsNoTracking().ToList() : null;
 
         public IQueryable<Company> GetQueryableAll()
-            => _dbContext.Company.Select(e => e);
+            => _dbContext.Company.AsNoTracking();
 
         public bool IsFreeName(string name)
             => _dbContext.Company.FirstOrDefault(e => e.Name == name) == null;
