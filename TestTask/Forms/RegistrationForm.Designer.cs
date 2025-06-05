@@ -42,7 +42,7 @@
             // 
             // tlpRegistration
             // 
-            tlpRegistration.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tlpRegistration.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tlpRegistration.ColumnCount = 1;
             tlpRegistration.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tlpRegistration.Controls.Add(tbLogIn, 0, 0);
@@ -60,11 +60,11 @@
             // 
             // tbLogIn
             // 
+            tbLogIn.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tbLogIn.AnimateReadOnly = false;
             tbLogIn.BorderStyle = System.Windows.Forms.BorderStyle.None;
             tbLogIn.DataBindings.Add(new System.Windows.Forms.Binding("Text", userModelBindingSource, "Username", true));
             tbLogIn.Depth = 0;
-            tbLogIn.Dock = System.Windows.Forms.DockStyle.Fill;
             tbLogIn.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             tbLogIn.Hint = "Username";
             tbLogIn.LeadingIcon = null;
@@ -85,11 +85,11 @@
             // 
             // tbPassword
             // 
+            tbPassword.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tbPassword.AnimateReadOnly = false;
             tbPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             tbPassword.DataBindings.Add(new System.Windows.Forms.Binding("Text", userModelBindingSource, "Password", true));
             tbPassword.Depth = 0;
-            tbPassword.Dock = System.Windows.Forms.DockStyle.Fill;
             tbPassword.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             tbPassword.Hint = "Password";
             tbPassword.LeadingIcon = null;
@@ -106,10 +106,10 @@
             // 
             // btnSignUpNow
             // 
+            btnSignUpNow.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             btnSignUpNow.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             btnSignUpNow.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             btnSignUpNow.Depth = 0;
-            btnSignUpNow.Dock = System.Windows.Forms.DockStyle.Fill;
             btnSignUpNow.HighEmphasis = true;
             btnSignUpNow.Icon = null;
             btnSignUpNow.Location = new System.Drawing.Point(6, 6);
@@ -127,7 +127,7 @@
             // 
             // tableLayoutPanel1
             // 
-            tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel1.Controls.Add(btnSignUpNow, 0, 0);

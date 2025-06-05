@@ -45,12 +45,12 @@ namespace TestTask.Forms.Companies
             // 
             // tbNameCompany
             // 
+            tbNameCompany.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tbNameCompany.AnimateReadOnly = false;
             tbNameCompany.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             tbNameCompany.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             tbNameCompany.DataBindings.Add(new System.Windows.Forms.Binding("Text", companyModelBindingSource, "Name", true));
             tbNameCompany.Depth = 0;
-            tbNameCompany.Dock = System.Windows.Forms.DockStyle.Fill;
             tbNameCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             tbNameCompany.HideSelection = true;
             tbNameCompany.Hint = "Name";
@@ -81,6 +81,7 @@ namespace TestTask.Forms.Companies
             // 
             // tlpNameCompany
             // 
+            tlpNameCompany.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tlpNameCompany.ColumnCount = 1;
             tlpNameCompany.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tlpNameCompany.Controls.Add(tbNameCompany, 0, 0);
@@ -95,6 +96,7 @@ namespace TestTask.Forms.Companies
             // 
             // tlpCompany
             // 
+            tlpCompany.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tlpCompany.ColumnCount = 1;
             tlpCompany.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tlpCompany.Controls.Add(tbContry, 0, 0);
@@ -111,6 +113,7 @@ namespace TestTask.Forms.Companies
             // 
             // tbContry
             // 
+            tbContry.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tbContry.AnimateReadOnly = false;
             tbContry.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             tbContry.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
@@ -143,10 +146,10 @@ namespace TestTask.Forms.Companies
             // 
             // dtpCreateCompany
             // 
+            dtpCreateCompany.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             dtpCreateCompany.CalendarTrailingForeColor = System.Drawing.SystemColors.GradientActiveCaption;
             dtpCreateCompany.CustomFormat = "";
             dtpCreateCompany.DataBindings.Add(new System.Windows.Forms.Binding("Value", companyModelBindingSource, "DateCreation", true));
-            dtpCreateCompany.Dock = System.Windows.Forms.DockStyle.Fill;
             dtpCreateCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dtpCreateCompany.Location = new System.Drawing.Point(4, 60);
             dtpCreateCompany.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -158,7 +161,7 @@ namespace TestTask.Forms.Companies
             // 
             // tlbButtonCompany
             // 
-            tlbButtonCompany.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            tlbButtonCompany.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tlbButtonCompany.ColumnCount = 3;
             tlbButtonCompany.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             tlbButtonCompany.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));

@@ -25,163 +25,170 @@ namespace TestTask.Forms.Categories
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.tlpText = new System.Windows.Forms.TableLayoutPanel();
-            this.tbCategory = new MaterialSkin.Controls.MaterialTextBox2();
-            this.categoryModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tlpButtonCategory = new System.Windows.Forms.TableLayoutPanel();
-            this.btnSave = new MaterialSkin.Controls.MaterialButton();
-            this.btnClose = new MaterialSkin.Controls.MaterialButton();
-            this.btnClear = new MaterialSkin.Controls.MaterialButton();
-            this.tlpText.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.categoryModelBindingSource)).BeginInit();
-            this.tlpButtonCategory.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            tlpText = new System.Windows.Forms.TableLayoutPanel();
+            tbCategory = new MaterialSkin.Controls.MaterialTextBox2();
+            categoryModelBindingSource = new System.Windows.Forms.BindingSource(components);
+            tlpButtonCategory = new System.Windows.Forms.TableLayoutPanel();
+            btnSave = new MaterialSkin.Controls.MaterialButton();
+            btnClose = new MaterialSkin.Controls.MaterialButton();
+            btnClear = new MaterialSkin.Controls.MaterialButton();
+            tlpText.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)categoryModelBindingSource).BeginInit();
+            tlpButtonCategory.SuspendLayout();
+            SuspendLayout();
             // 
             // tlpText
             // 
-            this.tlpText.ColumnCount = 1;
-            this.tlpText.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpText.Controls.Add(this.tbCategory, 0, 0);
-            this.tlpText.Location = new System.Drawing.Point(5, 70);
-            this.tlpText.Name = "tlpText";
-            this.tlpText.RowCount = 1;
-            this.tlpText.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpText.Size = new System.Drawing.Size(240, 50);
-            this.tlpText.TabIndex = 0;
+            tlpText.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tlpText.ColumnCount = 1;
+            tlpText.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tlpText.Controls.Add(tbCategory, 0, 0);
+            tlpText.Location = new System.Drawing.Point(6, 81);
+            tlpText.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tlpText.Name = "tlpText";
+            tlpText.RowCount = 1;
+            tlpText.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tlpText.Size = new System.Drawing.Size(280, 58);
+            tlpText.TabIndex = 0;
             // 
             // tbCategory
             // 
-            this.tbCategory.AnimateReadOnly = false;
-            this.tbCategory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.tbCategory.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.tbCategory.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.categoryModelBindingSource, "Name", true));
-            this.tbCategory.Depth = 0;
-            this.tbCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.tbCategory.HideSelection = true;
-            this.tbCategory.Hint = "Name";
-            this.tbCategory.LeadingIcon = null;
-            this.tbCategory.Location = new System.Drawing.Point(3, 3);
-            this.tbCategory.MaxLength = 32767;
-            this.tbCategory.MouseState = MaterialSkin.MouseState.OUT;
-            this.tbCategory.Name = "tbCategory";
-            this.tbCategory.PasswordChar = '\0';
-            this.tbCategory.PrefixSuffixText = null;
-            this.tbCategory.ReadOnly = false;
-            this.tbCategory.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbCategory.SelectedText = "";
-            this.tbCategory.SelectionLength = 0;
-            this.tbCategory.SelectionStart = 0;
-            this.tbCategory.ShortcutsEnabled = true;
-            this.tbCategory.Size = new System.Drawing.Size(234, 48);
-            this.tbCategory.TabIndex = 0;
-            this.tbCategory.TabStop = false;
-            this.tbCategory.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.tbCategory.TrailingIcon = null;
-            this.tbCategory.UseSystemPasswordChar = false;
+            tbCategory.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tbCategory.AnimateReadOnly = false;
+            tbCategory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            tbCategory.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            tbCategory.DataBindings.Add(new System.Windows.Forms.Binding("Text", categoryModelBindingSource, "Name", true));
+            tbCategory.Depth = 0;
+            tbCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            tbCategory.HideSelection = true;
+            tbCategory.Hint = "Name";
+            tbCategory.LeadingIcon = null;
+            tbCategory.Location = new System.Drawing.Point(4, 3);
+            tbCategory.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tbCategory.MaxLength = 32767;
+            tbCategory.MouseState = MaterialSkin.MouseState.OUT;
+            tbCategory.Name = "tbCategory";
+            tbCategory.PasswordChar = '\0';
+            tbCategory.PrefixSuffixText = null;
+            tbCategory.ReadOnly = false;
+            tbCategory.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            tbCategory.SelectedText = "";
+            tbCategory.SelectionLength = 0;
+            tbCategory.SelectionStart = 0;
+            tbCategory.ShortcutsEnabled = true;
+            tbCategory.Size = new System.Drawing.Size(272, 48);
+            tbCategory.TabIndex = 0;
+            tbCategory.TabStop = false;
+            tbCategory.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            tbCategory.TrailingIcon = null;
+            tbCategory.UseSystemPasswordChar = false;
             // 
             // categoryModelBindingSource
             // 
-            this.categoryModelBindingSource.DataSource = typeof(TestTask.BindingItem.CategoryModel);
+            categoryModelBindingSource.DataSource = typeof(CategoryModel);
             // 
             // tlpButtonCategory
             // 
-            this.tlpButtonCategory.ColumnCount = 3;
-            this.tlpButtonCategory.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpButtonCategory.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpButtonCategory.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpButtonCategory.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpButtonCategory.Controls.Add(this.btnSave, 0, 0);
-            this.tlpButtonCategory.Controls.Add(this.btnClose, 2, 0);
-            this.tlpButtonCategory.Controls.Add(this.btnClear, 1, 0);
-            this.tlpButtonCategory.Location = new System.Drawing.Point(5, 125);
-            this.tlpButtonCategory.Margin = new System.Windows.Forms.Padding(0);
-            this.tlpButtonCategory.Name = "tlpButtonCategory";
-            this.tlpButtonCategory.RowCount = 1;
-            this.tlpButtonCategory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpButtonCategory.Size = new System.Drawing.Size(240, 45);
-            this.tlpButtonCategory.TabIndex = 1;
+            tlpButtonCategory.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tlpButtonCategory.ColumnCount = 3;
+            tlpButtonCategory.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            tlpButtonCategory.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            tlpButtonCategory.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            tlpButtonCategory.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            tlpButtonCategory.Controls.Add(btnSave, 0, 0);
+            tlpButtonCategory.Controls.Add(btnClose, 2, 0);
+            tlpButtonCategory.Controls.Add(btnClear, 1, 0);
+            tlpButtonCategory.Location = new System.Drawing.Point(6, 144);
+            tlpButtonCategory.Margin = new System.Windows.Forms.Padding(0);
+            tlpButtonCategory.Name = "tlpButtonCategory";
+            tlpButtonCategory.RowCount = 1;
+            tlpButtonCategory.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tlpButtonCategory.Size = new System.Drawing.Size(280, 52);
+            tlpButtonCategory.TabIndex = 1;
             // 
             // btnSave
             // 
-            this.btnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSave.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnSave.Depth = 0;
-            this.btnSave.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSave.HighEmphasis = true;
-            this.btnSave.Icon = null;
-            this.btnSave.Location = new System.Drawing.Point(4, 6);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnSave.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnSave.Name = "btnSave";
-            this.btnSave.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnSave.Size = new System.Drawing.Size(72, 33);
-            this.btnSave.TabIndex = 3;
-            this.btnSave.Text = "Save";
-            this.btnSave.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnSave.UseAccentColor = false;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            btnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnSave.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            btnSave.Depth = 0;
+            btnSave.Dock = System.Windows.Forms.DockStyle.Fill;
+            btnSave.HighEmphasis = true;
+            btnSave.Icon = null;
+            btnSave.Location = new System.Drawing.Point(5, 7);
+            btnSave.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            btnSave.MouseState = MaterialSkin.MouseState.HOVER;
+            btnSave.Name = "btnSave";
+            btnSave.NoAccentTextColor = System.Drawing.Color.Empty;
+            btnSave.Size = new System.Drawing.Size(83, 38);
+            btnSave.TabIndex = 3;
+            btnSave.Text = "Save";
+            btnSave.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            btnSave.UseAccentColor = false;
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += BtnSave_Click;
             // 
             // btnClose
             // 
-            this.btnClose.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnClose.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnClose.Depth = 0;
-            this.btnClose.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClose.HighEmphasis = true;
-            this.btnClose.Icon = null;
-            this.btnClose.Location = new System.Drawing.Point(164, 6);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnClose.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnClose.Name = "btnClose";
-            this.btnClose.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClose.Size = new System.Drawing.Size(72, 33);
-            this.btnClose.TabIndex = 5;
-            this.btnClose.Text = "Close";
-            this.btnClose.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnClose.UseAccentColor = false;
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
+            btnClose.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnClose.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            btnClose.Depth = 0;
+            btnClose.Dock = System.Windows.Forms.DockStyle.Fill;
+            btnClose.HighEmphasis = true;
+            btnClose.Icon = null;
+            btnClose.Location = new System.Drawing.Point(191, 7);
+            btnClose.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            btnClose.MouseState = MaterialSkin.MouseState.HOVER;
+            btnClose.Name = "btnClose";
+            btnClose.NoAccentTextColor = System.Drawing.Color.Empty;
+            btnClose.Size = new System.Drawing.Size(84, 38);
+            btnClose.TabIndex = 5;
+            btnClose.Text = "Close";
+            btnClose.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            btnClose.UseAccentColor = false;
+            btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += BtnClose_Click;
             // 
             // btnClear
             // 
-            this.btnClear.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnClear.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnClear.Depth = 0;
-            this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClear.HighEmphasis = true;
-            this.btnClear.Icon = null;
-            this.btnClear.Location = new System.Drawing.Point(84, 6);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnClear.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnClear.Name = "btnClear";
-            this.btnClear.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClear.Size = new System.Drawing.Size(72, 33);
-            this.btnClear.TabIndex = 4;
-            this.btnClear.Text = "Default Value";
-            this.btnClear.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnClear.UseAccentColor = false;
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
+            btnClear.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnClear.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            btnClear.Depth = 0;
+            btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
+            btnClear.HighEmphasis = true;
+            btnClear.Icon = null;
+            btnClear.Location = new System.Drawing.Point(98, 7);
+            btnClear.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            btnClear.MouseState = MaterialSkin.MouseState.HOVER;
+            btnClear.Name = "btnClear";
+            btnClear.NoAccentTextColor = System.Drawing.Color.Empty;
+            btnClear.Size = new System.Drawing.Size(83, 38);
+            btnClear.TabIndex = 4;
+            btnClear.Text = "Default Value";
+            btnClear.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            btnClear.UseAccentColor = false;
+            btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += BtnClear_Click;
             // 
             // CategoryFormBase
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(250, 175);
-            this.Controls.Add(this.tlpButtonCategory);
-            this.Controls.Add(this.tlpText);
-            this.MinimumSize = new System.Drawing.Size(250, 175);
-            this.Name = "CategoryFormBase";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CategoryForm";
-            this.Load += new System.EventHandler(this.FormBase_Load);
-            this.tlpText.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.categoryModelBindingSource)).EndInit();
-            this.tlpButtonCategory.ResumeLayout(false);
-            this.tlpButtonCategory.PerformLayout();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(292, 202);
+            Controls.Add(tlpButtonCategory);
+            Controls.Add(tlpText);
+            Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            MinimumSize = new System.Drawing.Size(292, 202);
+            Name = "CategoryFormBase";
+            Padding = new System.Windows.Forms.Padding(5, 85, 5, 3);
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "CategoryForm";
+            Load += FormBase_Load;
+            tlpText.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)categoryModelBindingSource).EndInit();
+            tlpButtonCategory.ResumeLayout(false);
+            tlpButtonCategory.PerformLayout();
+            ResumeLayout(false);
 
         }
 

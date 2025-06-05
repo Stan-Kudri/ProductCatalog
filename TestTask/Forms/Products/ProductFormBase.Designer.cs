@@ -58,11 +58,11 @@ namespace TestTask.Forms.Products
             // 
             // cmbCompanyValue
             // 
+            cmbCompanyValue.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             cmbCompanyValue.AutoResize = false;
             cmbCompanyValue.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
             cmbCompanyValue.DataSource = itemsBindingSourceCompany;
             cmbCompanyValue.Depth = 0;
-            cmbCompanyValue.Dock = System.Windows.Forms.DockStyle.Fill;
             cmbCompanyValue.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             cmbCompanyValue.DropDownHeight = 174;
             cmbCompanyValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -92,7 +92,7 @@ namespace TestTask.Forms.Products
             // 
             // tlpProductData
             // 
-            tlpProductData.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tlpProductData.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tlpProductData.ColumnCount = 1;
             tlpProductData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tlpProductData.Controls.Add(cmbCompanyValue, 0, 1);
@@ -117,12 +117,12 @@ namespace TestTask.Forms.Products
             // 
             // tbPrice
             // 
+            tbPrice.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tbPrice.AnimateReadOnly = false;
             tbPrice.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             tbPrice.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             tbPrice.DataBindings.Add(new System.Windows.Forms.Binding("Text", productModelBindingSource, "Price", true));
             tbPrice.Depth = 0;
-            tbPrice.Dock = System.Windows.Forms.DockStyle.Fill;
             tbPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             tbPrice.HideSelection = true;
             tbPrice.Hint = "Price";
@@ -155,12 +155,12 @@ namespace TestTask.Forms.Products
             // 
             // tbDestination
             // 
+            tbDestination.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tbDestination.AnimateReadOnly = false;
             tbDestination.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             tbDestination.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             tbDestination.DataBindings.Add(new System.Windows.Forms.Binding("Text", productModelBindingSource, "Destination", true));
             tbDestination.Depth = 0;
-            tbDestination.Dock = System.Windows.Forms.DockStyle.Fill;
             tbDestination.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             tbDestination.HideSelection = true;
             tbDestination.Hint = "Destination";
@@ -187,11 +187,11 @@ namespace TestTask.Forms.Products
             // 
             // cmbCategoryValue
             // 
+            cmbCategoryValue.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             cmbCategoryValue.AutoResize = false;
             cmbCategoryValue.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
             cmbCategoryValue.DataSource = itemsBindingSourceCategory;
             cmbCategoryValue.Depth = 0;
-            cmbCategoryValue.Dock = System.Windows.Forms.DockStyle.Fill;
             cmbCategoryValue.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             cmbCategoryValue.DropDownHeight = 174;
             cmbCategoryValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -222,11 +222,11 @@ namespace TestTask.Forms.Products
             // 
             // cmbTypeValue
             // 
+            cmbTypeValue.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             cmbTypeValue.AutoResize = false;
             cmbTypeValue.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
             cmbTypeValue.DataSource = itemsBindingSourceTypes;
             cmbTypeValue.Depth = 0;
-            cmbTypeValue.Dock = System.Windows.Forms.DockStyle.Fill;
             cmbTypeValue.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             cmbTypeValue.DropDownHeight = 174;
             cmbTypeValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -256,12 +256,12 @@ namespace TestTask.Forms.Products
             // 
             // tbName
             // 
+            tbName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tbName.AnimateReadOnly = false;
             tbName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             tbName.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             tbName.DataBindings.Add(new System.Windows.Forms.Binding("Text", productModelBindingSource, "Name", true));
             tbName.Depth = 0;
-            tbName.Dock = System.Windows.Forms.DockStyle.Fill;
             tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             tbName.HideSelection = true;
             tbName.Hint = "Name";
@@ -288,7 +288,7 @@ namespace TestTask.Forms.Products
             // 
             // tlpProductButton
             // 
-            tlpProductButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            tlpProductButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tlpProductButton.ColumnCount = 3;
             tlpProductButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             tlpProductButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -376,7 +376,7 @@ namespace TestTask.Forms.Products
             Controls.Add(tlpProductButton);
             Controls.Add(tlpProductData);
             Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            MinimumSize = new System.Drawing.Size(362, 421);
+            MinimumSize = new System.Drawing.Size(362, 460);
             Name = "ProductFormBase";
             Padding = new System.Windows.Forms.Padding(5, 85, 5, 3);
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
