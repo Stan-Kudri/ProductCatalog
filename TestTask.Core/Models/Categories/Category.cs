@@ -19,7 +19,10 @@ namespace TestTask.Core.Models.Categories
 
         public Category(string name, List<Product> product = null, List<ProductType> type = null)
         {
-            Name = name != string.Empty && name != null ? Name = name : throw new ArgumentException("The category name cannot be empty.", nameof(name));
+            Name = name != string.Empty && name != null
+                   ? Name = name
+                   : throw new ArgumentException("The category name cannot be empty.", nameof(name));
+
             Products = product;
             Types = type;
         }
@@ -35,8 +38,7 @@ namespace TestTask.Core.Models.Categories
         public bool Equals(Category other)
             => other != null && other.Id == Id && other.Name == Name;
 
-        public override int GetHashCode()
-            => Id.GetHashCode() + Name.GetHashCode();
+        public override int GetHashCode() => Id.GetHashCode() + Name.GetHashCode();
 
         public override string ToString() => Name;
     }

@@ -11,10 +11,7 @@ namespace TestTask.Forms.Companies
         private bool _сhangedName = false;
 
         public EditItemCompanyForm(IServiceProvider serviceProvider)
-            : base(serviceProvider)
-        {
-            Text = "Edit Company";
-        }
+            : base(serviceProvider) => Text = "Edit Company";
 
         public void Initialize(Company company) => _oldCompany = company;
 

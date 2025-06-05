@@ -14,7 +14,7 @@ namespace TestTask.Core.DBContext.Configuration
             builder.Property(e => e.CompanyId).IsRequired().HasColumnName("companyId");
             builder.Property(e => e.CategoryId).IsRequired().HasColumnName("categoryId");
             builder.Property(e => e.TypeId).IsRequired().HasColumnName("typeId");
-            builder.Property(e => e.Price).IsRequired().HasColumnType("NUMERIC").HasColumnName("price").HasConversion<double>();
+            builder.Property(e => e.Price).IsRequired().HasColumnName("price").HasConversion<double>();
             builder.Property(e => e.Destination).HasColumnName("destination");
             builder.HasOne(e => e.Company).WithMany(e => e.Product).HasForeignKey(e => e.CompanyId).OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(e => e.Category).WithMany(e => e.Products).HasForeignKey(e => e.CategoryId).OnDelete(DeleteBehavior.Cascade);

@@ -11,7 +11,7 @@ namespace TestTask.Core.DBContext.Configuration
             builder.ToTable("company");
             builder.HasIndex(e => e.Name).IsUnique();
             builder.Property(e => e.Name).IsRequired().HasMaxLength(128).HasColumnName("name").HasMaxLength(128);
-            builder.Property(e => e.DateCreation).IsRequired().HasColumnType("DATETIME").HasColumnName("dateCreation");
+            builder.Property(e => e.DateCreation).IsRequired().HasColumnName("dateCreation");
             builder.Property(e => e.Country).IsRequired().HasMaxLength(64).HasColumnName("country");
         }
     }

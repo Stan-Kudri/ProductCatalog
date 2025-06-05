@@ -18,7 +18,9 @@ namespace TestTask.Core.Models.Companies
 
         public Company(string name, DateTime dateCreation, string country, List<Product> products = null)
         {
-            Name = name != string.Empty && name != null ? Name = name : throw new ArgumentException("The product name cannot be empty.", nameof(name));
+            Name = name != string.Empty && name != null
+                   ? Name = name
+                   : throw new ArgumentException("The product name cannot be empty.", nameof(name));
 
             DateCreation = dateCreation <= DateTime.Now ?
                 DateCreation = dateCreation :

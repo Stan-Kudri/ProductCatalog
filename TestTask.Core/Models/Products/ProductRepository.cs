@@ -79,9 +79,9 @@ namespace TestTask.Core.Models.Products
 
         public void Upsert(Product item)
         {
-            if (_dbContext.Company.FirstOrDefault(e => e.Id == item.CompanyId) == null ||
-                _dbContext.Category.FirstOrDefault(e => e.Id == item.CategoryId) == null ||
-                _dbContext.Type.FirstOrDefault(e => e.Id == item.TypeId) == null)
+            if (_dbContext.Company.FirstOrDefault(e => e.Id == item.CompanyId) == null
+                || _dbContext.Category.FirstOrDefault(e => e.Id == item.CategoryId) == null
+                || _dbContext.Type.FirstOrDefault(e => e.Id == item.TypeId) == null)
             {
                 return;
             }

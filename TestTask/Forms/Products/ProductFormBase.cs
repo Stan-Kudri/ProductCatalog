@@ -65,6 +65,7 @@ namespace TestTask.Forms.Products
             {
                 _categories.Category = category;
                 itemsBindingSourceTypes.DataSource = _types.Items;
+                SetTypeProductSelector();
             }
         }
 
@@ -90,13 +91,23 @@ namespace TestTask.Forms.Products
             }
         }
 
+        private void SetTypeProductSelector()
+        {
+            _types = new SelectType(_categories.Category.Types);
+
+            cmbTypeValue.Enabled = _types.Items != null && _types.Items.Count > 0;
+            if (cmbTypeValue.Enabled)
+            {
+                itemsBindingSourceTypes.DataSource = _types.Items;
+            }
+        }
+
         protected virtual void SetDefaultValueData()
         {
             tbName.Text = string.Empty;
             cmbCompanyValue.SelectedItem = _companies.Company;
             cmbCategoryValue.SelectedItem = _categories.Category;
-            _types = new SelectType(_categories.Category.Types);
-            cmbTypeValue.SelectedItem = _types.Type;
+            SetTypeProductSelector();
             tbPrice.Text = "0";
             tbDestination.Text = string.Empty;
         }
@@ -109,19 +120,19 @@ namespace TestTask.Forms.Products
                 return false;
             }
 
-            if (cmbCompanyValue.Text.Length <= 0)
+            if (cmbCompanyValue.Text.Length <= decimal.Zero)
             {
                 message = "Select your company.";
                 return false;
             }
 
-            if (cmbCategoryValue.Text.Length <= 0)
+            if (cmbCategoryValue.Text.Length <= decimal.Zero)
             {
                 message = "Select your category.";
                 return false;
             }
 
-            if (cmbTypeValue.Text.Length <= 0)
+            if (cmbTypeValue.Text.Length <= decimal.Zero)
             {
                 message = "Select your type.";
                 return false;

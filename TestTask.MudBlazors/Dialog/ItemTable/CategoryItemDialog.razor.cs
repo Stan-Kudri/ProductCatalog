@@ -10,6 +10,8 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 {
     public partial class CategoryItemDialog : IItemDialog
     {
+        private const string ErrorFieldRequired = "Field is required.";
+
         [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
         [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
         [Inject] private IMessageBox MessageDialog { get; set; } = null!;
@@ -104,7 +106,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
         {
             if (string.IsNullOrWhiteSpace(str))
             {
-                yield return "Field is required.";
+                yield return ErrorFieldRequired;
             }
         }
 

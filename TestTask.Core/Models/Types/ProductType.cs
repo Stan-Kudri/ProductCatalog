@@ -19,9 +19,13 @@ namespace TestTask.Core.Models.Types
 
         public ProductType(string name, int categoryId)
         {
-            Name = name != string.Empty && name != null ? Name = name : throw new ArgumentException("The category name cannot be empty.", nameof(name));
+            Name = name != string.Empty && name != null
+                   ? Name = name
+                   : throw new ArgumentException("The category name cannot be empty.", nameof(name));
 
-            CategoryId = categoryId > 0 ? CategoryId = categoryId : throw new ArgumentException("Category ID greater than zero.", nameof(categoryId));
+            CategoryId = categoryId > 0
+                         ? CategoryId = categoryId
+                         : throw new ArgumentException("Category ID greater than zero.", nameof(categoryId));
         }
 
         public string Name { get; set; }
@@ -30,7 +34,7 @@ namespace TestTask.Core.Models.Types
 
         public Category Category { get; set; }
 
-        public List<Product> Products { get; set; }
+        public List<Product> Products { get; set; } = null;
 
         public override bool Equals(object obj) => Equals(obj as ProductType);
 
