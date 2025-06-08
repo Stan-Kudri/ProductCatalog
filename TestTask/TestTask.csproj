@@ -22,6 +22,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+	<EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>D8A7BEF7BEAC2E79D5051BF156EA5F750D023587</ManifestCertificateThumbprint>
