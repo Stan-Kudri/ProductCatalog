@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using TestTask.Core.Models.Categories;
 
 namespace TestTask.Test.ServiceTest
@@ -111,13 +111,12 @@ namespace TestTask.Test.ServiceTest
             },
         };
 
-
         [Theory]
         [MemberData(nameof(CategoryItems))]
         public void Service_Should_Add_All_The_Item_Of_Database(List<Category> category)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var categoryRepository = new CategoryRepository(dbContext);
             categoryRepository.AddRange(category);
 
@@ -133,7 +132,7 @@ namespace TestTask.Test.ServiceTest
         public void Service_Should_Add_The_Item_To_The_Database(List<Category> categories, Category addCategory, List<Category> expectCategories)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var service = new CategoryRepository(dbContext);
             dbContext.Category.AddRange(categories);
             dbContext.SaveChanges();
@@ -151,7 +150,7 @@ namespace TestTask.Test.ServiceTest
         public void Service_Should_Update_The_Item_To_The_Database(List<Category> categories, Category updateCategory, List<Category> expectCategories)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var service = new CategoryRepository(dbContext);
             dbContext.Category.AddRange(categories);
             dbContext.SaveChanges();
@@ -169,7 +168,7 @@ namespace TestTask.Test.ServiceTest
         public void Service_Should_Remove_Range_Items_By_ID_To_The_Database(List<Category> categories, List<int> removeID, List<Category> expectCategories)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var service = new CategoryRepository(dbContext);
             dbContext.Category.AddRange(categories);
             dbContext.SaveChanges();
@@ -187,7 +186,7 @@ namespace TestTask.Test.ServiceTest
         public void Get_Name_By_ID_From_The_Database(List<Category> categories, int id, string expectName)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var service = new CategoryRepository(dbContext);
             service.AddRange(categories);
 
@@ -203,7 +202,7 @@ namespace TestTask.Test.ServiceTest
         public void Add_Items_Did_Not_Happen_Because_The_ID_Are_Busy(List<Category> categories, Category category)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var service = new CategoryRepository(dbContext);
             service.AddRange(categories);
 

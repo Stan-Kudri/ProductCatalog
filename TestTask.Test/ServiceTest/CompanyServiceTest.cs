@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using TestTask.Core.Models.Companies;
 
 namespace TestTask.Test.ServiceTest
@@ -126,7 +126,7 @@ namespace TestTask.Test.ServiceTest
         public void Service_Should_Add_All_The_Item_Of_Database(List<Company> companies)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var companyRepository = new CompanyRepository(dbContext);
             companyRepository.AddRange(companies);
 
@@ -142,7 +142,7 @@ namespace TestTask.Test.ServiceTest
         public void Service_Should_Add_The_Item_To_The_Database(List<Company> companies, Company addCompany, List<Company> expectCompanies)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var companyRepository = new CompanyRepository(dbContext);
             dbContext.Company.AddRange(companies);
             dbContext.SaveChanges();
@@ -160,7 +160,7 @@ namespace TestTask.Test.ServiceTest
         public void Service_Should_Update_The_Item_To_The_Database(List<Company> companies, Company updateCompany, List<Company> expectCompanies)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var companyRepository = new CompanyRepository(dbContext);
             dbContext.Company.AddRange(companies);
             dbContext.SaveChanges();
@@ -178,7 +178,7 @@ namespace TestTask.Test.ServiceTest
         public void Service_Should_Remove_Range_Items_By_ID_To_The_Database(List<Company> companies, List<int> removeID, List<Company> expectCompanies)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var companyRepository = new CompanyRepository(dbContext);
             dbContext.Company.AddRange(companies);
             dbContext.SaveChanges();
@@ -196,7 +196,7 @@ namespace TestTask.Test.ServiceTest
         public void Get_Name_By_ID_From_The_Database(Company company, int id, string expectName)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var companyRepository = new CompanyRepository(dbContext);
             companyRepository.Add(company);
 
@@ -212,7 +212,7 @@ namespace TestTask.Test.ServiceTest
         public void Add_Items_Did_Not_Happen_Because_The_ID_Are_Busy(List<Company> companies, Company company)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var companyRepository = new CompanyRepository(dbContext);
             companyRepository.AddRange(companies);
 

@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Page;
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -6,12 +6,8 @@ using TestTask.Core.DBContext;
 
 namespace TestTask.Core.Models.Categories
 {
-    public class CategoryRepository : IRepository<Category>
+    public class CategoryRepository(AppDbContext appDbContext) : IRepository<Category>
     {
-        private readonly AppDbContext _dbContext;
-
-        public CategoryRepository(AppDbContext appDbContext) => _dbContext = appDbContext;
-
         public void Add(Category item)
         {
             if (item == null)
@@ -19,39 +15,39 @@ namespace TestTask.Core.Models.Categories
                 throw new ArgumentException("The received parameters are not correct.", nameof(item));
             }
 
-            if (_dbContext.Category.Any(e => e.Id == item.Id))
+            if (appDbContext.Category.Any(e => e.Id == item.Id))
             {
                 throw new ArgumentException("This company exists.");
             }
 
-            _dbContext.Category.Add(item);
-            _dbContext.SaveChanges();
+            appDbContext.Category.Add(item);
+            appDbContext.SaveChanges();
         }
 
         public void Updata(Category item)
         {
             if (item == null)
             {
-                throw new ArgumentNullException("The format of the transmitted data is incorrect.", nameof(item));
+                throw new ArgumentNullException(nameof(item), "The format of the transmitted data is incorrect.");
             }
 
-            var oldItem = _dbContext.Category.FirstOrDefault(e => e.Id == item.Id) ?? throw new InvalidOperationException("Interaction element not found.");
+            var oldItem = appDbContext.Category.FirstOrDefault(e => e.Id == item.Id) ?? throw new InvalidOperationException("Interaction element not found.");
             oldItem.Name = item.Name;
-            _dbContext.SaveChanges();
+            appDbContext.SaveChanges();
         }
 
         public void Remove(int id)
         {
-            var category = _dbContext.Category.FirstOrDefault(e => e.Id == id)
+            var category = appDbContext.Category.FirstOrDefault(e => e.Id == id)
                             ?? throw new InvalidOperationException("Interaction element not found.");
 
-            _dbContext.Category.Remove(category);
-            _dbContext.SaveChanges();
+            appDbContext.Category.Remove(category);
+            appDbContext.SaveChanges();
         }
 
         public void Upsert(Category item)
         {
-            var duplicateId = _dbContext.Category.FirstOrDefault(e => e.Id == item.Id);
+            var duplicateId = appDbContext.Category.FirstOrDefault(e => e.Id == item.Id);
 
             if (duplicateId == null)
             {
@@ -78,24 +74,24 @@ namespace TestTask.Core.Models.Categories
         }
 
         public Category GetCategory(int id)
-            => _dbContext.Category.FirstOrDefault(e => e.Id == id)
+            => appDbContext.Category.FirstOrDefault(e => e.Id == id)
             ?? throw new ArgumentException("Interaction element not found.");
 
         public string GetName(int id)
-            => _dbContext.Category.FirstOrDefault(e => e.Id == id).Name
+            => appDbContext.Category.FirstOrDefault(e => e.Id == id).Name
             ?? throw new ArgumentException("Interaction element not found.");
 
         public List<Category> GetAll()
-            => _dbContext.Category.Count() > 0 ? _dbContext.Category.AsNoTracking().ToList() : null;
+            => appDbContext.Category.Any() ? [.. appDbContext.Category.AsNoTracking()] : null;
 
-        public IQueryable<Category> GetQueryableAll() => _dbContext.Category.AsNoTracking();
+        public IQueryable<Category> GetQueryableAll() => appDbContext.Category.AsNoTracking();
 
         public bool IsFreeName(string name)
-            => _dbContext.Category.FirstOrDefault(e => e.Name == name) == null;
+            => appDbContext.Category.FirstOrDefault(e => e.Name == name) == null;
 
         public bool IsFreeNameItemUpsert(Category item)
         {
-            var busyItem = _dbContext.Category.FirstOrDefault(e => e.Name == item.Name);
+            var busyItem = appDbContext.Category.FirstOrDefault(e => e.Name == item.Name);
             return busyItem == null || item.Id == busyItem.Id;
         }
     }

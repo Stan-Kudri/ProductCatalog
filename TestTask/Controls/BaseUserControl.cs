@@ -1,6 +1,6 @@
-﻿using MaterialSkin;
 using System.ComponentModel;
 using System.Windows.Forms;
+using MaterialSkin;
 
 namespace TestTask.Controls
 {

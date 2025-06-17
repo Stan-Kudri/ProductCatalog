@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Extensions.DependencyInjection;
 using TestTask.BindingItem.Pages;
 using TestTask.BindingItem.Pages.Sort;
 using TestTask.Controls.PageTabControls.Model;

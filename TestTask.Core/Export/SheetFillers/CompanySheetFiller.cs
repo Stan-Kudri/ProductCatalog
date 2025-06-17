@@ -1,7 +1,7 @@
-﻿using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NPOI.SS.UserModel;
 using TestTask.Core.Models.Companies;
 
 namespace TestTask.Core.Export.SheetFillers
@@ -65,6 +65,6 @@ namespace TestTask.Core.Export.SheetFillers
         }
 
         private static List<CompanyField> CreateColumnMap()
-            => ((CompanyField[])Enum.GetValues(typeof(CompanyField))).ToList();
+            => Enum.GetValues<CompanyField>().ToList();
     }
 }

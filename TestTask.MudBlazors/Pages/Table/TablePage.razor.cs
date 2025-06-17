@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using TestTask.MudBlazors.Pages.Export;
 using TestTask.MudBlazors.Pages.Import;
@@ -12,13 +12,13 @@ namespace TestTask.MudBlazors.Pages.Table
         private async void OpenDialogImport()
         {
             DialogOptions closeOnEscapeKey = new DialogOptions { CloseOnEscapeKey = true };
-            DialogService.Show<DialogImportData>("Import table", closeOnEscapeKey);
+            await DialogService.ShowAsync<DialogImportData>("Import table", closeOnEscapeKey);
         }
 
         private async void OpenDialogExport()
         {
             DialogOptions closeOnEscapeKey = new DialogOptions { CloseOnEscapeKey = true };
-            DialogService.Show<ExportExcel>("Export table", closeOnEscapeKey);
+            await DialogService.ShowAsync<ExportExcel>("Export table", closeOnEscapeKey);
         }
     }
 }

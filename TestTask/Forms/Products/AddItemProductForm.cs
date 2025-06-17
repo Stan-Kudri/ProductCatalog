@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using TestTask.BindingItem.ObservableCollection;
 using TestTask.Core.Models.Categories;
