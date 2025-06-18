@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -22,12 +22,12 @@ namespace TestTask.Controls.CheckComboBox
             InitializeComponent();
 
             _checkBoxProperties = new CheckBoxProperties();
-            _checkBoxProperties.PropertyChanged += new EventHandler(_CheckBoxProperties_PropertyChanged);
+            _checkBoxProperties.PropertyChanged += new EventHandler(CheckBoxProperties_PropertyChanged);
 
             // Dumps the ListControl in a(nother) Container to ensure the ScrollBar on the ListControl does not
             // Paint over the Size grip. Setting the Padding or Margin on the Popup or host control does
             // not work as I expected. I don't think it can work that way.
-            CheckBoxComboBoxListControlContainer ContainerControl = new CheckBoxComboBoxListControlContainer();
+            var ContainerControl = new CheckBoxComboBoxListControlContainer();
             _checkBoxComboBoxListControl = new CheckBoxComboBoxListControl(this);
             _checkBoxComboBoxListControl.Items.CheckBoxCheckedChanged += new EventHandler(Items_CheckBoxCheckedChanged);
             ContainerControl.Controls.Add(_checkBoxComboBoxListControl);
@@ -77,7 +77,7 @@ namespace TestTask.Controls.CheckComboBox
         {
             string listText = string.Empty;
 
-            int startIndex = DropDownStyle == ComboBoxStyle.DropDownList
+            var startIndex = DropDownStyle == ComboBoxStyle.DropDownList
                                                         && DataSource == null
                                                         && skipFirstItem ? 1 : 0;
 
@@ -138,6 +138,7 @@ namespace TestTask.Controls.CheckComboBox
         /// <summary>
         /// The DataSource of the combobox. Refreshes the CheckBox wrappers when this is set.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new object DataSource
         {
             get => base.DataSource;
@@ -155,6 +156,10 @@ namespace TestTask.Controls.CheckComboBox
         /// <summary>
         /// The ValueMember of the combobox. Refreshes the CheckBox wrappers when this is set.
         /// </summary>
+        /// <summary>
+        /// The ValueMember of the combobox. Refreshes the CheckBox wrappers when this is set.
+        /// </summary>          
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new string ValueMember
         {
             get => base.ValueMember;
@@ -175,6 +180,7 @@ namespace TestTask.Controls.CheckComboBox
         /// a concatenated Text of the items selected. This concatenation however is controlled by the Binded 
         /// object, since it owns that property.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string DisplayMemberSingleItem
         {
             get
@@ -323,13 +329,14 @@ namespace TestTask.Controls.CheckComboBox
         /// </summary>
         [Description("The properties that will be assigned to the checkboxes as default values.")]
         [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public CheckBoxProperties CheckBoxProperties
         {
             get => _checkBoxProperties;
             set
             {
                 _checkBoxProperties = value;
-                _CheckBoxProperties_PropertyChanged(this, EventArgs.Empty);
+                CheckBoxProperties_PropertyChanged(this, EventArgs.Empty);
             }
         }
         /// <summary>
@@ -337,7 +344,7 @@ namespace TestTask.Controls.CheckComboBox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void _CheckBoxProperties_PropertyChanged(object sender, EventArgs e)
+        private void CheckBoxProperties_PropertyChanged(object sender, EventArgs e)
         {
             foreach (CheckBoxComboBoxItem item in CheckBoxItems)
             {
@@ -421,11 +428,11 @@ namespace TestTask.Controls.CheckComboBox
         /// <summary>
         /// Simply a reference to the CheckBoxComboBox.
         /// </summary>
-        private CheckBoxComboBox _checkBoxComboBox;
+        private readonly CheckBoxComboBox _checkBoxComboBox;
         /// <summary>
         /// A Typed list of ComboBoxCheckBoxItems.
         /// </summary>
-        private CheckBoxComboBoxItemList _items;
+        private readonly CheckBoxComboBoxItemList _items;
 
         #endregion
 
@@ -599,7 +606,7 @@ namespace TestTask.Controls.CheckComboBox
         /// <summary>
         /// A reference to the CheckBoxComboBox.
         /// </summary>
-        private CheckBoxComboBox _CheckBoxComboBox;
+        private readonly CheckBoxComboBox _CheckBoxComboBox;
         /// <summary>
         /// A reference to the Item in ComboBox.Items that this object is extending.
         /// </summary>
@@ -612,6 +619,7 @@ namespace TestTask.Controls.CheckComboBox
         /// <summary>
         /// A reference to the Item in ComboBox.Items that this object is extending.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public object ComboBoxItem
         {
             get => _ComboBoxItem;
@@ -639,9 +647,9 @@ namespace TestTask.Controls.CheckComboBox
 
             // Helps to maintain the Checked status of this
             // checkbox before the control is visible
-            if (_ComboBoxItem is INotifyPropertyChanged)
+            if (_ComboBoxItem is INotifyPropertyChanged changed)
             {
-                ((INotifyPropertyChanged)_ComboBoxItem).PropertyChanged += new PropertyChangedEventHandler(CheckBoxComboBoxItem_PropertyChanged);
+                changed.PropertyChanged += new PropertyChangedEventHandler(CheckBoxComboBoxItem_PropertyChanged);
             }
         }
 
@@ -724,20 +732,16 @@ namespace TestTask.Controls.CheckComboBox
     /// it will be lost or regenerated from the ComboBox.Items.
     /// </summary>
     [ToolboxItem(false)]
-    public class CheckBoxComboBoxItemList : List<CheckBoxComboBoxItem>
+    public class CheckBoxComboBoxItemList(CheckBoxComboBox checkBoxComboBox) : List<CheckBoxComboBoxItem>
     {
-        #region CONSTRUCTORS
 
-        public CheckBoxComboBoxItemList(CheckBoxComboBox checkBoxComboBox)
-        {
-            _CheckBoxComboBox = checkBoxComboBox;
-        }
+        #region CONSTRUCTORS
 
         #endregion
 
         #region PRIVATE FIELDS
 
-        private CheckBoxComboBox _CheckBoxComboBox;
+        private readonly CheckBoxComboBox _CheckBoxComboBox = checkBoxComboBox;
 
         #endregion
 
@@ -805,8 +809,6 @@ namespace TestTask.Controls.CheckComboBox
                                     && _CheckBoxComboBox.DataSource
                                     == null ? 1 : 0;
 
-
-
                 for (var Index = StartIndex; Index <= Count - 1; Index++)
                 {
                     CheckBoxComboBoxItem Item = this[Index];
@@ -817,9 +819,8 @@ namespace TestTask.Controls.CheckComboBox
                         && Item.DataBindings != null
                         && Item.DataBindings["Text"] != null)
                     {
-                        PropertyInfo PropertyInfo = Item
-                                                        .ComboBoxItem.GetType()
-                                                        .GetProperty(Item.DataBindings["Text"].BindingMemberInfo.BindingMember);
+                        PropertyInfo PropertyInfo = Item.ComboBoxItem.GetType()
+                                                                     .GetProperty(Item.DataBindings["Text"].BindingMemberInfo.BindingMember);
                         Text = (string)PropertyInfo.GetValue(Item.ComboBoxItem, null);
                     }
                     else

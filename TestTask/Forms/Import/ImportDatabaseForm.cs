@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Microsoft.Extensions.DependencyInjection;
 using TestTask.Core;
 using TestTask.Core.DataTable;
 using TestTask.Forms;
@@ -23,7 +23,7 @@ namespace TestTask.ChildForms.Import
                 = true;
         }
 
-        private Dictionary<Tables, bool> SelectTables = new Dictionary<Tables, bool>()
+        private readonly Dictionary<Tables, bool> SelectTables = new Dictionary<Tables, bool>()
         {
             { Tables.Company, true},
             { Tables.Category, true},

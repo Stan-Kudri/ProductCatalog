@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +57,7 @@ namespace TestTask.Core.Models.Page
 
         public bool HasNext => PageNumber < PageCount;
 
-        public int Count => Items.Count();
+        public int Count => Items.Count;
 
         public IEnumerator<T> GetEnumerator() => Items.GetEnumerator();
 

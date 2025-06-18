@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using TestTask.Core;
 using TestTask.Core.Models.Categories;
@@ -13,7 +13,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 {
     public partial class ProductItemDialog : IItemDialog
     {
-        [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
+        [CascadingParameter] IMudDialogInstance MudDialog { get; set; } = null!;
         [Inject] private ProductRepository ProductRepository { get; set; } = null!;
         [Inject] private CompanyRepository CompanyRepository { get; set; } = null!;
         [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
@@ -21,11 +21,14 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
         [Inject] private IMessageBox MessageDialog { get; set; } = null!;
 
         private ProductModel productModel { get; set; } = new ProductModel();
-        private string[] errors = { };
+
+        private const string MessageFieldRequired = "Field is required.";
+
+        private string[] errors = [];
         private bool isAddItem = true;
         private bool isDisabledType = true;
 
-        private Product? oldProduct;
+        private Product _oldProduct = null!;
 
         private List<Company> selectCompanies = new List<Company>();
         private List<Category> selectCategories = new List<Category>();
@@ -50,9 +53,9 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
             }
 
             isAddItem = isDisabledType = false;
-            oldProduct = ProductRepository.GetItem((int)Id);
-            selectTypes = ProductTypeRepository.GetListTypesByCategory(oldProduct.CategoryId);
-            productModel = oldProduct.GetProductModel();
+            _oldProduct = ProductRepository.GetItem((int)Id);
+            selectTypes = ProductTypeRepository.GetListTypesByCategory(_oldProduct.CategoryId);
+            productModel = _oldProduct.GetProductModel();
         }
 
         private void Close() => MudDialog.Cancel();
@@ -97,7 +100,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
                 return;
             }
 
-            var product = productModel.GetModifyType(oldProduct.Id);
+            var product = productModel.GetModifyType(_oldProduct.Id);
 
             if (!ProductRepository.IsFreeNameItemUpsert(product))
             {
@@ -105,7 +108,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
                 return;
             }
 
-            if (!oldProduct.Equals(product))
+            if (!_oldProduct.Equals(product))
             {
                 ProductRepository.Updata(product);
             }
@@ -113,11 +116,13 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
             MudDialog.Close();
         }
 
-        private void RecoverPastData() => productModel = oldProduct.GetProductModel();
+        private void RecoverPastData() => productModel = _oldProduct.GetProductModel();
 
         private void ChangeValueCategory(Category? item)
         {
+#pragma warning disable BL0005 // Component parameter should not be set outside of its component.
             productModel.Category = item;
+#pragma warning restore BL0005 // Component parameter should not be set outside of its component.
 
             if (productModel.Category == null || productModel.Category.Types == null)
             {
@@ -133,7 +138,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
         {
             if (string.IsNullOrWhiteSpace(str))
             {
-                yield return "Field is required.";
+                yield return MessageFieldRequired;
             }
         }
 
@@ -141,7 +146,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
         {
             if (!decimal.TryParse(str, out var value))
             {
-                yield return "Field is required.";
+                yield return MessageFieldRequired;
             }
         }
 

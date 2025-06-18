@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace TestTask.Core
 {
@@ -19,7 +19,6 @@ namespace TestTask.Core
         public string Error { get; }
 
         public int Row { get; }
-
 
         public Result<T2> ToError<T2>()
         {
@@ -75,6 +74,11 @@ namespace TestTask.Core
                     && other.Success == Success
                     && other.Error == Error
                     && other.Row == Row;
+        }
+
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
         }
     }
 }

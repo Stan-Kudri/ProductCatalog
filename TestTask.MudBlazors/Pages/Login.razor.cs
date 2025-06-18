@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using TestTask.Core.Models.Users;
@@ -19,7 +19,7 @@ namespace TestTask.MudBlazors.Pages
 
         private UserModel userModel { get; set; } = new UserModel();
         private string matchPassword = string.Empty;
-        private string[] errors = { };
+        private string[] errors = [];
 
         [Parameter] public bool IsSignIn { get; set; } = false;
 
@@ -27,7 +27,9 @@ namespace TestTask.MudBlazors.Pages
 
         private void RegistrationPage() => Navigation.NavigateTo($"/login/{false}");
 
+#pragma warning disable BL0005 // Component parameter should not be set outside of its component.
         private void ClearField() => userModel.Password = userModel.Username = matchPassword = string.Empty;
+#pragma warning restore BL0005 // Component parameter should not be set outside of its component.
 
         private async Task SignIn()
         {

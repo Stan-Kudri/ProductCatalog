@@ -1,4 +1,4 @@
-﻿using TestTask.Core.Models.Companies;
+using TestTask.Core.Models.Companies;
 using TestTask.MudBlazors.Pages.Table.Model;
 
 namespace TestTask.MudBlazors.Pages.Table.PageTableView

@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using TestTask.Core.DBContext;
 
 namespace TestTask.Core.Models.Types
@@ -96,14 +96,13 @@ namespace TestTask.Core.Models.Types
         }
 
         public List<ProductType> GetAll()
-            => _dbContext.Type.Count() > 0 ? _dbContext.Type.AsNoTracking().ToList() : null;
+            => _dbContext.Type.Any() ? _dbContext.Type.AsNoTracking().ToList() : null;
 
         public List<ProductType> GetListTypesByCategory(int idCategory)
             => _dbContext.Type.Where(e => e.CategoryId == idCategory).AsNoTracking().ToList();
 
         public bool IsFreeName(string name)
             => _dbContext.Type.FirstOrDefault(e => e.Name == name) == null;
-
 
         public bool IsFreeNameItemUpsert(ProductType item)
         {

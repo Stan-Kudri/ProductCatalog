@@ -1,4 +1,4 @@
-﻿namespace TestTask.Controls.PageTabControls.Model
+namespace TestTask.Controls.PageTabControls.Model
 {
     public interface ILoad
     {

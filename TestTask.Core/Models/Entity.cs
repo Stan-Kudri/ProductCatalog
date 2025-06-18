@@ -1,4 +1,4 @@
-﻿namespace TestTask.Core.Models
+namespace TestTask.Core.Models
 {
     public class Entity
     {

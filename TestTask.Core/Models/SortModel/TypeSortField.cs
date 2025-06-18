@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace TestTask.Core.Models.SortModel
@@ -12,7 +12,7 @@ namespace TestTask.Core.Models.SortModel
 
         protected bool? _isAscending = true;
 
-        private static Dictionary<string, bool?> _sortMap = new Dictionary<string, bool?>()
+        private static readonly Dictionary<string, bool?> _sortMap = new Dictionary<string, bool?>()
         {
             { NoSorting, null },
             { Ascending, true },

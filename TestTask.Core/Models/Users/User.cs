@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -39,9 +39,8 @@ namespace TestTask.Core.Models.Users
 
         private string GetPaswordHash(string password)
         {
-            MD5 MD5Hash = MD5.Create();
             byte[] inputBytes = Encoding.ASCII.GetBytes(password);
-            byte[] hash = MD5Hash.ComputeHash(inputBytes);
+            byte[] hash = MD5.HashData(inputBytes);
             return BitConverter.ToString(hash).Replace("-", "");
         }
     }

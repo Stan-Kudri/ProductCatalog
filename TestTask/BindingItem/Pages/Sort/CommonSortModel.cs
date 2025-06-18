@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -16,7 +16,7 @@ namespace TestTask.BindingItem.Pages.Sort
 
         private readonly ISortEntity<T> _sortType;
 
-        private string[] _selectField;
+        private readonly string[] _selectField;
 
         public CommonSortModel(ISortEntity<T> sortType)
         {

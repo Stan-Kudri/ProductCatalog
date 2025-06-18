@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using TestTask.Core.DBContext;
 
 namespace TestTask.Core.Models.Products
@@ -23,7 +23,6 @@ namespace TestTask.Core.Models.Products
             {
                 throw new ArgumentException("This product exists.");
             }
-
 
             InvalidDBForItemProduct(item);
 
@@ -95,7 +94,7 @@ namespace TestTask.Core.Models.Products
             Updata(item);
         }
 
-        public List<Product> GetAll() => _dbContext.Product.Count() > 0 ? _dbContext.Product.AsNoTracking().ToList() : null;
+        public List<Product> GetAll() => _dbContext.Product.Any() ? _dbContext.Product.AsNoTracking().ToList() : null;
 
         public bool IsFreeName(string name) => _dbContext.Product.FirstOrDefault(e => e.Name == name) == null;
 

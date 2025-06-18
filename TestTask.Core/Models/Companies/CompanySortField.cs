@@ -1,4 +1,4 @@
-﻿using TestTask.Core.Models.SortModel;
+using TestTask.Core.Models.SortModel;
 
 namespace TestTask.Core.Models.Companies
 {

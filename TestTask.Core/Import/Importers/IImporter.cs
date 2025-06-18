@@ -1,4 +1,4 @@
-﻿using NPOI.SS.UserModel;
+using NPOI.SS.UserModel;
 
 namespace TestTask.Core.Import.Importers
 {

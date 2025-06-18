@@ -1,4 +1,4 @@
-﻿using TestTask.Core;
+using TestTask.Core;
 using TestTask.Core.Import;
 using TestTask.Core.Models.Categories;
 

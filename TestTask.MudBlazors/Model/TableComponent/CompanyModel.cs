@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using TestTask.Core.Models.Companies;
 
 namespace TestTask.MudBlazors.Model.TableComponent

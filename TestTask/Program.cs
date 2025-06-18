@@ -1,7 +1,7 @@
-﻿using MaterialSkin;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows.Forms;
+using MaterialSkin;
+using Microsoft.Extensions.DependencyInjection;
 using TestTask.Core;
 using TestTask.Core.Import;
 using TestTask.Core.Import.Importers;
@@ -45,7 +45,7 @@ namespace TestTask
                         .WithScopedLifetime()
 
                     .FromAssemblies(typeof(BaseForm).Assembly)
-                        .AddClasses(form => form.AssignableTo(typeof(BaseForm)))
+                        .AddClasses(form => form.AssignableTo<BaseForm>())
                         .AsSelf()
                         .WithTransientLifetime()
 

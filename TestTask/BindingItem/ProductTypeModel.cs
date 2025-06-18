@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Types;
 

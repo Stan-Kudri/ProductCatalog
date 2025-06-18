@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Extensions.DependencyInjection;
 using TestTask.BindingItem.Pages;
 using TestTask.BindingItem.Pages.Sort;
 using TestTask.Controls.PageTabControls.Model;
@@ -26,7 +26,7 @@ namespace TestTask.Controls.PageTabControls
         private IServiceProvider _serviceProvider;
         private CompanyRepository _companyRepository;
 
-        private SortCompanyModel _selectSortField = new SortCompanyModel();
+        private readonly SortCompanyModel _selectSortField = new SortCompanyModel();
         private bool _isAscending = true;
 
         public CompanyListView() => InitializeComponent();
@@ -54,10 +54,12 @@ namespace TestTask.Controls.PageTabControls
         {
             using (var addForm = _serviceProvider.GetRequiredService<AddItemCompanyForm>())
             {
+#pragma warning disable CA1849 // Call async methods when in an async method
                 if (addForm.ShowDialog() != DialogResult.OK)
                 {
                     return Task.FromResult(false);
                 }
+#pragma warning restore CA1849 // Call async methods when in an async method
 
                 var item = addForm.GetCompanyModel().ToCompany();
                 _companyRepository.Add(item);

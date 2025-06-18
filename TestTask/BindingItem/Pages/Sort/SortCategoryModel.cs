@@ -1,4 +1,4 @@
-﻿using TestTask.Core.Models.Categories;
+using TestTask.Core.Models.Categories;
 
 namespace TestTask.BindingItem.Pages.Sort
 {

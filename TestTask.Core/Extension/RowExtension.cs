@@ -1,5 +1,5 @@
-﻿using NPOI.SS.UserModel;
 using System;
+using NPOI.SS.UserModel;
 
 namespace TestTask.Core.Extension
 {
@@ -88,7 +88,7 @@ namespace TestTask.Core.Extension
                 }
 
                 var valueInDateTimeCell = cell.DateCellValue;
-                return Result<DateTime>.CreateSuccess(valueInDateTimeCell, self.RowNum);
+                return Result<DateTime>.CreateSuccess((DateTime)valueInDateTimeCell, self.RowNum);
             }
             catch
             {

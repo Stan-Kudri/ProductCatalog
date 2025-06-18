@@ -1,4 +1,4 @@
-﻿using MudBlazor;
+using MudBlazor;
 using TestTask.Core;
 using TestTask.MudBlazors.Extension;
 

@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows.Forms;
+using Microsoft.Extensions.DependencyInjection;
 using TestTask.BindingItem;
 using TestTask.Core;
 using TestTask.Core.Models.Companies;
@@ -79,12 +79,9 @@ namespace TestTask.Forms.Companies
                 throw new Exception("The country field is empty.");
             }
 
-            if (dtpCreateCompany.Value == null)
-            {
-                throw new Exception("Error in date selection.");
-            }
-
-            return new CompanyModel(tbNameCompany.Text, dtpCreateCompany.Value, tbContry.Text);
+            return dtpCreateCompany.Value == null
+                ? throw new Exception("Error in date selection.")
+                : new CompanyModel(tbNameCompany.Text, dtpCreateCompany.Value, tbContry.Text);
         }
     }
 }

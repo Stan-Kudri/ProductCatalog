@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using MudBlazor.Services;
 using TestTask.Core;
@@ -66,7 +66,7 @@ namespace TestTask.MudBlazors
                                         .AsImplementedInterfaces()
                                         .WithScopedLifetime()
 
-                                        .AddClasses(sheetFiller => sheetFiller.AssignableTo(typeof(ISheetFiller)))
+                                        .AddClasses(sheetFiller => sheetFiller.AssignableTo<ISheetFiller>())
                                         .AsSelf()
                                         .WithScopedLifetime()
                                     );

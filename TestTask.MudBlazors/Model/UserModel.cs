@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using TestTask.Core.Models.Users;
 
 namespace TestTask.MudBlazors.Model

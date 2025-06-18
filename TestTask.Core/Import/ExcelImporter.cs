@@ -1,14 +1,14 @@
-﻿using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
 using System.Collections.Generic;
 using System.IO;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 using TestTask.Core.Import.Importers;
 
 namespace TestTask.Core.Import
 {
     public class ExcelImporter<T>
     {
-        private IImporter<T> _importer;
+        private readonly IImporter<T> _importer;
 
         public ExcelImporter(IImporter<T> importer)
             => _importer = importer;
@@ -27,7 +27,7 @@ namespace TestTask.Core.Import
 
         public List<Result<T>> Import(Stream stream)
         {
-            var workbook = new XSSFWorkbook(stream);
+            using var workbook = new XSSFWorkbook(stream);
             var addMode = new List<Result<T>>();
 
             if (!TryGetSheet(workbook, out var sheet))

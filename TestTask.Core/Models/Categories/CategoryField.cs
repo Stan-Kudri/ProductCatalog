@@ -1,4 +1,4 @@
-﻿namespace TestTask.Core.Models.Categories
+namespace TestTask.Core.Models.Categories
 {
     public enum CategoryField
     {

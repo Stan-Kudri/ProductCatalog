@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using TestTask.Core;
 using TestTask.Core.Models.Categories;
@@ -11,13 +11,13 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 {
     public partial class ProductTypeItemDialog : IItemDialog
     {
-        [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
+        [CascadingParameter] IMudDialogInstance MudDialog { get; set; } = null!;
         [Inject] private ProductTypeRepository ProductTypeRepository { get; set; } = null!;
         [Inject] private CategoryRepository CategoryRepository { get; set; } = null!;
         [Inject] private IMessageBox MessageDialog { get; set; } = null!;
 
         private TypeProductModel typeProductModel { get; set; } = new TypeProductModel();
-        private string[] errors = { };
+        private string[] errors = Array.Empty<string>();
         private bool isAddItem = true;
 
         private ProductType? oldTypeProduct;

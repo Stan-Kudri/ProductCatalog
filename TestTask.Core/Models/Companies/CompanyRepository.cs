@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -90,7 +90,7 @@ namespace TestTask.Core.Models.Companies
             => _dbContext.Company.FirstOrDefault(e => e.Id == id);
 
         public List<Company> GetAll()
-            => _dbContext.Company.Count() > 0 ? _dbContext.Company.AsNoTracking().ToList() : null;
+            => _dbContext.Company.Any() ? _dbContext.Company.AsNoTracking().ToList() : null;
 
         public IQueryable<Company> GetQueryableAll()
             => _dbContext.Company.AsNoTracking();

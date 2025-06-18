@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using TestTask.Core;
 using TestTask.Core.Import;
 using TestTask.Core.Import.Importers;
@@ -83,7 +83,7 @@ namespace TestTask.Test.ImportTest
         public void Add_All_Item_From_Excel_File(List<Company> companies, List<Category> categories, List<ProductType> types, List<Product> exceptProduct)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var companyRepository = new CompanyRepository(dbContext);
             var categoryRepository = new CategoryRepository(dbContext);
             var typeRepository = new ProductTypeRepository(dbContext);

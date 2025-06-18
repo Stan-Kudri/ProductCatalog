@@ -1,5 +1,6 @@
-﻿using MaterialSkin;
+using System.ComponentModel;
 using System.Windows.Forms;
+using MaterialSkin;
 
 namespace TestTask.Controls
 {
@@ -9,10 +10,12 @@ namespace TestTask.Controls
         public BaseUserControl() => InitializeComponent();
 
         //IMaterialControl item
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Depth { get; set; }
 
         public MaterialSkinManager SkinManager => MaterialSkinManager.Instance;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MouseState MouseState { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace TestTask.MudBlazors.Pages.Table.Model
+namespace TestTask.MudBlazors.Pages.Table.Model
 {
     public interface ITableDetailProvider<T>
     {

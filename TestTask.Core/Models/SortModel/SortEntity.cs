@@ -1,7 +1,7 @@
-﻿using Ardalis.SmartEnum;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Ardalis.SmartEnum;
 
 namespace TestTask.Core.Models.SortModel
 {

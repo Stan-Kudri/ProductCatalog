@@ -1,6 +1,5 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using TestTask.Core.Models.Categories;
-using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Types;
 
 namespace TestTask.Test.ServiceTest
@@ -136,7 +135,7 @@ namespace TestTask.Test.ServiceTest
         public void Service_Should_Add_All_The_Item_Of_Database(List<Category> categories, List<ProductType> types)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var categoryRepository = new CategoryRepository(dbContext);
             var typeProductService = new ProductTypeRepository(dbContext);
             categoryRepository.AddRange(categories);
@@ -154,7 +153,7 @@ namespace TestTask.Test.ServiceTest
         public void Service_Should_Add_The_Item_To_The_Database(List<Category> categories, List<ProductType> types, ProductType addType, List<ProductType> expectTypes)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var categoryRepository = new CategoryRepository(dbContext);
             var typeProductService = new ProductTypeRepository(dbContext);
             categoryRepository.AddRange(categories);
@@ -173,7 +172,7 @@ namespace TestTask.Test.ServiceTest
         public void Service_Should_Update_The_Item_To_The_Database(List<Category> categories, List<ProductType> types, ProductType updateType, List<ProductType> expectTypes)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var categoryRepository = new CategoryRepository(dbContext);
             var typeProductService = new ProductTypeRepository(dbContext);
             categoryRepository.AddRange(categories);
@@ -192,7 +191,7 @@ namespace TestTask.Test.ServiceTest
         public void Service_Should_Remove_Item_By_ID_To_The_Database(List<Category> categories, List<ProductType> types, int removeID, List<ProductType> expectTypes)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var categoryRepository = new CategoryRepository(dbContext);
             var typeProductService = new ProductTypeRepository(dbContext);
             categoryRepository.AddRange(categories);
@@ -211,7 +210,7 @@ namespace TestTask.Test.ServiceTest
         public void Add_Items_Did_Not_Happen_Because_The_ID_Are_Busy(List<Category> categories, List<ProductType> types, ProductType addType)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var categoryRepository = new CategoryRepository(dbContext);
             var typeProductService = new ProductTypeRepository(dbContext);
             categoryRepository.AddRange(categories);
@@ -226,7 +225,7 @@ namespace TestTask.Test.ServiceTest
         public void Did_Not_Happen_Add_Items_Because_The_Missing_Child_Id(List<Category> categories, ProductType addType)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var categoryRepository = new CategoryRepository(dbContext);
             var typeProductService = new ProductTypeRepository(dbContext);
             categoryRepository.AddRange(categories);

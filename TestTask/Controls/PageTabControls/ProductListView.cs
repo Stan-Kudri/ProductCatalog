@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Extensions.DependencyInjection;
 using TestTask.BindingItem.Pages;
 using TestTask.BindingItem.Pages.Sort;
 using TestTask.Controls.PageTabControls.Model;
@@ -24,9 +24,6 @@ namespace TestTask.Controls.PageTabControls
     {
         private const int IndexId = 0;
         private const int IndexColumnName = 1;
-        private const int IndexColumnCompanyName = 2;
-        private const int IndexColumnCategoryName = 3;
-        private const int IndexColumnType = 4;
         private const int IndexColumnPrice = 5;
         private const int IndexColumnDestination = 6;
         private const int IndexColumnIdCompany = 7;
@@ -41,7 +38,7 @@ namespace TestTask.Controls.PageTabControls
 
         private IMessageBox _messageBox;
         private MessageByTable<Product> _messageByTable;
-        private SortProductModel _selectSortField = new SortProductModel();
+        private readonly SortProductModel _selectSortField = new SortProductModel();
         private bool _isAscending = true;
 
         public ProductListView() => InitializeComponent();
@@ -93,10 +90,12 @@ namespace TestTask.Controls.PageTabControls
             {
                 addForm.Initialize(listCompany.ToList(), listCategory.ToList(), listTypeProduct.ToList());
 
+#pragma warning disable CA1849 // Call async methods when in an async method
                 if (addForm.ShowDialog() != DialogResult.OK)
                 {
                     return false;
                 }
+#pragma warning restore CA1849 // Call async methods when in an async method
 
                 var item = addForm.GetProductModel().ToProduct();
                 _productRepository.Add(item);
@@ -188,7 +187,6 @@ namespace TestTask.Controls.PageTabControls
             => string.IsNullOrEmpty(tbSearchStrName.Text)
             ? items
             : items.Where(e => e.Name.Contains(tbSearchStrName.Text));
-
 
         private void SelectSortField()
         {

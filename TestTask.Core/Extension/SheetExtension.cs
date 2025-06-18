@@ -1,7 +1,7 @@
-﻿using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NPOI.SS.UserModel;
 
 namespace TestTask.Core.Extension
 {
@@ -12,7 +12,7 @@ namespace TestTask.Core.Extension
             var result = new Dictionary<T, int>(columns.Count);
             if (sheet.LastRowNum <= 0)
             {
-                throw new Exception("File is empty");
+                throw new ArgumentException("File is empty");
             }
 
             var rowFirst = sheet.GetRow(0);

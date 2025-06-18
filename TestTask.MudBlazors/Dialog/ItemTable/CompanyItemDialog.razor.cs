@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using TestTask.Core;
 using TestTask.Core.Models.Companies;
@@ -10,12 +10,12 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 {
     public partial class CompanyItemDialog : IItemDialog
     {
-        [CascadingParameter] MudDialogInstance MudDialog { get; set; } = null!;
+        [CascadingParameter] IMudDialogInstance MudDialog { get; set; } = null!;
         [Inject] private CompanyRepository CompanyRepository { get; set; } = null!;
         [Inject] private IMessageBox MessageDialog { get; set; } = null!;
 
         private CompanyModel companyModel { get; set; } = new CompanyModel();
-        private string[] errors = { };
+        private string[] errors = [];
         private bool isAddItem = true;
 
         private Company? oldCompany;

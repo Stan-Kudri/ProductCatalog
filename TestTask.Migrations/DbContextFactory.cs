@@ -1,17 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TestTask.Core.DBContext;
 
 namespace TestTask.Migrations
 {
-    public class DbContextFactory
+    public class DbContextFactory(string connectionName)
     {
-        public string _connectionName;
-
-        public DbContextFactory(string connectionName) => _connectionName = connectionName;
-
         public AppDbContext Create()
         {
-            var builder = new DbContextOptionsBuilder<AppDbContext>().UseSqlite($"Data Source={_connectionName}.db", x =>
+            var builder = new DbContextOptionsBuilder<AppDbContext>().UseSqlite($"Data Source={connectionName}.db", x =>
             {
                 x.MigrationsAssembly(typeof(DbContextFactoryMigration).Assembly.FullName);
             });

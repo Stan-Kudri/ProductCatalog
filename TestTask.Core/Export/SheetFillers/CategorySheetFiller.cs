@@ -1,7 +1,7 @@
-﻿using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NPOI.SS.UserModel;
 using TestTask.Core.Models.Categories;
 
 namespace TestTask.Core.Export.SheetFillers
@@ -59,6 +59,6 @@ namespace TestTask.Core.Export.SheetFillers
         }
 
         private static List<CategoryField> CreateColumnMap()
-            => ((CategoryField[])Enum.GetValues(typeof(CategoryField))).ToList();
+            => Enum.GetValues<CategoryField>().ToList();
     }
 }

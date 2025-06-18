@@ -1,4 +1,4 @@
-﻿namespace TestTask.Core.Models.Products
+namespace TestTask.Core.Models.Products
 {
     public enum ProductField
     {

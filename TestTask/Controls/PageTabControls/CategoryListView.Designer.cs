@@ -1,4 +1,4 @@
-﻿using TestTask.BindingItem.Pages;
+using TestTask.BindingItem.Pages;
 
 namespace TestTask.Controls.PageTabControls
 {

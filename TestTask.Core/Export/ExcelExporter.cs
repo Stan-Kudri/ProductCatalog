@@ -1,6 +1,6 @@
-﻿using NPOI.XSSF.UserModel;
 using System.Collections.Generic;
 using System.IO;
+using NPOI.XSSF.UserModel;
 using TestTask.Core.Export.SheetFillers;
 
 namespace TestTask.Core.Export
@@ -14,7 +14,7 @@ namespace TestTask.Core.Export
 
         public void Export(Stream destination)
         {
-            var workbook = new XSSFWorkbook();
+            using var workbook = new XSSFWorkbook();
 
             foreach (var filler in _fillers)
             {

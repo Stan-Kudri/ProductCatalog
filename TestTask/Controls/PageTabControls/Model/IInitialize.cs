@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace TestTask.Controls.PageTabControls.Model
 {

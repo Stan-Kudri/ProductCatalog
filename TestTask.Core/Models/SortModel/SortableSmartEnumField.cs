@@ -1,8 +1,8 @@
-﻿using Ardalis.SmartEnum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Ardalis.SmartEnum;
 
 namespace TestTask.Core.Models.SortModel
 {
@@ -12,11 +12,10 @@ namespace TestTask.Core.Models.SortModel
     {
         private static readonly SortableSmartEnumField<TSmartEnum, T> Id = new SortableSmartEnumField<TSmartEnum, T>("Id", 0, CreateField(e => e.Id));
 
-        private ISortableField<T> _field;
+        private readonly ISortableField<T> _field;
 
         public SortableSmartEnumField(string name, int value, ISortableField<T> field)
             : base(name, value) => _field = field;
-
 
         public static ISortableField<T> DefaultValue => Id;
 

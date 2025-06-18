@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TestTask.Core.DBContext.Configuration;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;

@@ -1,9 +1,8 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using TestTask.Core;
 using TestTask.Core.Import;
 using TestTask.Core.Import.Importers;
 using TestTask.Core.Models.Categories;
-using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Types;
 using TestTask.Test.Properties;
 
@@ -73,7 +72,7 @@ namespace TestTask.Test.ImportTest
         public void Add_All_Item_From_Excel_File(List<Category> categories, List<ProductType> exceptType)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var categoryRepository = new CategoryRepository(dbContext);
             var typeRepository = new ProductTypeRepository(dbContext);
 

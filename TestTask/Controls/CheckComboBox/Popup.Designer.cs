@@ -1,4 +1,4 @@
-﻿namespace TestTask.Controls.CheckComboBox
+namespace TestTask.Controls.CheckComboBox
 {
     partial class Popup
     {
@@ -19,10 +19,10 @@
                 {
                     components.Dispose();
                 }
-                if (content != null)
+                if (_content != null)
                 {
-                    System.Windows.Forms.Control _content = content;
-                    content = null;
+                    System.Windows.Forms.Control _content = Content;
+                    this._content = null;
                     _content.Dispose();
                 }
             }

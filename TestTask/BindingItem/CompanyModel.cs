@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using TestTask.Core.Models.Companies;
 
 namespace TestTask.BindingItem
@@ -13,7 +13,9 @@ namespace TestTask.BindingItem
         {
             _name = name;
             _country = country;
-            _dateCreation = dateCreation == null ? throw new ArgumentException("The company creation date cannot be zero.", nameof(dateCreation)) : _dateCreation = dateCreation;
+            _dateCreation = dateCreation == null
+                            ? throw new ArgumentException("The company creation date cannot be zero.", nameof(dateCreation))
+                            : _dateCreation = dateCreation;
         }
 
         public string Name
@@ -34,8 +36,8 @@ namespace TestTask.BindingItem
             set => SetField(ref _country, value);
         }
 
-        public Company ToCompany() => new Company(_name, _dateCreation, _country);
+        public Company ToCompany() => new(_name, _dateCreation, _country);
 
-        public Company ToCompany(int id) => new Company(_name, _dateCreation, _country, id);
+        public Company ToCompany(int id) => new(_name, _dateCreation, _country, id);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using TestTask.Core.DataTable;
@@ -23,15 +23,15 @@ namespace TestTask.MudBlazors.Pages.Import
         [Inject] private ExcelImporter<Product> ExcelImportProduct { get; set; } = null!;
         [Inject] private NavigationManager Navigation { get; set; } = null!;
 
-        [CascadingParameter] private MudDialogInstance MudDialog { get; set; } = null!;
+        [CascadingParameter] private IMudDialogInstance MudDialog { get; set; } = null!;
 
-        private SelectTable selectedTable = new SelectTable();
+        private readonly SelectTable _selectedTable = new SelectTable();
 
         private void Cancel() => MudDialog.Cancel();
 
         private async Task UploadData(IBrowserFile fileload)
         {
-            if (selectedTable.SelectTables.Count() == 0 || fileload.Size == decimal.Zero)
+            if (!_selectedTable.SelectTables.Any() || fileload.Size == decimal.Zero)
             {
                 return;
             }
@@ -53,13 +53,14 @@ namespace TestTask.MudBlazors.Pages.Import
         private void Import<T>(Tables table, MemoryStream memoryStream, ExcelImporter<T> excelImporter, IRepository<T> repository)
             where T : Entity
         {
-            if (!selectedTable.SelectTables.Contains(table))
+            if (!_selectedTable.SelectTables.Contains(table))
             {
                 return;
             }
 
             memoryStream.Position = 0;
-            var readItems = excelImporter.Import(new NonClosableStream(memoryStream));
+            using var nonClosableStream = new NonClosableStream(memoryStream);
+            var readItems = excelImporter.Import(nonClosableStream);
             foreach (var row in readItems)
             {
                 if (row.Success)
