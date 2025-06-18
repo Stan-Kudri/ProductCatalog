@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using TestTask.Core.Models.Products;
 using TestTask.MudBlazors.Pages.Table.Model;
 

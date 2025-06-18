@@ -8,7 +8,7 @@ namespace TestTask.Core.Import
 {
     public class ExcelImporter<T>
     {
-        private IImporter<T> _importer;
+        private readonly IImporter<T> _importer;
 
         public ExcelImporter(IImporter<T> importer)
             => _importer = importer;

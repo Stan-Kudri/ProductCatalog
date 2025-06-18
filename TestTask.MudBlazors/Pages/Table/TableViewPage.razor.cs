@@ -35,9 +35,9 @@ namespace TestTask.MudBlazors.Pages.Table
         private HashSet<T> selectedItems = new HashSet<T>();
         private bool isSelectItems = true;
 
-        private string? searchString = null;
-        private PageModel pageModel = new PageModel();
-        private PagedList<T>? pagedList = null;
+        private string? _searchString = null;
+        private readonly PageModel _pageModel = new PageModel();
+        private PagedList<T>? _pagedList = null;
 
         private bool isAscending { get; set; } = true;
 
@@ -114,7 +114,7 @@ namespace TestTask.MudBlazors.Pages.Table
             }
 
             var buffer = new byte[fileload.Size];
-            await fileload.OpenReadStream().ReadAsync(buffer);
+            await fileload.OpenReadStream().ReadExactlyAsync(buffer);
 
             var companyRead = ExcelImport.Import(buffer);
             foreach (var row in companyRead)
@@ -137,23 +137,23 @@ namespace TestTask.MudBlazors.Pages.Table
 
         private void OnSearch(string text)
         {
-            searchString = text;
+            _searchString = text;
             LoadData();
         }
 
         private void PageChanged(int i)
         {
-            pageModel.Number = i;
+            _pageModel.Number = i;
             LoadData();
         }
 
         private void LoadData()
         {
             IQueryable<T> queriable = TableProvider.GetQueryableAll();
-            queriable = TableProvider.GetSearchName(queriable, searchString);
+            queriable = TableProvider.GetSearchName(queriable, _searchString);
             queriable = SortField.Apply(queriable, isAscending);
-            pagedList = queriable.GetPagedList(pageModel);
-            items = pagedList.Items;
+            _pagedList = queriable.GetPagedList(_pageModel);
+            items = _pagedList.Items;
             StateHasChanged();
         }
     }

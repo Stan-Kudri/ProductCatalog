@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting.StaticWebAssets;
+using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using TestTask.MudBlazors;
 
 var builder = WebApplication.CreateBuilder(args);

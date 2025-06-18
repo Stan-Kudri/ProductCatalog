@@ -1,4 +1,4 @@
-﻿using TestTask.Core.Models.Page;
+using TestTask.Core.Models.Page;
 
 namespace TestTask.MudBlazors.Model
 {

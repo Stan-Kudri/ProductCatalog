@@ -1,4 +1,4 @@
-﻿using MudBlazor;
+using MudBlazor;
 using TestTask.MudBlazors.Dialog;
 
 namespace TestTask.MudBlazors.Extension

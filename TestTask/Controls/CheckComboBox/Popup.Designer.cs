@@ -21,7 +21,7 @@ namespace TestTask.Controls.CheckComboBox
                 }
                 if (_content != null)
                 {
-                    System.Windows.Forms.Control _content = _content;
+                    System.Windows.Forms.Control _content = Content;
                     this._content = null;
                     _content.Dispose();
                 }

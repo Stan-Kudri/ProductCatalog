@@ -24,9 +24,6 @@ namespace TestTask.Controls.PageTabControls
     {
         private const int IndexId = 0;
         private const int IndexColumnName = 1;
-        private const int IndexColumnCompanyName = 2;
-        private const int IndexColumnCategoryName = 3;
-        private const int IndexColumnType = 4;
         private const int IndexColumnPrice = 5;
         private const int IndexColumnDestination = 6;
         private const int IndexColumnIdCompany = 7;
@@ -41,7 +38,7 @@ namespace TestTask.Controls.PageTabControls
 
         private IMessageBox _messageBox;
         private MessageByTable<Product> _messageByTable;
-        private SortProductModel _selectSortField = new SortProductModel();
+        private readonly SortProductModel _selectSortField = new SortProductModel();
         private bool _isAscending = true;
 
         public ProductListView() => InitializeComponent();
@@ -188,7 +185,6 @@ namespace TestTask.Controls.PageTabControls
             => string.IsNullOrEmpty(tbSearchStrName.Text)
             ? items
             : items.Where(e => e.Name.Contains(tbSearchStrName.Text));
-
 
         private void SelectSortField()
         {

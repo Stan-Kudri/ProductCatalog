@@ -3,9 +3,9 @@
 
 <MudDialog>
     <DialogContent>
-        <MudSelect T="Tables" Label="Select table" MultiSelection="true" @bind-Value="selectedTable.Table"
-                   @bind-SelectedValues="selectedTable.SelectTables" SelectAll="true" SelectAllText="All">
-            @foreach (var item in selectedTable.Items)
+        <MudSelect T="Tables" Label="Select table" MultiSelection="true" @bind-Value="_selectedTable.Table"
+                   @bind-SelectedValues="_selectedTable.SelectTables" SelectAll="true" SelectAllText="All">
+            @foreach (var item in _selectedTable.Items)
             {
                 <MudSelectItem T="Tables" Value="@item" />
             }

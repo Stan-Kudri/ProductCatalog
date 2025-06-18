@@ -1,4 +1,4 @@
-﻿using TestTask.Core.Models.Categories;
+using TestTask.Core.Models.Categories;
 using TestTask.MudBlazors.Pages.Table.Model;
 
 namespace TestTask.MudBlazors.Pages.Table.PageTableProvider

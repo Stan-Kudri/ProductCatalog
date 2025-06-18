@@ -80,7 +80,7 @@ namespace TestTask.Controls.CheckComboBox
             set { resizable = value; }
         }
 
-        private ToolStripControlHost _host;
+        private readonly ToolStripControlHost _host;
 
         private Size _minSize;
         /// <summary>

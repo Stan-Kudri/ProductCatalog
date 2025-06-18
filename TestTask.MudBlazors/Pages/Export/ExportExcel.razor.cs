@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
 using NPOI.XSSF.UserModel;
@@ -19,20 +19,20 @@ namespace TestTask.MudBlazors.Pages.Export
 
         [CascadingParameter] private IMudDialogInstance MudDialog { get; set; } = null!;
 
-        private SelectTable selectedTable = new SelectTable();
+        private readonly SelectTable selectedTable = new SelectTable();
 
         private void Cancel() => MudDialog.Cancel();
 
         private async Task DownloadFile()
         {
-            if (selectedTable.SelectTables.Count() <= 0)
+            if (!selectedTable.SelectTables.Any())
             {
                 return;
             }
 
             var fillers = SelectExportTable();
 
-            var workbook = new XSSFWorkbook();
+            using var workbook = new XSSFWorkbook();
             foreach (var filler in fillers)
             {
                 var sheet = workbook.CreateSheet(filler.Name);

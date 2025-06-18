@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using TestTask.Core.Models.Users;
 
 namespace TestTask.MudBlazors.Authenticate
@@ -37,7 +37,6 @@ namespace TestTask.MudBlazors.Authenticate
             return isSuccess;
         }
 
-
         public async Task<List<Claim>> GetLoginInfoAsync()
         {
             var emptyResut = new List<Claim>();
@@ -56,7 +55,7 @@ namespace TestTask.MudBlazors.Authenticate
             if (token.Success && token.Value != default)
             {
                 var claims = JwtTokenHelper.ValidateDecodeToken(token.Value, _configuration);
-                if (!claims.Any())
+                if (claims.Count == 0)
                 {
                     await LogoutAsync();
                 }

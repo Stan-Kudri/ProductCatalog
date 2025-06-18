@@ -72,8 +72,7 @@ namespace TestTask.Test
             var totalItem = items.Count;
 
             // Assert
-            Assert.Throws<ArgumentException>(()
-                =>
+            Assert.Throws<ArgumentException>(() =>
             { new PagedList<Category>(items, pageNumber, pageSize, totalItem); });
         }
 
@@ -87,8 +86,7 @@ namespace TestTask.Test
             var totalItem = items.Count;
 
             // Assert
-            Assert.Throws<ArgumentException>(()
-                =>
+            Assert.Throws<ArgumentException>(() =>
             { new PagedList<Category>(items, pageNumber, pageSize, totalItem); });
         }
 
@@ -102,18 +100,16 @@ namespace TestTask.Test
             var totalItem = -2;
 
             // Assert
-            Assert.Throws<ArgumentException>(()
-                =>
+            Assert.Throws<ArgumentException>(() =>
             { new PagedList<Category>(items, pageNumber, pageSize, totalItem); });
         }
 
         [Theory]
         [InlineData(null, 3, 1, 0)]
-        public void Exception_By_Null_List(List<Category> items, int pageSize, int numberPage, int totalItem)
+        public void Exception_By_Null_List(List<Category>? items, int pageSize, int numberPage, int totalItem)
         {
             // Assert
-            Assert.Throws<ArgumentNullException>(()
-                =>
+            Assert.Throws<ArgumentNullException>(() =>
             { new PagedList<Category>(items, numberPage, pageSize, totalItem); });
         }
     }

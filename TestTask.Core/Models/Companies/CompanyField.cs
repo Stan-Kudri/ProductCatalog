@@ -1,4 +1,4 @@
-﻿namespace TestTask.Core.Models.Companies
+namespace TestTask.Core.Models.Companies
 {
     public enum CompanyField
     {

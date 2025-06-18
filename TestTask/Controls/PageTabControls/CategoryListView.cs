@@ -24,7 +24,7 @@ namespace TestTask.Controls.PageTabControls
         private IServiceProvider _serviceProvider;
         private CategoryRepository _categoryRepository;
 
-        private SortCategoryModel _selectSortField = new SortCategoryModel();
+        private readonly SortCategoryModel _selectSortField = new SortCategoryModel();
         private bool _isAscending = true;
 
         public CategoryListView() => InitializeComponent();

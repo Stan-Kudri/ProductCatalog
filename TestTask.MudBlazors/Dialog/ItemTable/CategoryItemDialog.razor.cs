@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using TestTask.Core;
 using TestTask.Core.Models.Categories;
@@ -17,7 +17,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
         [Inject] private IMessageBox MessageDialog { get; set; } = null!;
 
         private CategoryModel categoryModel { get; set; } = new CategoryModel();
-        private string[] errors = { };
+        private string[] errors = [];
         private bool isAddItem = true;
 
         private Category? oldItem;

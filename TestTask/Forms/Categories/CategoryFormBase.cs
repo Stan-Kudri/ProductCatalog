@@ -1,6 +1,6 @@
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows.Forms;
+using Microsoft.Extensions.DependencyInjection;
 using TestTask.BindingItem;
 using TestTask.Core;
 

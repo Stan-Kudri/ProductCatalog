@@ -22,7 +22,6 @@ namespace TestTask.Controls.PageTabControls
     {
         private const int IndexId = 0;
         private const int IndexColumnTypeName = 1;
-        private const int IndexColumnNameCategory = 2;
         private const int IndexColumnIdCategory = 3;
 
         private IServiceProvider _serviceProvider;
@@ -31,7 +30,7 @@ namespace TestTask.Controls.PageTabControls
 
         private IMessageBox _messageBox;
         private MessageByTable<ProductType> _messageByTable;
-        private SortTypeProductModel _selectSortField = new SortTypeProductModel();
+        private readonly SortTypeProductModel _selectSortField = new SortTypeProductModel();
         private bool _isAscending = true;
 
         public TypeProductListView() => InitializeComponent();

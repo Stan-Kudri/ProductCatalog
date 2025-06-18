@@ -45,7 +45,7 @@ namespace TestTask
                         .WithScopedLifetime()
 
                     .FromAssemblies(typeof(BaseForm).Assembly)
-                        .AddClasses(form => form.AssignableTo(typeof(BaseForm)))
+                        .AddClasses(form => form.AssignableTo<BaseForm>())
                         .AsSelf()
                         .WithTransientLifetime()
 

@@ -428,11 +428,11 @@ namespace TestTask.Controls.CheckComboBox
         /// <summary>
         /// Simply a reference to the CheckBoxComboBox.
         /// </summary>
-        private CheckBoxComboBox _checkBoxComboBox;
+        private readonly CheckBoxComboBox _checkBoxComboBox;
         /// <summary>
         /// A Typed list of ComboBoxCheckBoxItems.
         /// </summary>
-        private CheckBoxComboBoxItemList _items;
+        private readonly CheckBoxComboBoxItemList _items;
 
         #endregion
 
@@ -606,7 +606,7 @@ namespace TestTask.Controls.CheckComboBox
         /// <summary>
         /// A reference to the CheckBoxComboBox.
         /// </summary>
-        private CheckBoxComboBox _CheckBoxComboBox;
+        private readonly CheckBoxComboBox _CheckBoxComboBox;
         /// <summary>
         /// A reference to the Item in ComboBox.Items that this object is extending.
         /// </summary>
@@ -741,7 +741,7 @@ namespace TestTask.Controls.CheckComboBox
 
         #region PRIVATE FIELDS
 
-        private CheckBoxComboBox _CheckBoxComboBox = checkBoxComboBox;
+        private readonly CheckBoxComboBox _CheckBoxComboBox = checkBoxComboBox;
 
         #endregion
 

@@ -19,7 +19,7 @@ namespace TestTask.MudBlazors.Pages
 
         private UserModel userModel { get; set; } = new UserModel();
         private string matchPassword = string.Empty;
-        private string[] errors = { };
+        private string[] errors = [];
 
         [Parameter] public bool IsSignIn { get; set; } = false;
 

@@ -26,7 +26,7 @@ namespace TestTask.Controls.PageTabControls
         private IServiceProvider _serviceProvider;
         private CompanyRepository _companyRepository;
 
-        private SortCompanyModel _selectSortField = new SortCompanyModel();
+        private readonly SortCompanyModel _selectSortField = new SortCompanyModel();
         private bool _isAscending = true;
 
         public CompanyListView() => InitializeComponent();

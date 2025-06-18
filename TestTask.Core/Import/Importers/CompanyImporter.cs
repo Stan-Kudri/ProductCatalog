@@ -1,6 +1,6 @@
-﻿using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
+using NPOI.SS.UserModel;
 using TestTask.Core.Extension;
 using TestTask.Core.Models.Companies;
 

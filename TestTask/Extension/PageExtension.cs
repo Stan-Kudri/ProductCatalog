@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using TestTask.Core.Models.Page;
 
 namespace TestTask.Extension

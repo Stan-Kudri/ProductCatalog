@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using TestTask.Core.DataTable;
@@ -25,13 +25,13 @@ namespace TestTask.MudBlazors.Pages.Import
 
         [CascadingParameter] private IMudDialogInstance MudDialog { get; set; } = null!;
 
-        private SelectTable selectedTable = new SelectTable();
+        private readonly SelectTable _selectedTable = new SelectTable();
 
         private void Cancel() => MudDialog.Cancel();
 
         private async Task UploadData(IBrowserFile fileload)
         {
-            if (selectedTable.SelectTables.Count() == 0 || fileload.Size == decimal.Zero)
+            if (!_selectedTable.SelectTables.Any() || fileload.Size == decimal.Zero)
             {
                 return;
             }
@@ -53,7 +53,7 @@ namespace TestTask.MudBlazors.Pages.Import
         private void Import<T>(Tables table, MemoryStream memoryStream, ExcelImporter<T> excelImporter, IRepository<T> repository)
             where T : Entity
         {
-            if (!selectedTable.SelectTables.Contains(table))
+            if (!_selectedTable.SelectTables.Contains(table))
             {
                 return;
             }

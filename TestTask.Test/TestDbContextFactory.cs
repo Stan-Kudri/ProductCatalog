@@ -8,9 +8,11 @@ namespace TestTask.Test
     {
         public AppDbContext Create()
         {
-            using var sqlLiteConnection = new SqliteConnection("Data Source=:memory:");
-            sqlLiteConnection.Open();
+#pragma warning disable CA2000 // Dispose objects before losing scope
+            var sqlLiteConnection = new SqliteConnection("Data Source=:memory:");
+#pragma warning restore CA2000 // Dispose objects before losing scope
 
+            sqlLiteConnection.Open();
             var builder = new DbContextOptionsBuilder().UseSqlite(sqlLiteConnection);
 
             var dbContext = new AppDbContext(builder.Options);

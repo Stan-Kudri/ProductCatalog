@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using TestTask.Core;
 using TestTask.Core.Models.Companies;
@@ -15,7 +15,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
         [Inject] private IMessageBox MessageDialog { get; set; } = null!;
 
         private CompanyModel companyModel { get; set; } = new CompanyModel();
-        private string[] errors = { };
+        private string[] errors = [];
         private bool isAddItem = true;
 
         private Company? oldCompany;
