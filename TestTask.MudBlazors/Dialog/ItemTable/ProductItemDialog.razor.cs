@@ -120,11 +120,9 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
         private void ChangeValueCategory(Category? item)
         {
-            ArgumentNullException.ThrowIfNull(item);
-            ArgumentNullException.ThrowIfNull(productModel);
-            ArgumentNullException.ThrowIfNull(productModel.Category);
-
+#pragma warning disable BL0005 // Component parameter should not be set outside of its component.
             productModel.Category = item;
+#pragma warning restore BL0005 // Component parameter should not be set outside of its component.
 
             if (productModel.Category == null || productModel.Category.Types == null)
             {
