@@ -24,10 +24,7 @@ namespace TestTask.Controls
         private float[] _percentages;
 
         public ListViewControl()
-            : base()
-        {
-            InitializeComponent();
-        }
+            : base() => InitializeComponent();
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public PageModel Page { get; set; } = new PageModel();
@@ -63,15 +60,15 @@ namespace TestTask.Controls
 
         private async void BtnEditItem_Click(object sender, EventArgs e)
         {
-            var indexEditItem = listView.SelectedIndices.Cast<int>();
+            var selectedIndices = listView.SelectedIndices.Cast<int>().ToList();
 
-            if (indexEditItem.Count() != 1)
+            if (selectedIndices.Count != 1)
             {
                 await _messageBox.ShowWarning("Select one item.");
                 return;
             }
 
-            var row = indexEditItem.First();
+            var row = selectedIndices[0]; // Берем первый элемент из списка
             var rowItem = listView.Items[row];
             var entity = _provider.GetEntity(rowItem);
 

@@ -50,10 +50,12 @@ namespace TestTask.Controls.PageTabControls
         {
             using (var addForm = _serviceProvider.GetRequiredService<AddCategoryForm>())
             {
+#pragma warning disable CA1849 // Call async methods when in an async method
                 if (addForm.ShowDialog() != DialogResult.OK)
                 {
                     return Task.FromResult(false);
                 }
+#pragma warning restore CA1849 // Call async methods when in an async method
 
                 var item = addForm.GetItemModel().ToCategory();
                 _categoryRepository.Add(item);

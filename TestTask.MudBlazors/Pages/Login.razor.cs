@@ -27,7 +27,9 @@ namespace TestTask.MudBlazors.Pages
 
         private void RegistrationPage() => Navigation.NavigateTo($"/login/{false}");
 
+#pragma warning disable BL0005 // Component parameter should not be set outside of its component.
         private void ClearField() => userModel.Password = userModel.Username = matchPassword = string.Empty;
+#pragma warning restore BL0005 // Component parameter should not be set outside of its component.
 
         private async Task SignIn()
         {

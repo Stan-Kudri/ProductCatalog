@@ -120,6 +120,10 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
         private void ChangeValueCategory(Category? item)
         {
+            ArgumentNullException.ThrowIfNull(item);
+            ArgumentNullException.ThrowIfNull(productModel);
+            ArgumentNullException.ThrowIfNull(productModel.Category);
+
             productModel.Category = item;
 
             if (productModel.Category == null || productModel.Category.Types == null)

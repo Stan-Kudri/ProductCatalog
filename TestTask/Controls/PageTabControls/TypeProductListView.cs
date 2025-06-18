@@ -70,10 +70,12 @@ namespace TestTask.Controls.PageTabControls
             {
                 addForm.Initialize(listCategory.ToList());
 
+#pragma warning disable CA1849 // Call async methods when in an async method
                 if (addForm.ShowDialog() != DialogResult.OK)
                 {
                     return false;
                 }
+#pragma warning restore CA1849 // Call async methods when in an async method
 
                 var item = addForm.GetTypeProductModel().ToProductType();
                 _typeRepository.Add(item);
