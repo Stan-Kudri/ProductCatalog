@@ -59,7 +59,8 @@ namespace TestTask.MudBlazors.Pages.Import
             }
 
             memoryStream.Position = 0;
-            var readItems = excelImporter.Import(new NonClosableStream(memoryStream));
+            using var nonClosableStream = new NonClosableStream(memoryStream);
+            var readItems = excelImporter.Import(nonClosableStream);
             foreach (var row in readItems)
             {
                 if (row.Success)

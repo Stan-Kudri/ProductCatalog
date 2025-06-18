@@ -1,6 +1,5 @@
 using FluentAssertions;
 using TestTask.Core.Models.Categories;
-using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Types;
 
 namespace TestTask.Test.ServiceTest
@@ -136,7 +135,7 @@ namespace TestTask.Test.ServiceTest
         public void Service_Should_Add_All_The_Item_Of_Database(List<Category> categories, List<ProductType> types)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var categoryRepository = new CategoryRepository(dbContext);
             var typeProductService = new ProductTypeRepository(dbContext);
             categoryRepository.AddRange(categories);

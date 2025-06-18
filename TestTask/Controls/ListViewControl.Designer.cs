@@ -1,4 +1,4 @@
-﻿namespace TestTask.Controls
+namespace TestTask.Controls
 {
     partial class ListViewControl
     {

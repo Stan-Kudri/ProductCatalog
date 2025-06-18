@@ -60,7 +60,7 @@ namespace TestTask.Test.ImportTest
         public void Import_Should_Add_All_File_Items(List<Category> exceptCategory)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
             var categoryRepository = new CategoryRepository(dbContext);
             var memoryStream = new MemoryStream(Resources.DataIsAllFilledIn);
             var categoryImporter = new CategoryImporter();

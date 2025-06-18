@@ -146,7 +146,7 @@ namespace TestTask.Test.ServiceTest
         public void Service_Should_Add_All_The_Item_Of_Database(Company company, Category category, ProductType type, List<Product> products)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
 
             var companyRepository = new CompanyRepository(dbContext);
             var categoryRepository = new CategoryRepository(dbContext);
@@ -176,7 +176,7 @@ namespace TestTask.Test.ServiceTest
             List<Product> expectProducts)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
 
             var companyRepository = new CompanyRepository(dbContext);
             var categoryRepository = new CategoryRepository(dbContext);
@@ -207,7 +207,7 @@ namespace TestTask.Test.ServiceTest
             List<Product> expectProducts)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
 
             var companyRepository = new CompanyRepository(dbContext);
             var categoryRepository = new CategoryRepository(dbContext);
@@ -238,7 +238,7 @@ namespace TestTask.Test.ServiceTest
             List<Product> expectProducts)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
 
             var companyRepository = new CompanyRepository(dbContext);
             var categoryRepository = new CategoryRepository(dbContext);
@@ -268,7 +268,7 @@ namespace TestTask.Test.ServiceTest
             Product product)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
 
             var companyRepository = new CompanyRepository(dbContext);
             var categoryRepository = new CategoryRepository(dbContext);
@@ -295,7 +295,7 @@ namespace TestTask.Test.ServiceTest
             Product product)
         {
             //Arrange
-            var dbContext = new TestDbContextFactory().Create();
+            using var dbContext = new TestDbContextFactory().Create();
 
             var companyRepository = new CompanyRepository(dbContext);
             var categoryRepository = new CategoryRepository(dbContext);

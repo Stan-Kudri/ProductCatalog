@@ -1,4 +1,4 @@
-﻿namespace TestTask.Controls.PageTabControls
+namespace TestTask.Controls.PageTabControls
 {
     partial class CompanyListView
     {

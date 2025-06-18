@@ -181,6 +181,7 @@ dotnet_diagnostic.CA1047.severity=error
 dotnet_diagnostic.CA1050.severity=error
 dotnet_diagnostic.CA1064.severity=error
 
+dotnet_diagnostic.CA1416.severity=none
 dotnet_diagnostic.CA1507.severity=error
 dotnet_diagnostic.CA1514.severity=error
 
