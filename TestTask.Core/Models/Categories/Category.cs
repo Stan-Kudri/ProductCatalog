@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TestTask.Core.Exeption;
 using TestTask.Core.Models.Products;
 using ProductType = TestTask.Core.Models.Types.ProductType;
 
@@ -15,14 +16,12 @@ namespace TestTask.Core.Models.Categories
             : this(name)
             => Id = id > 0
                     ? Id = id
-                    : throw new ArgumentException("The ID must be greater than zero.", nameof(id));
+                    : throw BusinessLogicException.EnsureIdLessThenZero<Category>(id);
 
         public Category(string name, List<Product> product = null, List<ProductType> type = null)
         {
-            Name = name != string.Empty && name != null
-                   ? Name = name
-                   : throw new ArgumentException("The category name cannot be empty.", nameof(name));
-
+            BusinessLogicException.ThrowIfNullOrEmpty(name);
+            Name = name;
             Products = product;
             Types = type;
         }

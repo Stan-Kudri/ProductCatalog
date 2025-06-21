@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using TestTask.Core;
+using TestTask.Core.Exeption;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Types;
 using TestTask.MudBlazors.Extension;
@@ -38,7 +39,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
             if (Id <= 0)
             {
-                throw new Exception("The ID value can't be less than zero.");
+                throw new BusinessLogicException("The ID value can't be less than zero.");
             }
 
             isAddItem = false;

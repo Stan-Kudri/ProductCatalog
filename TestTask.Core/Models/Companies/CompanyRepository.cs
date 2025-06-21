@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using TestTask.Core.DBContext;
+using TestTask.Core.Exeption;
 
 namespace TestTask.Core.Models.Companies
 {
@@ -14,14 +14,11 @@ namespace TestTask.Core.Models.Companies
 
         public void Add(Company item)
         {
-            if (item == null)
-            {
-                throw new ArgumentException("The received parameters are not correct.", nameof(item));
-            }
+            BusinessLogicException.ThrowIfNull(item);
 
             if (_dbContext.Company.Any(e => e.Id == item.Id))
             {
-                throw new ArgumentException("This company exists.");
+                BusinessLogicException.ThrowUniqueIDPropertyError<Company>(item);
             }
 
             _dbContext.Company.Add(item);
@@ -30,13 +27,11 @@ namespace TestTask.Core.Models.Companies
 
         public void Updata(Company item)
         {
-            if (item == null)
-            {
-                throw new ArgumentNullException("The format of the transmitted data is incorrect.", nameof(item));
-            }
+
+            BusinessLogicException.ThrowIfNull(item);
 
             var oldItem = _dbContext.Company.FirstOrDefault(e => e.Id == item.Id)
-                            ?? throw new InvalidOperationException("Interaction element not found.");
+                            ?? throw NotFoundException.NotFoundIdProperty<Company>(item.Id);
 
             oldItem.Name = item.Name;
             oldItem.DateCreation = item.DateCreation;
@@ -48,7 +43,7 @@ namespace TestTask.Core.Models.Companies
         public void Remove(int id)
         {
             var company = _dbContext.Company.FirstOrDefault(e => e.Id == id)
-                            ?? throw new InvalidOperationException("Interaction element not found.");
+                            ?? throw NotFoundException.NotFoundIdProperty<Company>(id);
 
             _dbContext.Company.Remove(company);
             _dbContext.SaveChanges();
@@ -84,7 +79,7 @@ namespace TestTask.Core.Models.Companies
 
         public string CompanyName(int id)
             => _dbContext.Company.FirstOrDefault(e => e.Id == id).Name
-            ?? throw new ArgumentException("Interaction element not found.");
+            ?? throw NotFoundException.NotFoundIdProperty<Company>(id);
 
         public Company GetCompany(int? id)
             => _dbContext.Company.FirstOrDefault(e => e.Id == id);

@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using NPOI.SS.UserModel;
+using TestTask.Core.Exeption;
 using TestTask.Core.Extension;
 using TestTask.Core.Models.Companies;
 
@@ -38,7 +38,7 @@ namespace TestTask.Core.Import.Importers
         {
             if (_header == null)
             {
-                throw new Exception("You should read header");
+                throw new BusinessLogicException("You should read header");
             }
 
             if (row.Cells.Count < _header.Count)

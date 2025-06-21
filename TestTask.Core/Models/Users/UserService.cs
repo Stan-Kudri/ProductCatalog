@@ -35,7 +35,6 @@ namespace TestTask.Core.Models.Users
         public User GetUser(string username, string passwordHash)
             => _dbContext.Users.FirstOrDefault(e => e.Username == username && e.PasswordHash == passwordHash);
 
-        public IQueryable<User> GetQueryableAll()
-            => _dbContext.Users.Select(e => e);
+        public IQueryable<User> GetQueryableAll() => _dbContext.Users.Select(e => e);
     }
 }

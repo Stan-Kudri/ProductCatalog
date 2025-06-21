@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TestTask.Core.Exeption;
 using TestTask.Core.Models.Products;
 
 namespace TestTask.Core.Models.Companies
@@ -14,20 +15,17 @@ namespace TestTask.Core.Models.Companies
             : this(name, dateCreation, country)
             => Id = id > 0
                     ? Id = id
-                    : throw new ArgumentException("The ID must be greater than zero.", nameof(id));
+                    : throw NotFoundException.NotFoundIdProperty<Company>(id);
 
         public Company(string name, DateTime dateCreation, string country, List<Product> products = null)
         {
-            Name = name != string.Empty && name != null
-                   ? Name = name
-                   : throw new ArgumentException("The product name cannot be empty.", nameof(name));
+            BusinessLogicException.ThrowIfNullOrEmpty(name);
+            BusinessLogicException.ThrowIfNullOrEmpty(country);
+            BusinessLogicException.EnsureRangeDate<Company>(dateCreation, nameof(dateCreation), DateTime.Now);
 
-            DateCreation = dateCreation <= DateTime.Now ?
-                DateCreation = dateCreation :
-                throw new ArgumentException("The creation date is currently impossible.", nameof(dateCreation));
-
-            Country = country != string.Empty && country != null ? Country = country : throw new ArgumentException("The country cannot be empty.", nameof(country));
-
+            Name = name;
+            Country = country;
+            DateCreation = dateCreation;
             Product = products;
         }
 

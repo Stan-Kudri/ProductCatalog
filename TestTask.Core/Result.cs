@@ -1,4 +1,5 @@
 using System;
+using TestTask.Core.Exeption;
 
 namespace TestTask.Core
 {
@@ -24,7 +25,7 @@ namespace TestTask.Core
         {
             if (Success)
             {
-                throw new Exception("Should be error.");
+                throw new BusinessLogicException("Should be error.");
             }
 
             return Result<T2>.CreateFail(Error, Row);
@@ -36,7 +37,7 @@ namespace TestTask.Core
         {
             if (string.IsNullOrEmpty(error))
             {
-                throw new Exception("Error cannot be empty.");
+                throw new BusinessLogicException("Error cannot be empty.");
             }
 
             return new Result<T>(default, false, error, row);

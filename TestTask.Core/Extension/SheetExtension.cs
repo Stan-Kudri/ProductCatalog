@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NPOI.SS.UserModel;
+using TestTask.Core.Exeption;
 
 namespace TestTask.Core.Extension
 {
@@ -42,7 +43,7 @@ namespace TestTask.Core.Extension
             if (result.Count != columns.Count)
             {
                 var notFoundColumns = columns.Select(e => e.Value).Except(result.Keys).ToList();
-                throw new Exception($"Unnable to find columns: [{string.Join(", ", notFoundColumns)}]");
+                throw new BusinessLogicException($"Unnable to find columns: [{string.Join(", ", notFoundColumns)}]");
             }
 
             return result;
