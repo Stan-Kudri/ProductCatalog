@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using TestTask.Core;
+using TestTask.Core.Exeption;
 using TestTask.Core.Models.Categories;
 using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model.TableComponent;
@@ -32,10 +33,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
                 return;
             }
 
-            if (Id <= 0)
-            {
-                throw new Exception("The ID value can't be less than zero.");
-            }
+            BusinessLogicException.EnsureIdLessThenZero(Id);
 
             isAddItem = false;
             oldItem = CategoryRepository.GetCategory((int)Id);

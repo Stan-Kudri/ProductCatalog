@@ -1,8 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using TestTask.Core.DBContext;
+using TestTask.Core.Exeption;
+using TestTask.Core.Models.Categories;
 
 namespace TestTask.Core.Models.Types
 {
@@ -14,19 +15,16 @@ namespace TestTask.Core.Models.Types
 
         public void Add(ProductType item)
         {
-            if (item == null)
-            {
-                throw new ArgumentException("The received parameters are not correct.", nameof(item));
-            }
+            BusinessLogicException.ThrowIfNull(item);
 
             if (_dbContext.Type.Any(e => e.Id == item.Id))
             {
-                throw new ArgumentException("This type exists.");
+                BusinessLogicException.ThrowUniqueIDBusy<ProductType>(item.Id);
             }
 
             if (_dbContext.Category.FirstOrDefault(e => e.Id == item.CategoryId) == null)
             {
-                throw new Exception("Category ID does not exist.");
+                throw NotFoundException.NotFoundIdProperty<Category>(item.CategoryId);
             }
 
             _dbContext.Type.Add(item);
@@ -35,18 +33,15 @@ namespace TestTask.Core.Models.Types
 
         public void Updata(ProductType item)
         {
-            if (item == null)
-            {
-                throw new ArgumentNullException("The format of the transmitted data is incorrect.", nameof(item));
-            }
+            BusinessLogicException.ThrowIfNull(item);
 
             if (!_dbContext.Category.Any(e => e.Id == item.CategoryId))
             {
-                throw new Exception("Category ID does not exist.");
+                throw new BusinessLogicException("Category ID does not exist.");
             }
 
             var oldItem = _dbContext.Type.FirstOrDefault(e => e.Id == item.Id)
-                            ?? throw new InvalidOperationException("Interaction element not found.");
+                            ?? throw NotFoundException.NotFoundIdProperty<ProductType>(item.Id);
 
             oldItem.Name = item.Name;
             oldItem.CategoryId = item.CategoryId;
@@ -57,7 +52,7 @@ namespace TestTask.Core.Models.Types
         public void Remove(int id)
         {
             var item = _dbContext.Type.FirstOrDefault(e => e.Id == id)
-                        ?? throw new InvalidOperationException("Interaction element not found.");
+                        ?? throw NotFoundException.NotFoundIdProperty<ProductType>(id);
 
             _dbContext.Type.Remove(item);
             _dbContext.SaveChanges();
@@ -112,7 +107,7 @@ namespace TestTask.Core.Models.Types
 
         public ProductType GetItem(int id)
             => _dbContext.Type.FirstOrDefault(e => e.Id == id)
-            ?? throw new ArgumentException("Interaction element not found.");
+            ?? throw NotFoundException.NotFoundIdProperty<ProductType>(id);
 
         public IQueryable<ProductType> GetQueryableAll()
             => _dbContext.Type.Include(e => e.Category).Select(e => e);

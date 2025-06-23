@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NPOI.SS.UserModel;
+using TestTask.Core.Exeption;
 using TestTask.Core.Models.Types;
 
 namespace TestTask.Core.Export.SheetFillers
@@ -55,7 +56,7 @@ namespace TestTask.Core.Export.SheetFillers
                             cell.SetCellValue(item.CategoryId);
                             break;
                         default:
-                            throw new Exception("Unknown field.");
+                            throw new NotFoundException("Unknown field.");
                     }
                 }
             }

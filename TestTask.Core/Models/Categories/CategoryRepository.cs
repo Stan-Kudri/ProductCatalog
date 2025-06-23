@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using TestTask.Core.DBContext;
+using TestTask.Core.Exeption;
 
 namespace TestTask.Core.Models.Categories
 {
@@ -10,14 +10,11 @@ namespace TestTask.Core.Models.Categories
     {
         public void Add(Category item)
         {
-            if (item == null)
-            {
-                throw new ArgumentException("The received parameters are not correct.", nameof(item));
-            }
+            BusinessLogicException.ThrowIfNull(item);
 
             if (appDbContext.Category.Any(e => e.Id == item.Id))
             {
-                throw new ArgumentException("This company exists.");
+                BusinessLogicException.ThrowUniqueIDBusy<Category>(item.Id);
             }
 
             appDbContext.Category.Add(item);
@@ -26,12 +23,10 @@ namespace TestTask.Core.Models.Categories
 
         public void Updata(Category item)
         {
-            if (item == null)
-            {
-                throw new ArgumentNullException(nameof(item), "The format of the transmitted data is incorrect.");
-            }
+            BusinessLogicException.ThrowIfNull(item);
 
-            var oldItem = appDbContext.Category.FirstOrDefault(e => e.Id == item.Id) ?? throw new InvalidOperationException("Interaction element not found.");
+            var oldItem = appDbContext.Category.FirstOrDefault(e => e.Id == item.Id)
+                            ?? throw NotFoundException.NotFoundIdProperty<Category>(item.Id);
             oldItem.Name = item.Name;
             appDbContext.SaveChanges();
         }
@@ -39,7 +34,7 @@ namespace TestTask.Core.Models.Categories
         public void Remove(int id)
         {
             var category = appDbContext.Category.FirstOrDefault(e => e.Id == id)
-                            ?? throw new InvalidOperationException("Interaction element not found.");
+                            ?? throw NotFoundException.NotFoundIdProperty<Category>(id);
 
             appDbContext.Category.Remove(category);
             appDbContext.SaveChanges();
@@ -75,11 +70,11 @@ namespace TestTask.Core.Models.Categories
 
         public Category GetCategory(int id)
             => appDbContext.Category.FirstOrDefault(e => e.Id == id)
-            ?? throw new ArgumentException("Interaction element not found.");
+            ?? throw NotFoundException.NotFoundIdProperty<Category>(id);
 
         public string GetName(int id)
-            => appDbContext.Category.FirstOrDefault(e => e.Id == id).Name
-            ?? throw new ArgumentException("Interaction element not found.");
+            => appDbContext.Category.AsNoTracking().FirstOrDefault(e => e.Id == id).Name
+            ?? throw NotFoundException.NotFoundIdProperty<Category>(id);
 
         public List<Category> GetAll()
             => appDbContext.Category.Any() ? [.. appDbContext.Category.AsNoTracking()] : null;

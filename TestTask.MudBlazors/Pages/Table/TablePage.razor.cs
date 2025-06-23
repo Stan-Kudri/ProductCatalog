@@ -7,18 +7,21 @@ namespace TestTask.MudBlazors.Pages.Table
 {
     public partial class TablePage
     {
+        private const string TitleImportTable = "Import table";
+        private const string TitleExportTable = "Export table";
+
         [Inject] private IDialogService DialogService { get; set; } = null!;
 
         private async void OpenDialogImport()
         {
             DialogOptions closeOnEscapeKey = new DialogOptions { CloseOnEscapeKey = true };
-            await DialogService.ShowAsync<DialogImportData>("Import table", closeOnEscapeKey);
+            await DialogService.ShowAsync<DialogImportData>(TitleImportTable, closeOnEscapeKey);
         }
 
         private async void OpenDialogExport()
         {
             DialogOptions closeOnEscapeKey = new DialogOptions { CloseOnEscapeKey = true };
-            await DialogService.ShowAsync<ExportExcel>("Export table", closeOnEscapeKey);
+            await DialogService.ShowAsync<ExportExcel>(TitleExportTable, closeOnEscapeKey);
         }
     }
 }

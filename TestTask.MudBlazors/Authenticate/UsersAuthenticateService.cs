@@ -40,7 +40,7 @@ namespace TestTask.MudBlazors.Authenticate
 
         private (bool, User) ValidUserService(User user)
             => !_userService.IsUserData(user)
-                ? ((bool, User))(false, user)
+                ? (false, user)
                 : (true, _userService.GetUser(user.Username, user.PasswordHash));
     }
 }

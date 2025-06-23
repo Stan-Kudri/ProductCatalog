@@ -106,10 +106,10 @@ namespace TestTask.Test.ImportTest
             }
 
             //Act
-            var actualCompanies = dbContext.Product.ToList();
+            var actualProduct = dbContext.Product.ToList();
 
             //Assert
-            actualCompanies.Should().Equal(exceptProduct);
+            actualProduct.Should().Equal(exceptProduct);
             productRead.Should().AllSatisfy(e => e.Success.Should().BeTrue());
         }
 

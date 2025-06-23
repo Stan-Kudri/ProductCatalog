@@ -1,4 +1,4 @@
-using System;
+using TestTask.Core.Exeption;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Types;
 
@@ -11,11 +11,11 @@ namespace TestTask.BindingItem
 
         public ProductTypeModel(string name, Category category)
         {
-            Category = category ?? throw new ArgumentException("The category cannot be null.", nameof(category));
+            BusinessLogicException.ThrowIfNull(category);
+            BusinessLogicException.ThrowIfNullOrEmpty(name);
 
-            Name = name != string.Empty && name != null ?
-                Name = name :
-                throw new ArgumentException("The type product cannot be empty.", nameof(name));
+            Category = category;
+            Name = name;
         }
 
         public string Name

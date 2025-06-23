@@ -234,7 +234,7 @@ dotnet_diagnostic.CA2024.severity=error
 
 # Usage rules
 dotnet_diagnostic.CA2200.severity=error
-dotnet_diagnostic.CA2201.severity=none
+dotnet_diagnostic.CA2201.severity=error
 dotnet_diagnostic.CA2215.severity=error
 dotnet_diagnostic.CA2218.severity=error
 dotnet_diagnostic.CA2224.severity=error

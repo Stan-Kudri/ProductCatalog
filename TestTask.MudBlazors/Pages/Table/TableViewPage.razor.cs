@@ -29,6 +29,7 @@ namespace TestTask.MudBlazors.Pages.Table
         private const string MessageNotSelectedItem = "No items selected.";
         private const string MessageRemoveItem = "Remove item";
         private const string MessageEditItem = "Upload data";
+
         private const int NoItemsSelected = 0;
 
         private IEnumerable<T>? items;

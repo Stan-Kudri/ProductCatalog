@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TestTask.Core.Exeption;
 
 namespace TestTask.Core.Models.Page
 {
@@ -14,10 +15,7 @@ namespace TestTask.Core.Models.Page
 
         public PagedList(IEnumerable<T> items, int pageNumber, int pageSize, int totalItems)
         {
-            if (items == null)
-            {
-                throw new ArgumentNullException(nameof(items));
-            }
+            BusinessLogicException.ThrowIfNull(items);
 
             if (pageNumber < 0)
             {

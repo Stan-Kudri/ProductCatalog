@@ -1,4 +1,5 @@
 using System;
+using TestTask.Core.Exeption;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Types;
@@ -15,29 +16,29 @@ namespace TestTask.Core.Models.Products
             : this(name, companyId, categoryId, typeId, destination, price)
             => Id = id > 0
                     ? Id = id
-                    : throw new ArgumentException("The ID must be greater than zero.", nameof(id));
+                    : throw BusinessLogicException.EnsureIdLessThenZero<Product>(id);
 
         public Product(string name, int companyId, int categoryId, int typeId, string destination, decimal price)
         {
-            Name = name != null && name != string.Empty
-                   ? Name = name
-                   : throw new ArgumentException("The name product cannot be empty.", name);
+            BusinessLogicException.ThrowIfNullOrEmpty(name);
+
+            Name = name;
 
             CompanyId = companyId > 0
                         ? CompanyId = companyId
-                        : throw new ArgumentException("Company ID greater than zero.", nameof(companyId));
+                        : throw NotFoundException.NotFoundIdProperty<Company>(companyId);
 
             CategoryId = categoryId > 0
                          ? CategoryId = categoryId
-                         : throw new ArgumentException("Category ID greater than zero.", nameof(categoryId));
+                         : throw NotFoundException.NotFoundIdProperty<Category>(categoryId);
 
             TypeId = typeId > 0
                      ? TypeId = typeId
-                     : throw new ArgumentException("Type ID greater than zero.", nameof(typeId));
+                     : throw NotFoundException.NotFoundIdProperty<ProductType>(typeId);
 
             Price = price > 0
                     ? Price = price
-                    : throw new ArgumentException("The price is greater than zero.", nameof(price));
+                    : throw BusinessLogicException.EnsureValueLessThenZero<Product>(nameof(price), price);
 
             Destination = destination;
         }

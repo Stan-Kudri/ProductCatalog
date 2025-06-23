@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TestTask.BindingItem;
 using TestTask.BindingItem.ObservableCollection;
 using TestTask.Core;
+using TestTask.Core.Exeption;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Types;
@@ -29,13 +30,13 @@ namespace TestTask.Forms.Products
         }
 
         private Company SelectedCompany =>
-            cmbCompanyValue.SelectedValue != null ? (Company)cmbCompanyValue.SelectedValue : throw new Exception("Wrong combo box format");
+            cmbCompanyValue.SelectedValue != null ? (Company)cmbCompanyValue.SelectedValue : throw new BusinessLogicException("Wrong combo box format");
 
         private Category SelectedCategory =>
-            cmbCategoryValue.SelectedValue != null ? (Category)cmbCategoryValue.SelectedValue : throw new Exception("Wrong combo box format");
+            cmbCategoryValue.SelectedValue != null ? (Category)cmbCategoryValue.SelectedValue : throw new BusinessLogicException("Wrong combo box format");
 
         private ProductType SelectedType =>
-            cmbTypeValue.SelectedValue != null ? (ProductType)cmbTypeValue.SelectedValue : throw new Exception("Wrong combo box format");
+            cmbTypeValue.SelectedValue != null ? (ProductType)cmbTypeValue.SelectedValue : throw new BusinessLogicException("Wrong combo box format");
 
         protected virtual async void BtnSave_Click(object sender, EventArgs e)
         {
@@ -153,7 +154,7 @@ namespace TestTask.Forms.Products
 
         public ProductModel GetProductModel()
             => !decimal.TryParse(tbPrice.Text, out var price)
-                ? throw new Exception("The Price field is filled in incorrectly.")
+                ? throw new BusinessLogicException("The Price field is filled in incorrectly.")
                 : new ProductModel(tbName.Text, SelectedCompany, SelectedCategory, SelectedType, price, tbDestination.Text);
     }
 }
