@@ -1,4 +1,5 @@
 using FluentAssertions;
+using TestTask.Core.Exeption;
 using TestTask.Core.Models.Categories;
 
 namespace TestTask.Test.ServiceTest
@@ -207,7 +208,7 @@ namespace TestTask.Test.ServiceTest
             service.AddRange(categories);
 
             //Assert
-            Assert.Throws<ArgumentException>(() => { service.Add(category); });
+            Assert.Throws<BusinessLogicException>(() => { service.Add(category); });
         }
     }
 }

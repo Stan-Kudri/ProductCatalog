@@ -1,4 +1,5 @@
 using System;
+using TestTask.Core.Exeption;
 using TestTask.Core.Models.Companies;
 
 namespace TestTask.BindingItem
@@ -11,11 +12,11 @@ namespace TestTask.BindingItem
 
         public CompanyModel(string name, DateTime dateCreation, string country)
         {
+            BusinessLogicException.ThrowIfNull(dateCreation);
+
             _name = name;
             _country = country;
-            _dateCreation = dateCreation == null
-                            ? throw new ArgumentException("The company creation date cannot be zero.", nameof(dateCreation))
-                            : _dateCreation = dateCreation;
+            _dateCreation = dateCreation;
         }
 
         public string Name

@@ -19,7 +19,7 @@ namespace TestTask.Core.Models.Types
 
             if (_dbContext.Type.Any(e => e.Id == item.Id))
             {
-                BusinessLogicException.ThrowUniqueIDPropertyError<ProductType>(item);
+                BusinessLogicException.ThrowUniqueIDBusy<ProductType>(item.Id);
             }
 
             if (_dbContext.Category.FirstOrDefault(e => e.Id == item.CategoryId) == null)

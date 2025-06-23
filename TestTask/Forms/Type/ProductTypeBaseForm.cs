@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TestTask.BindingItem;
 using TestTask.BindingItem.ObservableCollection;
 using TestTask.Core;
+using TestTask.Core.Exeption;
 using TestTask.Core.Models.Categories;
 
 namespace TestTask.Forms.Type
@@ -25,7 +26,7 @@ namespace TestTask.Forms.Type
         private Category SelectedCategory
             => cmbListCategory.SelectedValue != null
             ? (Category)cmbListCategory.SelectedValue
-            : throw new Exception("Wrong combo box format");
+            : throw new BusinessLogicException("Wrong combo box format");
 
         protected virtual async void BtnSave_Click(object sender, EventArgs e)
         {
@@ -81,7 +82,7 @@ namespace TestTask.Forms.Type
             var name = tbName.Text;
 
             return name == string.Empty || name == null
-                ? throw new Exception("The name type field is filled in incorrectly.")
+                ? throw new BusinessLogicException("The name type field is filled in incorrectly.")
                 : new ProductTypeModel(name, SelectedCategory);
         }
     }

@@ -1,4 +1,5 @@
 using FluentAssertions;
+using TestTask.Core.Exeption;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
@@ -281,7 +282,7 @@ namespace TestTask.Test.ServiceTest
             productRepository.AddRange(products);
 
             //Assert
-            Assert.Throws<ArgumentException>(() => { productRepository.Add(product); });
+            Assert.Throws<BusinessLogicException>(() => { productRepository.Add(product); });
         }
 
         [Theory]
@@ -307,7 +308,7 @@ namespace TestTask.Test.ServiceTest
             typeRepository.Add(type);
 
             //Assert
-            Assert.Throws<Exception>(() => { productRepository.Add(product); });
+            Assert.Throws<NotFoundException>(() => { productRepository.Add(product); });
         }
     }
 }

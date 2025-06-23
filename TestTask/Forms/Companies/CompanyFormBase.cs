@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
 using TestTask.BindingItem;
 using TestTask.Core;
+using TestTask.Core.Exeption;
 using TestTask.Core.Models.Companies;
 
 namespace TestTask.Forms.Companies
@@ -71,16 +72,16 @@ namespace TestTask.Forms.Companies
         {
             if (tbNameCompany.Text == string.Empty)
             {
-                throw new Exception("The name company field is empty.");
+                throw new BusinessLogicException("The name company field is empty.");
             }
 
             if (tbContry.Text == string.Empty)
             {
-                throw new Exception("The country field is empty.");
+                throw new BusinessLogicException("The country field is empty.");
             }
 
             return dtpCreateCompany.Value == null
-                ? throw new Exception("Error in date selection.")
+                ? throw new BusinessLogicException("Error in date selection.")
                 : new CompanyModel(tbNameCompany.Text, dtpCreateCompany.Value, tbContry.Text);
         }
     }

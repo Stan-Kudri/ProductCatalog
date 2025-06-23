@@ -1,4 +1,4 @@
-using System;
+using TestTask.Core.Exeption;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
@@ -17,19 +17,19 @@ namespace TestTask.BindingItem
 
         public ProductModel(string name, Company company, Category category, ProductType type, decimal price, string destination)
         {
-            Name = name != null && name != string.Empty
-                ? Name = name
-                : throw new ArgumentException("The name product cannot be empty.", name);
+            BusinessLogicException.ThrowIfNullOrEmpty(name);
+            BusinessLogicException.ThrowIfNull(company);
+            BusinessLogicException.ThrowIfNull(category);
+            BusinessLogicException.ThrowIfNull(type);
+            BusinessLogicException.ThrowIfNull(company);
+            BusinessLogicException.EnsureRangeMinValue(price, 0);
 
-            Company = company ?? throw new ArgumentException("The company cannot be null.", nameof(company));
-
-            Category = category ?? throw new ArgumentException("The category cannot be null.", nameof(category));
-
-            Type = type ?? throw new ArgumentException("The type cannot be null.", nameof(type));
-
+            Name = name;
+            Company = company;
+            Category = category;
+            Type = type;
             Destination = destination;
-
-            Price = price > 0 ? Price = price : throw new ArgumentException("The price is greater than zero.", nameof(price));
+            Price = price;
         }
 
         public string Name

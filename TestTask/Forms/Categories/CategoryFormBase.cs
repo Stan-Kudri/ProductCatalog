@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
 using TestTask.BindingItem;
 using TestTask.Core;
+using TestTask.Core.Exeption;
 
 namespace TestTask.Forms.Categories
 {
@@ -58,7 +59,7 @@ namespace TestTask.Forms.Categories
 
         public CategoryModel GetItemModel()
             => tbCategory.Text == string.Empty
-                ? throw new Exception("The Category field is filled in incorrectly.")
+                ? throw new BusinessLogicException("The Category field is filled in incorrectly.")
                 : new CategoryModel(tbCategory.Text);
     }
 }

@@ -22,6 +22,8 @@ namespace TestTask.Core.Models.Products
         {
             BusinessLogicException.ThrowIfNullOrEmpty(name);
 
+            Name = name;
+
             CompanyId = companyId > 0
                         ? CompanyId = companyId
                         : throw NotFoundException.NotFoundIdProperty<Company>(companyId);

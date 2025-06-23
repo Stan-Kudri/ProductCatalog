@@ -1,3 +1,4 @@
+using TestTask.Core.Exeption;
 using TestTask.Core.Models;
 
 namespace TestTask.MudBlazors.Pages.Table.Model
@@ -6,20 +7,9 @@ namespace TestTask.MudBlazors.Pages.Table.Model
     {
         public ListTableColumn(string name, int widthValuePercent, Func<Entity, object> valueSelector)
         {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentException("The column name cannot be empty.", nameof(name));
-            }
-
-            if (widthValuePercent <= 0)
-            {
-                throw new ArgumentException("The width is greater than zero.", nameof(widthValuePercent));
-            }
-
-            if (valueSelector == null)
-            {
-                throw new ArgumentNullException("ValueSelector should not be null");
-            }
+            BusinessLogicException.ThrowIfNullOrEmpty(name);
+            BusinessLogicException.EnsureRangeMinValue(widthValuePercent, 0);
+            BusinessLogicException.ThrowIfNull(valueSelector);
 
             Name = name;
             WidthValuePercent = widthValuePercent;

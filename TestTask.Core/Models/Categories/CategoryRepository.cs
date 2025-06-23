@@ -14,7 +14,7 @@ namespace TestTask.Core.Models.Categories
 
             if (appDbContext.Category.Any(e => e.Id == item.Id))
             {
-                throw NotFoundException.NotFoundIdProperty<Category>(item.Id);
+                BusinessLogicException.ThrowUniqueIDBusy<Category>(item.Id);
             }
 
             appDbContext.Category.Add(item);

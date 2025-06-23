@@ -21,7 +21,7 @@ namespace TestTask.Core.Models.Products
 
             if (_dbContext.Product.Any(e => e.Id == item.Id))
             {
-                BusinessLogicException.ThrowUniqueIDPropertyError<Product>(item);
+                BusinessLogicException.ThrowUniqueIDBusy<Product>(item.Id);
             }
 
             InvalidDBForItemProduct(item);

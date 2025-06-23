@@ -6,6 +6,8 @@ namespace TestTask.MudBlazors.Shared
 {
     public partial class MainLayout
     {
+        private const string MessageLogout = "User logout";
+
         [Inject] private NavigationManager Navigation { get; set; } = null!;
         [Inject] private BlazorAppLoginService BlazorAppLoginService { get; set; } = null!;
         [Inject] private ISnackbar Snackbar { get; set; } = null!;
@@ -19,7 +21,7 @@ namespace TestTask.MudBlazors.Shared
         private async Task LogoutAsync()
         {
             await BlazorAppLoginService.LogoutAsync();
-            Snackbar.Add("User logout", Severity.Info);
+            Snackbar.Add(MessageLogout, Severity.Info);
         }
     }
 }

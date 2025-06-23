@@ -18,7 +18,7 @@ namespace TestTask.Core.Models.Companies
 
             if (_dbContext.Company.Any(e => e.Id == item.Id))
             {
-                BusinessLogicException.ThrowUniqueIDPropertyError<Company>(item);
+                BusinessLogicException.ThrowUniqueIDBusy<Company>(item.Id);
             }
 
             _dbContext.Company.Add(item);

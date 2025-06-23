@@ -37,10 +37,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
                 return;
             }
 
-            if (Id <= 0)
-            {
-                throw new BusinessLogicException("The ID value can't be less than zero.");
-            }
+            BusinessLogicException.EnsureIdLessThenZero(Id);
 
             isAddItem = false;
             oldTypeProduct = ProductTypeRepository.GetItem((int)Id);

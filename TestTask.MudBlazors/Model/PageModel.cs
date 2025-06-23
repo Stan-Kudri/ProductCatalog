@@ -16,7 +16,7 @@ namespace TestTask.MudBlazors.Model
         {
         }
 
-        public int[] Items { get; set; } = new int[] { FirstSizePage, 30, 60 };
+        public int[] Items { get; set; } = [FirstSizePage, 30, 60];
 
         public Page GetPage() => new Page(_number, _size);
 

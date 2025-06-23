@@ -1,4 +1,5 @@
 using FluentAssertions;
+using TestTask.Core.Exeption;
 using TestTask.Core.Models.Companies;
 
 namespace TestTask.Test.ServiceTest
@@ -217,7 +218,7 @@ namespace TestTask.Test.ServiceTest
             companyRepository.AddRange(companies);
 
             //Assert
-            Assert.Throws<ArgumentException>(() => { companyRepository.Add(company); });
+            Assert.Throws<BusinessLogicException>(() => { companyRepository.Add(company); });
         }
     }
 }

@@ -18,11 +18,24 @@ namespace TestTask.Core.Exeption
         public static void ThrowUniqueIDPropertyError<T>(object property) =>
             throw new BusinessLogicException($"{typeof(T).Name} \"{property}\" property with such an identifier exists.");
 
+        public static void ThrowUniqueIDBusy<T>(int id) =>
+            throw new BusinessLogicException($"The {typeof(T).Name} with ID \"{id}\" is busy.");
+
         public static BusinessLogicException EnsureValueLessThenZero<T>(string propertyName, object value) =>
             throw new BusinessLogicException($"The {typeof(T).Name} {propertyName} \"{value}\" is less than zero.");
 
         public static BusinessLogicException EnsureIdLessThenZero<T>(int id) =>
             throw new BusinessLogicException($"The {typeof(T).Name} ID \"{id}\" is less than zero.");
+
+        public static void EnsureIdLessThenZero(int? id)
+        {
+            if (id > 0)
+            {
+                return;
+            }
+
+            throw new BusinessLogicException($"The ID \"{id}\" is less than zero.");
+        }
 
         public static void EnsureRangeDate<T>(DateTime date, string propertyName, DateTime minDateTime)
         {
@@ -32,6 +45,26 @@ namespace TestTask.Core.Exeption
             }
 
             OutOfRangeMinDate<T>(propertyName, minDateTime);
+        }
+
+        public static void EnsureRangeMinValue(int value, int minValue)
+        {
+            if (value > minValue)
+            {
+                return;
+            }
+
+            OutOfRangeMinValue(value, minValue);
+        }
+
+        public static void EnsureRangeMinValue(decimal value, decimal minValue)
+        {
+            if (value > minValue)
+            {
+                return;
+            }
+
+            OutOfRangeMinValue(value, minValue);
         }
 
         public static void ThrowIfNull([NotNull] object? obj)
@@ -57,5 +90,8 @@ namespace TestTask.Core.Exeption
 
         private static BusinessLogicException OutOfRangeMinDate<T>(string property, DateTime minDateTime)
             => new BusinessLogicException($"The {property} {typeof(T).Name} is less than expected {minDateTime}.");
+
+        private static BusinessLogicException OutOfRangeMinValue(object value, object minValue)
+            => new BusinessLogicException($"The value {value} is out of range. Minimum value {minValue}.");
     }
 }

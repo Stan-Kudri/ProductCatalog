@@ -1,4 +1,5 @@
 using FluentAssertions;
+using TestTask.Core.Exeption;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Page;
 
@@ -73,7 +74,9 @@ namespace TestTask.Test
 
             // Assert
             Assert.Throws<ArgumentException>(() =>
-            { new PagedList<Category>(items, pageNumber, pageSize, totalItem); });
+            {
+                new PagedList<Category>(items, pageNumber, pageSize, totalItem);
+            });
         }
 
         [Theory]
@@ -87,7 +90,9 @@ namespace TestTask.Test
 
             // Assert
             Assert.Throws<ArgumentException>(() =>
-            { new PagedList<Category>(items, pageNumber, pageSize, totalItem); });
+            {
+                new PagedList<Category>(items, pageNumber, pageSize, totalItem);
+            });
         }
 
         [Theory]
@@ -101,7 +106,9 @@ namespace TestTask.Test
 
             // Assert
             Assert.Throws<ArgumentException>(() =>
-            { new PagedList<Category>(items, pageNumber, pageSize, totalItem); });
+            {
+                new PagedList<Category>(items, pageNumber, pageSize, totalItem);
+            });
         }
 
         [Theory]
@@ -109,8 +116,10 @@ namespace TestTask.Test
         public void Exception_By_Null_List(List<Category>? items, int pageSize, int numberPage, int totalItem)
         {
             // Assert
-            Assert.Throws<ArgumentNullException>(() =>
-            { new PagedList<Category>(items, numberPage, pageSize, totalItem); });
+            Assert.Throws<BusinessLogicException>(() =>
+            {
+                new PagedList<Category>(items, numberPage, pageSize, totalItem);
+            });
         }
     }
 }
