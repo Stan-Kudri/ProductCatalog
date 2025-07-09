@@ -37,7 +37,8 @@ namespace TestTask.MudBlazors
             builder.Services.AddScoped(e => e.GetRequiredService<DbContextFactory>().Create());
             builder.Services.AddScoped<IMessageBox, MessageDialog>();
             builder.Services.AddScoped<UserService>();
-            builder.Services.AddScoped<UserValidator>();
+            builder.Services.AddScoped<IUserValidator, UserValidator>();
+            builder.Services.AddScoped<IPasswordHasher, BCryptPasswordHasher>();
 
             builder.Services.Scan(scan => scan
                                     .FromAssemblies(typeof(IRepository<>).Assembly)

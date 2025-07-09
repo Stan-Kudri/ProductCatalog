@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace TestTask.Core.Models.Users
 {
-    public class UserValidator
+    public class UserValidator : IUserValidator
     {
         public const int MinLengthUsername = 3;
 
-        public bool ValidFormatUsername(string username, out string message)
+        public bool ValidateUsername(string username, out string message)
         {
             message = string.Empty;
 
@@ -28,7 +28,7 @@ namespace TestTask.Core.Models.Users
 
         public const int MinLengthPass = 6;
 
-        public bool ValidFormatPassword(string password, out string message)
+        public bool ValidatePassword(string password, out string message)
         {
             message = string.Empty;
 

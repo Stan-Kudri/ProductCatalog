@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Components;
-using TestTask.Core.Models.Users;
 
 namespace TestTask.MudBlazors.Model
 {
@@ -31,7 +30,5 @@ namespace TestTask.MudBlazors.Model
             get => _password;
             set => _password = value;
         }
-
-        public User ToUser() => new User(_username, _password);
     }
 }

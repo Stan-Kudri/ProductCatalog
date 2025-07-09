@@ -10,7 +10,7 @@ namespace TestTask.MudBlazors.Pages
     public partial class Login
     {
         [Inject] private UserService UserService { get; set; } = null!;
-        [Inject] private UserValidator UserValidator { get; set; } = null!;
+        [Inject] private IUserValidator UserValidator { get; set; } = null!;
         [Inject] private NavigationManager Navigation { get; set; } = null!;
         [Inject] private BlazorAppLoginService BlazorAppLoginService { get; set; } = null!;
         [Inject] private ISnackbar Snackbar { get; set; } = null!;
@@ -33,7 +33,7 @@ namespace TestTask.MudBlazors.Pages
 
         private async Task SignIn()
         {
-            var loginResult = await BlazorAppLoginService.LoginAsync(userModel.ToUser());
+            var loginResult = await BlazorAppLoginService.LoginAsync(userModel);
 
             if (!loginResult)
             {
@@ -52,9 +52,7 @@ namespace TestTask.MudBlazors.Pages
                 return;
             }
 
-            var user = userModel.ToUser();
-
-            UserService.Add(user);
+            UserService.Add(userModel.Username, userModel.Password);
             Snackbar.Add($"Account registered", Severity.Success);
             SignInPage();
         }
@@ -67,7 +65,7 @@ namespace TestTask.MudBlazors.Pages
                 yield break;
             }
 
-            if (!UserValidator.ValidFormatPassword(password, out var message))
+            if (!UserValidator.ValidatePassword(password, out var message))
             {
                 yield return message;
                 yield break;
@@ -88,7 +86,7 @@ namespace TestTask.MudBlazors.Pages
                 yield break;
             }
 
-            if (!UserValidator.ValidFormatUsername(username, out var message))
+            if (!UserValidator.ValidateUsername(username, out var message))
             {
                 yield return message;
                 yield break;

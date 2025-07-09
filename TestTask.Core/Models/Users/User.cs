@@ -1,6 +1,4 @@
 using System;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace TestTask.Core.Models.Users
 {
@@ -10,38 +8,34 @@ namespace TestTask.Core.Models.Users
         {
         }
 
-        public User(string username, string password)
+        public User(string username, string passwordHash)
         {
-            var validator = new UserValidator();
-
-            if (!validator.ValidFormatPassword(password, out var messageValidPass))
-            {
-                throw new ArgumentException(messageValidPass, nameof(password));
-            }
-
-            if (!validator.ValidFormatUsername(username, out var messageValidUsername))
-            {
-                throw new ArgumentException(messageValidUsername, nameof(username));
-            }
+            ArgumentException.ThrowIfNullOrEmpty(username);
+            ArgumentException.ThrowIfNullOrEmpty(passwordHash);
 
             Username = username;
-            PasswordHash = GetPaswordHash(password);
+            PasswordHash = passwordHash;
         }
 
         public User(string username, string passwordHash, UserRole userRole)
             : this(username, passwordHash) => UserRole = userRole;
 
+        /// <summary>
+        /// User login.
+        /// </summary>
         public string Username { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Password Hash.
+        /// </summary>
         public string PasswordHash { get; set; } = string.Empty;
 
+        /// <summary>
+        /// User role in the app.
+        /// </summary>
         public UserRole UserRole { get; set; } = UserRole.Basic;
 
-        private string GetPaswordHash(string password)
-        {
-            byte[] inputBytes = Encoding.ASCII.GetBytes(password);
-            byte[] hash = MD5.HashData(inputBytes);
-            return BitConverter.ToString(hash).Replace("-", "");
-        }
+        public bool Equals(User? user)
+            => user is not null && user.Username == Username && user.PasswordHash == PasswordHash;
     }
 }

@@ -1,5 +1,3 @@
-using TestTask.Core.Models.Users;
-
 namespace TestTask.BindingItem
 {
     public class UserModel : ModelBase
@@ -24,7 +22,5 @@ namespace TestTask.BindingItem
             get => _password;
             set => SetField(ref _password, value);
         }
-
-        public User ToUser() => new User(_username, _password);
     }
 }

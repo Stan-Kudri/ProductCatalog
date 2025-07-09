@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using TestTask.Core.Models.Users;
+using TestTask.MudBlazors.Model;
 
 namespace TestTask.MudBlazors.Authenticate
 {
@@ -15,7 +16,7 @@ namespace TestTask.MudBlazors.Authenticate
             _userService = userService;
         }
 
-        public async Task<string> LoginAsync(User userModel)
+        public async Task<string> LoginAsync(UserModel userModel)
         {
             await Task.CompletedTask;
             var (isUserDate, user) = ValidUserService(userModel);
@@ -38,9 +39,9 @@ namespace TestTask.MudBlazors.Authenticate
             return token;
         }
 
-        private (bool, User) ValidUserService(User user)
-            => !_userService.IsUserData(user)
-                ? (false, user)
-                : (true, _userService.GetUser(user.Username, user.PasswordHash));
+        private (bool, User?) ValidUserService(UserModel userModel)
+            => !_userService.IsUserData(userModel.Username, userModel.Password)
+                ? (false, null)
+                : (true, _userService.GetUser(userModel.Username, userModel.Password));
     }
 }

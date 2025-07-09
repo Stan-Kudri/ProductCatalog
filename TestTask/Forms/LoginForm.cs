@@ -45,6 +45,12 @@ namespace TestTask.Forms
                 return;
             }
 
+            if (!_userService.IsUserData(user.Username, user.Password))
+            {
+                message = "Invalid username or password.";
+                return;
+            }
+
             Hide();
 
             using (var tableForm = _serviceProvider.GetRequiredService<MainForm>())
@@ -56,20 +62,20 @@ namespace TestTask.Forms
             }
         }
 
-        private bool ValidateData(out string message, out User user)
+        private bool ValidateData(out string message, out UserModel userModel)
         {
-            user = null;
+            userModel = null;
             var username = tbLogIn.Text;
             var password = tbPassword.Text;
 
-            var userValidator = _serviceProvider.GetRequiredService<UserValidator>();
-            if (!userValidator.ValidFormatUsername(username, out string messageValidUsername))
+            var userValidator = _serviceProvider.GetRequiredService<IUserValidator>();
+            if (!userValidator.ValidateUsername(username, out string messageValidUsername))
             {
                 message = messageValidUsername;
                 return false;
             }
 
-            if (!userValidator.ValidFormatPassword(password, out string messageValidPassword))
+            if (!userValidator.ValidatePassword(password, out string messageValidPassword))
             {
                 message = messageValidPassword;
                 return false;
@@ -81,14 +87,7 @@ namespace TestTask.Forms
                 return false;
             }
 
-            user = new UserModel(username, password).ToUser();
-
-            if (!_userService.IsUserData(user))
-            {
-                message = "Invalid username or password.";
-                return false;
-            }
-
+            userModel = new UserModel(username, password);
             message = string.Empty;
             return true;
         }

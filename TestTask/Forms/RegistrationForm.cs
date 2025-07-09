@@ -24,7 +24,7 @@ namespace TestTask.Forms
         private void RegistrationForm_FormClosing(object sender, FormClosingEventArgs e)
             => DialogResult = DialogResult.Cancel;
 
-        private async void BtnSignUpNow_Click(object sender, System.EventArgs e)
+        private async void BtnSignUpNow_Click(object sender, EventArgs e)
         {
             if (!ValidateData(out var message, out var user))
             {
@@ -34,25 +34,25 @@ namespace TestTask.Forms
 
             Hide();
 
-            _userService.Add(user);
+            _userService.Add(user.Username, user.Password);
             DialogResult = DialogResult.OK;
 
             Close();
         }
 
-        private bool ValidateData(out string message, out User user)
+        private bool ValidateData(out string message, out UserModel userModel)
         {
-            user = null;
+            userModel = null;
             var username = tbLogIn.Text;
             var password = tbPassword.Text;
             var userValidator = _serviceProvider.GetRequiredService<UserValidator>();
-            if (!userValidator.ValidFormatUsername(username, out string messageValidUsername))
+            if (!userValidator.ValidateUsername(username, out string messageValidUsername))
             {
                 message = messageValidUsername;
                 return false;
             }
 
-            if (!userValidator.ValidFormatPassword(password, out string messageValidPassword))
+            if (!userValidator.ValidatePassword(password, out string messageValidPassword))
             {
                 message = messageValidPassword;
                 return false;
@@ -65,7 +65,7 @@ namespace TestTask.Forms
             }
 
             message = string.Empty;
-            user = new UserModel(username, password).ToUser();
+            userModel = new UserModel(username, password);
             return true;
         }
     }
