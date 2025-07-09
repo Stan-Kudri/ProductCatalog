@@ -1,4 +1,4 @@
-﻿using TestTask.BindingItem;
+using TestTask.BindingItem;
 
 namespace TestTask.Forms.Categories
 {
@@ -201,6 +201,6 @@ namespace TestTask.Forms.Categories
         protected MaterialSkin.Controls.MaterialButton btnClear;
         protected MaterialSkin.Controls.MaterialButton btnClose;
         protected System.Windows.Forms.BindingSource categoryModelBindingSource;
-        private System.ComponentModel.IContainer components;
+        private new System.ComponentModel.IContainer components;
     }
 }

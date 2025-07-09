@@ -89,9 +89,9 @@ namespace TestTask.Core.Exeption
             throw new BusinessLogicException($"{typeof(T).Name} \"{property}\" must be unique. A record with this value already exists.");
 
         private static BusinessLogicException OutOfRangeMinDate<T>(string property, DateTime minDateTime)
-            => new BusinessLogicException($"The {property} {typeof(T).Name} is less than expected {minDateTime}.");
+            => new($"The {property} {typeof(T).Name} is less than expected {minDateTime}.");
 
         private static BusinessLogicException OutOfRangeMinValue(object value, object minValue)
-            => new BusinessLogicException($"The value {value} is out of range. Minimum value {minValue}.");
+            => new($"The value {value} is out of range. Minimum value {minValue}.");
     }
 }

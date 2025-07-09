@@ -8,7 +8,7 @@ namespace TestTask.Core.Import.Importers
 {
     public class CategoryImporter : IImporter<Category>
     {
-        private readonly Dictionary<string, CategoryField> _columnMap = new Dictionary<string, CategoryField>
+        private readonly Dictionary<string, CategoryField> _columnMap = new()
         {
             ["ID"] = CategoryField.ID,
             ["Name"] = CategoryField.Name,

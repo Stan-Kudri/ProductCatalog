@@ -2,7 +2,6 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using System.Security.Permissions;
 using System.Windows.Forms;
 using VS = System.Windows.Forms.VisualStyles;
 
@@ -112,7 +111,6 @@ namespace TestTask.Controls.CheckComboBox
         /// <returns>An object of type <see cref="T:System.Windows.Forms.CreateParams" /> used when creating a new window.</returns>
         protected override CreateParams CreateParams
         {
-            [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
             get
             {
                 var cp = base.CreateParams;
@@ -377,7 +375,6 @@ namespace TestTask.Controls.CheckComboBox
         /// Processes Windows messages.
         /// </summary>
         /// <param name="m">The Windows <see cref="T:System.Windows.Forms.Message" /> to process.</param>
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         protected override void WndProc(ref Message m)
         {
             if (InternalProcessResizing(ref m, false))
@@ -393,13 +390,11 @@ namespace TestTask.Controls.CheckComboBox
         /// </summary>
         /// <param name="m">The message.</param>
         /// <returns>true, if the WndProc method from the base class shouldn't be invoked.</returns>
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public bool ProcessResizing(ref Message m)
         {
             return InternalProcessResizing(ref m, true);
         }
 
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         private bool InternalProcessResizing(ref Message m, bool contentControl)
         {
             if (m.Msg == NativeMethods.WM_NCACTIVATE && m.WParam != IntPtr.Zero && _childPopup != null && _childPopup.Visible)
@@ -425,7 +420,6 @@ namespace TestTask.Controls.CheckComboBox
             return false;
         }
 
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         private bool OnGetMinMaxInfo(ref Message m)
         {
             var minmax = Marshal.PtrToStructure<NativeMethods.MINMAXINFO>(m.LParam);

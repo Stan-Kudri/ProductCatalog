@@ -19,7 +19,7 @@ namespace TestTask.MudBlazors
     {
         const string ConnectionName = "DbConnection";
 
-        public static void AppWebApplicationBuilder(this WebApplicationBuilder? builder)
+        public static void AppWebApplicationBuilder(this WebApplicationBuilder builder)
         {
             // Add services to the container.
             builder.Services.AddRazorPages();
@@ -73,7 +73,7 @@ namespace TestTask.MudBlazors
                                     );
         }
 
-        public static void AuthenicateDIBuilder(this WebApplicationBuilder? builder)
+        public static void AuthenicateDIBuilder(this WebApplicationBuilder builder)
         {
             builder.Services.AddTransient<BlazorAppLoginService>();
             builder.Services.AddScoped<AuthenticationStateProvider, BlazorAuthStateProvider>();

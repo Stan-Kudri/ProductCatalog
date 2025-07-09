@@ -34,7 +34,7 @@ namespace TestTask.Core.Extension
                 return Result<int>.CreateFail(columnName + " cell is empty", self.RowNum);
             }
 
-            string valueShouldBeNumberMessage = columnName + " should be number";
+            var valueShouldBeNumberMessage = columnName + " should be number";
 
             if (cell.CellType == CellType.Blank)
             {
@@ -67,7 +67,7 @@ namespace TestTask.Core.Extension
                 return Result<DateTime>.CreateFail(columnName + " cell is empty", self.RowNum);
             }
 
-            string valueShouldBeDateMessage = columnName + " should be Date";
+            var valueShouldBeDateMessage = columnName + " should be Date";
 
             if (cell.CellType == CellType.Blank)
             {
@@ -105,7 +105,7 @@ namespace TestTask.Core.Extension
                 return Result<decimal>.CreateFail(columnName + " cell is empty", self.RowNum);
             }
 
-            string valueShouldBeNumberMessage = columnName + " should be number";
+            var valueShouldBeNumberMessage = columnName + " should be number";
 
             if (cell.CellType == CellType.Blank)
             {

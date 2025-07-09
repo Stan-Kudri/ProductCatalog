@@ -1,11 +1,11 @@
-﻿namespace TestTask.Forms
+namespace TestTask.Forms
 {
     partial class RegistrationForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private new System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.

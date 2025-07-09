@@ -45,9 +45,10 @@ namespace TestTask.Forms
                 return;
             }
 
-            if (!_userService.IsUserData(user.Username, user.Password))
+            if (!_userService.IsDataVerifyUser(user.Username, user.Password))
             {
                 message = "Invalid username or password.";
+                await _messageBox.ShowInfo(message);
                 return;
             }
 

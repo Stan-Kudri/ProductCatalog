@@ -1,4 +1,4 @@
-﻿using TestTask.BindingItem;
+using TestTask.BindingItem;
 
 namespace TestTask.Forms.Companies
 {
@@ -277,6 +277,6 @@ namespace TestTask.Forms.Companies
         protected System.Windows.Forms.BindingSource modeModelBindingSource;
         protected System.Windows.Forms.DateTimePicker dtpCreateCompany;
         private System.Windows.Forms.BindingSource companyModelBindingSource;
-        private System.ComponentModel.IContainer components;
+        private new System.ComponentModel.IContainer components;
     }
 }

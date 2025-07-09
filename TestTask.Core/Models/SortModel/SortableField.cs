@@ -4,17 +4,12 @@ using System.Linq.Expressions;
 
 namespace TestTask.Core.Models.SortModel
 {
-    public class SortableField<T, TKey>
+    public class SortableField<T, TKey>(Expression<Func<T, TKey>> expression)
         : ISortableField<T> where T : Entity
     {
-        private readonly Expression<Func<T, TKey>> _expression;
-
-        public SortableField(Expression<Func<T, TKey>> expression)
-            => _expression = expression;
-
         public IOrderedQueryable<T> OrderBy(IQueryable<T> query, bool asc)
-                => asc ? query.OrderBy(_expression) : query.OrderByDescending(_expression);
+                => asc ? query.OrderBy(expression) : query.OrderByDescending(expression);
         public IOrderedQueryable<T> ThenBy(IOrderedQueryable<T> query, bool asc)
-                => asc ? query.ThenBy(_expression) : query.ThenByDescending(_expression);
+                => asc ? query.ThenBy(expression) : query.ThenByDescending(expression);
     }
 }

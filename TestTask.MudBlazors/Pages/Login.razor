@@ -28,14 +28,14 @@ else
             </div>
         }
 
-        <MudForm @bind-Errors="@errors" Model="userModel" Style="border-block-end-width:4;">
+        <MudForm @bind-Errors="@errors" Model="UserModel" Style="border-block-end-width:4;">
             <MudTextField T="string" Label="Username" Style="font-size: 16px;" Class="mt-4"
-                          @bind-Value=@userModel.Username
+                          @bind-Value=@UserModel.Username
                           InputType="InputType.Text" Variant="Variant.Outlined"
                           Validation="@(new Func<string, IEnumerable<string>>(ValidFormatUsername))" Required="true" />
             <MudTextField T="string" Label="Password" HelperText="Choose a strong password" Style="font-size: 16px;" Class="mt-4"
                           InputType="InputType.Password" Variant="Variant.Outlined"
-                          @bind-Value="@userModel.Password" For="@(() => userModel.Password)"
+                          @bind-Value="@UserModel.Password" For="@(() => UserModel.Password)"
                           Validation="@(new Func<string, IEnumerable<string>>(ValidFormatPassword))" Required="true"
                           RequiredError="Password is required!" />
             @if (!IsSignIn)

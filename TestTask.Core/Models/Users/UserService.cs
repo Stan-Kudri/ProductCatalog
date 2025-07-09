@@ -37,28 +37,26 @@ namespace TestTask.Core.Models.Users
         public bool IsFreeUsername(string username)
             => dbContext.Users.FirstOrDefault(e => e.Username == username) == null;
 
-        public bool IsUserData(string username, string password)
+        public bool IsDataVerifyUser(string username, string password)
         {
             var user = dbContext.Users.FirstOrDefault(e => e.Username == username);
-
-            if (user == null && !Verify(password, user.PasswordHash))
-            {
-                return false;
-            }
-
-            return true;
+            return user != null || Verify(password, user.PasswordHash);
         }
 
-        public User GetUser(string username, string password)
+#pragma warning disable CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+        public User? GetUser(string username, string password)
+#pragma warning restore CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
         {
-            var user = dbContext.Users.FirstOrDefault(e => e.Username == username);
-
-            if (user == null && !Verify(password, user.PasswordHash))
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
                 return null;
             }
 
-            return new User(username, user.PasswordHash);
+            var user = dbContext.Users.FirstOrDefault(e => e.Username == username);
+
+            return user == null && !Verify(password, user.PasswordHash)
+                    ? null
+                    : new User(username, user.PasswordHash);
         }
 
         public IQueryable<User> GetQueryableAll() => dbContext.Users.Select(e => e);

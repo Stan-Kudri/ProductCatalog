@@ -12,71 +12,67 @@ namespace TestTask.Test.ImportTest
 {
     public class ProductImportTest
     {
-        public static IEnumerable<object[]> Items() => new List<object[]>
-        {
-            new object[]
-            {
+        public static IEnumerable<object[]> Items() =>
+        [
+            [
                 new List<Company>()
                 {
-                    new Company("MF", new DateTime(2000, 6, 7), "Belarus", 1),
-                    new Company("Apple", new DateTime(1973, 7, 12), "USA", 2),
+                    new("MF", new DateTime(2000, 6, 7), "Belarus", 1),
+                    new("Apple", new DateTime(1973, 7, 12), "USA", 2),
                 },
                 new List<Category>()
                 {
-                    new Category("Clothe", 1),
-                    new Category("Electronic", 2),
+                    new("Clothe", 1),
+                    new("Electronic", 2),
                 },
                 new List<ProductType>()
                 {
-                    new ProductType("Coat", 1, 1),
-                    new ProductType("Sweater", 1, 2),
-                    new ProductType("Shirt", 1, 3),
-                    new ProductType("Phone", 2, 4),
-                    new ProductType("Laptop", 2, 5),
+                    new("Coat", 1, 1),
+                    new("Sweater", 1, 2),
+                    new("Shirt", 1, 3),
+                    new("Phone", 2, 4),
+                    new("Laptop", 2, 5),
                 },
                 new List<Product>()
                 {
-                    new Product("Polivuri", 1, 1, 1, "", 235, 4),
-                    new Product("Rick&Morty", 1, 1, 2, "", 15, 5),
-                    new Product("Iphone 13", 1, 2, 4, "", 400, 6),
+                    new("Polivuri", 1, 1, 1, "", 235, 4),
+                    new("Rick&Morty", 1, 1, 2, "", 15, 5),
+                    new("Iphone 13", 1, 2, 4, "", 400, 6),
                 },
-            }
-        };
+            ]
+        ];
 
-        public static IEnumerable<object[]> FailReadSheet() => new List<object[]>
-        {
-            new object[]
-            {
+        public static IEnumerable<object[]> FailReadSheet() =>
+        [
+            [
                 new List<Result<Product>>()
                 {
                     Result<Product>.CreateFail("Failed to read sheet.", 0),
                 },
-            }
-        };
+            ]
+        ];
 
-        public static IEnumerable<object[]> FailReadColumn() => new List<object[]>
-        {
-            new object[]
-            {
+        public static IEnumerable<object[]> FailReadColumn() =>
+        [
+            [
                 new List<Result<Product>>()
                 {
                     Result<Product>.CreateFail("Failed to load title.", 0),
                 },
-            }
-        };
+            ]
+        ];
 
-        public static IEnumerable<object[]> FailReadItems() => new List<object[]>
-        {
-            new object[]
-            {
+        public static IEnumerable<object[]> FailReadItems() =>
+        [
+            [
                 new List<Result<Product>>()
                 {
                     Result<Product>.CreateFail("Fewer cells than needed", 1),
                     Result<Product>.CreateFail("Price should be number", 2),
                     Result<Product>.CreateFail("Fewer cells than needed", 3),
                 },
-            }
-        };
+            ]
+        ];
 
         [Theory]
         [MemberData(nameof(Items))]

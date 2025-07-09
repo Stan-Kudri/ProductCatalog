@@ -2,7 +2,7 @@ using System;
 
 namespace TestTask.Core.Models.Users
 {
-    public class User : Entity
+    public class User : Entity, IEquatable<User>
     {
         private User()
         {
@@ -35,7 +35,9 @@ namespace TestTask.Core.Models.Users
         /// </summary>
         public UserRole UserRole { get; set; } = UserRole.Basic;
 
-        public bool Equals(User? user)
+        public bool Equals(User user)
             => user is not null && user.Username == Username && user.PasswordHash == PasswordHash;
+
+        public override bool Equals(object obj) => Equals(obj as User);
     }
 }

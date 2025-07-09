@@ -393,6 +393,6 @@ namespace TestTask.Controls
         protected MaterialSkin.Controls.MaterialButton btnNextPage;
         protected MaterialSkin.Controls.MaterialButton btnLastPage;
         protected System.Windows.Forms.Label labelPageSize;
-        private System.ComponentModel.IContainer components;
+        private new System.ComponentModel.IContainer components;
     }
 }

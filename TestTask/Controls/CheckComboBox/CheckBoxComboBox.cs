@@ -75,19 +75,19 @@ namespace TestTask.Controls.CheckComboBox
         /// </summary>
         internal string GetCSVText(bool skipFirstItem)
         {
-            string listText = string.Empty;
+            var listText = string.Empty;
 
             var startIndex = DropDownStyle == ComboBoxStyle.DropDownList
                                                         && DataSource == null
                                                         && skipFirstItem ? 1 : 0;
 
-            for (int index = startIndex; index <= _checkBoxComboBoxListControl.Items.Count - 1; index++)
+            for (var index = startIndex; index <= _checkBoxComboBoxListControl.Items.Count - 1; index++)
             {
-                CheckBoxComboBoxItem item = _checkBoxComboBoxListControl.Items[index];
+                var item = _checkBoxComboBoxListControl.Items[index];
 
                 if (item.Checked)
                 {
-                    listText += String.IsNullOrEmpty(listText) ? item.Text : String.Format("{0}{1}", TextSeparator, item.Text);
+                    listText += string.IsNullOrEmpty(listText) ? item.Text : string.Format("{0}{1}", TextSeparator, item.Text);
                 }
             }
 
@@ -254,10 +254,7 @@ namespace TestTask.Controls.CheckComboBox
                 CheckBoxItems[0].ComboBoxItem = listText;
             }
 
-            if (CheckBoxCheckedChanged != null)
-            {
-                CheckBoxCheckedChanged(sender, e);
-            }
+            CheckBoxCheckedChanged?.Invoke(sender, e);
         }
 
         /// <summary>
@@ -309,7 +306,7 @@ namespace TestTask.Controls.CheckComboBox
         /// </summary>
         public void ClearSelection()
         {
-            foreach (CheckBoxComboBoxItem item in CheckBoxItems)
+            foreach (var item in CheckBoxItems)
             {
                 if (item.Checked)
                 {
@@ -346,7 +343,7 @@ namespace TestTask.Controls.CheckComboBox
         /// <param name="e"></param>
         private void CheckBoxProperties_PropertyChanged(object sender, EventArgs e)
         {
-            foreach (CheckBoxComboBoxItem item in CheckBoxItems)
+            foreach (var item in CheckBoxItems)
             {
                 item.ApplyProperties(CheckBoxProperties);
             }
@@ -483,9 +480,9 @@ namespace TestTask.Controls.CheckComboBox
 
             #region Disposes all items that are no longer in the combo box list
 
-            for (int Index = _items.Count - 1; Index >= 0; Index--)
+            for (var index = _items.Count - 1; index >= 0; index--)
             {
-                CheckBoxComboBoxItem Item = _items[Index];
+                var Item = _items[index];
                 if (!_checkBoxComboBox.Items.Contains(Item.ComboBoxItem))
                 {
                     _items.Remove(Item);
@@ -588,7 +585,7 @@ namespace TestTask.Controls.CheckComboBox
         {
             DoubleBuffered = true;
             _CheckBoxComboBox = owner;
-            _ComboBoxItem = comboBoxItem;
+            ComboBoxItem = comboBoxItem;
 
             if (_CheckBoxComboBox.DataSource != null)
             {
@@ -607,10 +604,6 @@ namespace TestTask.Controls.CheckComboBox
         /// A reference to the CheckBoxComboBox.
         /// </summary>
         private readonly CheckBoxComboBox _CheckBoxComboBox;
-        /// <summary>
-        /// A reference to the Item in ComboBox.Items that this object is extending.
-        /// </summary>
-        private object _ComboBoxItem;
 
         #endregion
 
@@ -620,11 +613,7 @@ namespace TestTask.Controls.CheckComboBox
         /// A reference to the Item in ComboBox.Items that this object is extending.
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public object ComboBoxItem
-        {
-            get => _ComboBoxItem;
-            internal set => _ComboBoxItem = value;
-        }
+        public object ComboBoxItem { get; internal set; }
 
         #endregion
 
@@ -637,17 +626,18 @@ namespace TestTask.Controls.CheckComboBox
         public void AddBindings()
         {
             // Note, the text uses "DisplayMemberSingleItem", not "DisplayMember" (unless its not assigned)
-            DataBindings.Add("Text", _ComboBoxItem, _CheckBoxComboBox.DisplayMemberSingleItem);
+            DataBindings.Add("Text", ComboBoxItem, _CheckBoxComboBox.DisplayMemberSingleItem);
 
             // The ValueMember must be a bool type property usable by the CheckBox.Checked.
-            DataBindings.Add("Checked", _ComboBoxItem, _CheckBoxComboBox.ValueMember, false,
+            DataBindings.Add("Checked", ComboBoxItem, _CheckBoxComboBox.ValueMember, false,
+
                 // This helps to maintain proper selection state in the Binded object,
                 // even when the controls are added and removed.
                 DataSourceUpdateMode.OnPropertyChanged, false, null, null);
 
             // Helps to maintain the Checked status of this
             // checkbox before the control is visible
-            if (_ComboBoxItem is INotifyPropertyChanged changed)
+            if (ComboBoxItem is INotifyPropertyChanged changed)
             {
                 changed.PropertyChanged += new PropertyChangedEventHandler(CheckBoxComboBoxItem_PropertyChanged);
             }
@@ -714,10 +704,10 @@ namespace TestTask.Controls.CheckComboBox
         {
             if (e.PropertyName == _CheckBoxComboBox.ValueMember)
             {
-                Checked = (bool)_ComboBoxItem
+                Checked = (bool)ComboBoxItem
                                     .GetType()
                                     .GetProperty(_CheckBoxComboBox.ValueMember)
-                                    .GetValue(_ComboBoxItem, null);
+                                    .GetValue(ComboBoxItem, null);
             }
         }
 
@@ -766,7 +756,7 @@ namespace TestTask.Controls.CheckComboBox
 
         public new void AddRange(IEnumerable<CheckBoxComboBoxItem> collection)
         {
-            foreach (CheckBoxComboBoxItem Item in collection)
+            foreach (var Item in collection)
             {
                 Item.CheckedChanged += new EventHandler(item_CheckedChanged);
             }
@@ -776,7 +766,7 @@ namespace TestTask.Controls.CheckComboBox
 
         public new void Clear()
         {
-            foreach (CheckBoxComboBoxItem Item in this)
+            foreach (var Item in this)
             {
                 Item.CheckedChanged -= item_CheckedChanged;
             }
@@ -811,7 +801,7 @@ namespace TestTask.Controls.CheckComboBox
 
                 for (var Index = StartIndex; Index <= Count - 1; Index++)
                 {
-                    CheckBoxComboBoxItem Item = this[Index];
+                    var Item = this[Index];
 
                     string Text;
 

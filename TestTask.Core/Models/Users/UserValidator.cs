@@ -17,7 +17,7 @@ namespace TestTask.Core.Models.Users
                 return false;
             }
 
-            if (!username.All(e => char.IsLetterOrDigit(e)))
+            if (!username.All(char.IsLetterOrDigit))
             {
                 message = "Illegal characters in string.";
                 return false;
@@ -32,7 +32,7 @@ namespace TestTask.Core.Models.Users
         {
             message = string.Empty;
 
-            if (password == null)
+            if (string.IsNullOrEmpty(password))
             {
                 message = "Password should not be empty.";
                 return false;
@@ -44,21 +44,21 @@ namespace TestTask.Core.Models.Users
                 return false;
             }
 
-            if (!password.All(e => char.IsLetterOrDigit(e)))
+            if (!password.All(char.IsLetterOrDigit))
             {
                 message = "Illegal characters in string.";
                 return false;
             }
 
-            if (!password.Any(e => char.IsDigit(e)))
+            if (!password.Any(char.IsDigit))
             {
                 message = string.Format("{0}{1}{2}", "Invalid string format.", Environment.NewLine, "The password does not contain a number.");
                 return false;
             }
 
-            if (!password.Any(e => char.IsLetter(e)))
+            if (!password.Any(char.IsLetter))
             {
-                message = string.Format("{0}{1}{2}", "Invalid string format.", Environment.NewLine, "The password does not contain a latter.");
+                message = string.Format("{0}{1}{2}", "Invalid string format.", Environment.NewLine, "The password does not contain a letter.");
                 return false;
             }
 

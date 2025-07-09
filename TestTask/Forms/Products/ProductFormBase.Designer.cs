@@ -1,4 +1,4 @@
-﻿using TestTask.BindingItem.ObservableCollection;
+using TestTask.BindingItem.ObservableCollection;
 
 namespace TestTask.Forms.Products
 {
@@ -415,6 +415,6 @@ namespace TestTask.Forms.Products
         protected System.Windows.Forms.BindingSource productModelBindingSource;
         protected System.Windows.Forms.BindingSource itemsBindingSourceTypes;
         protected MaterialSkin.Controls.MaterialTextBox2 tbName;
-        private System.ComponentModel.IContainer components;
+        private new System.ComponentModel.IContainer components;
     }
 }

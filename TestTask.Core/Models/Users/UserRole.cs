@@ -2,22 +2,17 @@ using Ardalis.SmartEnum;
 
 namespace TestTask.Core.Models.Users
 {
-    public class UserRole : SmartEnum<UserRole>
+    public class UserRole(string name, int value) : SmartEnum<UserRole>(name, value)
     {
         /// <summary>
         /// Пользователь.
         /// </summary>
-        public static UserRole Basic = new(Role.User, 0);
+        public static UserRole Basic { get; private set; } = new(Role.User, 0);
 
         /// <summary>
         /// Администратор.
         /// </summary>
-        public static UserRole Admin = new(Role.Admin, 1);
-
-        public UserRole(string name, int value)
-            : base(name, value)
-        {
-        }
+        public static UserRole Admin { get; private set; } = new(Role.Admin, 1);
 
         public override string ToString() => Name;
     }

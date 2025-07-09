@@ -7,12 +7,9 @@ using TestTask.Core.Models.Categories;
 
 namespace TestTask.Core.Export.SheetFillers
 {
-    public class CategorySheetFiller : ISheetFiller
+    public class CategorySheetFiller(CategoryRepository categoryRepository) : ISheetFiller
     {
-        private readonly CategoryRepository _categoryRepository;
         private readonly List<CategoryField> _columnMap = CreateColumnMap();
-
-        public CategorySheetFiller(CategoryRepository categoryRepository) => _categoryRepository = categoryRepository;
 
         public string Name => "Category";
 
@@ -21,7 +18,7 @@ namespace TestTask.Core.Export.SheetFillers
         public void Fill(ISheet sheet)
         {
             IRow row = sheet.CreateRow(0);
-            for (int i = 0; i < _columnMap.Count; i++)
+            for (var i = 0; i < _columnMap.Count; i++)
             {
                 CategoryField column = _columnMap[i];
                 row.CreateCell(i).SetCellValue(column.ToString());
@@ -29,18 +26,18 @@ namespace TestTask.Core.Export.SheetFillers
 
             var numberRow = 0;
 
-            var allItems = _categoryRepository.GetAll();
+            var allItems = categoryRepository.GetAll();
             if (allItems == null || allItems.Count <= 0)
             {
                 return;
             }
 
-            foreach (var item in _categoryRepository.GetAll())
+            foreach (var item in categoryRepository.GetAll())
             {
                 numberRow++;
                 row = sheet.CreateRow(numberRow);
 
-                for (int i = 0; i < _columnMap.Count; i++)
+                for (var i = 0; i < _columnMap.Count; i++)
                 {
                     CategoryField column = _columnMap[i];
                     ICell cell = row.CreateCell(i);

@@ -2,20 +2,16 @@ using TestTask.Core.Models.Categories;
 
 namespace TestTask.BindingItem
 {
-    public class CategoryModel : ModelBase
+    public class CategoryModel(string name) : ModelBase
     {
-        private string _name;
-
-        public CategoryModel(string name) => _name = name;
-
         public string Name
         {
-            get => _name;
-            set => SetField(ref _name, value);
+            get => name;
+            set => SetField(ref name, value);
         }
 
-        public Category ToCategory() => new Category(_name);
+        public Category ToCategory() => new(name);
 
-        public Category ToCategory(int id) => new Category(_name, id);
+        public Category ToCategory(int id) => new(name, id);
     }
 }

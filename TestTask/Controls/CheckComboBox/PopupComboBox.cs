@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Security.Permissions;
 using System.Windows.Forms;
 
 namespace TestTask.Controls.CheckComboBox
@@ -27,7 +26,7 @@ namespace TestTask.Controls.CheckComboBox
         /// Note however the pop-up properties must be set after the dropDownControl is assigned, since this 
         /// popup wrapper is recreated when the dropDownControl is assigned.
         /// </summary>
-        protected Popup dropDown = new Popup(new CheckBoxComboBoxListControlContainer());
+        protected Popup dropDown = new(new CheckBoxComboBoxListControlContainer());
 
         private Control dropDownControl;
         /// <summary>
@@ -67,30 +66,28 @@ namespace TestTask.Controls.CheckComboBox
         /// Processes Windows messages.
         /// </summary>
         /// <param name="m">The Windows <see cref="T:System.Windows.Forms.Message" /> to process.</param>
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == (NativeMethods.WM_REFLECT + NativeMethods.WM_COMMAND))
+            if (m.Msg == (NativeMethods.WM_REFLECT + NativeMethods.WM_COMMAND) && NativeMethods.HIWORD(m.WParam) == NativeMethods.CBN_DROPDOWN)
             {
-                if (NativeMethods.HIWORD(m.WParam) == NativeMethods.CBN_DROPDOWN)
+                var localDropDown = dropDown;
+                if (localDropDown == null)
                 {
-                    var localDropDown = dropDown;
-                    if (localDropDown == null)
-                    {
-                        return;
-                    }
-
-                    // Blocks a redisplay when the user closes the control by clicking 
-                    // on the combobox.
-                    BeginInvoke(new MethodInvoker(() =>
-                    {
-                        TimeSpan TimeSpan = DateTime.Now.Subtract(localDropDown.LastClosedTimeStamp);
-
-                        if (TimeSpan.TotalMilliseconds > 100)
-                            ShowDropDown();
-                    }));
                     return;
                 }
+
+                // Blocks a redisplay when the user closes the control by clicking 
+                // on the combobox.
+                BeginInvoke(new MethodInvoker(() =>
+                {
+                    var timeSpan = DateTime.Now.Subtract(localDropDown.LastClosedTimeStamp);
+
+                    if (timeSpan.TotalMilliseconds > 100)
+                    {
+                        ShowDropDown();
+                    }
+                }));
+                return;
             }
             base.WndProc(ref m);
         }

@@ -6,24 +6,20 @@ using Ardalis.SmartEnum;
 
 namespace TestTask.Core.Models.SortModel
 {
-    public class SortableSmartEnumField<TSmartEnum, T> : SmartEnum<TSmartEnum>, ISortableField<T>, ISortableSmartEnumOperation<T>
+    public class SortableSmartEnumField<TSmartEnum, T>(string name, int value, ISortableField<T> field)
+        : SmartEnum<TSmartEnum>(name, value), ISortableField<T>, ISortableSmartEnumOperation<T>
         where TSmartEnum : SortableSmartEnumField<TSmartEnum, T>
         where T : Entity
     {
-        private static readonly SortableSmartEnumField<TSmartEnum, T> Id = new SortableSmartEnumField<TSmartEnum, T>("Id", 0, CreateField(e => e.Id));
-
-        private readonly ISortableField<T> _field;
-
-        public SortableSmartEnumField(string name, int value, ISortableField<T> field)
-            : base(name, value) => _field = field;
+        private static readonly SortableSmartEnumField<TSmartEnum, T> Id = new("Id", 0, CreateField(e => e.Id));
 
         public static ISortableField<T> DefaultValue => Id;
 
         static IReadOnlyCollection<ISortableField<T>> ISortableSmartEnumOperation<T>.List => List;
 
-        public IOrderedQueryable<T> OrderBy(IQueryable<T> query, bool asc) => _field.OrderBy(query, asc);
+        public IOrderedQueryable<T> OrderBy(IQueryable<T> query, bool asc) => field.OrderBy(query, asc);
 
-        public IOrderedQueryable<T> ThenBy(IOrderedQueryable<T> query, bool asc) => _field.ThenBy(query, asc);
+        public IOrderedQueryable<T> ThenBy(IOrderedQueryable<T> query, bool asc) => field.ThenBy(query, asc);
 
         protected static ISortableField<T> CreateField<TKey>(Expression<Func<T, TKey>> expression) => new SortableField<T, TKey>(expression);
 

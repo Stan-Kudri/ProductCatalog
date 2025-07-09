@@ -1,4 +1,4 @@
-﻿namespace TestTask.Forms.Type
+namespace TestTask.Forms.Type
 {
     partial class ProductTypeBaseForm
     {
@@ -247,6 +247,6 @@
         protected System.Windows.Forms.BindingSource itemsBindingSource;
         protected System.Windows.Forms.BindingSource selectCategoryBindingSource;
         protected System.Windows.Forms.BindingSource categoryBindingSource;
-        private System.ComponentModel.IContainer components;
+        private new System.ComponentModel.IContainer components;
     }
 }

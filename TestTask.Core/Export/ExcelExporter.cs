@@ -5,18 +5,13 @@ using TestTask.Core.Export.SheetFillers;
 
 namespace TestTask.Core.Export
 {
-    public class ExcelExporter
+    public class ExcelExporter(IReadOnlyCollection<ISheetFiller> fillers)
     {
-        private readonly IReadOnlyCollection<ISheetFiller> _fillers;
-
-        public ExcelExporter(IReadOnlyCollection<ISheetFiller> fillers)
-            => _fillers = fillers;
-
         public void Export(Stream destination)
         {
             using var workbook = new XSSFWorkbook();
 
-            foreach (var filler in _fillers)
+            foreach (var filler in fillers)
             {
                 var sheet = workbook.CreateSheet(filler.Name);
                 filler.Fill(sheet);

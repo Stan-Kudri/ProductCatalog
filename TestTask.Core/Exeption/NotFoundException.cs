@@ -18,13 +18,13 @@ namespace TestTask.Core.Exeption
         }
 
         public static NotFoundException NotFoundIdProperty<TEntity>(int id)
-            => new NotFoundException($"The {typeof(TEntity).Name} with ID \"{id}\" not found.");
+            => new($"The {typeof(TEntity).Name} with ID \"{id}\" not found.");
 
         public static NotFoundException Create<TEntity, TValue>(string propertyName, TValue propertyValue)
-            => new NotFoundException(FormatMessage(propertyName, propertyValue, typeof(TEntity).Name));
+            => new(FormatMessage(propertyName, propertyValue, typeof(TEntity).Name));
 
         public static NotFoundException Create<TEntity>(params (string PropertyName, object? PropertyValue)[] properties)
-            => new NotFoundException(FormatMessage(properties, typeof(TEntity).Name));
+            => new(FormatMessage(properties, typeof(TEntity).Name));
 
         public static string FormatMessage<T>(string propertyName, T propertyValue, string entityName)
             => $"Unknown {entityName} {propertyName} '{propertyValue}'";

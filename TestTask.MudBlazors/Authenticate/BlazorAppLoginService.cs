@@ -6,31 +6,18 @@ using TestTask.MudBlazors.Model;
 
 namespace TestTask.MudBlazors.Authenticate
 {
-    public class BlazorAppLoginService
+    public class BlazorAppLoginService(ProtectedLocalStorage localStorage, NavigationManager navigation, IUsersAuthenticate authenticateService, IConfiguration configuration)
     {
         private readonly string TokenKey = nameof(TokenKey);
-
-        private readonly ProtectedLocalStorage _localStorage;
-        private readonly NavigationManager _navigation;
-        private readonly IUsersAuthenticate _authenticateService;
-        private readonly IConfiguration _configuration;
-
-        public BlazorAppLoginService(ProtectedLocalStorage localStorage, NavigationManager navigation, IUsersAuthenticate authenticateService, IConfiguration configuration)
-        {
-            _localStorage = localStorage;
-            _navigation = navigation;
-            _authenticateService = authenticateService;
-            _configuration = configuration;
-        }
 
         public async Task<bool> LoginAsync(UserModel userModel)
         {
             var isSuccess = false;
-            var token = await _authenticateService.LoginAsync(userModel);
+            var token = await authenticateService.LoginAsync(userModel);
             if (!string.IsNullOrEmpty(token))
             {
                 isSuccess = true;
-                await _localStorage.SetAsync(TokenKey, token);
+                await localStorage.SetAsync(TokenKey, token);
             }
 
             return isSuccess;
@@ -43,7 +30,7 @@ namespace TestTask.MudBlazors.Authenticate
 
             try
             {
-                token = await _localStorage.GetAsync<string>(TokenKey);
+                token = await localStorage.GetAsync<string>(TokenKey);
             }
             catch (CryptographicException)
             {
@@ -56,7 +43,7 @@ namespace TestTask.MudBlazors.Authenticate
                 return emptyResut;
             }
 
-            var claims = JwtTokenHelper.ValidateDecodeToken(token.Value, _configuration);
+            var claims = JwtTokenHelper.ValidateDecodeToken(token.Value, configuration);
             if (claims.Count == 0)
             {
                 await LogoutAsync();
@@ -68,10 +55,10 @@ namespace TestTask.MudBlazors.Authenticate
         public async Task LogoutAsync()
         {
             await RemoveAuthDataFromStorageAsync();
-            _navigation.NavigateTo("/", true);
+            navigation.NavigateTo("/", true);
         }
 
         private async Task RemoveAuthDataFromStorageAsync()
-            => await _localStorage.DeleteAsync(TokenKey);
+            => await localStorage.DeleteAsync(TokenKey);
     }
 }

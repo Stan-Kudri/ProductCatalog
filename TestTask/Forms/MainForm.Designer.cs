@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using TestTask.BindingItem;
 using TestTask.Core.Models.Categories;
 
@@ -9,7 +9,7 @@ namespace TestTask.Forms
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private new System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -300,8 +300,6 @@ namespace TestTask.Forms
         private System.Windows.Forms.ToolStripMenuItem tsmImportFromExcel;
         private System.Windows.Forms.ToolStripMenuItem tsmSaveToExcel;
         private MaterialSkin.Controls.MaterialTabSelector materialTabSelector;
-        private System.Windows.Forms.BindingSource pageModelBindingSource;
-        private System.Windows.Forms.BindingSource itemsBindingSource;
         private System.Windows.Forms.BindingSource bindingSourcePage;
         private System.Windows.Forms.BindingSource bindingSourcePageCompanies;
         private System.Windows.Forms.BindingSource bindingSourcePageProducts;

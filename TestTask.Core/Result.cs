@@ -3,7 +3,7 @@ using TestTask.Core.Exeption;
 
 namespace TestTask.Core
 {
-    public class Result<T>
+    public class Result<T> : IEquatable<Result<T>>
     {
         private Result(T value, bool success, string error, int row)
         {
@@ -31,7 +31,7 @@ namespace TestTask.Core
             return Result<T2>.CreateFail(Error, Row);
         }
 
-        public static Result<T> CreateSuccess(T value, int row) => new Result<T>(value, true, string.Empty, row);
+        public static Result<T> CreateSuccess(T value, int row) => new(value, true, string.Empty, row);
 
         public static Result<T> CreateFail(string error, int row)
         {
@@ -77,9 +77,6 @@ namespace TestTask.Core
                     && other.Row == Row;
         }
 
-        public override int GetHashCode()
-        {
-            throw new NotImplementedException();
-        }
+        public override int GetHashCode() => HashCode.Combine(Success, Error, Row);
     }
 }
