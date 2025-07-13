@@ -73,7 +73,6 @@ namespace TestTask.Core.Import.Importers
                         res.Name = name.Value;
                         break;
                 }
-
             }
 
             return Result<Category>.CreateSuccess(res, row.RowNum);

@@ -10,7 +10,7 @@ namespace TestTask.MudBlazors.Authenticate
         public async Task<string> LoginAsync(UserModel userModel)
         {
             await Task.CompletedTask;
-            var (isVerifyUserData, user) = ValidUserService(userModel);
+            var (isVerifyUserData, user) = await ValidUserService(userModel);
 
             if (!isVerifyUserData || user == null)
             {
@@ -30,8 +30,8 @@ namespace TestTask.MudBlazors.Authenticate
             return token;
         }
 
-        private (bool, User?) ValidUserService(UserModel userModel)
-            => !userService.IsDataVerifyUser(userModel.Username, userModel.Password)
+        private async Task<(bool, User?)> ValidUserService(UserModel userModel)
+            => !await userService.IsDataVerifyUser(userModel.Username, userModel.Password)
                 ? (false, null)
                 : (true, userService.GetUser(userModel.Username, userModel.Password));
     }

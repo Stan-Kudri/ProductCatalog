@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using NPOI.SS.UserModel;
 
 namespace TestTask.Core.Export.SheetFillers
@@ -6,6 +7,6 @@ namespace TestTask.Core.Export.SheetFillers
     {
         string Name { get; }
 
-        void Fill(ISheet sheet);
+        Task Fill(ISheet sheet);
     }
 }

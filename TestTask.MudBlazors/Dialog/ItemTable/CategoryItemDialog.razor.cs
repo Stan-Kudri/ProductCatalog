@@ -25,7 +25,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
         [Parameter] public int? Id { get; set; } = null;
 
-        protected override void OnInitialized()
+        protected override async void OnInitialized()
         {
             if (Id == null)
             {
@@ -36,7 +36,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
             BusinessLogicException.EnsureIdLessThenZero(Id);
 
             isAddItem = false;
-            oldItem = CategoryRepository.GetCategory((int)Id);
+            oldItem = await CategoryRepository.GetItem((int)Id);
             categoryModel = oldItem.GetCategoryModel();
         }
 
@@ -55,14 +55,14 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
                 return;
             }
 
-            if (!CategoryRepository.IsFreeName(categoryModel.Name))
+            if (!await CategoryRepository.IsFreeName(categoryModel.Name))
             {
                 await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
             var item = categoryModel.GetCategory();
-            CategoryRepository.Add(item);
+            await CategoryRepository.AddAsync(item);
 
             MudDialog.Close();
         }
@@ -84,7 +84,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
             var item = categoryModel.GetModifyCategory(oldItem.Id);
 
-            if (!CategoryRepository.IsFreeNameItemUpsert(item))
+            if (!await CategoryRepository.IsFreeNameItemUpsert(item))
             {
                 await MessageDialog.ShowWarning("Name is not free.");
                 return;
@@ -92,7 +92,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
             if (!oldItem.Equals(item))
             {
-                CategoryRepository.Updata(item);
+                await CategoryRepository.UpdataAsync(item);
             }
 
             MudDialog.Close();

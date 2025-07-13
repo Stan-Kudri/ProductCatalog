@@ -71,7 +71,7 @@ namespace TestTask.Test.ImportTest
             {
                 if (item.Success)
                 {
-                    companyRepository.Upsert(item.Value);
+                    companyRepository.UpsertAsync(item.Value);
                 }
             }
 

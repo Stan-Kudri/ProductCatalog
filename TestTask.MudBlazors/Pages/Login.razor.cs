@@ -45,14 +45,14 @@ namespace TestTask.MudBlazors.Pages
             Navigation.NavigateTo("/table", true);
         }
 
-        private void AddUser()
+        private async Task AddUser()
         {
             if (errors.Length != 0)
             {
                 return;
             }
 
-            UserService.Add(UserModel.Username, UserModel.Password);
+            await UserService.AddAsync(UserModel.Username, UserModel.Password);
             Snackbar.Add($"Account registered", Severity.Success);
             SignInPage();
         }

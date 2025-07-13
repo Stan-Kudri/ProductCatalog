@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Types;
 
 namespace TestTask.BindingItem.ObservableCollection
@@ -10,6 +12,8 @@ namespace TestTask.BindingItem.ObservableCollection
 
         public SelectType(List<ProductType> listType)
             => ReplaceCollection(listType);
+
+        public ObservableCollection<ProductType> ItemsByCategory { get; private set; }
 
         public ObservableCollection<ProductType> Items { get; set; }
 
@@ -32,11 +36,14 @@ namespace TestTask.BindingItem.ObservableCollection
 
         public void ReplaceCollection(List<ProductType> list)
         {
-            if (list != null)
+            if (list != null && list.Count > 0)
             {
                 Items = new ObservableCollection<ProductType>(list);
                 _type = Items[0];
             }
         }
+
+        public void SetItemsByCategory(Category category)
+            => ItemsByCategory = new ObservableCollection<ProductType>(Items.Where(e => e.CategoryId == category.Id).ToList());
     }
 }

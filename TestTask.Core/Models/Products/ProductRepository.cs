@@ -1,6 +1,8 @@
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using NPOI.SS.Formula.Functions;
 using TestTask.Core.DBContext;
 using TestTask.Core.Exeption;
 using TestTask.Core.Models.Categories;
@@ -9,121 +11,95 @@ using TestTask.Core.Models.Types;
 
 namespace TestTask.Core.Models.Products
 {
-    public class ProductRepository : IRepository<Product>
+    public class ProductRepository(AppDbContext appDbContext)
+        : BaseRepository<Product>(appDbContext, appDbContext.Product)
     {
-        private readonly AppDbContext _dbContext;
-
-        public ProductRepository(AppDbContext appDbContext) => _dbContext = appDbContext;
-
-        public void Add(Product item)
+        public override async Task AddAsync(Product item, CancellationToken cancellationToken = default)
         {
             BusinessLogicException.ThrowIfNull(item);
 
-            if (_dbContext.Product.Any(e => e.Id == item.Id))
+            if (await _dbSet.AnyAsync(e => e.Id == item.Id, cancellationToken))
             {
                 BusinessLogicException.ThrowUniqueIDBusy<Product>(item.Id);
             }
 
-            InvalidDBForItemProduct(item);
-
-            _dbContext.Product.Add(item);
-            _dbContext.SaveChanges();
+            await InvalidDBForItemProduct(item, cancellationToken);
+            await _dbSet.AddAsync(item, cancellationToken);
+            await _appDbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public void Updata(Product item)
+        public override async Task UpdataAsync(Product item, CancellationToken cancellationToken = default)
         {
             BusinessLogicException.ThrowIfNull(item);
 
-            var oldItem = _dbContext.Product.FirstOrDefault(e => e.Id == item.Id)
-                            ?? throw NotFoundException.NotFoundIdProperty<Product>(item.Id);
+            var oldItem = await _dbSet.FirstOrDefaultAsync(e => e.Id == item.Id, cancellationToken)
+                                                    ?? throw NotFoundException.NotFoundIdProperty<Product>(item.Id);
 
-            InvalidDBForItemProduct(item);
+            await InvalidDBForItemProduct(item, cancellationToken);
+            UpdataItem(oldItem, item);
+            await _appDbContext.SaveChangesAsync(cancellationToken);
+        }
 
+        public override async Task UpsertAsync(Product item, CancellationToken cancellationToken = default)
+        {
+            if (await _appDbContext.Company.FirstOrDefaultAsync(e => e.Id == item.CompanyId, cancellationToken) == null
+                || await _appDbContext.Category.FirstOrDefaultAsync(e => e.Id == item.CategoryId, cancellationToken) == null
+                || await _appDbContext.Type.FirstOrDefaultAsync(e => e.Id == item.TypeId, cancellationToken) == null)
+            {
+                return;
+            }
+
+            var duplicateId = _dbSet.FirstOrDefaultAsync(e => e.Id == item.Id, cancellationToken);
+            if (duplicateId == null)
+            {
+                await AddAsync(item, cancellationToken);
+            }
+
+            await UpdataAsync(item, cancellationToken);
+        }
+
+        public override IQueryable<Product> GetQueryableAll()
+            => _dbSet.Include(e => e.Company).Include(e => e.Category).ThenInclude(e => e.Types).AsNoTracking();
+
+        public override async Task<Product> GetItem(int id, CancellationToken cancellationToken = default)
+            => await _dbSet.Include(e => e.Company).Include(e => e.Category).ThenInclude(e => e.Types).FirstOrDefaultAsync(e => e.Id == id, cancellationToken)
+            ?? throw NotFoundException.NotFoundIdProperty<T>(id);
+
+        public async Task<bool> IsFreeName(string name, CancellationToken cancellationToken = default)
+            => await _dbSet.FirstOrDefaultAsync(e => e.Name == name, cancellationToken) == null;
+
+        public async Task<bool> IsFreeNameItemUpsert(Product item, CancellationToken cancellationToken = default)
+        {
+            var busyItem = await _dbSet.FirstOrDefaultAsync(e => e.Name == item.Name, cancellationToken);
+            return busyItem == null || item.Id == busyItem.Id;
+        }
+
+        private async Task InvalidDBForItemProduct(Product item, CancellationToken cancellationToken = default)
+        {
+            if (!await _appDbContext.Company.AnyAsync(e => e.Id == item.CompanyId, cancellationToken))
+            {
+                throw NotFoundException.NotFoundIdProperty<Company>(item.CompanyId);
+            }
+
+            if (!await _appDbContext.Category.AnyAsync(e => e.Id == item.CategoryId, cancellationToken))
+            {
+                throw NotFoundException.NotFoundIdProperty<Category>(item.CategoryId);
+            }
+
+            if (!await _appDbContext.Type.AnyAsync(e => e.Id == item.TypeId, cancellationToken))
+            {
+                throw NotFoundException.NotFoundIdProperty<ProductType>(item.TypeId);
+            }
+        }
+
+        protected override void UpdataItem(Product oldItem, Product item)
+        {
             oldItem.Name = item.Name;
             oldItem.CompanyId = item.CompanyId;
             oldItem.CategoryId = item.CategoryId;
             oldItem.TypeId = item.TypeId;
             oldItem.Price = item.Price;
             oldItem.Destination = item.Destination;
-
-            _dbContext.SaveChanges();
-        }
-
-        public void Remove(int id)
-        {
-            var item = _dbContext.Product.FirstOrDefault(e => e.Id == id)
-                        ?? throw NotFoundException.NotFoundIdProperty<Product>(id);
-            _dbContext.Product.Remove(item);
-            _dbContext.SaveChanges();
-        }
-
-        public void AddRange(List<Product> products)
-        {
-            foreach (var item in products)
-            {
-                Add(item);
-            }
-        }
-
-        public void RemoveRange(List<int> listId)
-        {
-            foreach (var id in listId)
-            {
-                Remove(id);
-            }
-        }
-
-        public void Upsert(Product item)
-        {
-            if (_dbContext.Company.FirstOrDefault(e => e.Id == item.CompanyId) == null
-                || _dbContext.Category.FirstOrDefault(e => e.Id == item.CategoryId) == null
-                || _dbContext.Type.FirstOrDefault(e => e.Id == item.TypeId) == null)
-            {
-                return;
-            }
-
-            var duplicateId = _dbContext.Product.FirstOrDefault(e => e.Id == item.Id);
-            if (duplicateId == null)
-            {
-                Add(item);
-            }
-
-            Updata(item);
-        }
-
-        public List<Product> GetAll() => _dbContext.Product.Any() ? _dbContext.Product.AsNoTracking().ToList() : null;
-
-        public bool IsFreeName(string name) => _dbContext.Product.FirstOrDefault(e => e.Name == name) == null;
-
-        public bool IsFreeNameItemUpsert(Product item)
-        {
-            var busyItem = _dbContext.Product.FirstOrDefault(e => e.Name == item.Name);
-            return busyItem == null || item.Id == busyItem.Id;
-        }
-
-        public Product GetItem(int id)
-            => _dbContext.Product.FirstOrDefault(e => e.Id == id)
-            ?? throw NotFoundException.NotFoundIdProperty<Product>(id);
-
-        public IQueryable<Product> GetQueryableAll()
-            => _dbContext.Product.Include(e => e.Company).Include(e => e.Category).ThenInclude(e => e.Types).AsNoTracking();
-
-        private void InvalidDBForItemProduct(Product item)
-        {
-            if (!_dbContext.Company.Any(e => e.Id == item.CompanyId))
-            {
-                throw NotFoundException.NotFoundIdProperty<Company>(item.CompanyId);
-            }
-
-            if (!_dbContext.Category.Any(e => e.Id == item.CategoryId))
-            {
-                throw NotFoundException.NotFoundIdProperty<Category>(item.CategoryId);
-            }
-
-            if (!_dbContext.Type.Any(e => e.Id == item.TypeId))
-            {
-                throw NotFoundException.NotFoundIdProperty<ProductType>(item.TypeId);
-            }
         }
     }
 }

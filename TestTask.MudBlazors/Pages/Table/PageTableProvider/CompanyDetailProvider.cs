@@ -28,8 +28,8 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableView
                                 || e.Country.Contains(searchString)
                                 || e.DateCreation.ToString().Contains(searchString));
 
-        public void Remove(int id) => _companyRepository.Remove(id);
+        public async Task Remove(int id) => await _companyRepository.RemoveAsync(id);
 
-        public void Upsert(Company entity) => _companyRepository.Upsert(entity);
+        public async Task Upsert(Company entity) => await _companyRepository.UpsertAsync(entity);
     }
 }

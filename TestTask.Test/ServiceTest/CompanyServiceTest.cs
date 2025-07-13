@@ -129,7 +129,7 @@ namespace TestTask.Test.ServiceTest
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
             var companyRepository = new CompanyRepository(dbContext);
-            companyRepository.AddRange(companies);
+            companyRepository.AddRangeAsync(companies);
 
             //Act
             var actualCompanies = dbContext.Company.ToList();
@@ -147,7 +147,7 @@ namespace TestTask.Test.ServiceTest
             var companyRepository = new CompanyRepository(dbContext);
             dbContext.Company.AddRange(companies);
             dbContext.SaveChanges();
-            companyRepository.Add(addCompany);
+            companyRepository.AddAsync(addCompany);
 
             //Act
             var actualCompanies = dbContext.Company.ToList();
@@ -165,7 +165,7 @@ namespace TestTask.Test.ServiceTest
             var companyRepository = new CompanyRepository(dbContext);
             dbContext.Company.AddRange(companies);
             dbContext.SaveChanges();
-            companyRepository.Updata(updateCompany);
+            companyRepository.UpdataAsync(updateCompany);
 
             //Act
             var actualCompanies = dbContext.Company.ToList();
@@ -183,7 +183,7 @@ namespace TestTask.Test.ServiceTest
             var companyRepository = new CompanyRepository(dbContext);
             dbContext.Company.AddRange(companies);
             dbContext.SaveChanges();
-            companyRepository.RemoveRange(removeID);
+            companyRepository.RemoveRangeAsync(removeID);
 
             //Act
             var actualCompanies = dbContext.Company.ToList();
@@ -199,7 +199,7 @@ namespace TestTask.Test.ServiceTest
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
             var companyRepository = new CompanyRepository(dbContext);
-            companyRepository.Add(company);
+            companyRepository.AddAsync(company);
 
             //Act
             var actualName = companyRepository.CompanyName(id);
@@ -215,10 +215,10 @@ namespace TestTask.Test.ServiceTest
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
             var companyRepository = new CompanyRepository(dbContext);
-            companyRepository.AddRange(companies);
+            companyRepository.AddRangeAsync(companies);
 
             //Assert
-            Assert.Throws<BusinessLogicException>(() => { companyRepository.Add(company); });
+            Assert.Throws<BusinessLogicException>(() => { companyRepository.AddAsync(company); });
         }
     }
 }

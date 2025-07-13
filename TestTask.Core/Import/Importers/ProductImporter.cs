@@ -128,7 +128,6 @@ namespace TestTask.Core.Import.Importers
                         res.Destination = destination.Value;
                         break;
                 }
-
             }
 
             return Result<Product>.CreateSuccess(res, row.RowNum);

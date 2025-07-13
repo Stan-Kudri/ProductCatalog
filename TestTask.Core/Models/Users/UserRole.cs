@@ -5,21 +5,21 @@ namespace TestTask.Core.Models.Users
     public class UserRole(string name, int value) : SmartEnum<UserRole>(name, value)
     {
         /// <summary>
-        /// Пользователь.
+        /// User.
         /// </summary>
-        public static UserRole Basic { get; private set; } = new(Role.User, 0);
+        public static UserRole Basic { get; private set; } = new(RoleNames.Basic, 0);
 
         /// <summary>
-        /// Администратор.
+        /// Admin.
         /// </summary>
-        public static UserRole Admin { get; private set; } = new(Role.Admin, 1);
+        public static UserRole Admin { get; private set; } = new(RoleNames.Admin, 1);
 
         public override string ToString() => Name;
     }
 
-    public class Role
+    public static class RoleNames
     {
         public const string Admin = "Administration";
-        public const string User = "Basic Role";
+        public const string Basic = "Basic Role";
     }
 }

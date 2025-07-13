@@ -50,7 +50,7 @@ namespace TestTask.MudBlazors.Pages.Import
             Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
         }
 
-        private void Import<T>(Tables table, MemoryStream memoryStream, ExcelImporter<T> excelImporter, IRepository<T> repository)
+        private void Import<T>(Tables table, MemoryStream memoryStream, ExcelImporter<T> excelImporter, BaseRepository<T> repository)
             where T : Entity
         {
             if (!_selectedTable.SelectTables.Contains(table))
@@ -65,7 +65,7 @@ namespace TestTask.MudBlazors.Pages.Import
             {
                 if (row.Success)
                 {
-                    repository.Upsert(row.Value);
+                    repository.UpsertAsync(row.Value);
                 }
             }
         }

@@ -37,10 +37,10 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
         [Parameter] public int? Id { get; set; } = null;
 
-        protected override void OnInitialized()
+        protected override async void OnInitialized()
         {
-            selectCompanies = CompanyRepository.GetAll();
-            selectCategories = CategoryRepository.GetAll();
+            selectCompanies = await CompanyRepository.GetAll();
+            selectCategories = await CategoryRepository.GetAll();
 
             if (Id == null)
             {
@@ -51,7 +51,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
             BusinessLogicException.EnsureIdLessThenZero(Id);
 
             isAddItem = isDisabledType = false;
-            _oldProduct = ProductRepository.GetItem((int)Id);
+            _oldProduct = await ProductRepository.GetItem((int)Id);
             selectTypes = ProductTypeRepository.GetListTypesByCategory(_oldProduct.CategoryId);
             productModel = _oldProduct.GetProductModel();
         }
@@ -71,14 +71,14 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
                 return;
             }
 
-            if (!ProductRepository.IsFreeName(productModel.Name))
+            if (!await ProductRepository.IsFreeName(productModel.Name))
             {
                 await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
             var product = productModel.GetProductType();
-            ProductRepository.Add(product);
+            await ProductRepository.AddAsync(product);
 
             MudDialog.Close();
         }
@@ -100,7 +100,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
             var product = productModel.GetModifyType(_oldProduct.Id);
 
-            if (!ProductRepository.IsFreeNameItemUpsert(product))
+            if (!await ProductRepository.IsFreeNameItemUpsert(product))
             {
                 await MessageDialog.ShowWarning("Name is not free.");
                 return;
@@ -108,7 +108,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
             if (!_oldProduct.Equals(product))
             {
-                ProductRepository.Updata(product);
+                await ProductRepository.UpdataAsync(product);
             }
 
             MudDialog.Close();
@@ -122,6 +122,9 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
             productModel.Category = item;
 #pragma warning restore BL0005 // Component parameter should not be set outside of its component.
 
+            selectTypes = ProductTypeRepository.GetListTypesByCategory(productModel.Category.Id);
+            productModel.Category.Types = selectTypes;
+
             if (productModel.Category == null || productModel.Category.Types == null)
             {
                 isDisabledType = true;
@@ -129,7 +132,6 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
             }
 
             isDisabledType = false;
-            selectTypes = ProductTypeRepository.GetListTypesByCategory(productModel.Category.Id);
         }
 
         private IEnumerable<string> ValidFormatText(string str)

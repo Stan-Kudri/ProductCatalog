@@ -70,7 +70,7 @@ namespace TestTask.Test.ImportTest
             {
                 if (item.Success)
                 {
-                    categoryRepository.Upsert(item.Value);
+                    categoryRepository.UpsertAsync(item.Value);
                 }
             }
 

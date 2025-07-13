@@ -76,7 +76,7 @@ namespace TestTask.Test.ImportTest
 
         [Theory]
         [MemberData(nameof(Items))]
-        public void Add_All_Item_From_Excel_File(List<Company> companies, List<Category> categories, List<ProductType> types, List<Product> exceptProduct)
+        public async void Add_All_Item_From_Excel_File(List<Company> companies, List<Category> categories, List<ProductType> types, List<Product> exceptProduct)
         {
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
@@ -85,9 +85,9 @@ namespace TestTask.Test.ImportTest
             var typeRepository = new ProductTypeRepository(dbContext);
             var productRepository = new ProductRepository(dbContext);
 
-            companyRepository.AddRange(companies);
-            categoryRepository.AddRange(categories);
-            typeRepository.AddRange(types);
+            await companyRepository.AddRangeAsync(companies);
+            await categoryRepository.AddRangeAsync(categories);
+            await typeRepository.AddRangeAsync(types);
 
             var memoryStream = new MemoryStream(Resources.DataIsAllFilledIn);
             var productImporter = new ProductImporter();
@@ -97,7 +97,7 @@ namespace TestTask.Test.ImportTest
             {
                 if (item.Success)
                 {
-                    productRepository.Upsert(item.Value);
+                    await productRepository.UpsertAsync(item.Value);
                 }
             }
 

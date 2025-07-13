@@ -23,7 +23,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
         [Parameter] public int? Id { get; set; } = null;
 
-        protected override void OnInitialized()
+        protected override async void OnInitialized()
         {
             if (Id == null)
             {
@@ -34,7 +34,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
             BusinessLogicException.EnsureIdLessThenZero(Id);
 
             isAddItem = false;
-            oldCompany = CompanyRepository.GetCompany((int)Id);
+            oldCompany = await CompanyRepository.GetItem((int)Id);
             companyModel = oldCompany.GetCompanyModel();
         }
 
@@ -53,14 +53,14 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
                 return;
             }
 
-            if (!CompanyRepository.IsFreeName(companyModel.Name))
+            if (!await CompanyRepository.IsFreeName(companyModel.Name))
             {
                 await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
             var company = companyModel.GetCompany();
-            CompanyRepository.Add(company);
+            await CompanyRepository.AddAsync(company);
 
             MudDialog.Close();
         }
@@ -82,7 +82,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
             var company = companyModel.GetModifyCompany(oldCompany.Id);
 
-            if (!CompanyRepository.IsFreeNameItemUpsert(company))
+            if (!await CompanyRepository.IsFreeNameItemUpsert(company))
             {
                 await MessageDialog.ShowWarning("Name is not free.");
                 return;
@@ -90,7 +90,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
             if (!oldCompany.Equals(company))
             {
-                CompanyRepository.Updata(company);
+                await CompanyRepository.UpdataAsync(company);
             }
 
             MudDialog.Close();

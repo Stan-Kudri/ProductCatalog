@@ -8,13 +8,9 @@ using TestTask.Core.Models.Users;
 
 namespace TestTask.Core.DBContext
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext(DbContextOptions options)
+        : DbContext(options)
     {
-        public AppDbContext(DbContextOptions options)
-            : base(options)
-        {
-        }
-
         public DbSet<User> Users { get; set; }
 
         public DbSet<Company> Company { get; set; }

@@ -27,9 +27,9 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
         [Parameter] public int? Id { get; set; } = null;
 
-        protected override void OnInitialized()
+        protected override async void OnInitialized()
         {
-            selectCategories = CategoryRepository.GetAll();
+            selectCategories = await CategoryRepository.GetAll();
 
             if (Id == null)
             {
@@ -40,7 +40,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
             BusinessLogicException.EnsureIdLessThenZero(Id);
 
             isAddItem = false;
-            oldTypeProduct = ProductTypeRepository.GetItem((int)Id);
+            oldTypeProduct = await ProductTypeRepository.GetItem((int)Id);
             typeProductModel = oldTypeProduct.GetTypeProductModel();
         }
 
@@ -59,14 +59,14 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
                 return;
             }
 
-            if (!ProductTypeRepository.IsFreeName(typeProductModel.Name))
+            if (!await ProductTypeRepository.IsFreeName(typeProductModel.Name))
             {
                 await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
             var typeProduct = typeProductModel.GetProductType();
-            ProductTypeRepository.Add(typeProduct);
+            await ProductTypeRepository.AddAsync(typeProduct);
 
             MudDialog.Close();
         }
@@ -88,7 +88,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
             var typeProduct = typeProductModel.GetModifyType(oldTypeProduct.Id);
 
-            if (!ProductTypeRepository.IsFreeNameItemUpsert(typeProduct))
+            if (!await ProductTypeRepository.IsFreeNameItemUpsert(typeProduct))
             {
                 await MessageDialog.ShowWarning("Name is not free.");
                 return;
@@ -96,7 +96,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
             if (!oldTypeProduct.Equals(typeProduct))
             {
-                ProductTypeRepository.Updata(typeProduct);
+                await ProductTypeRepository.UpdataAsync(typeProduct);
             }
 
             MudDialog.Close();

@@ -154,10 +154,10 @@ namespace TestTask.Test.ServiceTest
             var typeRepository = new ProductTypeRepository(dbContext);
             var productRepository = new ProductRepository(dbContext);
 
-            companyRepository.Add(company);
-            categoryRepository.Add(category);
-            typeRepository.Add(type);
-            productRepository.AddRange(products);
+            companyRepository.AddAsync(company);
+            categoryRepository.AddAsync(category);
+            typeRepository.AddAsync(type);
+            productRepository.AddRangeAsync(products);
 
             //Act
             var actualProducts = dbContext.Product.ToList();
@@ -184,11 +184,11 @@ namespace TestTask.Test.ServiceTest
             var typeRepository = new ProductTypeRepository(dbContext);
             var productRepository = new ProductRepository(dbContext);
 
-            companyRepository.Add(company);
-            categoryRepository.Add(category);
-            typeRepository.Add(type);
-            productRepository.AddRange(products);
-            productRepository.Add(addProduct);
+            companyRepository.AddAsync(company);
+            categoryRepository.AddAsync(category);
+            typeRepository.AddAsync(type);
+            productRepository.AddRangeAsync(products);
+            productRepository.AddAsync(addProduct);
 
             //Act
             var actualProducts = dbContext.Product.ToList();
@@ -215,11 +215,11 @@ namespace TestTask.Test.ServiceTest
             var typeRepository = new ProductTypeRepository(dbContext);
             var productRepository = new ProductRepository(dbContext);
 
-            companyRepository.Add(company);
-            categoryRepository.Add(category);
-            typeRepository.Add(type);
-            productRepository.AddRange(products);
-            productRepository.Updata(updateProduct);
+            companyRepository.AddAsync(company);
+            categoryRepository.AddAsync(category);
+            typeRepository.AddAsync(type);
+            productRepository.AddRangeAsync(products);
+            productRepository.UpdataAsync(updateProduct);
 
             //Act
             var actualProducts = dbContext.Product.ToList();
@@ -246,11 +246,11 @@ namespace TestTask.Test.ServiceTest
             var typeRepository = new ProductTypeRepository(dbContext);
             var productRepository = new ProductRepository(dbContext);
 
-            companyRepository.Add(company);
-            categoryRepository.Add(category);
-            typeRepository.Add(type);
-            productRepository.AddRange(products);
-            productRepository.Remove(removeId);
+            companyRepository.AddAsync(company);
+            categoryRepository.AddAsync(category);
+            typeRepository.AddAsync(type);
+            productRepository.AddRangeAsync(products);
+            productRepository.RemoveAsync(removeId);
 
             //Act
             var actualProducts = dbContext.Product.ToList();
@@ -276,13 +276,13 @@ namespace TestTask.Test.ServiceTest
             var typeRepository = new ProductTypeRepository(dbContext);
             var productRepository = new ProductRepository(dbContext);
 
-            companyRepository.Add(company);
-            categoryRepository.Add(category);
-            typeRepository.Add(type);
-            productRepository.AddRange(products);
+            companyRepository.AddAsync(company);
+            categoryRepository.AddAsync(category);
+            typeRepository.AddAsync(type);
+            productRepository.AddRangeAsync(products);
 
             //Assert
-            Assert.Throws<BusinessLogicException>(() => { productRepository.Add(product); });
+            Assert.Throws<BusinessLogicException>(() => { productRepository.AddAsync(product); });
         }
 
         [Theory]
@@ -303,12 +303,12 @@ namespace TestTask.Test.ServiceTest
             var typeRepository = new ProductTypeRepository(dbContext);
             var productRepository = new ProductRepository(dbContext);
 
-            companyRepository.Add(company);
-            categoryRepository.Add(category);
-            typeRepository.Add(type);
+            companyRepository.AddAsync(company);
+            categoryRepository.AddAsync(category);
+            typeRepository.AddAsync(type);
 
             //Assert
-            Assert.Throws<NotFoundException>(() => { productRepository.Add(product); });
+            Assert.Throws<NotFoundException>(() => { productRepository.AddAsync(product); });
         }
     }
 }

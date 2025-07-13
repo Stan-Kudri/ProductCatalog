@@ -52,8 +52,7 @@ namespace TestTask.Core.Models.Companies
                    && other.Country == Country;
         }
 
-        public override int GetHashCode()
-            => Id.GetHashCode() + DateCreation.GetHashCode() + Country.GetHashCode();
+        public override int GetHashCode() => HashCode.Combine(Id, DateCreation, Country);
 
         public override string ToString() => Name;
     }

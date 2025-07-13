@@ -35,7 +35,7 @@ namespace TestTask.Forms.Companies
                 return;
             }
 
-            if (!_companyRepository.IsFreeName(nameCompany))
+            if (!await _companyRepository.IsFreeName(nameCompany))
             {
                 await _messageBox.ShowWarning("Name company is not free.");
                 return;

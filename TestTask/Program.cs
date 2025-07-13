@@ -38,10 +38,10 @@ namespace TestTask
                 .AddScoped<MessageByTable<Product>>()
                 .AddSingleton(e => new OpenFileDialog { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
                 .AddSingleton(e => new SaveFileDialog() { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
-
+                .AddSingleton<ExcelImporterModel>()
                 .Scan(scan => scan
-                    .FromAssemblies(typeof(IRepository<>).Assembly)
-                        .AddClasses(repository => repository.AssignableTo(typeof(IRepository<>)))
+                    .FromAssemblies(typeof(BaseRepository<>).Assembly)
+                        .AddClasses(repository => repository.AssignableTo(typeof(BaseRepository<>)))
                         .AsSelf()
                         .WithScopedLifetime()
 
@@ -62,9 +62,7 @@ namespace TestTask
 
                         .AddClasses(importer => importer.AssignableTo<IExcelImpoterTable>())
                         .AsImplementedInterfaces()
-                        .WithSingletonLifetime())
-
-                .AddSingleton<ExcelImporterModel>();
+                        .WithSingletonLifetime());
 
             var container = collection.BuildServiceProvider();
 

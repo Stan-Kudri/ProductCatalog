@@ -12,7 +12,6 @@ namespace TestTask.Forms.Type
     public partial class ProductTypeBaseForm : BaseForm
     {
         protected IMessageBox _messageBox;
-
         protected SelectCategory _categories;
 
         public ProductTypeBaseForm() => InitializeComponent();

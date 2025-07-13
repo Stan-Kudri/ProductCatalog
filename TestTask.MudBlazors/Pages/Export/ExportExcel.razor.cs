@@ -36,7 +36,7 @@ namespace TestTask.MudBlazors.Pages.Export
             foreach (var filler in fillers)
             {
                 var sheet = workbook.CreateSheet(filler.Name);
-                filler.Fill(sheet);
+                await filler.Fill(sheet);
             }
 
             using var root = new MemoryStream();

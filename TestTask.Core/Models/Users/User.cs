@@ -39,5 +39,7 @@ namespace TestTask.Core.Models.Users
             => user is not null && user.Username == Username && user.PasswordHash == PasswordHash;
 
         public override bool Equals(object obj) => Equals(obj as User);
+
+        public override int GetHashCode() => HashCode.Combine(UserRole, Username, PasswordHash);
     }
 }

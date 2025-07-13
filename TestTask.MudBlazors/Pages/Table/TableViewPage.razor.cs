@@ -81,7 +81,7 @@ namespace TestTask.MudBlazors.Pages.Table
 
             foreach (var item in selectedItems)
             {
-                TableProvider.Remove(item.Id);
+                await TableProvider.Remove(item.Id);
             }
 
             LoadData();
@@ -95,7 +95,7 @@ namespace TestTask.MudBlazors.Pages.Table
                 return;
             }
 
-            TableProvider.Remove(id);
+            await TableProvider.Remove(id);
             LoadData();
             Snackbar.Add(MessageRemoveItem, Severity.Success);
         }
@@ -122,7 +122,7 @@ namespace TestTask.MudBlazors.Pages.Table
             {
                 if (row.Success)
                 {
-                    TableProvider.Upsert(row.Value);
+                    await TableProvider.Upsert(row.Value);
                 }
             }
 

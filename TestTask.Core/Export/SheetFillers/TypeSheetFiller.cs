@@ -1,24 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using NPOI.SS.UserModel;
 using TestTask.Core.Exeption;
 using TestTask.Core.Models.Types;
 
 namespace TestTask.Core.Export.SheetFillers
 {
-    public class TypeSheetFiller : ISheetFiller
+    public class TypeSheetFiller(ProductTypeRepository stepService)
+        : ISheetFiller
     {
-        private readonly ProductTypeRepository _typeRepository;
         private readonly List<ProductTypeField> _columnMap = CreateColumnMap();
-
-        public TypeSheetFiller(ProductTypeRepository stepService) => _typeRepository = stepService;
 
         public string Name => "Type";
 
         public List<ProductTypeField> ColumnMap => _columnMap;
 
-        public void Fill(ISheet sheet)
+        public async Task Fill(ISheet sheet)
         {
             IRow row = sheet.CreateRow(0);
             for (int i = 0; i < _columnMap.Count; i++)
@@ -29,13 +28,13 @@ namespace TestTask.Core.Export.SheetFillers
 
             var numberRow = 0;
 
-            var allItems = _typeRepository.GetAll();
+            var allItems = await stepService.GetAll();
             if (allItems == null || allItems.Count <= 0)
             {
                 return;
             }
 
-            foreach (var item in _typeRepository.GetAll())
+            foreach (var item in await stepService.GetAll())
             {
                 numberRow++;
                 row = sheet.CreateRow(numberRow);

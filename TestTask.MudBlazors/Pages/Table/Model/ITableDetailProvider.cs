@@ -4,9 +4,9 @@ namespace TestTask.MudBlazors.Pages.Table.Model
     {
         IReadOnlyList<ListTableColumn> Columns { get; }
 
-        void Remove(int id);
+        Task Remove(int id);
 
-        void Upsert(T entity);
+        Task Upsert(T entity);
 
         IQueryable<T> GetSearchName(IQueryable<T> items, string? searchString);
 

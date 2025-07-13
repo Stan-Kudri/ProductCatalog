@@ -23,8 +23,7 @@ namespace TestTask.Controls
         private bool Resizing = false;
         private float[] _percentages;
 
-        public ListViewControl()
-            : base() => InitializeComponent();
+        public ListViewControl() : base() => InitializeComponent();
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public PageModel Page { get; set; } = new PageModel();
@@ -72,7 +71,7 @@ namespace TestTask.Controls
             var rowItem = listView.Items[row];
             var entity = _provider.GetEntity(rowItem);
 
-            if (_provider.Edit(entity))
+            if (await _provider.Edit(entity))
             {
                 LoadData();
             }
@@ -106,7 +105,7 @@ namespace TestTask.Controls
                 }
 
                 var entity = _provider.GetEntity(item);
-                _provider.Remove(entity);
+                await _provider.Remove(entity);
             }
 
             LoadData();
@@ -183,6 +182,8 @@ namespace TestTask.Controls
 
         public void LoadData()
         {
+            if (_provider == null) throw new InvalidOperationException("Provider is not set");
+
             _pagedList = _provider.GetPage(Page.GetPage());
             if (IsNotFirstPageEmpty())
             {
@@ -192,10 +193,13 @@ namespace TestTask.Controls
             listView.Items.Clear();
             foreach (var item in _pagedList.Items)
             {
-                var values = _provider.Columns
-                    .Select(cl => cl.ValueSelector(item).ToString())
-                    .ToArray();
-                listView.Items.Add(new ListViewItem(values));
+                var values = _provider.Columns?.Select(cl => cl?.ValueSelector?.Invoke(item)?.ToString() ?? string.Empty)
+                                               .ToArray();
+
+                if (values != null)
+                {
+                    listView.Items.Add(new ListViewItem(values));
+                }
             }
             UpdateButtons();
 

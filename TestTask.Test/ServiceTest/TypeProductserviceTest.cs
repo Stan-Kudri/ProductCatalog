@@ -139,8 +139,8 @@ namespace TestTask.Test.ServiceTest
             using var dbContext = new TestDbContextFactory().Create();
             var categoryRepository = new CategoryRepository(dbContext);
             var typeProductService = new ProductTypeRepository(dbContext);
-            categoryRepository.AddRange(categories);
-            typeProductService.AddRange(types);
+            categoryRepository.AddRangeAsync(categories);
+            typeProductService.AddRangeAsync(types);
 
             //Act
             var actualType = dbContext.Type.ToList();
@@ -157,9 +157,9 @@ namespace TestTask.Test.ServiceTest
             using var dbContext = new TestDbContextFactory().Create();
             var categoryRepository = new CategoryRepository(dbContext);
             var typeProductService = new ProductTypeRepository(dbContext);
-            categoryRepository.AddRange(categories);
-            typeProductService.AddRange(types);
-            typeProductService.Add(addType);
+            categoryRepository.AddRangeAsync(categories);
+            typeProductService.AddRangeAsync(types);
+            typeProductService.AddAsync(addType);
 
             //Act
             var actualType = dbContext.Type.ToList();
@@ -176,9 +176,9 @@ namespace TestTask.Test.ServiceTest
             using var dbContext = new TestDbContextFactory().Create();
             var categoryRepository = new CategoryRepository(dbContext);
             var typeProductService = new ProductTypeRepository(dbContext);
-            categoryRepository.AddRange(categories);
-            typeProductService.AddRange(types);
-            typeProductService.Updata(updateType);
+            categoryRepository.AddRangeAsync(categories);
+            typeProductService.AddRangeAsync(types);
+            typeProductService.UpdataAsync(updateType);
 
             //Act
             var actualType = dbContext.Type.ToList();
@@ -195,9 +195,9 @@ namespace TestTask.Test.ServiceTest
             using var dbContext = new TestDbContextFactory().Create();
             var categoryRepository = new CategoryRepository(dbContext);
             var typeProductService = new ProductTypeRepository(dbContext);
-            categoryRepository.AddRange(categories);
-            typeProductService.AddRange(types);
-            typeProductService.Remove(removeID);
+            categoryRepository.AddRangeAsync(categories);
+            typeProductService.AddRangeAsync(types);
+            typeProductService.RemoveAsync(removeID);
 
             //Act
             var actualType = dbContext.Type.ToList();
@@ -214,11 +214,11 @@ namespace TestTask.Test.ServiceTest
             using var dbContext = new TestDbContextFactory().Create();
             var categoryRepository = new CategoryRepository(dbContext);
             var typeProductService = new ProductTypeRepository(dbContext);
-            categoryRepository.AddRange(categories);
-            typeProductService.AddRange(types);
+            categoryRepository.AddRangeAsync(categories);
+            typeProductService.AddRangeAsync(types);
 
             //Act & Assert
-            Assert.Throws<BusinessLogicException>(() => { typeProductService.Add(addType); });
+            Assert.Throws<BusinessLogicException>(() => { typeProductService.AddAsync(addType); });
         }
 
         [Theory]
@@ -229,10 +229,10 @@ namespace TestTask.Test.ServiceTest
             using var dbContext = new TestDbContextFactory().Create();
             var categoryRepository = new CategoryRepository(dbContext);
             var typeProductService = new ProductTypeRepository(dbContext);
-            categoryRepository.AddRange(categories);
+            categoryRepository.AddRangeAsync(categories);
 
             //Act & Assert
-            Assert.Throws<NotFoundException>(() => { typeProductService.Add(addType); });
+            Assert.Throws<NotFoundException>(() => { typeProductService.AddAsync(addType); });
         }
     }
 }

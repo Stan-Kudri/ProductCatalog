@@ -1,5 +1,7 @@
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TestTask.Core.DBContext;
 using TestTask.Core.Exeption;
 
@@ -7,7 +9,7 @@ namespace TestTask.Core.Models.Users
 {
     public class UserService(AppDbContext dbContext, IUserValidator userValidator, IPasswordHasher passwordHasher)
     {
-        public void Add(string username, string password, CancellationToken cancellationToken = default)
+        public async Task AddAsync(string username, string password, CancellationToken cancellationToken = default)
         {
             BusinessLogicException.ThrowIfNull(username);
             BusinessLogicException.ThrowIfNull(password);
@@ -30,17 +32,17 @@ namespace TestTask.Core.Models.Users
             var passwordHash = Hash(password);
             var user = new User(username, passwordHash);
 
-            dbContext.Users.Add(user);
-            dbContext.SaveChanges();
+            await dbContext.Users.AddAsync(user, cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
         }
 
         public bool IsFreeUsername(string username)
             => dbContext.Users.FirstOrDefault(e => e.Username == username) == null;
 
-        public bool IsDataVerifyUser(string username, string password)
+        public async Task<bool> IsDataVerifyUser(string username, string password, CancellationToken cancellationToken = default)
         {
-            var user = dbContext.Users.FirstOrDefault(e => e.Username == username);
-            return user != null || Verify(password, user.PasswordHash);
+            var user = await dbContext.Users.FirstOrDefaultAsync(e => e.Username == username, cancellationToken);
+            return user != null && Verify(password, user.PasswordHash);
         }
 
 #pragma warning disable CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.

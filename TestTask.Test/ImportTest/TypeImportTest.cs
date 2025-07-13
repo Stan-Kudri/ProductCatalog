@@ -80,12 +80,12 @@ namespace TestTask.Test.ImportTest
             var typeImporter = new TypeProductImporter();
             var typeRead = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
 
-            categoryRepository.AddRange(categories);
+            categoryRepository.AddRangeAsync(categories);
             foreach (var item in typeRead)
             {
                 if (item.Success)
                 {
-                    typeRepository.Upsert(item.Value);
+                    typeRepository.UpsertAsync(item.Value);
                 }
             }
 

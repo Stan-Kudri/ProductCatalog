@@ -12,13 +12,13 @@ namespace TestTask.MudBlazors.Pages.Table
 
         [Inject] private IDialogService DialogService { get; set; } = null!;
 
-        private async void OpenDialogImport()
+        private async Task OpenDialogImport()
         {
             DialogOptions closeOnEscapeKey = new DialogOptions { CloseOnEscapeKey = true };
             await DialogService.ShowAsync<DialogImportData>(TitleImportTable, closeOnEscapeKey);
         }
 
-        private async void OpenDialogExport()
+        private async Task OpenDialogExport()
         {
             DialogOptions closeOnEscapeKey = new DialogOptions { CloseOnEscapeKey = true };
             await DialogService.ShowAsync<ExportExcel>(TitleExportTable, closeOnEscapeKey);

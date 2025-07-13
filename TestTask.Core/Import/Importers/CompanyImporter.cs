@@ -99,7 +99,6 @@ namespace TestTask.Core.Import.Importers
                         res.Country = country.Value;
                         break;
                 }
-
             }
 
             return Result<Company>.CreateSuccess(res, row.RowNum);

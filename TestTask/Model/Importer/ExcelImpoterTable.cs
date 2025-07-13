@@ -8,37 +8,27 @@ using TestTask.Core.Models;
 
 namespace TestTask.Model.Importer
 {
-    public class ExcelImpoterTable<T> : IExcelImpoterTable
+    public class ExcelImpoterTable<T>(IMessageBox messageBox, BaseRepository<T> repository, ExcelImporter<T> excelImport)
+        : IExcelImpoterTable
         where T : Entity
     {
-        private readonly IMessageBox _messageBox;
-        private readonly IRepository<T> _repository;
-        private readonly ExcelImporter<T> _excelImport;
-
-        public ExcelImpoterTable(IMessageBox messageBox, IRepository<T> repository, ExcelImporter<T> excelImport)
-        {
-            _messageBox = messageBox;
-            _repository = repository;
-            _excelImport = excelImport;
-        }
-
         public async Task ImportAsync(HashSet<Tables> selectTable, string path)
         {
             if (selectTable.Contains(Tables.Company))
             {
-                var reader = _excelImport.ImportFromFile(path);
+                var reader = excelImport.ImportFromFile(path);
 
                 foreach (var item in reader)
                 {
                     if (item.Success)
                     {
-                        _repository.Upsert(item.Value);
+                        await repository.UpsertAsync(item.Value);
                     }
                 }
 
                 if (!reader.IsNoErrorLine(out var message))
                 {
-                    await _messageBox.ShowWarning(message, typeof(T).Name);
+                    await messageBox.ShowWarning(message, typeof(T).Name);
                 }
             }
         }

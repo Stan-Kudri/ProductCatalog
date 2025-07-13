@@ -84,7 +84,6 @@ namespace TestTask.Core.Import.Importers
                         res.CategoryId = categoryId.Value;
                         break;
                 }
-
             }
 
             return Result<ProductType>.CreateSuccess(res, row.RowNum);

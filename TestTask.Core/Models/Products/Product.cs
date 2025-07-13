@@ -79,6 +79,6 @@ namespace TestTask.Core.Models.Products
                    && other.Destination == Destination;
         }
 
-        public override int GetHashCode() => Id.GetHashCode() * CompanyId.GetHashCode() + Type.GetHashCode();
+        public override int GetHashCode() => HashCode.Combine(Id, CompanyId, Type);
     }
 }

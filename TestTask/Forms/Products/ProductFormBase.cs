@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
 using TestTask.BindingItem;
@@ -65,7 +66,6 @@ namespace TestTask.Forms.Products
             if (category != null)
             {
                 _categories.Category = category;
-                itemsBindingSourceTypes.DataSource = _types.Items;
                 SetTypeProductSelector();
             }
         }
@@ -74,8 +74,6 @@ namespace TestTask.Forms.Products
         {
             companyBindingSource.DataSource = _companies.Items;
             categoryBindingSource.DataSource = _categories.Items;
-            _types.ReplaceCollection(_categories.Category.Types);
-            itemsBindingSourceTypes.DataSource = _types.Items;
             SetDefaultValueData();
         }
 
@@ -94,12 +92,12 @@ namespace TestTask.Forms.Products
 
         private void SetTypeProductSelector()
         {
-            _types = new SelectType(_categories.Category.Types);
+            _types.SetItemsByCategory(_categories.Category);
+            cmbTypeValue.Enabled = _types.ItemsByCategory != null && _types.ItemsByCategory.Count > 0;
 
-            cmbTypeValue.Enabled = _types.Items != null && _types.Items.Count > 0;
             if (cmbTypeValue.Enabled)
             {
-                itemsBindingSourceTypes.DataSource = _types.Items;
+                itemsBindingSourceTypes.DataSource = _types.ItemsByCategory;
             }
         }
 
@@ -150,7 +148,10 @@ namespace TestTask.Forms.Products
         }
 
         protected void ReplaceTypeProduct(List<ProductType> itmes)
-            => _types.ReplaceCollection(itmes);
+        {
+            var typeProduct = _types.Items.Where(e => e.Category == _categories.Category).ToList();
+            _types.ReplaceCollection(typeProduct);
+        }
 
         public ProductModel GetProductModel()
             => !decimal.TryParse(tbPrice.Text, out var price)

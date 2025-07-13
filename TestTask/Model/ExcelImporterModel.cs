@@ -5,16 +5,11 @@ using TestTask.Model.Importer;
 
 namespace TestTask.Model
 {
-    public sealed class ExcelImporterModel
+    public sealed class ExcelImporterModel(IEnumerable<IExcelImpoterTable> excelImpoterTables)
     {
-        private readonly IEnumerable<IExcelImpoterTable> _excelImporterTables;
-
-        public ExcelImporterModel(IEnumerable<IExcelImpoterTable> excelImpoterTables)
-            => _excelImporterTables = excelImpoterTables;
-
         public async Task UpdataDB(HashSet<Tables> selectTables, string path)
         {
-            foreach (var table in _excelImporterTables)
+            foreach (var table in excelImpoterTables)
             {
                 await table.ImportAsync(selectTables, path);
             }

@@ -13,7 +13,7 @@ namespace TestTask.Core.Extension
             var result = new Dictionary<T, int>(columns.Count);
             if (sheet.LastRowNum <= 0)
             {
-                throw new ArgumentException("File is empty");
+                throw new BusinessLogicException("File is empty");
             }
 
             var rowFirst = sheet.GetRow(0);

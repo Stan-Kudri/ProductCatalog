@@ -62,7 +62,7 @@
         <NavMenu />
         <AuthorizeView Context="auth">
             <Authorized> 
-                @if (auth.User.IsInRole(Role.Admin))
+                @if (auth.User.IsInRole(RoleNames.Admin))
                 {
                     <MudNavLink Href="users" Match="NavLinkMatch.All" Icon="@MaterialDesignIcons.Normal.AccountDetails">Users</MudNavLink>
                 }

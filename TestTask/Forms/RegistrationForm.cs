@@ -32,9 +32,16 @@ namespace TestTask.Forms
                 return;
             }
 
+            if (!_userService.IsFreeUsername(user.Username))
+            {
+                message = "Username is taken.";
+                await _messageBox.ShowInfo(message);
+                return;
+            }
+
             Hide();
 
-            _userService.Add(user.Username, user.Password);
+            await _userService.AddAsync(user.Username, user.Password);
             DialogResult = DialogResult.OK;
 
             Close();
@@ -45,7 +52,7 @@ namespace TestTask.Forms
             userModel = null;
             var username = tbLogIn.Text;
             var password = tbPassword.Text;
-            var userValidator = _serviceProvider.GetRequiredService<UserValidator>();
+            var userValidator = _serviceProvider.GetRequiredService<IUserValidator>();
             if (!userValidator.ValidateUsername(username, out string messageValidUsername))
             {
                 message = messageValidUsername;
@@ -55,12 +62,6 @@ namespace TestTask.Forms
             if (!userValidator.ValidatePassword(password, out string messageValidPassword))
             {
                 message = messageValidPassword;
-                return false;
-            }
-
-            if (!_userService.IsFreeUsername(username))
-            {
-                message = "Username is taken.";
                 return false;
             }
 

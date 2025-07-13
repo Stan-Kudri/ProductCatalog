@@ -1,24 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using NPOI.SS.UserModel;
 using TestTask.Core.Exeption;
 using TestTask.Core.Models.Companies;
 
 namespace TestTask.Core.Export.SheetFillers
 {
-    public class CompanySheetFiller : ISheetFiller
+    public class CompanySheetFiller(CompanyRepository companyRepository)
+        : ISheetFiller
     {
-        private readonly CompanyRepository _companyRepository;
         private readonly List<CompanyField> _columnMap = CreateColumnMap();
-
-        public CompanySheetFiller(CompanyRepository companyRepository) => _companyRepository = companyRepository;
 
         public string Name => "Company";
 
         public List<CompanyField> ColumnMap => _columnMap;
 
-        public void Fill(ISheet sheet)
+        public async Task Fill(ISheet sheet)
         {
             IRow row = sheet.CreateRow(0);
             for (int i = 0; i < _columnMap.Count; i++)
@@ -29,13 +28,13 @@ namespace TestTask.Core.Export.SheetFillers
 
             var numberRow = 0;
 
-            var allItems = _companyRepository.GetAll();
+            var allItems = await companyRepository.GetAll();
             if (allItems == null || allItems.Count <= 0)
             {
                 return;
             }
 
-            foreach (var item in _companyRepository.GetAll())
+            foreach (var item in await companyRepository.GetAll())
             {
                 numberRow++;
                 row = sheet.CreateRow(numberRow);

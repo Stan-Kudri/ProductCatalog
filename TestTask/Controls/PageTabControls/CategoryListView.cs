@@ -46,38 +46,40 @@ namespace TestTask.Controls.PageTabControls
 
         public void LoadData() => listView.LoadData();
 
-        public Task<bool> Add()
+        public async Task<bool> Add()
         {
             using (var addForm = _serviceProvider.GetRequiredService<AddCategoryForm>())
             {
 #pragma warning disable CA1849 // Call async methods when in an async method
                 if (addForm.ShowDialog() != DialogResult.OK)
                 {
-                    return Task.FromResult(false);
+                    return false;
                 }
 #pragma warning restore CA1849 // Call async methods when in an async method
 
                 var item = addForm.GetItemModel().ToCategory();
-                _categoryRepository.Add(item);
+                await _categoryRepository.AddAsync(item);
             }
 
-            return Task.FromResult(true);
+            return true;
         }
 
-        public bool Edit(Entity entity)
+        public async Task<bool> Edit(Entity entity)
         {
             var oldItem = (Category)entity;
             using (var editForm = _serviceProvider.GetRequiredService<EditCategoryForm>())
             {
                 editForm.Initialize(oldItem);
 
-                if (editForm.ShowDialog() != DialogResult.OK)
+                var dialogResult = await editForm.FormShowDialogAsync();
+
+                if (dialogResult != DialogResult.OK)
                 {
                     return false;
                 }
 
                 var updateItem = editForm.EditItem();
-                _categoryRepository.Updata(updateItem);
+                await _categoryRepository.UpdataAsync(updateItem);
             }
 
             return true;
@@ -100,7 +102,7 @@ namespace TestTask.Controls.PageTabControls
             return new PagedList<Entity>(result, result.PageNumber, result.PageSize, result.TotalItems);
         }
 
-        public void Remove(Entity entity) => _categoryRepository.Remove(entity.Id);
+        public async Task Remove(Entity entity) => await _categoryRepository.RemoveAsync(entity.Id);
 
         private void ButtonUseFilter_Click(object sender, EventArgs e)
             => UsedFilter();

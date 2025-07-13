@@ -78,28 +78,30 @@ namespace TestTask.Controls.PageTabControls
 #pragma warning restore CA1849 // Call async methods when in an async method
 
                 var item = addForm.GetTypeProductModel().ToProductType();
-                _typeRepository.Add(item);
+                await _typeRepository.AddAsync(item);
             }
 
             return true;
         }
 
-        public bool Edit(Entity entity)
+        public async Task<bool> Edit(Entity entity)
         {
-            var listCategory = _categoryRepository.GetAll();
+            var listCategory = await _categoryRepository.GetAll();
             var oldItem = (ProductType)entity;
 
             using (var editForm = _serviceProvider.GetRequiredService<EditProductTypeForm>())
             {
                 editForm.Initialize(listCategory, oldItem);
 
-                if (editForm.ShowDialog() != DialogResult.OK)
+                var dialogResult = await editForm.FormShowDialogAsync();
+
+                if (dialogResult != DialogResult.OK)
                 {
                     return false;
                 }
 
                 var updateItem = editForm.GetEditTypeProduct();
-                _typeRepository.Updata(updateItem);
+                await _typeRepository.UpdataAsync(updateItem);
             }
 
             return true;
@@ -123,7 +125,7 @@ namespace TestTask.Controls.PageTabControls
             return new PagedList<Entity>(result, result.PageNumber, result.PageSize, result.TotalItems);
         }
 
-        public void Remove(Entity entity) => _typeRepository.Remove(entity.Id);
+        public async Task Remove(Entity entity) => await _typeRepository.RemoveAsync(entity.Id);
 
         private void ButtonUseFilter_Click(object sender, EventArgs e)
             => UsedFilter();

@@ -3,13 +3,8 @@ using System.Linq;
 
 namespace TestTask.Core.Models.SortModel
 {
-    public sealed class Sorter<T>
+    public sealed class Sorter<T>(ISortableField<T> defaultValue)
     {
-        private readonly ISortableField<T> _defaultValue;
-
-        public Sorter(ISortableField<T> defaultValue)
-            => _defaultValue = defaultValue;
-
         public IQueryable<T> Apply(IQueryable<T> items, IEnumerable<ISortableField<T>> sortFields, bool? ascending = true)
         {
             if (ascending == null)
@@ -21,7 +16,7 @@ namespace TestTask.Core.Models.SortModel
             var actualSortFields = sortFields.ToList();
             if (actualSortFields.Count == 0)
             {
-                actualSortFields.Add(_defaultValue);
+                actualSortFields.Add(defaultValue);
             }
 
             var query = actualSortFields[0].OrderBy(items, asc);

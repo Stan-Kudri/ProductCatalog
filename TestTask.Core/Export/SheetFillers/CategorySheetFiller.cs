@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using NPOI.SS.UserModel;
 using TestTask.Core.Exeption;
 using TestTask.Core.Models.Categories;
 
 namespace TestTask.Core.Export.SheetFillers
 {
-    public class CategorySheetFiller(CategoryRepository categoryRepository) : ISheetFiller
+    public class CategorySheetFiller(CategoryRepository categoryRepository)
+        : ISheetFiller
     {
         private readonly List<CategoryField> _columnMap = CreateColumnMap();
 
@@ -15,7 +17,7 @@ namespace TestTask.Core.Export.SheetFillers
 
         public List<CategoryField> ColumnMap => _columnMap;
 
-        public void Fill(ISheet sheet)
+        public async Task Fill(ISheet sheet)
         {
             IRow row = sheet.CreateRow(0);
             for (var i = 0; i < _columnMap.Count; i++)
@@ -26,13 +28,13 @@ namespace TestTask.Core.Export.SheetFillers
 
             var numberRow = 0;
 
-            var allItems = categoryRepository.GetAll();
+            var allItems = await categoryRepository.GetAll();
             if (allItems == null || allItems.Count <= 0)
             {
                 return;
             }
 
-            foreach (var item in categoryRepository.GetAll())
+            foreach (var item in await categoryRepository.GetAll())
             {
                 numberRow++;
                 row = sheet.CreateRow(numberRow);

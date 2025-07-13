@@ -98,30 +98,32 @@ namespace TestTask.Controls.PageTabControls
 #pragma warning restore CA1849 // Call async methods when in an async method
 
                 var item = addForm.GetProductModel().ToProduct();
-                _productRepository.Add(item);
+                await _productRepository.AddAsync(item);
             }
 
             return true;
         }
 
-        public bool Edit(Entity entity)
+        public async Task<bool> Edit(Entity entity)
         {
-            var listCompany = _companyRepository.GetAll();
-            var listCategory = _categoryRepository.GetAll();
-            var listTypeProduct = _typeRepository.GetAll();
+            var listCompany = await _companyRepository.GetAll();
+            var listCategory = await _categoryRepository.GetAll();
+            var listTypeProduct = await _typeRepository.GetAll();
             var oldItem = (Product)entity;
 
             using (var editForm = _serviceProvider.GetRequiredService<EditItemProductForm>())
             {
                 editForm.Initialize(listCompany, listCategory, listTypeProduct, oldItem);
 
-                if (editForm.ShowDialog() != DialogResult.OK)
+                var dialogResult = await editForm.FormShowDialogAsync();
+
+                if (dialogResult != DialogResult.OK)
                 {
                     return false;
                 }
 
                 var updateItem = editForm.GetEditProduct();
-                _productRepository.Updata(updateItem);
+                await _productRepository.UpdataAsync(updateItem);
             }
 
             return true;
@@ -149,7 +151,7 @@ namespace TestTask.Controls.PageTabControls
             return new PagedList<Entity>(result, result.PageNumber, result.PageSize, result.TotalItems);
         }
 
-        public void Remove(Entity entity) => _productRepository.Remove(entity.Id);
+        public async Task Remove(Entity entity) => await _productRepository.RemoveAsync(entity.Id);
 
         private void ButtonUseFilter_Click(object sender, EventArgs e)
             => UsedFilter();

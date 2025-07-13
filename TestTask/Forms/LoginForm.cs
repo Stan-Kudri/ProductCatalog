@@ -45,7 +45,7 @@ namespace TestTask.Forms
                 return;
             }
 
-            if (!_userService.IsDataVerifyUser(user.Username, user.Password))
+            if (!await _userService.IsDataVerifyUser(user.Username, user.Password))
             {
                 message = "Invalid username or password.";
                 await _messageBox.ShowInfo(message);
@@ -79,12 +79,6 @@ namespace TestTask.Forms
             if (!userValidator.ValidatePassword(password, out string messageValidPassword))
             {
                 message = messageValidPassword;
-                return false;
-            }
-
-            if (_userService.IsFreeUsername(username))
-            {
-                message = "This user does not exist.";
                 return false;
             }
 

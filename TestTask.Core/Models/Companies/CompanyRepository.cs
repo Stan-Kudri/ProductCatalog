@@ -1,102 +1,45 @@
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TestTask.Core.DBContext;
 using TestTask.Core.Exeption;
 
 namespace TestTask.Core.Models.Companies
 {
-    public class CompanyRepository : IRepository<Company>
+    public class CompanyRepository(AppDbContext appDbContext)
+        : BaseRepository<Company>(appDbContext, appDbContext.Company)
     {
-        private readonly AppDbContext _dbContext;
-
-        public CompanyRepository(AppDbContext appDbContext) => _dbContext = appDbContext;
-
-        public void Add(Company item)
+        public override async Task UpsertAsync(Company item, CancellationToken cancellationToken = default)
         {
-            BusinessLogicException.ThrowIfNull(item);
-
-            if (_dbContext.Company.Any(e => e.Id == item.Id))
-            {
-                BusinessLogicException.ThrowUniqueIDBusy<Company>(item.Id);
-            }
-
-            _dbContext.Company.Add(item);
-            _dbContext.SaveChanges();
-        }
-
-        public void Updata(Company item)
-        {
-
-            BusinessLogicException.ThrowIfNull(item);
-
-            var oldItem = _dbContext.Company.FirstOrDefault(e => e.Id == item.Id)
-                            ?? throw NotFoundException.NotFoundIdProperty<Company>(item.Id);
-
-            oldItem.Name = item.Name;
-            oldItem.DateCreation = item.DateCreation;
-            oldItem.Country = item.Country;
-
-            _dbContext.SaveChanges();
-        }
-
-        public void Remove(int id)
-        {
-            var company = _dbContext.Company.FirstOrDefault(e => e.Id == id)
-                            ?? throw NotFoundException.NotFoundIdProperty<Company>(id);
-
-            _dbContext.Company.Remove(company);
-            _dbContext.SaveChanges();
-        }
-
-        public void AddRange(List<Company> companies)
-        {
-            foreach (var item in companies)
-            {
-                Add(item);
-            }
-        }
-
-        public void RemoveRange(List<int> listId)
-        {
-            foreach (var id in listId)
-            {
-                Remove(id);
-            }
-        }
-
-        public void Upsert(Company company)
-        {
-            var duplicateId = _dbContext.Company.FirstOrDefault(e => e.Id == company.Id);
+            var duplicateId = _dbSet.FirstOrDefault(e => e.Id == item.Id);
 
             if (duplicateId == null)
             {
-                Add(company);
+                await AddAsync(item, cancellationToken);
             }
 
-            Updata(company);
+            await UpdataAsync(item, cancellationToken);
         }
 
-        public string CompanyName(int id)
-            => _dbContext.Company.FirstOrDefault(e => e.Id == id).Name
+        public async Task<string> CompanyName(int id, CancellationToken cancellationToken = default)
+            => (await _dbSet.FirstOrDefaultAsync(e => e.Id == id, cancellationToken)).Name
             ?? throw NotFoundException.NotFoundIdProperty<Company>(id);
 
-        public Company GetCompany(int? id)
-            => _dbContext.Company.FirstOrDefault(e => e.Id == id);
+        public async Task<bool> IsFreeName(string name, CancellationToken cancellationToken = default)
+            => await _dbSet.FirstOrDefaultAsync(e => e.Name == name, cancellationToken) == null;
 
-        public List<Company> GetAll()
-            => _dbContext.Company.Any() ? _dbContext.Company.AsNoTracking().ToList() : null;
-
-        public IQueryable<Company> GetQueryableAll()
-            => _dbContext.Company.AsNoTracking();
-
-        public bool IsFreeName(string name)
-            => _dbContext.Company.FirstOrDefault(e => e.Name == name) == null;
-
-        public bool IsFreeNameItemUpsert(Company item)
+        public async Task<bool> IsFreeNameItemUpsert(Company item, CancellationToken cancellationToken = default)
         {
-            var busyItem = _dbContext.Company.FirstOrDefault(e => e.Name == item.Name);
+            var busyItem = await _dbSet.FirstOrDefaultAsync(e => e.Name == item.Name, cancellationToken);
             return busyItem == null || item.Id == busyItem.Id;
+        }
+
+        protected override void UpdataItem(Company oldItem, Company item)
+        {
+            oldItem.Name = item.Name;
+            oldItem.DateCreation = item.DateCreation;
+            oldItem.Country = item.Country;
         }
     }
 }

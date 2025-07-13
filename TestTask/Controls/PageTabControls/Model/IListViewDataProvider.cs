@@ -12,11 +12,11 @@ namespace TestTask.Controls.PageTabControls.Model
 
         PagedList<Entity> GetPage(Page page);
 
-        void Remove(Entity entity);
+        Task Remove(Entity entity);
 
         Entity GetEntity(ListViewItem item);
 
-        bool Edit(Entity entity);
+        Task<bool> Edit(Entity entity);
 
         Task<bool> Add();
     }
