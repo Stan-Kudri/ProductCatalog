@@ -57,6 +57,7 @@ namespace TestTask.Core.Models.Types
             if (duplicateId == null)
             {
                 await AddAsync(item, cancellationToken);
+                return;
             }
 
             await UpdataAsync(item, cancellationToken);

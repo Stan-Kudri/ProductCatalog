@@ -114,12 +114,12 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(CategoryItems))]
-        public void Service_Should_Add_All_The_Item_Of_Database(List<Category> category)
+        public async Task Service_Should_Add_All_The_Item_Of_Database(List<Category> category)
         {
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
             var categoryRepository = new CategoryRepository(dbContext);
-            categoryRepository.AddRangeAsync(category);
+            await categoryRepository.AddRangeAsync(category);
 
             //Act
             var actualCompanies = dbContext.Category.ToList();
@@ -130,14 +130,14 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddItemCategory))]
-        public void Service_Should_Add_The_Item_To_The_Database(List<Category> categories, Category addCategory, List<Category> expectCategories)
+        public async Task Service_Should_Add_The_Item_To_The_Database(List<Category> categories, Category addCategory, List<Category> expectCategories)
         {
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
             var service = new CategoryRepository(dbContext);
             dbContext.Category.AddRange(categories);
-            dbContext.SaveChanges();
-            service.AddAsync(addCategory);
+            await dbContext.SaveChangesAsync();
+            await service.AddAsync(addCategory);
 
             //Act
             var actualCategories = dbContext.Category.ToList();
@@ -148,14 +148,14 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(UpdateItemCategory))]
-        public void Service_Should_Update_The_Item_To_The_Database(List<Category> categories, Category updateCategory, List<Category> expectCategories)
+        public async Task Service_Should_Update_The_Item_To_The_Database(List<Category> categories, Category updateCategory, List<Category> expectCategories)
         {
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
             var service = new CategoryRepository(dbContext);
             dbContext.Category.AddRange(categories);
-            dbContext.SaveChanges();
-            service.UpdataAsync(updateCategory);
+            await dbContext.SaveChangesAsync();
+            await service.UpdataAsync(updateCategory);
 
             //Act
             var actualCategories = dbContext.Category.ToList();
@@ -166,14 +166,14 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(RemoveRangeCategory))]
-        public void Service_Should_Remove_Range_Items_By_ID_To_The_Database(List<Category> categories, List<int> removeID, List<Category> expectCategories)
+        public async Task Service_Should_Remove_Range_Items_By_ID_To_The_Database(List<Category> categories, List<int> removeID, List<Category> expectCategories)
         {
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
             var service = new CategoryRepository(dbContext);
             dbContext.Category.AddRange(categories);
-            dbContext.SaveChanges();
-            service.RemoveRangeAsync(removeID);
+            await dbContext.SaveChangesAsync();
+            await service.RemoveRangeAsync(removeID);
 
             //Act
             var actualCategories = dbContext.Category.ToList();
@@ -184,12 +184,12 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(NameCategoryById))]
-        public void Get_Name_By_ID_From_The_Database(List<Category> categories, int id, string expectName)
+        public async Task Get_Name_By_ID_From_The_Database(List<Category> categories, int id, string expectName)
         {
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
             var service = new CategoryRepository(dbContext);
-            service.AddRangeAsync(categories);
+            await service.AddRangeAsync(categories);
 
             //Act
             var actualName = service.GetName(id);
@@ -200,15 +200,15 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddCategoryWithBusyId))]
-        public void Add_Items_Did_Not_Happen_Because_The_ID_Are_Busy(List<Category> categories, Category category)
+        public async Task Add_Items_Did_Not_Happen_Because_The_ID_Are_Busy(List<Category> categories, Category category)
         {
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
             var service = new CategoryRepository(dbContext);
-            service.AddRangeAsync(categories);
+            await service.AddRangeAsync(categories);
 
             //Assert
-            Assert.Throws<BusinessLogicException>(() => { service.AddAsync(category); });
+            await Assert.ThrowsAsync<BusinessLogicException>(async () => { await service.AddAsync(category); });
         }
     }
 }

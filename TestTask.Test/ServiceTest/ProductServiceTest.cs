@@ -144,7 +144,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(ProductItems))]
-        public void Service_Should_Add_All_The_Item_Of_Database(Company company, Category category, ProductType type, List<Product> products)
+        public async Task Service_Should_Add_All_The_Item_Of_Database(Company company, Category category, ProductType type, List<Product> products)
         {
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
@@ -154,10 +154,10 @@ namespace TestTask.Test.ServiceTest
             var typeRepository = new ProductTypeRepository(dbContext);
             var productRepository = new ProductRepository(dbContext);
 
-            companyRepository.AddAsync(company);
-            categoryRepository.AddAsync(category);
-            typeRepository.AddAsync(type);
-            productRepository.AddRangeAsync(products);
+            await companyRepository.AddAsync(company);
+            await categoryRepository.AddAsync(category);
+            await typeRepository.AddAsync(type);
+            await productRepository.AddRangeAsync(products);
 
             //Act
             var actualProducts = dbContext.Product.ToList();
@@ -168,7 +168,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddItemProduct))]
-        public void Service_Should_Add_The_Item_To_The_Database
+        public async Task Service_Should_Add_The_Item_To_The_Database
             (Company company,
             Category category,
             ProductType type,
@@ -184,11 +184,11 @@ namespace TestTask.Test.ServiceTest
             var typeRepository = new ProductTypeRepository(dbContext);
             var productRepository = new ProductRepository(dbContext);
 
-            companyRepository.AddAsync(company);
-            categoryRepository.AddAsync(category);
-            typeRepository.AddAsync(type);
-            productRepository.AddRangeAsync(products);
-            productRepository.AddAsync(addProduct);
+            await companyRepository.AddAsync(company);
+            await categoryRepository.AddAsync(category);
+            await typeRepository.AddAsync(type);
+            await productRepository.AddRangeAsync(products);
+            await productRepository.AddAsync(addProduct);
 
             //Act
             var actualProducts = dbContext.Product.ToList();
@@ -199,7 +199,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(UpdateItemProduct))]
-        public void Service_Shouldt_Update_The_Item_To_The_Database
+        public async Task Service_Shouldt_Update_The_Item_To_The_Database
             (Company company,
             Category category,
             ProductType type,
@@ -215,11 +215,11 @@ namespace TestTask.Test.ServiceTest
             var typeRepository = new ProductTypeRepository(dbContext);
             var productRepository = new ProductRepository(dbContext);
 
-            companyRepository.AddAsync(company);
-            categoryRepository.AddAsync(category);
-            typeRepository.AddAsync(type);
-            productRepository.AddRangeAsync(products);
-            productRepository.UpdataAsync(updateProduct);
+            await companyRepository.AddAsync(company);
+            await categoryRepository.AddAsync(category);
+            await typeRepository.AddAsync(type);
+            await productRepository.AddRangeAsync(products);
+            await productRepository.UpdataAsync(updateProduct);
 
             //Act
             var actualProducts = dbContext.Product.ToList();
@@ -230,7 +230,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(RemoveProduct))]
-        public void Service_Should_Remove_Item_By_ID_To_The_Database
+        public async Task Service_Should_Remove_Item_By_ID_To_The_Database
             (Company company,
             Category category,
             ProductType type,
@@ -246,11 +246,11 @@ namespace TestTask.Test.ServiceTest
             var typeRepository = new ProductTypeRepository(dbContext);
             var productRepository = new ProductRepository(dbContext);
 
-            companyRepository.AddAsync(company);
-            categoryRepository.AddAsync(category);
-            typeRepository.AddAsync(type);
-            productRepository.AddRangeAsync(products);
-            productRepository.RemoveAsync(removeId);
+            await companyRepository.AddAsync(company);
+            await categoryRepository.AddAsync(category);
+            await typeRepository.AddAsync(type);
+            await productRepository.AddRangeAsync(products);
+            await productRepository.RemoveAsync(removeId);
 
             //Act
             var actualProducts = dbContext.Product.ToList();
@@ -261,7 +261,7 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddProductWithBusyId))]
-        public void Add_Items_Did_Not_Happen_Because_The_ID_Are_Busy
+        public async Task Add_Items_Did_Not_Happen_Because_The_ID_Are_Busy
             (Company company,
             Category category,
             ProductType type,
@@ -276,20 +276,20 @@ namespace TestTask.Test.ServiceTest
             var typeRepository = new ProductTypeRepository(dbContext);
             var productRepository = new ProductRepository(dbContext);
 
-            companyRepository.AddAsync(company);
-            categoryRepository.AddAsync(category);
-            typeRepository.AddAsync(type);
-            productRepository.AddRangeAsync(products);
+            await companyRepository.AddAsync(company);
+            await categoryRepository.AddAsync(category);
+            await typeRepository.AddAsync(type);
+            await productRepository.AddRangeAsync(products);
 
             //Assert
-            Assert.Throws<BusinessLogicException>(() => { productRepository.AddAsync(product); });
+            await Assert.ThrowsAsync<BusinessLogicException>(async () => { await productRepository.AddAsync(product); });
         }
 
         [Theory]
         [MemberData(nameof(AddProductWithCompanyMissing))]
         [MemberData(nameof(AddProductWithCategoryMissing))]
         [MemberData(nameof(AddProductWithTypeMissing))]
-        public void Did_Not_Happen_Add_Items_Because_The_Missing_Child_Id
+        public async Task Did_Not_Happen_Add_Items_Because_The_Missing_Child_Id
             (Company company,
             Category category,
             ProductType type,
@@ -303,12 +303,12 @@ namespace TestTask.Test.ServiceTest
             var typeRepository = new ProductTypeRepository(dbContext);
             var productRepository = new ProductRepository(dbContext);
 
-            companyRepository.AddAsync(company);
-            categoryRepository.AddAsync(category);
-            typeRepository.AddAsync(type);
+            await companyRepository.AddAsync(company);
+            await categoryRepository.AddAsync(category);
+            await typeRepository.AddAsync(type);
 
             //Assert
-            Assert.Throws<NotFoundException>(() => { productRepository.AddAsync(product); });
+            await Assert.ThrowsAsync<NotFoundException>(async () => { await productRepository.AddAsync(product); });
         }
     }
 }

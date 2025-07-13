@@ -17,6 +17,7 @@ namespace TestTask.Core.Models.Companies
             if (duplicateId == null)
             {
                 await AddAsync(item, cancellationToken);
+                return;
             }
 
             await UpdataAsync(item, cancellationToken);

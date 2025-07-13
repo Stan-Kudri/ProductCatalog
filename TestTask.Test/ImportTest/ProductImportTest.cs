@@ -76,7 +76,7 @@ namespace TestTask.Test.ImportTest
 
         [Theory]
         [MemberData(nameof(Items))]
-        public async void Add_All_Item_From_Excel_File(List<Company> companies, List<Category> categories, List<ProductType> types, List<Product> exceptProduct)
+        public async Task Add_All_Item_From_Excel_File(List<Company> companies, List<Category> categories, List<ProductType> types, List<Product> exceptProduct)
         {
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();

@@ -16,6 +16,7 @@ namespace TestTask.Core.Models.Categories
             if (duplicateId == null)
             {
                 await AddAsync(item, cancellationToken);
+                return;
             }
 
             await UpdataAsync(item, cancellationToken);

@@ -124,12 +124,12 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(CompanyItems))]
-        public void Service_Should_Add_All_The_Item_Of_Database(List<Company> companies)
+        public async Task Service_Should_Add_All_The_Item_Of_Database(List<Company> companies)
         {
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
             var companyRepository = new CompanyRepository(dbContext);
-            companyRepository.AddRangeAsync(companies);
+            await companyRepository.AddRangeAsync(companies);
 
             //Act
             var actualCompanies = dbContext.Company.ToList();
@@ -140,14 +140,14 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddItemCompany))]
-        public void Service_Should_Add_The_Item_To_The_Database(List<Company> companies, Company addCompany, List<Company> expectCompanies)
+        public async Task Service_Should_Add_The_Item_To_The_Database(List<Company> companies, Company addCompany, List<Company> expectCompanies)
         {
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
             var companyRepository = new CompanyRepository(dbContext);
             dbContext.Company.AddRange(companies);
-            dbContext.SaveChanges();
-            companyRepository.AddAsync(addCompany);
+            await dbContext.SaveChangesAsync();
+            await companyRepository.AddAsync(addCompany);
 
             //Act
             var actualCompanies = dbContext.Company.ToList();
@@ -158,14 +158,14 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(UpdateItemCompany))]
-        public void Service_Should_Update_The_Item_To_The_Database(List<Company> companies, Company updateCompany, List<Company> expectCompanies)
+        public async Task Service_Should_Update_The_Item_To_The_Database(List<Company> companies, Company updateCompany, List<Company> expectCompanies)
         {
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
             var companyRepository = new CompanyRepository(dbContext);
             dbContext.Company.AddRange(companies);
-            dbContext.SaveChanges();
-            companyRepository.UpdataAsync(updateCompany);
+            await dbContext.SaveChangesAsync();
+            await companyRepository.UpdataAsync(updateCompany);
 
             //Act
             var actualCompanies = dbContext.Company.ToList();
@@ -176,14 +176,14 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(RemoveRangeCompany))]
-        public void Service_Should_Remove_Range_Items_By_ID_To_The_Database(List<Company> companies, List<int> removeID, List<Company> expectCompanies)
+        public async Task Service_Should_Remove_Range_Items_By_ID_To_The_Database(List<Company> companies, List<int> removeID, List<Company> expectCompanies)
         {
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
             var companyRepository = new CompanyRepository(dbContext);
             dbContext.Company.AddRange(companies);
-            dbContext.SaveChanges();
-            companyRepository.RemoveRangeAsync(removeID);
+            await dbContext.SaveChangesAsync();
+            await companyRepository.RemoveRangeAsync(removeID);
 
             //Act
             var actualCompanies = dbContext.Company.ToList();
@@ -194,12 +194,12 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(NameCompanyById))]
-        public void Get_Name_By_ID_From_The_Database(Company company, int id, string expectName)
+        public async Task Get_Name_By_ID_From_The_Database(Company company, int id, string expectName)
         {
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
             var companyRepository = new CompanyRepository(dbContext);
-            companyRepository.AddAsync(company);
+            await companyRepository.AddAsync(company);
 
             //Act
             var actualName = companyRepository.CompanyName(id);
@@ -210,15 +210,15 @@ namespace TestTask.Test.ServiceTest
 
         [Theory]
         [MemberData(nameof(AddCompanyWithBusyId))]
-        public void Add_Items_Did_Not_Happen_Because_The_ID_Are_Busy(List<Company> companies, Company company)
+        public async Task Add_Items_Did_Not_Happen_Because_The_ID_Are_Busy(List<Company> companies, Company company)
         {
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
             var companyRepository = new CompanyRepository(dbContext);
-            companyRepository.AddRangeAsync(companies);
+            await companyRepository.AddRangeAsync(companies);
 
             //Assert
-            Assert.Throws<BusinessLogicException>(() => { companyRepository.AddAsync(company); });
+            await Assert.ThrowsAsync<BusinessLogicException>(async () => { await companyRepository.AddAsync(company); });
         }
     }
 }

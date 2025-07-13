@@ -49,10 +49,11 @@ namespace TestTask.Core.Models.Products
                 return;
             }
 
-            var duplicateId = _dbSet.FirstOrDefaultAsync(e => e.Id == item.Id, cancellationToken);
+            var duplicateId = await _dbSet.FirstOrDefaultAsync(e => e.Id == item.Id, cancellationToken);
             if (duplicateId == null)
             {
                 await AddAsync(item, cancellationToken);
+                return;
             }
 
             await UpdataAsync(item, cancellationToken);
