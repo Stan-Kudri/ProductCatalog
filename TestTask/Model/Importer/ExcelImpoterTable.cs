@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using TestTask.Core;
 using TestTask.Core.DataTable;
@@ -8,28 +7,27 @@ using TestTask.Core.Models;
 
 namespace TestTask.Model.Importer
 {
-    public class ExcelImpoterTable<T>(IMessageBox messageBox, BaseRepository<T> repository, ExcelImporter<T> excelImport)
+    public class ExcelImpoterTable<T>(IMessageBox messageBox, BaseService<T> service, ExcelImporter<T> excelImport, Table table)
         : IExcelImpoterTable
         where T : Entity
     {
-        public async Task ImportAsync(HashSet<Tables> selectTable, string path)
+        public Table Table => table;
+
+        public async Task ImportAsync(string path)
         {
-            if (selectTable.Contains(Tables.Company))
+            var reader = excelImport.ImportFromFile(path);
+
+            foreach (var item in reader)
             {
-                var reader = excelImport.ImportFromFile(path);
-
-                foreach (var item in reader)
+                if (item.Success)
                 {
-                    if (item.Success)
-                    {
-                        await repository.UpsertAsync(item.Value);
-                    }
+                    await service.UpsertAsync(item.Value);
                 }
+            }
 
-                if (!reader.IsNoErrorLine(out var message))
-                {
-                    await messageBox.ShowWarning(message, typeof(T).Name);
-                }
+            if (!reader.IsNoErrorLine(out var message))
+            {
+                await messageBox.ShowWarning(message, typeof(T).Name);
             }
         }
     }

@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
-using TestTask.BindingItem;
+using TestTask.BindingItem.DBItemModel;
 using TestTask.Core;
 using TestTask.Core.Exeption;
 using TestTask.Core.Models.Companies;
@@ -11,7 +11,7 @@ namespace TestTask.Forms.Companies
     public partial class CompanyFormBase : BaseForm
     {
         protected readonly IMessageBox _messageBox;
-        protected readonly CompanyRepository _companyRepository;
+        protected readonly CompanyService _companyRepository;
 
         private CompanyFormBase()
         {
@@ -22,7 +22,7 @@ namespace TestTask.Forms.Companies
         {
             InitializeComponent();
             _messageBox = serviceProvider.GetRequiredService<IMessageBox>();
-            _companyRepository = serviceProvider.GetRequiredService<CompanyRepository>();
+            _companyRepository = serviceProvider.GetRequiredService<CompanyService>();
         }
 
         protected virtual async void BtnSave_Click(object sender, EventArgs e)

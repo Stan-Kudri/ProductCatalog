@@ -1,4 +1,4 @@
-using TestTask.BindingItem;
+using TestTask.BindingItem.DBItemModel;
 
 namespace TestTask.Forms.Categories
 {

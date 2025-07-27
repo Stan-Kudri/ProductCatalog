@@ -33,9 +33,7 @@ namespace TestTask.Forms.Categories
         }
 
         protected override void SetDefaultValueData()
-        {
-            tbCategory.Text = _oldItem.Name;
-        }
+            => tbCategory.Text = _oldItem.Name;
 
         public Category EditItem() => _editItem;
     }

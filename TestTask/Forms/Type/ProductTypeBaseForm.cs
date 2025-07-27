@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
-using TestTask.BindingItem;
+using TestTask.BindingItem.DBItemModel;
 using TestTask.BindingItem.ObservableCollection;
 using TestTask.Core;
 using TestTask.Core.Exeption;

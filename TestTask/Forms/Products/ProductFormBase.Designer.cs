@@ -1,3 +1,4 @@
+using TestTask.BindingItem.DBItemModel;
 using TestTask.BindingItem.ObservableCollection;
 
 namespace TestTask.Forms.Products
@@ -151,7 +152,7 @@ namespace TestTask.Forms.Products
             // 
             // productModelBindingSource
             // 
-            productModelBindingSource.DataSource = typeof(BindingItem.ProductModel);
+            productModelBindingSource.DataSource = typeof(ProductModel);
             // 
             // tbDestination
             // 

@@ -2,7 +2,7 @@ using System;
 using TestTask.Core.Exeption;
 using TestTask.Core.Models.Companies;
 
-namespace TestTask.BindingItem
+namespace TestTask.BindingItem.DBItemModel
 {
     public class CompanyModel : ModelBase
     {

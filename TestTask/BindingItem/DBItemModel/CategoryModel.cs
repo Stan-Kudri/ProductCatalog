@@ -1,6 +1,6 @@
 using TestTask.Core.Models.Categories;
 
-namespace TestTask.BindingItem
+namespace TestTask.BindingItem.DBItemModel
 {
     public class CategoryModel(string name) : ModelBase
     {
