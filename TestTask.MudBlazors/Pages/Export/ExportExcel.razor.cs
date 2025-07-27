@@ -4,6 +4,7 @@ using MudBlazor;
 using NPOI.XSSF.UserModel;
 using TestTask.Core.DataTable;
 using TestTask.Core.Export.SheetFillers;
+using TestTask.Core.Export.SheetFillers.Model;
 using TestTask.Core.Import;
 using ItemSelected = TestTask.Core.DataTable.Table;
 

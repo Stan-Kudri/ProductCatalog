@@ -1,7 +1,7 @@
 using System;
 using TestTask.Core.Models.Categories;
 
-namespace TestTask.Core.Import.Importers
+namespace TestTask.Core.Import.Importers.Model
 {
     public class CategoryImporter : BaseImporter<Category, CategoryField>
     {

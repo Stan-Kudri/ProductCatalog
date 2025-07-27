@@ -2,7 +2,7 @@ using TestTask.Core.Exeption;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Types;
 
-namespace TestTask.BindingItem
+namespace TestTask.BindingItem.DBItemModel
 {
     public class ProductTypeModel : ModelBase
     {

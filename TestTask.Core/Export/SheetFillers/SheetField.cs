@@ -8,7 +8,8 @@ namespace TestTask.Core.Export.SheetFillers
         where TField : SmartEnum<TField>
         where T : Entity
     {
-        protected SheetField(string name, int value) : base(name, value)
+        protected SheetField(string name, int value)
+            : base(name, value)
         {
         }
 

@@ -7,40 +7,27 @@ using TestTask.Core.Models;
 
 namespace TestTask.Model.Importer
 {
-    public class ExcelImpoterTable<T>
+    public class ExcelImpoterTable<T>(IMessageBox messageBox, BaseService<T> service, ExcelImporter<T> excelImport, Table table)
         : IExcelImpoterTable
         where T : Entity
     {
-        private readonly IMessageBox _messageBox;
-        private readonly BaseService<T> _service;
-        private readonly ExcelImporter<T> _excelImporter;
-        private readonly Table _table;
-
-        public ExcelImpoterTable(IMessageBox messageBox, BaseService<T> service, ExcelImporter<T> excelImport, Table table)
-        {
-            _messageBox = messageBox;
-            _service = service;
-            _excelImporter = excelImport;
-            _table = table;
-        }
-
-        public Table Table => _table;
+        public Table Table => table;
 
         public async Task ImportAsync(string path)
         {
-            var reader = _excelImporter.ImportFromFile(path);
+            var reader = excelImport.ImportFromFile(path);
 
             foreach (var item in reader)
             {
                 if (item.Success)
                 {
-                    await _service.UpsertAsync(item.Value);
+                    await service.UpsertAsync(item.Value);
                 }
             }
 
             if (!reader.IsNoErrorLine(out var message))
             {
-                await _messageBox.ShowWarning(message, typeof(T).Name);
+                await messageBox.ShowWarning(message, typeof(T).Name);
             }
         }
     }

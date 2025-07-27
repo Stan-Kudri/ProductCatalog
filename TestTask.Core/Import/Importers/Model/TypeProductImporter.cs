@@ -1,7 +1,7 @@
 using System;
 using TestTask.Core.Models.Types;
 
-namespace TestTask.Core.Import.Importers
+namespace TestTask.Core.Import.Importers.Model
 {
     public class TypeProductImporter : BaseImporter<ProductType, ProductTypeField>
     {
