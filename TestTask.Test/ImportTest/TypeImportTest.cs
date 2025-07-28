@@ -1,7 +1,7 @@
 using FluentAssertions;
 using TestTask.Core;
 using TestTask.Core.Import;
-using TestTask.Core.Import.Importers;
+using TestTask.Core.Import.Importers.Model;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Types;
 using TestTask.Test.Properties;
@@ -69,7 +69,7 @@ namespace TestTask.Test.ImportTest
 
         [Theory]
         [MemberData(nameof(TypeItems))]
-        public void Add_All_Item_From_Excel_File(List<Category> categories, List<ProductType> exceptType)
+        public async Task Add_All_Item_From_Excel_File(List<Category> categories, List<ProductType> exceptType)
         {
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
@@ -80,12 +80,12 @@ namespace TestTask.Test.ImportTest
             var typeImporter = new TypeProductImporter();
             var typeRead = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
 
-            categoryService.AddRangeAsync(categories);
+            await categoryService.AddRangeAsync(categories);
             foreach (var item in typeRead)
             {
                 if (item.Success)
                 {
-                    typeService.UpsertAsync(item.Value);
+                    await typeService.UpsertAsync(item.Value);
                 }
             }
 

@@ -28,7 +28,7 @@ namespace TestTask.Core.Models.Types
 
             if (await _dbSet.AnyAsync(e => e.Name == item.Name, cancellationToken))
             {
-                return;
+                BusinessLogicException.ThrowUniqueNameBusy<ProductType>(item.Name);
             }
 
             await _dbSet.AddAsync(item, cancellationToken);
@@ -53,6 +53,12 @@ namespace TestTask.Core.Models.Types
 
         public override async Task UpsertAsync(ProductType item, CancellationToken cancellationToken = default)
         {
+            var duplicateName = await _dbSet.FirstOrDefaultAsync(e => e.Name == item.Name, cancellationToken);
+            if (duplicateName != null)
+            {
+                BusinessLogicException.ThrowUniqueNameBusy<ProductType>(item.Name);
+            }
+
             if (await appDbContext.Category.FirstOrDefaultAsync(e => e.Id == item.CategoryId, cancellationToken) == null)
             {
                 return;

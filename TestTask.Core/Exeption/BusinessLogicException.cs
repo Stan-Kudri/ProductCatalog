@@ -18,6 +18,9 @@ namespace TestTask.Core.Exeption
         public static void ThrowUniqueIDPropertyError<T>(object property) =>
             throw new BusinessLogicException($"{typeof(T).Name} \"{property}\" property with such an identifier exists.");
 
+        public static void ThrowUniqueNameBusy<T>(string name) =>
+            throw new BusinessLogicException($"The {typeof(T).Name} with name \"{name}\" is busy.");
+
         public static void ThrowUniqueIDBusy<T>(int id) =>
             throw new BusinessLogicException($"The {typeof(T).Name} with ID \"{id}\" is busy.");
 

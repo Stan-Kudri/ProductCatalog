@@ -18,9 +18,10 @@ namespace TestTask.Core.Models.Companies
             {
                 BusinessLogicException.ThrowUniqueIDBusy<Company>(item.Id);
             }
+
             if (await _dbSet.AnyAsync(e => e.Name == item.Name, cancellationToken))
             {
-                return;
+                BusinessLogicException.ThrowUniqueNameBusy<Company>(item.Name);
             }
 
             await _dbSet.AddAsync(item, cancellationToken);
@@ -29,8 +30,13 @@ namespace TestTask.Core.Models.Companies
 
         public override async Task UpsertAsync(Company item, CancellationToken cancellationToken = default)
         {
-            var duplicateId = _dbSet.FirstOrDefault(e => e.Id == item.Id);
+            var duplicateName = await _dbSet.FirstOrDefaultAsync(e => e.Name == item.Name, cancellationToken);
+            if (duplicateName != null)
+            {
+                BusinessLogicException.ThrowUniqueNameBusy<Company>(item.Name);
+            }
 
+            var duplicateId = _dbSet.FirstOrDefault(e => e.Id == item.Id);
             if (duplicateId == null)
             {
                 await AddAsync(item, cancellationToken);

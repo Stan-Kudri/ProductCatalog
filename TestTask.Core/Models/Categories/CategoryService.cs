@@ -17,9 +17,10 @@ namespace TestTask.Core.Models.Categories
             {
                 BusinessLogicException.ThrowUniqueIDBusy<Category>(item.Id);
             }
+
             if (await _dbSet.AnyAsync(e => e.Name == item.Name, cancellationToken))
             {
-                return;
+                BusinessLogicException.ThrowUniqueNameBusy<Category>(item.Name);
             }
 
             await _dbSet.AddAsync(item, cancellationToken);
@@ -28,8 +29,13 @@ namespace TestTask.Core.Models.Categories
 
         public override async Task UpsertAsync(Category item, CancellationToken cancellationToken = default)
         {
-            var duplicateId = await _dbSet.FirstOrDefaultAsync(e => e.Id == item.Id, cancellationToken);
+            var duplicateName = await _dbSet.FirstOrDefaultAsync(e => e.Name == item.Name, cancellationToken);
+            if (duplicateName != null)
+            {
+                BusinessLogicException.ThrowUniqueNameBusy<Category>(item.Name);
+            }
 
+            var duplicateId = await _dbSet.FirstOrDefaultAsync(e => e.Id == item.Id, cancellationToken);
             if (duplicateId == null)
             {
                 await AddAsync(item, cancellationToken);
