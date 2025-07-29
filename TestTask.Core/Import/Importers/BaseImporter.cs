@@ -29,10 +29,14 @@ namespace TestTask.Core.Import.Importers
         public Result<TModel> ReadRow(IRow row)
         {
             if (_fieldMap == null)
+            {
                 throw new BusinessLogicException("Header not read");
+            }
 
             if (row.Cells.Count < _fieldMap.Count)
+            {
                 return Result<TModel>.CreateFail("Fewer cells than needed", row.RowNum);
+            }
 
             var model = new TModel();
             Result<TModel> lastResult = null;
@@ -41,7 +45,9 @@ namespace TestTask.Core.Import.Importers
             {
                 lastResult = field.HandlerCell(model, row, index);
                 if (!lastResult.Success)
+                {
                     return lastResult;
+                }
             }
 
             return lastResult;

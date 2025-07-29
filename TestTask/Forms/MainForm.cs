@@ -4,9 +4,12 @@ using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
 using TestTask.ChildForms.Import;
 using TestTask.Controls.PageTabControls.Model;
+using TestTask.Core;
 using TestTask.Core.DataTable;
+using TestTask.Core.Exeption;
 using TestTask.Core.Export;
 using TestTask.Core.Export.SheetFillers;
+using TestTask.Core.Export.SheetFillers.Model;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
@@ -23,6 +26,7 @@ namespace TestTask.Forms
         private readonly CategoryService _categoryService;
         private readonly ProductTypeService _typeRepository;
         private readonly ExcelImporterModel _importExcel;
+        private readonly IMessageBox _messageBox;
 
         public MainForm(IServiceProvider serviceProvider)
         {
@@ -33,6 +37,7 @@ namespace TestTask.Forms
             _typeRepository = _serviceProvider.GetRequiredService<ProductTypeService>();
             _productService = _serviceProvider.GetRequiredService<ProductService>();
             _importExcel = _serviceProvider.GetRequiredService<ExcelImporterModel>();
+            _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
         }
 
         private void TableForm_Load(object sender, EventArgs e)
@@ -77,7 +82,14 @@ namespace TestTask.Forms
                 }
 
                 var path = openReplaceDataFromFile.FileName;
-                await _importExcel.UpdataDB(selectTable, path);
+                try
+                {
+                    await _importExcel.UpdataDB(selectTable, path);
+                }
+                catch (BusinessLogicException exeption)
+                {
+                    await _messageBox.ShowError(exeption.Message);
+                }
             }
 
             LoadDataSelectTabPage();

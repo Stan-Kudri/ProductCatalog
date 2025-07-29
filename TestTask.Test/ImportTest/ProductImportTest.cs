@@ -1,7 +1,7 @@
 using FluentAssertions;
 using TestTask.Core;
 using TestTask.Core.Import;
-using TestTask.Core.Import.Importers;
+using TestTask.Core.Import.Importers.Model;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;

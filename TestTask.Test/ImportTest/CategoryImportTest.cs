@@ -1,7 +1,7 @@
 using FluentAssertions;
 using TestTask.Core;
 using TestTask.Core.Import;
-using TestTask.Core.Import.Importers;
+using TestTask.Core.Import.Importers.Model;
 using TestTask.Core.Models.Categories;
 using TestTask.Test.Properties;
 
@@ -57,7 +57,7 @@ namespace TestTask.Test.ImportTest
 
         [Theory]
         [MemberData(nameof(CategoryItems))]
-        public void Import_Should_Add_All_File_Items(List<Category> exceptCategory)
+        public async Task Import_Should_Add_All_File_Items(List<Category> exceptCategory)
         {
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
@@ -70,7 +70,7 @@ namespace TestTask.Test.ImportTest
             {
                 if (item.Success)
                 {
-                    categoryService.UpsertAsync(item.Value);
+                    await categoryService.UpsertAsync(item.Value);
                 }
             }
 
