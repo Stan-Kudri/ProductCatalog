@@ -131,13 +131,13 @@ namespace TestTask.Controls.PageTabControls
 
         public Entity GetEntity(ListViewItem item)
         {
-            var idProduct = item.GetNonNullableString(IndexId).ParseInt();
+            var idProduct = item.GetNonNullableString(IndexId).ParseGuid();
             var name = item.GetNonNullableString(IndexColumnName);
             var price = item.GetNonNullableString(IndexColumnPrice).ParseDecimal();
             var destination = item.GetNonNullableString(IndexColumnDestination);
-            var companyId = item.GetNonNullableString(IndexColumnIdCompany).ParseInt();
-            var categoryId = item.GetNonNullableString(IndexColumnIdCategory).ParseInt();
-            var typeId = item.GetNonNullableString(IndexColumnIdType).ParseInt();
+            var companyId = item.GetNonNullableString(IndexColumnIdCompany).ParseGuid();
+            var categoryId = item.GetNonNullableString(IndexColumnIdCategory).ParseGuid();
+            var typeId = item.GetNonNullableString(IndexColumnIdType).ParseGuid();
 
             return new Product(name, companyId, categoryId, typeId, destination, price, idProduct);
         }

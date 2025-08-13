@@ -11,11 +11,8 @@ namespace TestTask.Core.Models.Companies
         {
         }
 
-        public Company(string name, DateTime dateCreation, string country, int id)
-            : this(name, dateCreation, country)
-            => Id = id > 0
-                    ? Id = id
-                    : throw NotFoundException.NotFoundIdProperty<Company>(id);
+        public Company(string name, DateTime dateCreation, string country, Guid id)
+            : this(name, dateCreation, country) => Id = id;
 
         public Company(string name, DateTime dateCreation, string country, List<Product> products = null)
         {

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -46,7 +47,7 @@ namespace TestTask.Core.Models.Companies
             await UpdataAsync(item, cancellationToken);
         }
 
-        public async Task<string> CompanyName(int id, CancellationToken cancellationToken = default)
+        public async Task<string> CompanyName(Guid id, CancellationToken cancellationToken = default)
             => (await _dbSet.FirstOrDefaultAsync(e => e.Id == id, cancellationToken)).Name
             ?? throw NotFoundException.NotFoundIdProperty<Company>(id);
 

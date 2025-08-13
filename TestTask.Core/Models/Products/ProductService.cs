@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -77,7 +78,7 @@ namespace TestTask.Core.Models.Products
         public override IQueryable<Product> GetQueryableAll()
             => _dbSet.Include(e => e.Company).Include(e => e.Category).ThenInclude(e => e.Types).AsNoTracking();
 
-        public override async Task<Product> GetItem(int id, CancellationToken cancellationToken = default)
+        public override async Task<Product> GetItem(Guid id, CancellationToken cancellationToken = default)
             => await _dbSet.Include(e => e.Company).Include(e => e.Category).ThenInclude(e => e.Types).FirstOrDefaultAsync(e => e.Id == id, cancellationToken)
             ?? throw NotFoundException.NotFoundIdProperty<T>(id);
 

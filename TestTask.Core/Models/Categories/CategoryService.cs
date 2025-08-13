@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -45,7 +46,7 @@ namespace TestTask.Core.Models.Categories
             await UpdataAsync(item, cancellationToken);
         }
 
-        public async Task<string> GetName(int id, CancellationToken cancellationToken = default)
+        public async Task<string> GetName(Guid id, CancellationToken cancellationToken = default)
             => (await _dbSet.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id, cancellationToken)).Name
             ?? throw NotFoundException.NotFoundIdProperty<Category>(id);
 

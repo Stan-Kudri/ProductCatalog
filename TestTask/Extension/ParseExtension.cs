@@ -13,5 +13,10 @@ namespace TestTask.Extension
             => decimal.TryParse(str, out var value)
                 ? value
                 : throw new InvalidOperationException("Invalid cast.");
+
+        public static Guid ParseGuid(this string str)
+            => Guid.TryParse(str, out var value)
+                ? value
+                : throw new InvalidOperationException("Invalid cast.");
     }
 }

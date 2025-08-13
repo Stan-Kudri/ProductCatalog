@@ -87,7 +87,7 @@ namespace TestTask.Controls.PageTabControls
 
         public Entity GetEntity(ListViewItem item)
         {
-            var id = item.GetNonNullableString(IndexId).ParseInt();
+            var id = item.GetNonNullableString(IndexId).ParseGuid();
             var name = item.GetNonNullableString(IndexColumnName) ?? throw new ArgumentException("Name cannot be null.");
 
             return new Category(name, id);

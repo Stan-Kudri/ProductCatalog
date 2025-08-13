@@ -9,10 +9,10 @@ namespace TestTask.Core.Models.Products
     public class ProductField : SheetField<Product, ProductField>, IFieldHandler<Product>
     {
         public static ProductField ID = new("ID", 0,
-                                            (field, item) => field.SetCellValue(item.Id),
+                                            (field, item) => field.SetCellValue(item.Id.ToString()),
                                             (model, row, idx) =>
                                             {
-                                                var res = row.GetInt(idx, "Id");
+                                                var res = row.GetGuid(idx, "Id");
                                                 if (!res.Success) return res.ToError<Product>();
                                                 model.Id = res.Value;
                                                 return Result<Product>.CreateSuccess(model, row.RowNum);
@@ -31,30 +31,30 @@ namespace TestTask.Core.Models.Products
                                                      });
 
         public static ProductField CompanyId = new("CompanyId", 2,
-                                                         (field, item) => field.SetCellValue(item.CompanyId),
+                                                         (field, item) => field.SetCellValue(item.CompanyId.ToString()),
                                                          (model, row, idx) =>
                                                          {
-                                                             var res = row.GetInt(idx, "CompanyId");
+                                                             var res = row.GetGuid(idx, "CompanyId");
                                                              if (!res.Success) return res.ToError<Product>();
                                                              model.CompanyId = res.Value;
                                                              return Result<Product>.CreateSuccess(model, row.RowNum);
                                                          });
 
         public static ProductField CategoryId = new("CategoryId", 3,
-                                                         (field, item) => field.SetCellValue(item.CategoryId),
+                                                         (field, item) => field.SetCellValue(item.CategoryId.ToString()),
                                                          (model, row, idx) =>
                                                          {
-                                                             var res = row.GetInt(idx, "CategoryId");
+                                                             var res = row.GetGuid(idx, "CategoryId");
                                                              if (!res.Success) return res.ToError<Product>();
                                                              model.CategoryId = res.Value;
                                                              return Result<Product>.CreateSuccess(model, row.RowNum);
                                                          });
 
         public static ProductField TypeId = new("TypeId", 4,
-                                                         (field, item) => field.SetCellValue(item.TypeId),
+                                                         (field, item) => field.SetCellValue(item.TypeId.ToString()),
                                                          (model, row, idx) =>
                                                          {
-                                                             var res = row.GetInt(idx, "TypeId");
+                                                             var res = row.GetGuid(idx, "TypeId");
                                                              if (!res.Success) return res.ToError<Product>();
                                                              model.TypeId = res.Value;
                                                              return Result<Product>.CreateSuccess(model, row.RowNum);

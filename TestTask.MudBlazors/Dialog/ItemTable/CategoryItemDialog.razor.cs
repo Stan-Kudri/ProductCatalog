@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using TestTask.Core;
-using TestTask.Core.Exeption;
 using TestTask.Core.Models.Categories;
 using TestTask.MudBlazors.Extension;
 using TestTask.MudBlazors.Model.TableComponent;
@@ -23,7 +22,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
 
         private Category? oldItem;
 
-        [Parameter] public int? Id { get; set; } = null;
+        [Parameter] public Guid? Id { get; set; } = null;
 
         protected override async void OnInitialized()
         {
@@ -33,10 +32,8 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
                 return;
             }
 
-            BusinessLogicException.EnsureIdLessThenZero(Id);
-
             isAddItem = false;
-            oldItem = await CategoryService.GetItem((int)Id);
+            oldItem = await CategoryService.GetItem((Guid)Id);
             categoryModel = oldItem.GetCategoryModel();
         }
 

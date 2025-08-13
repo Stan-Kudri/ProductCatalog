@@ -33,7 +33,7 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableProvider
                                 || e.Type.Name.Contains(searchString)
                                 || e.Price.ToString(CultureInfo.InvariantCulture).Contains(searchString));
 
-        public async Task Remove(int id) => await _productService.RemoveAsync(id);
+        public async Task Remove(Guid id) => await _productService.RemoveAsync(id);
 
         public async Task Upsert(Product entity) => await _productService.UpsertAsync(entity);
     }

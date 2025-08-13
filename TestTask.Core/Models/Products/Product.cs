@@ -12,29 +12,17 @@ namespace TestTask.Core.Models.Products
         {
         }
 
-        public Product(string name, int companyId, int categoryId, int typeId, string destination, decimal price, int id)
-            : this(name, companyId, categoryId, typeId, destination, price)
-            => Id = id > 0
-                    ? Id = id
-                    : throw BusinessLogicException.EnsureIdLessThenZero<Product>(id);
+        public Product(string name, Guid companyId, Guid categoryId, Guid typeId, string destination, decimal price, Guid id)
+            : this(name, companyId, categoryId, typeId, destination, price) => Id = id;
 
-        public Product(string name, int companyId, int categoryId, int typeId, string destination, decimal price)
+        public Product(string name, Guid companyId, Guid categoryId, Guid typeId, string destination, decimal price)
         {
             BusinessLogicException.ThrowIfNullOrEmpty(name);
 
             Name = name;
-
-            CompanyId = companyId > 0
-                        ? CompanyId = companyId
-                        : throw NotFoundException.NotFoundIdProperty<Company>(companyId);
-
-            CategoryId = categoryId > 0
-                         ? CategoryId = categoryId
-                         : throw NotFoundException.NotFoundIdProperty<Category>(categoryId);
-
-            TypeId = typeId > 0
-                     ? TypeId = typeId
-                     : throw NotFoundException.NotFoundIdProperty<ProductType>(typeId);
+            CompanyId = companyId;
+            CategoryId = categoryId;
+            TypeId = typeId;
 
             Price = price > 0
                     ? Price = price
@@ -49,15 +37,15 @@ namespace TestTask.Core.Models.Products
 
         public string Destination { get; set; } = null;
 
-        public int TypeId { get; set; } = 0;
+        public Guid TypeId { get; set; } = Guid.NewGuid();
 
         public ProductType Type { get; set; }
 
-        public int CompanyId { get; set; } = 0;
+        public Guid CompanyId { get; set; } = Guid.NewGuid();
 
         public Company Company { get; set; }
 
-        public int CategoryId { get; set; } = 0;
+        public Guid CategoryId { get; set; } = Guid.NewGuid();
 
         public Category Category { get; set; }
 

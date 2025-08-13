@@ -109,9 +109,9 @@ namespace TestTask.Controls.PageTabControls
 
         public Entity GetEntity(ListViewItem item)
         {
-            var id = item.GetNonNullableString(IndexId).ParseInt();
+            var id = item.GetNonNullableString(IndexId).ParseGuid();
             var name = item.GetNonNullableString(IndexColumnTypeName);
-            var categoryId = item.GetNonNullableString(IndexColumnIdCategory).ParseInt();
+            var categoryId = item.GetNonNullableString(IndexColumnIdCategory).ParseGuid();
 
             return new ProductType(name, categoryId, id);
         }

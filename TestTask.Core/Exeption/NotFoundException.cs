@@ -17,7 +17,7 @@ namespace TestTask.Core.Exeption
         {
         }
 
-        public static NotFoundException NotFoundIdProperty<TEntity>(int id)
+        public static NotFoundException NotFoundIdProperty<TEntity>(Guid id)
             => new($"The {typeof(TEntity).Name} with ID \"{id}\" not found.");
 
         public static NotFoundException Create<TEntity, TValue>(string propertyName, TValue propertyValue)

@@ -12,11 +12,8 @@ namespace TestTask.Core.Models.Categories
         {
         }
 
-        public Category(string name, int id)
-            : this(name)
-            => Id = id > 0
-                    ? Id = id
-                    : throw BusinessLogicException.EnsureIdLessThenZero<Category>(id);
+        public Category(string name, Guid id)
+            : this(name) => Id = id;
 
         public Category(string name, List<Product> product = null, List<ProductType> type = null)
         {
