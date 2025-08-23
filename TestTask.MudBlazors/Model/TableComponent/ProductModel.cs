@@ -73,7 +73,7 @@ namespace TestTask.MudBlazors.Model.TableComponent
 
         public Product GetProductType() => new Product(Name, Company.Id, Category.Id, ProductType.Id, Description, Price);
 
-        public Product GetModifyType(int idOldItem) => new Product(Name, Company.Id, Category.Id, ProductType.Id, Description, Price, idOldItem);
+        public Product GetModifyType(Guid idOldItem) => new Product(Name, Company.Id, Category.Id, ProductType.Id, Description, Price, idOldItem);
 
         public void ClearData()
         {

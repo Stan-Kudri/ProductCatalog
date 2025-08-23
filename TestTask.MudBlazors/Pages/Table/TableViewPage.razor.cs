@@ -44,7 +44,7 @@ namespace TestTask.MudBlazors.Pages.Table
 
         protected override void OnInitialized() => LoadData();
 
-        private async Task SaveDialogItem(int? id = null)
+        private async Task SaveDialogItem(Guid? id = null)
         {
             var parameters = new DialogParameters<TItemDialog> { { x => x.Id, id } };
             var options = new DialogOptions { CloseOnEscapeKey = true, FullWidth = true };
@@ -88,7 +88,7 @@ namespace TestTask.MudBlazors.Pages.Table
             Snackbar.Add(MessageRemoveItem, Severity.Success);
         }
 
-        private async Task Remove(int id)
+        private async Task Remove(Guid id)
         {
             if (!await MessageDialog.ShowQuestion("Delete items?"))
             {

@@ -22,7 +22,7 @@ namespace TestTask.MudBlazors.Model.TableComponent
 
         public Category GetCategory() => new Category(Name);
 
-        public Category GetModifyCategory(int idOldItem) => new Category(Name, idOldItem);
+        public Category GetModifyCategory(Guid idOldItem) => new Category(Name, idOldItem);
 
         public void ClearData() => Name = string.Empty;
     }

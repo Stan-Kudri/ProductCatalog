@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace TestTask.BindingItem.ObservableCollection
             set => SetField(ref _type, value);
         }
 
-        public void SetValueType(int typeId)
+        public void SetValueType(Guid typeId)
         {
             for (var i = 0; i < Items.Count; i++)
             {

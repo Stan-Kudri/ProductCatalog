@@ -16,53 +16,16 @@ namespace TestTask.Test.ImportTest
             {
                 new List<Category>()
                 {
-                    new Category("Clothe", 1),
-                    new Category("Electronic", 2),
+                    new Category("Clothe", new Guid("4af33f61-8fe2-461b-8eae-cc8344feebe8")),
+                    new Category("Electronic", new Guid("ff1c323c-123b-4eb4-b3cd-1884bd053b07")),
                 },
                 new List<ProductType>()
                 {
-                    new ProductType("Coat", 1, 1),
-                    new ProductType("Sweater", 1, 2),
-                    new ProductType("Shirt", 1, 3),
-                    new ProductType("Phone", 2, 4),
-                    new ProductType("Laptop", 2, 5),
-                },
-            }
-        };
-
-        public static IEnumerable<object[]> FailReadSheet() => new List<object[]>
-        {
-            new object[]
-            {
-                new List<Result<ProductType>>()
-                {
-                    Result<ProductType>.CreateFail("Failed to read sheet.", 0),
-                },
-            }
-        };
-
-        public static IEnumerable<object[]> FailReadColumn() => new List<object[]>
-        {
-            new object[]
-            {
-                new List<Result<ProductType>>()
-                {
-                    Result<ProductType>.CreateFail("Failed to load title.", 0),
-                },
-            }
-        };
-
-        public static IEnumerable<object[]> FailReadItems() => new List<object[]>
-        {
-            new object[]
-            {
-                new List<Result<ProductType>>()
-                {
-                    Result<ProductType>.CreateFail("Fewer cells than needed", 1),
-                    Result<ProductType>.CreateFail("Id should be number", 2),
-                    Result<ProductType>.CreateFail("Fewer cells than needed", 3),
-                    Result<ProductType>.CreateFail("Fewer cells than needed", 4),
-                    Result<ProductType>.CreateFail("Fewer cells than needed", 5),
+                    new ProductType("Coat", new Guid("4af33f61-8fe2-461b-8eae-cc8344feebe8"), new Guid("54d22ad6-5748-4ea7-b7e9-c7a4e0b52220")),
+                    new ProductType("Sweater", new Guid("4af33f61-8fe2-461b-8eae-cc8344feebe8"), new Guid("6ae9a401-0a41-4384-8f36-4b67df9846d1")),
+                    new ProductType("Shirt", new Guid("4af33f61-8fe2-461b-8eae-cc8344feebe8"), new Guid("eab5da2d-ed01-4ec7-8c2c-798048f7de9d")),
+                    new ProductType("Phone", new Guid("ff1c323c-123b-4eb4-b3cd-1884bd053b07"), new Guid("36e632d2-98b2-4a1b-8c8f-268aac79271e")),
+                    new ProductType("Laptop", new Guid("ff1c323c-123b-4eb4-b3cd-1884bd053b07"), new Guid("ccfd99fe-eb54-431f-9d7b-081e0bbc1ec3")),
                 },
             }
         };
@@ -76,7 +39,7 @@ namespace TestTask.Test.ImportTest
             var categoryService = new CategoryService(dbContext);
             var typeService = new ProductTypeService(dbContext);
 
-            var memoryStream = new MemoryStream(Resources.DataIsAllFilledIn);
+            var memoryStream = new MemoryStream(Resources.DataIsAllFilledInTable);
             var typeImporter = new TypeProductImporter();
             var typeRead = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
 
@@ -97,13 +60,16 @@ namespace TestTask.Test.ImportTest
             actualCompanies.Should().Equal(exceptType);
         }
 
-        [Theory]
-        [MemberData(nameof(FailReadSheet))]
-        public void Reading_File_With_Wrong_Sheet_Name(List<Result<ProductType>>? exceptResult)
+        [Fact]
+        public void Reading_File_With_Wrong_Sheet_Name()
         {
             //Arrange
             var memoryStream = new MemoryStream(Resources.NameSheetIsNotCorrect);
             var typeImporter = new TypeProductImporter();
+            var exceptResult = new List<Result<ProductType>>()
+            {
+                Result<ProductType>.CreateFail("Failed to read sheet.", 0),
+            };
 
             //Act                                 
             var actualResult = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
@@ -113,13 +79,16 @@ namespace TestTask.Test.ImportTest
             actualResult.Should().AllSatisfy(e => e.Success.Should().BeFalse());
         }
 
-        [Theory]
-        [MemberData(nameof(FailReadColumn))]
-        public void Reading_File_With_Wrong_Column_Name(List<Result<ProductType>>? exceptResult)
+        [Fact]
+        public void Reading_File_With_Wrong_Column_Name()
         {
             //Arrange
             var memoryStream = new MemoryStream(Resources.ColumnNameIsNotCorrect);
             var typeImporter = new TypeProductImporter();
+            var exceptResult = new List<Result<ProductType>>()
+            {
+                Result<ProductType>.CreateFail("Failed to load title.", 0),
+            };
 
             //Act                                 
             var actualResult = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);
@@ -129,13 +98,20 @@ namespace TestTask.Test.ImportTest
             actualResult.Should().AllSatisfy(e => e.Success.Should().BeFalse());
         }
 
-        [Theory]
-        [MemberData(nameof(FailReadItems))]
-        public void Reading_File_With_Incorrect_Sheet_Data(List<Result<ProductType>>? exceptResult)
+        [Fact]
+        public void Reading_File_With_Incorrect_Sheet_Data()
         {
             //Arrange
             var memoryStream = new MemoryStream(Resources.NotCorrectDataIsAllFilledIn);
             var typeImporter = new TypeProductImporter();
+            var exceptResult = new List<Result<ProductType>>()
+            {
+                Result<ProductType>.CreateFail("Fewer cells than needed", 1),
+                Result<ProductType>.CreateFail("Id should be guid", 2),
+                Result<ProductType>.CreateFail("Fewer cells than needed", 3),
+                Result<ProductType>.CreateFail("Fewer cells than needed", 4),
+                Result<ProductType>.CreateFail("Fewer cells than needed", 5),
+            };
 
             //Act                                 
             var actualResult = new ExcelImporter<ProductType>(typeImporter).Import(memoryStream);

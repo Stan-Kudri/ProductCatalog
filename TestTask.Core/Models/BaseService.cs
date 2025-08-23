@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -37,7 +38,7 @@ namespace TestTask.Core.Models
             await _appDbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task RemoveAsync(int id, CancellationToken cancellationToken = default)
+        public async Task RemoveAsync(Guid id, CancellationToken cancellationToken = default)
         {
             var item = await _dbSet.FirstOrDefaultAsync(e => e.Id == id, cancellationToken)
                             ?? throw NotFoundException.NotFoundIdProperty<T>(id);
@@ -56,7 +57,7 @@ namespace TestTask.Core.Models
             }
         }
 
-        public async Task RemoveRangeAsync(List<int> listId, CancellationToken cancellationToken = default)
+        public async Task RemoveRangeAsync(List<Guid> listId, CancellationToken cancellationToken = default)
         {
             foreach (var id in listId)
             {
@@ -69,7 +70,7 @@ namespace TestTask.Core.Models
 
         public virtual IQueryable<T> GetQueryableAll() => _dbSet.AsNoTracking();
 
-        public virtual async Task<T> GetItem(int id, CancellationToken cancellationToken = default)
+        public virtual async Task<T> GetItem(Guid id, CancellationToken cancellationToken = default)
             => await _dbSet.FirstOrDefaultAsync(e => e.Id == id, cancellationToken)
             ?? throw NotFoundException.NotFoundIdProperty<T>(id);
 

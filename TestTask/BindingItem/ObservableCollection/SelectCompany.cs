@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using TestTask.Core.Models.Companies;
@@ -25,7 +26,7 @@ namespace TestTask.BindingItem.ObservableCollection
             set => SetField(ref _company, value);
         }
 
-        public void SetValueCompany(int companyId)
+        public void SetValueCompany(Guid companyId)
         {
             for (var i = 0; i < Items.Count; i++)
             {

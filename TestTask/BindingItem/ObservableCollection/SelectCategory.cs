@@ -35,7 +35,7 @@ namespace TestTask.BindingItem.ObservableCollection
             }
         }
 
-        public void SetValueCategory(int categoryId)
+        public void SetValueCategory(Guid categoryId)
         {
             for (var i = 0; i < Items.Count; i++)
             {

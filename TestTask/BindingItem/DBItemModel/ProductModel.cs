@@ -1,3 +1,4 @@
+using System;
 using TestTask.Core.Exeption;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
@@ -70,6 +71,6 @@ namespace TestTask.BindingItem.DBItemModel
 
         public Product ToProduct() => new Product(_name, _company.Id, _category.Id, _type.Id, _destination, _price);
 
-        public Product ToProduct(int productId) => new Product(_name, _company.Id, _category.Id, _type.Id, _destination, _price, productId);
+        public Product ToProduct(Guid productId) => new Product(_name, _company.Id, _category.Id, _type.Id, _destination, _price, productId);
     }
 }

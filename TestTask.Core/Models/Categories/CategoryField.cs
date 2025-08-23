@@ -9,10 +9,10 @@ namespace TestTask.Core.Models.Categories
     public class CategoryField : SheetField<Category, CategoryField>, IFieldHandler<Category>
     {
         public static CategoryField ID = new("ID", 0,
-                                            (field, item) => field.SetCellValue(item.Id),
+                                            (field, item) => field.SetCellValue(item.Id.ToString()),
                                             (model, row, idx) =>
                                             {
-                                                var res = row.GetInt(idx, "Id");
+                                                var res = row.GetGuid(idx, "Id");
                                                 if (!res.Success) return res.ToError<Category>();
                                                 model.Id = res.Value;
                                                 return Result<Category>.CreateSuccess(model, row.RowNum);

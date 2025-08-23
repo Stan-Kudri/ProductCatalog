@@ -39,6 +39,6 @@ namespace TestTask.BindingItem.DBItemModel
 
         public Company ToCompany() => new(_name, _dateCreation, _country);
 
-        public Company ToCompany(int id) => new(_name, _dateCreation, _country, id);
+        public Company ToCompany(Guid id) => new(_name, _dateCreation, _country, id);
     }
 }

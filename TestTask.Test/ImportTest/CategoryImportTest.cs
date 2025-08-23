@@ -9,60 +9,13 @@ namespace TestTask.Test.ImportTest
 {
     public class CategoryImportTest
     {
-        public static IEnumerable<object[]> CategoryItems() => new List<object[]>
-        {
-            new object[]
-            {
-                new List<Category>()
-                {
-                    new Category("Clothe", 1),
-                    new Category("Electronic", 2),
-                },
-            }
-        };
-
-        public static IEnumerable<object[]> FailReadSheet() => new List<object[]>
-        {
-            new object[]
-            {
-                new List<Result<Category>>()
-                {
-                    Result<Category>.CreateFail("Failed to read sheet.", 0),
-                },
-            }
-        };
-
-        public static IEnumerable<object[]> FailReadColumn() => new List<object[]>
-        {
-            new object[]
-            {
-                new List<Result<Category>>()
-                {
-                    Result<Category>.CreateFail("Failed to load title.", 0),
-                },
-            }
-        };
-
-        public static IEnumerable<object[]> FailReadItems() => new List<object[]>
-        {
-            new object[]
-            {
-                new List<Result<Category>>()
-                {
-                    Result<Category>.CreateFail("Fewer cells than needed", 1),
-                    Result<Category>.CreateFail("Id should be number", 2),
-                },
-            }
-        };
-
-        [Theory]
-        [MemberData(nameof(CategoryItems))]
-        public async Task Import_Should_Add_All_File_Items(List<Category> exceptCategory)
+        [Fact]
+        public async Task Import_Should_Add_All_File_Items()
         {
             //Arrange
             using var dbContext = new TestDbContextFactory().Create();
             var categoryService = new CategoryService(dbContext);
-            var memoryStream = new MemoryStream(Resources.DataIsAllFilledIn);
+            var memoryStream = new MemoryStream(Resources.DataIsAllFilledInTable);
             var categoryImporter = new CategoryImporter();
             var categoryRead = new ExcelImporter<Category>(categoryImporter).Import(memoryStream);
 
@@ -74,6 +27,12 @@ namespace TestTask.Test.ImportTest
                 }
             }
 
+            var exceptCategory = new List<Category>()
+            {
+                new Category("Clothe", new Guid("4af33f61-8fe2-461b-8eae-cc8344feebe8")),
+                new Category("Electronic", new Guid("ff1c323c-123b-4eb4-b3cd-1884bd053b07")),
+            };
+
             //Act
             var actualCompanies = dbContext.Category.ToList();
 
@@ -82,13 +41,16 @@ namespace TestTask.Test.ImportTest
             categoryRead.Should().AllSatisfy(e => e.Success.Should().BeTrue());
         }
 
-        [Theory]
-        [MemberData(nameof(FailReadSheet))]
-        public void Reading_File_With_Wrong_Sheet_Name(List<Result<Category>>? exceptResult)
+        [Fact]
+        public void Reading_File_With_Wrong_Sheet_Name()
         {
             //Arrange
             var memoryStream = new MemoryStream(Resources.NameSheetIsNotCorrect);
             var categoryImporter = new CategoryImporter();
+            var exceptResult = new List<Result<Category>>()
+            {
+                Result<Category>.CreateFail("Failed to read sheet.", 0),
+            };
 
             //Act                                 
             var actualResult = new ExcelImporter<Category>(categoryImporter).Import(memoryStream);
@@ -98,13 +60,16 @@ namespace TestTask.Test.ImportTest
             actualResult.Should().AllSatisfy(e => e.Success.Should().BeFalse());
         }
 
-        [Theory]
-        [MemberData(nameof(FailReadColumn))]
-        public void Reading_File_With_Wrong_Column_Name(List<Result<Category>>? exceptResult)
+        [Fact]
+        public void Reading_File_With_Wrong_Column_Name()
         {
             //Arrange
             var memoryStream = new MemoryStream(Resources.ColumnNameIsNotCorrect);
             var categoryImporter = new CategoryImporter();
+            var exceptResult = new List<Result<Category>>()
+            {
+                Result<Category>.CreateFail("Failed to load title.", 0),
+            };
 
             //Act                                 
             var actualResult = new ExcelImporter<Category>(categoryImporter).Import(memoryStream);
@@ -114,13 +79,17 @@ namespace TestTask.Test.ImportTest
             actualResult.Should().AllSatisfy(e => e.Success.Should().BeFalse());
         }
 
-        [Theory]
-        [MemberData(nameof(FailReadItems))]
-        public void Reading_File_With_Incorrect_Sheet_Data(List<Result<Category>>? exceptResult)
+        [Fact]
+        public void Reading_File_With_Incorrect_Sheet_Data()
         {
             //Arrange
             var memoryStream = new MemoryStream(Resources.NotCorrectDataIsAllFilledIn);
             var categoryImporter = new CategoryImporter();
+            var exceptResult = new List<Result<Category>>()
+            {
+                Result<Category>.CreateFail("Fewer cells than needed", 1),
+                Result<Category>.CreateFail("Id should be guid", 2),
+            };
 
             //Act                                 
             var actualResult = new ExcelImporter<Category>(categoryImporter).Import(memoryStream);

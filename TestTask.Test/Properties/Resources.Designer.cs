@@ -73,9 +73,9 @@ namespace TestTask.Test.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] DataIsAllFilledIn {
+        internal static byte[] DataIsAllFilledInTable {
             get {
-                object obj = ResourceManager.GetObject("DataIsAllFilledIn", resourceCulture);
+                object obj = ResourceManager.GetObject("DataIsAllFilledInTable", resourceCulture);
                 return ((byte[])(obj));
             }
         }
