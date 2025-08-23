@@ -18,10 +18,10 @@ namespace TestTask.Controls.PageTabControls
 {
     public partial class CompanyListView : UserControl, IListViewDataProvider, IInitialize, ILoad
     {
-        private const int IndexId = 0;
-        private const int IndexColumnName = 1;
-        private const int IndexColumnDataCreate = 2;
-        private const int IndexColumnCountry = 3;
+        private const int IndexColumnName = 0;
+        private const int IndexColumnDataCreate = 1;
+        private const int IndexColumnCountry = 2;
+        private const int IndexId = 3;
 
         private IServiceProvider _serviceProvider;
         private CompanyService _companyRepository;
@@ -33,10 +33,10 @@ namespace TestTask.Controls.PageTabControls
 
         public IReadOnlyList<ListViewColumn> Columns { get; } = new List<ListViewColumn>
         {
-            new ListViewColumn("ID", 100, e => ((Company)e).Id),
             new ListViewColumn("Name", 300, e => ((Company)e).Name),
-            new ListViewColumn("DateCreation", 155, e => ((Company)e).DateCreation.ToString("d")),
-            new ListViewColumn("Country", 200, e => ((Company)e).Country),
+            new ListViewColumn("DateCreation", 204, e => ((Company)e).DateCreation.ToString("d")),
+            new ListViewColumn("Country", 250, e => ((Company)e).Country),
+            new ListViewColumn("ID", 0, e => ((Company)e).Id),
         };
 
         public void Initialize(IServiceProvider serviceProvider)
@@ -91,7 +91,7 @@ namespace TestTask.Controls.PageTabControls
 
         public Entity GetEntity(ListViewItem item)
         {
-            var id = item.GetNonNullableString(IndexId).ParseInt();
+            var id = item.GetNonNullableString(IndexId).ParseGuid();
             var name = item.GetNonNullableString(IndexColumnName) ?? throw new ArgumentException("Name cannot be null.");
             var strDateCreation = item.GetNonNullableString(IndexColumnDataCreate);
             DateTime dateCreation = strDateCreation != null ? DateTime.Parse(strDateCreation) : throw new ArgumentException("Data create cannot be null.");

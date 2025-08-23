@@ -1,3 +1,4 @@
+using System;
 using TestTask.Core.Models.Categories;
 
 namespace TestTask.BindingItem.DBItemModel
@@ -12,6 +13,6 @@ namespace TestTask.BindingItem.DBItemModel
 
         public Category ToCategory() => new(name);
 
-        public Category ToCategory(int id) => new(name, id);
+        public Category ToCategory(Guid id) => new(name, id);
     }
 }

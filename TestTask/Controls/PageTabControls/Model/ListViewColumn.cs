@@ -12,7 +12,7 @@ namespace TestTask.Controls.PageTabControls.Model
                 throw new ArgumentException("The column name cannot be empty.", nameof(name));
             }
 
-            if (width <= 0)
+            if (width < 0)
             {
                 throw new ArgumentException("The width is greater than zero.", nameof(width));
             }

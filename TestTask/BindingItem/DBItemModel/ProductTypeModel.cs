@@ -1,3 +1,4 @@
+using System;
 using TestTask.Core.Exeption;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Types;
@@ -32,6 +33,6 @@ namespace TestTask.BindingItem.DBItemModel
 
         public ProductType ToProductType() => new ProductType(_name, _category.Id);
 
-        public ProductType ToProductType(int typeId) => new ProductType(_name, _category.Id, typeId);
+        public ProductType ToProductType(Guid typeId) => new ProductType(_name, _category.Id, typeId);
     }
 }

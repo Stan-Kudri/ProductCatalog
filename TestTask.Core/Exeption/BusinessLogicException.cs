@@ -21,24 +21,11 @@ namespace TestTask.Core.Exeption
         public static void ThrowUniqueNameBusy<T>(string name) =>
             throw new BusinessLogicException($"The {typeof(T).Name} with name \"{name}\" is busy.");
 
-        public static void ThrowUniqueIDBusy<T>(int id) =>
+        public static void ThrowUniqueIDBusy<T>(Guid id) =>
             throw new BusinessLogicException($"The {typeof(T).Name} with ID \"{id}\" is busy.");
 
         public static BusinessLogicException EnsureValueLessThenZero<T>(string propertyName, object value) =>
             throw new BusinessLogicException($"The {typeof(T).Name} {propertyName} \"{value}\" is less than zero.");
-
-        public static BusinessLogicException EnsureIdLessThenZero<T>(int id) =>
-            throw new BusinessLogicException($"The {typeof(T).Name} ID \"{id}\" is less than zero.");
-
-        public static void EnsureIdLessThenZero(int? id)
-        {
-            if (id > 0)
-            {
-                return;
-            }
-
-            throw new BusinessLogicException($"The ID \"{id}\" is less than zero.");
-        }
 
         public static void EnsureRangeDate<T>(DateTime date, string propertyName, DateTime minDateTime)
         {

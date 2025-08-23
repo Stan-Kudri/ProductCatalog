@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using TestTask.Core;
-using TestTask.Core.Exeption;
 using TestTask.Core.Models.Categories;
 using TestTask.Core.Models.Companies;
 using TestTask.Core.Models.Products;
@@ -35,7 +34,7 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
         private List<Category> selectCategories = new List<Category>();
         private List<ProductType> selectTypes = new List<ProductType>();
 
-        [Parameter] public int? Id { get; set; } = null;
+        [Parameter] public Guid? Id { get; set; } = null;
 
         protected override async void OnInitialized()
         {
@@ -48,10 +47,8 @@ namespace TestTask.MudBlazors.Dialog.ItemTable
                 return;
             }
 
-            BusinessLogicException.EnsureIdLessThenZero(Id);
-
             isAddItem = isDisabledType = false;
-            _oldProduct = await ProductService.GetItem((int)Id);
+            _oldProduct = await ProductService.GetItem((Guid)Id);
             selectTypes = ProductTypeService.GetListTypesByCategory(_oldProduct.CategoryId);
             productModel = _oldProduct.GetProductModel();
         }

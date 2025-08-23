@@ -43,7 +43,7 @@ namespace TestTask.MudBlazors.Model.TableComponent
 
         public Company GetCompany() => new(Name, (DateTime)DateCreation, Country);
 
-        public Company GetModifyCompany(int idOldItem) => new(Name, (DateTime)DateCreation, Country, idOldItem);
+        public Company GetModifyCompany(Guid idOldItem) => new(Name, (DateTime)DateCreation, Country, idOldItem);
 
         public void ClearData()
         {

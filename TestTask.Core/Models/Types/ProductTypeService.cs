@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -39,7 +40,9 @@ namespace TestTask.Core.Models.Types
         {
             BusinessLogicException.ThrowIfNull(item);
 
-            if (!await appDbContext.Category.AnyAsync(e => e.Id == item.CategoryId, cancellationToken))
+            var isCategoryExists = await appDbContext.Category.AnyAsync(e => e.Id == item.CategoryId, cancellationToken);
+
+            if (!isCategoryExists)
             {
                 throw new BusinessLogicException("Category ID does not exist.");
             }
@@ -80,7 +83,7 @@ namespace TestTask.Core.Models.Types
         public override IQueryable<ProductType> GetQueryableAll()
             => _dbSet.Include(e => e.Category).Select(e => e);
 
-        public List<ProductType> GetListTypesByCategory(int idCategory)
+        public List<ProductType> GetListTypesByCategory(Guid idCategory)
             => _dbSet.Where(e => e.CategoryId == idCategory).AsNoTracking().ToList();
 
         public async Task<bool> IsFreeName(string name, CancellationToken cancellationToken = default)

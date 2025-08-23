@@ -121,8 +121,8 @@
   <data name="ColumnNameIsNotCorrect" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ColumnNameIsNotCorrect.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="DataIsAllFilledIn" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DataIsAllFilledIn.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="DataIsAllFilledInTable" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataIsAllFilledInTable.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="NameSheetIsNotCorrect" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NameSheetIsNotCorrect.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

@@ -13,8 +13,7 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableProvider
 
         public IReadOnlyList<ListTableColumn> Columns => new List<ListTableColumn>
         {
-            new ListTableColumn("ID", 5, e => ((Product)e).Id),
-            new ListTableColumn("Name", 15, e => ((Product)e).Name),
+            new ListTableColumn("Name", 20, e => ((Product)e).Name),
             new ListTableColumn("Company", 15, e => ((Product)e).Company),
             new ListTableColumn("Category", 15, e => ((Product)e).Category),
             new ListTableColumn("Type", 15, e => ((Product)e).Type),
@@ -33,7 +32,7 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableProvider
                                 || e.Type.Name.Contains(searchString)
                                 || e.Price.ToString(CultureInfo.InvariantCulture).Contains(searchString));
 
-        public async Task Remove(int id) => await _productService.RemoveAsync(id);
+        public async Task Remove(Guid id) => await _productService.RemoveAsync(id);
 
         public async Task Upsert(Product entity) => await _productService.UpsertAsync(entity);
     }

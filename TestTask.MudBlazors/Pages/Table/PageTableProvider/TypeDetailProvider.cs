@@ -12,8 +12,7 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableProvider
 
         public IReadOnlyList<ListTableColumn> Columns => new List<ListTableColumn>
         {
-            new ListTableColumn("ID", 10, e => ((ProductType)e).Id),
-            new ListTableColumn("Name", 25, e => ((ProductType)e).Name),
+            new ListTableColumn("Name", 30, e => ((ProductType)e).Name),
             new ListTableColumn("Category", 35, e => ((ProductType)e).Category),
         };
 
@@ -26,7 +25,7 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableProvider
                 : items.Where(e => e.Name.Contains(searchString)
                                 || e.Category.Name.Contains(searchString));
 
-        public async Task Remove(int id) => await _typeService.RemoveAsync(id);
+        public async Task Remove(Guid id) => await _typeService.RemoveAsync(id);
 
         public async Task Upsert(ProductType entity) => await _typeService.UpsertAsync(entity);
     }

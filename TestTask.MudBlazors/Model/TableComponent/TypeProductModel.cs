@@ -35,7 +35,7 @@ namespace TestTask.MudBlazors.Model.TableComponent
 
         public ProductType GetProductType() => new ProductType(Name, Category.Id);
 
-        public ProductType GetModifyType(int idOldItem) => new ProductType(Name, Category.Id, idOldItem);
+        public ProductType GetModifyType(Guid idOldItem) => new ProductType(Name, Category.Id, idOldItem);
 
         public void ClearData()
         {

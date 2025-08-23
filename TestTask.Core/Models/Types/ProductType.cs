@@ -12,26 +12,19 @@ namespace TestTask.Core.Models.Types
         {
         }
 
-        public ProductType(string name, int categoryId, int id)
-            : this(name, categoryId)
-            => Id = id > 0
-                    ? Id = id
-                    : throw BusinessLogicException.EnsureIdLessThenZero<ProductType>(id);
+        public ProductType(string name, Guid categoryId, Guid id)
+            : this(name, categoryId) => Id = id;
 
-        public ProductType(string name, int categoryId)
+        public ProductType(string name, Guid categoryId)
         {
             BusinessLogicException.ThrowIfNullOrEmpty(name);
-
             Name = name;
-
-            CategoryId = categoryId > 0
-                         ? CategoryId = categoryId
-                         : throw BusinessLogicException.EnsureIdLessThenZero<Category>(categoryId);
+            CategoryId = categoryId;
         }
 
         public string Name { get; set; }
 
-        public int CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
 
         public Category Category { get; set; }
 

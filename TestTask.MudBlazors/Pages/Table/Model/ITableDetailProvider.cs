@@ -4,7 +4,7 @@ namespace TestTask.MudBlazors.Pages.Table.Model
     {
         IReadOnlyList<ListTableColumn> Columns { get; }
 
-        Task Remove(int id);
+        Task Remove(Guid id);
 
         Task Upsert(T entity);
 

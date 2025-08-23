@@ -9,11 +9,15 @@ namespace TestTask.Core.Models.Categories
     public class CategoryField : SheetField<Category, CategoryField>, IFieldHandler<Category>
     {
         public static CategoryField ID = new("ID", 0,
-                                            (field, item) => field.SetCellValue(item.Id),
+                                            (field, item) => field.SetCellValue(item.Id.ToString()),
                                             (model, row, idx) =>
                                             {
-                                                var res = row.GetInt(idx, "Id");
-                                                if (!res.Success) return res.ToError<Category>();
+                                                var res = row.GetGuid(idx, "Id");
+                                                if (!res.Success)
+                                                {
+                                                    return res.ToError<Category>();
+                                                }
+
                                                 model.Id = res.Value;
                                                 return Result<Category>.CreateSuccess(model, row.RowNum);
                                             });
@@ -23,9 +27,16 @@ namespace TestTask.Core.Models.Categories
                                                        (model, row, idx) =>
                                                        {
                                                            var res = row.GetString(idx, "Name");
-                                                           if (!res.Success) return res.ToError<Category>();
+                                                           if (!res.Success)
+                                                           {
+                                                               return res.ToError<Category>();
+                                                           }
+
                                                            if (string.IsNullOrEmpty(res.Value))
+                                                           {
                                                                return Result<Category>.CreateFail("Name should not be empty", row.RowNum);
+                                                           }
+
                                                            model.Name = res.Value;
                                                            return Result<Category>.CreateSuccess(model, row.RowNum);
                                                        });

@@ -12,8 +12,7 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableView
 
         public IReadOnlyList<ListTableColumn> Columns => new List<ListTableColumn>
         {
-            new ListTableColumn("ID", 5, e => ((Company)e).Id),
-            new ListTableColumn("Name", 15, e => ((Company)e).Name),
+            new ListTableColumn("Name", 20, e => ((Company)e).Name),
             new ListTableColumn("DateCreation", 20, e => ((Company)e).DateCreation.ToString("d")),
             new ListTableColumn("Country", 25, e => ((Company)e).Country),
         };
@@ -28,7 +27,7 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableView
                                 || e.Country.Contains(searchString)
                                 || e.DateCreation.ToString().Contains(searchString));
 
-        public async Task Remove(int id) => await _companyService.RemoveAsync(id);
+        public async Task Remove(Guid id) => await _companyService.RemoveAsync(id);
 
         public async Task Upsert(Company entity) => await _companyService.UpsertAsync(entity);
     }

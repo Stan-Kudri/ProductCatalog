@@ -5,6 +5,33 @@ namespace TestTask.Core.Extension
 {
     public static class RowExtension
     {
+        public static Result<Guid> GetGuid(this IRow self, int cellNumber, string columnName)
+        {
+            var cell = self.GetCell(cellNumber);
+
+            if (cell == null)
+            {
+                return Result<Guid>.CreateFail(columnName + " cell is empty", self.RowNum);
+            }
+
+            var valueShouldBeNumberMessage = columnName + " should be guid";
+
+            if (cell.CellType == CellType.Blank)
+            {
+                return Result<Guid>.CreateFail(valueShouldBeNumberMessage, self.RowNum);
+            }
+
+            try
+            {
+                var valueInCell = cell.StringCellValue;
+                return Result<Guid>.CreateSuccess(Guid.Parse(valueInCell), self.RowNum);
+            }
+            catch
+            {
+                return Result<Guid>.CreateFail(valueShouldBeNumberMessage, self.RowNum);
+            }
+        }
+
         public static Result<string> GetString(this IRow self, int cellNumber, string columnName)
         {
             var cell = self.GetCell(cellNumber);

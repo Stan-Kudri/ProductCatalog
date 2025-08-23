@@ -20,15 +20,14 @@ namespace TestTask.Controls.PageTabControls
 {
     public partial class TypeProductListView : UserControl, IListViewDataProvider, IInitialize, ILoad
     {
-        private const int IndexId = 0;
-        private const int IndexColumnTypeName = 1;
+        private const int IndexColumnTypeName = 0;
+        private const int IndexId = 2;
         private const int IndexColumnIdCategory = 3;
 
         private IServiceProvider _serviceProvider;
         private CategoryService _categoryRepository;
         private ProductTypeService _typeRepository;
 
-        private IMessageBox _messageBox;
         private MessageByTable<ProductType> _messageByTable;
         private readonly SortTypeProductModel _selectSortField = new SortTypeProductModel();
         private bool _isAscending = true;
@@ -37,10 +36,10 @@ namespace TestTask.Controls.PageTabControls
 
         public IReadOnlyList<ListViewColumn> Columns { get; } = new List<ListViewColumn>
         {
-            new ListViewColumn("ID", 100, e => ((ProductType)e).Id),
-            new ListViewColumn("Name", 350, e => ((ProductType)e).Name),
-            new ListViewColumn("Category", 300, e => ((ProductType)e).Category),
-            new ListViewColumn("CategoryId", 1, e => ((ProductType)e).CategoryId),
+            new ListViewColumn("Name", 400, e => ((ProductType)e).Name),
+            new ListViewColumn("Category", 350, e => ((ProductType)e).Category),
+            new ListViewColumn("ID", 0, e => ((ProductType)e).Id),
+            new ListViewColumn("CategoryId", 0, e => ((ProductType)e).CategoryId),
         };
 
         public void Initialize(IServiceProvider serviceProvider)
@@ -48,7 +47,6 @@ namespace TestTask.Controls.PageTabControls
             _serviceProvider = serviceProvider;
             _categoryRepository = _serviceProvider.GetRequiredService<CategoryService>();
             _typeRepository = _serviceProvider.GetRequiredService<ProductTypeService>();
-            _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
             _messageByTable = _serviceProvider.GetRequiredService<MessageByTable<ProductType>>();
             listView.Initialize(this, serviceProvider.GetRequiredService<IMessageBox>());
             checkCmbField.Items.AddRange(_selectSortField.SelectField);
@@ -109,9 +107,9 @@ namespace TestTask.Controls.PageTabControls
 
         public Entity GetEntity(ListViewItem item)
         {
-            var id = item.GetNonNullableString(IndexId).ParseInt();
+            var id = item.GetNonNullableString(IndexId).ParseGuid();
             var name = item.GetNonNullableString(IndexColumnTypeName);
-            var categoryId = item.GetNonNullableString(IndexColumnIdCategory).ParseInt();
+            var categoryId = item.GetNonNullableString(IndexColumnIdCategory).ParseGuid();
 
             return new ProductType(name, categoryId, id);
         }

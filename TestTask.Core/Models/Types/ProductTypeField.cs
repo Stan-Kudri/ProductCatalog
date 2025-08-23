@@ -9,11 +9,15 @@ namespace TestTask.Core.Models.Types
     public class ProductTypeField : SheetField<ProductType, ProductTypeField>, IFieldHandler<ProductType>
     {
         public static ProductTypeField ID = new("ID", 0,
-                                                 (field, item) => field.SetCellValue(item.Id),
+                                                 (field, item) => field.SetCellValue(item.Id.ToString()),
                                                  (model, row, idx) =>
                                                  {
-                                                     var res = row.GetInt(idx, "Id");
-                                                     if (!res.Success) return res.ToError<ProductType>();
+                                                     var res = row.GetGuid(idx, "Id");
+                                                     if (!res.Success)
+                                                     {
+                                                         return res.ToError<ProductType>();
+                                                     }
+
                                                      model.Id = res.Value;
                                                      return Result<ProductType>.CreateSuccess(model, row.RowNum);
                                                  });
@@ -23,19 +27,30 @@ namespace TestTask.Core.Models.Types
                                                        (model, row, idx) =>
                                                        {
                                                            var res = row.GetString(idx, "Name");
-                                                           if (!res.Success) return res.ToError<ProductType>();
+                                                           if (!res.Success)
+                                                           {
+                                                               return res.ToError<ProductType>();
+                                                           }
+
                                                            if (string.IsNullOrEmpty(res.Value))
+                                                           {
                                                                return Result<ProductType>.CreateFail("Name should not be empty", row.RowNum);
+                                                           }
+
                                                            model.Name = res.Value;
                                                            return Result<ProductType>.CreateSuccess(model, row.RowNum);
                                                        });
 
         public static ProductTypeField CategoryId = new("CategoryId", 2,
-                                                         (field, item) => field.SetCellValue(item.CategoryId),
+                                                         (field, item) => field.SetCellValue(item.CategoryId.ToString()),
                                                          (model, row, idx) =>
                                                          {
-                                                             var res = row.GetInt(idx, "CategoryId");
-                                                             if (!res.Success) return res.ToError<ProductType>();
+                                                             var res = row.GetGuid(idx, "CategoryId");
+                                                             if (!res.Success)
+                                                             {
+                                                                 return res.ToError<ProductType>();
+                                                             }
+
                                                              model.CategoryId = res.Value;
                                                              return Result<ProductType>.CreateSuccess(model, row.RowNum);
                                                          });
