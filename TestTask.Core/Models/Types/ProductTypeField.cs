@@ -13,7 +13,11 @@ namespace TestTask.Core.Models.Types
                                                  (model, row, idx) =>
                                                  {
                                                      var res = row.GetGuid(idx, "Id");
-                                                     if (!res.Success) return res.ToError<ProductType>();
+                                                     if (!res.Success)
+                                                     {
+                                                         return res.ToError<ProductType>();
+                                                     }
+
                                                      model.Id = res.Value;
                                                      return Result<ProductType>.CreateSuccess(model, row.RowNum);
                                                  });
@@ -23,9 +27,16 @@ namespace TestTask.Core.Models.Types
                                                        (model, row, idx) =>
                                                        {
                                                            var res = row.GetString(idx, "Name");
-                                                           if (!res.Success) return res.ToError<ProductType>();
+                                                           if (!res.Success)
+                                                           {
+                                                               return res.ToError<ProductType>();
+                                                           }
+
                                                            if (string.IsNullOrEmpty(res.Value))
+                                                           {
                                                                return Result<ProductType>.CreateFail("Name should not be empty", row.RowNum);
+                                                           }
+
                                                            model.Name = res.Value;
                                                            return Result<ProductType>.CreateSuccess(model, row.RowNum);
                                                        });
@@ -35,7 +46,11 @@ namespace TestTask.Core.Models.Types
                                                          (model, row, idx) =>
                                                          {
                                                              var res = row.GetGuid(idx, "CategoryId");
-                                                             if (!res.Success) return res.ToError<ProductType>();
+                                                             if (!res.Success)
+                                                             {
+                                                                 return res.ToError<ProductType>();
+                                                             }
+
                                                              model.CategoryId = res.Value;
                                                              return Result<ProductType>.CreateSuccess(model, row.RowNum);
                                                          });

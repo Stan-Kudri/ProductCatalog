@@ -13,7 +13,11 @@ namespace TestTask.Core.Models.Companies
                                             (model, row, idx) =>
                                             {
                                                 var res = row.GetGuid(idx, "Id");
-                                                if (!res.Success) return res.ToError<Company>();
+                                                if (!res.Success)
+                                                {
+                                                    return res.ToError<Company>();
+                                                }
+
                                                 model.Id = res.Value;
                                                 return Result<Company>.CreateSuccess(model, row.RowNum);
                                             });
@@ -23,9 +27,16 @@ namespace TestTask.Core.Models.Companies
                                                      (model, row, idx) =>
                                                      {
                                                          var res = row.GetString(idx, "Name");
-                                                         if (!res.Success) return res.ToError<Company>();
+                                                         if (!res.Success)
+                                                         {
+                                                             return res.ToError<Company>();
+                                                         }
+
                                                          if (string.IsNullOrEmpty(res.Value))
+                                                         {
                                                              return Result<Company>.CreateFail("Name should not be empty", row.RowNum);
+                                                         }
+
                                                          model.Name = res.Value;
                                                          return Result<Company>.CreateSuccess(model, row.RowNum);
                                                      });
@@ -35,7 +46,11 @@ namespace TestTask.Core.Models.Companies
                                                       (model, row, idx) =>
                                                       {
                                                           var res = row.GetDate(idx, "DateCreation");
-                                                          if (!res.Success) return res.ToError<Company>();
+                                                          if (!res.Success)
+                                                          {
+                                                              return res.ToError<Company>();
+                                                          }
+
                                                           model.DateCreation = res.Value;
                                                           return Result<Company>.CreateSuccess(model, row.RowNum);
                                                       });
@@ -45,9 +60,16 @@ namespace TestTask.Core.Models.Companies
                                                  (model, row, idx) =>
                                                  {
                                                      var res = row.GetString(idx, "Country");
-                                                     if (!res.Success) return res.ToError<Company>();
+                                                     if (!res.Success)
+                                                     {
+                                                         return res.ToError<Company>();
+                                                     }
+
                                                      if (string.IsNullOrEmpty(res.Value))
+                                                     {
                                                          return Result<Company>.CreateFail("Country should not be empty", row.RowNum);
+                                                     }
+
                                                      model.Country = res.Value;
                                                      return Result<Company>.CreateSuccess(model, row.RowNum);
                                                  });

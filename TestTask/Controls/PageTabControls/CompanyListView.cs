@@ -33,10 +33,10 @@ namespace TestTask.Controls.PageTabControls
 
         public IReadOnlyList<ListViewColumn> Columns { get; } = new List<ListViewColumn>
         {
-            new ListViewColumn("ID", 100, e => ((Company)e).Id),
+            new ListViewColumn("ID", 1, e => ((Company)e).Id),
             new ListViewColumn("Name", 300, e => ((Company)e).Name),
-            new ListViewColumn("DateCreation", 155, e => ((Company)e).DateCreation.ToString("d")),
-            new ListViewColumn("Country", 200, e => ((Company)e).Country),
+            new ListViewColumn("DateCreation", 204, e => ((Company)e).DateCreation.ToString("d")),
+            new ListViewColumn("Country", 250, e => ((Company)e).Country),
         };
 
         public void Initialize(IServiceProvider serviceProvider)

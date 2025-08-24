@@ -13,7 +13,11 @@ namespace TestTask.Core.Models.Products
                                             (model, row, idx) =>
                                             {
                                                 var res = row.GetGuid(idx, "Id");
-                                                if (!res.Success) return res.ToError<Product>();
+                                                if (!res.Success)
+                                                {
+                                                    return res.ToError<Product>();
+                                                }
+
                                                 model.Id = res.Value;
                                                 return Result<Product>.CreateSuccess(model, row.RowNum);
                                             });
@@ -23,9 +27,16 @@ namespace TestTask.Core.Models.Products
                                                      (model, row, idx) =>
                                                      {
                                                          var res = row.GetString(idx, "Name");
-                                                         if (!res.Success) return res.ToError<Product>();
+                                                         if (!res.Success)
+                                                         {
+                                                             return res.ToError<Product>();
+                                                         }
+
                                                          if (string.IsNullOrEmpty(res.Value))
+                                                         {
                                                              return Result<Product>.CreateFail("Name should not be empty", row.RowNum);
+                                                         }
+
                                                          model.Name = res.Value;
                                                          return Result<Product>.CreateSuccess(model, row.RowNum);
                                                      });
@@ -35,7 +46,10 @@ namespace TestTask.Core.Models.Products
                                                          (model, row, idx) =>
                                                          {
                                                              var res = row.GetGuid(idx, "CompanyId");
-                                                             if (!res.Success) return res.ToError<Product>();
+                                                             if (!res.Success)
+                                                             {
+                                                                 return res.ToError<Product>();
+                                                             }
                                                              model.CompanyId = res.Value;
                                                              return Result<Product>.CreateSuccess(model, row.RowNum);
                                                          });
@@ -45,7 +59,10 @@ namespace TestTask.Core.Models.Products
                                                          (model, row, idx) =>
                                                          {
                                                              var res = row.GetGuid(idx, "CategoryId");
-                                                             if (!res.Success) return res.ToError<Product>();
+                                                             if (!res.Success)
+                                                             {
+                                                                 return res.ToError<Product>();
+                                                             }
                                                              model.CategoryId = res.Value;
                                                              return Result<Product>.CreateSuccess(model, row.RowNum);
                                                          });
@@ -55,7 +72,10 @@ namespace TestTask.Core.Models.Products
                                                          (model, row, idx) =>
                                                          {
                                                              var res = row.GetGuid(idx, "TypeId");
-                                                             if (!res.Success) return res.ToError<Product>();
+                                                             if (!res.Success)
+                                                             {
+                                                                 return res.ToError<Product>();
+                                                             }
                                                              model.TypeId = res.Value;
                                                              return Result<Product>.CreateSuccess(model, row.RowNum);
                                                          });
@@ -65,7 +85,10 @@ namespace TestTask.Core.Models.Products
                                                (model, row, idx) =>
                                                {
                                                    var res = row.GetDecimal(idx, "Price");
-                                                   if (!res.Success) return res.ToError<Product>();
+                                                   if (!res.Success)
+                                                   {
+                                                       return res.ToError<Product>();
+                                                   }
                                                    model.Price = res.Value;
                                                    return Result<Product>.CreateSuccess(model, row.RowNum);
                                                });
@@ -75,7 +98,10 @@ namespace TestTask.Core.Models.Products
                                                      (model, row, idx) =>
                                                      {
                                                          var res = row.GetString(idx, "Destination");
-                                                         if (!res.Success) return res.ToError<Product>();
+                                                         if (!res.Success)
+                                                         {
+                                                             return res.ToError<Product>();
+                                                         }
                                                          model.Destination = res.Value;
                                                          return Result<Product>.CreateSuccess(model, row.RowNum);
                                                      });

@@ -165,25 +165,53 @@ namespace TestTask.Migrations.Migrations
                 CREATE TEMP TABLE category_map (old_id INTEGER, new_id TEXT);
                 INSERT INTO category_map(old_id, new_id)
                 SELECT id,
-                       lower(hex(randomblob(4)) || '-' || hex(randomblob(2)) || '-' || hex(randomblob(2)) || '-' || hex(randomblob(2)) || '-' || hex(randomblob(6)))
+                       (
+                            substr(hex(randomblob(4)), 1, 8) || '-' ||
+                            substr(hex(randomblob(2)), 1, 4) || '-' ||
+                            '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
+                            substr('89ab', abs(random()) % 4 + 1, 1) || 
+                            substr(hex(randomblob(2)), 2, 3) || '-' ||
+                            substr(hex(randomblob(6)), 1, 12)
+                       ) as guid
                 FROM category;
 
                 CREATE TEMP TABLE type_map (old_id INTEGER, new_id TEXT);
                 INSERT INTO type_map(old_id, new_id)
                 SELECT id,
-                       lower(hex(randomblob(4)) || '-' || hex(randomblob(2)) || '-' || hex(randomblob(2)) || '-' || hex(randomblob(2)) || '-' || hex(randomblob(6)))
+                       (
+                            substr(hex(randomblob(4)), 1, 8) || '-' ||
+                            substr(hex(randomblob(2)), 1, 4) || '-' ||
+                            '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
+                            substr('89ab', abs(random()) % 4 + 1, 1) || 
+                            substr(hex(randomblob(2)), 2, 3) || '-' ||
+                            substr(hex(randomblob(6)), 1, 12)
+                       ) as guid
                 FROM type;
 
                 CREATE TEMP TABLE company_map (old_id INTEGER, new_id TEXT);
                 INSERT INTO company_map(old_id, new_id)
                 SELECT id,
-                       lower(hex(randomblob(4)) || '-' || hex(randomblob(2)) || '-' || hex(randomblob(2)) || '-' || hex(randomblob(2)) || '-' || hex(randomblob(6)))
+                       (
+                            substr(hex(randomblob(4)), 1, 8) || '-' ||
+                            substr(hex(randomblob(2)), 1, 4) || '-' ||
+                            '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
+                            substr('89ab', abs(random()) % 4 + 1, 1) || 
+                            substr(hex(randomblob(2)), 2, 3) || '-' ||
+                            substr(hex(randomblob(6)), 1, 12)
+                       ) as guid
                 FROM company;
 
                 CREATE TEMP TABLE user_map (old_id INTEGER, new_id TEXT);
                 INSERT INTO user_map(old_id, new_id)
                 SELECT id,
-                       lower(hex(randomblob(4)) || '-' || hex(randomblob(2)) || '-' || hex(randomblob(2)) || '-' || hex(randomblob(2)) || '-' || hex(randomblob(6)))
+                       (
+                            substr(hex(randomblob(4)), 1, 8) || '-' ||
+                            substr(hex(randomblob(2)), 1, 4) || '-' ||
+                            '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
+                            substr('89ab', abs(random()) % 4 + 1, 1) || 
+                            substr(hex(randomblob(2)), 2, 3) || '-' ||
+                            substr(hex(randomblob(6)), 1, 12)
+                       ) as guid
                 FROM user;
             ");
 
@@ -211,7 +239,14 @@ namespace TestTask.Migrations.Migrations
                 JOIN user_map m ON u.id = m.old_id;
 
                 INSERT INTO product_new (id, name, typeId, price, destination, companyId, categoryId)
-                SELECT lower(hex(randomblob(4)) || '-' || hex(randomblob(2)) || '-' || hex(randomblob(2)) || '-' || hex(randomblob(2)) || '-' || hex(randomblob(6))),
+                SELECT (
+                            substr(hex(randomblob(4)), 1, 8) || '-' ||
+                            substr(hex(randomblob(2)), 1, 4) || '-' ||
+                            '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
+                            substr('89ab', abs(random()) % 4 + 1, 1) || 
+                            substr(hex(randomblob(2)), 2, 3) || '-' ||
+                            substr(hex(randomblob(6)), 1, 12)
+                       ) as guid,
                        p.name,
                        tm.new_id,
                        p.price,
