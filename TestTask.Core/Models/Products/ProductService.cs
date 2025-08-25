@@ -93,17 +93,20 @@ namespace TestTask.Core.Models.Products
 
         private async Task InvalidDBForItemProduct(Product item, CancellationToken cancellationToken = default)
         {
-            if (!await _appDbContext.Company.AnyAsync(e => e.Id == item.CompanyId, cancellationToken))
+            var isCompanyExists = await _appDbContext.Company.AnyAsync(e => e.Id == item.CompanyId, cancellationToken);
+            if (!isCompanyExists)
             {
                 throw NotFoundException.NotFoundIdProperty<Company>(item.CompanyId);
             }
 
-            if (!await _appDbContext.Category.AnyAsync(e => e.Id == item.CategoryId, cancellationToken))
+            var isCategoryExists = await _appDbContext.Category.AnyAsync(e => e.Id == item.CategoryId, cancellationToken);
+            if (!isCategoryExists)
             {
                 throw NotFoundException.NotFoundIdProperty<Category>(item.CategoryId);
             }
 
-            if (!await _appDbContext.Type.AnyAsync(e => e.Id == item.TypeId, cancellationToken))
+            var isTypeExists = await _appDbContext.Type.AnyAsync(e => e.Id == item.TypeId, cancellationToken);
+            if (!isTypeExists)
             {
                 throw NotFoundException.NotFoundIdProperty<ProductType>(item.TypeId);
             }

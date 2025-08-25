@@ -12,7 +12,6 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableView
 
         public IReadOnlyList<ListTableColumn> Columns => new List<ListTableColumn>
         {
-            new ListTableColumn("ID", 0, e => ((Company)e).Id),
             new ListTableColumn("Name", 20, e => ((Company)e).Name),
             new ListTableColumn("DateCreation", 20, e => ((Company)e).DateCreation.ToString("d")),
             new ListTableColumn("Country", 25, e => ((Company)e).Country),

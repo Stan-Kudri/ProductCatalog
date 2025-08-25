@@ -169,7 +169,7 @@ namespace TestTask.Migrations.Migrations
                             substr(hex(randomblob(4)), 1, 8) || '-' ||
                             substr(hex(randomblob(2)), 1, 4) || '-' ||
                             '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
-                            substr('89ab', abs(random()) % 4 + 1, 1) || 
+                            substr('89AB', abs(random()) % 4 + 1, 1) || 
                             substr(hex(randomblob(2)), 2, 3) || '-' ||
                             substr(hex(randomblob(6)), 1, 12)
                        ) as guid
@@ -182,7 +182,7 @@ namespace TestTask.Migrations.Migrations
                             substr(hex(randomblob(4)), 1, 8) || '-' ||
                             substr(hex(randomblob(2)), 1, 4) || '-' ||
                             '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
-                            substr('89ab', abs(random()) % 4 + 1, 1) || 
+                            substr('89AB', abs(random()) % 4 + 1, 1) || 
                             substr(hex(randomblob(2)), 2, 3) || '-' ||
                             substr(hex(randomblob(6)), 1, 12)
                        ) as guid
@@ -195,7 +195,7 @@ namespace TestTask.Migrations.Migrations
                             substr(hex(randomblob(4)), 1, 8) || '-' ||
                             substr(hex(randomblob(2)), 1, 4) || '-' ||
                             '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
-                            substr('89ab', abs(random()) % 4 + 1, 1) || 
+                            substr('89AB', abs(random()) % 4 + 1, 1) || 
                             substr(hex(randomblob(2)), 2, 3) || '-' ||
                             substr(hex(randomblob(6)), 1, 12)
                        ) as guid
@@ -208,7 +208,7 @@ namespace TestTask.Migrations.Migrations
                             substr(hex(randomblob(4)), 1, 8) || '-' ||
                             substr(hex(randomblob(2)), 1, 4) || '-' ||
                             '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
-                            substr('89ab', abs(random()) % 4 + 1, 1) || 
+                            substr('89AB', abs(random()) % 4 + 1, 1) || 
                             substr(hex(randomblob(2)), 2, 3) || '-' ||
                             substr(hex(randomblob(6)), 1, 12)
                        ) as guid
@@ -243,7 +243,7 @@ namespace TestTask.Migrations.Migrations
                             substr(hex(randomblob(4)), 1, 8) || '-' ||
                             substr(hex(randomblob(2)), 1, 4) || '-' ||
                             '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
-                            substr('89ab', abs(random()) % 4 + 1, 1) || 
+                            substr('89AB', abs(random()) % 4 + 1, 1) || 
                             substr(hex(randomblob(2)), 2, 3) || '-' ||
                             substr(hex(randomblob(6)), 1, 12)
                        ) as guid,

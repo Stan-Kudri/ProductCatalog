@@ -40,7 +40,9 @@ namespace TestTask.Core.Models.Types
         {
             BusinessLogicException.ThrowIfNull(item);
 
-            if (!await appDbContext.Category.AnyAsync(e => e.Id == item.CategoryId, cancellationToken))
+            var isCategoryExists = await appDbContext.Category.AnyAsync(e => e.Id == item.CategoryId, cancellationToken);
+
+            if (!isCategoryExists)
             {
                 throw new BusinessLogicException("Category ID does not exist.");
             }

@@ -12,8 +12,7 @@ namespace TestTask.MudBlazors.Pages.Table.PageTableProvider
 
         public IReadOnlyList<ListTableColumn> Columns => new List<ListTableColumn>
         {
-            new ListTableColumn("ID", 0, e => ((Category)e).Id),
-            new ListTableColumn("Name", 60, e => ((Category)e).Name),
+            new ListTableColumn("Name", 80, e => ((Category)e).Name),
         };
 
         public IQueryable<Category> GetQueryableAll()
