@@ -18,10 +18,10 @@ namespace TestTask.Controls.PageTabControls
 {
     public partial class CompanyListView : UserControl, IListViewDataProvider, IInitialize, ILoad
     {
-        private const int IndexId = 0;
-        private const int IndexColumnName = 1;
-        private const int IndexColumnDataCreate = 2;
-        private const int IndexColumnCountry = 3;
+        private const int IndexColumnName = 0;
+        private const int IndexColumnDataCreate = 1;
+        private const int IndexColumnCountry = 2;
+        private const int IndexId = 3;
 
         private IServiceProvider _serviceProvider;
         private CompanyService _companyRepository;
@@ -33,10 +33,10 @@ namespace TestTask.Controls.PageTabControls
 
         public IReadOnlyList<ListViewColumn> Columns { get; } = new List<ListViewColumn>
         {
-            new ListViewColumn("ID", 1, e => ((Company)e).Id),
             new ListViewColumn("Name", 300, e => ((Company)e).Name),
             new ListViewColumn("DateCreation", 204, e => ((Company)e).DateCreation.ToString("d")),
             new ListViewColumn("Country", 250, e => ((Company)e).Country),
+            new ListViewColumn("ID", 0, e => ((Company)e).Id),
         };
 
         public void Initialize(IServiceProvider serviceProvider)

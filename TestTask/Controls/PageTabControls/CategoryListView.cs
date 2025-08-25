@@ -18,8 +18,8 @@ namespace TestTask.Controls.PageTabControls
 {
     public partial class CategoryListView : UserControl, IListViewDataProvider, IInitialize, ILoad
     {
-        private const int IndexId = 0;
-        private const int IndexColumnName = 1;
+        private const int IndexColumnName = 0;
+        private const int IndexId = 1;
 
         private IServiceProvider _serviceProvider;
         private CategoryService _categoryRepository;
@@ -31,8 +31,8 @@ namespace TestTask.Controls.PageTabControls
 
         public IReadOnlyList<ListViewColumn> Columns { get; } = new List<ListViewColumn>
         {
-            new ListViewColumn("ID", 1, e => ((Category)e).Id),
             new ListViewColumn("Name", 755, e => ((Category)e).Name),
+            new ListViewColumn("ID", 0, e => ((Category)e).Id),
         };
 
         public void Initialize(IServiceProvider serviceProvider)

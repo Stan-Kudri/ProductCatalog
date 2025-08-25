@@ -22,10 +22,10 @@ namespace TestTask.Controls.PageTabControls
 {
     public partial class ProductListView : UserControl, IListViewDataProvider, IInitialize, ILoad
     {
-        private const int IndexId = 0;
-        private const int IndexColumnName = 1;
-        private const int IndexColumnPrice = 5;
-        private const int IndexColumnDestination = 6;
+        private const int IndexColumnName = 0;
+        private const int IndexColumnPrice = 4;
+        private const int IndexColumnDestination = 5;
+        private const int IndexId = 6;
         private const int IndexColumnIdCompany = 7;
         private const int IndexColumnIdCategory = 8;
         private const int IndexColumnIdType = 9;
@@ -36,7 +36,6 @@ namespace TestTask.Controls.PageTabControls
         private ProductTypeService _typeRepository;
         private ProductService _productRepository;
 
-        private IMessageBox _messageBox;
         private MessageByTable<Product> _messageByTable;
         private readonly SortProductModel _selectSortField = new SortProductModel();
         private bool _isAscending = true;
@@ -45,16 +44,16 @@ namespace TestTask.Controls.PageTabControls
 
         public IReadOnlyList<ListViewColumn> Columns { get; } = new List<ListViewColumn>
         {
-            new ListViewColumn("ID", 1, e => ((Product)e).Id),
-            new ListViewColumn("Name", 100, e => ((Product)e).Name),
+            new ListViewColumn("Name", 140, e => ((Product)e).Name),
             new ListViewColumn("Company", 140, e => ((Product)e).Company),
             new ListViewColumn("Category", 130, e => ((Product)e).Category),
             new ListViewColumn("Type", 120, e => ((Product)e).Type),
             new ListViewColumn("Price", 100, e => ((Product)e).Price),
-            new ListViewColumn("Destination", 161, e => ((Product)e).Destination),
-            new ListViewColumn("CompanyId", 1, e => ((Product)e).CompanyId),
-            new ListViewColumn("CategoryId", 1, e => ((Product)e).CategoryId),
-            new ListViewColumn("TypeId", 1, e => ((Product)e).TypeId),
+            new ListViewColumn("Destination", 121, e => ((Product)e).Destination),
+            new ListViewColumn("ID", 0, e => ((Product)e).Id),
+            new ListViewColumn("CompanyId", 0, e => ((Product)e).CompanyId),
+            new ListViewColumn("CategoryId", 0, e => ((Product)e).CategoryId),
+            new ListViewColumn("TypeId", 0, e => ((Product)e).TypeId),
         };
 
         public void Initialize(IServiceProvider serviceProvider)
@@ -64,7 +63,6 @@ namespace TestTask.Controls.PageTabControls
             _companyRepository = _serviceProvider.GetRequiredService<CompanyService>();
             _categoryRepository = _serviceProvider.GetRequiredService<CategoryService>();
             _typeRepository = _serviceProvider.GetRequiredService<ProductTypeService>();
-            _messageBox = _serviceProvider.GetRequiredService<IMessageBox>();
             _messageByTable = _serviceProvider.GetRequiredService<MessageByTable<Product>>();
             listView.Initialize(this, serviceProvider.GetRequiredService<IMessageBox>());
             checkCmbField.Items.AddRange(_selectSortField.SelectField);
