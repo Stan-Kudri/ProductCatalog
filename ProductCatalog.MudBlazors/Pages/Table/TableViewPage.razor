@@ -1,0 +1,118 @@
+﻿@using Bromix.MudBlazor.MaterialDesignIcons
+@using ProductCatalog.Core.Models
+@using ProductCatalog.Core.Models.SortModel
+@using ProductCatalog.MudBlazors
+@using ProductCatalog.MudBlazors.Pages
+@using ProductCatalog.MudBlazors.Shared
+
+@typeparam T
+@typeparam TSortType   
+@typeparam TItemDialog
+
+<MudPaper>
+
+    <MudToolBar>
+
+        <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-1 mr-3" Style="max-width:250px;"/>
+
+        <MudSelect T="ISortableField<T>" Style="align-items:end" Label="Sort" MultiSelection="true" @bind-Value="SortField.SortField" @bind-SelectedValues="SortField.SortFields"
+                    SelectAll="true" SelectAllText="All" OnClose="@LoadData">
+            @foreach (var item in SortField.Items)
+            {
+                <MudSelectItem T="ISortableField<T>" Value="@item" />
+            }
+        </MudSelect>
+
+        <div style="align-items:end">
+            <MudToggleIconButton Toggled="@isAscending" ToggledChanged="@OnToggledChanged" Class="mr-5"
+                                    Icon="@MaterialDesignIcons.Normal.SortAlphabeticalDescending" Color="@Color.Primary" Title="Descending" Size="Size.Large"
+                                    ToggledIcon="@MaterialDesignIcons.Normal.SortAlphabeticalAscending" ToggledColor="@Color.Primary" ToggledTitle="Ascending" ToggledSize="Size.Large" />
+            <MudSpacer />
+        </div>
+
+        <MudTooltip Text="Off Filter" Placement="Placement.Top">
+            <MudIconButton Icon="@MaterialDesignIcons.Normal.FilterOff" OnClick="@ClearFilter" Color="Color.Primary" Variant="Variant.Text" Size="Size.Large"/>
+        </MudTooltip>
+             
+    </MudToolBar>
+
+    <MudToolBar WrapContent="true">
+
+        <MudSpacer/>
+        <MudIconButton Icon="@Icons.Material.Filled.Add" OnClick="@((e) => SaveDialogItem())" Color="Color.Primary" Variant="Variant.Text" Title="Add Item" />
+        <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="@Remove" Color="Color.Primary" Variant="Variant.Text" Disabled="@isSelectItems" Title="Remove Select Items" />
+        <MudFileUpload T="IBrowserFile" Accept=".xlsx,.xls,.xlsm" FilesChanged="UploadFiles" style="padding:0; margin:0;">
+            <ButtonTemplate>
+                <MudIconButton HtmlTag="label" Icon="@MaterialDesignIcons.Normal.FileImport" Color="Color.Primary" title="Import Excel" />
+            </ButtonTemplate>
+        </MudFileUpload>
+
+    </MudToolBar>
+           
+    <MudTable Items="@items" Hover="true" SortLabel="Sort By" Elevation="0" MultiSelection="true" Dense="true" T="T" SelectedItemsChanged="OnSelectItems" RowsPerPage="_pageModel.Size">
+
+        <ColGroup>
+
+            <MudItem xs="8" Class="mt-2">
+                @for (var i = 0; i < TableProvider.Columns.Count; i++)
+                {
+                    <col style="width: @TableProvider.Columns[i].WidthValuePercent%;" />
+                }
+            </MudItem>
+            <MudItem xs="4">
+                <col style="width: 40px;" />
+            </MudItem>
+                        
+        </ColGroup>
+                
+        <HeaderContent>
+            @foreach(var item in TableProvider.Columns)
+            {
+                <MudTh>@item.Name</MudTh>    
+            }
+            <MudTh></MudTh>
+        </HeaderContent>
+
+        <RowTemplate>
+
+            @foreach (var item in TableProvider.Columns)
+            {
+                <MudTd DataLabel="@item.Name">@item.ValueSelector(@context)</MudTd>
+            }
+            <MudTh Class="d-flex justify-center">
+                <MudTooltip Text="Edit" Placement="Placement.Bottom">
+                    <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Variant="Variant.Outlined" Size="Size.Medium" OnClick="@((e) => SaveDialogItem(context.Id))" />
+                </MudTooltip>
+                <MudTooltip Text="Remove" Placement="Placement.Bottom">
+                    <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" Size="Size.Medium" Class="ml-2" OnClick="@(() => Remove(context.Id))" />
+                </MudTooltip>
+            </MudTh>
+            
+         </RowTemplate>
+
+         
+        <PagerContent>
+            <MudGrid Justify="Justify.Center">
+                @if (_pagedList.Items.Count > 0)
+                {
+                    <MudItem Class="d-flex align-center justify-center ">
+                        <MudSelect T="int" Label="Show on page" @bind-Value="_pageModel.Size" SelectedValuesChanged="LoadData" Style="max-width:150px;">
+                            @foreach (var sizePage in _pageModel.Items)
+                            {
+                                <MudSelectItem T="int" Value="@sizePage" />
+                            }
+                        </MudSelect>
+                        <MudPagination SelectedChanged="PageChanged" BoundaryCount="1" MiddleCount="3" Count="_pagedList.PageCount" />
+                    </MudItem>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6" Align="Align.Center" class="mt-5 mb-5">There are no matching items.</MudText>
+                }
+            </MudGrid>
+        </PagerContent>
+
+    </MudTable>
+
+</MudPaper>

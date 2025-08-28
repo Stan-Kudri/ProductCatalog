@@ -1,0 +1,42 @@
+﻿@page "/table/"
+
+ @using Bromix.MudBlazor.MaterialDesignIcons
+@using ProductCatalog.Core.Models.Categories
+@using ProductCatalog.Core.Models.Companies
+@using ProductCatalog.Core.Models.Products
+@using ProductCatalog.Core.Models.Types
+@using ProductCatalog.MudBlazors
+@using ProductCatalog.MudBlazors.Dialog
+@using ProductCatalog.MudBlazors.Dialog.ItemTable
+@using ProductCatalog.MudBlazors.Model
+@using ProductCatalog.MudBlazors.Pages
+@using ProductCatalog.MudBlazors.Pages.Export
+@using ProductCatalog.MudBlazors.Pages.Table.Model
+@using ProductCatalog.MudBlazors.Shared
+@using Table
+
+@attribute [Authorize]
+
+<MudPaper>
+    <MudToolBar>
+        <MudSpacer />
+        <MudButton StartIcon="@MaterialDesignIcons.Normal.FileExport" Color="Color.Tertiary" OnClick="OpenDialogExport">Export EXCEL</MudButton>
+        <MudButton StartIcon="@MaterialDesignIcons.Normal.FileImport" Color="Color.Primary" OnClick="OpenDialogImport">Import EXCEL</MudButton>
+    </MudToolBar>
+    <MudTabs Rounded="true" AlwaysShowScrollButtons="true" Border="true" Centered="true" >
+        <MudSpacer/>
+        <MudTabPanel Text="Company">
+            <TableViewPage TSortType="CompanySortField" T="Company" TItemDialog=CompanyItemDialog></TableViewPage>
+        </MudTabPanel>
+        <MudTabPanel Text="Category">
+            <TableViewPage TSortType="CategoriesSortField" T="Category" TItemDialog=CategoryItemDialog></TableViewPage>
+        </MudTabPanel>
+        <MudTabPanel Text="Type Product">
+            <TableViewPage TSortType="ProductTypeSortField" T="ProductType" TItemDialog=ProductTypeItemDialog></TableViewPage>
+        </MudTabPanel>
+        <MudTabPanel Text="Product">
+            <TableViewPage TSortType="ProductSortField" T="Product" TItemDialog=ProductItemDialog></TableViewPage>
+        </MudTabPanel>
+    </MudTabs>
+ </MudPaper>
+

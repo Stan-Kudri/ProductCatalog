@@ -1,0 +1,72 @@
+using System;
+using ProductCatalog.Core.Exeption;
+using ProductCatalog.Core.Models.Categories;
+using ProductCatalog.Core.Models.Companies;
+using ProductCatalog.Core.Models.Types;
+
+namespace ProductCatalog.Core.Models.Products
+{
+    public class Product : Entity, IEquatable<Product>
+    {
+        public Product()
+        {
+        }
+
+        public Product(string name, Guid companyId, Guid categoryId, Guid typeId, string destination, decimal price, Guid id)
+            : this(name, companyId, categoryId, typeId, destination, price) => Id = id;
+
+        public Product(string name, Guid companyId, Guid categoryId, Guid typeId, string destination, decimal price)
+        {
+            BusinessLogicException.ThrowIfNullOrEmpty(name);
+
+            Name = name;
+            CompanyId = companyId;
+            CategoryId = categoryId;
+            TypeId = typeId;
+
+            Price = price > 0
+                    ? Price = price
+                    : throw BusinessLogicException.EnsureValueLessThenZero<Product>(nameof(price), price);
+
+            Destination = destination;
+        }
+
+        public string Name { get; set; }
+
+        public decimal Price { get; set; } = decimal.Zero;
+
+        public string Destination { get; set; } = null;
+
+        public Guid TypeId { get; set; } = Guid.NewGuid();
+
+        public ProductType Type { get; set; }
+
+        public Guid CompanyId { get; set; } = Guid.NewGuid();
+
+        public Company Company { get; set; }
+
+        public Guid CategoryId { get; set; } = Guid.NewGuid();
+
+        public Category Category { get; set; }
+
+        public override bool Equals(object obj) => Equals(obj as Product);
+
+        public bool Equals(Product other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            return other.Name == Name
+                   && other.Id == Id
+                   && other.CompanyId == CompanyId
+                   && other.CategoryId == CategoryId
+                   && other.TypeId == TypeId
+                   && other.Price == Price
+                   && other.Destination == Destination;
+        }
+
+        public override int GetHashCode() => HashCode.Combine(Id, CompanyId, Type);
+    }
+}
