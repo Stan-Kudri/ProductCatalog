@@ -1,0 +1,82 @@
+﻿@page "/mainlayout"
+
+@using Bromix.MudBlazor.MaterialDesignIcons
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using ProductCatalog.Core.Import
+@using ProductCatalog.Core.Import.Importers
+@using ProductCatalog.Core.Models.Categories
+@using ProductCatalog.Core.Models.Companies
+@using ProductCatalog.Core.Models.Products
+@using ProductCatalog.Core.Models.Types
+@using ProductCatalog.Core.Models.Users
+@using ProductCatalog.MudBlazors
+@using ProductCatalog.MudBlazors.Authenticate
+@using ProductCatalog.MudBlazors.Model
+@using ProductCatalog.MudBlazors.Pages
+@using ProductCatalog.MudBlazors.Pages.Import
+@using ProductCatalog.MudBlazors.Pages.Table.Model
+@using ProductCatalog.MudBlazors.Shared
+
+@inherits LayoutComponentBase
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+<MudPopoverProvider />
+
+<MudLayout>
+
+    <MudAppBar Elevation="0">
+
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())"/>
+        <MudSpacer />
+
+        <AuthorizeView Context="auth">
+
+            <Authorized>
+                <MudMenu FullWidth="true" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Style="align-items:center">
+                    <ActivatorContent>
+                        <MudChip T="string" Icon="@MaterialDesignIcons.Normal.Account" Label="true" Class="pa-4"
+                                 Style="@($"color:{Colors.Gray.Lighten4};background:{Colors.LightBlue.Accent4};")">
+                            @auth.User.Identity.Name
+                        </MudChip>
+                    </ActivatorContent> 
+                    <ChildContent>
+                        <MudMenuItem Class="pa-1 red-text text-accent-2" Style="text-align:center" OnClick="LogoutAsync">Sign Out</MudMenuItem>
+                    </ChildContent>
+                </MudMenu>
+            </Authorized>
+
+            <NotAuthorized>
+                <MudTooltip Text="Sign In">
+                    <MudIconButton Icon="@MaterialDesignIcons.Normal.Account" Color="Color.Inherit" OnClick="SignInPage" />
+                </MudTooltip>
+            </NotAuthorized>
+
+        </AuthorizeView>
+        
+    </MudAppBar>
+
+    <MudDrawer @bind-Open="_drawerOpen" Elevation="6" Style="font-size:12px">
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h5" Style="font: italic small-caps bold 16px/2 cursive;">MudBlazor</MudText>
+        </MudDrawerHeader>
+        <NavMenu />
+        <AuthorizeView Context="auth">
+            <Authorized> 
+                @if (auth.User.IsInRole(RoleNames.Admin))
+                {
+                    <MudNavLink Href="users" Match="NavLinkMatch.All" Icon="@MaterialDesignIcons.Normal.AccountDetails">Users</MudNavLink>
+                }
+            </Authorized>
+        </AuthorizeView>
+        
+    </MudDrawer>
+
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.Large" Class="my-4 pt-0">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+
+</MudLayout>
