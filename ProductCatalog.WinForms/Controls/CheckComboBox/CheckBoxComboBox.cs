@@ -461,10 +461,12 @@ namespace ProductCatalog.Controls.CheckComboBox
             SynchroniseControlsWithComboBoxItems();
             base.OnVisibleChanged(e);
         }
+
         /// <summary>
         /// Maintains the controls displayed in the list by keeping them in sync with the actual 
         /// items in the combobox. (e.g. removing and adding as well as ordering)
         /// </summary>
+        [Obsolete]
         public void SynchroniseControlsWithComboBoxItems()
         {
             SuspendLayout();
