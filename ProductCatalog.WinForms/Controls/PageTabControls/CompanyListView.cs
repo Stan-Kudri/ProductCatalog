@@ -114,6 +114,7 @@ namespace ProductCatalog.Controls.PageTabControls
         private void ButtonUseFilter_Click(object sender, EventArgs e)
             => UsedFilter();
 
+        [Obsolete]
         private void BtnClearFilter_Click(object sender, EventArgs e)
         {
             tbSearchStrName.Text = string.Empty;
@@ -148,6 +149,7 @@ namespace ProductCatalog.Controls.PageTabControls
             ? items
             : items.Where(e => e.Name.Contains(tbSearchStrName.Text) || e.Country.Contains(tbSearchStrName.Text) || e.DateCreation.ToString().Contains(tbSearchStrName.Text));
 
+        [Obsolete]
         private void SelectSortField()
         {
             var selectField = new HashSet<CompanySortField>();
@@ -163,6 +165,7 @@ namespace ProductCatalog.Controls.PageTabControls
             _selectSortField.SortFields = selectField;
         }
 
+        [Obsolete]
         private void UsedFilter()
         {
             SelectSortField();

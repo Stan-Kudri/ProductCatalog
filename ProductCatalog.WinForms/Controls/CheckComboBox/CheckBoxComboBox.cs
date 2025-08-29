@@ -16,6 +16,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         /// <summary>
         /// TODO: Documentation Constructor
         /// </summary>
+        [Obsolete]
         public CheckBoxComboBox()
             : base()
         {
@@ -73,6 +74,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         /// <summary>
         /// Builds a CSV string of the items selected.
         /// </summary>
+        [Obsolete]
         internal string GetCSVText(bool skipFirstItem)
         {
             var listText = string.Empty;
@@ -98,6 +100,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         /// TODO: Documentation WndProc
         /// </summary>
         /// <param name="m"></param>
+        [Obsolete]
         protected override void WndProc(ref Message m)
         {
             // 323 : Item Added
@@ -122,6 +125,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         /// the list contents, use Items instead.
         /// </summary>
         [Browsable(false)]
+        [Obsolete]
         public CheckBoxComboBoxItemList CheckBoxItems
         {
             get
@@ -139,6 +143,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         /// The DataSource of the combobox. Refreshes the CheckBox wrappers when this is set.
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Obsolete]
         public new object DataSource
         {
             get => base.DataSource;
@@ -160,6 +165,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         /// The ValueMember of the combobox. Refreshes the CheckBox wrappers when this is set.
         /// </summary>          
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Obsolete]
         public new string ValueMember
         {
             get => base.ValueMember;
@@ -226,6 +232,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        [Obsolete]
         private void Items_CheckBoxCheckedChanged(object sender, EventArgs e) => OnCheckBoxCheckedChanged(sender, e);
 
         /// <summary>
@@ -233,6 +240,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        [Obsolete]
         protected virtual void OnCheckBoxCheckedChanged(object sender, EventArgs e)
         {
             var listText = GetCSVText(true);
@@ -262,6 +270,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         /// to help maintain the correct text in main TextBox.
         /// </summary>
         /// <param name="e"></param>
+        [Obsolete]
         protected override void OnDropDownStyleChanged(EventArgs e)
         {
             base.OnDropDownStyleChanged(e);
@@ -292,6 +301,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         /// A function to clear/reset the list.
         /// (Ubiklou : http://www.codeproject.com/KB/combobox/extending_combobox.aspx?msg=2526813#xx2526813xx)
         /// </summary>
+        [Obsolete]
         public void Clear()
         {
             Items.Clear();
@@ -301,9 +311,11 @@ namespace ProductCatalog.Controls.CheckComboBox
                 _mustAddHiddenItem = true;
             }
         }
+
         /// <summary>
         /// Uncheck all items.
         /// </summary>
+        [Obsolete]
         public void ClearSelection()
         {
             foreach (var item in CheckBoxItems)
@@ -327,6 +339,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         [Description("The properties that will be assigned to the checkboxes as default values.")]
         [Browsable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Obsolete]
         public CheckBoxProperties CheckBoxProperties
         {
             get => _checkBoxProperties;
@@ -336,11 +349,13 @@ namespace ProductCatalog.Controls.CheckComboBox
                 CheckBoxProperties_PropertyChanged(this, EventArgs.Empty);
             }
         }
+
         /// <summary>
         /// TODO: Documentation _CheckBoxProperties_PropertyChanged
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        [Obsolete]
         private void CheckBoxProperties_PropertyChanged(object sender, EventArgs e)
         {
             foreach (var item in CheckBoxItems)
@@ -455,6 +470,7 @@ namespace ProductCatalog.Controls.CheckComboBox
 
         #region PROTECTED MEMBERS
 
+        [Obsolete]
         protected override void OnVisibleChanged(EventArgs e)
         {
             // Synchronises the CheckBox list with the items in the ComboBox.
@@ -582,6 +598,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         /// </summary>
         /// <param name="owner">A reference to the CheckBoxComboBox.</param>
         /// <param name="comboBoxItem">A reference to the item in the ComboBox.Items that this object is extending.</param>
+        [Obsolete]
         public CheckBoxComboBoxItem(CheckBoxComboBox owner, object comboBoxItem)
             : base()
         {
@@ -625,6 +642,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         /// When using Data Binding operations via the DataSource property of the ComboBox. This
         /// adds the required Bindings for the CheckBoxes.
         /// </summary>
+        [Obsolete]
         public void AddBindings()
         {
             // Note, the text uses "DisplayMemberSingleItem", not "DisplayMember" (unless its not assigned)
@@ -649,6 +667,7 @@ namespace ProductCatalog.Controls.CheckComboBox
 
         #region PROTECTED MEMBERS
 
+        [Obsolete]
         protected override void OnCheckedChanged(EventArgs e)
         {
             // Found that when this event is raised, the bool value of the binded item is not yet updated.
@@ -702,6 +721,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         /// time, which also means the summary text value
         /// of the combo is out of sync initially.
         /// </summary>
+        [Obsolete]
         private void CheckBoxComboBoxItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == _CheckBoxComboBox.ValueMember)
@@ -790,6 +810,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         /// <summary>
         /// Returns the item with the specified displayName or Text.
         /// </summary>
+        [Obsolete]
         public CheckBoxComboBoxItem this[string displayName]
         {
             get
