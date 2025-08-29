@@ -11,6 +11,7 @@ namespace ProductCatalog.Migrations.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             // 1. Creating new tables with Guid PK/FK
+
             // User table
             migrationBuilder.CreateTable(
                 name: "user_new",
@@ -162,102 +163,102 @@ namespace ProductCatalog.Migrations.Migrations
 
             // 2. Create temporary mapper tables with standard GUID generation via randomblob
             migrationBuilder.Sql(@"
-                CREATE TEMP TABLE category_map (old_id INTEGER, new_id TEXT);
-                INSERT INTO category_map(old_id, new_id)
-                SELECT id,
-                       (
-                            substr(hex(randomblob(4)), 1, 8) || '-' ||
-                            substr(hex(randomblob(2)), 1, 4) || '-' ||
-                            '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
-                            substr('89AB', abs(random()) % 4 + 1, 1) || 
-                            substr(hex(randomblob(2)), 2, 3) || '-' ||
-                            substr(hex(randomblob(6)), 1, 12)
-                       ) as guid
-                FROM category;
+            CREATE TEMP TABLE category_map (old_id INTEGER, new_id TEXT);
+            INSERT INTO category_map(old_id, new_id)
+            SELECT id,
+                   (
+                        substr(hex(randomblob(4)), 1, 8) || '-' ||
+                        substr(hex(randomblob(2)), 1, 4) || '-' ||
+                        '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
+                        substr('89AB', abs(random()) % 4 + 1, 1) || 
+                        substr(hex(randomblob(2)), 2, 3) || '-' ||
+                        substr(hex(randomblob(6)), 1, 12)
+                   ) as guid
+            FROM category;
 
-                CREATE TEMP TABLE type_map (old_id INTEGER, new_id TEXT);
-                INSERT INTO type_map(old_id, new_id)
-                SELECT id,
-                       (
-                            substr(hex(randomblob(4)), 1, 8) || '-' ||
-                            substr(hex(randomblob(2)), 1, 4) || '-' ||
-                            '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
-                            substr('89AB', abs(random()) % 4 + 1, 1) || 
-                            substr(hex(randomblob(2)), 2, 3) || '-' ||
-                            substr(hex(randomblob(6)), 1, 12)
-                       ) as guid
-                FROM type;
+            CREATE TEMP TABLE type_map (old_id INTEGER, new_id TEXT);
+            INSERT INTO type_map(old_id, new_id)
+            SELECT id,
+                   (
+                        substr(hex(randomblob(4)), 1, 8) || '-' ||
+                        substr(hex(randomblob(2)), 1, 4) || '-' ||
+                        '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
+                        substr('89AB', abs(random()) % 4 + 1, 1) || 
+                        substr(hex(randomblob(2)), 2, 3) || '-' ||
+                        substr(hex(randomblob(6)), 1, 12)
+                   ) as guid
+            FROM type;
 
-                CREATE TEMP TABLE company_map (old_id INTEGER, new_id TEXT);
-                INSERT INTO company_map(old_id, new_id)
-                SELECT id,
-                       (
-                            substr(hex(randomblob(4)), 1, 8) || '-' ||
-                            substr(hex(randomblob(2)), 1, 4) || '-' ||
-                            '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
-                            substr('89AB', abs(random()) % 4 + 1, 1) || 
-                            substr(hex(randomblob(2)), 2, 3) || '-' ||
-                            substr(hex(randomblob(6)), 1, 12)
-                       ) as guid
-                FROM company;
+            CREATE TEMP TABLE company_map (old_id INTEGER, new_id TEXT);
+            INSERT INTO company_map(old_id, new_id)
+            SELECT id,
+                   (
+                        substr(hex(randomblob(4)), 1, 8) || '-' ||
+                        substr(hex(randomblob(2)), 1, 4) || '-' ||
+                        '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
+                        substr('89AB', abs(random()) % 4 + 1, 1) || 
+                        substr(hex(randomblob(2)), 2, 3) || '-' ||
+                        substr(hex(randomblob(6)), 1, 12)
+                   ) as guid
+            FROM company;
 
-                CREATE TEMP TABLE user_map (old_id INTEGER, new_id TEXT);
-                INSERT INTO user_map(old_id, new_id)
-                SELECT id,
-                       (
-                            substr(hex(randomblob(4)), 1, 8) || '-' ||
-                            substr(hex(randomblob(2)), 1, 4) || '-' ||
-                            '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
-                            substr('89AB', abs(random()) % 4 + 1, 1) || 
-                            substr(hex(randomblob(2)), 2, 3) || '-' ||
-                            substr(hex(randomblob(6)), 1, 12)
-                       ) as guid
-                FROM user;
-            ");
+            CREATE TEMP TABLE user_map (old_id INTEGER, new_id TEXT);
+            INSERT INTO user_map(old_id, new_id)
+            SELECT id,
+                   (
+                        substr(hex(randomblob(4)), 1, 8) || '-' ||
+                        substr(hex(randomblob(2)), 1, 4) || '-' ||
+                        '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
+                        substr('89AB', abs(random()) % 4 + 1, 1) || 
+                        substr(hex(randomblob(2)), 2, 3) || '-' ||
+                        substr(hex(randomblob(6)), 1, 12)
+                   ) as guid
+            FROM user;
+        ");
 
             // 3. Transferring data while maintaining connections
             migrationBuilder.Sql(@"
-                INSERT INTO category_new (id, name)
-                SELECT m.new_id, c.name
-                FROM category c
-                JOIN category_map m ON c.id = m.old_id;
+            INSERT INTO category_new (id, name)
+            SELECT m.new_id, c.name
+            FROM category c
+            JOIN category_map m ON c.id = m.old_id;
 
-                INSERT INTO type_new (id, name, categoryId)
-                SELECT tm.new_id, t.name, cm.new_id
-                FROM type t
-                JOIN type_map tm ON t.id = tm.old_id
-                JOIN category_map cm ON t.categoryId = cm.old_id;
+            INSERT INTO type_new (id, name, categoryId)
+            SELECT tm.new_id, t.name, cm.new_id
+            FROM type t
+            JOIN type_map tm ON t.id = tm.old_id
+            JOIN category_map cm ON t.categoryId = cm.old_id;
 
-                INSERT INTO company_new (id, name, dateCreation, country)
-                SELECT m.new_id, c.name, c.dateCreation, c.country
-                FROM company c
-                JOIN company_map m ON c.id = m.old_id;
+            INSERT INTO company_new (id, name, dateCreation, country)
+            SELECT m.new_id, c.name, c.dateCreation, c.country
+            FROM company c
+            JOIN company_map m ON c.id = m.old_id;
 
-                INSERT INTO user_new (id, username, passwordHash, role)
-                SELECT m.new_id, u.username, u.passwordHash, u.role
-                FROM user u
-                JOIN user_map m ON u.id = m.old_id;
+            INSERT INTO user_new (id, username, passwordHash, role)
+            SELECT m.new_id, u.username, u.passwordHash, u.role
+            FROM user u
+            JOIN user_map m ON u.id = m.old_id;
 
-                INSERT INTO product_new (id, name, typeId, price, destination, companyId, categoryId)
-                SELECT (
-                            substr(hex(randomblob(4)), 1, 8) || '-' ||
-                            substr(hex(randomblob(2)), 1, 4) || '-' ||
-                            '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
-                            substr('89AB', abs(random()) % 4 + 1, 1) || 
-                            substr(hex(randomblob(2)), 2, 3) || '-' ||
-                            substr(hex(randomblob(6)), 1, 12)
-                       ) as guid,
-                       p.name,
-                       tm.new_id,
-                       p.price,
-                       p.destination,
-                       cm.new_id,
-                       catm.new_id
-                FROM product p
-                JOIN type_map tm ON p.typeId = tm.old_id
-                JOIN company_map cm ON p.companyId = cm.old_id
-                JOIN category_map catm ON p.categoryId = catm.old_id;
-            ");
+            INSERT INTO product_new (id, name, typeId, price, destination, companyId, categoryId)
+            SELECT (
+                        substr(hex(randomblob(4)), 1, 8) || '-' ||
+                        substr(hex(randomblob(2)), 1, 4) || '-' ||
+                        '4' || substr(hex(randomblob(2)), 2, 3) || '-' ||
+                        substr('89AB', abs(random()) % 4 + 1, 1) || 
+                        substr(hex(randomblob(2)), 2, 3) || '-' ||
+                        substr(hex(randomblob(6)), 1, 12)
+                   ) as guid,
+                   p.name,
+                   tm.new_id,
+                   p.price,
+                   p.destination,
+                   cm.new_id,
+                   catm.new_id
+            FROM product p
+            JOIN type_map tm ON p.typeId = tm.old_id
+            JOIN company_map cm ON p.companyId = cm.old_id
+            JOIN category_map catm ON p.categoryId = catm.old_id;
+        ");
 
             // 4. Delete old tables
             migrationBuilder.DropTable(name: "product");
@@ -277,20 +278,11 @@ namespace ProductCatalog.Migrations.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-               name: "product");
-
-            migrationBuilder.DropTable(
-                name: "user");
-
-            migrationBuilder.DropTable(
-                name: "company");
-
-            migrationBuilder.DropTable(
-                name: "type");
-
-            migrationBuilder.DropTable(
-                name: "category");
+            migrationBuilder.DropTable(name: "product");
+            migrationBuilder.DropTable(name: "user");
+            migrationBuilder.DropTable(name: "company");
+            migrationBuilder.DropTable(name: "type");
+            migrationBuilder.DropTable(name: "category");
         }
     }
 }

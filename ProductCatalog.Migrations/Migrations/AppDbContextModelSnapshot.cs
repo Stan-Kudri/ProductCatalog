@@ -197,9 +197,7 @@ namespace ProductCatalog.Migrations.Migrations
                     .IsRequired();
 
                 b.Navigation("Category");
-
                 b.Navigation("Company");
-
                 b.Navigation("Type");
             });
 
@@ -217,7 +215,6 @@ namespace ProductCatalog.Migrations.Migrations
             modelBuilder.Entity("ProductCatalog.Core.Models.Categories.Category", b =>
             {
                 b.Navigation("Products");
-
                 b.Navigation("Types");
             });
 
