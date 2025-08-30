@@ -104,6 +104,7 @@ namespace ProductCatalog.Controls.PageTabControls
 
         public async Task Remove(Entity entity) => await _categoryRepository.RemoveAsync(entity.Id);
 
+        [Obsolete]
         private void ButtonUseFilter_Click(object sender, EventArgs e)
             => UsedFilter();
 
@@ -118,6 +119,7 @@ namespace ProductCatalog.Controls.PageTabControls
             LoadData();
         }
 
+        [Obsolete]
         private void BtnTypeSort_Click(object sender, EventArgs e)
         {
             if (_isAscending)
