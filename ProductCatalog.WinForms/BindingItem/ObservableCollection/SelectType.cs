@@ -5,7 +5,7 @@ using System.Linq;
 using ProductCatalog.Core.Models.Categories;
 using ProductCatalog.Core.Models.Types;
 
-namespace ProductCatalog.BindingItem.ObservableCollection
+namespace ProductCatalog.WinForms.BindingItem.ObservableCollection
 {
     public class SelectType : ModelBase
     {

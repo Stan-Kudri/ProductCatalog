@@ -1,6 +1,6 @@
 using System;
 
-namespace ProductCatalog.Extension
+namespace ProductCatalog.WinForms.Extension
 {
     public static class ParseExtension
     {

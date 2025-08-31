@@ -2,10 +2,7 @@ using ProductCatalog.Core.Models.Products;
 
 namespace ProductCatalog.Core.Export.SheetFillers.Model
 {
-    public class ProductSheetFiller : SheetFiller<Product, ProductField>
+    public class ProductSheetFiller(ProductService service) : SheetFiller<Product, ProductField>(service)
     {
-        public ProductSheetFiller(ProductService service) : base(service)
-        {
-        }
     }
 }

@@ -7,35 +7,35 @@
 @using ProductCatalog.MudBlazors.Shared
 
  <MudContainer>
-    <MudForm @bind-Errors="@errors" Model="@productModel">
+    <MudForm @bind-Errors="@errors" Model="@ProductModel">
 
         <MudTextField T="string" Label="Name"
                       InputType="InputType.Text"
                       Required="true"
-                      @bind-Value=@productModel.Name
+                      @bind-Value=@ProductModel.Name
                       Validation="@(new Func<string, IEnumerable<string>>(ValidFormatText))" />
 
         <MudTextField T="decimal" Label="Price"
                       InputType="InputType.Text"
                       Required="true"
-                      @bind-Value=@productModel.Price
+                      @bind-Value=@ProductModel.Price
                       Validation="@(new Func<string, IEnumerable<string>>(ValidFormatPrice))" />
 
-        <MudSelect T="Company" Label="Company" @bind-Value="productModel.Company" AdornmentIcon="@Icons.Material.Filled.ShortText">
+        <MudSelect T="Company" Label="Company" @bind-Value="ProductModel.Company" AdornmentIcon="@Icons.Material.Filled.ShortText">
             @foreach (var item in selectCompanies)
             {
                 <MudSelectItem T="Company" Value="@item" />
             }
         </MudSelect>
 
-        <MudSelect T="Category" Label="Category" AdornmentIcon="@Icons.Material.Filled.ShortText" Value="@productModel.Category" ValueChanged="ChangeValueCategory">
+        <MudSelect T="Category" Label="Category" AdornmentIcon="@Icons.Material.Filled.ShortText" Value="@ProductModel.Category" ValueChanged="ChangeValueCategory">
             @foreach (var item in selectCategories)
             {
                 <MudSelectItem T="Category" Value="@item" />
             }
         </MudSelect>
 
-        <MudSelect T="ProductType" Label="Product Type" @bind-Value="productModel.ProductType" AdornmentIcon="@Icons.Material.Filled.ShortText" Disabled="@isDisabledType">
+        <MudSelect T="ProductType" Label="Product Type" @bind-Value="ProductModel.ProductType" AdornmentIcon="@Icons.Material.Filled.ShortText" Disabled="@isDisabledType">
             @foreach (var item in selectTypes)
             {
                 <MudSelectItem T="ProductType" Value="@item" />

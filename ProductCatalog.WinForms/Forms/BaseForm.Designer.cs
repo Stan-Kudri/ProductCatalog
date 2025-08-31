@@ -1,4 +1,4 @@
-namespace ProductCatalog.Forms
+﻿namespace ProductCatalog.WinForms.Forms
 {
     partial class BaseForm
     {

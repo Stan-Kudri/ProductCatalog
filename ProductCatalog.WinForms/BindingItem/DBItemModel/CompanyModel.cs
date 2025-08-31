@@ -2,7 +2,7 @@ using System;
 using ProductCatalog.Core.Exeption;
 using ProductCatalog.Core.Models.Companies;
 
-namespace ProductCatalog.BindingItem.DBItemModel
+namespace ProductCatalog.WinForms.BindingItem.DBItemModel
 {
     public class CompanyModel : ModelBase
     {

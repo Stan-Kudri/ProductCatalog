@@ -3,13 +3,10 @@ using ProductCatalog.Core.DataTable;
 using ProductCatalog.Core.Import;
 using ProductCatalog.Core.Models.Products;
 
-namespace ProductCatalog.Model.Importer
+namespace ProductCatalog.WinForms.Model.Importer
 {
-    public class ExcelImporterProduct : ExcelImpoterTable<Product>
+    public class ExcelImporterProduct(IMessageBox messageBox, ProductService service, ExcelImporter<Product> excelImport)
+        : ExcelImpoterTable<Product>(messageBox, service, excelImport, Table.Product)
     {
-        public ExcelImporterProduct(IMessageBox messageBox, ProductService service, ExcelImporter<Product> excelImport)
-            : base(messageBox, service, excelImport, Table.Product)
-        {
-        }
     }
 }

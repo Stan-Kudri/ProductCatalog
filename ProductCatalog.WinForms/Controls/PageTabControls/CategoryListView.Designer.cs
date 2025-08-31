@@ -1,6 +1,8 @@
-using ProductCatalog.BindingItem.Pages;
+﻿
 
-namespace ProductCatalog.Controls.PageTabControls
+using ProductCatalog.Controls.CheckComboBoxes;
+
+namespace ProductCatalog.WinForms.Controls.PageTabControls
 {
     partial class CategoryListView
     {
@@ -31,7 +33,7 @@ namespace ProductCatalog.Controls.PageTabControls
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            CheckComboBox.CheckBoxProperties checkBoxProperties = new CheckComboBox.CheckBoxProperties();
+            CheckBoxProperties checkBoxProperties = new CheckBoxProperties();
             tlpFilter = new System.Windows.Forms.TableLayoutPanel();
             labelSortName = new System.Windows.Forms.Label();
             labelSearchName = new System.Windows.Forms.Label();
@@ -39,7 +41,7 @@ namespace ProductCatalog.Controls.PageTabControls
             tbSearchStrName = new System.Windows.Forms.TextBox();
             buttonUseFilter = new MaterialSkin.Controls.MaterialButton();
             btnTypeSort = new MaterialSkin.Controls.MaterialButton();
-            checkCmbField = new CheckComboBox.CheckBoxComboBox();
+            checkCmbField = new CheckBoxComboBox();
             itemsBindingSourceSortName = new System.Windows.Forms.BindingSource(components);
             listView = new ListViewControl();
             tlpFilter.SuspendLayout();
@@ -226,6 +228,6 @@ namespace ProductCatalog.Controls.PageTabControls
         private System.Windows.Forms.Label labelSearchName;
         private System.Windows.Forms.Label labelSortName;
         private MaterialSkin.Controls.MaterialButton btnTypeSort;
-        private CheckComboBox.CheckBoxComboBox checkCmbField;
+        private CheckBoxComboBox checkCmbField;
     }
 }

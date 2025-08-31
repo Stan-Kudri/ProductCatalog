@@ -16,7 +16,7 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
         [Inject] private CategoryService CategoryService { get; set; } = null!;
         [Inject] private IMessageBox MessageDialog { get; set; } = null!;
 
-        private CategoryModel categoryModel { get; set; } = new CategoryModel();
+        private CategoryModel CategoryModel { get; set; } = new CategoryModel();
         private string[] errors = [];
         private bool isAddItem = true;
 
@@ -34,7 +34,7 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
 
             isAddItem = false;
             oldItem = await CategoryService.GetItem((Guid)Id);
-            categoryModel = oldItem.GetCategoryModel();
+            CategoryModel = oldItem.GetCategoryModel();
         }
 
         private void Close() => MudDialog.Cancel();
@@ -52,19 +52,19 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
                 return;
             }
 
-            if (!await CategoryService.IsFreeName(categoryModel.Name))
+            if (!await CategoryService.IsFreeName(CategoryModel.Name))
             {
                 await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
-            var item = categoryModel.GetCategory();
+            var item = CategoryModel.GetCategory();
             await CategoryService.AddAsync(item);
 
             MudDialog.Close();
         }
 
-        private void ClearData() => categoryModel.ClearData();
+        private void ClearData() => CategoryModel.ClearData();
 
         private async Task Updata()
         {
@@ -79,7 +79,7 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
                 return;
             }
 
-            var item = categoryModel.GetModifyCategory(oldItem.Id);
+            var item = CategoryModel.GetModifyCategory(oldItem.Id);
 
             if (!await CategoryService.IsFreeNameItemUpsert(item))
             {
@@ -95,7 +95,7 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
             MudDialog.Close();
         }
 
-        private void RecoverPastData() => categoryModel = oldItem.GetCategoryModel();
+        private void RecoverPastData() => CategoryModel = oldItem.GetCategoryModel();
 
         private IEnumerable<string> ValidFormatText(string str)
         {
@@ -109,7 +109,7 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
         {
             message = string.Empty;
 
-            if (string.IsNullOrWhiteSpace(categoryModel.Name))
+            if (string.IsNullOrWhiteSpace(CategoryModel.Name))
             {
                 message = "Name is required.";
                 return false;

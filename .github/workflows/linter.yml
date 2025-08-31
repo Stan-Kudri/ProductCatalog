@@ -1,26 +1,38 @@
-name: Linter
+﻿name: Linter
 
 on:
   push:
-    branches:
-      - master
-    paths-ignore:
-      - "**.md"
+    branches: [ master ]
+    paths-ignore: [ "**.md" ]
   pull_request:
-    paths-ignore:
-      - "**.md"
+    paths-ignore: [ "**.md" ]
 
 jobs:
   lint:
-    name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup .NET SDK # detected from global.json
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Restore dependencies
+        run: dotnet restore ProductCatalog.sln
+
       - name: Add Problem Matcher for dotnet-format
         uses: xt0rted/dotnet-format-problem-matcher@v1.2.0
-      - name: Lint
-        run: dotnet format --verify-no-changes --verbosity detailed
+
+      - name: Lint (verify formatting)
+        run: dotnet format ProductCatalog.sln --verify-no-changes --verbosity detailed

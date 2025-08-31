@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
-using ProductCatalog.BindingItem.Pages;
-using ProductCatalog.BindingItem.Pages.Sort;
 using ProductCatalog.Controls.PageTabControls.Model;
 using ProductCatalog.Core;
 using ProductCatalog.Core.Models;
@@ -14,11 +12,13 @@ using ProductCatalog.Core.Models.Companies;
 using ProductCatalog.Core.Models.Page;
 using ProductCatalog.Core.Models.Products;
 using ProductCatalog.Core.Models.Types;
-using ProductCatalog.Extension;
-using ProductCatalog.Forms.Products;
-using ProductCatalog.Messages;
+using ProductCatalog.WinForms.BindingItem.Pages;
+using ProductCatalog.WinForms.BindingItem.Pages.Sort;
+using ProductCatalog.WinForms.Extension;
+using ProductCatalog.WinForms.Forms.Products;
+using ProductCatalog.WinForms.Messages;
 
-namespace ProductCatalog.Controls.PageTabControls
+namespace ProductCatalog.WinForms.Controls.PageTabControls
 {
     public partial class ProductListView : UserControl, IListViewDataProvider, IInitialize, ILoad
     {
@@ -151,6 +151,7 @@ namespace ProductCatalog.Controls.PageTabControls
 
         public async Task Remove(Entity entity) => await _productRepository.RemoveAsync(entity.Id);
 
+        [Obsolete]
         private void ButtonUseFilter_Click(object sender, EventArgs e)
             => UsedFilter();
 
@@ -165,6 +166,7 @@ namespace ProductCatalog.Controls.PageTabControls
             LoadData();
         }
 
+        [Obsolete]
         private void BtnTypeSort_Click(object sender, EventArgs e)
         {
             if (_isAscending)

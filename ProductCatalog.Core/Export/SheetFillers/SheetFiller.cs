@@ -7,20 +7,13 @@ using ProductCatalog.Core.Models;
 
 namespace ProductCatalog.Core.Export.SheetFillers
 {
-    public class SheetFiller<TEntity, TField> : ISheetFiller
+    public class SheetFiller<TEntity, TField>(BaseService<TEntity> service) : ISheetFiller
         where TField : SheetField<TEntity, TField>
         where TEntity : Entity
     {
-        private readonly BaseService<TEntity> _service;
-        private readonly List<TField> _fields;
+        private readonly List<TField> _fields = SmartEnum<TField>.List.OrderBy(field => field.Value).ToList();
 
         public string Name => typeof(TEntity).Name;
-
-        public SheetFiller(BaseService<TEntity> service)
-        {
-            _service = service;
-            _fields = SmartEnum<TField>.List.OrderBy(field => field.Value).ToList();
-        }
 
         public async Task Fill(ISheet sheet)
         {
@@ -31,7 +24,7 @@ namespace ProductCatalog.Core.Export.SheetFillers
                 header.CreateCell(i).SetCellValue(_fields[i].Name);
             }
 
-            var items = await _service.GetAll();
+            var items = await service.GetAll();
             foreach (var item in items)
             {
                 rowIndex++;

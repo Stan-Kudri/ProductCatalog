@@ -1,6 +1,6 @@
-using ProductCatalog.BindingItem.DBItemModel;
+﻿using ProductCatalog.WinForms.BindingItem.DBItemModel;
 
-namespace ProductCatalog.Forms.Companies
+namespace ProductCatalog.WinForms.Forms.Companies
 {
     partial class CompanyFormBase
     {

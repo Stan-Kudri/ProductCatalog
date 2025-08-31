@@ -1,7 +1,7 @@
 using System.Windows.Forms;
 using ProductCatalog.Core.Exeption;
 
-namespace ProductCatalog.Extension
+namespace ProductCatalog.WinForms.Extension
 {
     public static class ListViewExtension
     {

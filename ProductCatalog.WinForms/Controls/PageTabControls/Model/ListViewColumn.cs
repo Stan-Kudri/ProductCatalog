@@ -7,19 +7,12 @@ namespace ProductCatalog.Controls.PageTabControls.Model
     {
         public ListViewColumn(string name, int width, Func<Entity, object> valueSelector)
         {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentException("The column name cannot be empty.", nameof(name));
-            }
+            ArgumentException.ThrowIfNullOrEmpty(name, nameof(name));
+            ArgumentNullException.ThrowIfNull(valueSelector, nameof(valueSelector));
 
             if (width < 0)
             {
                 throw new ArgumentException("The width is greater than zero.", nameof(width));
-            }
-
-            if (valueSelector == null)
-            {
-                throw new ArgumentNullException("ValueSelector should not be null");
             }
 
             Name = name;

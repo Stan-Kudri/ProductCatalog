@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using ProductCatalog.Core.Models;
 using ProductCatalog.Core.Models.SortModel;
 
-namespace ProductCatalog.BindingItem.Pages.Sort
+namespace ProductCatalog.WinForms.BindingItem.Pages.Sort
 {
     public class CommonSortModel<T> : ISortEntity<T>
         where T : Entity

@@ -1,8 +1,8 @@
-using System.Drawing;
-using ProductCatalog.BindingItem;
+﻿using System.Drawing;
 using ProductCatalog.Core.Models.Categories;
+using ProductCatalog.WinForms.BindingItem;
 
-namespace ProductCatalog.Forms
+namespace ProductCatalog.WinForms.Forms
 {
     partial class MainForm
     {
@@ -44,13 +44,13 @@ namespace ProductCatalog.Forms
             materialTabSelector = new MaterialSkin.Controls.MaterialTabSelector();
             tabControl = new MaterialSkin.Controls.MaterialTabControl();
             tabPageCompanies = new System.Windows.Forms.TabPage();
-            listViewCompany = new ProductCatalog.Controls.PageTabControls.CompanyListView();
+            listViewCompany = new ProductCatalog.WinForms.Controls.PageTabControls.CompanyListView();
             tabPageCategory = new System.Windows.Forms.TabPage();
-            listViewCategory = new ProductCatalog.Controls.PageTabControls.CategoryListView();
+            listViewCategory = new ProductCatalog.WinForms.Controls.PageTabControls.CategoryListView();
             tabPageTypeProduct = new System.Windows.Forms.TabPage();
-            listViewTypeProduct = new ProductCatalog.Controls.PageTabControls.TypeProductListView();
+            listViewTypeProduct = new ProductCatalog.WinForms.Controls.PageTabControls.TypeProductListView();
             tabPageProducts = new System.Windows.Forms.TabPage();
-            listViewProduct = new ProductCatalog.Controls.PageTabControls.ProductListView();
+            listViewProduct = new ProductCatalog.WinForms.Controls.PageTabControls.ProductListView();
             bindingSourcePage = new System.Windows.Forms.BindingSource(components);
             bindingSourcePageProducts = new System.Windows.Forms.BindingSource(components);
             bindingSourcePageCompanies = new System.Windows.Forms.BindingSource(components);

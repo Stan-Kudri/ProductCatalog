@@ -1,19 +1,16 @@
 using System;
 using System.Collections.Generic;
-using ProductCatalog.BindingItem.ObservableCollection;
 using ProductCatalog.Core.Models.Categories;
 using ProductCatalog.Core.Models.Companies;
 using ProductCatalog.Core.Models.Types;
+using ProductCatalog.WinForms.BindingItem.ObservableCollection;
 
-namespace ProductCatalog.Forms.Products
+namespace ProductCatalog.WinForms.Forms.Products
 {
     public class AddItemProductForm : ProductFormBase
     {
         public AddItemProductForm(IServiceProvider serviceProvider)
-            : base(serviceProvider)
-        {
-            Text = "Add Product";
-        }
+            : base(serviceProvider) => Text = "Add Product";
 
         public void Initialize(List<Company> company, List<Category> category, List<ProductType> types)
         {

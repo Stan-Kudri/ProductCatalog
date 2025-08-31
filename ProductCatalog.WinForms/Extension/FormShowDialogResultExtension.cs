@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ProductCatalog.Forms;
+using ProductCatalog.WinForms.Forms;
 
-namespace ProductCatalog.Extension
+namespace ProductCatalog.WinForms.Extension
 {
     public static class FormShowDialogResultExtension
     {

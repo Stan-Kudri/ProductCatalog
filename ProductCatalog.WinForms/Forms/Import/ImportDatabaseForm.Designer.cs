@@ -1,4 +1,4 @@
-namespace ProductCatalog.ChildForms.Import
+﻿namespace ProductCatalog.WinForms.Forms.Import
 {
     partial class ImportDatabaseForm
     {

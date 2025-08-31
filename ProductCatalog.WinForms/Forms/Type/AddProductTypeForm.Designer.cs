@@ -1,4 +1,4 @@
-namespace ProductCatalog.Forms.Type
+﻿namespace ProductCatalog.WinForms.Forms.Type
 {
     partial class AddProductTypeForm
     {

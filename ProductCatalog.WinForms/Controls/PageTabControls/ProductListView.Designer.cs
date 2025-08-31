@@ -1,4 +1,6 @@
-namespace ProductCatalog.Controls.PageTabControls
+﻿using ProductCatalog.Controls.CheckComboBoxes;
+
+namespace ProductCatalog.WinForms.Controls.PageTabControls
 {
     partial class ProductListView
     {
@@ -29,7 +31,7 @@ namespace ProductCatalog.Controls.PageTabControls
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            CheckComboBox.CheckBoxProperties checkBoxProperties2 = new CheckComboBox.CheckBoxProperties();
+            CheckBoxProperties checkBoxProperties = new CheckBoxProperties();
             listView = new ListViewControl();
             tlpFilter = new System.Windows.Forms.TableLayoutPanel();
             labelSearchName = new System.Windows.Forms.Label();
@@ -37,7 +39,7 @@ namespace ProductCatalog.Controls.PageTabControls
             buttonUseFilter = new MaterialSkin.Controls.MaterialButton();
             tbSearchStrName = new System.Windows.Forms.TextBox();
             labelTypeSort = new System.Windows.Forms.Label();
-            checkCmbField = new CheckComboBox.CheckBoxComboBox();
+            checkCmbField = new CheckBoxComboBox();
             btnTypeSort = new MaterialSkin.Controls.MaterialButton();
             itemsBindingSourceSortType = new System.Windows.Forms.BindingSource(components);
             tlpFilter.SuspendLayout();
@@ -162,8 +164,8 @@ namespace ProductCatalog.Controls.PageTabControls
             // 
             // checkCmbField
             // 
-            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
-            checkCmbField.CheckBoxProperties = checkBoxProperties2;
+            checkBoxProperties.ForeColor = System.Drawing.SystemColors.ControlText;
+            checkCmbField.CheckBoxProperties = checkBoxProperties;
             checkCmbField.DisplayMemberSingleItem = "";
             checkCmbField.Dock = System.Windows.Forms.DockStyle.Bottom;
             checkCmbField.FormattingEnabled = true;
@@ -225,7 +227,7 @@ namespace ProductCatalog.Controls.PageTabControls
         private System.Windows.Forms.BindingSource itemsBindingSourceSortType;
         private System.Windows.Forms.Label labelSearchName;
         private System.Windows.Forms.Label labelTypeSort;
-        private CheckComboBox.CheckBoxComboBox checkCmbField;
+        private ProductCatalog.Controls.CheckComboBoxes.CheckBoxComboBox checkCmbField;
         private MaterialSkin.Controls.MaterialButton btnTypeSort;
     }
 }

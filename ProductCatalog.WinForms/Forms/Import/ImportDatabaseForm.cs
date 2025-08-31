@@ -4,9 +4,8 @@ using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
 using ProductCatalog.Core;
 using ProductCatalog.Core.DataTable;
-using ProductCatalog.Forms;
 
-namespace ProductCatalog.ChildForms.Import
+namespace ProductCatalog.WinForms.Forms.Import
 {
     public partial class ImportDatabaseForm : BaseForm
     {

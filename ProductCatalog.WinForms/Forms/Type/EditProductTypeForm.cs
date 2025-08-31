@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using ProductCatalog.BindingItem.ObservableCollection;
 using ProductCatalog.Core.Models.Categories;
 using ProductCatalog.Core.Models.Types;
+using ProductCatalog.WinForms.BindingItem.ObservableCollection;
 
-namespace ProductCatalog.Forms.Type
+namespace ProductCatalog.WinForms.Forms.Type
 {
     public partial class EditProductTypeForm : ProductTypeBaseForm
     {
@@ -13,10 +13,7 @@ namespace ProductCatalog.Forms.Type
         private ProductType _editItem;
 
         public EditProductTypeForm(IServiceProvider serviceProvider)
-            : base(serviceProvider)
-        {
-            Text = "Edit Type";
-        }
+            : base(serviceProvider) => Text = "Edit Type";
 
         public void Initialize(List<Category> category, ProductType oldItem)
         {

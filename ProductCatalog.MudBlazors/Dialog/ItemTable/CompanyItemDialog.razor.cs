@@ -14,7 +14,7 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
         [Inject] private CompanyService CompanyService { get; set; } = null!;
         [Inject] private IMessageBox MessageDialog { get; set; } = null!;
 
-        private CompanyModel companyModel { get; set; } = new CompanyModel();
+        private CompanyModel CompanyModel { get; set; } = new CompanyModel();
         private string[] errors = [];
         private bool isAddItem = true;
 
@@ -32,7 +32,7 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
 
             isAddItem = false;
             oldCompany = await CompanyService.GetItem((Guid)Id);
-            companyModel = oldCompany.GetCompanyModel();
+            CompanyModel = oldCompany.GetCompanyModel();
         }
 
         private void Close() => MudDialog.Cancel();
@@ -50,19 +50,19 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
                 return;
             }
 
-            if (!await CompanyService.IsFreeName(companyModel.Name))
+            if (!await CompanyService.IsFreeName(CompanyModel.Name))
             {
                 await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
-            var company = companyModel.GetCompany();
+            var company = CompanyModel.GetCompany();
             await CompanyService.AddAsync(company);
 
             MudDialog.Close();
         }
 
-        private void ClearData() => companyModel.ClearData();
+        private void ClearData() => CompanyModel.ClearData();
 
         private async Task Updata()
         {
@@ -77,7 +77,7 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
                 return;
             }
 
-            var company = companyModel.GetModifyCompany(oldCompany.Id);
+            var company = CompanyModel.GetModifyCompany(oldCompany.Id);
 
             if (!await CompanyService.IsFreeNameItemUpsert(company))
             {
@@ -93,7 +93,7 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
             MudDialog.Close();
         }
 
-        private void RecoverPastData() => companyModel = oldCompany.GetCompanyModel();
+        private void RecoverPastData() => CompanyModel = oldCompany.GetCompanyModel();
 
         private IEnumerable<string> ValidFormatText(string str)
         {
@@ -107,13 +107,13 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
         {
             message = string.Empty;
 
-            if (companyModel.Name == null || companyModel.Name == string.Empty)
+            if (CompanyModel.Name == null || CompanyModel.Name == string.Empty)
             {
                 message = "Name is required.";
                 return false;
             }
 
-            if (companyModel.DateCreation == null)
+            if (CompanyModel.DateCreation == null)
             {
                 message = "The company creation date has not been selected.";
                 return false;

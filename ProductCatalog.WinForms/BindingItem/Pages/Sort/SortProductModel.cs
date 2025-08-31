@@ -1,6 +1,6 @@
 using ProductCatalog.Core.Models.Products;
 
-namespace ProductCatalog.BindingItem.Pages.Sort
+namespace ProductCatalog.WinForms.BindingItem.Pages.Sort
 {
     public class SortProductModel : CommonSortModel<Product>
     {

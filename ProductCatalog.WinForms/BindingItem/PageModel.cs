@@ -2,7 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using ProductCatalog.Core.Models.Page;
 
-namespace ProductCatalog.BindingItem
+namespace ProductCatalog.WinForms.BindingItem
 {
     public class PageModel : ModelBase
     {

@@ -4,13 +4,9 @@ using ProductCatalog.MudBlazors.Pages.Table.Model;
 
 namespace ProductCatalog.MudBlazors.Pages.Table.PageTableProvider
 {
-    public class ProductDetailProvider : ITableDetailProvider<Product>
+    public class ProductDetailProvider(ProductService productService)
+        : ITableDetailProvider<Product>
     {
-        private readonly ProductService _productService;
-
-        public ProductDetailProvider(ProductService productService)
-            => _productService = productService;
-
         public IReadOnlyList<ListTableColumn> Columns => new List<ListTableColumn>
         {
             new ListTableColumn("Name", 20, e => ((Product)e).Name),
@@ -21,7 +17,7 @@ namespace ProductCatalog.MudBlazors.Pages.Table.PageTableProvider
         };
 
         public IQueryable<Product> GetQueryableAll()
-            => _productService.GetQueryableAll();
+            => productService.GetQueryableAll();
 
         public IQueryable<Product> GetSearchName(IQueryable<Product> items, string? searchString)
             => string.IsNullOrEmpty(searchString)
@@ -32,8 +28,8 @@ namespace ProductCatalog.MudBlazors.Pages.Table.PageTableProvider
                                 || e.Type.Name.Contains(searchString)
                                 || e.Price.ToString(CultureInfo.InvariantCulture).Contains(searchString));
 
-        public async Task Remove(Guid id) => await _productService.RemoveAsync(id);
+        public async Task Remove(Guid id) => await productService.RemoveAsync(id);
 
-        public async Task Upsert(Product entity) => await _productService.UpsertAsync(entity);
+        public async Task Upsert(Product entity) => await productService.UpsertAsync(entity);
     }
 }

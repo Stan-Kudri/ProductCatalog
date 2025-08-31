@@ -2,7 +2,7 @@ using System;
 using System.Windows.Forms;
 using ProductCatalog.Core.Models.Categories;
 
-namespace ProductCatalog.Forms.Categories
+namespace ProductCatalog.WinForms.Forms.Categories
 {
     public class EditCategoryForm : CategoryFormBase
     {

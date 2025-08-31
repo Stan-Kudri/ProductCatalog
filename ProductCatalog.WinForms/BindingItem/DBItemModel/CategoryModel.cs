@@ -1,7 +1,7 @@
 using System;
 using ProductCatalog.Core.Models.Categories;
 
-namespace ProductCatalog.BindingItem.DBItemModel
+namespace ProductCatalog.WinForms.BindingItem.DBItemModel
 {
     public class CategoryModel(string name) : ModelBase
     {

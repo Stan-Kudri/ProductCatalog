@@ -1,15 +1,11 @@
 using System.Drawing;
 
-namespace ProductCatalog.Controls.CheckComboBox
+namespace ProductCatalog.Controls.CheckComboBoxes
 {
-    internal struct GripBounds
+    internal struct GripBounds(Rectangle clientRectangle)
     {
         private const int GripSize = 6;
         private const int CornerGripSize = GripSize << 1;
-
-        public GripBounds(Rectangle clientRectangle) => this.clientRectangle = clientRectangle;
-
-        private Rectangle clientRectangle;
 
         public Rectangle ClientRectangle => clientRectangle;
 

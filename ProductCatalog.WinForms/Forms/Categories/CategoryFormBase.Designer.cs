@@ -1,6 +1,6 @@
-using ProductCatalog.BindingItem.DBItemModel;
+﻿using ProductCatalog.WinForms.BindingItem.DBItemModel;
 
-namespace ProductCatalog.Forms.Categories
+namespace ProductCatalog.WinForms.Forms.Categories
 {
     partial class CategoryFormBase: BaseForm
     {

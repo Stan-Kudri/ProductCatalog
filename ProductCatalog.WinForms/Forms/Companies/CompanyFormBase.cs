@@ -1,12 +1,12 @@
 using System;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
-using ProductCatalog.BindingItem.DBItemModel;
 using ProductCatalog.Core;
 using ProductCatalog.Core.Exeption;
 using ProductCatalog.Core.Models.Companies;
+using ProductCatalog.WinForms.BindingItem.DBItemModel;
 
-namespace ProductCatalog.Forms.Companies
+namespace ProductCatalog.WinForms.Forms.Companies
 {
     public partial class CompanyFormBase : BaseForm
     {

@@ -2,7 +2,7 @@ using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace ProductCatalog.Controls.CheckComboBox
+namespace ProductCatalog.Controls.CheckComboBoxes
 {
     internal static class NativeMethods
     {

@@ -4,17 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
-using ProductCatalog.BindingItem.Pages;
-using ProductCatalog.BindingItem.Pages.Sort;
 using ProductCatalog.Controls.PageTabControls.Model;
 using ProductCatalog.Core;
 using ProductCatalog.Core.Models;
 using ProductCatalog.Core.Models.Categories;
 using ProductCatalog.Core.Models.Page;
-using ProductCatalog.Extension;
-using ProductCatalog.Forms.Categories;
+using ProductCatalog.WinForms.BindingItem.Pages;
+using ProductCatalog.WinForms.BindingItem.Pages.Sort;
+using ProductCatalog.WinForms.Extension;
+using ProductCatalog.WinForms.Forms.Categories;
 
-namespace ProductCatalog.Controls.PageTabControls
+namespace ProductCatalog.WinForms.Controls.PageTabControls
 {
     public partial class CategoryListView : UserControl, IListViewDataProvider, IInitialize, ILoad
     {
@@ -104,6 +104,7 @@ namespace ProductCatalog.Controls.PageTabControls
 
         public async Task Remove(Entity entity) => await _categoryRepository.RemoveAsync(entity.Id);
 
+        [Obsolete]
         private void ButtonUseFilter_Click(object sender, EventArgs e)
             => UsedFilter();
 
@@ -118,6 +119,7 @@ namespace ProductCatalog.Controls.PageTabControls
             LoadData();
         }
 
+        [Obsolete]
         private void BtnTypeSort_Click(object sender, EventArgs e)
         {
             if (_isAscending)

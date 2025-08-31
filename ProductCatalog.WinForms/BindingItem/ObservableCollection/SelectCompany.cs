@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ProductCatalog.Core.Models.Companies;
 
-namespace ProductCatalog.BindingItem.ObservableCollection
+namespace ProductCatalog.WinForms.BindingItem.ObservableCollection
 {
     public class SelectCompany : ModelBase
     {

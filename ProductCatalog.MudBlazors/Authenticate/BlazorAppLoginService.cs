@@ -26,8 +26,7 @@ namespace ProductCatalog.MudBlazors.Authenticate
         public async Task<List<Claim>> GetLoginInfoAsync()
         {
             var emptyResut = new List<Claim>();
-            ProtectedBrowserStorageResult<string> token = default;
-
+            ProtectedBrowserStorageResult<string> token;
             try
             {
                 token = await localStorage.GetAsync<string>(TokenKey);

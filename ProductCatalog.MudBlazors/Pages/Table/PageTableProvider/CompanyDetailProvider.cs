@@ -1,15 +1,11 @@
 using ProductCatalog.Core.Models.Companies;
 using ProductCatalog.MudBlazors.Pages.Table.Model;
 
-namespace ProductCatalog.MudBlazors.Pages.Table.PageTableView
+namespace ProductCatalog.MudBlazors.Pages.Table.PageTableProvider
 {
-    public class CompanyDetailProvider : ITableDetailProvider<Company>
+    public class CompanyDetailProvider(CompanyService companyService)
+        : ITableDetailProvider<Company>
     {
-        private readonly CompanyService _companyService;
-
-        public CompanyDetailProvider(CompanyService companyService)
-            => _companyService = companyService;
-
         public IReadOnlyList<ListTableColumn> Columns => new List<ListTableColumn>
         {
             new ListTableColumn("Name", 20, e => ((Company)e).Name),
@@ -18,7 +14,7 @@ namespace ProductCatalog.MudBlazors.Pages.Table.PageTableView
         };
 
         public IQueryable<Company> GetQueryableAll()
-            => _companyService.GetQueryableAll();
+            => companyService.GetQueryableAll();
 
         public IQueryable<Company> GetSearchName(IQueryable<Company> items, string? searchString)
             => string.IsNullOrEmpty(searchString)
@@ -27,8 +23,8 @@ namespace ProductCatalog.MudBlazors.Pages.Table.PageTableView
                                 || e.Country.Contains(searchString)
                                 || e.DateCreation.ToString().Contains(searchString));
 
-        public async Task Remove(Guid id) => await _companyService.RemoveAsync(id);
+        public async Task Remove(Guid id) => await companyService.RemoveAsync(id);
 
-        public async Task Upsert(Company entity) => await _companyService.UpsertAsync(entity);
+        public async Task Upsert(Company entity) => await companyService.UpsertAsync(entity);
     }
 }

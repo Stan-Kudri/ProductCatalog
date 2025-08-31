@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProductCatalog.Core;
 
-namespace ProductCatalog.Messages
+namespace ProductCatalog.WinForms.Messages
 {
     public class MessageBoxShow : IMessageBox
     {

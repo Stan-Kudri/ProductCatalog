@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using ProductCatalog.Core.DataTable;
 
-namespace ProductCatalog.Model.Importer
+namespace ProductCatalog.WinForms.Model.Importer
 {
     public interface IExcelImpoterTable
     {

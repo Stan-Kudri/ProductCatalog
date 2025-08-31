@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
-using ProductCatalog.ChildForms.Import;
 using ProductCatalog.Controls.PageTabControls.Model;
 using ProductCatalog.Core;
 using ProductCatalog.Core.DataTable;
@@ -14,9 +13,10 @@ using ProductCatalog.Core.Models.Categories;
 using ProductCatalog.Core.Models.Companies;
 using ProductCatalog.Core.Models.Products;
 using ProductCatalog.Core.Models.Types;
-using ProductCatalog.Model;
+using ProductCatalog.WinForms.Forms.Import;
+using ProductCatalog.WinForms.Model;
 
-namespace ProductCatalog.Forms
+namespace ProductCatalog.WinForms.Forms
 {
     public partial class MainForm : BaseForm
     {
