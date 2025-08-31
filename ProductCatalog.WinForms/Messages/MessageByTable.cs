@@ -1,7 +1,7 @@
-﻿using ProductCatalog.Core;
-using ProductCatalog.Core.Models;
 using System.Linq;
 using System.Threading.Tasks;
+using ProductCatalog.Core;
+using ProductCatalog.Core.Models;
 
 namespace ProductCatalog.WinForms.Messages
 {

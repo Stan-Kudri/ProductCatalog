@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using Microsoft.Extensions.DependencyInjection;
 using ProductCatalog.Controls.PageTabControls.Model;
 using ProductCatalog.Core;
 using ProductCatalog.Core.DataTable;
@@ -12,9 +15,6 @@ using ProductCatalog.Core.Models.Products;
 using ProductCatalog.Core.Models.Types;
 using ProductCatalog.WinForms.Forms.Import;
 using ProductCatalog.WinForms.Model;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace ProductCatalog.WinForms.Forms
 {

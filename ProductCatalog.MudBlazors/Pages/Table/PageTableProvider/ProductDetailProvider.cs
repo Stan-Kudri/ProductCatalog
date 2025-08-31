@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using ProductCatalog.Core.Models.Products;
 using ProductCatalog.MudBlazors.Pages.Table.Model;
 

@@ -1,4 +1,4 @@
-﻿using ProductCatalog.Core.Models.Types;
+using ProductCatalog.Core.Models.Types;
 
 namespace ProductCatalog.Core.Export.SheetFillers.Model
 {

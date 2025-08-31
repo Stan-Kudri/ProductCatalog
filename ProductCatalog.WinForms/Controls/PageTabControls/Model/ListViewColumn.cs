@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ProductCatalog.Core.Models;
 
 namespace ProductCatalog.Controls.PageTabControls.Model

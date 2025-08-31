@@ -1,9 +1,9 @@
-﻿using ProductCatalog.Core.Models.Categories;
+using System;
+using System.Collections.Generic;
+using ProductCatalog.Core.Models.Categories;
 using ProductCatalog.Core.Models.Companies;
 using ProductCatalog.Core.Models.Types;
 using ProductCatalog.WinForms.BindingItem.ObservableCollection;
-using System;
-using System.Collections.Generic;
 
 namespace ProductCatalog.WinForms.Forms.Products
 {

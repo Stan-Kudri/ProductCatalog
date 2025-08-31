@@ -1,5 +1,5 @@
-﻿using ProductCatalog.WinForms.Forms.Categories;
 using System;
+using ProductCatalog.WinForms.Forms.Categories;
 
 namespace ProductCatalog.WinForms.Forms.Categories
 {

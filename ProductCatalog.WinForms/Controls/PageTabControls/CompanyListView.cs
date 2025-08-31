@@ -1,4 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Microsoft.Extensions.DependencyInjection;
 using ProductCatalog.Controls.PageTabControls.Model;
 using ProductCatalog.Core;
 using ProductCatalog.Core.Models;
@@ -8,11 +13,6 @@ using ProductCatalog.WinForms.BindingItem.Pages;
 using ProductCatalog.WinForms.BindingItem.Pages.Sort;
 using ProductCatalog.WinForms.Extension;
 using ProductCatalog.WinForms.Forms.Companies;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ProductCatalog.WinForms.Controls.PageTabControls
 {

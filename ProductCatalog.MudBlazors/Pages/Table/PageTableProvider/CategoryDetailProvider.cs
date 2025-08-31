@@ -1,9 +1,9 @@
-﻿using ProductCatalog.Core.Models.Categories;
+using ProductCatalog.Core.Models.Categories;
 using ProductCatalog.MudBlazors.Pages.Table.Model;
 
 namespace ProductCatalog.MudBlazors.Pages.Table.PageTableProvider
 {
-    public class CategoryDetailProvider(CategoryService categoryService) 
+    public class CategoryDetailProvider(CategoryService categoryService)
         : ITableDetailProvider<Category>
     {
         public IReadOnlyList<ListTableColumn> Columns => new List<ListTableColumn>

@@ -1,6 +1,6 @@
-﻿using ProductCatalog.WinForms.Forms;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProductCatalog.WinForms.Forms;
 
 namespace ProductCatalog.WinForms.Extension
 {

@@ -1,6 +1,6 @@
-﻿using ProductCatalog.Core.Models.Companies;
 using System;
 using System.Windows.Forms;
+using ProductCatalog.Core.Models.Companies;
 
 namespace ProductCatalog.WinForms.Forms.Companies
 {

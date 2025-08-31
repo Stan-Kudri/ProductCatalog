@@ -1,4 +1,4 @@
-﻿namespace ProductCatalog.WinForms.BindingItem
+namespace ProductCatalog.WinForms.BindingItem
 {
     public class UserModel(string username, string password) : ModelBase
     {

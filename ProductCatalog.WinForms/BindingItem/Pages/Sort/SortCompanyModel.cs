@@ -1,4 +1,4 @@
-﻿using ProductCatalog.Core.Models.Companies;
+using ProductCatalog.Core.Models.Companies;
 
 namespace ProductCatalog.WinForms.BindingItem.Pages.Sort
 {

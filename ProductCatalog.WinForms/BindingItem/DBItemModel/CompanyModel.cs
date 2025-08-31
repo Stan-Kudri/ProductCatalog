@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ProductCatalog.Core.Exeption;
 using ProductCatalog.Core.Models.Companies;
 

@@ -1,11 +1,11 @@
-﻿using ProductCatalog.Core.Models.Categories;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using ProductCatalog.Core.Models.Categories;
 using ProductCatalog.Core.Models.Companies;
 using ProductCatalog.Core.Models.Products;
 using ProductCatalog.Core.Models.Types;
 using ProductCatalog.WinForms.BindingItem.ObservableCollection;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace ProductCatalog.WinForms.Forms.Products
 {

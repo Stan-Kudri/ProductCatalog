@@ -1,6 +1,6 @@
-﻿using ProductCatalog.Core;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProductCatalog.Core;
 
 namespace ProductCatalog.WinForms.Messages
 {

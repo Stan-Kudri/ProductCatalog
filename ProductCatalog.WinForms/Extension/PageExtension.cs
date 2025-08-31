@@ -1,5 +1,5 @@
-﻿using ProductCatalog.Core.Models.Page;
 using System.Linq;
+using ProductCatalog.Core.Models.Page;
 
 namespace ProductCatalog.WinForms.Extension
 {

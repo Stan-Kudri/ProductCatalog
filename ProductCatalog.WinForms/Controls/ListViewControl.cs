@@ -1,12 +1,12 @@
-﻿using ProductCatalog.Controls.PageTabControls.Model;
-using ProductCatalog.Core;
-using ProductCatalog.Core.Models;
-using ProductCatalog.Core.Models.Page;
-using ProductCatalog.WinForms.BindingItem;
 using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using ProductCatalog.Controls.PageTabControls.Model;
+using ProductCatalog.Core;
+using ProductCatalog.Core.Models;
+using ProductCatalog.Core.Models.Page;
+using ProductCatalog.WinForms.BindingItem;
 
 namespace ProductCatalog.WinForms.Controls
 {

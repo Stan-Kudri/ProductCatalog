@@ -1,4 +1,4 @@
-﻿using ProductCatalog.Core.Models.Types;
+using ProductCatalog.Core.Models.Types;
 using ProductCatalog.MudBlazors.Pages.Table.Model;
 
 namespace ProductCatalog.MudBlazors.Pages.Table.PageTableProvider

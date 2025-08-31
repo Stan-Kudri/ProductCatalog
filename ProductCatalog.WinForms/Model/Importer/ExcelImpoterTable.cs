@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using ProductCatalog.Core;
 using ProductCatalog.Core.DataTable;
 using ProductCatalog.Core.Extension;

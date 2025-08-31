@@ -1,4 +1,4 @@
-﻿using ProductCatalog.Core;
+using ProductCatalog.Core;
 using ProductCatalog.Core.DataTable;
 using ProductCatalog.Core.Import;
 using ProductCatalog.Core.Models.Products;

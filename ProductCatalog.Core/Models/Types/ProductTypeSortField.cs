@@ -1,4 +1,4 @@
-﻿using ProductCatalog.Core.Models.SortModel;
+using ProductCatalog.Core.Models.SortModel;
 
 namespace ProductCatalog.Core.Models.Types
 {

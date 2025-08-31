@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using ProductCatalog.Core.Models.Categories;
 using ProductCatalog.WinForms.BindingItem.ObservableCollection;

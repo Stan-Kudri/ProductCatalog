@@ -1,8 +1,8 @@
-﻿using Ardalis.SmartEnum;
+using Ardalis.SmartEnum;
 
 namespace ProductCatalog.WinForms.BindingItem.Pages
 {
-    public class TypeSortFields(string name, int value) 
+    public class TypeSortFields(string name, int value)
         : SmartEnum<TypeSortFields>(name, value)
     {
         public static TypeSortFields Unknown = new("Unknown", 0);

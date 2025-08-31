@@ -1,8 +1,8 @@
-﻿using ProductCatalog.Core.DataTable;
-using ProductCatalog.WinForms.Model.Importer;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ProductCatalog.Core.DataTable;
+using ProductCatalog.WinForms.Model.Importer;
 
 namespace ProductCatalog.WinForms.Model
 {
