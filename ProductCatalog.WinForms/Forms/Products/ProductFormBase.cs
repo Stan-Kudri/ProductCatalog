@@ -1,17 +1,17 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
-using ProductCatalog.BindingItem.DBItemModel;
-using ProductCatalog.BindingItem.ObservableCollection;
 using ProductCatalog.Core;
 using ProductCatalog.Core.Exeption;
 using ProductCatalog.Core.Models.Categories;
 using ProductCatalog.Core.Models.Companies;
 using ProductCatalog.Core.Models.Types;
+using ProductCatalog.WinForms.BindingItem.DBItemModel;
+using ProductCatalog.WinForms.BindingItem.ObservableCollection;
 
-namespace ProductCatalog.Forms.Products
+namespace ProductCatalog.WinForms.Forms.Products
 {
     public partial class ProductFormBase : BaseForm
     {

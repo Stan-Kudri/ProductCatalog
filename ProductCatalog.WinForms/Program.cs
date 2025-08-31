@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Windows.Forms;
 using MaterialSkin;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,13 +9,13 @@ using ProductCatalog.Core.Models;
 using ProductCatalog.Core.Models.Products;
 using ProductCatalog.Core.Models.Types;
 using ProductCatalog.Core.Models.Users;
-using ProductCatalog.Forms;
-using ProductCatalog.Messages;
 using ProductCatalog.Migrations;
-using ProductCatalog.Model;
-using ProductCatalog.Model.Importer;
+using ProductCatalog.WinForms.Forms;
+using ProductCatalog.WinForms.Messages;
+using ProductCatalog.WinForms.Model;
+using ProductCatalog.WinForms.Model.Importer;
 
-namespace ProductCatalog
+namespace ProductCatalog.WinForms
 {
     public static class Program
     {

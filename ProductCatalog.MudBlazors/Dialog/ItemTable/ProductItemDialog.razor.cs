@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using ProductCatalog.Core;
 using ProductCatalog.Core.Models.Categories;
@@ -20,7 +20,7 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
         [Inject] private ProductTypeService ProductTypeService { get; set; } = null!;
         [Inject] private IMessageBox MessageDialog { get; set; } = null!;
 
-        private ProductModel productModel { get; set; } = new ProductModel();
+        private ProductModel ProductModel { get; set; } = new ProductModel();
 
         private const string MessageFieldRequired = "Field is required.";
 
@@ -50,7 +50,7 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
             isAddItem = isDisabledType = false;
             _oldProduct = await ProductService.GetItem((Guid)Id);
             selectTypes = ProductTypeService.GetListTypesByCategory(_oldProduct.CategoryId);
-            productModel = _oldProduct.GetProductModel();
+            ProductModel = _oldProduct.GetProductModel();
         }
 
         private void Close() => MudDialog.Cancel();
@@ -68,19 +68,19 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
                 return;
             }
 
-            if (!await ProductService.IsFreeName(productModel.Name))
+            if (!await ProductService.IsFreeName(ProductModel.Name))
             {
                 await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
-            var product = productModel.GetProductType();
+            var product = ProductModel.GetProductType();
             await ProductService.AddAsync(product);
 
             MudDialog.Close();
         }
 
-        private void ClearData() => productModel.ClearData();
+        private void ClearData() => ProductModel.ClearData();
 
         private async Task Updata()
         {
@@ -95,7 +95,7 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
                 return;
             }
 
-            var product = productModel.GetModifyType(_oldProduct.Id);
+            var product = ProductModel.GetModifyType(_oldProduct.Id);
 
             if (!await ProductService.IsFreeNameItemUpsert(product))
             {
@@ -111,18 +111,18 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
             MudDialog.Close();
         }
 
-        private void RecoverPastData() => productModel = _oldProduct.GetProductModel();
+        private void RecoverPastData() => ProductModel = _oldProduct.GetProductModel();
 
         private void ChangeValueCategory(Category? item)
         {
 #pragma warning disable BL0005 // Component parameter should not be set outside of its component.
-            productModel.Category = item;
+            ProductModel.Category = item;
 #pragma warning restore BL0005 // Component parameter should not be set outside of its component.
 
-            selectTypes = ProductTypeService.GetListTypesByCategory(productModel.Category.Id);
-            productModel.Category.Types = selectTypes;
+            selectTypes = ProductTypeService.GetListTypesByCategory(ProductModel.Category.Id);
+            ProductModel.Category.Types = selectTypes;
 
-            if (productModel.Category == null || productModel.Category.Types == null)
+            if (ProductModel.Category == null || ProductModel.Category.Types == null)
             {
                 isDisabledType = true;
                 return;
@@ -141,7 +141,7 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
 
         private IEnumerable<string> ValidFormatPrice(string str)
         {
-            if (!decimal.TryParse(str, out var value))
+            if (!decimal.TryParse(str, out decimal value))
             {
                 yield return MessageFieldRequired;
             }
@@ -151,31 +151,31 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
         {
             message = string.Empty;
 
-            if (productModel.Name == null || productModel.Name == string.Empty)
+            if (ProductModel.Name == null || ProductModel.Name == string.Empty)
             {
                 message = "Name is required.";
                 return false;
             }
 
-            if (productModel.Price <= 0)
+            if (ProductModel.Price <= 0)
             {
                 message = "Price is required";
                 return false;
             }
 
-            if (productModel.Company == null)
+            if (ProductModel.Company == null)
             {
                 message = "Company not selected.";
                 return false;
             }
 
-            if (productModel.Category == null)
+            if (ProductModel.Category == null)
             {
                 message = "Category not selected.";
                 return false;
             }
 
-            if (productModel.ProductType == null)
+            if (ProductModel.ProductType == null)
             {
                 message = "Product Type not selected.";
                 return false;

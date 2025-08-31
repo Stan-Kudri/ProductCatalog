@@ -1,8 +1,8 @@
+﻿using MaterialSkin;
 using System.ComponentModel;
 using System.Windows.Forms;
-using MaterialSkin;
 
-namespace ProductCatalog.Controls
+namespace ProductCatalog.WinForms.Controls
 {
     public partial class BaseUserControl : UserControl, IMaterialControl
     {

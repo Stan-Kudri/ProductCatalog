@@ -1,11 +1,11 @@
-using System;
-using System.Windows.Forms;
-using Microsoft.Extensions.DependencyInjection;
-using ProductCatalog.BindingItem;
+﻿using Microsoft.Extensions.DependencyInjection;
 using ProductCatalog.Core;
 using ProductCatalog.Core.Models.Users;
+using ProductCatalog.WinForms.BindingItem;
+using System;
+using System.Windows.Forms;
 
-namespace ProductCatalog.Forms
+namespace ProductCatalog.WinForms.Forms
 {
     public partial class LoginForm : BaseForm
     {

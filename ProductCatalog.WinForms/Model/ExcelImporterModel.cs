@@ -1,10 +1,10 @@
+﻿using ProductCatalog.Core.DataTable;
+using ProductCatalog.WinForms.Model.Importer;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ProductCatalog.Core.DataTable;
-using ProductCatalog.Model.Importer;
 
-namespace ProductCatalog.Model
+namespace ProductCatalog.WinForms.Model
 {
     public sealed class ExcelImporterModel(IEnumerable<IExcelImpoterTable> excelImpoterTables)
     {

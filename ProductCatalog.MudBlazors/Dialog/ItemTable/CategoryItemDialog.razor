@@ -5,11 +5,11 @@
 @using ProductCatalog.MudBlazors.Shared
 
 <MudContainer>
-    <MudForm @bind-Errors="@errors" Model="@categoryModel">
+    <MudForm @bind-Errors="@errors" Model="@CategoryModel">
         <MudTextField T="string" Label="Name"
                       InputType="InputType.Text"
                       Required="true"
-                      @bind-Value=@categoryModel.Name
+                      @bind-Value=@CategoryModel.Name
                       Validation="@(new Func<string, IEnumerable<string>>(ValidFormatText))" />
     </MudForm>
 

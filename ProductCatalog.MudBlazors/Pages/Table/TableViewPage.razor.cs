@@ -1,4 +1,4 @@
-using Ardalis.SmartEnum;
+﻿using Ardalis.SmartEnum;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
@@ -40,7 +40,7 @@ namespace ProductCatalog.MudBlazors.Pages.Table
         private readonly PageModel _pageModel = new PageModel();
         private PagedList<T>? _pagedList = null;
 
-        private bool isAscending { get; set; } = true;
+        private bool IsAscending { get; set; } = true;
 
         protected override void OnInitialized() => LoadData();
 
@@ -102,7 +102,7 @@ namespace ProductCatalog.MudBlazors.Pages.Table
 
         private void ClearFilter()
         {
-            isAscending = true;
+            IsAscending = true;
             SortField.Clear();
             LoadData();
         }
@@ -132,7 +132,7 @@ namespace ProductCatalog.MudBlazors.Pages.Table
 
         public void OnToggledChanged(bool toggled)
         {
-            isAscending = toggled;
+            IsAscending = toggled;
             LoadData();
         }
 
@@ -152,7 +152,7 @@ namespace ProductCatalog.MudBlazors.Pages.Table
         {
             IQueryable<T> queriable = TableProvider.GetQueryableAll();
             queriable = TableProvider.GetSearchName(queriable, _searchString);
-            queriable = SortField.Apply(queriable, isAscending);
+            queriable = SortField.Apply(queriable, IsAscending);
             _pagedList = queriable.GetPagedList(_pageModel);
             items = _pagedList.Items;
             StateHasChanged();

@@ -1,4 +1,4 @@
-namespace ProductCatalog.Controls
+﻿namespace ProductCatalog.WinForms.Controls
 {
     partial class ListViewControl
     {

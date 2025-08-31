@@ -1,4 +1,4 @@
-namespace ProductCatalog.Controls.CheckComboBox
+﻿namespace ProductCatalog.Controls.CheckComboBoxes
 {
     partial class Popup
     {

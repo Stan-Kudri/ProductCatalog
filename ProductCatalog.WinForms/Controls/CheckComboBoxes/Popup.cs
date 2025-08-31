@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using VS = System.Windows.Forms.VisualStyles;
 
-namespace ProductCatalog.Controls.CheckComboBox
+namespace ProductCatalog.Controls.CheckComboBoxes
 {
     [CLSCompliant(true), ToolboxItem(false)]
     public partial class Popup : ToolStripDropDown

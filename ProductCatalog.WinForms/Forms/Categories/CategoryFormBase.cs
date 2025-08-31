@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
-using ProductCatalog.BindingItem.DBItemModel;
 using ProductCatalog.Core;
 using ProductCatalog.Core.Exeption;
+using ProductCatalog.WinForms.BindingItem.DBItemModel;
 
-namespace ProductCatalog.Forms.Categories
+namespace ProductCatalog.WinForms.Forms.Categories
 {
     public partial class CategoryFormBase : BaseForm
     {

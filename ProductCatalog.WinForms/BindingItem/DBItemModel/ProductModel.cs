@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using ProductCatalog.Core.Exeption;
 using ProductCatalog.Core.Models.Categories;
 using ProductCatalog.Core.Models.Companies;
 using ProductCatalog.Core.Models.Products;
 using ProductType = ProductCatalog.Core.Models.Types.ProductType;
 
-namespace ProductCatalog.BindingItem.DBItemModel
+namespace ProductCatalog.WinForms.BindingItem.DBItemModel
 {
     public class ProductModel : ModelBase
     {

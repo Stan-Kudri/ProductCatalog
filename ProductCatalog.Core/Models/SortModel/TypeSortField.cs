@@ -1,16 +1,16 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace ProductCatalog.Core.Models.SortModel
 {
-    public class TypeSortField
+    public class TypeSortField(bool? isAscending)
     {
         public const string NoSorting = "No Sorting";
 
         private const string Ascending = "Ascending";
         private const string Descending = "Descending";
 
-        protected bool? _isAscending = true;
+        protected bool? _isAscending = isAscending;
 
         private static readonly Dictionary<string, bool?> _sortMap = new Dictionary<string, bool?>()
         {
@@ -23,8 +23,6 @@ namespace ProductCatalog.Core.Models.SortModel
             : this(null)
         {
         }
-
-        public TypeSortField(bool? isAscending) => _isAscending = isAscending;
 
         public string SortType
         {

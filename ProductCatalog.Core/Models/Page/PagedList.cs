@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +32,7 @@ namespace ProductCatalog.Core.Models.Page
                 throw new ArgumentException("Total items can not be less than zero.", nameof(totalItems));
             }
 
-            Items = items.Take(pageSize).ToList();
+            Items = [.. items.Take(pageSize)];
             PageNumber = pageNumber;
             PageSize = pageSize;
             TotalItems = totalItems;

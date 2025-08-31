@@ -1,6 +1,6 @@
-using MaterialSkin.Controls;
+﻿using MaterialSkin.Controls;
 
-namespace ProductCatalog.Forms
+namespace ProductCatalog.WinForms.Forms
 {
     public partial class BaseForm : MaterialForm
     {

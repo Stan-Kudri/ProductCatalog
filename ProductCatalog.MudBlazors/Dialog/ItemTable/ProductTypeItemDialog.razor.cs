@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using ProductCatalog.Core;
 using ProductCatalog.Core.Models.Categories;
@@ -16,7 +16,7 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
         [Inject] private CategoryService CategoryService { get; set; } = null!;
         [Inject] private IMessageBox MessageDialog { get; set; } = null!;
 
-        private TypeProductModel typeProductModel { get; set; } = new TypeProductModel();
+        private TypeProductModel TypeProductModel { get; set; } = new TypeProductModel();
         private string[] errors = Array.Empty<string>();
         private bool isAddItem = true;
 
@@ -38,7 +38,7 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
 
             isAddItem = false;
             oldTypeProduct = await ProductTypeService.GetItem((Guid)Id);
-            typeProductModel = oldTypeProduct.GetTypeProductModel();
+            TypeProductModel = oldTypeProduct.GetTypeProductModel();
         }
 
         private void Close() => MudDialog.Cancel();
@@ -56,19 +56,19 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
                 return;
             }
 
-            if (!await ProductTypeService.IsFreeName(typeProductModel.Name))
+            if (!await ProductTypeService.IsFreeName(TypeProductModel.Name))
             {
                 await MessageDialog.ShowWarning("Name is not free.");
                 return;
             }
 
-            var typeProduct = typeProductModel.GetProductType();
+            var typeProduct = TypeProductModel.GetProductType();
             await ProductTypeService.AddAsync(typeProduct);
 
             MudDialog.Close();
         }
 
-        private void ClearData() => typeProductModel.ClearData();
+        private void ClearData() => TypeProductModel.ClearData();
 
         private async Task Updata()
         {
@@ -83,7 +83,7 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
                 return;
             }
 
-            var typeProduct = typeProductModel.GetModifyType(oldTypeProduct.Id);
+            var typeProduct = TypeProductModel.GetModifyType(oldTypeProduct.Id);
 
             if (!await ProductTypeService.IsFreeNameItemUpsert(typeProduct))
             {
@@ -99,7 +99,7 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
             MudDialog.Close();
         }
 
-        private void RecoverPastData() => typeProductModel = oldTypeProduct.GetTypeProductModel();
+        private void RecoverPastData() => TypeProductModel = oldTypeProduct.GetTypeProductModel();
 
         private IEnumerable<string> ValidFormatText(string str)
         {
@@ -113,13 +113,13 @@ namespace ProductCatalog.MudBlazors.Dialog.ItemTable
         {
             message = string.Empty;
 
-            if (typeProductModel.Name == null || typeProductModel.Name == string.Empty)
+            if (TypeProductModel.Name == null || TypeProductModel.Name == string.Empty)
             {
                 message = "Name is required.";
                 return false;
             }
 
-            if (typeProductModel.Category == null)
+            if (TypeProductModel.Category == null)
             {
                 message = "Category not selected.";
                 return false;

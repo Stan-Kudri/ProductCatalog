@@ -1,7 +1,7 @@
+﻿using ProductCatalog.Core.Models.Page;
 using System.Linq;
-using ProductCatalog.Core.Models.Page;
 
-namespace ProductCatalog.Extension
+namespace ProductCatalog.WinForms.Extension
 {
     public static class PageExtension
     {

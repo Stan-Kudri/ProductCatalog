@@ -1,8 +1,8 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ProductCatalog.BindingItem
+namespace ProductCatalog.WinForms.BindingItem
 {
     public class ModelBase : INotifyPropertyChanged
     {

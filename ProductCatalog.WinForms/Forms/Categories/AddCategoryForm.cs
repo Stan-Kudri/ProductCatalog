@@ -1,6 +1,7 @@
+﻿using ProductCatalog.WinForms.Forms.Categories;
 using System;
 
-namespace ProductCatalog.Forms.Categories
+namespace ProductCatalog.WinForms.Forms.Categories
 {
     public class AddCategoryForm : CategoryFormBase
     {

@@ -1,14 +1,14 @@
+﻿using ProductCatalog.Controls.PageTabControls.Model;
+using ProductCatalog.Core;
+using ProductCatalog.Core.Models;
+using ProductCatalog.Core.Models.Page;
+using ProductCatalog.WinForms.BindingItem;
 using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
-using ProductCatalog.BindingItem;
-using ProductCatalog.Controls.PageTabControls.Model;
-using ProductCatalog.Core;
-using ProductCatalog.Core.Models;
-using ProductCatalog.Core.Models.Page;
 
-namespace ProductCatalog.Controls
+namespace ProductCatalog.WinForms.Controls
 {
     public partial class ListViewControl : BaseUserControl
     {

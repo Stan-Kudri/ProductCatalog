@@ -5,21 +5,21 @@
 @using ProductCatalog.MudBlazors.Shared
 
 <MudContainer>
-    <MudForm @bind-Errors="@errors" Model="@companyModel">
+    <MudForm @bind-Errors="@errors" Model="@CompanyModel">
         <MudTextField T="string" Label="Name"
                       InputType="InputType.Text"
                       Required="true"
-                      @bind-Value=@companyModel.Name
+                      @bind-Value=@CompanyModel.Name
                       Validation="@(new Func<string, IEnumerable<string>>(ValidFormatText))" />
         <MudTextField T="string" Label="Country"
                       InputType="InputType.Text"
                       Required="true"
-                      @bind-Value=@companyModel.Country
+                      @bind-Value=@CompanyModel.Country
                       Validation="@(new Func<string, IEnumerable<string>>(ValidFormatText))" />
         <MudDatePicker Label="Date"
                        MaxDate="DateTime.Now"
                        Required="true"
-                       @bind-Date=@companyModel.DateCreation />
+                       @bind-Date=@CompanyModel.DateCreation />
     </MudForm>
 
     <MudSpacer/>

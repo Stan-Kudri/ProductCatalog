@@ -1,18 +1,14 @@
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace ProductCatalog.MudBlazors.Authenticate
 {
-    public class BlazorAuthStateProvider : AuthenticationStateProvider
+    public class BlazorAuthStateProvider(BlazorAppLoginService blazorAppLoginService)
+        : AuthenticationStateProvider
     {
-        private readonly BlazorAppLoginService _blazorAppLoginService;
-
-        public BlazorAuthStateProvider(BlazorAppLoginService blazorAppLoginService)
-            => _blazorAppLoginService = blazorAppLoginService;
-
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            var claims = await _blazorAppLoginService.GetLoginInfoAsync();
+            var claims = await blazorAppLoginService.GetLoginInfoAsync();
             ClaimsIdentity claimsIdentity = claims.Count != 0 ? new ClaimsIdentity(claims, "Bearer") : new ClaimsIdentity();
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
             return new AuthenticationState(claimsPrincipal);

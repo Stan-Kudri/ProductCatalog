@@ -5,15 +5,15 @@
 @using ProductCatalog.MudBlazors.Shared
 
 <MudContainer>
-    <MudForm @bind-Errors="@errors" Model="@typeProductModel">
+    <MudForm @bind-Errors="@errors" Model="@TypeProductModel">
 
         <MudTextField T="string" Label="Name"
                       InputType="InputType.Text"
                       Required="true"
-                      @bind-Value=@typeProductModel.Name
+                      @bind-Value=@TypeProductModel.Name
                       Validation="@(new Func<string, IEnumerable<string>>(ValidFormatText))" />
 
-        <MudSelect T="Category" Label="Category" @bind-Value="typeProductModel.Category" AdornmentIcon="@Icons.Material.Filled.ShortText">
+        <MudSelect T="Category" Label="Category" @bind-Value="TypeProductModel.Category" AdornmentIcon="@Icons.Material.Filled.ShortText">
             @foreach (var item in selectCategories)
             {
                 <MudSelectItem T="Category" Value="@item" />

@@ -1,13 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using ProductCatalog.BindingItem.ObservableCollection;
-using ProductCatalog.Core.Models.Categories;
+﻿using ProductCatalog.Core.Models.Categories;
 using ProductCatalog.Core.Models.Companies;
 using ProductCatalog.Core.Models.Products;
 using ProductCatalog.Core.Models.Types;
+using ProductCatalog.WinForms.BindingItem.ObservableCollection;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
-namespace ProductCatalog.Forms.Products
+namespace ProductCatalog.WinForms.Forms.Products
 {
     public class EditItemProductForm : ProductFormBase
     {
@@ -15,10 +15,7 @@ namespace ProductCatalog.Forms.Products
         private Product _editItem;
 
         public EditItemProductForm(IServiceProvider serviceProvider)
-            : base(serviceProvider)
-        {
-            Text = "Edit Product";
-        }
+            : base(serviceProvider) => Text = "Edit Product";
 
         public void Initialize(List<Company> company, List<Category> categories, List<ProductType> types, Product oldItem)
         {

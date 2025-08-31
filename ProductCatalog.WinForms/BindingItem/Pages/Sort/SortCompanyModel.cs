@@ -1,6 +1,6 @@
-using ProductCatalog.Core.Models.Companies;
+﻿using ProductCatalog.Core.Models.Companies;
 
-namespace ProductCatalog.BindingItem.Pages.Sort
+namespace ProductCatalog.WinForms.BindingItem.Pages.Sort
 {
     public class SortCompanyModel : CommonSortModel<Company>
     {

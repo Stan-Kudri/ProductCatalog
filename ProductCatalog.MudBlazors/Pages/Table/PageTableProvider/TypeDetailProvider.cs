@@ -1,15 +1,11 @@
-using ProductCatalog.Core.Models.Types;
+﻿using ProductCatalog.Core.Models.Types;
 using ProductCatalog.MudBlazors.Pages.Table.Model;
 
 namespace ProductCatalog.MudBlazors.Pages.Table.PageTableProvider
 {
-    public class TypeDetailProvider : ITableDetailProvider<ProductType>
+    public class TypeDetailProvider(ProductTypeService productTypeService)
+        : ITableDetailProvider<ProductType>
     {
-        private readonly ProductTypeService _typeService;
-
-        public TypeDetailProvider(ProductTypeService productTypeService)
-            => _typeService = productTypeService;
-
         public IReadOnlyList<ListTableColumn> Columns => new List<ListTableColumn>
         {
             new ListTableColumn("Name", 30, e => ((ProductType)e).Name),
@@ -17,7 +13,7 @@ namespace ProductCatalog.MudBlazors.Pages.Table.PageTableProvider
         };
 
         public IQueryable<ProductType> GetQueryableAll()
-            => _typeService.GetQueryableAll();
+            => productTypeService.GetQueryableAll();
 
         public IQueryable<ProductType> GetSearchName(IQueryable<ProductType> items, string? searchString)
             => string.IsNullOrEmpty(searchString)
@@ -25,8 +21,8 @@ namespace ProductCatalog.MudBlazors.Pages.Table.PageTableProvider
                 : items.Where(e => e.Name.Contains(searchString)
                                 || e.Category.Name.Contains(searchString));
 
-        public async Task Remove(Guid id) => await _typeService.RemoveAsync(id);
+        public async Task Remove(Guid id) => await productTypeService.RemoveAsync(id);
 
-        public async Task Upsert(ProductType entity) => await _typeService.UpsertAsync(entity);
+        public async Task Upsert(ProductType entity) => await productTypeService.UpsertAsync(entity);
     }
 }

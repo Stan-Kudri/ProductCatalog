@@ -1,22 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Microsoft.Extensions.DependencyInjection;
-using ProductCatalog.BindingItem.Pages;
-using ProductCatalog.BindingItem.Pages.Sort;
+﻿using Microsoft.Extensions.DependencyInjection;
 using ProductCatalog.Controls.PageTabControls.Model;
 using ProductCatalog.Core;
 using ProductCatalog.Core.Models;
 using ProductCatalog.Core.Models.Categories;
 using ProductCatalog.Core.Models.Page;
 using ProductCatalog.Core.Models.Types;
-using ProductCatalog.Extension;
-using ProductCatalog.Forms.Type;
-using ProductCatalog.Messages;
+using ProductCatalog.WinForms.BindingItem.Pages;
+using ProductCatalog.WinForms.BindingItem.Pages.Sort;
+using ProductCatalog.WinForms.Extension;
+using ProductCatalog.WinForms.Forms.Type;
+using ProductCatalog.WinForms.Messages;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
-namespace ProductCatalog.Controls.PageTabControls
+namespace ProductCatalog.WinForms.Controls.PageTabControls
 {
     public partial class TypeProductListView : UserControl, IListViewDataProvider, IInitialize, ILoad
     {

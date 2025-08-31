@@ -1,11 +1,12 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ProductCatalog.Core;
 using ProductCatalog.Core.DataTable;
 using ProductCatalog.Core.Extension;
 using ProductCatalog.Core.Import;
 using ProductCatalog.Core.Models;
+using ProductCatalog.WinForms.Model.Importer;
 
-namespace ProductCatalog.Model.Importer
+namespace ProductCatalog.WinForms.Model.Importer
 {
     public class ExcelImpoterTable<T>(IMessageBox messageBox, BaseService<T> service, ExcelImporter<T> excelImport, Table table)
         : IExcelImpoterTable

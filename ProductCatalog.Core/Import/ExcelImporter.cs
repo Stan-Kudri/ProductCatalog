@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -6,13 +6,8 @@ using ProductCatalog.Core.Import.Importers;
 
 namespace ProductCatalog.Core.Import
 {
-    public class ExcelImporter<T>
+    public class ExcelImporter<T>(IImporter<T> importer)
     {
-        private readonly IImporter<T> _importer;
-
-        public ExcelImporter(IImporter<T> importer)
-            => _importer = importer;
-
         public List<Result<T>> ImportFromFile(string path)
         {
             using var file = File.OpenRead(path);
@@ -36,7 +31,7 @@ namespace ProductCatalog.Core.Import
                 return addMode;
             }
 
-            var success = _importer.ReadHeader(sheet);
+            var success = importer.ReadHeader(sheet);
             if (!success)
             {
                 var result = Result<T>.CreateFail("Failed to load title.", 0);
@@ -53,7 +48,7 @@ namespace ProductCatalog.Core.Import
                     continue;
                 }
 
-                var modeResult = _importer.ReadRow(row);
+                var modeResult = importer.ReadRow(row);
                 addMode.Add(modeResult);
             }
 
@@ -65,7 +60,7 @@ namespace ProductCatalog.Core.Import
             for (var i = 0; i < workbook.NumberOfSheets; i++)
             {
                 var sheetName = workbook.GetSheetName(i);
-                if (_importer.IsModelSheet(sheetName))
+                if (importer.IsModelSheet(sheetName))
                 {
                     sheet = workbook.GetSheetAt(i);
                     return true;

@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace ProductCatalog.Controls.CheckComboBox
+namespace ProductCatalog.Controls.CheckComboBoxes
 {
     [ToolboxBitmap(typeof(System.Windows.Forms.ComboBox)),
         ToolboxItem(true), ToolboxItemFilter("System.Windows.Forms"),

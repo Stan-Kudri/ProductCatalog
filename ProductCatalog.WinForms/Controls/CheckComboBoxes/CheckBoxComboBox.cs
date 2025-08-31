@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace ProductCatalog.Controls.CheckComboBox
+namespace ProductCatalog.Controls.CheckComboBoxes
 {
     /// <summary>
     /// https://github.com/sgissinger/CheckBoxComboBox/blob/master/CheckBoxComboBox/CheckBoxComboBox.cs
@@ -763,7 +763,7 @@ namespace ProductCatalog.Controls.CheckComboBox
 
         protected void OnCheckBoxCheckedChanged(object sender, EventArgs e) => CheckBoxCheckedChanged?.Invoke(sender, e);
 
-        private void item_CheckedChanged(object sender, EventArgs e) => OnCheckBoxCheckedChanged(sender, e);
+        private void Item_CheckedChanged(object sender, EventArgs e) => OnCheckBoxCheckedChanged(sender, e);
 
         #endregion
 
@@ -772,7 +772,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         [Obsolete("Do not add items to this list directly. Use the ComboBox items instead.", false)]
         public new void Add(CheckBoxComboBoxItem item)
         {
-            item.CheckedChanged += new EventHandler(item_CheckedChanged);
+            item.CheckedChanged += new EventHandler(Item_CheckedChanged);
             base.Add(item);
         }
 
@@ -780,7 +780,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         {
             foreach (var Item in collection)
             {
-                Item.CheckedChanged += new EventHandler(item_CheckedChanged);
+                Item.CheckedChanged += new EventHandler(Item_CheckedChanged);
             }
 
             base.AddRange(collection);
@@ -790,7 +790,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         {
             foreach (var Item in this)
             {
-                Item.CheckedChanged -= item_CheckedChanged;
+                Item.CheckedChanged -= Item_CheckedChanged;
             }
 
             base.Clear();
@@ -799,7 +799,7 @@ namespace ProductCatalog.Controls.CheckComboBox
         [Obsolete("Do not remove items from this list directly. Use the ComboBox items instead.", false)]
         public new bool Remove(CheckBoxComboBoxItem item)
         {
-            item.CheckedChanged -= item_CheckedChanged;
+            item.CheckedChanged -= Item_CheckedChanged;
             return base.Remove(item);
         }
 

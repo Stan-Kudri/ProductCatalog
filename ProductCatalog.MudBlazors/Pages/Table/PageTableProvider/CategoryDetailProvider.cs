@@ -1,30 +1,26 @@
-using ProductCatalog.Core.Models.Categories;
+﻿using ProductCatalog.Core.Models.Categories;
 using ProductCatalog.MudBlazors.Pages.Table.Model;
 
 namespace ProductCatalog.MudBlazors.Pages.Table.PageTableProvider
 {
-    public class CategoryDetailProvider : ITableDetailProvider<Category>
+    public class CategoryDetailProvider(CategoryService categoryService) 
+        : ITableDetailProvider<Category>
     {
-        private readonly CategoryService _categoryService;
-
-        public CategoryDetailProvider(CategoryService categoryService)
-            => _categoryService = categoryService;
-
         public IReadOnlyList<ListTableColumn> Columns => new List<ListTableColumn>
         {
             new ListTableColumn("Name", 80, e => ((Category)e).Name),
         };
 
         public IQueryable<Category> GetQueryableAll()
-            => _categoryService.GetQueryableAll();
+            => categoryService.GetQueryableAll();
 
         public IQueryable<Category> GetSearchName(IQueryable<Category> items, string? searchString)
             => string.IsNullOrEmpty(searchString)
                 ? items
                 : items.Where(e => e.Name.Contains(searchString));
 
-        public async Task Remove(Guid id) => await _categoryService.RemoveAsync(id);
+        public async Task Remove(Guid id) => await categoryService.RemoveAsync(id);
 
-        public async Task Upsert(Category entity) => await _categoryService.UpsertAsync(entity);
+        public async Task Upsert(Category entity) => await categoryService.UpsertAsync(entity);
     }
 }

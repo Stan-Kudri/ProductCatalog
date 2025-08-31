@@ -1,7 +1,7 @@
-using ProductCatalog.BindingItem.DBItemModel;
-using ProductCatalog.BindingItem.ObservableCollection;
+﻿using ProductCatalog.WinForms.BindingItem.DBItemModel;
+using ProductCatalog.WinForms.BindingItem.ObservableCollection;
 
-namespace ProductCatalog.Forms.Products
+namespace ProductCatalog.WinForms.Forms.Products
 {
     partial class ProductFormBase
     {

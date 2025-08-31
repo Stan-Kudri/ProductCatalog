@@ -1,14 +1,14 @@
+﻿using ProductCatalog.Core.Models.Companies;
 using System;
 using System.Windows.Forms;
-using ProductCatalog.Core.Models.Companies;
 
-namespace ProductCatalog.Forms.Companies
+namespace ProductCatalog.WinForms.Forms.Companies
 {
     public class EditItemCompanyForm : CompanyFormBase
     {
         private Company _oldCompany;
         private Company _editCompany;
-        private bool _сhangedName = false;
+        private bool _сhangedName;
 
         public EditItemCompanyForm(IServiceProvider serviceProvider)
             : base(serviceProvider) => Text = "Edit Company";
