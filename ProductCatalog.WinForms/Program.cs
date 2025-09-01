@@ -2,18 +2,10 @@ using System;
 using System.Windows.Forms;
 using MaterialSkin;
 using Microsoft.Extensions.DependencyInjection;
-using ProductCatalog.Core;
-using ProductCatalog.Core.Import;
-using ProductCatalog.Core.Import.Importers;
-using ProductCatalog.Core.Models;
-using ProductCatalog.Core.Models.Products;
-using ProductCatalog.Core.Models.Types;
-using ProductCatalog.Core.Models.Users;
-using ProductCatalog.Migrations;
+using Microsoft.Extensions.Hosting;
+using ProductCatalog.WinForms.Extension;
 using ProductCatalog.WinForms.Forms;
-using ProductCatalog.WinForms.Messages;
 using ProductCatalog.WinForms.Model;
-using ProductCatalog.WinForms.Model.Importer;
 
 namespace ProductCatalog.WinForms
 {
@@ -27,56 +19,43 @@ namespace ProductCatalog.WinForms
         [STAThread]
         static void Main()
         {
-            var collection = new ServiceCollection()
-                .AddSingleton(e => new DbContextFactory(ConnectionName))
-                .AddScoped(e => e.GetRequiredService<DbContextFactory>().Create())
-                .AddScoped<IMessageBox>(e => new MessageBoxShow())
-                .AddScoped<UserService>()
-                .AddScoped<IPasswordHasher, BCryptPasswordHasher>()
-                .AddScoped<IUserValidator, UserValidator>()
-                .AddScoped<MessageByTable<ProductType>>()
-                .AddScoped<MessageByTable<Product>>()
-                .AddSingleton(e => new OpenFileDialog { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
-                .AddSingleton(e => new SaveFileDialog() { Filter = "Excel Files |*.xlsx;*.xls;*.xlsm" })
-                .AddSingleton<ExcelImporterModel>()
-                .Scan(scan => scan
-                    .FromAssemblies(typeof(BaseService<>).Assembly)
-                        .AddClasses(service => service.AssignableTo(typeof(BaseService<>)))
-                        .AsSelf()
-                        .WithScopedLifetime()
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
 
-                    .FromAssemblies(typeof(BaseForm).Assembly)
-                        .AddClasses(form => form.AssignableTo<BaseForm>())
-                        .AsSelf()
-                        .WithTransientLifetime()
+            using var host = CreateHostBuilder().Build();
+            RunLoginForm(host.Services);
+        }
 
-                    .FromAssemblies(typeof(IImporter<>).Assembly, typeof(ExcelImporter<>).Assembly, typeof(IExcelImpoterTable).Assembly)
-
-                        .AddClasses(importer => importer.AssignableTo(typeof(IImporter<>)))
-                        .AsImplementedInterfaces()
-                        .WithSingletonLifetime()
-
-                        .AddClasses(importer => importer.AssignableTo(typeof(ExcelImporter<>)))
-                        .AsSelf()
-                        .WithSingletonLifetime()
-
-                        .AddClasses(importer => importer.AssignableTo<IExcelImpoterTable>())
-                        .AsImplementedInterfaces()
-                        .WithSingletonLifetime());
-
-            var container = collection.BuildServiceProvider();
-
-            using (var scope = container.CreateScope())
-            {
-                using (var loginForm = scope.ServiceProvider.GetRequiredService<LoginForm>())
+        private static IHostBuilder CreateHostBuilder() =>
+            Host.CreateDefaultBuilder()
+                .ConfigureServices((_, services) =>
                 {
-                    var materialSkinManager = MaterialSkinManager.Instance;
-                    materialSkinManager.AddFormToManage(loginForm);
-                    materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-                    Application.EnableVisualStyles();
-                    Application.Run(loginForm);
-                }
-            }
+                    services
+                        .AddDatabaseServices(ConnectionName)
+                        .AddApplicationServices()
+                        .AddImporterServices()
+                        .AddFormServices()
+                        .AddSingleton(new OpenFileDialog
+                        {
+                            Filter = "Excel Files|*.xlsx;*.xls;*.xlsm"
+                        })
+                        .AddSingleton(new SaveFileDialog
+                        {
+                            Filter = "Excel Files|*.xlsx;*.xls;*.xlsm"
+                        })
+                        .AddSingleton<ExcelImporterModel>();
+                });
+
+        private static void RunLoginForm(IServiceProvider services)
+        {
+            using var scope = services.CreateScope();
+            var loginForm = scope.ServiceProvider.GetRequiredService<LoginForm>();
+
+            var skinManager = MaterialSkinManager.Instance;
+            skinManager.AddFormToManage(loginForm);
+            skinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+
+            Application.Run(loginForm);
         }
     }
 }

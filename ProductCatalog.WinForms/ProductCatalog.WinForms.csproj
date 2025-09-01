@@ -17,10 +17,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <UseWindowsForms>true</UseWindowsForms>
-    <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
 	<EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
@@ -33,9 +30,13 @@
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
-  <PropertyGroup>
-    <SignManifests>true</SignManifests>
-    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+  <PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
+	<SignManifests>false</SignManifests>
+	<GenerateClickOnceManifests>false</GenerateClickOnceManifests>
+	<GenerateBootstrapper>false</GenerateBootstrapper>
+	<BootstrapperEnabled>false</BootstrapperEnabled>
+	<UseWPF>false</UseWPF>
+	<UseWindowsForms>false</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="BindingItem\Pages\TypeProduct\**" />
@@ -82,6 +83,8 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.8" />
     <PackageReference Include="Scrutor" Version="6.1.0" />
     <PackageReference Include="System.ComponentModel.Composition" Version="9.0.5" />
     <PackageReference Include="EntityFramework" Version="6.5.1" />

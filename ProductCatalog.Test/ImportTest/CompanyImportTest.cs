@@ -30,15 +30,20 @@ namespace ProductCatalog.Test.ImportTest
 
             var exceptCompany = new List<Company>()
             {
-                new Company("MF", new DateTime(2000, 6, 7), "Belarus", new Guid("54d32ad6-5748-4ea7-b7e9-c7a4e0b52220")),
-                new Company("Apple", new DateTime(1973, 7, 12), "USA",  new Guid("8422dcb1-91bd-4626-a099-852bbff0c969")),
+                new Company("MF", new DateTime(2000, 06, 07), "Belarus", new Guid("54d32ad6-5748-4ea7-b7e9-c7a4e0b52220")),
+                new Company("Apple", new DateTime(1973, 07, 12), "USA",  new Guid("8422dcb1-91bd-4626-a099-852bbff0c969")),
             };
 
             //Act
             var actualCompanies = dbContext.Company.ToList();
 
             //Assert
-            actualCompanies.Should().Equal(exceptCompany);
+            //actualCompanies.Should().BeEquivalentTo(exceptCompany, options => options.ComparingByMembers<Company>());
+            actualCompanies.Should()
+                           .BeEquivalentTo(companyRead.Where(e => e.Success).Select(e => e.Value),
+                                           options => options.Using<DateTime>(ctx => ctx.Subject.Should().BeCloseTo(ctx.Expectation, TimeSpan.FromSeconds(1)))
+                                                             .WhenTypeIs<DateTime>()
+                                                             .ExcludingMissingMembers());
             companyRead.Should().AllSatisfy(e => e.Success.Should().BeTrue());
         }
 

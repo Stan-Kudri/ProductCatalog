@@ -49,7 +49,7 @@ namespace ProductCatalog.Core.Models.Companies
                    && other.Country == Country;
         }
 
-        public override int GetHashCode() => HashCode.Combine(Id, DateCreation, Country);
+        public override int GetHashCode() => HashCode.Combine(Name, Id, DateCreation, Country);
 
         public override string ToString() => Name;
     }

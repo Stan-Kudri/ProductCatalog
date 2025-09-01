@@ -29,10 +29,12 @@ jobs:
       run: dotnet restore
       
     - name: MudBlazor
-      run: dotnet build "ProductCatalog.MudBlazor" --no-restore
+      run: dotnet build "ProductCatalog.MudBlazors" --no-restore
       
-    - name: WinForms
-      run: dotnet build "ProductCatalog.Winforms" --no-restore
+    - name: Build Core and Migrations only (skip WinForms on Linux)
+      run: |
+        dotnet build "ProductCatalog.Core" --no-restore
+        dotnet build "ProductCatalog.Migrations" --no-restore
 
     - name: Test
       run: dotnet test "ProductCatalog.Test" --no-restore --verbosity normal
