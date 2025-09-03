@@ -3,6 +3,28 @@ This repository hosts a C# solution for managing and interacting with a product 
 This is a project with calculator implementation on WPF/WinForms. Also the project contains unit tests.
 User authentication is performed via login and password. Passwords are stored as BCrypt hashes. During sign-in, the entered password is hashed and compared against the stored hash to validate credentials.
 
+## MudBlazor (SignIn, Main, Add Product)
+<p align="center">
+  <img src="MudBlazor.SignIn.png" alt="SingnIn" width="600"/>
+</p>
+<p align="center">
+  <img src="MudBlazor.Main.png" alt="Main"/>
+</p>
+<p align="center">
+  <img src="MudBlazor.AddProduct.png" alt="AddProduct" width="600"/>
+</p>
+
+## WinForms (SignIn, Main, Add Product)
+<p align="center">
+  <img src="WinForms.SignIn.png" alt="SingnIn" width="400" height="400"/>
+</p>
+<p align="center">
+  <img src="WinForms.Main.png" alt="Main"/>
+</p>
+<p align="center">
+  <img src="WinForms.AddProduct.png" alt="AddProduct" width="400" height="500"/>
+</p>
+
 The solution structure comprises five projects:
 
 - ProductCatalog.Core
