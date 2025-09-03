@@ -38,7 +38,6 @@ namespace ProductCatalog.Test.ImportTest
             var actualCompanies = dbContext.Company.ToList();
 
             //Assert
-            //actualCompanies.Should().BeEquivalentTo(exceptCompany, options => options.ComparingByMembers<Company>());
             actualCompanies.Should()
                            .BeEquivalentTo(companyRead.Where(e => e.Success).Select(e => e.Value),
                                            options => options.Using<DateTime>(ctx => ctx.Subject.Should().BeCloseTo(ctx.Expectation, TimeSpan.FromSeconds(1)))
