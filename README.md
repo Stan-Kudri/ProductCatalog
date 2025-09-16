@@ -8,19 +8,19 @@ User authentication is performed via login and password. Passwords are stored as
 - ProductCatalog.Migrations;
 - ProductCatalog.Test;
 - ProductCatalog.WinForms (UI);
-- ProductCatalog.MudBlazors (UI);
+- ProductCatalog.MudBlazors (UI).
 
-## 🔐 Functionality
-### Authentication
+## 🔐 Functionality:
+### Authentication:
 - Login and password authorization;
 - Password hashing using BCrypt;
-- Secure endpoints;
+- Secure endpoints.
 
-### Data management
+### Data management:
 - Company - Company management;
 - Category - Product categories;
 - Type - Category subtypes;
-- Product - Products with binding to types;
+- Product - Products with binding to types.
 
 ### Import/Export (.xlsx file):
 - Export select one or more tables;
@@ -56,6 +56,6 @@ User authentication is performed via login and password. Passwords are stored as
 - Entity Framework Core 9 - ORM for working with a database;
 - SQLite - Built-in database;
 - BCrypt - Password hashing;
-- MaterialSkin/MudBlazor - UI components;
+- MaterialSkin/MudBlazor - UI components.
 - NPOI - Working with Excel files;
 - JWT - Authentication in a Web application;
